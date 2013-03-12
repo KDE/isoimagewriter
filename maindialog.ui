@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>711</width>
-    <height>117</height>
+    <height>115</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -48,7 +48,7 @@
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="logo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -60,6 +60,9 @@
        </property>
        <property name="pixmap">
         <pixmap resource="RosaImageWriter.qrc">:/logo-rosa.png</pixmap>
+       </property>
+       <property name="margin">
+        <number>0</number>
        </property>
       </widget>
      </item>
@@ -79,8 +82,31 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="imageHorizontalLayout">
-     <item>
+    <layout class="QGridLayout" name="controlsGridLayout">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="imageEdit">
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="deviceLabel">
+       <property name="text">
+        <string>&amp;USB Device:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>deviceList</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
       <widget class="QLabel" name="imageLabel">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -91,36 +117,25 @@
        <property name="text">
         <string>Image:</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
        <property name="buddy">
         <cstring></cstring>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLineEdit" name="imageEdit">
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="deviceList"/>
      </item>
-     <item>
+     <item row="0" column="2">
       <widget class="QPushButton" name="imageSelectButton">
        <property name="text">
         <string>&amp;Open</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="deviceHorizontalLayout">
-     <item>
-      <widget class="QComboBox" name="deviceList"/>
-     </item>
-     <item>
+     <item row="1" column="2">
       <widget class="QPushButton" name="writeButton">
        <property name="font">
         <font>
@@ -138,6 +153,12 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>imageEdit</tabstop>
+  <tabstop>imageSelectButton</tabstop>
+  <tabstop>deviceList</tabstop>
+  <tabstop>writeButton</tabstop>
+ </tabstops>
  <resources>
   <include location="RosaImageWriter.qrc"/>
  </resources>
