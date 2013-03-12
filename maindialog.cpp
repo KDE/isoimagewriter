@@ -6,6 +6,9 @@ MainDialog::MainDialog(QWidget *parent) :
     ui(new Ui::MainDialog)
 {
     ui->setupUi(this);
+    int currentHeight = this->size().height();
+    setMaximumHeight(currentHeight);
+    setMinimumHeight(currentHeight);
 }
 
 MainDialog::~MainDialog()

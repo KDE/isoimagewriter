@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon-rosa.ico</file>
+        <file>logo-rosa.png</file>
+    </qresource>
+</RCC>

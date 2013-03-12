@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += maindialog.h
 
 FORMS    += maindialog.ui
+
+RESOURCES += \
+    RosaImageWriter.qrc
