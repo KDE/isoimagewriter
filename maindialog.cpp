@@ -6,10 +6,12 @@
 #include <QDropEvent>
 #include <QMimeData>
 #include <QLocale>
+#include <QThread>
 
 #include "maindialog.h"
 #include "ui_maindialog.h"
 #include "progressdialog.h"
+#include "imagewriter.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -311,6 +313,26 @@ void MainDialog::writeImageToDevice()
             QMessageBox::Yes | QMessageBox::No,
             QMessageBox::No) == QMessageBox::No)
         return;
-    ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024);
+
+    // DBG: Temporarily assign fixed image size
+    m_ImageSize = 300 * 1024 * 1024;
+    ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024, this);
+
+    ImageWriter* writer = new ImageWriter();
+    QThread *writerThread = new QThread(this);
+    // Connect start and end signals
+    connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
+    connect(writerThread, &QThread::finished, writer, &ImageWriter::deleteLater);
+    // When writer finishes its job, close the dialog and quit the thread
+    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
+    connect(writer, &ImageWriter::finished, dlg, &ProgressDialog::reject);
+    // Each time a block is written, update the progress bar
+    connect(writer, &ImageWriter::blockWritten, dlg, &ProgressDialog::updateProgressBar);
+    // If the Cancel button is pressed, inform the writer to stop the operation
+    connect(dlg, &ProgressDialog::cancelled, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+
+    // Now display the dialog and start the writer thread
     dlg->show();
+    writer->moveToThread(writerThread);
+    writerThread->start();
 }

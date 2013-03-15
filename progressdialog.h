@@ -20,6 +20,13 @@ private:
 
 protected:
     void keyPressEvent(QKeyEvent* keyEvent);
+
+signals:
+    void cancelled();
+
+public slots:
+    void cancelWriting();
+    void updateProgressBar(int increment);
 };
 
 #endif // PROGRESSDIALOG_H

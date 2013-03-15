@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         maindialog.cpp \
-    progressdialog.cpp
+    progressdialog.cpp \
+    imagewriter.cpp
 
 HEADERS  += maindialog.h \
-    progressdialog.h
+    progressdialog.h \
+    imagewriter.h
 
 FORMS    += maindialog.ui \
     progressdialog.ui

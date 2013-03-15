@@ -26,3 +26,14 @@ void ProgressDialog::keyPressEvent(QKeyEvent* keyEvent)
         return;
     QDialog::keyPressEvent(keyEvent);
 }
+
+void ProgressDialog::cancelWriting()
+{
+    emit cancelled();
+    reject();
+}
+
+void ProgressDialog::updateProgressBar(int increment)
+{
+    ui->progressBar->setValue(ui->progressBar->value() + increment);
+}
