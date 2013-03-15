@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        maindialog.cpp
+        maindialog.cpp \
+    progressdialog.cpp
 
-HEADERS  += maindialog.h
+HEADERS  += maindialog.h \
+    progressdialog.h
 
-FORMS    += maindialog.ui
+FORMS    += maindialog.ui \
+    progressdialog.ui
 
 RESOURCES += \
     RosaImageWriter.qrc

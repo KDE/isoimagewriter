@@ -20,6 +20,7 @@ private:
 
 protected:
     QString m_ImageFile;
+    quint64 m_ImageSize;
     void enumFlashDevices();
     void preprocessImageFile(const QString& newImageFile);
 
@@ -39,7 +40,7 @@ public:
 
     QString m_VisibleName;
     QString m_Volumes;
-    qint64  m_Size;
+    quint64 m_Size;
     QString m_PhysicalDevice;
 };
 

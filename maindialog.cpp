@@ -1,11 +1,15 @@
 #include <Wbemidl.h>
 #include <comutil.h>
+
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QLocale>
+
 #include "maindialog.h"
 #include "ui_maindialog.h"
+#include "progressdialog.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -234,11 +238,13 @@ void MainDialog::enumFlashDevices()
 void MainDialog::preprocessImageFile(const QString& newImageFile)
 {
     m_ImageFile = newImageFile;
+    m_ImageSize = 0;
     QString displayName = m_ImageFile;
     QFile f(m_ImageFile);
     if (f.open(QIODevice::ReadOnly))
     {
-        displayName += " (" + QString::number(f.size() / 1024 / 1024) + " MB)";
+        m_ImageSize = f.size();
+        displayName += " (" + QString::number(m_ImageSize / 1024 / 1024) + " MB)";
         f.close();
     }
     ui->imageEdit->setText(displayName);
@@ -286,7 +292,17 @@ void MainDialog::openImageFile()
 
 void MainDialog::writeImageToDevice()
 {
-    QMessageBox msg;
-    msg.setText("Write is clicked.\nImage: " + m_ImageFile + "\nDevice: " + ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>()->m_PhysicalDevice);
-    msg.exec();
+    QLocale currentLocale;
+    UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
+    if (m_ImageSize > selectedDevice->m_Size)
+    {
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Critical);
+        msg.setText("The image is larger than your selected device!\nImage size: " + currentLocale.toString(m_ImageSize) + " bytes\nDisk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes");
+        msg.exec();
+        return;
+    }
+    ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024);
+    dlg->setModal(true);
+    dlg->show();
 }
