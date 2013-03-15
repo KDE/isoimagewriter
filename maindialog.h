@@ -21,9 +21,13 @@ private:
 protected:
     QString m_ImageFile;
     void enumFlashDevices();
+    void preprocessImageFile(const QString& newImageFile);
+
+    void dragEnterEvent(QDragEnterEvent* event);
+    void dropEvent(QDropEvent* event);
 
 public slots:
-    void selectImageFile();
+    void openImageFile();
     void writeImageToDevice();
 };
 

@@ -2,6 +2,8 @@
 #include <comutil.h>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QDropEvent>
+#include <QMimeData>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
@@ -229,10 +231,9 @@ void MainDialog::enumFlashDevices()
     FREE_BSTR(strQueryLetters);
 }
 
-void MainDialog::selectImageFile()
+void MainDialog::preprocessImageFile(const QString& newImageFile)
 {
-    m_ImageFile = QFileDialog::getOpenFileName(this, "", "", "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
-    m_ImageFile.replace('/', '\\');
+    m_ImageFile = newImageFile;
     QString displayName = m_ImageFile;
     QFile f(m_ImageFile);
     if (f.open(QIODevice::ReadOnly))
@@ -241,6 +242,46 @@ void MainDialog::selectImageFile()
         f.close();
     }
     ui->imageEdit->setText(displayName);
+}
+
+void MainDialog::dragEnterEvent(QDragEnterEvent* event)
+{
+    if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"") ||
+        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\""))
+        event->accept();
+}
+
+void MainDialog::dropEvent(QDropEvent* event)
+{
+    QString newImageFile = "";
+    QByteArray droppedFileName;
+    droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileNameW\"");
+    if (!droppedFileName.isEmpty())
+    {
+        newImageFile = QString::fromWCharArray(reinterpret_cast<const wchar_t*>(droppedFileName.constData()));
+    }
+    else
+    {
+        droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileName\"");
+        if (!droppedFileName.isEmpty())
+        {
+            newImageFile = QString::fromLocal8Bit(droppedFileName.constData());
+        }
+    }
+    if (newImageFile != "")
+    {
+        preprocessImageFile(newImageFile);
+    }
+}
+
+void MainDialog::openImageFile()
+{
+    QString newImageFile = QFileDialog::getOpenFileName(this, "", "", "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
+    if (newImageFile != "")
+    {
+        newImageFile.replace('/', '\\');
+        preprocessImageFile(newImageFile);
+    }
 }
 
 void MainDialog::writeImageToDevice()
