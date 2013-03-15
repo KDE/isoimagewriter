@@ -21,3 +21,5 @@ FORMS    += maindialog.ui
 
 RESOURCES += \
     RosaImageWriter.qrc
+
+LIBS += Ole32.lib OleAut32.lib Wbemuuid.lib comsuppw.lib

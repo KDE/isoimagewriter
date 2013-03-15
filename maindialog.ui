@@ -126,7 +126,11 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="deviceList"/>
+      <widget class="QComboBox" name="deviceList">
+       <property name="duplicatesEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="0" column="2">
       <widget class="QPushButton" name="imageSelectButton">
@@ -162,5 +166,42 @@
  <resources>
   <include location="RosaImageWriter.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>imageSelectButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainDialog</receiver>
+   <slot>selectImageFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>658</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>467</x>
+     <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>writeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainDialog</receiver>
+   <slot>writeImageToDevice()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>686</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>507</x>
+     <y>13</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>selectImageFile()</slot>
+  <slot>writeImageToDevice()</slot>
+ </slots>
 </ui>

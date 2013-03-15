@@ -4,7 +4,7 @@
 #include <QDialog>
 
 namespace Ui {
-class MainDialog;
+    class MainDialog;
 }
 
 class MainDialog : public QDialog
@@ -17,6 +17,28 @@ public:
     
 private:
     Ui::MainDialog *ui;
+
+protected:
+    QString m_ImageFile;
+    void enumFlashDevices();
+
+public slots:
+    void selectImageFile();
+    void writeImageToDevice();
 };
+
+
+class UsbDevice
+{
+public:
+    UsbDevice() : m_VisibleName("Unknown Device"), m_Volumes(""), m_Size(0), m_PhysicalDevice("") {}
+
+    QString m_VisibleName;
+    QString m_Volumes;
+    qint64  m_Size;
+    QString m_PhysicalDevice;
+};
+
+Q_DECLARE_METATYPE(UsbDevice*)
 
 #endif // MAINDIALOG_H
