@@ -4,7 +4,7 @@
 #include <QDialog>
 
 namespace Ui {
-class ProgressDialog;
+    class ProgressDialog;
 }
 
 class ProgressDialog : public QDialog
@@ -17,6 +17,9 @@ public:
     
 private:
     Ui::ProgressDialog *ui;
+
+protected:
+    void keyPressEvent(QKeyEvent* keyEvent);
 };
 
 #endif // PROGRESSDIALOG_H

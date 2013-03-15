@@ -13,12 +13,12 @@
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::MainDialog)
+    ui(new Ui::MainDialog),
+    m_ImageFile(""),
+    m_ImageSize(0)
 {
     ui->setupUi(this);
-    int currentHeight = this->size().height();
-    setMaximumHeight(currentHeight);
-    setMinimumHeight(currentHeight);
+    setFixedHeight(size().height());
     // TODO: Show dialog disabled, print "please wait", enumerate devices, then update the list, enable the window
     enumFlashDevices();
 }
@@ -312,6 +312,5 @@ void MainDialog::writeImageToDevice()
             QMessageBox::No) == QMessageBox::No)
         return;
     ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024);
-    dlg->setModal(true);
     dlg->show();
 }
