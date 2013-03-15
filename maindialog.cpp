@@ -296,12 +296,21 @@ void MainDialog::writeImageToDevice()
     UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
     if (m_ImageSize > selectedDevice->m_Size)
     {
-        QMessageBox msg;
-        msg.setIcon(QMessageBox::Critical);
-        msg.setText("The image is larger than your selected device!\nImage size: " + currentLocale.toString(m_ImageSize) + " bytes\nDisk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes");
-        msg.exec();
+        QMessageBox::critical(
+            this,
+            "ROSA Image Writer",
+            "The image is larger than your selected device!\nImage size: " + currentLocale.toString(m_ImageSize) + " bytes\nDisk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes",
+            QMessageBox::Ok
+        );
         return;
     }
+    if (QMessageBox::warning(
+            this,
+            "ROSA Image Writer",
+            "Writing an image will erase all existing data on the selected device.\nAre you sure you wish to proceed?",
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No) == QMessageBox::No)
+        return;
     ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024);
     dlg->setModal(true);
     dlg->show();
