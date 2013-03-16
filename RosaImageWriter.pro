@@ -14,7 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         maindialog.cpp \
-    imagewriter.cpp
+    imagewriter.cpp \
+    common.cpp
 
 HEADERS  += maindialog.h \
     imagewriter.h \

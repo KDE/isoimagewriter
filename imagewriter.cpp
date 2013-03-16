@@ -27,7 +27,7 @@ void ImageWriter::writeImage()
 
         buffer = VirtualAlloc(NULL, BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
         if (buffer == NULL)
-            throw "Failed to allocate memory for buffer.\nError code: " + QString::number(GetLastError());
+            throw "Failed to allocate memory for buffer.\n" + errorMessageFromCode();
 
         imageFile = CreateFile(
             reinterpret_cast<const wchar_t*>(m_ImageFile.utf16()),
@@ -39,7 +39,7 @@ void ImageWriter::writeImage()
             NULL
         );
         if (imageFile == INVALID_HANDLE_VALUE)
-            throw "Failed to open the image file.\nError code: " + QString::number(GetLastError());
+            throw "Failed to open the image file.\n" + errorMessageFromCode();
 
         // Unmounting volumes that belong the selected device
         // TODO: Check first if they are used and show warning
@@ -56,9 +56,9 @@ void ImageWriter::writeImage()
                 NULL
             );
             if (volume == INVALID_HANDLE_VALUE)
-                throw "Failed to open the drive " + m_Device->m_Volumes[i] + "\nError code: " + QString::number(GetLastError());
+                throw "Failed to open the drive " + m_Device->m_Volumes[i] + "\n" + errorMessageFromCode();
             if (!DeviceIoControl(volume, FSCTL_DISMOUNT_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-                throw "Failed to unmount the drive " + m_Device->m_Volumes[i] + "\nError code: " + QString::number(GetLastError());
+                throw "Failed to unmount the drive " + m_Device->m_Volumes[i] + "\n" + errorMessageFromCode();
             CloseHandle(volume);
             volume = INVALID_HANDLE_VALUE;
         }
@@ -73,13 +73,13 @@ void ImageWriter::writeImage()
             NULL
         );
         if (deviceFile == INVALID_HANDLE_VALUE)
-            throw "Failed to open the target device.\nError code: " + QString::number(GetLastError());
+            throw "Failed to open the target device.\n" + errorMessageFromCode();
         if (!DeviceIoControl(deviceFile, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-            throw "Failed to lock the target device.\nError code: " + QString::number(GetLastError());
+            throw "Failed to lock the target device.\n" + errorMessageFromCode();
 
         DISK_GEOMETRY dg;
         if (!DeviceIoControl(deviceFile, IOCTL_DISK_GET_DRIVE_GEOMETRY, NULL, 0, &dg, sizeof(dg), &bret, NULL))
-            throw "Failed to get the target device info.\nError code: " + QString::number(GetLastError());
+            throw "Failed to get the target device info.\n" + errorMessageFromCode();
 
         DWORD readBytes;
         DWORD writtenBytes;
@@ -90,7 +90,7 @@ void ImageWriter::writeImage()
             readBytes = alignNumber(readBytes, dg.BytesPerSector);
             res = WriteFile(deviceFile, buffer, readBytes, &writtenBytes, NULL);
             if (!res)
-                throw "Failed to write to the device:\nError code: " + QString::number(GetLastError());
+                throw "Failed to write to the device:\n" + errorMessageFromCode();
             if (writtenBytes != readBytes)
                 throw QString("The last block was not fully written (" + QString::number(writtenBytes) + " of " + QString::number(readBytes) + ")!\nAborting.");
             emit blockWritten(1);
@@ -101,7 +101,7 @@ void ImageWriter::writeImage()
             }
         }
         if (!res)
-            throw "Failed to read the image file:\nError code: " + QString::number(GetLastError());
+            throw "Failed to read the image file:\n" + errorMessageFromCode();
     }
     catch (QString msg)
     {
