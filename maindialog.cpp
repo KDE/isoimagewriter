@@ -317,11 +317,9 @@ void MainDialog::writeImageToDevice()
             QMessageBox::No) == QMessageBox::No)
         return;
 
-    // DBG: Temporarily assign fixed image size
-    m_ImageSize = 300 * 1024 * 1024;
     ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024, this);
 
-    ImageWriter* writer = new ImageWriter();
+    ImageWriter* writer = new ImageWriter(m_ImageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
     // Connect start and end signals
     connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
@@ -333,6 +331,7 @@ void MainDialog::writeImageToDevice()
     connect(writer, &ImageWriter::blockWritten, dlg, &ProgressDialog::updateProgressBar);
     // If the Cancel button is pressed, inform the writer to stop the operation
     connect(dlg, &ProgressDialog::cancelled, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+    connect(writer, &ImageWriter::error, dlg, &ProgressDialog::showErrorMessage);
 
     // Now display the dialog and start the writer thread
     dlg->show();

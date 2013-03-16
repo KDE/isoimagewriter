@@ -27,6 +27,7 @@ signals:
 public slots:
     void cancelWriting();
     void updateProgressBar(int increment);
+    void showErrorMessage(const QString& msg);
 };
 
 #endif // PROGRESSDIALOG_H

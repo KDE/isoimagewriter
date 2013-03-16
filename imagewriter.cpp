@@ -1,10 +1,13 @@
 #include <QThread>
+#include <QFile>
 
 #include "imagewriter.h"
 
-ImageWriter::ImageWriter(QObject *parent) :
+ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent) :
     QObject(parent),
-    m_CancelWriting(false)
+    m_CancelWriting(false),
+    m_ImageFile(ImageFile),
+    m_Device(Device)
 {
 }
 
@@ -30,6 +33,14 @@ void ImageWriter::writeImage()
     close(fd);
     close(fi);
  */
+    QFile imageFile(m_ImageFile);
+    QFile deviceFile(m_Device->m_PhysicalDevice);
+    if (!imageFile.open(QIODevice::ReadOnly))
+    {
+        emit error("Failed to open image file:\n" + imageFile.errorString());
+        emit finished();
+        return;
+    }
     // DBG: Test implementation
     for (int i = 0; i < 20; ++i)
     {

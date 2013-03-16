@@ -1,4 +1,5 @@
 #include <QKeyEvent>
+#include <QMessageBox>
 
 #include "progressdialog.h"
 #include "ui_progressdialog.h"
@@ -36,4 +37,14 @@ void ProgressDialog::cancelWriting()
 void ProgressDialog::updateProgressBar(int increment)
 {
     ui->progressBar->setValue(ui->progressBar->value() + increment);
+}
+
+void ProgressDialog::showErrorMessage(const QString& msg)
+{
+    QMessageBox::critical(
+        this,
+        "ROSA Image Writer",
+        msg,
+        QMessageBox::Ok
+    );
 }
