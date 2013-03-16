@@ -20,6 +20,7 @@ void ImageWriter::writeImage()
     HANDLE volume = INVALID_HANDLE_VALUE;
     const qint64 BLOCK_SIZE = 1024 * 1024;
     LPVOID buffer = NULL;
+    bool isError = false;
     try
     {
         DWORD bret;
@@ -94,7 +95,10 @@ void ImageWriter::writeImage()
                 throw QString("The last block was not fully written (" + QString::number(writtenBytes) + " of " + QString::number(readBytes) + ")!\nAborting.");
             emit blockWritten(1);
             if (m_CancelWriting)
+            {
+                emit cancelled();
                 break;
+            }
         }
         if (!res)
             throw "Failed to read the image file:\nError code: " + QString::number(GetLastError());
@@ -102,6 +106,7 @@ void ImageWriter::writeImage()
     catch (QString msg)
     {
         emit error(msg);
+        isError = true;
     }
 
     if (volume != INVALID_HANDLE_VALUE)
@@ -112,6 +117,8 @@ void ImageWriter::writeImage()
         CloseHandle(deviceFile);
     if (buffer != NULL)
         VirtualFree(buffer, BLOCK_SIZE, MEM_DECOMMIT | MEM_RELEASE);
+    if (!isError && !m_CancelWriting)
+        emit success();
     emit finished();
 }
 

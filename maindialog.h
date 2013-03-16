@@ -33,6 +33,7 @@ public slots:
     void showWritingProgress();
     void hideWritingProgress();
     void updateProgressBar(int increment);
+    void showSuccessMessage();
     void showErrorMessage(QString msg);
 };
 

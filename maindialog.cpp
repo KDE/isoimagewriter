@@ -237,6 +237,7 @@ void MainDialog::enumFlashDevices()
     FREE_BSTR(strQueryLetters);
 
     ui->deviceList->setEnabled(true);
+    ui->writeButton->setEnabled(ui->deviceList->count() > 0);
 }
 
 void MainDialog::preprocessImageFile(const QString& newImageFile)
@@ -252,7 +253,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
         f.close();
     }
     ui->imageEdit->setText(displayName);
-    ui->writeButton->setEnabled(true);
+    ui->writeButton->setEnabled(ui->deviceList->count() > 0);
 }
 
 void MainDialog::dragEnterEvent(QDragEnterEvent* event)
@@ -338,13 +339,17 @@ void MainDialog::openImageFile()
 void MainDialog::writeImageToDevice()
 {
     QLocale currentLocale;
+    if ((ui->deviceList->count() == 0) || (m_ImageFile == ""))
+        return;
     UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
     if (m_ImageSize > selectedDevice->m_Size)
     {
         QMessageBox::critical(
             this,
             ApplicationTitle,
-            "The image is larger than your selected device!\nImage size: " + currentLocale.toString(m_ImageSize) + " bytes\nDisk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes",
+            "The image is larger than your selected device!\n"
+            "Image size: " + currentLocale.toString(m_ImageSize) + " bytes\n"
+            "Disk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes",
             QMessageBox::Ok
         );
         return;
@@ -352,7 +357,8 @@ void MainDialog::writeImageToDevice()
     if (QMessageBox::warning(
             this,
             ApplicationTitle,
-            "Writing an image will erase all existing data on the selected device.\nAre you sure you wish to proceed?",
+            "Writing an image will erase all existing data on the selected device.\n"
+            "Are you sure you wish to proceed?",
             QMessageBox::Yes | QMessageBox::No,
             QMessageBox::No) == QMessageBox::No)
         return;
@@ -382,12 +388,14 @@ void MainDialog::writeImageToDevice()
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
 
-    // If error is sent from the worker display it in the current GUI thread
+    // Show the message about successful completion on success
+    connect(writer, &ImageWriter::success, this, &MainDialog::showSuccessMessage);
+
+    // Show error message if error is sent by the worker
     connect(writer, &ImageWriter::error, this, &MainDialog::showErrorMessage);
 
-    // Restore the normal view of the dialog when writing is finished
-    // TODO: If a messagebox is displayed, wait until it's closed, and only then restore the dialog!
-    connect(writer, &ImageWriter::finished, this, &MainDialog::hideWritingProgress);
+    // Silently return back to normal dialog form if the operation was cancelled
+    connect(writer, &ImageWriter::cancelled, this, &MainDialog::hideWritingProgress);
 
     // Now start the writer thread
     writer->moveToThread(writerThread);
@@ -399,12 +407,22 @@ void MainDialog::updateProgressBar(int increment)
     ui->progressBar->setValue(ui->progressBar->value() + increment);
 }
 
+void MainDialog::showSuccessMessage()
+{
+    QMessageBox::information(
+        this,
+        ApplicationTitle,
+        "The operation completed successfully."
+    );
+    hideWritingProgress();
+}
+
 void MainDialog::showErrorMessage(QString msg)
 {
     QMessageBox::critical(
         this,
         ApplicationTitle,
-        msg,
-        QMessageBox::Ok
+        msg
     );
+    hideWritingProgress();
 }

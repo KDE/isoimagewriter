@@ -22,8 +22,10 @@ protected:
 signals:
     void finished();
     void blockWritten(int count);
+    void success();
     void error(QString msg);
-    
+    void cancelled();
+
 public slots:
     void writeImage();
     void cancelWriting();
