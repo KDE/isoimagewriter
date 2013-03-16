@@ -19,6 +19,8 @@ MainDialog::MainDialog(QWidget *parent) :
     m_ImageSize(0)
 {
     ui->setupUi(this);
+    ui->progressBar->setVisible(false);
+    ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
     setFixedHeight(size().height());
     // TODO: Show dialog disabled, print "please wait", enumerate devices, then update the list, enable the window
     enumFlashDevices();
@@ -253,6 +255,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
         f.close();
     }
     ui->imageEdit->setText(displayName);
+    ui->writeStartStopButton->setEnabled(true);
 }
 
 void MainDialog::dragEnterEvent(QDragEnterEvent* event)

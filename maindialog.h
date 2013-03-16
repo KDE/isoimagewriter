@@ -21,7 +21,6 @@ private:
 protected:
     QString m_ImageFile;
     quint64 m_ImageSize;
-    void enumFlashDevices();
     void preprocessImageFile(const QString& newImageFile);
 
     void dragEnterEvent(QDragEnterEvent* event);
@@ -29,6 +28,7 @@ protected:
 
 public slots:
     void openImageFile();
+    void enumFlashDevices();
     void writeImageToDevice();
 };
 

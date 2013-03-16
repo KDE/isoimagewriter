@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>711</width>
-    <height>115</height>
+    <height>148</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -141,12 +141,66 @@
      <item row="0" column="2">
       <widget class="QPushButton" name="imageSelectButton">
        <property name="text">
-        <string>&amp;Open</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="RosaImageWriter.qrc">
+         <normaloff>:/res/icon-open.ico</normaloff>:/res/icon-open.ico</iconset>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QPushButton" name="writeButton">
+      <widget class="QPushButton" name="refreshDevicesButton">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="RosaImageWriter.qrc">
+         <normaloff>:/res/icon-refresh.ico</normaloff>:/res/icon-refresh.ico</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="format">
+        <string>%v / %m MB</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="progressBarSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="writeStartStopButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <weight>75</weight>
@@ -167,7 +221,6 @@
   <tabstop>imageEdit</tabstop>
   <tabstop>imageSelectButton</tabstop>
   <tabstop>deviceList</tabstop>
-  <tabstop>writeButton</tabstop>
  </tabstops>
  <resources>
   <include location="RosaImageWriter.qrc"/>
@@ -180,8 +233,8 @@
    <slot>openImageFile()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>658</x>
-     <y>67</y>
+     <x>700</x>
+     <y>76</y>
     </hint>
     <hint type="destinationlabel">
      <x>467</x>
@@ -190,14 +243,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>writeButton</sender>
+   <sender>writeStartStopButton</sender>
    <signal>clicked()</signal>
    <receiver>MainDialog</receiver>
    <slot>writeImageToDevice()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>686</x>
-     <y>92</y>
+     <x>700</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
      <x>507</x>
@@ -205,9 +258,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>refreshDevicesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainDialog</receiver>
+   <slot>enumFlashDevices()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>685</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>openImageFile()</slot>
   <slot>writeImageToDevice()</slot>
+  <slot>enumFlashDevices()</slot>
  </slots>
 </ui>
