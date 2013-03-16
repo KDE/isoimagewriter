@@ -19,6 +19,7 @@ MainDialog::MainDialog(QWidget *parent) :
     m_ImageSize(0)
 {
     ui->setupUi(this);
+    setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowContextHelpButtonHint);
     setFixedHeight(size().height());
     hideWritingProgress();
     // TODO: Show dialog disabled, print "please wait", enumerate devices, then update the list, enable the window
