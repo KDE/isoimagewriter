@@ -21,6 +21,7 @@ private:
 protected:
     QString m_ImageFile;
     quint64 m_ImageSize;
+    QString m_LastOpenedDir;
     void preprocessImageFile(const QString& newImageFile);
 
     void dragEnterEvent(QDragEnterEvent* event);

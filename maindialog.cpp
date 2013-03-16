@@ -16,7 +16,8 @@ MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MainDialog),
     m_ImageFile(""),
-    m_ImageSize(0)
+    m_ImageSize(0),
+    m_LastOpenedDir("")
 {
     ui->setupUi(this);
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowContextHelpButtonHint);
@@ -329,10 +330,11 @@ void MainDialog::hideWritingProgress()
 
 void MainDialog::openImageFile()
 {
-    QString newImageFile = QFileDialog::getOpenFileName(this, "", "", "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
+    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
     if (newImageFile != "")
     {
         newImageFile.replace('/', '\\');
+        m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('\\'));
         preprocessImageFile(newImageFile);
     }
 }
