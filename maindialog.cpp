@@ -1,5 +1,4 @@
 #include <Wbemidl.h>
-#include <comutil.h>
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -79,6 +78,9 @@ MainDialog::~MainDialog()
 
 void MainDialog::enumFlashDevices()
 {
+    ui->deviceList->clear();
+    ui->deviceList->setEnabled(false);
+
     int ret_value = 0;
     const size_t ERR_BUF_SZ = 1024;
     wchar_t err_msg[ERR_BUF_SZ];
@@ -106,7 +108,6 @@ void MainDialog::enumFlashDevices()
         ALLOC_BSTR(strQL, L"WQL");
         ALLOC_BSTR(strQueryDisks, L"SELECT * FROM Win32_DiskDrive WHERE InterfaceType = \"USB\"");
 
-        CHECK_OK(CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, 0), L"CoInitializeSecurity failed.");
         CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, (void**)&pIWbemLocator), L"CoCreateInstance(WbemAdministrativeLocator) failed.");
         CHECK_OK(pIWbemLocator->ConnectServer(bstrNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), L"ConnectServer failed.");
         CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), L"Failed to query USB flash devices.");
@@ -235,6 +236,8 @@ void MainDialog::enumFlashDevices()
     FREE_BSTR(strQueryDisks);
     FREE_BSTR(strQueryPartitions);
     FREE_BSTR(strQueryLetters);
+
+    ui->deviceList->setEnabled(true);
 }
 
 void MainDialog::preprocessImageFile(const QString& newImageFile)

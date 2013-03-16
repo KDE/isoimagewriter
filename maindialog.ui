@@ -36,7 +36,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="RosaImageWriter.qrc">
-    <normaloff>:/icon-rosa.ico</normaloff>:/icon-rosa.ico</iconset>
+    <normaloff>:/res/icon-rosa.ico</normaloff>:/res/icon-rosa.ico</iconset>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -62,7 +62,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="RosaImageWriter.qrc">:/logo-rosa.png</pixmap>
+        <pixmap resource="RosaImageWriter.qrc">:/res/logo-rosa.png</pixmap>
        </property>
        <property name="margin">
         <number>0</number>
