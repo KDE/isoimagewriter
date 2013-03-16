@@ -4,6 +4,10 @@
 
 #include "maindialog.h"
 
+#ifndef Q_OS_WIN32
+#error Only Win32 is supported!
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

@@ -7,9 +7,9 @@
 #include <QLocale>
 #include <QThread>
 
+#include "common.h"
 #include "maindialog.h"
 #include "ui_maindialog.h"
-#include "progressdialog.h"
 #include "imagewriter.h"
 
 MainDialog::MainDialog(QWidget *parent) :
@@ -19,9 +19,8 @@ MainDialog::MainDialog(QWidget *parent) :
     m_ImageSize(0)
 {
     ui->setupUi(this);
-    ui->progressBar->setVisible(false);
-    ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
     setFixedHeight(size().height());
+    hideWritingProgress();
     // TODO: Show dialog disabled, print "please wait", enumerate devices, then update the list, enable the window
     enumFlashDevices();
 }
@@ -191,7 +190,7 @@ void MainDialog::enumFlashDevices()
                         {
                             if (val.vt == VT_BSTR)
                             {
-                                deviceData->m_Volumes += (deviceData->m_Volumes == "" ? "" : ", ") + QString::fromWCharArray(val.bstrVal);
+                                deviceData->m_Volumes << QString::fromWCharArray(val.bstrVal);
                             }
                             VariantClear(&val);
                         }
@@ -206,9 +205,7 @@ void MainDialog::enumFlashDevices()
             SAFE_RELEASE(pEnumPartitionsObject);
             FREE_BSTR(strQueryPartitions);
 
-            if (deviceData->m_Volumes == "")
-                deviceData->m_Volumes = "<unmounted>";
-            QString displayName = deviceData->m_Volumes + " - " + deviceData->m_VisibleName + " (" + QString::number(deviceData->m_Size / 1024 / 1024) + " MB)";
+            QString displayName = ((deviceData->m_Volumes.size() == 0) ? "<unmounted>" : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " MB)";
             ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
             deviceData = NULL;
         }
@@ -251,11 +248,11 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     if (f.open(QIODevice::ReadOnly))
     {
         m_ImageSize = f.size();
-        displayName += " (" + QString::number(m_ImageSize / 1024 / 1024) + " MB)";
+        displayName += " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " MB)";
         f.close();
     }
     ui->imageEdit->setText(displayName);
-    ui->writeStartStopButton->setEnabled(true);
+    ui->writeButton->setEnabled(true);
 }
 
 void MainDialog::dragEnterEvent(QDragEnterEvent* event)
@@ -288,6 +285,46 @@ void MainDialog::dropEvent(QDropEvent* event)
     }
 }
 
+void MainDialog::showWritingProgress()
+{
+    // Do not accept drag&drop while writing
+    setAcceptDrops(false);
+
+    // Disable the main interface
+    ui->imageLabel->setEnabled(false);
+    ui->imageEdit->setEnabled(false);
+    ui->imageSelectButton->setEnabled(false);
+    ui->deviceLabel->setEnabled(false);
+    ui->deviceList->setEnabled(false);
+    ui->deviceRefreshButton->setEnabled(false);
+
+    // Display and customize the progress bar part
+    ui->progressBar->setVisible(true);
+    ui->progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
+    ui->writeButton->setVisible(false);
+    ui->cancelButton->setVisible(true);
+}
+
+void MainDialog::hideWritingProgress()
+{
+    // Reenable drag&drop
+    setAcceptDrops(true);
+
+    // Enable the main interface
+    ui->imageLabel->setEnabled(true);
+    ui->imageEdit->setEnabled(true);
+    ui->imageSelectButton->setEnabled(true);
+    ui->deviceLabel->setEnabled(true);
+    ui->deviceList->setEnabled(true);
+    ui->deviceRefreshButton->setEnabled(true);
+
+    // Hide the progress bar
+    ui->progressBar->setVisible(false);
+    ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    ui->writeButton->setVisible(true);
+    ui->cancelButton->setVisible(false);
+}
+
 void MainDialog::openImageFile()
 {
     QString newImageFile = QFileDialog::getOpenFileName(this, "", "", "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
@@ -306,7 +343,7 @@ void MainDialog::writeImageToDevice()
     {
         QMessageBox::critical(
             this,
-            "ROSA Image Writer",
+            ApplicationTitle,
             "The image is larger than your selected device!\nImage size: " + currentLocale.toString(m_ImageSize) + " bytes\nDisk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes",
             QMessageBox::Ok
         );
@@ -314,30 +351,60 @@ void MainDialog::writeImageToDevice()
     }
     if (QMessageBox::warning(
             this,
-            "ROSA Image Writer",
+            ApplicationTitle,
             "Writing an image will erase all existing data on the selected device.\nAre you sure you wish to proceed?",
             QMessageBox::Yes | QMessageBox::No,
             QMessageBox::No) == QMessageBox::No)
         return;
 
-    ProgressDialog* dlg = new ProgressDialog(m_ImageSize / 1024 / 1024, this);
+    ui->progressBar->setMinimum(0);
+    ui->progressBar->setMaximum(alignNumberDiv(m_ImageSize, DEFAULT_UNIT));
+    ui->progressBar->setValue(0);
+    showWritingProgress();
 
     ImageWriter* writer = new ImageWriter(m_ImageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
+
     // Connect start and end signals
     connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
-    connect(writerThread, &QThread::finished, writer, &ImageWriter::deleteLater);
-    // When writer finishes its job, close the dialog and quit the thread
-    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
-    connect(writer, &ImageWriter::finished, dlg, &ProgressDialog::reject);
-    // Each time a block is written, update the progress bar
-    connect(writer, &ImageWriter::blockWritten, dlg, &ProgressDialog::updateProgressBar);
-    // If the Cancel button is pressed, inform the writer to stop the operation
-    connect(dlg, &ProgressDialog::cancelled, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
-    connect(writer, &ImageWriter::error, dlg, &ProgressDialog::showErrorMessage);
 
-    // Now display the dialog and start the writer thread
-    dlg->show();
+    // When writer finishes its job, quit the thread
+    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
+
+    // Guarantee deleting the objects after completion
+    connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
+    connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
+
+    // If the Cancel button is pressed, inform the writer to stop the operation
+    // Using DirectConnection because the thread does not read its own event queue until completion
+    connect(ui->cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+
+    // Each time a block is written, update the progress bar
+    connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
+
+    // If error is sent from the worker display it in the current GUI thread
+    connect(writer, &ImageWriter::error, this, &MainDialog::showErrorMessage);
+
+    // Restore the normal view of the dialog when writing is finished
+    // TODO: If a messagebox is displayed, wait until it's closed, and only then restore the dialog!
+    connect(writer, &ImageWriter::finished, this, &MainDialog::hideWritingProgress);
+
+    // Now start the writer thread
     writer->moveToThread(writerThread);
     writerThread->start();
+}
+
+void MainDialog::updateProgressBar(int increment)
+{
+    ui->progressBar->setValue(ui->progressBar->value() + increment);
+}
+
+void MainDialog::showErrorMessage(QString msg)
+{
+    QMessageBox::critical(
+        this,
+        ApplicationTitle,
+        msg,
+        QMessageBox::Ok
+    );
 }

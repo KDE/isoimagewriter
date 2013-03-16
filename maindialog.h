@@ -30,18 +30,22 @@ public slots:
     void openImageFile();
     void enumFlashDevices();
     void writeImageToDevice();
+    void showWritingProgress();
+    void hideWritingProgress();
+    void updateProgressBar(int increment);
+    void showErrorMessage(QString msg);
 };
 
 
 class UsbDevice
 {
 public:
-    UsbDevice() : m_VisibleName("Unknown Device"), m_Volumes(""), m_Size(0), m_PhysicalDevice("") {}
+    UsbDevice() : m_VisibleName("Unknown Device"), m_Volumes(), m_Size(0), m_PhysicalDevice("") {}
 
-    QString m_VisibleName;
-    QString m_Volumes;
-    quint64 m_Size;
-    QString m_PhysicalDevice;
+    QString     m_VisibleName;
+    QStringList m_Volumes;
+    quint64     m_Size;
+    QString     m_PhysicalDevice;
 };
 
 Q_DECLARE_METATYPE(UsbDevice*)

@@ -22,7 +22,7 @@ protected:
 signals:
     void finished();
     void blockWritten(int count);
-    void error(const QString& msg);
+    void error(QString msg);
     
 public slots:
     void writeImage();

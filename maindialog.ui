@@ -150,7 +150,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QPushButton" name="refreshDevicesButton">
+      <widget class="QPushButton" name="deviceRefreshButton">
        <property name="text">
         <string/>
        </property>
@@ -191,7 +191,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="writeStartStopButton">
+      <widget class="QPushButton" name="writeButton">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -209,6 +209,19 @@
        </property>
        <property name="text">
         <string>&amp;Write</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>&amp;Cancel</string>
        </property>
       </widget>
      </item>
@@ -243,13 +256,13 @@
    </hints>
   </connection>
   <connection>
-   <sender>writeStartStopButton</sender>
+   <sender>writeButton</sender>
    <signal>clicked()</signal>
    <receiver>MainDialog</receiver>
    <slot>writeImageToDevice()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>700</x>
+     <x>619</x>
      <y>137</y>
     </hint>
     <hint type="destinationlabel">
@@ -259,7 +272,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>refreshDevicesButton</sender>
+   <sender>deviceRefreshButton</sender>
    <signal>clicked()</signal>
    <receiver>MainDialog</receiver>
    <slot>enumFlashDevices()</slot>
