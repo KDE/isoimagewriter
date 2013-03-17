@@ -38,11 +38,12 @@ template <typename T> T alignNumber(T val, T factor)
     return alignNumberDiv(val, factor) * factor;
 }
 
-// Converts the WinAPI error code into text message
+// Converts the WinAPI and COM error code into text message
 // Input:
-//  err - error code (GetLastError() is used by default)
+//  prefixMessage - error description
+//  errorCode     - error code (GetLastError() is used by default)
 // Returns:
-//  text message in the current system language describing the error
-QString errorMessageFromCode(DWORD err = GetLastError());
+//  prefixMessage followed by a newline and the system error message for the errorCode
+QString errorMessageFromCode(QString prefixMessage, DWORD errorCode = GetLastError());
 
 #endif // COMMON_H

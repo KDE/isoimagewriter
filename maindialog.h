@@ -7,6 +7,8 @@
 
 #include <QDialog>
 
+#include "common.h"
+
 namespace Ui {
     class MainDialog;
 }
@@ -87,18 +89,16 @@ Q_DECLARE_METATYPE(UsbDevice*)
 
 
 // Several WinAPI COM specific macros for keeping the code clean
-// TODO: Invent something clever to avoid fixed name of the error message buffer
 
-// Runs the COM request specified, checks for return value and throws an exception if it's not OK
-// Error message is stored in the buffer with pre-defined name err_msg; exception is the HRESULT code
-#define CHECK_OK(code, msg)         \
-    {                               \
-        HRESULT res = code;         \
-        if (res != S_OK)            \
-        {                           \
-            wcscpy_s(err_msg, msg); \
-            throw res;              \
-        }                           \
+// Runs the COM request specified, checks for return value and throws an exception
+// with descriptive error message if it's not OK
+#define CHECK_OK(code, msg)                       \
+    {                                             \
+        HRESULT res = code;                       \
+        if (res != S_OK)                          \
+        {                                         \
+            throw errorMessageFromCode(msg, res); \
+        }                                         \
     }
 
 // Releases the COM object and nullifies the pointer
@@ -111,14 +111,15 @@ Q_DECLARE_METATYPE(UsbDevice*)
         }                   \
     }
 
-// Allocated a BSTR string using the specified text and checks for successful memory allocation
-// Error message is stored in the buffer with pre-defined name err_msg; exception is 0 value
-#define ALLOC_BSTR(name, str)                                               \
-    BSTR name = SysAllocString(str);                                        \
-    if (name == NULL)                                                       \
-    {                                                                       \
-        wcscpy_s(err_msg, L"Memory allocation for " ## L#name L" failed."); \
-        throw (HRESULT)0;                                                   \
+// Allocated a BSTR string using the specified text, checks for successful memory allocation
+// and throws an exception with descriptive error message if unsuccessful
+#define ALLOC_BSTR(name, str)                                         \
+    {                                                                 \
+        name = SysAllocString(str);                                   \
+        if (name == NULL)                                             \
+        {                                                             \
+            throw QString("Memory allocation for " #name " failed."); \
+        }                                                             \
     }
 
 // Releases the BSTR string and nullifies the pointer

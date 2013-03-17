@@ -4,18 +4,19 @@
 // Implementation of the non-template functions from common.h
 
 
-// Converts the WinAPI error code into text message
+// Converts the WinAPI and COM error code into text message
 // Input:
-//  err - error code (GetLastError() is used by default)
+//  prefixMessage - error description
+//  errorCode     - error code (GetLastError() is used by default)
 // Returns:
-//  text message in the current system language describing the error
-QString errorMessageFromCode(DWORD err)
+//  prefixMessage followed by a newline and the system error message for the errorCode
+QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
 {
     LPTSTR msgBuffer;
     DWORD res = FormatMessage(
         FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
         NULL,
-        err,
+        errorCode,
         0,
         (LPTSTR)&msgBuffer,
         0,
@@ -23,10 +24,10 @@ QString errorMessageFromCode(DWORD err)
     );
     if (res)
     {
-        QString msg = QString::fromWCharArray(msgBuffer);
+        prefixMessage += "\n" + QString::fromWCharArray(msgBuffer);
         LocalFree(msgBuffer);
-        return msg;
+        return prefixMessage;
     }
     else
-        return "Error code: " + QString::number(err);
+        return prefixMessage + "\nError code: " + QString::number(errorCode);
 }

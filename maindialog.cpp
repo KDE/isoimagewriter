@@ -150,14 +150,10 @@ void MainDialog::enumFlashDevices()
     // TODO: Disable the whole dialog
     ui->deviceList->setEnabled(false);
 
-    // Buffer for storing error message
-    const size_t ERR_BUF_SZ = 1024;
-    wchar_t err_msg[ERR_BUF_SZ];
-
     // Using WMI for enumerating the USB devices
 
     // Namespace of the WMI classes
-    BSTR bstrNamespace      = NULL;
+    BSTR strNamespace       = NULL;
     // "WQL" - the query language we're gonna use (the only possible, actually)
     BSTR strQL              = NULL;
     // Query string for requesting physical devices
@@ -183,14 +179,14 @@ void MainDialog::enumFlashDevices()
     try
     {
         // Start with allocating the fixed strings
-        ALLOC_BSTR(bstrNamespace, L"root\\cimv2");
+        ALLOC_BSTR(strNamespace, L"root\\cimv2");
         ALLOC_BSTR(strQL, L"WQL");
         ALLOC_BSTR(strQueryDisks, L"SELECT * FROM Win32_DiskDrive WHERE InterfaceType = \"USB\"");
 
         // Create the IWbemLocator and execute the first query (list of physical disks attached via USB)
-        CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, (void**)&pIWbemLocator), L"CoCreateInstance(WbemAdministrativeLocator) failed.");
-        CHECK_OK(pIWbemLocator->ConnectServer(bstrNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), L"ConnectServer failed.");
-        CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), L"Failed to query USB flash devices.");
+        CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, (void**)&pIWbemLocator), "CoCreateInstance(WbemAdministrativeLocator) failed.");
+        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), "ConnectServer failed.");
+        CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), "Failed to query USB flash devices.");
 
         // Enumerate the received list of devices
         for (;;)
@@ -244,7 +240,7 @@ void MainDialog::enumFlashDevices()
             ALLOC_BSTR(strQueryPartitions, reinterpret_cast<const wchar_t*>(qstrQueryPartitions.utf16()));
 
             // Execute the query
-            CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), L"Failed to query list of partitions.");
+            CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), "Failed to query list of partitions.");
 
             // Enumerate the received list of partitions
             for (;;)
@@ -276,7 +272,7 @@ void MainDialog::enumFlashDevices()
                     ALLOC_BSTR(strQueryLetters, reinterpret_cast<const wchar_t*>(qstrQueryLetters.utf16()));
 
                     // Execute the query
-                    CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), L"Failed to query list of logical disks.");
+                    CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), "Failed to query list of logical disks.");
 
                     // Enumerate the received list of logical disks
                     for (;;)
@@ -318,13 +314,13 @@ void MainDialog::enumFlashDevices()
             deviceData = NULL;
         }
     }
-    catch (HRESULT err_code)
+    catch (QString errMessage)
     {
         // Something bad happened
         QMessageBox::critical(
             this,
             ApplicationTitle,
-            "Error: " + QString::fromWCharArray(err_msg) + ((err_code != 0) ? QString(" (Code: 0x%1)\n").arg((ulong)err_code, 8, 16, QChar('0')) : "\n")
+            errMessage
         );
     }
 
@@ -341,7 +337,7 @@ void MainDialog::enumFlashDevices()
     SAFE_RELEASE(pWbemServices);
     SAFE_RELEASE(pIWbemLocator);
 
-    FREE_BSTR(bstrNamespace);
+    FREE_BSTR(strNamespace);
     FREE_BSTR(strQL);
     FREE_BSTR(strQueryDisks);
     FREE_BSTR(strQueryPartitions);
