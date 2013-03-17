@@ -1,5 +1,14 @@
 #include "common.h"
 
+////////////////////////////////////////////////////////////////////////////////
+// Implementation of the non-template functions from common.h
+
+
+// Converts the WinAPI error code into text message
+// Input:
+//  err - error code (GetLastError() is used by default)
+// Returns:
+//  text message in the current system language describing the error
 QString errorMessageFromCode(DWORD err)
 {
     LPTSTR msgBuffer;

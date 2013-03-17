@@ -21,80 +21,153 @@ MainDialog::MainDialog(QWidget *parent) :
     m_IsWriting(false)
 {
     ui->setupUi(this);
+    // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
+    // Disallow to change the dialog height
     setFixedHeight(size().height());
+    // Start in the "idle" mode
     hideWritingProgress();
-    // TODO: Show dialog disabled, print "please wait", enumerate devices, then update the list, enable the window
+    // Load the list of USB flash disks
     enumFlashDevices();
+    // TODO: Increase the dialog display speed by showing it with the empty list and enumerating devices
+    // in the background (dialog disabled, print "please wait")
+    // TODO: Use dialog disabling also for manual refreshing the list
+    // TODO: Automatically detect inserting/removing USB devices and update the list
 }
-
-// TODO: Automatically detect inserting/removing USB devices and update the list
-// Code snippet:
-//    DEV_BROADCAST_DEVICEINTERFACE cNotifyFilter;
-//    ZeroMemory(&cNotifyFilter, sizeof(cNotifyFilter));
-//    cNotifyFilter.dbcc_size        = sizeof(DEV_BROADCAST_DEVICEINTERFACE);
-//    cNotifyFilter.dbcc_devicetype  = DBT_DEVTYP_DEVICEINTERFACE;
-//    cNotifyFilter.dbcc_classguid   = GUID_DEVINTERFACE_VOLUME;
-//    m_hDevNotify = RegisterDeviceNotification(m_hAppWnd, &cNotifyFilter, DEVICE_NOTIFY_WINDOW_HANDLE);
-// m_hAppWnd is a handle of the window receiving WM_DEVICECHANGE.
 
 MainDialog::~MainDialog()
 {
+    cleanup();
+    delete ui;
+}
+
+// Retrieves information about the selected file and displays it in the dialog
+void MainDialog::preprocessImageFile(const QString& newImageFile)
+{
+    m_ImageFile = newImageFile;
+    m_ImageSize = 0;
+    QString displayName = m_ImageFile;
+    QFile f(m_ImageFile);
+    if (f.open(QIODevice::ReadOnly))
+    {
+        m_ImageSize = f.size();
+        displayName += " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " MB)";
+        f.close();
+    }
+    ui->imageEdit->setText(displayName);
+    // Enable the Write button (if there are USB flash disks present)
+    ui->writeButton->setEnabled(ui->deviceList->count() > 0);
+}
+
+// Frees the GUI-specific allocated resources
+void MainDialog::cleanup()
+{
+    // Delete all the formerly allocated UsbDevice objects attached to the combobox entries
     for (int i = 0; i < ui->deviceList->count(); ++i)
     {
         delete ui->deviceList->itemData(i).value<UsbDevice*>();
     }
-    delete ui;
 }
 
-#define CHECK_OK(code, msg)         \
-    {                               \
-        HRESULT res = code;         \
-        if (res != S_OK)            \
-        {                           \
-            wcscpy_s(err_msg, msg); \
-            throw res;              \
-        }                           \
-    }
+// The reimplemented dragEnterEvent to inform which incoming drag&drop events are acceptable
+void MainDialog::dragEnterEvent(QDragEnterEvent* event)
+{
+    // Accept only files with ANSI or Unicode paths
+    if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"") ||
+        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\""))
+        event->accept();
+}
 
-#define SAFE_RELEASE(obj)   \
-    {                       \
-        if (obj != NULL)    \
-        {                   \
-            obj->Release(); \
-            obj = NULL;     \
-        }                   \
-    }
+// The reimplemented dropEvent to process the dropped file
+void MainDialog::dropEvent(QDropEvent* event)
+{
+    QString newImageFile = "";
+    QByteArray droppedFileName;
 
-#define ALLOC_BSTR(name, str)                                               \
-    BSTR name = SysAllocString(str);                                        \
-    if (name == NULL)                                                       \
-    {                                                                       \
-        wcscpy_s(err_msg, L"Memory allocation for " ## L#name L" failed."); \
-        throw (HRESULT)0;                                                   \
+    // First, try to use the Unicode file name
+    droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileNameW\"");
+    if (!droppedFileName.isEmpty())
+    {
+        newImageFile = QString::fromWCharArray(reinterpret_cast<const wchar_t*>(droppedFileName.constData()));
     }
-
-#define FREE_BSTR(str)      \
-    {                       \
-        SysFreeString(str); \
-        str = NULL;         \
+    else
+    {
+        // If failed, use the ANSI name with the local codepage
+        droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileName\"");
+        if (!droppedFileName.isEmpty())
+        {
+            newImageFile = QString::fromLocal8Bit(droppedFileName.constData());
+        }
     }
+    if (newImageFile != "")
+    {
+        // If something was realy received update the information
+        preprocessImageFile(newImageFile);
+    }
+}
 
+// The reimplemented keyPressEvent to display confirmation if user closes the dialog during operation
+void MainDialog::closeEvent(QCloseEvent* event)
+{
+    if (m_IsWriting)
+    {
+        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
+            event->ignore();
+    }
+}
+
+// The reimplemented keyPressEvent to display confirmation if Esc is pressed during operation
+// (it normally closes the dialog but does not issue closeEvent for unknown reason)
+void MainDialog::keyPressEvent(QKeyEvent* event)
+{
+    if ((event->key() == Qt::Key_Escape) && m_IsWriting)
+    {
+        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
+            return;
+    }
+    QDialog::keyPressEvent(event);
+}
+
+// Suggests to select image file using the Open File dialog
+void MainDialog::openImageFile()
+{
+    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
+    if (newImageFile != "")
+    {
+        newImageFile.replace('/', '\\');
+        m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('\\'));
+        preprocessImageFile(newImageFile);
+    }
+}
+
+// Reloads the list of USB flash disks
 void MainDialog::enumFlashDevices()
 {
+    // Remove the existing entries
+    cleanup();
     ui->deviceList->clear();
+    // Disable the combobox
+    // TODO: Disable the whole dialog
     ui->deviceList->setEnabled(false);
 
-    int ret_value = 0;
+    // Buffer for storing error message
     const size_t ERR_BUF_SZ = 1024;
     wchar_t err_msg[ERR_BUF_SZ];
 
+    // Using WMI for enumerating the USB devices
+
+    // Namespace of the WMI classes
     BSTR bstrNamespace      = NULL;
+    // "WQL" - the query language we're gonna use (the only possible, actually)
     BSTR strQL              = NULL;
+    // Query string for requesting physical devices
     BSTR strQueryDisks      = NULL;
+    // Query string for requesting partitions for each of the the physical devices
     BSTR strQueryPartitions = NULL;
+    // Query string for requesting logical disks for each of the partitions
     BSTR strQueryLetters    = NULL;
 
+    // Various COM objects for executing the queries, enumerating lists and retrieving properties
     IWbemLocator*         pIWbemLocator         = NULL;
     IWbemServices*        pWbemServices         = NULL;
     IEnumWbemClassObject* pEnumDisksObject      = NULL;
@@ -104,28 +177,36 @@ void MainDialog::enumFlashDevices()
     IWbemClassObject*     pPartitionObject      = NULL;
     IWbemClassObject*     pLetterObject         = NULL;
 
+    // Temporary object for attaching data to the combobox entries
     UsbDevice* deviceData = NULL;
 
     try
     {
+        // Start with allocating the fixed strings
         ALLOC_BSTR(bstrNamespace, L"root\\cimv2");
         ALLOC_BSTR(strQL, L"WQL");
         ALLOC_BSTR(strQueryDisks, L"SELECT * FROM Win32_DiskDrive WHERE InterfaceType = \"USB\"");
 
+        // Create the IWbemLocator and execute the first query (list of physical disks attached via USB)
         CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, (void**)&pIWbemLocator), L"CoCreateInstance(WbemAdministrativeLocator) failed.");
         CHECK_OK(pIWbemLocator->ConnectServer(bstrNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), L"ConnectServer failed.");
         CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), L"Failed to query USB flash devices.");
 
+        // Enumerate the received list of devices
         for (;;)
         {
+            // Get the next available device or exit the loop
             ULONG uReturned;
             pEnumDisksObject->Next(WBEM_INFINITE, 1, &pDiskObject, &uReturned);
             if (uReturned == 0)
                 break;
 
             VARIANT val;
+
+            // Fetch the required properties and store them in the UsbDevice object
             UsbDevice* deviceData = new UsbDevice;
 
+            // User-friendly name of the device
             if (pDiskObject->Get(L"Model", 0, &val, 0, 0) == WBEM_S_NO_ERROR)
             {
                 if (val.vt == VT_BSTR)
@@ -135,6 +216,7 @@ void MainDialog::enumFlashDevices()
                 VariantClear(&val);
             }
 
+            // System name of the device
             if (pDiskObject->Get(L"DeviceID", 0, &val, 0, 0) == WBEM_S_NO_ERROR)
             {
                 if (val.vt == VT_BSTR)
@@ -144,7 +226,7 @@ void MainDialog::enumFlashDevices()
                 VariantClear(&val);
             }
 
-
+            // Size of the devifce
             if (pDiskObject->Get(L"Size", 0, &val, 0, 0) == WBEM_S_NO_ERROR)
             {
                 if (val.vt == VT_BSTR)
@@ -154,18 +236,25 @@ void MainDialog::enumFlashDevices()
                 VariantClear(&val);
             }
 
+            // The device object is no longer needed, release it
             SAFE_RELEASE(pDiskObject);
 
+            // Construct the request for listing the partitions on the current disk
             QString qstrQueryPartitions = "ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + deviceData->m_PhysicalDevice + "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition";
             ALLOC_BSTR(strQueryPartitions, reinterpret_cast<const wchar_t*>(qstrQueryPartitions.utf16()));
 
+            // Execute the query
             CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), L"Failed to query list of partitions.");
+
+            // Enumerate the received list of partitions
             for (;;)
             {
+                // Get the next available partition or exit the loop
                 pEnumPartitionsObject->Next(WBEM_INFINITE, 1, &pPartitionObject, &uReturned);
                 if (uReturned == 0)
                     break;
 
+                // Fetch the DeviceID property and store it for using in the next request
                 QString qstrQueryLetters = "";
                 if (pPartitionObject->Get(L"DeviceID", 0, &val, 0, 0) == WBEM_S_NO_ERROR)
                 {
@@ -175,20 +264,29 @@ void MainDialog::enumFlashDevices()
                     }
                     VariantClear(&val);
                 }
+
+                // The partition object is no longer needed, release it
                 SAFE_RELEASE(pPartitionObject);
 
+                // If DeviceID was fetched proceed to the logical disks
                 if (qstrQueryLetters != "")
                 {
+                    // Construct the request for listing the logical disks related to the current partition
                     qstrQueryLetters = "ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + qstrQueryLetters + "'} WHERE AssocClass = Win32_LogicalDiskToPartition";
                     ALLOC_BSTR(strQueryLetters, reinterpret_cast<const wchar_t*>(qstrQueryLetters.utf16()));
 
+                    // Execute the query
                     CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), L"Failed to query list of logical disks.");
+
+                    // Enumerate the received list of logical disks
                     for (;;)
                     {
+                        // Get the next available logical disk or exit the loop
                         pEnumLettersObject->Next(WBEM_INFINITE, 1, &pLetterObject, &uReturned);
                         if (uReturned == 0)
                             break;
 
+                        // Fetch the disk letter and add it to the list of volumes in the UsbDevice object
                         if (pLetterObject->Get(L"Caption", 0, &val, 0, 0) == WBEM_S_NO_ERROR)
                         {
                             if (val.vt == VT_BSTR)
@@ -197,32 +295,42 @@ void MainDialog::enumFlashDevices()
                             }
                             VariantClear(&val);
                         }
+
+                        // The logical disk object is no longer needed, release it
                         SAFE_RELEASE(pLetterObject);
                     }
 
+                    // Release the logical disks enumerator object and the corresponding query string
                     SAFE_RELEASE(pEnumLettersObject);
                     FREE_BSTR(strQueryLetters);
                 }
             }
 
+            // Release the partitions enumerator object and the corresponding query string
             SAFE_RELEASE(pEnumPartitionsObject);
             FREE_BSTR(strQueryPartitions);
 
+            // The device information is now complete, construct the display name for the combobox and append the entry
+            // Format is: "<volume(s) - <user-friendly name> (<size in megabytes>)"
             QString displayName = ((deviceData->m_Volumes.size() == 0) ? "<unmounted>" : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " MB)";
             ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
+            // The object is now under the combobox control, nullify the pointer
             deviceData = NULL;
         }
     }
     catch (HRESULT err_code)
     {
-        wprintf(L"Error: %s", err_msg);
-        if (err_code != 0)
-            wprintf(L" (Code: 0x%08lx)", err_code);
-        wprintf(L"\n");
-        ret_value = 1;
+        // Something bad happened
+        QMessageBox::critical(
+            this,
+            ApplicationTitle,
+            "Error: " + QString::fromWCharArray(err_msg) + ((err_code != 0) ? QString(" (Code: 0x%1)\n").arg((ulong)err_code, 8, 16, QChar('0')) : "\n")
+        );
     }
 
-    delete deviceData;
+    // The cleanup stage
+    if (deviceData != NULL)
+        delete deviceData;
 
     SAFE_RELEASE(pLetterObject);
     SAFE_RELEASE(pPartitionObject);
@@ -239,130 +347,13 @@ void MainDialog::enumFlashDevices()
     FREE_BSTR(strQueryPartitions);
     FREE_BSTR(strQueryLetters);
 
+    // Reenable the combobox
     ui->deviceList->setEnabled(true);
-    ui->writeButton->setEnabled(ui->deviceList->count() > 0);
+    // Update the Write button enabled/disabled state
+    ui->writeButton->setEnabled((ui->deviceList->count() > 0) && (m_ImageFile != ""));
 }
 
-void MainDialog::preprocessImageFile(const QString& newImageFile)
-{
-    m_ImageFile = newImageFile;
-    m_ImageSize = 0;
-    QString displayName = m_ImageFile;
-    QFile f(m_ImageFile);
-    if (f.open(QIODevice::ReadOnly))
-    {
-        m_ImageSize = f.size();
-        displayName += " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " MB)";
-        f.close();
-    }
-    ui->imageEdit->setText(displayName);
-    ui->writeButton->setEnabled(ui->deviceList->count() > 0);
-}
-
-void MainDialog::dragEnterEvent(QDragEnterEvent* event)
-{
-    if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"") ||
-        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\""))
-        event->accept();
-}
-
-void MainDialog::dropEvent(QDropEvent* event)
-{
-    QString newImageFile = "";
-    QByteArray droppedFileName;
-    droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileNameW\"");
-    if (!droppedFileName.isEmpty())
-    {
-        newImageFile = QString::fromWCharArray(reinterpret_cast<const wchar_t*>(droppedFileName.constData()));
-    }
-    else
-    {
-        droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileName\"");
-        if (!droppedFileName.isEmpty())
-        {
-            newImageFile = QString::fromLocal8Bit(droppedFileName.constData());
-        }
-    }
-    if (newImageFile != "")
-    {
-        preprocessImageFile(newImageFile);
-    }
-}
-
-void MainDialog::closeEvent(QCloseEvent* event)
-{
-    if (m_IsWriting)
-    {
-        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
-            event->ignore();
-    }
-}
-
-void MainDialog::keyPressEvent(QKeyEvent* event)
-{
-    if ((event->key() == Qt::Key_Escape) && m_IsWriting)
-    {
-        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
-            return;
-    }
-    QDialog::keyPressEvent(event);
-}
-
-void MainDialog::showWritingProgress()
-{
-    m_IsWriting = true;
-
-    // Do not accept drag&drop while writing
-    setAcceptDrops(false);
-
-    // Disable the main interface
-    ui->imageLabel->setEnabled(false);
-    ui->imageEdit->setEnabled(false);
-    ui->imageSelectButton->setEnabled(false);
-    ui->deviceLabel->setEnabled(false);
-    ui->deviceList->setEnabled(false);
-    ui->deviceRefreshButton->setEnabled(false);
-
-    // Display and customize the progress bar part
-    ui->progressBar->setVisible(true);
-    ui->progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
-    ui->writeButton->setVisible(false);
-    ui->cancelButton->setVisible(true);
-}
-
-void MainDialog::hideWritingProgress()
-{
-    m_IsWriting = false;
-
-    // Reenable drag&drop
-    setAcceptDrops(true);
-
-    // Enable the main interface
-    ui->imageLabel->setEnabled(true);
-    ui->imageEdit->setEnabled(true);
-    ui->imageSelectButton->setEnabled(true);
-    ui->deviceLabel->setEnabled(true);
-    ui->deviceList->setEnabled(true);
-    ui->deviceRefreshButton->setEnabled(true);
-
-    // Hide the progress bar
-    ui->progressBar->setVisible(false);
-    ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
-    ui->writeButton->setVisible(true);
-    ui->cancelButton->setVisible(false);
-}
-
-void MainDialog::openImageFile()
-{
-    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
-    if (newImageFile != "")
-    {
-        newImageFile.replace('/', '\\');
-        m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('\\'));
-        preprocessImageFile(newImageFile);
-    }
-}
-
+// Starts writing the image
 void MainDialog::writeImageToDevice()
 {
     QLocale currentLocale;
@@ -429,11 +420,59 @@ void MainDialog::writeImageToDevice()
     writerThread->start();
 }
 
+// Updates GUI to the "writing" mode (progress bar shown, controls disabled)
+void MainDialog::showWritingProgress()
+{
+    m_IsWriting = true;
+
+    // Do not accept dropped files while writing
+    setAcceptDrops(false);
+
+    // Disable the main interface
+    ui->imageLabel->setEnabled(false);
+    ui->imageEdit->setEnabled(false);
+    ui->imageSelectButton->setEnabled(false);
+    ui->deviceLabel->setEnabled(false);
+    ui->deviceList->setEnabled(false);
+    ui->deviceRefreshButton->setEnabled(false);
+
+    // Display and customize the progress bar part
+    ui->progressBar->setVisible(true);
+    ui->progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
+    ui->writeButton->setVisible(false);
+    ui->cancelButton->setVisible(true);
+}
+
+// Updates GUI to the "idle" mode (progress bar hidden, controls enabled)
+void MainDialog::hideWritingProgress()
+{
+    m_IsWriting = false;
+
+    // Reenable drag&drop
+    setAcceptDrops(true);
+
+    // Enable the main interface
+    ui->imageLabel->setEnabled(true);
+    ui->imageEdit->setEnabled(true);
+    ui->imageSelectButton->setEnabled(true);
+    ui->deviceLabel->setEnabled(true);
+    ui->deviceList->setEnabled(true);
+    ui->deviceRefreshButton->setEnabled(true);
+
+    // Hide the progress bar
+    ui->progressBar->setVisible(false);
+    ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    ui->writeButton->setVisible(true);
+    ui->cancelButton->setVisible(false);
+}
+
+// Increments the progress bar counter by the specified number
 void MainDialog::updateProgressBar(int increment)
 {
     ui->progressBar->setValue(ui->progressBar->value() + increment);
 }
 
+// Displays the message about successful completion and returns to the "idle" mode
 void MainDialog::showSuccessMessage()
 {
     QMessageBox::information(
@@ -444,6 +483,7 @@ void MainDialog::showSuccessMessage()
     hideWritingProgress();
 }
 
+// Displays the specified error message and returns to the "idle" mode
 void MainDialog::showErrorMessage(QString msg)
 {
     QMessageBox::critical(
