@@ -21,7 +21,7 @@ MainDialog::MainDialog(QWidget *parent) :
     m_IsWriting(false)
 {
     ui->setupUi(this);
-    setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowContextHelpButtonHint);
+    setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
     setFixedHeight(size().height());
     hideWritingProgress();
     // TODO: Show dialog disabled, print "please wait", enumerate devices, then update the list, enable the window
