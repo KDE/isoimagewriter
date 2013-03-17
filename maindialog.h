@@ -22,10 +22,14 @@ protected:
     QString m_ImageFile;
     quint64 m_ImageSize;
     QString m_LastOpenedDir;
+    bool    m_IsWriting;
     void preprocessImageFile(const QString& newImageFile);
 
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
+    void closeEvent(QCloseEvent* event);
+    void keyPressEvent(QKeyEvent* event);
+
 
 public slots:
     void openImageFile();

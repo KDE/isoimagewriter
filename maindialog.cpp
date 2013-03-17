@@ -17,7 +17,8 @@ MainDialog::MainDialog(QWidget *parent) :
     ui(new Ui::MainDialog),
     m_ImageFile(""),
     m_ImageSize(0),
-    m_LastOpenedDir("")
+    m_LastOpenedDir(""),
+    m_IsWriting(false)
 {
     ui->setupUi(this);
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowContextHelpButtonHint);
@@ -288,8 +289,29 @@ void MainDialog::dropEvent(QDropEvent* event)
     }
 }
 
+void MainDialog::closeEvent(QCloseEvent* event)
+{
+    if (m_IsWriting)
+    {
+        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
+            event->ignore();
+    }
+}
+
+void MainDialog::keyPressEvent(QKeyEvent* event)
+{
+    if ((event->key() == Qt::Key_Escape) && m_IsWriting)
+    {
+        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
+            return;
+    }
+    QDialog::keyPressEvent(event);
+}
+
 void MainDialog::showWritingProgress()
 {
+    m_IsWriting = true;
+
     // Do not accept drag&drop while writing
     setAcceptDrops(false);
 
@@ -310,6 +332,8 @@ void MainDialog::showWritingProgress()
 
 void MainDialog::hideWritingProgress()
 {
+    m_IsWriting = false;
+
     // Reenable drag&drop
     setAcceptDrops(true);
 
