@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+QTPLUGIN += qico qwindows
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = RosaImageWriter
@@ -13,7 +15,7 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        maindialog.cpp \
+	maindialog.cpp \
     imagewriter.cpp \
     common.cpp
 
