@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MainDialog is the main application window
 
+#include <Shobjidl.h>
 
 #include <QDialog>
 
@@ -33,6 +34,9 @@ protected:
     QString m_LastOpenedDir;
     // Whether image is being written at the moment or not
     bool    m_IsWriting;
+
+    // Windows7 Taskbar interface for mirroring the progress bar
+    ITaskbarList3* m_Win7TaskbarList;
 
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
