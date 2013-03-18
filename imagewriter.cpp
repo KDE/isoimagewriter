@@ -40,7 +40,7 @@ void ImageWriter::writeImage()
         // direct access to devices and for unbuffered reading/writing)
         buffer = VirtualAlloc(NULL, BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
         if (buffer == NULL)
-            throw errorMessageFromCode("Failed to allocate memory for buffer:");
+            throw errorMessageFromCode(tr("Failed to allocate memory for buffer:"));
 
         // Open the source image file for reading
         imageFile = CreateFile(
@@ -53,7 +53,7 @@ void ImageWriter::writeImage()
             NULL
         );
         if (imageFile == INVALID_HANDLE_VALUE)
-            throw errorMessageFromCode("Failed to open the image file:");
+            throw errorMessageFromCode(tr("Failed to open the image file:"));
 
         // Unmount volumes that belong to the selected target device
         // TODO: Check first if they are used and show warning
@@ -70,12 +70,12 @@ void ImageWriter::writeImage()
                 NULL
             );
             if (volume == INVALID_HANDLE_VALUE)
-                throw errorMessageFromCode("Failed to open the drive " + m_Device->m_Volumes[i]);
+                throw errorMessageFromCode(tr("Failed to open the drive") + " " + m_Device->m_Volumes[i]);
             // Trying to lock the volume but ignore if we failed (such call seems to be required for
             // dismounting the volume on WinXP)
             DeviceIoControl(volume, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL);
             if (!DeviceIoControl(volume, FSCTL_DISMOUNT_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-                throw errorMessageFromCode("Failed to unmount the drive " + m_Device->m_Volumes[i]);
+                throw errorMessageFromCode(tr("Failed to unmount the drive") + " " + m_Device->m_Volumes[i]);
             CloseHandle(volume);
             volume = INVALID_HANDLE_VALUE;
         }
@@ -91,15 +91,15 @@ void ImageWriter::writeImage()
             NULL
         );
         if (deviceFile == INVALID_HANDLE_VALUE)
-            throw errorMessageFromCode("Failed to open the target device:");
+            throw errorMessageFromCode(tr("Failed to open the target device:"));
         if (!DeviceIoControl(deviceFile, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-            throw errorMessageFromCode("Failed to lock the target device:");
+            throw errorMessageFromCode(tr("Failed to lock the target device:"));
 
         // The number of bytes to be written must be a multiple of sector size,
         // so first we get the sector size proper (DISK_GEOMETRY::BytesPerSector)
         DISK_GEOMETRY dg;
         if (!DeviceIoControl(deviceFile, IOCTL_DISK_GET_DRIVE_GEOMETRY, NULL, 0, &dg, sizeof(dg), &bret, NULL))
-            throw errorMessageFromCode("Failed to get the target device info:");
+            throw errorMessageFromCode(tr("Failed to get the target device info:"));
 
         DWORD readBytes;
         DWORD writtenBytes;
@@ -111,9 +111,9 @@ void ImageWriter::writeImage()
             readBytes = alignNumber(readBytes, dg.BytesPerSector);
             res = WriteFile(deviceFile, buffer, readBytes, &writtenBytes, NULL);
             if (!res)
-                throw errorMessageFromCode("Failed to write to the device:");
+                throw errorMessageFromCode(tr("Failed to write to the device:"));
             if (writtenBytes != readBytes)
-                throw QString("The last block was not fully written (" + QString::number(writtenBytes) + " of " + QString::number(readBytes) + ")!\nAborting.");
+                throw tr("The last block was not fully written (%1 of %2 bytes)!\nAborting.").arg(writtenBytes).arg(readBytes);
 
             // Inform the GUI thread that next block was written
             // TODO: Make sure that when BLOCK_SIZE is not a multiple of DEFAULT_UNIT this still
@@ -132,7 +132,7 @@ void ImageWriter::writeImage()
             }
         }
         if (!res)
-            throw errorMessageFromCode("Failed to read the image file:");
+            throw errorMessageFromCode(tr("Failed to read the image file:"));
     }
     catch (QString msg)
     {

@@ -78,7 +78,7 @@ public slots:
 class UsbDevice
 {
 public:
-    UsbDevice() : m_VisibleName("Unknown Device"), m_Volumes(), m_Size(0), m_PhysicalDevice("") {}
+    UsbDevice() : m_VisibleName(QObject::tr("Unknown Device")), m_Volumes(), m_Size(0), m_PhysicalDevice("") {}
 
     // User-friendly name of the device
     QString     m_VisibleName;
@@ -118,13 +118,13 @@ Q_DECLARE_METATYPE(UsbDevice*)
 
 // Allocated a BSTR string using the specified text, checks for successful memory allocation
 // and throws an exception with descriptive error message if unsuccessful
-#define ALLOC_BSTR(name, str)                                         \
-    {                                                                 \
-        name = SysAllocString(str);                                   \
-        if (name == NULL)                                             \
-        {                                                             \
-            throw QString("Memory allocation for " #name " failed."); \
-        }                                                             \
+#define ALLOC_BSTR(name, str)                                        \
+    {                                                                \
+        name = SysAllocString(str);                                  \
+        if (name == NULL)                                            \
+        {                                                            \
+            throw tr("Memory allocation for %1 failed.").arg(#name); \
+        }                                                            \
     }
 
 // Releases the BSTR string and nullifies the pointer

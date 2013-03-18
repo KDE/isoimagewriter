@@ -40,7 +40,7 @@ MainDialog::MainDialog(QWidget *parent) :
     // TODO: Automatically detect inserting/removing USB devices and update the list
 
     // Get the taskbar object (if NULL is returned it won't be used)
-    CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, (void**)&m_Win7TaskbarList);
+    CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void**>(&m_Win7TaskbarList));
 }
 
 MainDialog::~MainDialog()
@@ -61,7 +61,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     if (f.open(QIODevice::ReadOnly))
     {
         m_ImageSize = f.size();
-        displayName += " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " MB)";
+        displayName += " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " " + tr("MB") + ")";
         f.close();
     }
     ui->imageEdit->setText(displayName);
@@ -121,7 +121,7 @@ void MainDialog::closeEvent(QCloseEvent* event)
 {
     if (m_IsWriting)
     {
-        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
+        if (QMessageBox::question(this, ApplicationTitle, tr("Writing is in progress, abort it?")) == QMessageBox::No)
             event->ignore();
     }
 }
@@ -132,7 +132,7 @@ void MainDialog::keyPressEvent(QKeyEvent* event)
 {
     if ((event->key() == Qt::Key_Escape) && m_IsWriting)
     {
-        if (QMessageBox::question(this, ApplicationTitle, "Writing is in progress, abort it?") == QMessageBox::No)
+        if (QMessageBox::question(this, ApplicationTitle, tr("Writing is in progress, abort it?")) == QMessageBox::No)
             return;
     }
     QDialog::keyPressEvent(event);
@@ -141,7 +141,7 @@ void MainDialog::keyPressEvent(QKeyEvent* event)
 // Suggests to select image file using the Open File dialog
 void MainDialog::openImageFile()
 {
-    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, "Disk Images (*.iso;*.bin;*.img);;All Files(*.*)", NULL, QFileDialog::ReadOnly);
+    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, tr("Disk Images") + " (*.iso;*.bin;*.img);;" + tr("All Files") + " (*.*)", NULL, QFileDialog::ReadOnly);
     if (newImageFile != "")
     {
         newImageFile.replace('/', '\\');
@@ -194,9 +194,9 @@ void MainDialog::enumFlashDevices()
         ALLOC_BSTR(strQueryDisks, L"SELECT * FROM Win32_DiskDrive WHERE InterfaceType = \"USB\"");
 
         // Create the IWbemLocator and execute the first query (list of physical disks attached via USB)
-        CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, (void**)&pIWbemLocator), "CoCreateInstance(WbemAdministrativeLocator) failed.");
-        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), "ConnectServer failed.");
-        CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), "Failed to query USB flash devices.");
+        CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, reinterpret_cast<void**>(&pIWbemLocator)), tr("CoCreateInstance(WbemAdministrativeLocator) failed."));
+        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), tr("ConnectServer failed."));
+        CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), tr("Failed to query USB flash devices."));
 
         // Enumerate the received list of devices
         for (;;)
@@ -250,7 +250,7 @@ void MainDialog::enumFlashDevices()
             ALLOC_BSTR(strQueryPartitions, reinterpret_cast<const wchar_t*>(qstrQueryPartitions.utf16()));
 
             // Execute the query
-            CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), "Failed to query list of partitions.");
+            CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), tr("Failed to query list of partitions."));
 
             // Enumerate the received list of partitions
             for (;;)
@@ -282,7 +282,7 @@ void MainDialog::enumFlashDevices()
                     ALLOC_BSTR(strQueryLetters, reinterpret_cast<const wchar_t*>(qstrQueryLetters.utf16()));
 
                     // Execute the query
-                    CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), "Failed to query list of logical disks.");
+                    CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), tr("Failed to query list of logical disks."));
 
                     // Enumerate the received list of logical disks
                     for (;;)
@@ -318,7 +318,7 @@ void MainDialog::enumFlashDevices()
 
             // The device information is now complete, construct the display name for the combobox and append the entry
             // Format is: "<volume(s) - <user-friendly name> (<size in megabytes>)"
-            QString displayName = ((deviceData->m_Volumes.size() == 0) ? "<unmounted>" : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " MB)";
+            QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
             ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
             // The object is now under the combobox control, nullify the pointer
             deviceData = NULL;
@@ -371,9 +371,9 @@ void MainDialog::writeImageToDevice()
         QMessageBox::critical(
             this,
             ApplicationTitle,
-            "The image is larger than your selected device!\n"
-            "Image size: " + currentLocale.toString(m_ImageSize) + " bytes\n"
-            "Disk size: " + currentLocale.toString(selectedDevice->m_Size) + " bytes",
+            tr("The image is larger than your selected device!") + "\n" +
+            tr("Image size:") + " " + QString::number(m_ImageSize / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(m_ImageSize) + " " + tr("b") + ")\n" +
+            tr("Disk size:") + " " + QString::number(selectedDevice->m_Size / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(selectedDevice->m_Size) + " " + tr("b") + ")",
             QMessageBox::Ok
         );
         return;
@@ -381,8 +381,8 @@ void MainDialog::writeImageToDevice()
     if (QMessageBox::warning(
             this,
             ApplicationTitle,
-            "Writing an image will erase all existing data on the selected device.\n"
-            "Are you sure you wish to proceed?",
+            tr("Writing an image will erase all existing data on the selected device.\n"
+               "Are you sure you wish to proceed?"),
             QMessageBox::Yes | QMessageBox::No,
             QMessageBox::No) == QMessageBox::No)
         return;
@@ -450,7 +450,7 @@ void MainDialog::showWritingProgress()
 
     // Add the progress indicator to the taskbar button
     if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressValue((HWND)winId(), 0, ui->progressBar->maximum());
+        m_Win7TaskbarList->SetProgressValue(reinterpret_cast<HWND>(winId()), 0, ui->progressBar->maximum());
 }
 
 // Updates GUI to the "idle" mode (progress bar hidden, controls enabled)
@@ -477,7 +477,7 @@ void MainDialog::hideWritingProgress()
 
     // Remove progress indicator from the taskbar button
     if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressState((HWND)winId(), TBPF_NOPROGRESS);
+        m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_NOPROGRESS);
 }
 
 // Increments the progress bar counter by the specified number
@@ -495,7 +495,7 @@ void MainDialog::showSuccessMessage()
     QMessageBox::information(
         this,
         ApplicationTitle,
-        "The operation completed successfully."
+        tr("The operation completed successfully.")
     );
     hideWritingProgress();
 }
@@ -504,7 +504,7 @@ void MainDialog::showSuccessMessage()
 void MainDialog::showErrorMessage(QString msg)
 {
     if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressState((HWND)winId(), TBPF_ERROR);
+        m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_ERROR);
     QMessageBox::critical(
         this,
         ApplicationTitle,

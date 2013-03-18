@@ -18,7 +18,7 @@ QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
         NULL,
         errorCode,
         0,
-        (LPTSTR)&msgBuffer,
+        reinterpret_cast<LPTSTR>(&msgBuffer),
         0,
         NULL
     );
@@ -29,5 +29,5 @@ QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
         return prefixMessage;
     }
     else
-        return prefixMessage + "\nError code: " + QString::number(errorCode);
+        return prefixMessage + "\n" + QObject::tr("Error code:") + " " + QString::number(errorCode);
 }

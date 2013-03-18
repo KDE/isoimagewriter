@@ -7,6 +7,7 @@
 #include <windows.h>
 #include <type_traits>
 
+#include <QObject>
 #include <QString>
 
 // Default unit to be used when displaying file/device sizes (MB)

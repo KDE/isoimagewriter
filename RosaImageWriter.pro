@@ -42,3 +42,5 @@ RC_FILE += RosaImageWriter.rc
 LIBS += Ole32.lib OleAut32.lib Wbemuuid.lib
 
 QMAKE_LFLAGS_RELEASE += "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\""
+
+TRANSLATIONS = lang/ru_RU.ts
