@@ -5,6 +5,7 @@
 // This file contains some commonly-used constants and function declarations
 
 #include <windows.h>
+#include <type_traits>
 
 #include <QString>
 
@@ -23,6 +24,7 @@ const QString ApplicationTitle = "ROSA Image Writer";
 //  the number of blocks of size <factor> required for <val> to fit in
 template <typename T> T alignNumberDiv(T val, T factor)
 {
+    static_assert(std::is_integral<T>::value, "Only integer types are supported!");
     return ((val + factor - 1) / factor);
 }
 
@@ -35,6 +37,7 @@ template <typename T> T alignNumberDiv(T val, T factor)
 //  the total size of blocks of size <factor> required for <val> to fit in
 template <typename T> T alignNumber(T val, T factor)
 {
+    static_assert(std::is_integral<T>::value, "Only integer types are supported!");
     return alignNumberDiv(val, factor) * factor;
 }
 

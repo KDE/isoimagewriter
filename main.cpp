@@ -11,6 +11,7 @@
 //  3. unmounting of USB device volumes before writing;
 //  4. CoInitializeSecurity in main();
 //  5. WinAPI-specific headers, libraries, resources (icon, manifest), drag&drop MIME types (?).
+//  6. ITaskbarList3 COM interface.
 #ifndef Q_OS_WIN32
 #error Only Win32 is supported!
 #endif
