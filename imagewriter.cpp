@@ -67,6 +67,9 @@ void ImageWriter::writeImage()
             );
             if (volume == INVALID_HANDLE_VALUE)
                 throw errorMessageFromCode("Failed to open the drive " + m_Device->m_Volumes[i]);
+            // Trying to lock the volume but ignore if we failed (such call seems to be required for
+            // dismounting the volume on WinXP)
+            DeviceIoControl(volume, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL);
             if (!DeviceIoControl(volume, FSCTL_DISMOUNT_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
                 throw errorMessageFromCode("Failed to unmount the drive " + m_Device->m_Volumes[i]);
             CloseHandle(volume);
