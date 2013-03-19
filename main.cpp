@@ -13,6 +13,7 @@
 //  4. CoInitializeSecurity in main();
 //  5. WinAPI-specific headers, libraries, resources (icon, manifest), drag&drop MIME types (?).
 //  6. ITaskbarList3 COM interface.
+//  7. WM_DEVICECHANGE processing.
 #ifndef Q_OS_WIN32
 #error Only Win32 is supported!
 #endif
@@ -34,6 +35,9 @@ int main(int argc, char *argv[])
     }
 
     MainDialog w;
+    // MainDialog implements QAbstractNativeEventFilter interface and processes WM_DEVICECHANGE,
+    // register it for filtering native Windows events
+    a.installNativeEventFilter(&w);
     w.show();
     
     return a.exec();

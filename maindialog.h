@@ -8,6 +8,7 @@
 #include <Shobjidl.h>
 
 #include <QDialog>
+#include <QAbstractNativeEventFilter>
 
 #include "common.h"
 
@@ -15,14 +16,17 @@ namespace Ui {
     class MainDialog;
 }
 
-class MainDialog : public QDialog
+class MainDialog : public QDialog, public QAbstractNativeEventFilter
 {
     Q_OBJECT
     
 public:
     explicit MainDialog(QWidget *parent = 0);
     ~MainDialog();
-    
+
+    // Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages
+    bool nativeEventFilter(const QByteArray& eventType, void* message, long* result);
+
 private:
     Ui::MainDialog *ui;
 
@@ -52,6 +56,9 @@ protected:
     void closeEvent(QCloseEvent* event);
     void keyPressEvent(QKeyEvent* event);
 
+signals:
+    // Emitted when device change notification arrives
+    void deviceChanged();
 
 public slots:
     // Suggests to select image file using the Open File dialog

@@ -2,6 +2,8 @@
 // Implementation of MainDialog
 
 
+#include <windows.h>
+#include <dbt.h>
 #include <Wbemidl.h>
 
 #include <QMessageBox>
@@ -41,6 +43,10 @@ MainDialog::MainDialog(QWidget *parent) :
 
     // Get the taskbar object (if NULL is returned it won't be used)
     CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void**>(&m_Win7TaskbarList));
+
+    // When device changing event comes, refresh the list of USB flash disks
+    // Using QueuedConnection to avoid delays in processing the message
+    connect(this, &MainDialog::deviceChanged, this, &MainDialog::enumFlashDevices, Qt::QueuedConnection);
 }
 
 MainDialog::~MainDialog()
@@ -49,6 +55,22 @@ MainDialog::~MainDialog()
         m_Win7TaskbarList->Release();
     cleanup();
     delete ui;
+}
+
+// Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages
+bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* message, long* result)
+{
+    MSG* msg = static_cast<MSG*>(message);
+    if ((msg->message == WM_DEVICECHANGE) &&
+        ((msg->wParam == DBT_DEVICEARRIVAL) || (msg->wParam == DBT_DEVICEREMOVECOMPLETE)))
+    {
+        // If the event was caused by adding or remiving a device, mark the WinAPI message as processed
+        // and emit the notification signal
+        *(static_cast<LRESULT*>(result)) = TRUE;
+        emit deviceChanged();
+        return true;
+    }
+    return false;
 }
 
 // Retrieves information about the selected file and displays it in the dialog
