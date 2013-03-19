@@ -69,17 +69,27 @@ Aborting.</source>
         <translation>Образ:</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="173"/>
+        <location filename="../maindialog.ui" line="141"/>
+        <source>Open image file</source>
+        <translation>Открыть файл образа</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.ui" line="155"/>
+        <source>Refresh the list</source>
+        <translation>Перечитать список</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.ui" line="176"/>
         <source>%v / %m MB</source>
         <translation>%v / %m МБ</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="211"/>
+        <location filename="../maindialog.ui" line="214"/>
         <source>&amp;Write</source>
         <translation>&amp;Записать</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="224"/>
+        <location filename="../maindialog.ui" line="227"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Отменить</translation>
     </message>
