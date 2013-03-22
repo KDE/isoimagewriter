@@ -25,6 +25,7 @@ MainDialog::MainDialog(QWidget *parent) :
     m_ImageSize(0),
     m_LastOpenedDir(""),
     m_IsWriting(false),
+    m_EnumFlashDevicesWaiting(false),
     m_Win7TaskbarList(NULL)
 {
     ui->setupUi(this);
@@ -46,7 +47,7 @@ MainDialog::MainDialog(QWidget *parent) :
 
     // When device changing event comes, refresh the list of USB flash disks
     // Using QueuedConnection to avoid delays in processing the message
-    connect(this, &MainDialog::deviceChanged, this, &MainDialog::enumFlashDevices, Qt::QueuedConnection);
+    connect(this, &MainDialog::deviceChanged, this, &MainDialog::scheduleEnumFlashDevices, Qt::QueuedConnection);
 }
 
 MainDialog::~MainDialog()
@@ -170,6 +171,15 @@ void MainDialog::openImageFile()
         m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('\\'));
         preprocessImageFile(newImageFile);
     }
+}
+
+// Schedules reloading the list of USB flash disks to run when possible
+void MainDialog::scheduleEnumFlashDevices()
+{
+    if (m_IsWriting)
+        m_EnumFlashDevicesWaiting = true;
+    else
+        enumFlashDevices();
 }
 
 // Reloads the list of USB flash disks
@@ -500,6 +510,10 @@ void MainDialog::hideWritingProgress()
     // Remove progress indicator from the taskbar button
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_NOPROGRESS);
+
+    // If device list changed during writing update it now
+    if (m_EnumFlashDevicesWaiting)
+        enumFlashDevices();
 }
 
 // Increments the progress bar counter by the specified number

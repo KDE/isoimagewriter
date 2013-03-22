@@ -39,6 +39,8 @@ protected:
     QString m_LastOpenedDir;
     // Whether image is being written at the moment or not
     bool    m_IsWriting;
+    // Flag indicating that flash disks enumerating is pending
+    bool    m_EnumFlashDevicesWaiting;
 
     // Windows7 Taskbar interface for mirroring the progress bar
     ITaskbarList3* m_Win7TaskbarList;
@@ -56,6 +58,9 @@ protected:
     void closeEvent(QCloseEvent* event);
     void keyPressEvent(QKeyEvent* event);
 
+    // Reloads the list of USB flash disks
+    void enumFlashDevices();
+
 signals:
     // Emitted when device change notification arrives
     void deviceChanged();
@@ -63,8 +68,8 @@ signals:
 public slots:
     // Suggests to select image file using the Open File dialog
     void openImageFile();
-    // Reloads the list of USB flash disks
-    void enumFlashDevices();
+    // Schedules reloading the list of USB flash disks to run when possible
+    void scheduleEnumFlashDevices();
     // Starts writing the image
     void writeImageToDevice();
 

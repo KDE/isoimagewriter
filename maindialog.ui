@@ -278,7 +278,7 @@
    <sender>deviceRefreshButton</sender>
    <signal>clicked()</signal>
    <receiver>MainDialog</receiver>
-   <slot>enumFlashDevices()</slot>
+   <slot>scheduleEnumFlashDevices()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>685</x>
@@ -294,6 +294,6 @@
  <slots>
   <slot>openImageFile()</slot>
   <slot>writeImageToDevice()</slot>
-  <slot>enumFlashDevices()</slot>
+  <slot>scheduleEnumFlashDevices()</slot>
  </slots>
 </ui>
