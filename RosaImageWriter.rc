@@ -22,7 +22,7 @@ BEGIN
 			VALUE "CompanyName", "ROSA\0"
 			VALUE "FileDescription", "Tool for creating bootable ROSA installation USB flash drives\0"
 			VALUE "FileVersion", "2.0.0.0\0"
-			VALUE "LegalCopyright", "Copyright Â© 2013 ROSA\0"
+			VALUE "LegalCopyright", "Copyright © 2013 ROSA\0"
 			VALUE "OriginalFilename", "RosaImageWriter.exe\0"
 			VALUE "ProductName", "ROSA Image Writer\0"
 			VALUE "ProductVersion", "2.0.0.0\0"

@@ -11,9 +11,9 @@
 
 ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent) :
     QObject(parent),
-    m_CancelWriting(false),
+    m_Device(Device),
     m_ImageFile(ImageFile),
-    m_Device(Device)
+    m_CancelWriting(false)
 {
 }
 

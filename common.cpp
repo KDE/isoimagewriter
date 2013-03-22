@@ -31,3 +31,7 @@ QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
     else
         return prefixMessage + "\n" + QObject::tr("Error code:") + " " + QString::number(errorCode);
 }
+
+// This constant is declared in wbemprov.h and defined in wbemuuid.lib. If building with MinGW, the header is available but not library,
+// and the constant remains unresolved. So we define it here.
+EXTERN_C const CLSID CLSID_WbemAdministrativeLocator = {0xCB8555CC, 0x9128, 0x11D1, {0xAD, 0x9B, 0x00, 0xC0, 0x4F, 0xD8, 0xFD, 0xFF}};

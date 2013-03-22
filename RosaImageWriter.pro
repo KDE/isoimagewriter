@@ -39,7 +39,13 @@ RESOURCES += \
 
 RC_FILE += RosaImageWriter.rc
 
-LIBS += Ole32.lib OleAut32.lib Wbemuuid.lib
+win32:msvc {
+	LIBS += Ole32.lib OleAut32.lib
+}
+win32:mingw {
+	QMAKE_CXXFLAGS += -std=gnu++11
+	LIBS += -lole32 -loleaut32 -luuid
+}
 
 QMAKE_LFLAGS_RELEASE += "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\""
 

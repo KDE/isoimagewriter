@@ -66,7 +66,7 @@ bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* messag
     {
         // If the event was caused by adding or remiving a device, mark the WinAPI message as processed
         // and emit the notification signal
-        *(static_cast<LRESULT*>(result)) = TRUE;
+        *result = TRUE;
         emit deviceChanged();
         return true;
     }
