@@ -17,12 +17,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
 	maindialog.cpp \
     imagewriter.cpp \
-    common.cpp
+    common.cpp \
+    externalprogressbar.cpp
 
 HEADERS  += maindialog.h \
     imagewriter.h \
     common.h \
-    platform.h
+    platform.h \
+    externalprogressbar.h
 
 FORMS    += maindialog.ui
 

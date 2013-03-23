@@ -23,10 +23,8 @@ MainDialog::MainDialog(QWidget *parent) :
     m_ImageSize(0),
     m_LastOpenedDir(""),
     m_IsWriting(false),
-    m_EnumFlashDevicesWaiting(false)
-#ifdef Q_OS_WIN32
-    , m_Win7TaskbarList(NULL)
-#endif
+    m_EnumFlashDevicesWaiting(false),
+    m_ExtProgressBar(this)
 {
     ui->setupUi(this);
     // Remove the Context Help button and add the Minimize button to the titlebar
@@ -42,11 +40,6 @@ MainDialog::MainDialog(QWidget *parent) :
     // TODO: Use dialog disabling also for manual refreshing the list
     // TODO: Automatically detect inserting/removing USB devices and update the list
 
-#ifdef Q_OS_WIN32
-    // Get the taskbar object (if NULL is returned it won't be used)
-    CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void**>(&m_Win7TaskbarList));
-#endif
-
     // When device changing event comes, refresh the list of USB flash disks
     // Using QueuedConnection to avoid delays in processing the message
     connect(this, &MainDialog::deviceChanged, this, &MainDialog::scheduleEnumFlashDevices, Qt::QueuedConnection);
@@ -54,10 +47,6 @@ MainDialog::MainDialog(QWidget *parent) :
 
 MainDialog::~MainDialog()
 {
-#ifdef Q_OS_WIN32
-    if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->Release();
-#endif
     cleanup();
     delete ui;
 }
@@ -76,6 +65,9 @@ bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* messag
         emit deviceChanged();
         return true;
     }
+#else
+    Q_UNUSED(message);
+    Q_UNUSED(result);
 #endif
     return false;
 }
@@ -530,10 +522,7 @@ void MainDialog::writeImageToDevice()
             QMessageBox::No) == QMessageBox::No)
         return;
 
-    ui->progressBar->setMinimum(0);
-    ui->progressBar->setMaximum(alignNumberDiv(m_ImageSize, DEFAULT_UNIT));
-    ui->progressBar->setValue(0);
-    showWritingProgress();
+    showWritingProgress(alignNumberDiv(m_ImageSize, DEFAULT_UNIT));
 
     ImageWriter* writer = new ImageWriter(m_ImageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
@@ -570,7 +559,8 @@ void MainDialog::writeImageToDevice()
 }
 
 // Updates GUI to the "writing" mode (progress bar shown, controls disabled)
-void MainDialog::showWritingProgress()
+// Also sets the progress bar limits
+void MainDialog::showWritingProgress(int maxValue)
 {
     m_IsWriting = true;
 
@@ -586,16 +576,16 @@ void MainDialog::showWritingProgress()
     ui->deviceRefreshButton->setEnabled(false);
 
     // Display and customize the progress bar part
+    ui->progressBar->setMinimum(0);
+    ui->progressBar->setMaximum(maxValue);
+    ui->progressBar->setValue(0);
     ui->progressBar->setVisible(true);
     ui->progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
     ui->writeButton->setVisible(false);
     ui->cancelButton->setVisible(true);
 
-#ifdef Q_OS_WIN32
-    // Add the progress indicator to the taskbar button
-    if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressValue(reinterpret_cast<HWND>(winId()), 0, ui->progressBar->maximum());
-#endif
+    // Expose the progress bar state to the OS
+    m_ExtProgressBar.InitProgressBar(maxValue);
 }
 
 // Updates GUI to the "idle" mode (progress bar hidden, controls enabled)
@@ -620,11 +610,8 @@ void MainDialog::hideWritingProgress()
     ui->writeButton->setVisible(true);
     ui->cancelButton->setVisible(false);
 
-#ifdef Q_OS_WIN32
-    // Remove progress indicator from the taskbar button
-    if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_NOPROGRESS);
-#endif
+    // Send a signal that progressbar is no longer present
+    m_ExtProgressBar.DestroyProgressBar();
 
     // If device list changed during writing update it now
     if (m_EnumFlashDevicesWaiting)
@@ -636,10 +623,7 @@ void MainDialog::updateProgressBar(int increment)
 {
     int newValue = ui->progressBar->value() + increment;
     ui->progressBar->setValue(newValue);
-#ifdef Q_OS_WIN32
-    if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressValue((HWND)this->winId(), newValue, ui->progressBar->maximum());
-#endif
+    m_ExtProgressBar.SetProgressValue(newValue);
 }
 
 // Displays the message about successful completion and returns to the "idle" mode
@@ -656,10 +640,7 @@ void MainDialog::showSuccessMessage()
 // Displays the specified error message and returns to the "idle" mode
 void MainDialog::showErrorMessage(QString msg)
 {
-#ifdef Q_OS_WIN32
-    if (m_Win7TaskbarList != NULL)
-        m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_ERROR);
-#endif
+    m_ExtProgressBar.ProgressSetError();
     QMessageBox::critical(
         this,
         ApplicationTitle,

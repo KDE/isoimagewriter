@@ -9,6 +9,7 @@
 #include <QAbstractNativeEventFilter>
 
 #include "common.h"
+#include "externalprogressbar.h"
 
 namespace Ui {
     class MainDialog;
@@ -40,10 +41,8 @@ protected:
     // Flag indicating that flash disks enumerating is pending
     bool    m_EnumFlashDevicesWaiting;
 
-#ifdef Q_OS_WIN32
-    // Windows7 Taskbar interface for mirroring the progress bar
-    ITaskbarList3* m_Win7TaskbarList;
-#endif
+    // Abstraction layer for projecting the progress bar into operating system (if supported)
+    ExternalProgressBar m_ExtProgressBar;
 
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
@@ -74,7 +73,8 @@ public slots:
     void writeImageToDevice();
 
     // Updates GUI to the "writing" mode (progress bar shown, controls disabled)
-    void showWritingProgress();
+    // Also sets the progress bar limits
+    void showWritingProgress(int maxValue);
     // Updates GUI to the "idle" mode (progress bar hidden, controls enabled)
     void hideWritingProgress();
     // Increments the progress bar counter by the specified number
