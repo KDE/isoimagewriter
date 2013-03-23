@@ -1,9 +1,12 @@
+#include <QFile>
+
 #include "common.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of the non-template functions from common.h
 
 
+#ifdef Q_OS_WIN32
 // Converts the WinAPI and COM error code into text message
 // Input:
 //  prefixMessage - error description
@@ -35,3 +38,19 @@ QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
 // This constant is declared in wbemprov.h and defined in wbemuuid.lib. If building with MinGW, the header is available but not library,
 // and the constant remains unresolved. So we define it here.
 EXTERN_C const CLSID CLSID_WbemAdministrativeLocator = {0xCB8555CC, 0x9128, 0x11D1, {0xAD, 0x9B, 0x00, 0xC0, 0x4F, 0xD8, 0xFD, 0xFF}};
+#endif
+
+// Gets the contents of the specified file
+// Input:
+//  fileName - path to the file to read
+// Returns:
+//  the file contents or empty string if an error occurred
+QString readFileContents(const QString& fileName)
+{
+    QFile f(fileName);
+    if (!f.open(QFile::ReadOnly))
+        return "";
+    QString ret = f.readAll();
+    f.close();
+    return ret;
+}

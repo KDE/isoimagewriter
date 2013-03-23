@@ -4,11 +4,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains some commonly-used constants and function declarations
 
-#include <windows.h>
-#include <type_traits>
 
 #include <QObject>
 #include <QString>
+
+#include <type_traits>
+
+#include "platform.h"
 
 // Default unit to be used when displaying file/device sizes (MB)
 const quint64 DEFAULT_UNIT = 1048576;
@@ -42,6 +44,7 @@ template <typename T> T alignNumber(T val, T factor)
     return alignNumberDiv(val, factor) * factor;
 }
 
+#ifdef Q_OS_WIN32
 // Converts the WinAPI and COM error code into text message
 // Input:
 //  prefixMessage - error description
@@ -49,5 +52,13 @@ template <typename T> T alignNumber(T val, T factor)
 // Returns:
 //  prefixMessage followed by a newline and the system error message for the errorCode
 QString errorMessageFromCode(QString prefixMessage, DWORD errorCode = GetLastError());
+#endif
+
+// Gets the contents of the specified file
+// Input:
+//  fileName - path to the file to read
+// Returns:
+//  the file contents or empty string if an error occurred
+QString readFileContents(const QString& fileName);
 
 #endif // COMMON_H

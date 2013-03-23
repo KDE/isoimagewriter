@@ -5,8 +5,6 @@
 // MainDialog is the main application window
 
 
-#include <Shobjidl.h>
-
 #include <QDialog>
 #include <QAbstractNativeEventFilter>
 
@@ -42,8 +40,10 @@ protected:
     // Flag indicating that flash disks enumerating is pending
     bool    m_EnumFlashDevicesWaiting;
 
+#ifdef Q_OS_WIN32
     // Windows7 Taskbar interface for mirroring the progress bar
     ITaskbarList3* m_Win7TaskbarList;
+#endif
 
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
@@ -105,6 +105,7 @@ public:
 Q_DECLARE_METATYPE(UsbDevice*)
 
 
+#ifdef Q_OS_WIN32
 // Several WinAPI COM specific macros for keeping the code clean
 
 // Runs the COM request specified, checks for return value and throws an exception
@@ -145,6 +146,7 @@ Q_DECLARE_METATYPE(UsbDevice*)
         SysFreeString(str); \
         str = NULL;         \
     }
+#endif
 
 
 #endif // MAINDIALOG_H

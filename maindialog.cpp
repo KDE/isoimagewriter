@@ -2,16 +2,14 @@
 // Implementation of MainDialog
 
 
-#include <windows.h>
-#include <dbt.h>
-#include <Wbemidl.h>
-
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDropEvent>
 #include <QMimeData>
 #include <QLocale>
 #include <QThread>
+#include <QDir>
+#include <QRegularExpression>
 
 #include "common.h"
 #include "maindialog.h"
@@ -25,8 +23,10 @@ MainDialog::MainDialog(QWidget *parent) :
     m_ImageSize(0),
     m_LastOpenedDir(""),
     m_IsWriting(false),
-    m_EnumFlashDevicesWaiting(false),
-    m_Win7TaskbarList(NULL)
+    m_EnumFlashDevicesWaiting(false)
+#ifdef Q_OS_WIN32
+    , m_Win7TaskbarList(NULL)
+#endif
 {
     ui->setupUi(this);
     // Remove the Context Help button and add the Minimize button to the titlebar
@@ -42,8 +42,10 @@ MainDialog::MainDialog(QWidget *parent) :
     // TODO: Use dialog disabling also for manual refreshing the list
     // TODO: Automatically detect inserting/removing USB devices and update the list
 
+#ifdef Q_OS_WIN32
     // Get the taskbar object (if NULL is returned it won't be used)
     CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void**>(&m_Win7TaskbarList));
+#endif
 
     // When device changing event comes, refresh the list of USB flash disks
     // Using QueuedConnection to avoid delays in processing the message
@@ -52,8 +54,10 @@ MainDialog::MainDialog(QWidget *parent) :
 
 MainDialog::~MainDialog()
 {
+#ifdef Q_OS_WIN32
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->Release();
+#endif
     cleanup();
     delete ui;
 }
@@ -61,6 +65,7 @@ MainDialog::~MainDialog()
 // Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages
 bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* message, long* result)
 {
+#ifdef Q_OS_WIN32
     MSG* msg = static_cast<MSG*>(message);
     if ((msg->message == WM_DEVICECHANGE) &&
         ((msg->wParam == DBT_DEVICEARRIVAL) || (msg->wParam == DBT_DEVICEREMOVECOMPLETE)))
@@ -71,6 +76,7 @@ bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* messag
         emit deviceChanged();
         return true;
     }
+#endif
     return false;
 }
 
@@ -79,7 +85,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
 {
     m_ImageFile = newImageFile;
     m_ImageSize = 0;
-    QString displayName = m_ImageFile;
+    QString displayName = QDir::toNativeSeparators(m_ImageFile);
     QFile f(m_ImageFile);
     if (f.open(QIODevice::ReadOnly))
     {
@@ -164,11 +170,10 @@ void MainDialog::keyPressEvent(QKeyEvent* event)
 // Suggests to select image file using the Open File dialog
 void MainDialog::openImageFile()
 {
-    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, tr("Disk Images") + " (*.iso;*.bin;*.img);;" + tr("All Files") + " (*.*)", NULL, QFileDialog::ReadOnly);
+    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, tr("Disk Images") + " (*.iso *.bin *.img);;" + tr("All Files") + " (*.*)", NULL, QFileDialog::ReadOnly);
     if (newImageFile != "")
     {
-        newImageFile.replace('/', '\\');
-        m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('\\'));
+        m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
         preprocessImageFile(newImageFile);
     }
 }
@@ -192,6 +197,111 @@ void MainDialog::enumFlashDevices()
     // TODO: Disable the whole dialog
     ui->deviceList->setEnabled(false);
 
+#if defined(Q_OS_LINUX)
+    // Using /sys/bus/usb/devices directory contents for enumerating the USB devices
+    //
+    // Details:
+    // Take the devices which have <device>/bInterfaceClass contents set to "08" (storage device).
+    //
+    // 1. To get the user-friendly name we need to read the <manufacturer> and <product> files
+    //    of the parent device (the parent device is the one with less-specified name, e.g. "2-1" for "2-1:1.0").
+    //
+    // 2. The block device name can be found by searching the contents of the following subdirectory:
+    //      <device>/host*/target*/<scsi-device-name>/block/
+    //    where * is a placeholder, and <scsi-device-name> starts with the same substring that "target*" ends with.
+    //    For example, this path may look like follows:
+    //      /sys/bus/usb/devices/1-1:1.0/host4/target4:0:0/4:0:0:0/block/
+    //    This path contains the list of block devices by their names, e.g. sdc, which gives us /dev/sdc.
+    //
+    // 3. And, finally, for the device size we multiply .../block/sdX/size (the number of sectors) with
+    //    .../block/sdX/queue/logical_block_size (the sector size).
+
+    // Start with enumerating all the USB devices
+    QString usbDevicesRoot = "/sys/bus/usb/devices";
+    QDir dirList(usbDevicesRoot);
+    QStringList usbDevices = dirList.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (int i = 0; i < usbDevices.size(); ++i)
+    {
+        QDir subdirList = dirList;
+        if (!subdirList.cd(usbDevices[i]))
+            continue;
+
+        // Skip devices with wrong interface class
+        if (readFileContents(subdirList.absoluteFilePath("bInterfaceClass")) != "08\n")
+            continue;
+
+        // Search for "host*" entries and take the first one
+        // TODO: Find out whether several host entries may appear
+        QStringList hosts = subdirList.entryList(QStringList("host*"));
+        if (hosts.size() == 0)
+            continue;
+        if (!subdirList.cd(hosts[0]))
+            continue;
+
+        // Search for "target*" entries and take the first one
+        // TODO: Find out whether several target entries may appear
+        QStringList targets = subdirList.entryList(QStringList("target*"));
+        if (targets.size() == 0)
+            continue;
+        if (!subdirList.cd(targets[0]))
+            continue;
+
+        // Remove the "target" part and append "*" to search for appropriate SCSI devices
+        // Again, take the first one
+        // TODO: Find out whether several SCSI devices may appear
+        QStringList scsiTargets = subdirList.entryList(QStringList(targets[0].mid(6) + "*"));
+        if (scsiTargets.size() == 0)
+            continue;
+
+        // Read the list of block devices and take the first one
+        // TODO: Find out whether several block devices may appear
+        // TODO: Check what happens with card readers with several cards inserted
+        // Preliminary googling showed that several SCSI LUNs may appear in this case
+        if (!subdirList.cd(scsiTargets[0] + "/block"))
+            continue;
+        QStringList blockDevices = subdirList.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+        if (blockDevices.size() == 0)
+            continue;
+
+        // Store the necessary information in the UsbDevice object
+        UsbDevice* deviceData = new UsbDevice;
+
+        // Use the block device name as both physical device and displayed volume name
+        deviceData->m_PhysicalDevice = "/dev/" + blockDevices[0];
+        deviceData->m_Volumes << deviceData->m_PhysicalDevice;
+
+        // Get the device size
+        quint64 blocksNum = readFileContents(subdirList.absoluteFilePath(blockDevices[0] + "/size")).toULongLong();
+        // TODO: Find out whether size is counted in logical or physical blocks
+        uint blockSize = readFileContents(subdirList.absoluteFilePath(blockDevices[0] + "/queue/logical_block_size")).toUInt();
+        if (blockSize == 0)
+            blockSize = 512;
+        deviceData->m_Size = blocksNum * blockSize;
+
+        // Get the user-friendly name for the device by reading the parent device fields
+        QString usbParentDevice = usbDevices[i];
+        usbParentDevice.replace(QRegularExpression("^(\\d+-\\d+):.*$"), "\\1");
+        usbParentDevice.prepend(usbDevicesRoot + "/");
+        QString manufacturer = readFileContents(usbParentDevice + "/manufacturer").trimmed();
+        QString product = readFileContents(usbParentDevice + "/product").trimmed();
+        if ((manufacturer != "") || (product != ""))
+        {
+            // If only one of the <manufacturer> and <product> is non-empty, make it the device name,
+            // otherwise concatenate via space character
+            // TODO: Find out how to get more "friendly" name (for SATA-USB connector it shows the bridge
+            // device name instead of the disk drive name)
+            deviceData->m_VisibleName = (manufacturer + " " + product).trimmed();
+        }
+
+        // The device information is now complete, construct the display name for the combobox and append the entry
+        // Format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
+        QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
+        ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
+        // The object is now under the combobox control, nullify the pointer
+        deviceData = NULL;
+    }
+
+#elif defined(Q_OS_WIN32)
     // Using WMI for enumerating the USB devices
 
     // Namespace of the WMI classes
@@ -349,7 +459,7 @@ void MainDialog::enumFlashDevices()
             FREE_BSTR(strQueryPartitions);
 
             // The device information is now complete, construct the display name for the combobox and append the entry
-            // Format is: "<volume(s) - <user-friendly name> (<size in megabytes>)"
+            // Format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
             QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
             ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
             // The object is now under the combobox control, nullify the pointer
@@ -384,6 +494,7 @@ void MainDialog::enumFlashDevices()
     FREE_BSTR(strQueryDisks);
     FREE_BSTR(strQueryPartitions);
     FREE_BSTR(strQueryLetters);
+#endif
 
     // Reenable the combobox
     ui->deviceList->setEnabled(true);
@@ -480,9 +591,11 @@ void MainDialog::showWritingProgress()
     ui->writeButton->setVisible(false);
     ui->cancelButton->setVisible(true);
 
+#ifdef Q_OS_WIN32
     // Add the progress indicator to the taskbar button
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->SetProgressValue(reinterpret_cast<HWND>(winId()), 0, ui->progressBar->maximum());
+#endif
 }
 
 // Updates GUI to the "idle" mode (progress bar hidden, controls enabled)
@@ -507,9 +620,11 @@ void MainDialog::hideWritingProgress()
     ui->writeButton->setVisible(true);
     ui->cancelButton->setVisible(false);
 
+#ifdef Q_OS_WIN32
     // Remove progress indicator from the taskbar button
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_NOPROGRESS);
+#endif
 
     // If device list changed during writing update it now
     if (m_EnumFlashDevicesWaiting)
@@ -521,8 +636,10 @@ void MainDialog::updateProgressBar(int increment)
 {
     int newValue = ui->progressBar->value() + increment;
     ui->progressBar->setValue(newValue);
+#ifdef Q_OS_WIN32
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->SetProgressValue((HWND)this->winId(), newValue, ui->progressBar->maximum());
+#endif
 }
 
 // Displays the message about successful completion and returns to the "idle" mode
@@ -539,8 +656,10 @@ void MainDialog::showSuccessMessage()
 // Displays the specified error message and returns to the "idle" mode
 void MainDialog::showErrorMessage(QString msg)
 {
+#ifdef Q_OS_WIN32
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->SetProgressState(reinterpret_cast<HWND>(winId()), TBPF_ERROR);
+#endif
     QMessageBox::critical(
         this,
         ApplicationTitle,

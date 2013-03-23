@@ -21,7 +21,8 @@ SOURCES += main.cpp\
 
 HEADERS  += maindialog.h \
     imagewriter.h \
-    common.h
+    common.h \
+    platform.h
 
 FORMS    += maindialog.ui
 
@@ -37,7 +38,10 @@ RESOURCES += \
 #QMAKE_TARGET_DESCRIPTION = "Tool for creating bootable ROSA installation USB flash drives"
 #QMAKE_TARGET_COPYRIGHT = "Copyright (c) 2013 ROSA"
 
-RC_FILE += RosaImageWriter.rc
+win32 {
+	RC_FILE += RosaImageWriter.rc
+	QMAKE_LFLAGS_RELEASE += "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\""
+}
 
 win32:msvc {
 	LIBS += Ole32.lib OleAut32.lib
@@ -46,7 +50,8 @@ win32:mingw {
 	QMAKE_CXXFLAGS += -std=gnu++11
 	LIBS += -lole32 -loleaut32 -luuid
 }
-
-QMAKE_LFLAGS_RELEASE += "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\""
+linux:gcc {
+	QMAKE_CXXFLAGS += -std=gnu++11
+}
 
 TRANSLATIONS = lang/ru_RU.ts

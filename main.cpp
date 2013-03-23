@@ -1,8 +1,7 @@
-#include <comutil.h>
-
 #include <QApplication>
 #include <QTranslator>
 
+#include "common.h"
 #include "maindialog.h"
 
 // For now, only Windows platform is supported
@@ -15,7 +14,7 @@
 //  6. ITaskbarList3 COM interface.
 //  7. WM_DEVICECHANGE processing.
 #ifndef Q_OS_WIN32
-#error Only Win32 is supported!
+//#error Only Win32 is supported!
 #endif
 
 int main(int argc, char *argv[])
@@ -26,6 +25,7 @@ int main(int argc, char *argv[])
     appTranslator.load(QLocale::system().name(), "lang");
     a.installTranslator(&appTranslator);
 
+#ifdef Q_OS_WIN32
     // CoInitialize() seems to be called by Qt automatically, so only set security attributes
     HRESULT res = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, 0);
     if (res != S_OK)
@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
         printf("CoInitializeSecurity failed! (Code: 0x%08lx)\n", res);
         return res;
     }
+#endif
 
     MainDialog w;
     // MainDialog implements QAbstractNativeEventFilter interface and processes WM_DEVICECHANGE,

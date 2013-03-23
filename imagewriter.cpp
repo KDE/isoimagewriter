@@ -2,8 +2,6 @@
 // Implementation of ImageWriter
 
 
-#include <windows.h>
-
 #include <QFile>
 
 #include "common.h"
@@ -20,6 +18,7 @@ ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *p
 // The main method that writes the image
 void ImageWriter::writeImage()
 {
+#ifdef Q_OS_WIN32
     // Using try-catch for processing errors
     // Invalid values are used for indication non-initialized objects;
     // after the try-catch block all the initialized objects are freed
@@ -157,6 +156,7 @@ void ImageWriter::writeImage()
 
     // In any case the operation is finished
     emit finished();
+#endif
 }
 
 // Implements reaction to the cancel request from user
