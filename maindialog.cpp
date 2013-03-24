@@ -103,9 +103,10 @@ void MainDialog::cleanup()
 // The reimplemented dragEnterEvent to inform which incoming drag&drop events are acceptable
 void MainDialog::dragEnterEvent(QDragEnterEvent* event)
 {
-    // Accept only files with ANSI or Unicode paths
+    // Accept only files with ANSI or Unicode paths (Windows) and URIs (Linux)
     if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"") ||
-        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\""))
+        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\"") ||
+        event->mimeData()->hasFormat("text/uri-list"))
         event->accept();
 }
 
@@ -128,6 +129,27 @@ void MainDialog::dropEvent(QDropEvent* event)
         if (!droppedFileName.isEmpty())
         {
             newImageFile = QString::fromLocal8Bit(droppedFileName.constData());
+        }
+        else
+        {
+            // And, finally, try the URI
+            droppedFileName = event->mimeData()->data("text/uri-list");
+            if (!droppedFileName.isEmpty())
+            {
+                // If several files are dropped they are separated by newlines,
+                // take the first file
+                int newLineIndexLF = droppedFileName.indexOf('\n');
+                int newLineIndex = droppedFileName.indexOf("\r\n");
+                // Make sure both CRLF and LF are accepted
+                if ((newLineIndexLF != -1) && (newLineIndexLF < newLineIndex))
+                    newLineIndex = newLineIndexLF;
+                if (newLineIndex != -1)
+                    droppedFileName = droppedFileName.left(newLineIndex);
+                // Decode the file path from percent-encoding
+                QUrl url = QUrl::fromEncoded(droppedFileName);
+                if (url.isLocalFile())
+                    newImageFile = url.toLocalFile();
+            }
         }
     }
     if (newImageFile != "")
