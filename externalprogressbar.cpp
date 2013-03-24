@@ -9,7 +9,7 @@
 ExternalProgressBar::ExternalProgressBar(QWidget* mainWindow) :
     m_MaxValue(0)
 {
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     // Get the taskbar object (if NULL is returned it won't be used - e.g. on pre-7 Windows versions)
     CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void**>(&m_Win7TaskbarList));
     // Store the window handle. In Windows winId() returns HWND.
@@ -21,7 +21,7 @@ ExternalProgressBar::ExternalProgressBar(QWidget* mainWindow) :
 
 ExternalProgressBar::~ExternalProgressBar()
 {
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->Release();
 #endif
@@ -32,7 +32,7 @@ bool ExternalProgressBar::InitProgressBar(quint64 maxSteps)
 {
     bool res = true;
     m_MaxValue = maxSteps;
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     // When we set the progress value, TBPF_NORMAL is set automatically
     if (m_Win7TaskbarList != NULL)
         res = (m_Win7TaskbarList->SetProgressValue(m_hWnd, 0, maxSteps) == S_OK);
@@ -46,7 +46,7 @@ bool ExternalProgressBar::InitProgressBar(quint64 maxSteps)
 bool ExternalProgressBar::DestroyProgressBar()
 {
     bool res = true;
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     if (m_Win7TaskbarList != NULL)
         res = (m_Win7TaskbarList->SetProgressState(m_hWnd, TBPF_NOPROGRESS) == S_OK);
 #endif
@@ -57,7 +57,7 @@ bool ExternalProgressBar::DestroyProgressBar()
 bool ExternalProgressBar::SetProgressValue(quint64 currentSteps)
 {
     bool res = true;
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     if (m_Win7TaskbarList != NULL)
         res = (m_Win7TaskbarList->SetProgressValue(m_hWnd, currentSteps, m_MaxValue) == S_OK);
 #else
@@ -70,7 +70,7 @@ bool ExternalProgressBar::SetProgressValue(quint64 currentSteps)
 bool ExternalProgressBar::ProgressSetPause()
 {
     bool res = true;
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     if (m_Win7TaskbarList != NULL)
         res = (m_Win7TaskbarList->SetProgressState(m_hWnd, TBPF_PAUSED) == S_OK);
 #endif
@@ -81,7 +81,7 @@ bool ExternalProgressBar::ProgressSetPause()
 bool ExternalProgressBar::ProgressSetError()
 {
     bool res = true;
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     if (m_Win7TaskbarList != NULL)
         res = (m_Win7TaskbarList->SetProgressState(m_hWnd, TBPF_ERROR) == S_OK);
 #endif

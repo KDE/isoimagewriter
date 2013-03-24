@@ -18,13 +18,15 @@ SOURCES += main.cpp\
 	maindialog.cpp \
     imagewriter.cpp \
     common.cpp \
-    externalprogressbar.cpp
+    externalprogressbar.cpp \
+    physicaldevice.cpp
 
 HEADERS  += maindialog.h \
     imagewriter.h \
     common.h \
     platform.h \
-    externalprogressbar.h
+    externalprogressbar.h \
+    physicaldevice.h
 
 FORMS    += maindialog.ui
 

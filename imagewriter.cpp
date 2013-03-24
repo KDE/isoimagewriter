@@ -6,6 +6,7 @@
 
 #include "common.h"
 #include "imagewriter.h"
+#include "physicaldevice.h"
 
 ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent) :
     QObject(parent),
@@ -18,48 +19,43 @@ ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *p
 // The main method that writes the image
 void ImageWriter::writeImage()
 {
-#ifdef Q_OS_WIN32
-    // Using try-catch for processing errors
-    // Invalid values are used for indication non-initialized objects;
-    // after the try-catch block all the initialized objects are freed
-    HANDLE imageFile = INVALID_HANDLE_VALUE;
-    HANDLE deviceFile = INVALID_HANDLE_VALUE;
-    HANDLE volume = INVALID_HANDLE_VALUE;
-    LPVOID buffer = NULL;
+    const qint64 TRANSFER_BLOCK_SIZE = 1024 * 1024;
+    void* buffer = NULL;
 
-    const qint64 BLOCK_SIZE = 1024 * 1024;
     bool isError = false;
     bool cancelRequested = false;
 
+    // Using try-catch for processing errors
+    // Invalid values are used for indication non-initialized objects;
+    // after the try-catch block all the initialized objects are freed
     try
     {
-        DWORD bret;
-
+#if defined(Q_OS_WIN32)
         // Using VirtualAlloc so that the buffer was properly aligned (required for
         // direct access to devices and for unbuffered reading/writing)
-        buffer = VirtualAlloc(NULL, BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+        buffer = VirtualAlloc(NULL, TRANSFER_BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
         if (buffer == NULL)
-            throw errorMessageFromCode(tr("Failed to allocate memory for buffer:"));
+            throw formatErrorMessageFromCode(tr("Failed to allocate memory for buffer:"));
+#elif defined(Q_OS_LINUX)
+        buffer = malloc(TRANSFER_BLOCK_SIZE);
+        if (buffer == NULL)
+            throw tr("Failed to allocate memory for buffer.");
+#endif
 
         // Open the source image file for reading
-        imageFile = CreateFile(
-            reinterpret_cast<const wchar_t*>(m_ImageFile.utf16()),
-            GENERIC_READ,
-            FILE_SHARE_READ,
-            NULL,
-            OPEN_EXISTING,
-            FILE_FLAG_SEQUENTIAL_SCAN,
-            NULL
-        );
-        if (imageFile == INVALID_HANDLE_VALUE)
-            throw errorMessageFromCode(tr("Failed to open the image file:"));
+        QFile imageFile(m_ImageFile);
+        if (!imageFile.open(QIODevice::ReadOnly))
+            throw tr("Failed to open the image file:") + "\n" + imageFile.errorString();
 
+#if defined(Q_OS_WIN32)
         // Unmount volumes that belong to the selected target device
         // TODO: Check first if they are used and show warning
         // (problem: have to show request in the GUI thread and return reply back here)
+        QStringList errMessages;
         for (int i = 0; i < m_Device->m_Volumes.size(); ++i)
         {
-            volume = CreateFile(
+            DWORD bret;
+            HANDLE volume = CreateFile(
                 reinterpret_cast<const wchar_t*>(("\\\\.\\" + m_Device->m_Volumes[i]).utf16()),
                 GENERIC_READ | GENERIC_WRITE,
                 FILE_SHARE_READ | FILE_SHARE_WRITE,
@@ -69,57 +65,52 @@ void ImageWriter::writeImage()
                 NULL
             );
             if (volume == INVALID_HANDLE_VALUE)
-                throw errorMessageFromCode(tr("Failed to open the drive") + " " + m_Device->m_Volumes[i]);
+            {
+                errMessages << formatErrorMessageFromCode(tr("Failed to open the drive") + " " + m_Device->m_Volumes[i]);
+                continue;
+            }
             // Trying to lock the volume but ignore if we failed (such call seems to be required for
             // dismounting the volume on WinXP)
             DeviceIoControl(volume, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL);
             if (!DeviceIoControl(volume, FSCTL_DISMOUNT_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-                throw errorMessageFromCode(tr("Failed to unmount the drive") + " " + m_Device->m_Volumes[i]);
+                errMessages << formatErrorMessageFromCode(tr("Failed to unmount the drive") + " " + m_Device->m_Volumes[i]);
             CloseHandle(volume);
             volume = INVALID_HANDLE_VALUE;
         }
+        if (errMessages.size() > 0)
+            throw errMessages.join("\n\n");
+#endif
 
         // Open the target USB device for writing and lock it
-        deviceFile = CreateFile(
-            reinterpret_cast<const wchar_t*>(m_Device->m_PhysicalDevice.utf16()),
-            GENERIC_WRITE,
-            FILE_SHARE_READ | FILE_SHARE_WRITE,
-            NULL,
-            OPEN_EXISTING,
-            FILE_FLAG_WRITE_THROUGH | FILE_FLAG_NO_BUFFERING,
-            NULL
-        );
-        if (deviceFile == INVALID_HANDLE_VALUE)
-            throw errorMessageFromCode(tr("Failed to open the target device:"));
-        if (!DeviceIoControl(deviceFile, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-            throw errorMessageFromCode(tr("Failed to lock the target device:"));
+        PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
+        if (!deviceFile.open())
+            throw tr("Failed to open the target device:") + "\n" + deviceFile.errorString();
 
         // The number of bytes to be written must be a multiple of sector size,
-        // so first we get the sector size proper (DISK_GEOMETRY::BytesPerSector)
-        DISK_GEOMETRY dg;
-        if (!DeviceIoControl(deviceFile, IOCTL_DISK_GET_DRIVE_GEOMETRY, NULL, 0, &dg, sizeof(dg), &bret, NULL))
-            throw errorMessageFromCode(tr("Failed to get the target device info:"));
+        // so first we get the sector size proper
+        qint64 sectorSize = deviceFile.getDeviceSectorSize();
+        if (sectorSize < 0)
+            sectorSize = 512;
 
-        DWORD readBytes;
-        DWORD writtenBytes;
-        BOOL res;
+        qint64 readBytes;
+        qint64 writtenBytes;
         // Start reading/writing cycle
-        while ((res = ReadFile(imageFile, buffer, BLOCK_SIZE, &readBytes, NULL)) && (readBytes > 0))
+        while ((readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) && (readBytes > 0))
         {
             // Align the number of bytes to the sector size
-            readBytes = alignNumber(readBytes, dg.BytesPerSector);
-            res = WriteFile(deviceFile, buffer, readBytes, &writtenBytes, NULL);
-            if (!res)
-                throw errorMessageFromCode(tr("Failed to write to the device:"));
+            readBytes = alignNumber(readBytes, sectorSize);
+            writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
+            if (writtenBytes < 0)
+                throw tr("Failed to write to the device:") + "\n" + deviceFile.errorString();
             if (writtenBytes != readBytes)
                 throw tr("The last block was not fully written (%1 of %2 bytes)!\nAborting.").arg(writtenBytes).arg(readBytes);
 
             // Inform the GUI thread that next block was written
-            // TODO: Make sure that when BLOCK_SIZE is not a multiple of DEFAULT_UNIT this still
-            // works or at least fails compilation
-            emit blockWritten(BLOCK_SIZE / DEFAULT_UNIT);
+            // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
+            // this still works or at least fails compilation
+            emit blockWritten(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
 
-            // Check for the cancel request (using temporary variable to avoid multiple unlocks in the code)
+            // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();
             cancelRequested = m_CancelWriting;
             m_Mutex.unlock();
@@ -130,8 +121,8 @@ void ImageWriter::writeImage()
                 break;
             }
         }
-        if (!res)
-            throw errorMessageFromCode(tr("Failed to read the image file:"));
+        if (readBytes < 0)
+            throw tr("Failed to read the image file:") + "\n" + imageFile.errorString();
     }
     catch (QString msg)
     {
@@ -140,15 +131,12 @@ void ImageWriter::writeImage()
         isError = true;
     }
 
-    // The cleanup stage
-    if (volume != INVALID_HANDLE_VALUE)
-        CloseHandle(volume);
-    if (imageFile != INVALID_HANDLE_VALUE)
-        CloseHandle(imageFile);
-    if (deviceFile != INVALID_HANDLE_VALUE)
-        CloseHandle(deviceFile);
     if (buffer != NULL)
-        VirtualFree(buffer, BLOCK_SIZE, MEM_DECOMMIT | MEM_RELEASE);
+#if defined(Q_OS_WIN32)
+        VirtualFree(buffer, TRANSFER_BLOCK_SIZE, MEM_DECOMMIT | MEM_RELEASE);
+#elif defined(Q_OS_LINUX)
+        free(buffer);
+#endif
 
     // If no errors occurred and user did not stop the operation, it means everything went fine
     if (!isError && !cancelRequested)
@@ -156,7 +144,6 @@ void ImageWriter::writeImage()
 
     // In any case the operation is finished
     emit finished();
-#endif
 }
 
 // Implements reaction to the cancel request from user

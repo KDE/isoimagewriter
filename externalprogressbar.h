@@ -33,7 +33,7 @@ protected:
     // Maximum counter value for the progress bar
     quint64 m_MaxValue;
 
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     // Windows7 Taskbar interface for mirroring the progress bar
     ITaskbarList3* m_Win7TaskbarList;
 

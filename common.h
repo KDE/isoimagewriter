@@ -44,14 +44,21 @@ template <typename T> T alignNumber(T val, T factor)
     return alignNumberDiv(val, factor) * factor;
 }
 
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
+// Converts the WinAPI and COM error code into text message
+// Input:
+//  errorCode - error code (GetLastError() is used by default)
+// Returns:
+//  system error message for the errorCode
+QString errorMessageFromCode(DWORD errorCode = GetLastError());
+
 // Converts the WinAPI and COM error code into text message
 // Input:
 //  prefixMessage - error description
 //  errorCode     - error code (GetLastError() is used by default)
 // Returns:
 //  prefixMessage followed by a newline and the system error message for the errorCode
-QString errorMessageFromCode(QString prefixMessage, DWORD errorCode = GetLastError());
+QString formatErrorMessageFromCode(QString prefixMessage, DWORD errorCode = GetLastError());
 #endif
 
 // Gets the contents of the specified file

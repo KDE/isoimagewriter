@@ -6,14 +6,13 @@
 // Implementation of the non-template functions from common.h
 
 
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
 // Converts the WinAPI and COM error code into text message
 // Input:
-//  prefixMessage - error description
-//  errorCode     - error code (GetLastError() is used by default)
+//  errorCode - error code (GetLastError() is used by default)
 // Returns:
-//  prefixMessage followed by a newline and the system error message for the errorCode
-QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
+//  system error message for the errorCode
+QString errorMessageFromCode(DWORD errorCode)
 {
     LPTSTR msgBuffer;
     DWORD res = FormatMessage(
@@ -27,12 +26,23 @@ QString errorMessageFromCode(QString prefixMessage, DWORD errorCode)
     );
     if (res)
     {
-        prefixMessage += "\n" + QString::fromWCharArray(msgBuffer);
+        QString ret = QString::fromWCharArray(msgBuffer);
         LocalFree(msgBuffer);
-        return prefixMessage;
+        return ret;
     }
     else
-        return prefixMessage + "\n" + QObject::tr("Error code:") + " " + QString::number(errorCode);
+        return QObject::tr("Error code:") + " " + QString::number(errorCode);
+}
+
+// Converts the WinAPI and COM error code into text message
+// Input:
+//  prefixMessage - error description
+//  errorCode     - error code (GetLastError() is used by default)
+// Returns:
+//  prefixMessage followed by a newline and the system error message for the errorCode
+QString formatErrorMessageFromCode(QString prefixMessage, DWORD errorCode)
+{
+    return prefixMessage + "\n" + errorMessageFromCode(errorCode);
 }
 
 // This constant is declared in wbemprov.h and defined in wbemuuid.lib. If building with MinGW, the header is available but not library,

@@ -105,18 +105,18 @@ public:
 Q_DECLARE_METATYPE(UsbDevice*)
 
 
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
 // Several WinAPI COM specific macros for keeping the code clean
 
 // Runs the COM request specified, checks for return value and throws an exception
 // with descriptive error message if it's not OK
-#define CHECK_OK(code, msg)                       \
-    {                                             \
-        HRESULT res = code;                       \
-        if (res != S_OK)                          \
-        {                                         \
-            throw errorMessageFromCode(msg, res); \
-        }                                         \
+#define CHECK_OK(code, msg)                             \
+    {                                                   \
+        HRESULT res = code;                             \
+        if (res != S_OK)                                \
+        {                                               \
+            throw formatErrorMessageFromCode(msg, res); \
+        }                                               \
     }
 
 // Releases the COM object and nullifies the pointer

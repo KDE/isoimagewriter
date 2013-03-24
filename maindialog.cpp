@@ -38,7 +38,7 @@ MainDialog::MainDialog(QWidget *parent) :
     // TODO: Increase the dialog display speed by showing it with the empty list and enumerating devices
     // in the background (dialog disabled, print "please wait")
     // TODO: Use dialog disabling also for manual refreshing the list
-    // TODO: Automatically detect inserting/removing USB devices and update the list
+    // TODO: Automatically detect inserting/removing USB devices and update the list in Linux
 
     // When device changing event comes, refresh the list of USB flash disks
     // Using QueuedConnection to avoid delays in processing the message
@@ -54,7 +54,7 @@ MainDialog::~MainDialog()
 // Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages
 bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* message, long* result)
 {
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     MSG* msg = static_cast<MSG*>(message);
     if ((msg->message == WM_DEVICECHANGE) &&
         ((msg->wParam == DBT_DEVICEARRIVAL) || (msg->wParam == DBT_DEVICEREMOVECOMPLETE)))
@@ -292,7 +292,6 @@ void MainDialog::enumFlashDevices()
         // The object is now under the combobox control, nullify the pointer
         deviceData = NULL;
     }
-
 #elif defined(Q_OS_WIN32)
     // Using WMI for enumerating the USB devices
 
