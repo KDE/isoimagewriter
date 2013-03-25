@@ -6,7 +6,6 @@
 
 
 #include <QDialog>
-#include <QAbstractNativeEventFilter>
 
 #include "common.h"
 #include "externalprogressbar.h"
@@ -15,16 +14,13 @@ namespace Ui {
     class MainDialog;
 }
 
-class MainDialog : public QDialog, public QAbstractNativeEventFilter
+class MainDialog : public QDialog
 {
     Q_OBJECT
     
 public:
     explicit MainDialog(QWidget *parent = 0);
     ~MainDialog();
-
-    // Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages
-    bool nativeEventFilter(const QByteArray& eventType, void* message, long* result);
 
 private:
     Ui::MainDialog *ui;
@@ -59,10 +55,6 @@ protected:
 
     // Reloads the list of USB flash disks
     void enumFlashDevices();
-
-signals:
-    // Emitted when device change notification arrives
-    void deviceChanged();
 
 public slots:
     // Suggests to select image file using the Open File dialog

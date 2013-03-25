@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "maindialog.h"
+#include "usbdevicemonitor.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX)
 #error Unsupported platrofm!
@@ -27,10 +28,14 @@ int main(int argc, char *argv[])
 #endif
 
     MainDialog w;
-    // MainDialog implements QAbstractNativeEventFilter interface and processes WM_DEVICECHANGE,
-    // register it for filtering native Windows events
-    a.installNativeEventFilter(&w);
     w.show();
-    
+
+    UsbDeviceMonitor deviceMonitor;
+    deviceMonitor.startMonitoring();
+
+    // When device changing event comes, refresh the list of USB flash disks
+    // Using QueuedConnection to avoid delays in processing the message
+    QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w, &MainDialog::scheduleEnumFlashDevices, Qt::QueuedConnection);
+
     return a.exec();
 }

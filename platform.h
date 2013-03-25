@@ -15,6 +15,7 @@
 #if defined(Q_OS_LINUX)
 #include <sys/ioctl.h>
 #include <linux/fs.h>
+#include <libudev.h>
 #endif
 
 

@@ -38,38 +38,12 @@ MainDialog::MainDialog(QWidget *parent) :
     // TODO: Increase the dialog display speed by showing it with the empty list and enumerating devices
     // in the background (dialog disabled, print "please wait")
     // TODO: Use dialog disabling also for manual refreshing the list
-    // TODO: Automatically detect inserting/removing USB devices and update the list in Linux
-
-    // When device changing event comes, refresh the list of USB flash disks
-    // Using QueuedConnection to avoid delays in processing the message
-    connect(this, &MainDialog::deviceChanged, this, &MainDialog::scheduleEnumFlashDevices, Qt::QueuedConnection);
 }
 
 MainDialog::~MainDialog()
 {
     cleanup();
     delete ui;
-}
-
-// Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages
-bool MainDialog::nativeEventFilter(const QByteArray& /*eventType*/, void* message, long* result)
-{
-#if defined(Q_OS_WIN32)
-    MSG* msg = static_cast<MSG*>(message);
-    if ((msg->message == WM_DEVICECHANGE) &&
-        ((msg->wParam == DBT_DEVICEARRIVAL) || (msg->wParam == DBT_DEVICEREMOVECOMPLETE)))
-    {
-        // If the event was caused by adding or remiving a device, mark the WinAPI message as processed
-        // and emit the notification signal
-        *result = TRUE;
-        emit deviceChanged();
-        return true;
-    }
-#else
-    Q_UNUSED(message);
-    Q_UNUSED(result);
-#endif
-    return false;
 }
 
 // Retrieves information about the selected file and displays it in the dialog

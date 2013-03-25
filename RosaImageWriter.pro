@@ -19,14 +19,16 @@ SOURCES += main.cpp\
     imagewriter.cpp \
     common.cpp \
     externalprogressbar.cpp \
-    physicaldevice.cpp
+    physicaldevice.cpp \
+    usbdevicemonitor.cpp
 
 HEADERS  += maindialog.h \
     imagewriter.h \
     common.h \
     platform.h \
     externalprogressbar.h \
-    physicaldevice.h
+    physicaldevice.h \
+    usbdevicemonitor.h
 
 FORMS    += maindialog.ui
 
@@ -56,6 +58,7 @@ win32:mingw {
 }
 linux:gcc {
 	QMAKE_CXXFLAGS += -std=gnu++11
+	LIBS += -ludev
 }
 
 TRANSLATIONS = lang/ru_RU.ts
