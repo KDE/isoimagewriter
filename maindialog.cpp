@@ -49,17 +49,16 @@ MainDialog::~MainDialog()
 // Retrieves information about the selected file and displays it in the dialog
 void MainDialog::preprocessImageFile(const QString& newImageFile)
 {
-    m_ImageFile = newImageFile;
-    m_ImageSize = 0;
-    QString displayName = QDir::toNativeSeparators(m_ImageFile);
-    QFile f(m_ImageFile);
-    if (f.open(QIODevice::ReadOnly))
+    QFile f(newImageFile);
+    if (!f.open(QIODevice::ReadOnly))
     {
-        m_ImageSize = f.size();
-        displayName += " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " " + tr("MB") + ")";
-        f.close();
+        QMessageBox::critical(this, ApplicationTitle, tr("Failed to open the image file:") + "\n" + f.errorString());
+        return;
     }
-    ui->imageEdit->setText(displayName);
+    m_ImageSize = f.size();
+    f.close();
+    m_ImageFile = newImageFile;
+    ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " " + tr("MB") + ")");
     // Enable the Write button (if there are USB flash disks present)
     ui->writeButton->setEnabled(ui->deviceList->count() > 0);
 }
