@@ -21,6 +21,7 @@ ExternalProgressBar::ExternalProgressBar(QWidget* mainWindow) :
 
 ExternalProgressBar::~ExternalProgressBar()
 {
+    DestroyProgressBar();
 #if defined(Q_OS_WIN32)
     if (m_Win7TaskbarList != NULL)
         m_Win7TaskbarList->Release();
