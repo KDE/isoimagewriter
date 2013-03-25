@@ -207,85 +207,82 @@ void MainDialog::enumFlashDevices()
     QString usbDevicesRoot = "/sys/bus/usb/devices";
     QDir dirList(usbDevicesRoot);
     QStringList usbDevices = dirList.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-    for (int i = 0; i < usbDevices.size(); ++i)
+    for (int deviceIdx = 0; deviceIdx < usbDevices.size(); ++deviceIdx)
     {
-        QDir subdirList = dirList;
-        if (!subdirList.cd(usbDevices[i]))
+        QDir deviceDir = dirList;
+        if (!deviceDir.cd(usbDevices[deviceIdx]))
             continue;
 
         // Skip devices with wrong interface class
-        if (readFileContents(subdirList.absoluteFilePath("bInterfaceClass")) != "08\n")
+        if (readFileContents(deviceDir.absoluteFilePath("bInterfaceClass")) != "08\n")
             continue;
 
-        // Search for "host*" entries and take the first one
-        // TODO: Find out whether several host entries may appear
-        QStringList hosts = subdirList.entryList(QStringList("host*"));
-        if (hosts.size() == 0)
-            continue;
-        if (!subdirList.cd(hosts[0]))
-            continue;
-
-        // Search for "target*" entries and take the first one
-        // TODO: Find out whether several target entries may appear
-        QStringList targets = subdirList.entryList(QStringList("target*"));
-        if (targets.size() == 0)
-            continue;
-        if (!subdirList.cd(targets[0]))
-            continue;
-
-        // Remove the "target" part and append "*" to search for appropriate SCSI devices
-        // Again, take the first one
-        // TODO: Find out whether several SCSI devices may appear
-        QStringList scsiTargets = subdirList.entryList(QStringList(targets[0].mid(6) + "*"));
-        if (scsiTargets.size() == 0)
-            continue;
-
-        // Read the list of block devices and take the first one
-        // TODO: Find out whether several block devices may appear
-        // TODO: Check what happens with card readers with several cards inserted
-        // Preliminary googling showed that several SCSI LUNs may appear in this case
-        if (!subdirList.cd(scsiTargets[0] + "/block"))
-            continue;
-        QStringList blockDevices = subdirList.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-        if (blockDevices.size() == 0)
-            continue;
-
-        // Store the necessary information in the UsbDevice object
-        UsbDevice* deviceData = new UsbDevice;
-
-        // Use the block device name as both physical device and displayed volume name
-        deviceData->m_PhysicalDevice = "/dev/" + blockDevices[0];
-        deviceData->m_Volumes << deviceData->m_PhysicalDevice;
-
-        // Get the device size
-        quint64 blocksNum = readFileContents(subdirList.absoluteFilePath(blockDevices[0] + "/size")).toULongLong();
-        // TODO: Find out whether size is counted in logical or physical blocks
-        uint blockSize = readFileContents(subdirList.absoluteFilePath(blockDevices[0] + "/queue/logical_block_size")).toUInt();
-        if (blockSize == 0)
-            blockSize = 512;
-        deviceData->m_Size = blocksNum * blockSize;
-
-        // Get the user-friendly name for the device by reading the parent device fields
-        QString usbParentDevice = usbDevices[i];
-        usbParentDevice.replace(QRegularExpression("^(\\d+-\\d+):.*$"), "\\1");
-        usbParentDevice.prepend(usbDevicesRoot + "/");
-        QString manufacturer = readFileContents(usbParentDevice + "/manufacturer").trimmed();
-        QString product = readFileContents(usbParentDevice + "/product").trimmed();
-        if ((manufacturer != "") || (product != ""))
+        // Search for "host*" entries and process them
+        QStringList hosts = deviceDir.entryList(QStringList("host*"));
+        for (int hostIdx = 0; hostIdx < hosts.size(); ++hostIdx)
         {
-            // If only one of the <manufacturer> and <product> is non-empty, make it the device name,
-            // otherwise concatenate via space character
-            // TODO: Find out how to get more "friendly" name (for SATA-USB connector it shows the bridge
-            // device name instead of the disk drive name)
-            deviceData->m_VisibleName = (manufacturer + " " + product).trimmed();
-        }
+            QDir hostDir = deviceDir;
+            if (!hostDir.cd(hosts[hostIdx]))
+                continue;
 
-        // The device information is now complete, construct the display name for the combobox and append the entry
-        // Format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
-        QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
-        ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
-        // The object is now under the combobox control, nullify the pointer
-        deviceData = NULL;
+            // Search for "target*" entries and process them
+            QStringList targets = hostDir.entryList(QStringList("target*"));
+            for (int targetIdx = 0; targetIdx < targets.size(); ++targetIdx)
+            {
+                QDir targetDir = hostDir;
+                if (!targetDir.cd(targets[targetIdx]))
+                    continue;
+
+                // Remove the "target" part and append "*" to search for appropriate SCSI devices
+                QStringList scsiTargets = targetDir.entryList(QStringList(targets[targetIdx].mid(6) + "*"));
+                for (int scsiTargetIdx = 0; scsiTargetIdx < scsiTargets.size(); ++scsiTargetIdx)
+                {
+                    QDir scsiTargetDir = targetDir;
+                    if (!scsiTargetDir.cd(scsiTargets[scsiTargetIdx] + "/block"))
+                        continue;
+
+                    // Read the list of block devices and process them
+                    QStringList blockDevices = scsiTargetDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+                    for (int blockDeviceIdx = 0; blockDeviceIdx < blockDevices.size(); ++blockDeviceIdx)
+                    {
+                        // Create the new UsbDevice object to bind information to the listbox entry
+                        UsbDevice* deviceData = new UsbDevice;
+
+                        // Use the block device name as both physical device and displayed volume name
+                        deviceData->m_PhysicalDevice = "/dev/" + blockDevices[blockDeviceIdx];
+                        deviceData->m_Volumes << deviceData->m_PhysicalDevice;
+
+                        // Get the device size
+                        quint64 blocksNum = readFileContents(scsiTargetDir.absoluteFilePath(blockDevices[blockDeviceIdx] + "/size")).toULongLong();
+                        // TODO: Find out whether size is counted in logical or physical blocks
+                        uint blockSize = readFileContents(scsiTargetDir.absoluteFilePath(blockDevices[blockDeviceIdx] + "/queue/logical_block_size")).toUInt();
+                        if (blockSize == 0)
+                            blockSize = 512;
+                        deviceData->m_Size = blocksNum * blockSize;
+
+                        // Get the user-friendly name for the device by reading the parent device fields
+                        QString usbParentDevice = usbDevices[deviceIdx];
+                        usbParentDevice.replace(QRegularExpression("^(\\d+-\\d+):.*$"), "\\1");
+                        usbParentDevice.prepend(usbDevicesRoot + "/");
+                        QString manufacturer = readFileContents(usbParentDevice + "/manufacturer").trimmed();
+                        QString product = readFileContents(usbParentDevice + "/product").trimmed();
+                        if ((manufacturer != "") || (product != ""))
+                        {
+                            // If only one of the <manufacturer> and <product> is non-empty, make it the device name,
+                            // otherwise concatenate via space character
+                            // TODO: Find out how to get more "friendly" name (for SATA-USB connector it shows the bridge
+                            // device name instead of the disk drive name)
+                            deviceData->m_VisibleName = (manufacturer + " " + product).trimmed();
+                        }
+
+                        // The device information is now complete, construct the display name for the combobox and append the entry
+                        // Format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
+                        QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
+                        ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
+                    }
+                }
+            }
+        }
     }
 #elif defined(Q_OS_WIN32)
     // Using WMI for enumerating the USB devices
