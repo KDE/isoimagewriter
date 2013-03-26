@@ -275,10 +275,8 @@ void MainDialog::enumFlashDevices()
                             deviceData->m_VisibleName = (manufacturer + " " + product).trimmed();
                         }
 
-                        // The device information is now complete, construct the display name for the combobox and append the entry
-                        // Format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
-                        QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
-                        ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
+                        // The device information is now complete, append the entry
+                        ui->deviceList->addItem(deviceData->formatDisplayName(), QVariant::fromValue(deviceData));
                     }
                 }
             }
@@ -441,10 +439,8 @@ void MainDialog::enumFlashDevices()
             SAFE_RELEASE(pEnumPartitionsObject);
             FREE_BSTR(strQueryPartitions);
 
-            // The device information is now complete, construct the display name for the combobox and append the entry
-            // Format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
-            QString displayName = ((deviceData->m_Volumes.size() == 0) ? tr("<unmounted>") : deviceData->m_Volumes.join(", ")) + " - " + deviceData->m_VisibleName + " (" + QString::number(alignNumberDiv(deviceData->m_Size, DEFAULT_UNIT)) + " " + tr("MB") + ")";
-            ui->deviceList->addItem(displayName, QVariant::fromValue(deviceData));
+            // The device information is now complete, append the entry
+            ui->deviceList->addItem(deviceData->formatDisplayName(), QVariant::fromValue(deviceData));
             // The object is now under the combobox control, nullify the pointer
             deviceData = NULL;
         }
