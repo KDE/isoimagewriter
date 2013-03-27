@@ -318,7 +318,7 @@ void MainDialog::enumFlashDevices()
 
         // Create the IWbemLocator and execute the first query (list of physical disks attached via USB)
         CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, reinterpret_cast<void**>(&pIWbemLocator)), tr("CoCreateInstance(WbemAdministrativeLocator) failed."));
-        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace,  NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), tr("ConnectServer failed."));
+        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace, NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), tr("ConnectServer failed."));
         CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), tr("Failed to query USB flash devices."));
 
         // Enumerate the received list of devices

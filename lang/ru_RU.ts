@@ -97,91 +97,92 @@ Aborting.</source>
         <translation>&amp;Отменить</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="85"/>
-        <location filename="../maindialog.cpp" line="290"/>
-        <location filename="../maindialog.cpp" line="454"/>
-        <location filename="../maindialog.cpp" line="509"/>
-        <location filename="../maindialog.cpp" line="510"/>
+        <location filename="../maindialog.cpp" line="55"/>
+        <source>Failed to open the image file:</source>
+        <translation>Не удалось открыть файл образа:</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.cpp" line="61"/>
+        <location filename="../maindialog.cpp" line="497"/>
+        <location filename="../maindialog.cpp" line="498"/>
         <source>MB</source>
         <translation>МБ</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="145"/>
-        <location filename="../maindialog.cpp" line="156"/>
+        <location filename="../maindialog.cpp" line="140"/>
+        <location filename="../maindialog.cpp" line="151"/>
         <source>Writing is in progress, abort it?</source>
         <translation>Запись образа не завершена, прервать её?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="165"/>
+        <location filename="../maindialog.cpp" line="160"/>
         <source>Disk Images</source>
         <translation>Образы дисков</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="165"/>
+        <location filename="../maindialog.cpp" line="160"/>
         <source>All Files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="330"/>
+        <location filename="../maindialog.cpp" line="320"/>
         <source>CoCreateInstance(WbemAdministrativeLocator) failed.</source>
         <translation>Ошибка при вызове CoCreateInstance(WbemAdministrativeLocator).</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="331"/>
+        <location filename="../maindialog.cpp" line="321"/>
         <source>ConnectServer failed.</source>
         <translation>Ошибка при вызове ConnectServer.</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="332"/>
+        <location filename="../maindialog.cpp" line="322"/>
         <source>Failed to query USB flash devices.</source>
         <translation>Ошибка при запросе списка USB флэш-дисков.</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="386"/>
+        <location filename="../maindialog.cpp" line="376"/>
         <source>Failed to query list of partitions.</source>
         <translation>Ошибка при запросе списка разделов.</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="418"/>
+        <location filename="../maindialog.cpp" line="408"/>
         <source>Failed to query list of logical disks.</source>
         <translation>Ошибка при запросе списка логических дисков.</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="290"/>
-        <location filename="../maindialog.cpp" line="454"/>
         <source>&lt;unmounted&gt;</source>
-        <translation>&lt;не примонтировано&gt;</translation>
+        <translation type="obsolete">&lt;не примонтировано&gt;</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="508"/>
+        <location filename="../maindialog.cpp" line="496"/>
         <source>The image is larger than your selected device!</source>
         <translation>Файл образа больше по размеру, чем выбранный диск!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="509"/>
+        <location filename="../maindialog.cpp" line="497"/>
         <source>Image size:</source>
         <translation>Размер образа:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="509"/>
-        <location filename="../maindialog.cpp" line="510"/>
+        <location filename="../maindialog.cpp" line="497"/>
+        <location filename="../maindialog.cpp" line="498"/>
         <source>b</source>
         <translation>б</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="510"/>
+        <location filename="../maindialog.cpp" line="498"/>
         <source>Disk size:</source>
         <translation>Размер диска:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="518"/>
+        <location filename="../maindialog.cpp" line="506"/>
         <source>Writing an image will erase all existing data on the selected device.
 Are you sure you wish to proceed?</source>
         <translation>Запись образа уничтожит все имеющиеся данные на выбранном диске.
 Вы уверены, что хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="634"/>
+        <location filename="../maindialog.cpp" line="622"/>
         <source>The operation completed successfully.</source>
         <translation>Операция успешно завершена.</translation>
     </message>
@@ -207,9 +208,19 @@ Are you sure you wish to proceed?</source>
         <translation>Код ошибки:</translation>
     </message>
     <message>
-        <location filename="../maindialog.h" line="93"/>
+        <location filename="../maindialog.h" line="85"/>
         <source>Unknown Device</source>
         <translation>Неизвестное устройство</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.h" line="90"/>
+        <source>&lt;unmounted&gt;</source>
+        <translation>&lt;не примонтировано&gt;</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.h" line="90"/>
+        <source>MB</source>
+        <translation>МБ</translation>
     </message>
 </context>
 </TS>
