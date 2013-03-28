@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SRCDIR=`dirname $0`
+DSTDIR=$1
+if [[ -z $DSTDIR ]]; then
+	DSTDIR=$SRCDIR
+else
+	DSTDIR=$DSTDIR/lang
+fi
+mkdir -p $DSTDIR 2>/dev/null
+for t in $SRCDIR/*.ts; do lrelease "$t" -qm "$DSTDIR/`basename -s .ts $t`.qm"; done

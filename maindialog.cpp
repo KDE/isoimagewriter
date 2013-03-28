@@ -254,7 +254,7 @@ void MainDialog::enumFlashDevices()
 
                         // Get the device size
                         quint64 blocksNum = readFileContents(scsiTargetDir.absoluteFilePath(blockDevices[blockDeviceIdx] + "/size")).toULongLong();
-                        // TODO: Find out whether size is counted in logical or physical blocks
+                        // The size is counted in logical blocks (tested with 4K-sector HDD)
                         uint blockSize = readFileContents(scsiTargetDir.absoluteFilePath(blockDevices[blockDeviceIdx] + "/queue/logical_block_size")).toUInt();
                         if (blockSize == 0)
                             blockSize = 512;
