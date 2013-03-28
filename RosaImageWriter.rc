@@ -1,6 +1,7 @@
 #include <winver.h>
 
-100       ICON      DISCARDABLE         "res\\icon-rosa.ico"
+CREATEPROCESS_MANIFEST_RESOURCE_ID         RT_MANIFEST                            "res\\RosaImageWriter.manifest"
+100                                        ICON               DISCARDABLE         "res\\icon-rosa.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 2,1,0,0

@@ -53,7 +53,6 @@ RESOURCES += \
 
 win32 {
 	RC_FILE += RosaImageWriter.rc
-	QMAKE_LFLAGS_RELEASE += "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\""
 }
 
 win32:msvc {
