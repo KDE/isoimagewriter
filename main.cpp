@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QTranslator appTranslator;
-    appTranslator.load(QLocale::system().name(), "lang");
+    appTranslator.load(QLocale::system().name(), QCoreApplication::applicationDirPath() + "/lang");
     a.installTranslator(&appTranslator);
 
 #if defined(Q_OS_WIN32)
