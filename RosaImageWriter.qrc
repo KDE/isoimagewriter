@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>res/icon-open.ico</file>
         <file>res/icon-refresh.ico</file>
-        <file>res/icon-rosa.ico</file>
+        <file>res/icon-rosa.svg</file>
         <file>res/logo-rosa.png</file>
     </qresource>
 </RCC>
