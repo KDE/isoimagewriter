@@ -43,7 +43,7 @@ RESOURCES += \
     RosaImageWriter.qrc
 
 # The following variables can be used for automatic VERSIONINFO generating,
-# but unfortunately it's impossible to use them together with RC_FILE or RES_FILE
+# but unfortunately it is impossible to use them together with RC_FILE or RES_FILE
 # which is needed for specifying the executable file icon.
 #VERSION = 2.1.0.0
 #QMAKE_TARGET_COMPANY = ROSA
@@ -63,8 +63,19 @@ win32:mingw {
 	LIBS += -lole32 -loleaut32 -luuid
 }
 linux:gcc {
-	QMAKE_CXXFLAGS += -std=gnu++11
 	LIBS += -ludev
+	GCCSTRVER = $$system(g++ -dumpversion)
+	GCCVERSION = $$split(GCCSTRVER, .)
+	GCCV_MJ = $$member(GCCVERSION, 0)
+	GCCV_MN = $$member(GCCVERSION, 1)
+	greaterThan(GCCV_MJ, 3) {
+		lessThan(GCCV_MN, 7) {
+			QMAKE_CXXFLAGS += -std=gnu++0x
+		}
+		greaterThan(GCCV_MN, 6) {
+			QMAKE_CXXFLAGS += -std=gnu++11
+		}
+	}
 }
 
 TRANSLATIONS = lang/ru_RU.ts
