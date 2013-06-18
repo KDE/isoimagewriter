@@ -29,6 +29,11 @@ SOURCES += main.cpp\
     physicaldevice.cpp \
     usbdevicemonitor.cpp
 
+macx {
+    OBJECTIVE_SOURCES += platform_mac.mm
+    ICON = res/icon-rosa.icns
+}
+
 HEADERS  += maindialog.h \
     imagewriter.h \
     common.h \
@@ -76,6 +81,17 @@ linux:gcc {
 			QMAKE_CXXFLAGS += -std=gnu++11
 		}
 	}
+}
+macx {
+    QMAKE_CFLAGS = $$replace(QMAKE_CFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+    QMAKE_CXXFLAGS = $$replace(QMAKE_CXXFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+    QMAKE_LFLAGS = $$replace(QMAKE_LFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+    QMAKE_OBJECTIVE_CFLAGS = $$replace(QMAKE_OBJECTIVE_CFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+
+    QMAKE_CXXFLAGS += -std=c++0x -stdlib=libc++
+    QMAKE_OBJECTIVE_CFLAGS += -std=c++0x -stdlib=libc++
+    QMAKE_INCDIR += /System/Library/Frameworks/AppKit.framework/Headers
+    QMAKE_LFLAGS += -framework IOKit -framework Cocoa
 }
 
 TRANSLATIONS = lang/ru_RU.ts

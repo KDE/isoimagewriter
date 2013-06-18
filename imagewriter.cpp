@@ -36,7 +36,7 @@ void ImageWriter::writeImage()
         buffer = VirtualAlloc(NULL, TRANSFER_BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
         if (buffer == NULL)
             throw formatErrorMessageFromCode(tr("Failed to allocate memory for buffer:"));
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
         buffer = malloc(TRANSFER_BLOCK_SIZE);
         if (buffer == NULL)
             throw tr("Failed to allocate memory for buffer.");
@@ -134,7 +134,7 @@ void ImageWriter::writeImage()
     if (buffer != NULL)
 #if defined(Q_OS_WIN32)
         VirtualFree(buffer, TRANSFER_BLOCK_SIZE, MEM_DECOMMIT | MEM_RELEASE);
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
         free(buffer);
 #endif
 

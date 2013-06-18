@@ -6,7 +6,7 @@
 #include "maindialog.h"
 #include "usbdevicemonitor.h"
 
-#if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX)
+#if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC)
 #error Unsupported platrofm!
 #endif
 

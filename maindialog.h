@@ -82,7 +82,7 @@ public slots:
 class UsbDevice
 {
 public:
-    UsbDevice() : m_VisibleName(QObject::tr("Unknown Device")), m_Volumes(), m_Size(0), m_PhysicalDevice("") {}
+    UsbDevice() : m_VisibleName(QObject::tr("Unknown Device")), m_Volumes(), m_Size(0), m_SectorSize(0), m_PhysicalDevice("") {}
 
     // Formats the device description for GUI
     // The format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
@@ -96,6 +96,8 @@ public:
     QStringList m_Volumes;
     // Size of the device
     quint64     m_Size;
+    // Sector size
+    qint32      m_SectorSize;
     // System name of the physical disk
     QString     m_PhysicalDevice;
 };

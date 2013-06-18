@@ -174,6 +174,26 @@ void MainDialog::scheduleEnumFlashDevices()
         enumFlashDevices();
 }
 
+void addFlashDeviceCallback(void* cbParam, const char* DeviceVendor, const char* DeviceName, const char* PhysicalDevice, const char* Volumes[], size_t NumVolumes, unsigned long long Size, int SectorSize)
+{
+    Ui::MainDialog* ui = (Ui::MainDialog*)cbParam;
+    UsbDevice* deviceData = new UsbDevice;
+    QString vendor = QString(DeviceVendor).trimmed();
+    QString name = QString(DeviceName).trimmed();
+    if ((vendor != "") || (name != ""))
+    {
+        // If only one of the <DeviceVendor> and <DeviceName> is non-empty, make it the device name,
+        // otherwise concatenate via space character
+        deviceData->m_VisibleName = (vendor + " " + name).trimmed();
+    }
+    deviceData->m_PhysicalDevice = PhysicalDevice;
+    for (size_t i = 0; i < NumVolumes; ++i)
+        deviceData->m_Volumes << Volumes[i];
+    deviceData->m_Size = Size;
+    deviceData->m_SectorSize = SectorSize;
+    ui->deviceList->addItem(deviceData->formatDisplayName(), QVariant::fromValue(deviceData));
+}
+
 // Reloads the list of USB flash disks
 void MainDialog::enumFlashDevices()
 {
@@ -183,6 +203,8 @@ void MainDialog::enumFlashDevices()
     // Disable the combobox
     // TODO: Disable the whole dialog
     ui->deviceList->setEnabled(false);
+
+    platformEnumFlashDevices(addFlashDeviceCallback, ui);
 
 #if defined(Q_OS_LINUX)
     // Using /sys/bus/usb/devices directory contents for enumerating the USB devices

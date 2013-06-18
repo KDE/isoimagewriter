@@ -45,7 +45,7 @@ bool PhysicalDevice::open()
         CloseHandle(m_fileHandle);
         return false;
     }
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
     // Simply use QFile, it works fine in Linux
     // TODO: Use system call open with O_DIRECT
     return QFile::open(QIODevice::WriteOnly);
