@@ -47,11 +47,12 @@ void ImageWriter::writeImage()
         if (!imageFile.open(QIODevice::ReadOnly))
             throw tr("Failed to open the image file:") + "\n" + imageFile.errorString();
 
-#if defined(Q_OS_WIN32)
         // Unmount volumes that belong to the selected target device
         // TODO: Check first if they are used and show warning
         // (problem: have to show request in the GUI thread and return reply back here)
         QStringList errMessages;
+
+#if defined(Q_OS_WIN32)
         for (int i = 0; i < m_Device->m_Volumes.size(); ++i)
         {
             DWORD bret;
@@ -77,9 +78,21 @@ void ImageWriter::writeImage()
             CloseHandle(volume);
             volume = INVALID_HANDLE_VALUE;
         }
+#elif defined(Q_OS_MAC)
+        struct statfs* mntEntries = NULL;
+        int mntEntriesNum = getmntinfo(&mntEntries, MNT_WAIT);
+        for (int i = 0; i < mntEntriesNum; ++i)
+        {
+            if (QString(mntEntries[i].f_mntfromname).startsWith(m_Device->m_PhysicalDevice))
+            {
+                // Mount point is the selected device or one of its partitions - try to unmount it
+                if (unmount(mntEntries[i].f_mntonname, MNT_FORCE) != 0)
+                    errMessages << tr("Failed to unmount the volume") + " " + m_Device->m_Volumes[i] + "\n" + strerror(errno);
+            }
+        }
+#endif
         if (errMessages.size() > 0)
             throw errMessages.join("\n\n");
-#endif
 
         // Open the target USB device for writing and lock it
         PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);

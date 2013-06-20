@@ -5,8 +5,25 @@
 #include <IOKit/usb/IOUSBLib.h>
 #include <IOKit/storage/IOMedia.h>
 #include <IOKit/IOBSD.h>
+#include <Authorization.h>
+#include <ServiceManagement.h>
 
 #include "common.h"
+
+bool restartElevated(const char* path)
+{
+    AuthorizationItem authItem = { kSMRightModifySystemDaemons, 0, NULL, 0 };
+    AuthorizationRights authRights = { 1, &authItem };
+    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+
+    AuthorizationRef authRef = NULL;
+
+    OSStatus status = AuthorizationCreate(&authRights, kAuthorizationEmptyEnvironment, flags, &authRef);
+
+    status = AuthorizationExecuteWithPrivileges(authRef, path, kAuthorizationFlagDefaults, NULL, NULL);
+
+    return true;
+}
 
 bool readBooleanRegKey(io_service_t device, CFStringRef key)
 {

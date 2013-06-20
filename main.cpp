@@ -10,8 +10,18 @@
 #error Unsupported platrofm!
 #endif
 
+bool restartElevated(const char*);
+
 int main(int argc, char *argv[])
 {
+    uid_t uid = getuid();
+    uid_t euid = geteuid();
+    if ((uid != 0) && (euid != 0))
+    {
+        restartElevated(argv[0]);
+        return 0;
+    }
+
     QApplication a(argc, argv);
 
     QTranslator qtTranslator;

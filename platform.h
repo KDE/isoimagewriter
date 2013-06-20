@@ -18,5 +18,12 @@
 #include <libudev.h>
 #endif
 
+#if defined(Q_OS_MAC)
+#include <unistd.h>
+#include <sys/param.h>
+#include <sys/ucred.h>
+#include <sys/mount.h>
+#include <errno.h>
+#endif
 
 #endif // PLATFORM_H
