@@ -7,25 +7,17 @@
 #include "usbdevicemonitor.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC)
-#error Unsupported platrofm!
+#error Unsupported platform!
 #endif
-
-bool restartElevated(const char*);
 
 int main(int argc, char *argv[])
 {
-    uid_t uid = getuid();
-    uid_t euid = geteuid();
-    if ((uid != 0) && (euid != 0))
-    {
-        restartElevated(argv[0]);
-        return 0;
-    }
+    ensureElevated(argv[0]);
 
     QApplication a(argc, argv);
 
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    qtTranslator.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     a.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;

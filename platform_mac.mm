@@ -1,29 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains Mac implementation of platform-dependent functions
 
+#include "common.h"
+#include "usbdevice.h"
+
 #include <Cocoa/Cocoa.h>
 #include <IOKit/usb/IOUSBLib.h>
 #include <IOKit/storage/IOMedia.h>
 #include <IOKit/IOBSD.h>
 #include <Authorization.h>
 #include <ServiceManagement.h>
-
-#include "common.h"
-
-bool restartElevated(const char* path)
-{
-    AuthorizationItem authItem = { kSMRightModifySystemDaemons, 0, NULL, 0 };
-    AuthorizationRights authRights = { 1, &authItem };
-    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-
-    AuthorizationRef authRef = NULL;
-
-    OSStatus status = AuthorizationCreate(&authRights, kAuthorizationEmptyEnvironment, flags, &authRef);
-
-    status = AuthorizationExecuteWithPrivileges(authRef, path, kAuthorizationFlagDefaults, NULL, NULL);
-
-    return true;
-}
 
 bool readBooleanRegKey(io_service_t device, CFStringRef key)
 {
@@ -118,47 +104,72 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         }
 
         // Skip devices without BSD names (that is, not real disks)
-        CFStringRef bsdName = readStringRegKey(device, CFSTR(kIOBSDNameKey));
-        if (bsdName == nil)
+        CFStringRef tempStr = readStringRegKey(device, CFSTR(kIOBSDNameKey));
+        if (tempStr == nil)
         {
             IOObjectRelease(device);
             continue;
         }
-        char bsdNameStr[128] = "/dev/";
-        strcat(bsdNameStr, CFStringGetCStringPtr(bsdName, encodingMethod));
 
-        // Get the rest of parameters and add the device into the list
-        CFStringRef vendor = readStringRegKey(device, CFSTR(kUSBVendorString));
-        const char* vendorStr = "";
-        if (vendor != nil)
-            vendorStr = CFStringGetCStringPtr(vendor, encodingMethod);
-        CFStringRef product = readStringRegKey(device, CFSTR(kUSBProductString));
-        const char* productStr = "";
-        if (product != nil)
-            productStr = CFStringGetCStringPtr(product, encodingMethod);
-        unsigned long long size = readIntegerRegKey(device, CFSTR(kIOMediaSizeKey));
-        unsigned long long sectorSize = readIntegerRegKey(device, CFSTR(kIOMediaPreferredBlockSizeKey));
-        const char* volumes[1] = { bsdNameStr };
-        callback(
-            cbParam,
-            vendorStr,
-            productStr,
-            bsdNameStr,
-            volumes,
-            1,
-            size,
-            sectorSize
-        );
+        // Fetch the required properties and store them in the UsbDevice object
+        UsbDevice* deviceData = new UsbDevice;
+
+        // Physical device name (use it also as the volumes list - the real list may be too long)
+        deviceData->m_PhysicalDevice = "/dev/";
+        deviceData->m_PhysicalDevice += CFStringGetCStringPtr(tempStr, encodingMethod);
+        CFRelease(tempStr);
+        deviceData->m_Volumes << deviceData->m_PhysicalDevice;
+
+        // User-friendly device name: vendor+product
+        tempStr = readStringRegKey(device, CFSTR(kUSBVendorString));
+        if (tempStr != nil)
+        {
+            deviceData->m_VisibleName = CFStringGetCStringPtr(tempStr, encodingMethod);
+            deviceData->m_VisibleName = deviceData->m_VisibleName.trimmed();
+            CFRelease(tempStr);
+        }
+        tempStr = readStringRegKey(device, CFSTR(kUSBProductString));
+        if (tempStr != nil)
+        {
+            deviceData->m_VisibleName += " ";
+            deviceData->m_VisibleName += CFStringGetCStringPtr(tempStr, encodingMethod);
+            deviceData->m_VisibleName = deviceData->m_VisibleName.trimmed();
+            CFRelease(tempStr);
+        }
+
+        // Size of the flash disk
+        deviceData->m_Size = readIntegerRegKey(device, CFSTR(kIOMediaSizeKey));
+        deviceData->m_SectorSize = readIntegerRegKey(device, CFSTR(kIOMediaPreferredBlockSizeKey));
+
+        // The device information is now complete, append the entry
+        callback(cbParam, deviceData);
 
         // Free the resources
-        CFRelease(bsdName);
-        if (vendor != nil)
-            CFRelease(vendor);
-        if (product != nil)
-            CFRelease(product);
         IOObjectRelease(device);
     }
 
     IOObjectRelease(iter);
     return true;
+}
+
+bool ensureElevated(const char* appPath)
+{
+    uid_t uid = getuid();
+    uid_t euid = geteuid();
+    if ((uid == 0) || (euid == 0))
+        return true;
+
+    AuthorizationItem authItem = { kSMRightModifySystemDaemons, 0, NULL, 0 };
+    AuthorizationRights authRights = { 1, &authItem };
+    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+
+    AuthorizationRef authRef = NULL;
+
+    if (AuthorizationCreate(&authRights, kAuthorizationEmptyEnvironment, flags, &authRef) != errAuthorizationSuccess)
+        return false;
+
+    if (AuthorizationExecuteWithPrivileges(authRef, appPath, kAuthorizationFlagDefaults, NULL, NULL) != errAuthorizationSuccess)
+        return false;
+
+    exit(0);
 }

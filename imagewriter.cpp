@@ -99,19 +99,13 @@ void ImageWriter::writeImage()
         if (!deviceFile.open())
             throw tr("Failed to open the target device:") + "\n" + deviceFile.errorString();
 
-        // The number of bytes to be written must be a multiple of sector size,
-        // so first we get the sector size proper
-        qint64 sectorSize = deviceFile.getDeviceSectorSize();
-        if (sectorSize < 0)
-            sectorSize = 512;
-
         qint64 readBytes;
         qint64 writtenBytes;
         // Start reading/writing cycle
         while ((readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) && (readBytes > 0))
         {
             // Align the number of bytes to the sector size
-            readBytes = alignNumber(readBytes, sectorSize);
+            readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
             writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
             if (writtenBytes < 0)
                 throw tr("Failed to write to the device:") + "\n" + deviceFile.errorString();

@@ -12,6 +12,9 @@
 
 #include "platform.h"
 
+class UsbDevice;
+
+
 // Default unit to be used when displaying file/device sizes (MB)
 const quint64 DEFAULT_UNIT = 1048576;
 
@@ -80,7 +83,7 @@ QString readFileContents(const QString& fileName);
 //  SectorSize     - sector size of the device
 // Returns:
 //  nothing
-typedef void (*AddFlashDeviceCallbackProc)(void* cbParam, const char* DeviceVendor, const char* DeviceName, const char* PhysicalDevice, const char* Volumes[], size_t NumVolumes, unsigned long long Size, int SectorSize);
+typedef void (*AddFlashDeviceCallbackProc)(void* cbParam, UsbDevice* device);
 
 // Performs platform-specific enumeration of USB flash disks and calls the callback
 // function for adding these devices into the application GUI structure
@@ -90,5 +93,15 @@ typedef void (*AddFlashDeviceCallbackProc)(void* cbParam, const char* DeviceVend
 // Returns:
 //  true if enumeration completed successfully, false otherwise
 bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam);
+
+// Checks the application privileges and if they are not sufficient, restarts
+// itself requesting higher privileges
+// Input:
+//  appPath - path to the application executable
+// Returns:
+//  true if already running elevated
+//  false if error occurs
+//  does not return if elevation request succeeded (the current instance terminates)
+bool ensureElevated(const char* appPath);
 
 #endif // COMMON_H

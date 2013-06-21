@@ -29,6 +29,12 @@ SOURCES += main.cpp\
     physicaldevice.cpp \
     usbdevicemonitor.cpp
 
+win32 {
+	SOURCES += platform_win.cpp
+}
+linux {
+	SOURCES += platform_lin.cpp
+}
 macx {
     OBJECTIVE_SOURCES += platform_mac.mm
     ICON = res/icon-rosa.icns
@@ -40,7 +46,8 @@ HEADERS  += maindialog.h \
     platform.h \
     externalprogressbar.h \
     physicaldevice.h \
-    usbdevicemonitor.h
+    usbdevicemonitor.h \
+    usbdevice.h
 
 FORMS    += maindialog.ui
 
@@ -58,14 +65,13 @@ RESOURCES += \
 
 win32 {
 	RC_FILE += RosaImageWriter.rc
-}
-
-win32:msvc {
-	LIBS += Ole32.lib OleAut32.lib
-}
-win32:mingw {
-	QMAKE_CXXFLAGS += -std=gnu++11
-	LIBS += -lole32 -loleaut32 -luuid
+	msvc {
+		LIBS += Ole32.lib OleAut32.lib
+	}
+	mingw {
+		QMAKE_CXXFLAGS += -std=gnu++11
+		LIBS += -lole32 -loleaut32 -luuid
+	}
 }
 linux:gcc {
 	LIBS += -ludev

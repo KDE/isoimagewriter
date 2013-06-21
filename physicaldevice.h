@@ -17,8 +17,6 @@ public:
 
     // Opens the selected device in WriteOnly mode
     virtual bool open();
-    // Gets the the device's sector size
-    int getDeviceSectorSize();
 
 protected:
 #if defined(Q_OS_WIN32)

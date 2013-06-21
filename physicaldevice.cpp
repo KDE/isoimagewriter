@@ -53,28 +53,3 @@ bool PhysicalDevice::open()
     return false;
 #endif
 }
-
-// Gets the the device's sector size
-int PhysicalDevice::getDeviceSectorSize()
-{
-    if (!isOpen())
-    {
-        setErrorString(tr("The device is not open."));
-        return -1;
-    }
-
-    // Use platform-specific IOCTLs for getting the sector size
-#if defined(Q_OS_WIN32)
-    DWORD bret;
-    DISK_GEOMETRY dg;
-    if (DeviceIoControl(m_fileHandle, IOCTL_DISK_GET_DRIVE_GEOMETRY, NULL, 0, &dg, sizeof(dg), &bret, NULL))
-        return dg.BytesPerSector;
-#elif defined(Q_OS_LINUX)
-    int sectorSize;
-    if (ioctl(handle(), BLKSSZGET, &sectorSize) == 0)
-        return sectorSize;
-#endif
-
-    // If failed for some reason (or unsupported platform), default is 512 bytes
-    return 512;
-}
