@@ -102,6 +102,13 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
 //  true if already running elevated
 //  false if error occurs
 //  does not return if elevation request succeeded (the current instance terminates)
-bool ensureElevated(const char* appPath);
+bool ensureElevated();
+
+// Returns the language id to be used by the application
+// Input:
+//  none
+// Returns:
+//  value of the --lang= argument, or (if not specified) name of the system locale
+QString getLocale();
 
 #endif // COMMON_H

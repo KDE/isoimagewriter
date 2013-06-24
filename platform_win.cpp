@@ -255,9 +255,8 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
     return true;
 }
 
-bool ensureElevated(const char* appPath)
+bool ensureElevated()
 {
     // In Windows the manifest already ensures elevated privileges
-    Q_UNUSED(appPath);
     return true;
 }

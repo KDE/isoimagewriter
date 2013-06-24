@@ -108,11 +108,10 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
     return true;
 }
 
-bool ensureElevated(const char* appPath)
+bool ensureElevated()
 {
     // In Linux elevated privileges are ensured by start scripts
     // TODO: Get rid of start script and/or consolehelper
     // Problem: In different DEs elevated start is different
-    Q_UNUSED(appPath);
     return true;
 }

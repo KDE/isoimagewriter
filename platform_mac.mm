@@ -4,6 +4,8 @@
 #include "common.h"
 #include "usbdevice.h"
 
+#include <QApplication>
+
 #include <Cocoa/Cocoa.h>
 #include <IOKit/usb/IOUSBLib.h>
 #include <IOKit/storage/IOMedia.h>
@@ -115,7 +117,9 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         UsbDevice* deviceData = new UsbDevice;
 
         // Physical device name (use it also as the volumes list - the real list may be too long)
-        deviceData->m_PhysicalDevice = "/dev/";
+        // Using "rdiskN" instead of BSD name "diskN" to work around an OS X bug when writing
+        // to "diskN" is extremely slow
+        deviceData->m_PhysicalDevice = "/dev/r";
         deviceData->m_PhysicalDevice += CFStringGetCStringPtr(tempStr, encodingMethod);
         CFRelease(tempStr);
         deviceData->m_Volumes << deviceData->m_PhysicalDevice;
@@ -152,7 +156,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
     return true;
 }
 
-bool ensureElevated(const char* appPath)
+bool ensureElevated()
 {
     uid_t uid = getuid();
     uid_t euid = geteuid();
@@ -168,7 +172,10 @@ bool ensureElevated(const char* appPath)
     if (AuthorizationCreate(&authRights, kAuthorizationEmptyEnvironment, flags, &authRef) != errAuthorizationSuccess)
         return false;
 
-    if (AuthorizationExecuteWithPrivileges(authRef, appPath, kAuthorizationFlagDefaults, NULL, NULL) != errAuthorizationSuccess)
+    QByteArray appPath = QApplication::arguments()[0].toUtf8();
+    QByteArray arg = ("--lang=" + getLocale()).toUtf8();
+    char* const args[] = { arg.data(), NULL };
+    if (AuthorizationExecuteWithPrivileges(authRef, appPath.constData(), kAuthorizationFlagDefaults, args, NULL) != errAuthorizationSuccess)
         return false;
 
     exit(0);

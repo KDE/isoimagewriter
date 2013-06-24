@@ -12,16 +12,18 @@
 
 int main(int argc, char *argv[])
 {
-    ensureElevated(argv[0]);
-
     QApplication a(argc, argv);
 
+    ensureElevated();
+
+    QString langName = getLocale();
+
     QTranslator qtTranslator;
-    qtTranslator.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    qtTranslator.load("qtbase_" + langName, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     a.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-    appTranslator.load(QLocale::system().name(), QCoreApplication::applicationDirPath() + "/lang");
+    appTranslator.load(langName, QCoreApplication::applicationDirPath() + "/lang");
     a.installTranslator(&appTranslator);
 
 #if defined(Q_OS_WIN32)
