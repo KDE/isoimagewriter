@@ -8,8 +8,12 @@
 
 #include "common.h"
 
+class ExternalProgressBarPrivate;
 class ExternalProgressBar
 {
+protected:
+    ExternalProgressBarPrivate* const d_ptr;
+
 public:
     ExternalProgressBar(QWidget* mainWindow);
     ~ExternalProgressBar();
@@ -32,14 +36,6 @@ public:
 protected:
     // Maximum counter value for the progress bar
     quint64 m_MaxValue;
-
-#if defined(Q_OS_WIN32)
-    // Windows7 Taskbar interface for mirroring the progress bar
-    ITaskbarList3* m_Win7TaskbarList;
-
-    // Main window handle for selecting the correct taskbar button
-    HWND m_hWnd;
-#endif
 };
 
 #endif // EXTERNALPROGRESSBAR_H

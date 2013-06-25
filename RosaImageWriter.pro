@@ -22,21 +22,23 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-	maindialog.cpp \
+    maindialog.cpp \
     imagewriter.cpp \
     common.cpp \
-    externalprogressbar.cpp \
     physicaldevice.cpp \
     usbdevicemonitor.cpp
 
 win32 {
-	SOURCES += platform_win.cpp
+    SOURCES += platform_win.cpp \
+        externalprogressbar_win.cpp
 }
 linux {
-	SOURCES += platform_lin.cpp
+    SOURCES += platform_lin.cpp \
+        externalprogressbar_lin.cpp
 }
 macx {
-    OBJECTIVE_SOURCES += platform_mac.mm
+    OBJECTIVE_SOURCES += platform_mac.mm \
+        externalprogressbar_mac.mm
     ICON = res/icon-rosa.icns
 }
 
