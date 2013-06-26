@@ -1,4 +1,4 @@
-#include <winver.h>
+#include <windows.h>
 
 CREATEPROCESS_MANIFEST_RESOURCE_ID         RT_MANIFEST                            "res\\RosaImageWriter.manifest"
 100                                        ICON               DISCARDABLE         "res\\icon-rosa.ico"

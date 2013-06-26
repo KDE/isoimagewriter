@@ -67,6 +67,7 @@ RESOURCES += \
 
 win32 {
 	RC_FILE += RosaImageWriter.rc
+	CONFIG -= embed_manifest_dll embed_manifest_exe
 	msvc {
 		LIBS += Ole32.lib OleAut32.lib
 	}
