@@ -14,6 +14,9 @@ win32 {
 linux {
 	QTPLUGIN += qxcb
 }
+macx {
+	QTPLUGIN += qcocoa
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
