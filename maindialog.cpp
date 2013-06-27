@@ -27,6 +27,13 @@ MainDialog::MainDialog(QWidget *parent) :
     m_EnumFlashDevicesWaiting(false),
     m_ExtProgressBar(this)
 {
+#if defined(Q_OS_MAC)
+    // Quick hack for OS X to avoid hiding our main dialog when inactive
+    // The Qt::WA_MacAlwaysShowToolWindow attribute does not work (see QTBUG-29816)
+    void disableHideOnDeactivate(WId wid);
+    disableHideOnDeactivate(winId());
+#endif
+
     ui->setupUi(this);
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);

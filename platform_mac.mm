@@ -180,3 +180,8 @@ bool ensureElevated()
 
     exit(0);
 }
+
+void disableHideOnDeactivate(WId wid)
+{
+    [[reinterpret_cast<NSView*>(wid) window] setHidesOnDeactivate: NO];
+}

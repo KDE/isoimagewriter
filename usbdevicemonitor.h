@@ -11,9 +11,14 @@
 
 #include "common.h"
 
+class UsbDeviceMonitorPrivate;
 class UsbDeviceMonitor : public QObject, public QAbstractNativeEventFilter
 {
     Q_OBJECT
+
+protected:
+    UsbDeviceMonitorPrivate* const d_ptr;
+
 public:
     explicit UsbDeviceMonitor(QObject *parent = 0);
     ~UsbDeviceMonitor();
@@ -22,14 +27,6 @@ public:
     bool nativeEventFilter(const QByteArray& eventType, void* message, long* result);
 
 protected:
-#if defined(Q_OS_LINUX)
-    // udev library context
-    struct udev* m_udev;
-    // udev device monitor handle
-    struct udev_monitor* m_udevMonitor;
-    // Watcher for udev monitor socket
-    QSocketNotifier* m_udevNotifier;
-#endif
     // Closes handles and frees resources
     void cleanup();
 
@@ -38,10 +35,6 @@ signals:
     void deviceChanged();
 
 public slots:
-#if defined(Q_OS_LINUX)
-    // Processes udev socket notification
-    void processUdevNotification(int socket);
-#endif
     // Initializes monitoring for USB devices
     bool startMonitoring();
 };
