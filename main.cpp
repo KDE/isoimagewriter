@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    ensureElevated();
+    if (!ensureElevated())
+        return 1;
 
     QString langName = getLocale();
 
