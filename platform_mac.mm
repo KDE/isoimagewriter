@@ -116,13 +116,14 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         // Fetch the required properties and store them in the UsbDevice object
         UsbDevice* deviceData = new UsbDevice;
 
-        // Physical device name (use it also as the volumes list - the real list may be too long)
+        // Physical device name
         // Using "rdiskN" instead of BSD name "diskN" to work around an OS X bug when writing
         // to "diskN" is extremely slow
-        deviceData->m_PhysicalDevice = "/dev/r";
-        deviceData->m_PhysicalDevice += CFStringGetCStringPtr(tempStr, encodingMethod);
+        QString bsdName = CFStringGetCStringPtr(tempStr, encodingMethod);
         CFRelease(tempStr);
-        deviceData->m_Volumes << deviceData->m_PhysicalDevice;
+        deviceData->m_PhysicalDevice = "/dev/r" + bsdName;
+        // Volume names are very long, so display the device name instead
+        deviceData->m_Volumes << "/dev/" + bsdName;
 
         // User-friendly device name: vendor+product
         tempStr = readStringRegKey(device, CFSTR(kUSBVendorString));
