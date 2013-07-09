@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-QTPLUGIN += qico
+QTPLUGIN += qico qsvgicon
 
 win32 {
 	QTPLUGIN += qwindows
@@ -57,6 +57,7 @@ macx {
         usbdevicemonitor_mac.mm
     HEADERS += usbdevicemonitor_mac_p.h
     ICON = res/icon-rosa.icns
+    QMAKE_INFO_PLIST = res/Info.plist
 }
 
 FORMS    += maindialog.ui
@@ -67,7 +68,7 @@ RESOURCES += \
 # The following variables can be used for automatic VERSIONINFO generating,
 # but unfortunately it is impossible to use them together with RC_FILE or RES_FILE
 # which is needed for specifying the executable file icon in Windows.
-#VERSION = 2.3.0.0
+VERSION = 2.4.0.0
 #QMAKE_TARGET_COMPANY = ROSA
 #QMAKE_TARGET_PRODUCT = "ROSA Image Writer"
 #QMAKE_TARGET_DESCRIPTION = "Tool for creating bootable ROSA installation USB flash drives"
@@ -100,15 +101,16 @@ linux:gcc {
 	}
 }
 macx {
-    QMAKE_CFLAGS = $$replace(QMAKE_CFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
-    QMAKE_CXXFLAGS = $$replace(QMAKE_CXXFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
-    QMAKE_LFLAGS = $$replace(QMAKE_LFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
-    QMAKE_OBJECTIVE_CFLAGS = $$replace(QMAKE_OBJECTIVE_CFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+	QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+	QMAKE_CFLAGS = $$replace(QMAKE_CFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+	QMAKE_CXXFLAGS = $$replace(QMAKE_CXXFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+	QMAKE_LFLAGS = $$replace(QMAKE_LFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
+	QMAKE_OBJECTIVE_CFLAGS = $$replace(QMAKE_OBJECTIVE_CFLAGS, '-mmacosx-version-min=10.6', '-mmacosx-version-min=10.7')
 
-    QMAKE_CXXFLAGS += -std=c++0x -stdlib=libc++
-    QMAKE_OBJECTIVE_CFLAGS += -std=c++0x -stdlib=libc++
-    QMAKE_INCDIR += /System/Library/Frameworks/AppKit.framework/Headers /System/Library/Frameworks/Security.framework/Headers /System/Library/Frameworks/ServiceManagement.framework/Headers
-    QMAKE_LFLAGS += -framework IOKit -framework Cocoa -framework Security
+	QMAKE_CXXFLAGS += -std=c++0x -stdlib=libc++
+	QMAKE_OBJECTIVE_CFLAGS += -std=c++0x -stdlib=libc++
+	QMAKE_INCDIR += /System/Library/Frameworks/AppKit.framework/Headers /System/Library/Frameworks/Security.framework/Headers /System/Library/Frameworks/ServiceManagement.framework/Headers
+	QMAKE_LFLAGS += -framework IOKit -framework Cocoa -framework Security
 }
 
 TRANSLATIONS = lang/ru_RU.ts lang/fr_FR.ts
