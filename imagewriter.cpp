@@ -117,6 +117,12 @@ void ImageWriter::writeImage()
             if (writtenBytes != readBytes)
                 throw tr("The last block was not fully written (%1 of %2 bytes)!\nAborting.").arg(writtenBytes).arg(readBytes);
 
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
+            // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
+            // For unknown reason, deviceFile.flush() does not work as intended here.
+            fsync(deviceFile.handle());
+#endif
+
             // Inform the GUI thread that next block was written
             // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
             // this still works or at least fails compilation
@@ -135,6 +141,9 @@ void ImageWriter::writeImage()
         }
         if (readBytes < 0)
             throw tr("Failed to read the image file:") + "\n" + imageFile.errorString();
+
+        imageFile.close();
+        deviceFile.close();
     }
     catch (QString msg)
     {

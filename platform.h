@@ -13,6 +13,7 @@
 #endif
 
 #if defined(Q_OS_LINUX)
+#include <unistd.h>
 #include <sys/ioctl.h>
 #include <linux/fs.h>
 #include <libudev.h>

@@ -9,7 +9,7 @@
 <h2>Description</h2>
 <p>This tool is designed for creating bootable USB flash disks with ROSA Linux installator by dumping the distribution ISO image file contents to the flash disk. It might also work the same way for other Linux (or non-Linux) distributions, but there is no guarantee since the image must be prepared for such use.</p>
 <p>The tool is distributed under the GPL v3 license which terms and conditions you can find in the file <a href="LICENSE.html" target="_blank">LICENSE.html</a>.</p>
-<p>Copyright &copy; 2013 ROSA</p>
+<p>Copyright &copy; 2014 ROSA</p>
 <p>Developed by: Konstantin Vlasov &lt;<a href="mailto:konstantin.vlasov@rosalab.ru">konstantin.vlasov@rosalab.ru</a>&gt;</p>
 
 <h2>Using</h2>
@@ -72,6 +72,14 @@
 </ol>
 
 <h2>Changelog</h2>
+<h3>Version 2.4.0.5</h3>
+<p>Minor bug fixes:</p>
+<ol>
+  <li>Windows: USB device remained locked after writing was finished.</li>
+  <li>Linux/MacOS: Added write flushing after every block: fixes "inconsistent progressbar" problem (when progress quickly went to 100%, and then waited for long time while real writing took place).</li>
+  <li>Rebuilt with Qt 5.3.1.</li>
+</ol>
+
 <h3>Version 2.4.0.0</h3>
 <p>Starting with this version, Mac OS X is also supported (version 10.7 and higher). More detailed list of changes:</p>
 <ol>
@@ -137,7 +145,7 @@
 </ol>
 
 <hr style="width: 75%;" />
-<p style="font-size: 75%; text-align: center;"><i>Copyright &copy; 2013 ROSA</i></p>
+<p style="font-size: 75%; text-align: center;"><i>Copyright &copy; 2014 ROSA</i></p>
 
 </body>
 </html>

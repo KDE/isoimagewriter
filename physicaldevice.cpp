@@ -38,7 +38,7 @@ bool PhysicalDevice::open()
         return false;
     }
     // Construct QFile around the device handle; close() will now close the handle automatically
-    if (QFile::open(_open_osfhandle(reinterpret_cast<intptr_t>(m_fileHandle), 0), QIODevice::WriteOnly))
+    if (QFile::open(_open_osfhandle(reinterpret_cast<intptr_t>(m_fileHandle), 0), QIODevice::WriteOnly | QIODevice::Unbuffered, AutoCloseHandle))
         return true;
     else
     {
