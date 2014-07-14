@@ -73,10 +73,11 @@
 
 <h2>Changelog</h2>
 <h3>Version 2.4.0.5</h3>
-<p>Minor bug fixes:</p>
+<p>Minor bug fixes and improvements:</p>
 <ol>
   <li>Windows: USB device remained locked after writing was finished.</li>
   <li>Linux/MacOS: Added write flushing after every block: fixes "inconsistent progressbar" problem (when progress quickly went to 100%, and then waited for long time while real writing took place).</li>
+  <li>Linux: Loading libudev dynamically, which allows to use either version 0 and 1 (whichever present in the distribution) or even work without it (USB devices list will have to be refreshed manually).
   <li>Rebuilt with Qt 5.3.1.</li>
 </ol>
 

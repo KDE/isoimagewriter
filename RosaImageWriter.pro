@@ -86,7 +86,7 @@ win32 {
 	}
 }
 linux:gcc {
-	LIBS += -ludev
+	LIBS += -ldl
 	GCCSTRVER = $$system(g++ -dumpversion)
 	GCCVERSION = $$split(GCCSTRVER, .)
 	GCCV_MJ = $$member(GCCVERSION, 0)

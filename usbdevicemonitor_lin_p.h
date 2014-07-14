@@ -16,6 +16,8 @@ public:
 
     UsbDeviceMonitor* q_ptr;
 
+    // Handle to dynamically loaded udev library
+    void* m_udevLib;
     // udev library context
     struct udev* m_udev;
     // udev device monitor handle
