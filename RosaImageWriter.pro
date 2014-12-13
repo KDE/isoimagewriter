@@ -6,17 +6,7 @@
 
 QT       += core gui
 
-QTPLUGIN += qico qsvgicon
-
-win32 {
-	QTPLUGIN += qwindows
-}
-linux {
-	QTPLUGIN += qxcb
-}
-macx {
-	QTPLUGIN += qcocoa
-}
+QTPLUGIN += qsvgicon
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
