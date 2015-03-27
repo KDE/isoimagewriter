@@ -58,11 +58,11 @@ RESOURCES += \
 # The following variables can be used for automatic VERSIONINFO generating,
 # but unfortunately it is impossible to use them together with RC_FILE or RES_FILE
 # which is needed for specifying the executable file icon in Windows.
-VERSION = 2.5.0.0
+VERSION = 2.6.0.0
 #QMAKE_TARGET_COMPANY = ROSA
 #QMAKE_TARGET_PRODUCT = "ROSA Image Writer"
 #QMAKE_TARGET_DESCRIPTION = "Tool for creating bootable ROSA installation USB flash drives"
-#QMAKE_TARGET_COPYRIGHT = "Copyright (c) 2014 ROSA"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (c) 2015 ROSA"
 
 win32 {
 	RC_FILE += RosaImageWriter.rc
