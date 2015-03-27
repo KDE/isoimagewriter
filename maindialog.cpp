@@ -41,6 +41,24 @@ MainDialog::MainDialog(QWidget *parent) :
     setFixedHeight(size().height());
     // Start in the "idle" mode
     hideWritingProgress();
+    // Get path to ISO from command line (if supplied)
+    QStringList args = QApplication::arguments();
+    for (int i = 1; i < args.length(); ++i)
+    {
+        if ((args[i].length() > 0) && (args[i][0] != '-'))
+        {
+            // Argument is not an option - try to use it as path to file
+            QString newImageFile = args[i];
+            if (newImageFile.left(7) == "file://")
+                newImageFile = QUrl(newImageFile).toLocalFile();
+            if (newImageFile != "")
+            {
+                m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
+                preprocessImageFile(newImageFile);
+            }
+            break;
+        }
+    }
     // Load the list of USB flash disks
     enumFlashDevices();
     // TODO: Increase the dialog display speed by showing it with the empty list and enumerating devices
