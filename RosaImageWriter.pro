@@ -77,6 +77,7 @@ win32 {
 }
 linux:gcc {
 	LIBS += -ldl
+	QMAKE_LFLAGS_RELEASE -= -Wl,-z,now       # Make sure weak symbols are not resolved on link-time
 	GCCSTRVER = $$system(g++ -dumpversion)
 	GCCVERSION = $$split(GCCSTRVER, .)
 	GCCV_MJ = $$member(GCCVERSION, 0)
