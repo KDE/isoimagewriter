@@ -222,17 +222,19 @@ void MainDialog::enumFlashDevices()
     ui->deviceList->setEnabled(true);
     // Update the Write button enabled/disabled state
     ui->writeButton->setEnabled((ui->deviceList->count() > 0) && (m_ImageFile != ""));
+    // Update the Clear button enabled/disabled state
+    ui->clearButton->setEnabled(ui->deviceList->count() > 0);
 }
 
-// Starts writing the image
-void MainDialog::writeImageToDevice()
+// Starts writing data to the device
+void MainDialog::writeToDevice(bool zeroing)
 {
-    QLocale currentLocale;
-    if ((ui->deviceList->count() == 0) || (m_ImageFile == ""))
+    if ((ui->deviceList->count() == 0) || (!zeroing && (m_ImageFile == "")))
         return;
     UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
-    if (m_ImageSize > selectedDevice->m_Size)
+    if (!zeroing && (m_ImageSize > selectedDevice->m_Size))
     {
+        QLocale currentLocale;
         QMessageBox::critical(
             this,
             ApplicationTitle,
@@ -246,13 +248,13 @@ void MainDialog::writeImageToDevice()
     if (QMessageBox::warning(
             this,
             ApplicationTitle,
-            tr("Writing an image will erase all existing data on the selected device.\n"
-               "Are you sure you wish to proceed?"),
+            "<font color=\"red\">" + tr("Warning!") + "</font> " + tr("All existing data on the selected device will be lost!") + "<br>" +
+            tr("Are you sure you wish to proceed?"),
             QMessageBox::Yes | QMessageBox::No,
             QMessageBox::No) == QMessageBox::No)
         return;
 
-    showWritingProgress(alignNumberDiv(m_ImageSize, DEFAULT_UNIT));
+    showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
 
     ImageWriter* writer = new ImageWriter(m_ImageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
@@ -288,6 +290,18 @@ void MainDialog::writeImageToDevice()
     writerThread->start();
 }
 
+// Starts writing the image
+void MainDialog::writeImageToDevice()
+{
+    writeToDevice(false);
+}
+
+// Clears the selected USB device
+void MainDialog::clearDevice()
+{
+    writeToDevice(true);
+}
+
 // Updates GUI to the "writing" mode (progress bar shown, controls disabled)
 // Also sets the progress bar limits
 void MainDialog::showWritingProgress(int maxValue)
@@ -312,6 +326,7 @@ void MainDialog::showWritingProgress(int maxValue)
     ui->progressBar->setVisible(true);
     ui->progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
     ui->writeButton->setVisible(false);
+    ui->clearButton->setVisible(false);
     ui->cancelButton->setVisible(true);
 
     // Expose the progress bar state to the OS
@@ -338,6 +353,7 @@ void MainDialog::hideWritingProgress()
     ui->progressBar->setVisible(false);
     ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
     ui->writeButton->setVisible(true);
+    ui->clearButton->setVisible(true);
     ui->cancelButton->setVisible(false);
 
     // Send a signal that progressbar is no longer present

@@ -21,7 +21,7 @@ public:
 protected:
     // Information about the selected USB flash disk
     UsbDevice* m_Device;
-    // Source image file (full path)
+    // Source image file (full path); if empty, zero-filled buffer of 1 MB is used
     QString m_ImageFile;
     // Flag used for cancelling the operation by user
     bool m_CancelWriting;

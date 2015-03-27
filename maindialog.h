@@ -42,6 +42,8 @@ protected:
 
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
+    // Starts writing data to the device
+    void writeToDevice(bool zeroing);
     // Frees the GUI-specific allocated resources
     void cleanup();
 
@@ -63,6 +65,8 @@ public slots:
     void scheduleEnumFlashDevices();
     // Starts writing the image
     void writeImageToDevice();
+    // Clears the selected USB device
+    void clearDevice();
 
     // Updates GUI to the "writing" mode (progress bar shown, controls disabled)
     // Also sets the progress bar limits

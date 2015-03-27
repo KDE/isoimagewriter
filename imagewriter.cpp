@@ -24,6 +24,7 @@ void ImageWriter::writeImage()
 
     bool isError = false;
     bool cancelRequested = false;
+    bool zeroing = (m_ImageFile == "");
 
     // Using try-catch for processing errors
     // Invalid values are used for indication non-initialized objects;
@@ -42,10 +43,19 @@ void ImageWriter::writeImage()
             throw tr("Failed to allocate memory for buffer.");
 #endif
 
-        // Open the source image file for reading
-        QFile imageFile(m_ImageFile);
-        if (!imageFile.open(QIODevice::ReadOnly))
-            throw tr("Failed to open the image file:") + "\n" + imageFile.errorString();
+        QFile imageFile;
+        if (zeroing)
+        {
+            // Prepare zero-filled buffer
+            memset(buffer, 0, TRANSFER_BLOCK_SIZE);
+        }
+        else
+        {
+            // Open the source image file for reading
+            imageFile.setFileName(m_ImageFile);
+            if (!imageFile.open(QIODevice::ReadOnly))
+                throw tr("Failed to open the image file:") + "\n" + imageFile.errorString();
+        }
 
         // Unmount volumes that belong to the selected target device
         // TODO: Check first if they are used and show warning
@@ -107,8 +117,17 @@ void ImageWriter::writeImage()
         qint64 readBytes;
         qint64 writtenBytes;
         // Start reading/writing cycle
-        while ((readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) && (readBytes > 0))
+        for (;;)
         {
+            if (zeroing)
+            {
+                readBytes = TRANSFER_BLOCK_SIZE;
+            }
+            else
+            {
+                if ((readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0)
+                    break;
+            }
             // Align the number of bytes to the sector size
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
             writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
@@ -138,11 +157,18 @@ void ImageWriter::writeImage()
                 emit cancelled();
                 break;
             }
+            if (zeroing)
+            {
+                // In zeroing mode only write 1 block - 1 MB is enough to clear both MBR and GPT
+                break;
+            }
         }
-        if (readBytes < 0)
-            throw tr("Failed to read the image file:") + "\n" + imageFile.errorString();
-
-        imageFile.close();
+        if (!zeroing)
+        {
+            if (readBytes < 0)
+                throw tr("Failed to read the image file:") + "\n" + imageFile.errorString();
+            imageFile.close();
+        }
         deviceFile.close();
     }
     catch (QString msg)

@@ -1,66 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
-    <extra-po-header-language>fr</extra-po-header-language>
-    <extra-po-header-language_team>French (http://www.transifex.com/projects/p/rosa_comm_transl/language/fr/)</extra-po-header-language_team>
-    <extra-po-header-last_translator>sylvainsjc &lt;sylvainsjc@gmail.com&gt;</extra-po-header-last_translator>
-    <extra-po-header-po_revision_date>2013-06-25 10:14+0000</extra-po-header-po_revision_date>
-    <extra-po-header-project_id_version>ROSA Community Translation</extra-po-header-project_id_version>
-    <extra-po-header_comment>#
-# Translators:
-# sylvainsjc &lt;sylvainsjc@gmail.com&gt;, 2013</extra-po-header_comment>
-    <extra-po-headers>Project-Id-Version,PO-Revision-Date,Last-Translator,Language-Team,MIME-Version,Content-Type,Content-Transfer-Encoding,Language,Plural-Forms,X-Language,X-Qt-Contexts</extra-po-headers>
+<TS version="2.1" language="ru_RU">
 <context>
     <name>ImageWriter</name>
     <message>
-        <location filename="../imagewriter.cpp" line="38"/>
+        <location filename="../imagewriter.cpp" line="39"/>
         <source>Failed to allocate memory for buffer:</source>
         <translation>Impossible d&apos;allouer de la mémoire pour le tampon:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="42"/>
+        <location filename="../imagewriter.cpp" line="43"/>
         <source>Failed to allocate memory for buffer.</source>
         <translation>Impossible d&apos;allouer de la mémoire pour le tampon.</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="48"/>
+        <location filename="../imagewriter.cpp" line="57"/>
         <source>Failed to open the image file:</source>
         <translation>Impossible d&apos;ouvrir le fichier image:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="70"/>
+        <location filename="../imagewriter.cpp" line="80"/>
         <source>Failed to open the drive</source>
         <translation>Impossible d&apos;ouvrir le lecteur</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="77"/>
+        <location filename="../imagewriter.cpp" line="87"/>
         <source>Failed to unmount the drive</source>
         <translation>Impossible de démonter le disque</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="90"/>
+        <location filename="../imagewriter.cpp" line="104"/>
         <source>Failed to unmount the volume</source>
         <translation>Impossible de démonter le volume</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="100"/>
+        <location filename="../imagewriter.cpp" line="115"/>
         <source>Failed to open the target device:</source>
         <translation>Impossible d&apos;ouvrir le périphérique cible:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="111"/>
+        <location filename="../imagewriter.cpp" line="135"/>
         <source>Failed to write to the device:</source>
         <translation>Impossible d&apos;écrire sur le périphérique:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="113"/>
+        <location filename="../imagewriter.cpp" line="137"/>
         <source>The last block was not fully written (%1 of %2 bytes)!
 Aborting.</source>
         <translation>Le dernier bloc n&apos;a pas été entièrement écrit (%1 of %2 bytes)!
 Abandon.</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="132"/>
+        <location filename="../imagewriter.cpp" line="166"/>
         <source>Failed to read the image file:</source>
         <translation>Impossible de lire le fichier image:</translation>
     </message>
@@ -94,72 +85,91 @@ Abandon.</translation>
     </message>
     <message>
         <location filename="../maindialog.ui" line="230"/>
+        <source>Clea&amp;r</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../maindialog.ui" line="252"/>
         <source>&amp;Write</source>
         <translation>&amp;Ecrire</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="243"/>
+        <location filename="../maindialog.ui" line="271"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="56"/>
+        <location filename="../maindialog.cpp" line="75"/>
         <source>Failed to open the image file:</source>
         <translation>Impossible d&apos;ouvrir le fichier image:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="62"/>
-        <location filename="../maindialog.cpp" line="215"/>
-        <location filename="../maindialog.cpp" line="216"/>
+        <location filename="../maindialog.cpp" line="81"/>
+        <location filename="../maindialog.cpp" line="236"/>
+        <location filename="../maindialog.cpp" line="237"/>
         <source>MB</source>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="141"/>
-        <location filename="../maindialog.cpp" line="152"/>
+        <location filename="../maindialog.cpp" line="160"/>
+        <location filename="../maindialog.cpp" line="171"/>
         <source>Writing is in progress, abort it?</source>
         <translation>L&apos;écriture est en cours, annuler?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="161"/>
+        <location filename="../maindialog.cpp" line="180"/>
         <source>Disk Images</source>
         <translation>Images disque</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="161"/>
+        <location filename="../maindialog.cpp" line="180"/>
         <source>All Files</source>
         <translation>Tous les fichiers</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="214"/>
+        <location filename="../maindialog.cpp" line="235"/>
         <source>The image is larger than your selected device!</source>
         <translation>L&apos;image est plus grande que le périphérique sélectionné!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="215"/>
+        <location filename="../maindialog.cpp" line="236"/>
         <source>Image size:</source>
         <translation>Taille de l&apos;image:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="215"/>
-        <location filename="../maindialog.cpp" line="216"/>
+        <location filename="../maindialog.cpp" line="236"/>
+        <location filename="../maindialog.cpp" line="237"/>
         <source>b</source>
         <translation>b</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="216"/>
+        <location filename="../maindialog.cpp" line="237"/>
         <source>Disk size:</source>
         <translation>taille du disque:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="224"/>
+        <location filename="../maindialog.cpp" line="245"/>
+        <source>Warning!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../maindialog.cpp" line="245"/>
+        <source>All existing data on the selected device will be lost!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../maindialog.cpp" line="246"/>
+        <source>Are you sure you wish to proceed?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Writing an image will erase all existing data on the selected device.
 Are you sure you wish to proceed?</source>
-        <translation>Graver une image va effacer toutes les données existantes sur le périphérique sélectionné.
+        <translation type="vanished">Graver une image va effacer toutes les données existantes sur le périphérique sélectionné.
 Êtes-vous sûr de vouloir continuer?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="340"/>
+        <location filename="../maindialog.cpp" line="375"/>
         <source>The operation completed successfully.</source>
         <translation>L&apos;opération s&apos;est terminée avec succès.</translation>
     </message>

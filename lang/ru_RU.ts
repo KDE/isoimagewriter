@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>ImageWriter</name>
     <message>
-        <location filename="../imagewriter.cpp" line="38"/>
+        <location filename="../imagewriter.cpp" line="39"/>
         <source>Failed to allocate memory for buffer:</source>
         <translation>Не удалось выделить память для буфера:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="42"/>
+        <location filename="../imagewriter.cpp" line="43"/>
         <source>Failed to allocate memory for buffer.</source>
         <translation>Не удалось выделить память для буфера.</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="48"/>
+        <location filename="../imagewriter.cpp" line="57"/>
         <source>Failed to open the image file:</source>
         <translation>Не удалось открыть файл образа:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="70"/>
+        <location filename="../imagewriter.cpp" line="80"/>
         <source>Failed to open the drive</source>
         <translation>Не удалось открыть диск</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="77"/>
+        <location filename="../imagewriter.cpp" line="87"/>
         <source>Failed to unmount the drive</source>
         <translation>Не удалось отмонтировать диск</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="90"/>
+        <location filename="../imagewriter.cpp" line="104"/>
         <source>Failed to unmount the volume</source>
         <translation>Не удалось отмонтировать том</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="100"/>
+        <location filename="../imagewriter.cpp" line="115"/>
         <source>Failed to open the target device:</source>
         <translation>Не удалось открыть целевое устройство:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="111"/>
+        <location filename="../imagewriter.cpp" line="135"/>
         <source>Failed to write to the device:</source>
         <translation>Ошибка записи на целевое устройство:</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="113"/>
+        <location filename="../imagewriter.cpp" line="137"/>
         <source>The last block was not fully written (%1 of %2 bytes)!
 Aborting.</source>
         <translation>Последний блок был записан не полностью (%1 из %2 байтов)!
 Операция прервана.</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="132"/>
+        <location filename="../imagewriter.cpp" line="166"/>
         <source>Failed to read the image file:</source>
         <translation>Ошибка чтения из файла образа:</translation>
     </message>
@@ -85,72 +85,91 @@ Aborting.</source>
     </message>
     <message>
         <location filename="../maindialog.ui" line="230"/>
+        <source>Clea&amp;r</source>
+        <translation>О&amp;чистить</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.ui" line="252"/>
         <source>&amp;Write</source>
         <translation>&amp;Записать</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="243"/>
+        <location filename="../maindialog.ui" line="271"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Отменить</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="56"/>
+        <location filename="../maindialog.cpp" line="75"/>
         <source>Failed to open the image file:</source>
         <translation>Не удалось открыть файл образа:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="62"/>
-        <location filename="../maindialog.cpp" line="215"/>
-        <location filename="../maindialog.cpp" line="216"/>
+        <location filename="../maindialog.cpp" line="81"/>
+        <location filename="../maindialog.cpp" line="236"/>
+        <location filename="../maindialog.cpp" line="237"/>
         <source>MB</source>
         <translation>МБ</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="141"/>
-        <location filename="../maindialog.cpp" line="152"/>
+        <location filename="../maindialog.cpp" line="160"/>
+        <location filename="../maindialog.cpp" line="171"/>
         <source>Writing is in progress, abort it?</source>
         <translation>Запись образа не завершена, прервать её?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="161"/>
+        <location filename="../maindialog.cpp" line="180"/>
         <source>Disk Images</source>
         <translation>Образы дисков</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="161"/>
+        <location filename="../maindialog.cpp" line="180"/>
         <source>All Files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="214"/>
+        <location filename="../maindialog.cpp" line="235"/>
         <source>The image is larger than your selected device!</source>
         <translation>Файл образа больше по размеру, чем выбранный диск!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="215"/>
+        <location filename="../maindialog.cpp" line="236"/>
         <source>Image size:</source>
         <translation>Размер образа:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="215"/>
-        <location filename="../maindialog.cpp" line="216"/>
+        <location filename="../maindialog.cpp" line="236"/>
+        <location filename="../maindialog.cpp" line="237"/>
         <source>b</source>
         <translation>б</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="216"/>
+        <location filename="../maindialog.cpp" line="237"/>
         <source>Disk size:</source>
         <translation>Размер диска:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="224"/>
+        <location filename="../maindialog.cpp" line="245"/>
+        <source>Warning!</source>
+        <translation>Внимание!</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.cpp" line="245"/>
+        <source>All existing data on the selected device will be lost!</source>
+        <translation>Все данные на выбранном диске будут удалены!</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.cpp" line="246"/>
+        <source>Are you sure you wish to proceed?</source>
+        <translation>Вы уверены, что хотите продолжить?</translation>
+    </message>
+    <message>
         <source>Writing an image will erase all existing data on the selected device.
 Are you sure you wish to proceed?</source>
-        <translation>Запись образа уничтожит все имеющиеся данные на выбранном диске.
+        <translation type="vanished">Запись образа уничтожит все имеющиеся данные на выбранном диске.
 Вы уверены, что хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="340"/>
+        <location filename="../maindialog.cpp" line="375"/>
         <source>The operation completed successfully.</source>
         <translation>Операция успешно завершена.</translation>
     </message>
