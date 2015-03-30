@@ -34,6 +34,7 @@ win32 {
         externalprogressbar_win.cpp \
         usbdevicemonitor_win.cpp
     HEADERS += usbdevicemonitor_win_p.h
+    QMAKE_CXXFLAGS_RELEASE -= -Zc:strictStrings
 }
 linux {
     SOURCES += platform_lin.cpp \
