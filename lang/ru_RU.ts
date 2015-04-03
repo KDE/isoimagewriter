@@ -51,9 +51,24 @@ Aborting.</source>
 Операция прервана.</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="166"/>
+        <location filename="../imagewriter.cpp" line="169"/>
         <source>Failed to read the image file:</source>
         <translation>Ошибка чтения из файла образа:</translation>
+    </message>
+    <message>
+        <location filename="../imagewriter.cpp" line="191"/>
+        <source>The operation completed successfully.</source>
+        <translation>Операция успешно завершена.</translation>
+    </message>
+    <message>
+        <location filename="../imagewriter.cpp" line="193"/>
+        <source>Now you need to format your device.</source>
+        <translation>Теперь вам нужно отформатировать устройство.</translation>
+    </message>
+    <message>
+        <location filename="../imagewriter.cpp" line="193"/>
+        <source>To be able to store data on this device again, please, use the button &quot;Clear&quot;.</source>
+        <translation>Чтобы снова использовать это устройство для хранения данных, воспользуйтесь кнопкой &quot;Очистить&quot;.</translation>
     </message>
 </context>
 <context>
@@ -85,80 +100,85 @@ Aborting.</source>
     </message>
     <message>
         <location filename="../maindialog.ui" line="230"/>
+        <source>Delete partitions and make all space available for storing data</source>
+        <translation>Удалить разделы, освободив место для хранения данных</translation>
+    </message>
+    <message>
+        <location filename="../maindialog.ui" line="233"/>
         <source>Clea&amp;r</source>
         <translation>О&amp;чистить</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="252"/>
+        <location filename="../maindialog.ui" line="255"/>
         <source>&amp;Write</source>
         <translation>&amp;Записать</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="271"/>
+        <location filename="../maindialog.ui" line="274"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Отменить</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="75"/>
+        <location filename="../maindialog.cpp" line="82"/>
         <source>Failed to open the image file:</source>
         <translation>Не удалось открыть файл образа:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="81"/>
-        <location filename="../maindialog.cpp" line="236"/>
-        <location filename="../maindialog.cpp" line="237"/>
+        <location filename="../maindialog.cpp" line="88"/>
+        <location filename="../maindialog.cpp" line="243"/>
+        <location filename="../maindialog.cpp" line="244"/>
         <source>MB</source>
         <translation>МБ</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="160"/>
-        <location filename="../maindialog.cpp" line="171"/>
+        <location filename="../maindialog.cpp" line="167"/>
+        <location filename="../maindialog.cpp" line="178"/>
         <source>Writing is in progress, abort it?</source>
         <translation>Запись образа не завершена, прервать её?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="180"/>
+        <location filename="../maindialog.cpp" line="187"/>
         <source>Disk Images</source>
         <translation>Образы дисков</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="180"/>
+        <location filename="../maindialog.cpp" line="187"/>
         <source>All Files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="235"/>
+        <location filename="../maindialog.cpp" line="242"/>
         <source>The image is larger than your selected device!</source>
         <translation>Файл образа больше по размеру, чем выбранный диск!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="236"/>
+        <location filename="../maindialog.cpp" line="243"/>
         <source>Image size:</source>
         <translation>Размер образа:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="236"/>
-        <location filename="../maindialog.cpp" line="237"/>
+        <location filename="../maindialog.cpp" line="243"/>
+        <location filename="../maindialog.cpp" line="244"/>
         <source>b</source>
         <translation>б</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="237"/>
+        <location filename="../maindialog.cpp" line="244"/>
         <source>Disk size:</source>
         <translation>Размер диска:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="245"/>
+        <location filename="../maindialog.cpp" line="252"/>
         <source>Warning!</source>
         <translation>Внимание!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="245"/>
+        <location filename="../maindialog.cpp" line="252"/>
         <source>All existing data on the selected device will be lost!</source>
         <translation>Все данные на выбранном диске будут удалены!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="246"/>
+        <location filename="../maindialog.cpp" line="253"/>
         <source>Are you sure you wish to proceed?</source>
         <translation>Вы уверены, что хотите продолжить?</translation>
     </message>
@@ -167,11 +187,6 @@ Aborting.</source>
 Are you sure you wish to proceed?</source>
         <translation type="vanished">Запись образа уничтожит все имеющиеся данные на выбранном диске.
 Вы уверены, что хотите продолжить?</translation>
-    </message>
-    <message>
-        <location filename="../maindialog.cpp" line="375"/>
-        <source>The operation completed successfully.</source>
-        <translation>Операция успешно завершена.</translation>
     </message>
 </context>
 <context>

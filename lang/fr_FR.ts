@@ -51,9 +51,24 @@ Aborting.</source>
 Abandon.</translation>
     </message>
     <message>
-        <location filename="../imagewriter.cpp" line="166"/>
+        <location filename="../imagewriter.cpp" line="169"/>
         <source>Failed to read the image file:</source>
         <translation>Impossible de lire le fichier image:</translation>
+    </message>
+    <message>
+        <location filename="../imagewriter.cpp" line="191"/>
+        <source>The operation completed successfully.</source>
+        <translation>L&apos;opération s&apos;est terminée avec succès.</translation>
+    </message>
+    <message>
+        <location filename="../imagewriter.cpp" line="193"/>
+        <source>Now you need to format your device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../imagewriter.cpp" line="193"/>
+        <source>To be able to store data on this device again, please, use the button &quot;Clear&quot;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -85,80 +100,85 @@ Abandon.</translation>
     </message>
     <message>
         <location filename="../maindialog.ui" line="230"/>
+        <source>Delete partitions and make all space available for storing data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../maindialog.ui" line="233"/>
         <source>Clea&amp;r</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="252"/>
+        <location filename="../maindialog.ui" line="255"/>
         <source>&amp;Write</source>
         <translation>&amp;Ecrire</translation>
     </message>
     <message>
-        <location filename="../maindialog.ui" line="271"/>
+        <location filename="../maindialog.ui" line="274"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="75"/>
+        <location filename="../maindialog.cpp" line="82"/>
         <source>Failed to open the image file:</source>
         <translation>Impossible d&apos;ouvrir le fichier image:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="81"/>
-        <location filename="../maindialog.cpp" line="236"/>
-        <location filename="../maindialog.cpp" line="237"/>
+        <location filename="../maindialog.cpp" line="88"/>
+        <location filename="../maindialog.cpp" line="243"/>
+        <location filename="../maindialog.cpp" line="244"/>
         <source>MB</source>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="160"/>
-        <location filename="../maindialog.cpp" line="171"/>
+        <location filename="../maindialog.cpp" line="167"/>
+        <location filename="../maindialog.cpp" line="178"/>
         <source>Writing is in progress, abort it?</source>
         <translation>L&apos;écriture est en cours, annuler?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="180"/>
+        <location filename="../maindialog.cpp" line="187"/>
         <source>Disk Images</source>
         <translation>Images disque</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="180"/>
+        <location filename="../maindialog.cpp" line="187"/>
         <source>All Files</source>
         <translation>Tous les fichiers</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="235"/>
+        <location filename="../maindialog.cpp" line="242"/>
         <source>The image is larger than your selected device!</source>
         <translation>L&apos;image est plus grande que le périphérique sélectionné!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="236"/>
+        <location filename="../maindialog.cpp" line="243"/>
         <source>Image size:</source>
         <translation>Taille de l&apos;image:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="236"/>
-        <location filename="../maindialog.cpp" line="237"/>
+        <location filename="../maindialog.cpp" line="243"/>
+        <location filename="../maindialog.cpp" line="244"/>
         <source>b</source>
         <translation>b</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="237"/>
+        <location filename="../maindialog.cpp" line="244"/>
         <source>Disk size:</source>
         <translation>taille du disque:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="245"/>
+        <location filename="../maindialog.cpp" line="252"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="245"/>
+        <location filename="../maindialog.cpp" line="252"/>
         <source>All existing data on the selected device will be lost!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="246"/>
+        <location filename="../maindialog.cpp" line="253"/>
         <source>Are you sure you wish to proceed?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -167,11 +187,6 @@ Abandon.</translation>
 Are you sure you wish to proceed?</source>
         <translation type="vanished">Graver une image va effacer toutes les données existantes sur le périphérique sélectionné.
 Êtes-vous sûr de vouloir continuer?</translation>
-    </message>
-    <message>
-        <location filename="../maindialog.cpp" line="375"/>
-        <source>The operation completed successfully.</source>
-        <translation>L&apos;opération s&apos;est terminée avec succès.</translation>
     </message>
 </context>
 <context>

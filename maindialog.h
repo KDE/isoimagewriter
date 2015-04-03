@@ -76,7 +76,7 @@ public slots:
     // Increments the progress bar counter by the specified number
     void updateProgressBar(int increment);
     // Displays the message about successful completion and returns to the "idle" mode
-    void showSuccessMessage();
+    void showSuccessMessage(QString msg);
     // Displays the specified error message and returns to the "idle" mode
     void showErrorMessage(QString msg);
 };

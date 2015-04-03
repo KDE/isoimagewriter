@@ -374,12 +374,12 @@ void MainDialog::updateProgressBar(int increment)
 }
 
 // Displays the message about successful completion and returns to the "idle" mode
-void MainDialog::showSuccessMessage()
+void MainDialog::showSuccessMessage(QString msg)
 {
     QMessageBox::information(
         this,
         ApplicationTitle,
-        tr("The operation completed successfully.")
+        msg
     );
     hideWritingProgress();
 }

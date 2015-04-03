@@ -32,7 +32,7 @@ signals:
     // Emitted when writeImage is finished for any reason
     void finished();
     // Emitted on successful completion
-    void success();
+    void success(QString msg);
     // Emitted when something wrong happened, <msg> is the error message
     void error(QString msg);
     // Emitted when processed the cancel request from user

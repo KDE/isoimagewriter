@@ -187,7 +187,11 @@ void ImageWriter::writeImage()
 
     // If no errors occurred and user did not stop the operation, it means everything went fine
     if (!isError && !cancelRequested)
-        emit success();
+        emit success(
+            tr("The operation completed successfully.") +
+            "<br><br>" +
+            (zeroing ? tr("Now you need to format your device.") : tr("To be able to store data on this device again, please, use the button \"Clear\"."))
+        );
 
     // In any case the operation is finished
     emit finished();

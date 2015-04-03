@@ -226,6 +226,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="toolTip">
+        <string>Delete partitions and make all space available for storing data</string>
+       </property>
        <property name="text">
         <string>Clea&amp;r</string>
        </property>
