@@ -53,6 +53,7 @@ MainDialog::MainDialog(QWidget *parent) :
                 newImageFile = QUrl(newImageFile).toLocalFile();
             if (newImageFile != "")
             {
+                newImageFile = QDir(newImageFile).absolutePath();
                 m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
                 preprocessImageFile(newImageFile);
             }
