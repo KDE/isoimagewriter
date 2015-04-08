@@ -12,6 +12,12 @@
 
 int main(int argc, char *argv[])
 {
+#if defined(Q_OS_MAC)
+    // On Mac OS X elevated launch is treated as setuid which is forbidden by default -> enable it
+    // TODO: Try to find a more "kosher" way, as well as get rid of deprecated AuthorizationExecuteWithPrivileges()
+    QCoreApplication::setSetuidAllowed(true);
+#endif
+
     QApplication a(argc, argv);
 
     if (!ensureElevated())
