@@ -8,6 +8,10 @@ QT       += core gui
 
 QTPLUGIN += qsvgicon
 
+# Exclude unused plugins to avoid bloating of statically-linked build
+QT_PLUGINS -= qdds qicns qjp2 qmng qtga qtiff qwbmp qwebp
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = RosaImageWriter
@@ -92,6 +96,9 @@ linux:gcc {
 		greaterThan(GCCV_MN, 6) {
 			QMAKE_CXXFLAGS += -std=gnu++11
 		}
+	}
+	contains(QT_CONFIG, static) {
+		QMAKE_LFLAGS += -s
 	}
 }
 macx {
