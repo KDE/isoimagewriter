@@ -2,9 +2,8 @@
 // This file contains Mac implementation of platform-dependent functions
 
 #include "common.h"
+#include "mainapplication.h"
 #include "usbdevice.h"
-
-#include <QApplication>
 
 #include <Cocoa/Cocoa.h>
 #include <IOKit/usb/IOUSBLib.h>
@@ -173,9 +172,31 @@ bool ensureElevated()
     if (AuthorizationCreate(&authRights, kAuthorizationEmptyEnvironment, flags, &authRef) != errAuthorizationSuccess)
         return false;
 
-    QByteArray appPath = QApplication::arguments()[0].toUtf8();
-    QByteArray arg = ("--lang=" + mApp->getLocale()).toUtf8();
-    char* const args[] = { arg.data(), NULL };
+    // Prepare list of arguments for restarting ImageWriter
+    // We need to explicitly pass language and initial directory so that the new instance
+    // inherited the current user's parameters rather than root's
+    const size_t maxArgsNum = 5;
+    // Make sure QByteArray objects live long enough, so that their data()'s were valid until execv() call
+    QByteArray argsBA[maxArgsNum + 1];
+    size_t argNo = 0;
+    // Executable is not required as first argument, so start with options
+    QString argLang = mApp->getLocale();
+    if (!argLang.isEmpty())
+        argsBA[argNo++] = ("--lang=" + argLang).toUtf8();
+    QString argDir = mApp->getInitialDir();
+    if (!argDir.isEmpty())
+        argsBA[argNo++] = ("--dir=" + argDir).toUtf8();
+    QString argImage = mApp->getInitialImage();
+    if (!argImage.isEmpty())
+         argsBA[argNo++] = argImage.toUtf8();
+
+    // Convert arguments into char*'s and append NULL element
+    char* args[maxArgsNum + 1];
+    for (size_t i = 0; i < argNo; ++i)
+         args[i] = argsBA[i].data();
+    args[argNo] = NULL;
+
+    QByteArray appPath = mApp->applicationFilePath().toUtf8();
     if (AuthorizationExecuteWithPrivileges(authRef, appPath.constData(), kAuthorizationFlagDefaults, args, NULL) != errAuthorizationSuccess)
         return false;
 

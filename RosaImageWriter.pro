@@ -100,6 +100,7 @@ linux:gcc {
 		}
 	}
 	contains(QT_CONFIG, static) {
+		# Static build is meant for releasing, clean up the binary
 		QMAKE_LFLAGS += -s
 	}
 }
@@ -114,6 +115,8 @@ macx {
 	QMAKE_OBJECTIVE_CFLAGS += -std=c++0x -stdlib=libc++
 	QMAKE_INCDIR += /System/Library/Frameworks/AppKit.framework/Headers /System/Library/Frameworks/Security.framework/Headers /System/Library/Frameworks/ServiceManagement.framework/Headers
 	QMAKE_LFLAGS += -framework IOKit -framework Cocoa -framework Security
+	# Clean up the binary after linking
+	QMAKE_POST_LINK = strip -S -x $(TARGET)
 }
 
 TRANSLATIONS = lang/ru_RU.ts lang/fr_FR.ts
