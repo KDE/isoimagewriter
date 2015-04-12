@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     maindialog.cpp \
     imagewriter.cpp \
     common.cpp \
-    physicaldevice.cpp
+    physicaldevice.cpp \
+    mainapplication.cpp
 
 HEADERS  += maindialog.h \
     imagewriter.h \
@@ -31,7 +32,8 @@ HEADERS  += maindialog.h \
     externalprogressbar.h \
     physicaldevice.h \
     usbdevicemonitor.h \
-    usbdevice.h
+    usbdevice.h \
+    mainapplication.h
 
 win32 {
     SOURCES += platform_win.cpp \

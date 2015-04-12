@@ -1,6 +1,5 @@
 #include "common.h"
 
-#include <QApplication>
 #include <QFile>
 #include <QStringList>
 
@@ -65,20 +64,4 @@ QString readFileContents(const QString& fileName)
     QString ret = f.readAll();
     f.close();
     return ret;
-}
-
-// Returns the language id to be used by the application
-// Input:
-//  none
-// Returns:
-//  value of the --lang= argument, or (if not specified) name of the system locale
-QString getLocale()
-{
-    QStringList args = QApplication::arguments();
-    for (int i = 1; i < args.length(); ++i)
-    {
-        if (args[i].startsWith("--lang="))
-            return args[i].mid(7);
-    }
-    return QLocale::system().name();
 }

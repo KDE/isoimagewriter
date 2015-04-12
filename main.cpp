@@ -3,6 +3,7 @@
 #include <QLibraryInfo>
 
 #include "common.h"
+#include "mainapplication.h"
 #include "maindialog.h"
 #include "usbdevicemonitor.h"
 
@@ -18,12 +19,12 @@ int main(int argc, char *argv[])
     QCoreApplication::setSetuidAllowed(true);
 #endif
 
-    QApplication a(argc, argv);
+    MainApplication a(argc, argv);
 
     if (!ensureElevated())
         return 1;
 
-    QString langName = getLocale();
+    QString langName = a.getLocale();
 
     // Load main Qt translation for those languages that do not split into modules
     QTranslator qtTranslator;

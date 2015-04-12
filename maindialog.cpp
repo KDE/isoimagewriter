@@ -9,9 +9,11 @@
 #include <QLocale>
 #include <QThread>
 #include <QDir>
+#include <QStandardPaths>
 #include <QRegularExpression>
 
 #include "common.h"
+#include "mainapplication.h"
 #include "maindialog.h"
 #include "ui_maindialog.h"
 #include "imagewriter.h"
@@ -41,23 +43,20 @@ MainDialog::MainDialog(QWidget *parent) :
     setFixedHeight(size().height());
     // Start in the "idle" mode
     hideWritingProgress();
+    // Change default open dir
+    m_LastOpenedDir = mApp->getInitialDir();
     // Get path to ISO from command line (if supplied)
-    QStringList args = QApplication::arguments();
-    for (int i = 1; i < args.length(); ++i)
+    QString newImageFile = mApp->getInitialImage();
+    if (!newImageFile.isEmpty())
     {
-        if ((args[i].length() > 0) && (args[i][0] != '-'))
+        if (newImageFile.left(7) == "file://")
+            newImageFile = QUrl(newImageFile).toLocalFile();
+        if (newImageFile != "")
         {
-            // Argument is not an option - try to use it as path to file
-            QString newImageFile = args[i];
-            if (newImageFile.left(7) == "file://")
-                newImageFile = QUrl(newImageFile).toLocalFile();
-            if (newImageFile != "")
-            {
-                newImageFile = QDir(newImageFile).absolutePath();
-                m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
-                preprocessImageFile(newImageFile);
-            }
-            break;
+            newImageFile = QDir(newImageFile).absolutePath();
+            // Update the default open dir
+            m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
+            preprocessImageFile(newImageFile);
         }
     }
     // Load the list of USB flash disks
@@ -79,7 +78,13 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     QFile f(newImageFile);
     if (!f.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(this, ApplicationTitle, tr("Failed to open the image file:") + "\n" + f.errorString());
+        QMessageBox::critical(
+            this,
+            ApplicationTitle,
+            tr("Failed to open the image file:") + "\n" +
+            QDir::toNativeSeparators(newImageFile) + "\n" +
+            f.errorString()
+        );
         return;
     }
     m_ImageSize = f.size();

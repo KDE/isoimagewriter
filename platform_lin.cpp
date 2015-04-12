@@ -1,11 +1,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains Linux implementation of platform-dependent functions
 
-#include "common.h"
-#include "usbdevice.h"
-
+#include <QMessageBox>
 #include <QDir>
+#include <QStandardPaths>
 #include <QRegularExpression>
+
+#include "common.h"
+#include "mainapplication.h"
+#include "usbdevice.h"
 
 
 bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam)
@@ -110,8 +113,71 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
 
 bool ensureElevated()
 {
-    // In Linux elevated privileges are ensured by start scripts
-    // TODO: Get rid of start script and/or consolehelper
-    // Problem: In different DEs elevated start is different
-    return true;
+    // If we already have root privileges do nothing
+    uid_t uid = getuid();
+    if (uid == 0)
+        return true;
+
+    // Search for known GUI su-applications
+    // TODO: Select preferrable app based on the current DE
+    QStringList suPrograms({"kdesu", "gksu"});
+    QString suProgram;
+    for (int i = 0; i < suPrograms.size(); ++i)
+    {
+        suProgram = QStandardPaths::findExecutable(suPrograms[i]);
+        if (!suProgram.isEmpty())
+            break;
+    }
+    if (suProgram.isEmpty())
+    {
+        QMessageBox::critical(
+            NULL,
+            ApplicationTitle,
+            "<font color=\"red\">" + QObject::tr("Error!") + "</font> " + QObject::tr("No appropriate su-application found!") + "<br>" +
+            QObject::tr("Please, restart the program with root privileges."),
+            QMessageBox::Ok
+        );
+        return false;
+    }
+
+    // Prepare list of arguments for restarting ImageWriter
+    // We need to explicitly pass language and initial directory so that the new instance
+    // inherited the current user's parameters rather than root's
+    const size_t maxArgsNum = 5;
+    // Make sure QByteArray objects live long enough, so that their data()'s were valid until execv() call
+    QByteArray argsBA[maxArgsNum + 1];
+    size_t argNo = 0;
+    // First comes the application being started (su-application)
+    argsBA[argNo++] = suProgram.toUtf8();
+    // Next our own executable
+    argsBA[argNo++] = mApp->applicationFilePath().toUtf8();
+    // After that come our command-line arguments
+    QString argLang = mApp->getLocale();
+    if (!argLang.isEmpty())
+        argsBA[argNo++] = ("--lang=" + argLang).toUtf8();
+    QString argDir = mApp->getInitialDir();
+    if (!argDir.isEmpty())
+        argsBA[argNo++] = ("--dir=" + argDir).toUtf8();
+    QString argImage = mApp->getInitialImage();
+    if (!argImage.isEmpty())
+         argsBA[argNo++] = argImage.toUtf8();
+
+    // Convert arguments into char*'s and append NULL element
+    char* args[maxArgsNum + 1];
+    for (size_t i = 0; i < argNo; ++i)
+         args[i] = argsBA[i].data();
+    args[argNo] = NULL;
+
+    // Replace ourselves with su-application
+    execv(args[0], args);
+
+    // Something went wrong
+    QMessageBox::critical(
+        NULL,
+        ApplicationTitle,
+        "<font color=\"red\">" + QObject::tr("Error!") + "</font> " + QObject::tr("Failed to restart with root privileges! (error code: %1)").arg(errno) + "<br>" +
+        QObject::tr("Please, restart the program with root privileges."),
+        QMessageBox::Ok
+    );
+    return false;
 }

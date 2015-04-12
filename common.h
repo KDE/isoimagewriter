@@ -21,6 +21,9 @@ const quint64 DEFAULT_UNIT = 1048576;
 // Application name used for titles in messageboxes
 const QString ApplicationTitle = "ROSA Image Writer";
 
+// Pointer to correctly typed application instance
+#define mApp (static_cast<MainApplication*>qApp)
+
 // Returns the number of blocks required to contain some number of bytes
 // Input:
 //  T      - any integer type
@@ -103,12 +106,5 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
 //  false if error occurs
 //  does not return if elevation request succeeded (the current instance terminates)
 bool ensureElevated();
-
-// Returns the language id to be used by the application
-// Input:
-//  none
-// Returns:
-//  value of the --lang= argument, or (if not specified) name of the system locale
-QString getLocale();
 
 #endif // COMMON_H

@@ -174,7 +174,7 @@ bool ensureElevated()
         return false;
 
     QByteArray appPath = QApplication::arguments()[0].toUtf8();
-    QByteArray arg = ("--lang=" + getLocale()).toUtf8();
+    QByteArray arg = ("--lang=" + mApp->getLocale()).toUtf8();
     char* const args[] = { arg.data(), NULL };
     if (AuthorizationExecuteWithPrivileges(authRef, appPath.constData(), kAuthorizationFlagDefaults, args, NULL) != errAuthorizationSuccess)
         return false;
