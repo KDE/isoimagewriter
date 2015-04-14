@@ -120,13 +120,24 @@ bool ensureElevated()
 
     // Search for known GUI su-applications
     // TODO: Select preferrable app based on the current DE
-    QStringList suPrograms({"kdesu", "gksu"});
+    struct SuProgram
+    {
+        // Name of the su-application
+        QString binaryName;
+        // Whether it accepts target command line as separate arguments or single argument
+        bool splitArgs;
+    };
+    QList<SuProgram> suPrograms = { {"kdesu", true}, {"gksu", false} };
     QString suProgram;
+    bool splitArgs = true;
     for (int i = 0; i < suPrograms.size(); ++i)
     {
-        suProgram = QStandardPaths::findExecutable(suPrograms[i]);
+        suProgram = QStandardPaths::findExecutable(suPrograms[i].binaryName);
         if (!suProgram.isEmpty())
+        {
+            splitArgs = suPrograms[i].splitArgs;
             break;
+        }
     }
     if (suProgram.isEmpty())
     {
@@ -146,26 +157,46 @@ bool ensureElevated()
     const size_t maxArgsNum = 5;
     // Make sure QByteArray objects live long enough, so that their data()'s were valid until execv() call
     QByteArray argsBA[maxArgsNum + 1];
+
     size_t argNo = 0;
     // First comes the application being started (su-application)
     argsBA[argNo++] = suProgram.toUtf8();
     // Next our own executable
-    argsBA[argNo++] = mApp->applicationFilePath().toUtf8();
+    argsBA[argNo] = mApp->applicationFilePath().toUtf8();
+    if (splitArgs)
+        ++argNo;
     // After that come our command-line arguments
     QString argLang = mApp->getLocale();
     if (!argLang.isEmpty())
-        argsBA[argNo++] = ("--lang=" + argLang).toUtf8();
+    {
+        if (splitArgs)
+            argsBA[argNo++] = ("--lang=" + argLang).toUtf8();
+        else
+            argsBA[argNo] += (" --lang=" + argLang).toUtf8();
+    }
     QString argDir = mApp->getInitialDir();
     if (!argDir.isEmpty())
-        argsBA[argNo++] = ("--dir=" + argDir).toUtf8();
+    {
+        if (splitArgs)
+            argsBA[argNo++] = ("--dir=" + argDir).toUtf8();
+        else
+            argsBA[argNo] += (" --dir=" + argDir).toUtf8();
+    }
     QString argImage = mApp->getInitialImage();
     if (!argImage.isEmpty())
-         argsBA[argNo++] = argImage.toUtf8();
+    {
+        if (splitArgs)
+            argsBA[argNo++] = argImage.toUtf8();
+        else
+            argsBA[argNo] += (" " + argImage).toUtf8();
+    }
+    if (!splitArgs)
+        ++argNo;
 
     // Convert arguments into char*'s and append NULL element
     char* args[maxArgsNum + 1];
     for (size_t i = 0; i < argNo; ++i)
-         args[i] = argsBA[i].data();
+        args[i] = argsBA[i].data();
     args[argNo] = NULL;
 
     // Replace ourselves with su-application
