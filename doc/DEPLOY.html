@@ -203,8 +203,8 @@
   <li>
     The application bundle is now ready, we can supply it with additional files and package it:<br/>
     <div class="code">
-      mkdir pkg
-      mv RosaImageWriter.app pkg/
+      mkdir pkg<br/>
+      mv RosaImageWriter.app pkg/<br/>
       mkdir pkg/RosaImageWriter.app/Contents/MacOS/lang<br/>
       cp doc/README.html doc/LICENSE.html pkg/<br/>
       cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
@@ -212,7 +212,7 @@
       hdiutil convert temp.dmg -format UDBZ -o RosaImageWriter-osx.dmg<br/>
       rm -f temp.dmg
     </div><br/>
-    (Converting from UDBZ to UDBZ is not required but, though it looks strange, it decreases the size of the DMG image by 4%.)<br/>
+    (Converting from UDBZ to UDBZ is not required but, though it looks strange, it might decrease the DMG image size by 4%.)<br/>
     Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.
   </li>
   <li>The file <code>RosaImageWriter-osx.dmg</code> is ready for publishing.</li>
