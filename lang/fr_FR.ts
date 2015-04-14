@@ -119,66 +119,66 @@ Abandon.</translation>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="82"/>
+        <location filename="../maindialog.cpp" line="84"/>
         <source>Failed to open the image file:</source>
         <translation>Impossible d&apos;ouvrir le fichier image:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="88"/>
-        <location filename="../maindialog.cpp" line="243"/>
-        <location filename="../maindialog.cpp" line="244"/>
+        <location filename="../maindialog.cpp" line="93"/>
+        <location filename="../maindialog.cpp" line="248"/>
+        <location filename="../maindialog.cpp" line="249"/>
         <source>MB</source>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="167"/>
-        <location filename="../maindialog.cpp" line="178"/>
+        <location filename="../maindialog.cpp" line="172"/>
+        <location filename="../maindialog.cpp" line="183"/>
         <source>Writing is in progress, abort it?</source>
         <translation>L&apos;écriture est en cours, annuler?</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="187"/>
+        <location filename="../maindialog.cpp" line="192"/>
         <source>Disk Images</source>
         <translation>Images disque</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="187"/>
+        <location filename="../maindialog.cpp" line="192"/>
         <source>All Files</source>
         <translation>Tous les fichiers</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="242"/>
+        <location filename="../maindialog.cpp" line="247"/>
         <source>The image is larger than your selected device!</source>
         <translation>L&apos;image est plus grande que le périphérique sélectionné!</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="243"/>
+        <location filename="../maindialog.cpp" line="248"/>
         <source>Image size:</source>
         <translation>Taille de l&apos;image:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="243"/>
-        <location filename="../maindialog.cpp" line="244"/>
+        <location filename="../maindialog.cpp" line="248"/>
+        <location filename="../maindialog.cpp" line="249"/>
         <source>b</source>
         <translation>b</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="244"/>
+        <location filename="../maindialog.cpp" line="249"/>
         <source>Disk size:</source>
         <translation>taille du disque:</translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="252"/>
+        <location filename="../maindialog.cpp" line="257"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="252"/>
+        <location filename="../maindialog.cpp" line="257"/>
         <source>All existing data on the selected device will be lost!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../maindialog.cpp" line="253"/>
+        <location filename="../maindialog.cpp" line="258"/>
         <source>Are you sure you wish to proceed?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -200,7 +200,7 @@ Are you sure you wish to proceed?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../common.cpp" line="36"/>
+        <location filename="../common.cpp" line="35"/>
         <source>Error code:</source>
         <translation>Code d&apos;erreur:</translation>
     </message>
@@ -248,6 +248,28 @@ Are you sure you wish to proceed?</source>
         <location filename="../platform_win.cpp" line="187"/>
         <source>Failed to query list of logical disks.</source>
         <translation>Impossible d&apos;obtenir la liste des disques logiques.</translation>
+    </message>
+    <message>
+        <location filename="../platform_lin.cpp" line="147"/>
+        <location filename="../platform_lin.cpp" line="209"/>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../platform_lin.cpp" line="147"/>
+        <source>No appropriate su-application found!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../platform_lin.cpp" line="148"/>
+        <location filename="../platform_lin.cpp" line="210"/>
+        <source>Please, restart the program with root privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../platform_lin.cpp" line="209"/>
+        <source>Failed to restart with root privileges! (Error code: %1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

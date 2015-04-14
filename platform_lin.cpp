@@ -206,7 +206,7 @@ bool ensureElevated()
     QMessageBox::critical(
         NULL,
         ApplicationTitle,
-        "<font color=\"red\">" + QObject::tr("Error!") + "</font> " + QObject::tr("Failed to restart with root privileges! (error code: %1)").arg(errno) + "<br>" +
+        "<font color=\"red\">" + QObject::tr("Error!") + "</font> " + QObject::tr("Failed to restart with root privileges! (Error code: %1)").arg(errno) + "<br>" +
         QObject::tr("Please, restart the program with root privileges."),
         QMessageBox::Ok
     );
