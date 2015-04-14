@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ROSA Image Writer Deployment Notes</title>
+  <style type="text/css">
+    body {
+      margin: 1em 4em;
+      font-family: sans-serif;
+      font-size: 11pt;
+      line-height: 125%;
+    }
+    h1, h2 {
+      margin-top: 2em;
+      text-decoration: underline;
+    }
+    code, .code {
+      font-family: Courier New, monospace;
+      font-size: 10pt;
+      border: dashed gray 1px;
+      background-color: #f5f5ff;
+      padding: 0px 4px;
+    }
+    div.code {
+      display: inline-block;
+    }
+    table.collapsed {
+      border: solid 1px gray;
+      border-collapse: collapse;
+    }
+    table.collapsed > tbody > tr {
+      border: none;
+    }
+    table.collapsed > tbody > tr > td {
+      border: solid 1px #c0c0c0;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Preface</h1>
+<p>This document contains instructions on how to build and package ROSA ImageWriter (further referred to as <i>RIW</i>) as portable application.</p>
+<p>Generally, the process looks like this:</p>
+<ol>
+  <li>Compile Qt from sources with static linking.</li>
+  <li>Build RIW using this Qt version, thus having a single executable binary.</li>
+  <li>Build the RIW translation files from TS sources.</li>
+  <li>Put these translations into the <code>lang</code> subdirectory near the RIW executable.</li>
+  <li>Also copy the same languages from Qt translations into <code>lang</code>.</li>
+  <li>Add the <code>LICENSE.html</code> and <code>README.html</code> files.</li>
+  <li>Package the result into appropriate distributable archive.</li>
+</ol>
+<p>However, some actions may differ depending on the operating system you are working with. Refer to one of the following sections for details.</p>
+
+<h2>Windows</h2>
+<p>This scenario was tested under Windows 7 SP1 Pro x64, using SDK from Microsoft Visual Studio 2013 Community Edition Update 4.</p>
+<h3>Configuring and building Qt</h3>
+<p>Here we suppose that the following paths are used:</p>
+<table class="collapsed">
+  <tr><td>Qt sources:</td><td class="code">C:\Programs\Qt-static\5.4.1-src\</td></tr>
+  <tr><td>Qt build directory:</td><td class="code">C:\Programs\Qt-static\5.4.1-build\</td></tr>
+  <tr><td>Qt installation directory:</td><td class="code">C:\Programs\Qt-static\5.4.1\</td></tr>
+</table>
+<p>From further on we will omit the prefix <code>C:\Programs\Qt-static\</code>.</p>
+<ol>
+  <li>For static build, special compiler flags are required. Open the file <code>5.4.1-src\qtbase\mkspecs\win32-msvc2013\qmake.conf</code> and replace the <code>-MD</code> and <code>-MDd</code> flags with <code>-MT</code> and <code>-MTd</code>, respectively (there should be 3 instances). If you are using different version of Visual Studio/SDK, use the file from the correct toolchain subdirectory (e.g. <code>win32-msvc2010</code> for VS2010).</li>
+  <li>Open the 32-bit SDK command prompt, change directory to <code>5.4.1-build\</code>.</li>
+  <li>
+    Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
+    <div class="code">..\5.4.1-src\configure -prefix C:\Programs\Qt-static\5.4.1 -opensource -confirm-license -release -static -target xp -qmake -gui -widgets -accessibility -no-angle -no-audio-backend -no-dbus -no-direct2d -no-directwrite -no-evdev -no-eventfd -no-fontconfig -no-freetype -no-gif -no-harfbuzz -no-iconv -no-icu -no-inotify -largefile -no-libjpeg -qt-libpng -mp -no-mtdev -no-native-gestures -no-nis -no-opengl -no-openssl -no-openvg -qt-pcre -no-plugin-manifests -no-qml-debug -qreal double -rtti -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -no-ssl -strip -no-style-fusion -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-system-proxies -no-use-gold-linker -warnings-are-errors -no-wmf-backend -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtx11extras</div>
+  </li>
+  <li>When configuring completes, check carefully the status information. Particularly, make sure that correct toolchain is used, otherwise you'll have to specify the toolchain manually (using the <code>QMAKESPEC</code> variable) and reconfigure Qt.</li>
+  <li>Now run <code>nmake</code> and then <code>nmake install</code>.</li>
+  <li>
+    Add Qt binaries path to the environment variable PATH:<br/>
+    <div class="code">set PATH=C:\Programs\Qt-static\5.4.1\bin;%PATH%</div>
+  </li>
+</ol>
+<h3>Building RIW</h3>
+<p>Now we can build RIW. It is better to do it in a separate subdirectory to avoid polluting the sources with temporary files.</p>
+<ol>
+  <li>Create a new directory and go there. Here we suppose that it is subdirectory <code>build\</code> in RIW sources.</li>
+  <li>
+    Run the commands:<br/>
+    <div class="code">
+      qmake ..\RosaImageWriter.pro<br/>
+      nmake Release<br/>
+      lrelease ..\RosaImageWriter.pro
+    </div>
+  </li>
+  <li>If you have digital certificate you can sign the executable file <code>release\RosaImageWriter.exe</code> to allow validation and improve Windows UAC prompt displayed when RIW is started.</li>
+  <li>
+    All files are now ready, we can package them:<br/>
+    <div class="code">
+      mkdir pkg\RosaImageWriter\lang<br/>
+      copy release\RosaImageWriter.exe pkg\RosaImageWriter\<br/>
+      copy ..\doc\README.html pkg\RosaImageWriter\<br/>
+      copy ..\doc\LICENSE.html pkg\RosaImageWriter\<br/>
+      copy ..\lang\*.qm pkg\RosaImageWriter\lang\<br/>
+      copy C:\Programs\Qt-static\5.4.1\translations\qtbase_ru.qm pkg\RosaImageWriter\lang\<br/>
+      copy C:\Programs\Qt-static\5.4.1\translations\qt_fr.qm pkg\RosaImageWriter\lang\<br/>
+      cd pkg<br/>
+      7z a RosaImageWriter-win.zip RosaImageWriter
+    </div><br/>
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.<br/>
+    The last command uses 7-Zip archiver to create ZIP archive; you can use any other tool for that purpose. ZIP format is recommended for distributing the application: though it is not the best one in terms of compression, it's supported by all decompressors and even by Windows itself, so users will have no trouble unpacking it.
+  </li>
+  <li>The file <code>RosaImageWriter-win.zip</code> is ready for publishing.</li>
+</ol>
+
+<h2>Linux</h2>
+<p>This scenario was tested under ROSA Desktop Fresh R5 i586 and x86_64, using gcc 4.9.2.</p>
+<h3>Configuring and building Qt</h3>
+<p>Here we suppose that the following paths are used:</p>
+<table class="collapsed">
+  <tr><td>Qt sources:</td><td class="code">~/Qt-static/5.4.1-src/</td></tr>
+  <tr><td>Qt build directory:</td><td class="code">~/Qt-static/5.4.1-build/</td></tr>
+  <tr><td>Qt installation directory:</td><td class="code">~/Qt-static/5.4.1/</td></tr>
+</table>
+<p>From further on we will omit the prefix <code>~/Qt-static/</code>.</p>
+<ol>
+  <li>
+    Some debug information remains in the executables even with debug options turned off and executable stripped. To fix this, open the file <code>5.4.1-src/qtbase/mkspecs/linux-g++/qmake.conf</code> and add the following directives to the end of the file:<br/>
+    <div class="code">
+      QMAKE_CFLAGS += -fno-asynchronous-unwind-tables<br/>
+      QMAKE_CXXFLAGS += -fno-asynchronous-unwind-tables
+    </div>
+  </li>
+  <li>Open terminal, change directory to <code>5.4.1-build/</code>.</li>
+  <li>
+    Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
+    <div class="code">../5.4.1-src/configure -prefix ~/Qt-static/5.4.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -fontconfig -qt-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -use-gold-linker -no-warnings-are-errors -xcb -qt-xcb -no-xcb-xlib -xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtwinextras -no-libudev</div>
+  </li>
+  <li>When configuring completes, check carefully the status information. Particularly, make sure that correct toolchain is used, otherwise you'll have to specify the toolchain manually (using the <code>QMAKESPEC</code> variable) and reconfigure Qt.</li>
+  <li>Now run <code>make</code> and then <code>make install</code>.</li>
+  <li>
+    Add Qt binaries path to the environment variable PATH:<br/>
+    <div class="code">export PATH=~/Qt-static/5.4.1/bin:$PATH</div>
+  </li>
+</ol>
+<h3>Building RIW</h3>
+<p>Now we can build RIW. It is better to do it in a separate subdirectory to avoid polluting the sources with temporary files.</p>
+<ol>
+  <li>Create a new directory and go there. Here we suppose that it is subdirectory <code>build/</code> in RIW sources.</li>
+  <li>
+    Run the commands:<br/>
+    <div class="code">
+      qmake ../RosaImageWriter.pro<br/>
+      make<br/>
+      lrelease ../RosaImageWriter.pro
+    </div>
+  </li>
+  <li>
+    All files are now ready, we can package them:<br/>
+    <div class="code">
+      mkdir -p pkg/RosaImageWriter/lang<br/>
+      cp RosaImageWriter ../doc/README.html ../doc/LICENSE.html pkg/RosaImageWriter/<br/>
+      cp ../lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qt_fr}.qm pkg/RosaImageWriter/lang/<br/>
+      cd pkg<br/>
+      tar cJf RosaImageWriter-lin.tar.xz RosaImageWriter
+    </div><br/>
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.
+  </li>
+  <li>The file <code>RosaImageWriter-lin.tar.xz</code> is ready for publishing.</li>
+</ol>
+
+<h2>Mac OS X</h2>
+<p>This scenario was tested under OS X 10.8.5 Mountain Lion, using Xcode 5.1.1.</p>
+<h3>Configuring and building Qt</h3>
+<p>Here we suppose that the following paths are used:</p>
+<table class="collapsed">
+  <tr><td>Qt sources:</td><td class="code">~/Qt-static/5.4.1-src/</td></tr>
+  <tr><td>Qt build directory:</td><td class="code">~/Qt-static/5.4.1-build/</td></tr>
+  <tr><td>Qt installation directory:</td><td class="code">~/Qt-static/5.4.1/</td></tr>
+</table>
+<p>From further on we will omit the prefix <code>~/Qt-static/</code>.</p>
+<ol>
+  <li>If you installed Xcode first time you need to start it and accept the license agreement. Otherwise command-line build tools will not work.</li>
+  <li>Open terminal, change directory to <code>5.4.1-build/</code>.</li>
+  <li>
+    Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
+    <div class="code">../5.4.1-src/configure -prefix ~/Qt-static/5.4.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -no-fontconfig -no-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -no-reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -no-use-gold-linker -no-warnings-are-errors -no-xcb -no-xcb-xlib -no-xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtwinextras -skip qtx11extras -no-libudev -no-framework</div>
+  </li>
+  <li>When configuring completes, check carefully the status information.</li>
+  <li>Now run <code>make</code> and then <code>make install</code>.</li>
+  <li>
+    Add Qt binaries path to the environment variable PATH:<br/>
+    <div class="code">export PATH=~/Qt-static/5.4.1/bin:$PATH</div>
+  </li>
+</ol>
+<h3>Building RIW</h3>
+<p>Now we can build RIW. Under OS X we have to do it in the sources directory, otherwise the <code>Info.plist</code> for some reason cannot be processed.</p>
+<ol>
+  <li>Go to the RIW sources directory.</li>
+  <li>
+    Run the commands:<br/>
+    <div class="code">
+      qmake RosaImageWriter.pro<br/>
+      make<br/>
+      lrelease RosaImageWriter.pro
+    </div>
+  </li>
+  <li>
+    The application bundle is now ready, we can supply it with additional files and package it:<br/>
+    <div class="code">
+      mkdir pkg
+      mv RosaImageWriter.app pkg/
+      mkdir pkg/RosaImageWriter.app/Contents/MacOS/lang<br/>
+      cp doc/README.html doc/LICENSE.html pkg/<br/>
+      cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
+      hdiutil create -format UDBZ -volname 'ROSA ImageWriter' -scrub -srcfolder pkg/ temp.dmg<br/>
+      hdiutil convert temp.dmg -format UDBZ -o RosaImageWriter-osx.dmg<br/>
+      rm -f temp.dmg
+    </div><br/>
+    (Converting from UDBZ to UDBZ is not required but, though it looks strange, it decreases the size of the DMG image by 4%.)<br/>
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.
+  </li>
+  <li>The file <code>RosaImageWriter-osx.dmg</code> is ready for publishing.</li>
+</ol>
+<!--
+Some outdated command lines from OS X build process (Qt 5.1.0 bundle from official site, packaging RIW with all the necessary Qt DLLs and plugins):
+
+/Users/rosa/Qt5.1.0/5.1.0/clang_64/bin/macdeployqt /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app
+mkdir /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/MacOS/lang
+/Users/rosa/Qt5.1.0/5.1.0/clang_64/bin/lrelease /Users/rosa/Documents/devel/rosa-image-writer/RosaImageWriter.pro
+cp /Users/rosa/Qt5.1.0/5.1.0/clang_64/translations/{qtbase_ru.qm,qt_fr.qm} /Users/rosa/Documents/devel/rosa-image-writer/lang/*.qm /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/MacOS/lang/
+echo 'Translations = MacOS/lang' >> /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/Resources/qt.conf
+rm -f /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/PlugIns/imageformats/lib{qgif,qjpeg,qmng,qtga,qtiff,qwbmp}.dylib
+rm -rf /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/{temp,temp.dmg,RosaImageWriter.dmg}
+mkdir /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/temp
+mv /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/temp/
+cp /Users/rosa/Documents/devel/rosa-image-writer/doc/{LICENSE.html,README.html} /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/temp/
+hdiutil create -size 32m -fs HFS+ -volname 'ROSA ImageWriter' -scrub -srcfolder /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/temp/ /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/temp.dmg
+hdiutil convert /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/temp.dmg -format UDZO -o /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.dmg
+
+# Deployment:
+for f in MacOS/RosaImageWriter Frameworks/QtCore.framework/Versions/5/QtCore Frameworks/QtGui.framework/Versions/5/QtGui Frameworks/QtPrintSupport.framework/Versions/5/QtPrintSupport Frameworks/QtWidgets.framework/Versions/5/QtWidgets PlugIns/accessible/libqtaccessiblewidgets.dylib PlugIns/imageformats/libqico.dylib PlugIns/platforms/libqcocoa.dylib PlugIns/printsupport/libcocoaprintersupport.dylib; do install_name_tool -change /Users/rosa/Qt5.1.0//5.1.0/clang_64/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore -change /Users/rosa/Qt5.1.0//5.1.0/clang_64/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui -change /Users/rosa/Qt5.1.0//5.1.0/clang_64/lib/QtPrintSupport.framework/Versions/5/QtPrintSupport @executable_path/../Frameworks/QtPrintSupport.framework/Versions/5/QtPrintSupport -change /Users/rosa/Qt5.1.0//5.1.0/clang_64/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets $f; done
+-->
+
+<hr style="width: 75%;" />
+<p style="font-size: 75%; text-align: center;"><i>Copyright &copy; 2015 NTC IT ROSA LLC</i></p>
+
+</body>
+</html>
