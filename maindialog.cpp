@@ -262,7 +262,7 @@ void MainDialog::writeToDevice(bool zeroing)
 
     showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
 
-    ImageWriter* writer = new ImageWriter(m_ImageFile, selectedDevice);
+    ImageWriter* writer = new ImageWriter(zeroing ? "" : m_ImageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
 
     // Connect start and end signals
