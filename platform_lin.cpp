@@ -3,10 +3,9 @@
 
 #include <QMessageBox>
 #include <QDir>
-#include <QStandardPaths>
 #include <QRegularExpression>
 
-#include "common.h"
+#include "platform_lin_suprogram.h"
 #include "mainapplication.h"
 #include "usbdevice.h"
 
@@ -118,28 +117,32 @@ bool ensureElevated()
     if (uid == 0)
         return true;
 
-    // Search for known GUI su-applications
-    // TODO: Select preferrable app based on the current DE
-    struct SuProgram
-    {
-        // Name of the su-application
-        QString binaryName;
-        // Whether it accepts target command line as separate arguments or single argument
-        bool splitArgs;
-    };
-    QList<SuProgram> suPrograms = { {"kdesu", true}, {"gksu", false} };
-    QString suProgram;
-    bool splitArgs = true;
+    // Search for known GUI su-applications.
+    // The list is priority-ordered. If there are native su-applications present,
+    // using the first such program. Otherwise, using just the first program that is present.
+    QList<SuProgram*> suPrograms = { new XdgSu(), new KdeSu(), new GkSu() };
+    SuProgram* suProgram = NULL;
     for (int i = 0; i < suPrograms.size(); ++i)
     {
-        suProgram = QStandardPaths::findExecutable(suPrograms[i].binaryName);
-        if (!suProgram.isEmpty())
+        // Skip missing su-apps
+        if (!suPrograms[i]->isPresent())
+            continue;
+
+        if (suPrograms[i]->isNative())
         {
-            splitArgs = suPrograms[i].splitArgs;
+            // If we found a native su-application - using it as preferred and stop searching
+            suProgram = suPrograms[i];
             break;
         }
+        else
+        {
+            // If not native, and no other su-application was found - using it, but continue searching,
+            // in case a native app will appear down the list
+            if (suProgram == NULL)
+                suProgram = suPrograms[i];
+        }
     }
-    if (suProgram.isEmpty())
+    if (suProgram == NULL)
     {
         QMessageBox::critical(
             NULL,
@@ -151,58 +154,28 @@ bool ensureElevated()
         return false;
     }
 
-    // Prepare list of arguments for restarting ImageWriter
+    // Prepare the list of arguments and restart ourselves using the su-application found
+    QStringList args;
+    // First comes our own executable
+    args << mApp->applicationFilePath();
     // We need to explicitly pass language and initial directory so that the new instance
     // inherited the current user's parameters rather than root's
-    const size_t maxArgsNum = 5;
-    // Make sure QByteArray objects live long enough, so that their data()'s were valid until execv() call
-    QByteArray argsBA[maxArgsNum + 1];
-
-    size_t argNo = 0;
-    // First comes the application being started (su-application)
-    argsBA[argNo++] = suProgram.toUtf8();
-    // Next our own executable
-    argsBA[argNo] = mApp->applicationFilePath().toUtf8();
-    if (splitArgs)
-        ++argNo;
-    // After that come our command-line arguments
     QString argLang = mApp->getLocale();
     if (!argLang.isEmpty())
-    {
-        if (splitArgs)
-            argsBA[argNo++] = ("--lang=" + argLang).toUtf8();
-        else
-            argsBA[argNo] += (" --lang=" + argLang).toUtf8();
-    }
+        args << "--lang=" + argLang;
     QString argDir = mApp->getInitialDir();
     if (!argDir.isEmpty())
-    {
-        if (splitArgs)
-            argsBA[argNo++] = ("--dir=" + argDir).toUtf8();
-        else
-            argsBA[argNo] += (" --dir=" + argDir).toUtf8();
-    }
+        args << "--dir=" + argDir;
+    // Finally, if image file was supplied, append it as well
     QString argImage = mApp->getInitialImage();
     if (!argImage.isEmpty())
-    {
-        if (splitArgs)
-            argsBA[argNo++] = argImage.toUtf8();
-        else
-            argsBA[argNo] += (" " + argImage).toUtf8();
-    }
-    if (!splitArgs)
-        ++argNo;
+        args << argImage;
+    // And now try to take off with all this garbage
+    suProgram->restartAsRoot(args);
 
-    // Convert arguments into char*'s and append NULL element
-    char* args[maxArgsNum + 1];
-    for (size_t i = 0; i < argNo; ++i)
-        args[i] = argsBA[i].data();
-    args[argNo] = NULL;
-
-    // Replace ourselves with su-application
-    execv(args[0], args);
-
-    // Something went wrong
+    // Something went wrong, we should have never returned! Cleanup and return error
+    for (int i = 0; i < suPrograms.size(); ++i)
+        delete suPrograms[i];
     QMessageBox::critical(
         NULL,
         ApplicationTitle,

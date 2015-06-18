@@ -44,9 +44,11 @@ win32 {
 }
 linux {
     SOURCES += platform_lin.cpp \
+        platform_lin_suprogram.cpp \
         externalprogressbar_lin.cpp \
         usbdevicemonitor_lin.cpp
-    HEADERS += usbdevicemonitor_lin_p.h
+    HEADERS += usbdevicemonitor_lin_p.h \
+        platform_lin_suprogram.h
 }
 macx {
     OBJECTIVE_SOURCES += platform_mac.mm \
