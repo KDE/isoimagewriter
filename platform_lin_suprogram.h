@@ -61,5 +61,13 @@ public:
     virtual bool isNative() const;
 };
 
+class BeeSu : public SuProgram
+{
+public:
+    BeeSu();
+    virtual ~BeeSu() {}
+    virtual bool isNative() const;
+};
+
 
 #endif // SUPROGRAM_H

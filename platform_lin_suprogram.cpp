@@ -67,6 +67,11 @@ GkSu::GkSu()
 {
 }
 
+BeeSu::BeeSu()
+    : SuProgram("beesu", {}, true)
+{
+}
+
 
 bool SuProgram::isPresent() const
 {
@@ -92,6 +97,13 @@ bool GkSu::isNative() const
     // gksu is native for GTK-based DEs; however, for Qt-based DEs (like LXQt) there is no alternative either
     const QString desktopEnvironment = detectDesktopEnvironment();
     return (!desktopEnvironment.isEmpty() && (desktopEnvironment != "KDE"));
+}
+
+bool BeeSu::isNative() const
+{
+    // beesu is developed for Fedora/RedHat, let's consider it native there
+    // TODO: Implement the OS check
+    return false;
 }
 
 

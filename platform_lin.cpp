@@ -120,7 +120,7 @@ bool ensureElevated()
     // Search for known GUI su-applications.
     // The list is priority-ordered. If there are native su-applications present,
     // using the first such program. Otherwise, using just the first program that is present.
-    QList<SuProgram*> suPrograms = { new XdgSu(), new KdeSu(), new GkSu() };
+    QList<SuProgram*> suPrograms = { new XdgSu(), new KdeSu(), new GkSu(), new BeeSu() };
     SuProgram* suProgram = NULL;
     for (int i = 0; i < suPrograms.size(); ++i)
     {
