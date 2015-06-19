@@ -102,8 +102,11 @@ bool GkSu::isNative() const
 bool BeeSu::isNative() const
 {
     // beesu is developed for Fedora/RedHat, let's consider it native there
-    // TODO: Implement the OS check
-    return false;
+    QFile redhatRelease("/etc/redhat-release");
+    if (!redhatRelease.open(QIODevice::ReadOnly | QIODevice::Text))
+        return false;
+    QString redhatInfo = redhatRelease.readAll();
+    return redhatInfo.contains("Red Hat", Qt::CaseInsensitive) || redhatInfo.contains("Fedora", Qt::CaseInsensitive);
 }
 
 
