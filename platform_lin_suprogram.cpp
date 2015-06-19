@@ -119,7 +119,7 @@ void SuProgram::restartAsRoot(const QStringList& args)
 
     // For execv() we need the list of char* arguments; using QByteArrays as temporary storage
     // Store QByteArray objects explicitly to make sure they live long enough, so that their data()'s were valid until execv() call
-    QByteArrayList argsBA;
+    QList<QByteArray> argsBA;
 
     // First comes the application being started (su-application) with all its arguments (if any)
     argsBA << m_binaryPath.toUtf8();
