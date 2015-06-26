@@ -21,9 +21,6 @@ int main(int argc, char *argv[])
 
     MainApplication a(argc, argv);
 
-    if (!ensureElevated())
-        return 1;
-
     QString langName = a.getLocale();
 
     // Load main Qt translation for those languages that do not split into modules
@@ -40,6 +37,9 @@ int main(int argc, char *argv[])
     QTranslator appTranslator;
     appTranslator.load(langName, QCoreApplication::applicationDirPath() + "/lang");
     a.installTranslator(&appTranslator);
+
+    if (!ensureElevated())
+        return 1;
 
 #if defined(Q_OS_WIN32)
     // CoInitialize() seems to be called by Qt automatically, so only set security attributes
