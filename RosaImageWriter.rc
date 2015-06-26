@@ -4,8 +4,8 @@ CREATEPROCESS_MANIFEST_RESOURCE_ID         RT_MANIFEST                          
 100                                        ICON               DISCARDABLE         "res\\icon-rosa.ico"
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 2,6,0,0
-	PRODUCTVERSION 2,6,0,0
+	FILEVERSION 2,6,1,0
+	PRODUCTVERSION 2,6,1,0
 	FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 	FILEFLAGS VS_FF_DEBUG
@@ -22,11 +22,11 @@ BEGIN
 		BEGIN
 			VALUE "CompanyName", "ROSA\0"
 			VALUE "FileDescription", "Tool for creating bootable ROSA installation USB flash drives\0"
-			VALUE "FileVersion", "2.6.0.0\0"
+			VALUE "FileVersion", "2.6.1.0\0"
 			VALUE "LegalCopyright", "Copyright © 2015 ROSA\0"
 			VALUE "OriginalFilename", "RosaImageWriter.exe\0"
 			VALUE "ProductName", "ROSA ImageWriter\0"
-			VALUE "ProductVersion", "2.6.0.0\0"
+			VALUE "ProductVersion", "2.6.1.0\0"
 		END
 	END
 	BLOCK "VarFileInfo"

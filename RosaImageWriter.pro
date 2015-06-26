@@ -67,7 +67,7 @@ RESOURCES += \
 # The following variables can be used for automatic VERSIONINFO generating,
 # but unfortunately it is impossible to use them together with RC_FILE or RES_FILE
 # which is needed for specifying the executable file icon in Windows.
-VERSION = 2.6.0.0
+VERSION = 2.6.1.0
 #QMAKE_TARGET_COMPANY = ROSA
 #QMAKE_TARGET_PRODUCT = "ROSA Image Writer"
 #QMAKE_TARGET_DESCRIPTION = "Tool for creating bootable ROSA installation USB flash drives"
@@ -121,4 +121,4 @@ macx {
 	QMAKE_POST_LINK = strip -S -x $(TARGET)
 }
 
-TRANSLATIONS = lang/ru_RU.ts lang/fr_FR.ts
+TRANSLATIONS = lang/ru_RU.ts lang/de_DE.ts lang/fr_FR.ts

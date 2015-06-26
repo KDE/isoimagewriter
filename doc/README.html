@@ -73,6 +73,22 @@
 </ol>
 
 <h2>Changelog</h2>
+<h3>Version 2.6.1.0</h3>
+<p>Minor bug fixes and improvements:</p>
+<ol>
+  <li>Added German translation (thanks to Matthias Schuster Scharmer).</li>
+  <li>Linux: Startup elevation of privileges improved:
+    <ul>
+      <li>Added support for <code>xdg-su</code> and <code>beesu</code>.</li>
+      <li>Fixed: <code>kdesu</code> could not always be found in KDE environments.</li>
+      <li>If several su-applications are present, the "native" one is preferred (for example, <code>kdesu</code> in KDE).</li>
+    </ul>
+  </li>
+  <li>Fixed: Some start-up messages could be untranslated.</li>
+  <li>Linux: Portable executable binaries are now linked statically with <code>libstdc++</code> (to avoid version mismatches).</li>
+  <li>Rebuilt with Qt 5.4.2.</li>
+</ol>
+
 <h3>Version 2.6.0.0</h3>
 <p>Minor bug fixes and improvements:</p>
 <ol>
