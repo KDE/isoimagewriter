@@ -134,7 +134,10 @@ void SuProgram::restartAsRoot(const QStringList& args)
     }
     else
     {
-        argsBA << args.join(' ').toUtf8();
+        QString joined = '\'' + args[0] + '\'';
+        for (i = 1; i < args.size(); ++i)
+            joined += " '" + args[i] + "'";
+        argsBA << joined.toUtf8();
     }
 
     // Convert arguments into char*'s and append NULL element
