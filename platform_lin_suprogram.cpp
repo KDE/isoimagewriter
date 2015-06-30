@@ -146,4 +146,7 @@ void SuProgram::restartAsRoot(const QStringList& args)
 
     // Replace ourselves with su-application
     execv(argsBin[0], argsBin);
+
+    // Something went wrong, we should have never returned! Cleaning up
+    delete[] argsBin;
 }
