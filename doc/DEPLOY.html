@@ -98,6 +98,7 @@
       copy ..\doc\LICENSE.html pkg\RosaImageWriter\<br/>
       copy ..\lang\*.qm pkg\RosaImageWriter\lang\<br/>
       copy C:\Programs\Qt-static\5.4.1\translations\qtbase_ru.qm pkg\RosaImageWriter\lang\<br/>
+      copy C:\Programs\Qt-static\5.4.1\translations\qtbase_de.qm pkg\RosaImageWriter\lang\<br/>
       copy C:\Programs\Qt-static\5.4.1\translations\qt_fr.qm pkg\RosaImageWriter\lang\<br/>
       cd pkg<br/>
       7z a RosaImageWriter-win.zip RosaImageWriter
@@ -120,13 +121,19 @@
 <p>From further on we will omit the prefix <code>~/Qt-static/</code>.</p>
 <ol>
   <li>
-    Some debug information remains in the executables even with debug options turned off and executable stripped. To fix this, open the file <code>5.4.1-src/qtbase/mkspecs/linux-g++/qmake.conf</code> and add the following directives to the end of the file:<br/>
+    First, you might want to fix the default build flags. There are two issues in sight:
+    <ul>
+      <li>Some debug information remains in the executables even with debug options turned off and executable stripped.</li>
+      <li><code>libstdc++</code> library uses symbol versions massively. So, the executable we get may not run on a different operating system because of the version mismatch. If you want to avoid this you can use static linking for <code>libstdc++</code>. Of course, you'll need a static version of it (e.g. in ROSA the package <code>libstdc++-static-devel</code> or <code>lib64stdc++-static-devel</code> should be installed).</li>
+    </ul>
+    To fix these two issues, open the file <code>5.4.1-src/qtbase/mkspecs/linux-g++/qmake.conf</code> and add the following directives to the end of the file:<br/>
     <div class="code">
       QMAKE_CFLAGS += -fno-asynchronous-unwind-tables<br/>
-      QMAKE_CXXFLAGS += -fno-asynchronous-unwind-tables
+      QMAKE_CXXFLAGS += -fno-asynchronous-unwind-tables<br/>
+      QMAKE_LFLAGS += -static-libstdc++
     </div>
   </li>
-  <li>Open terminal, change directory to <code>5.4.1-build/</code>.</li>
+  <li>Now, open terminal, change directory to <code>5.4.1-build/</code>.</li>
   <li>
     Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
     <div class="code">../5.4.1-src/configure -prefix ~/Qt-static/5.4.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -fontconfig -qt-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -use-gold-linker -no-warnings-are-errors -xcb -qt-xcb -no-xcb-xlib -xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtwinextras -no-libudev</div>
@@ -155,7 +162,7 @@
     <div class="code">
       mkdir -p pkg/RosaImageWriter/lang<br/>
       cp RosaImageWriter ../doc/README.html ../doc/LICENSE.html pkg/RosaImageWriter/<br/>
-      cp ../lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qt_fr}.qm pkg/RosaImageWriter/lang/<br/>
+      cp ../lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qtbase_de,qt_fr}.qm pkg/RosaImageWriter/lang/<br/>
       cd pkg<br/>
       tar cJf RosaImageWriter-lin.tar.xz RosaImageWriter
     </div><br/>
@@ -207,7 +214,7 @@
       mv RosaImageWriter.app pkg/<br/>
       mkdir pkg/RosaImageWriter.app/Contents/MacOS/lang<br/>
       cp doc/README.html doc/LICENSE.html pkg/<br/>
-      cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
+      cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qtbase_de.pm,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
       hdiutil create -format UDBZ -volname 'ROSA ImageWriter' -scrub -srcfolder pkg/ temp.dmg<br/>
       hdiutil convert temp.dmg -format UDBZ -o RosaImageWriter-osx.dmg<br/>
       rm -f temp.dmg
