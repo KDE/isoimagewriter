@@ -63,7 +63,7 @@
 </table>
 <p>From further on we will omit the prefix <code>C:\Programs\Qt-static\</code>.</p>
 <ol>
-  <li>For static build, special compiler flags are required. Open the file <code>5.4.1-src\qtbase\mkspecs\win32-msvc2013\qmake.conf</code> and replace the <code>-MD</code> and <code>-MDd</code> flags with <code>-MT</code> and <code>-MTd</code>, respectively (there should be 3 instances). If you are using different version of Visual Studio/SDK, use the file from the correct toolchain subdirectory (e.g. <code>win32-msvc2010</code> for VS2010).</li>
+  <li>For static build, special compiler flags are recommended (otherwise, the binary will require <code>msvcrNNN.dll</code> and <code>msvcpNNN.dll</code> which may not be present on all systems). Open the file <code>5.4.1-src\qtbase\mkspecs\win32-msvc2013\qmake.conf</code> and replace the <code>-MD</code> and <code>-MDd</code> flags with <code>-MT</code> and <code>-MTd</code>, respectively (there should be 3 instances). If you are using different version of Visual Studio/SDK, use the file from the correct toolchain subdirectory (e.g. <code>win32-msvc2010</code> for VS2010).</li>
   <li>Open the 32-bit SDK command prompt, change directory to <code>5.4.1-build\</code>.</li>
   <li>
     Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
@@ -103,7 +103,7 @@
       cd pkg<br/>
       7z a RosaImageWriter-win.zip RosaImageWriter
     </div><br/>
-    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.<br/>
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files (like <code>qt_fr.qm</code> for French, but <code>qtbase_ru.qm</code> for Russian).<br/>
     The last command uses 7-Zip archiver to create ZIP archive; you can use any other tool for that purpose. ZIP format is recommended for distributing the application: though it is not the best one in terms of compression, it's supported by all decompressors and even by Windows itself, so users will have no trouble unpacking it.
   </li>
   <li>The file <code>RosaImageWriter-win.zip</code> is ready for publishing.</li>
@@ -166,13 +166,13 @@
       cd pkg<br/>
       tar cJf RosaImageWriter-lin.tar.xz RosaImageWriter
     </div><br/>
-    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files (like <code>qt_fr.qm</code> for French, but <code>qtbase_ru.qm</code> for Russian).
   </li>
   <li>The file <code>RosaImageWriter-lin.tar.xz</code> is ready for publishing.</li>
 </ol>
 
 <h2>Mac OS X</h2>
-<p>This scenario was tested under OS X 10.8.5 Mountain Lion, using Xcode 5.1.1.</p>
+<p>This scenario was tested under OS X 10.8.5 Mountain Lion with Xcode 5.1.1, and OS X 10.10.4 Yosemite with Xcode 6.4.</p>
 <h3>Configuring and building Qt</h3>
 <p>Here we suppose that the following paths are used:</p>
 <table class="collapsed">
@@ -214,13 +214,13 @@
       mv RosaImageWriter.app pkg/<br/>
       mkdir pkg/RosaImageWriter.app/Contents/MacOS/lang<br/>
       cp doc/README.html doc/LICENSE.html pkg/<br/>
-      cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qtbase_de.pm,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
+      cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qtbase_de,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
       hdiutil create -format UDBZ -volname 'ROSA ImageWriter' -scrub -srcfolder pkg/ temp.dmg<br/>
       hdiutil convert temp.dmg -format UDBZ -o RosaImageWriter-osx.dmg<br/>
       rm -f temp.dmg
     </div><br/>
     (Converting from UDBZ to UDBZ is not required but, though it looks strange, it might decrease the DMG image size by 4%.)<br/>
-    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files.
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files (like <code>qt_fr.qm</code> for French, but <code>qtbase_ru.qm</code> for Russian).
   </li>
   <li>The file <code>RosaImageWriter-osx.dmg</code> is ready for publishing.</li>
 </ol>
