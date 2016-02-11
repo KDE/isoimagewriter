@@ -38,6 +38,9 @@
    <iconset resource="RosaImageWriter.qrc">
     <normaloff>:/res/icon-rosa.svg</normaloff>:/res/icon-rosa.svg</iconset>
   </property>
+  <property name="windowFlags">
+   <enum>Qt::WindowCloseButtonHint</enum>
+  </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
