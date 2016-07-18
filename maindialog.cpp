@@ -215,6 +215,14 @@ void addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 // Reloads the list of USB flash disks
 void MainDialog::enumFlashDevices()
 {
+    // Remember the currently selected device
+    QString selectedDevice = "";
+    int idx = ui->deviceList->currentIndex();
+    if (idx >= 0)
+    {
+        UsbDevice* dev = ui->deviceList->itemData(idx).value<UsbDevice*>();
+        selectedDevice = dev->m_PhysicalDevice;
+    }
     // Remove the existing entries
     cleanup();
     ui->deviceList->clear();
@@ -224,6 +232,17 @@ void MainDialog::enumFlashDevices()
 
     platformEnumFlashDevices(addFlashDeviceCallback, ui);
 
+    // Restore the previously selected device (if present)
+    if (selectedDevice != "")
+        for (int i = 0; i < ui->deviceList->count(); ++i)
+        {
+            UsbDevice* dev = ui->deviceList->itemData(i).value<UsbDevice*>();
+            if (dev->m_PhysicalDevice == selectedDevice)
+            {
+                ui->deviceList->setCurrentIndex(i);
+                break;
+            }
+        }
     // Reenable the combobox
     ui->deviceList->setEnabled(true);
     // Update the Write button enabled/disabled state
