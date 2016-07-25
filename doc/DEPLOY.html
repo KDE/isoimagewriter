@@ -53,27 +53,27 @@
 <p>However, some actions may differ depending on the operating system you are working with. Refer to one of the following sections for details.</p>
 
 <h2>Windows</h2>
-<p>This scenario was tested under Windows 7 SP1 Pro x64, using SDK from Microsoft Visual Studio 2013 Community Edition Update 4.</p>
+<p>This scenario was tested under Windows 7 SP1 Pro x64, using SDK from Microsoft Visual Studio 2015 Community Edition Update 3.</p>
 <h3>Configuring and building Qt</h3>
 <p>Here we suppose that the following paths are used:</p>
 <table class="collapsed">
-  <tr><td>Qt sources:</td><td class="code">C:\Programs\Qt-static\5.4.1-src\</td></tr>
-  <tr><td>Qt build directory:</td><td class="code">C:\Programs\Qt-static\5.4.1-build\</td></tr>
-  <tr><td>Qt installation directory:</td><td class="code">C:\Programs\Qt-static\5.4.1\</td></tr>
+  <tr><td>Qt sources:</td><td class="code">C:\Programs\Qt-static\5.6.1-src\</td></tr>
+  <tr><td>Qt build directory:</td><td class="code">C:\Programs\Qt-static\5.6.1-build\</td></tr>
+  <tr><td>Qt installation directory:</td><td class="code">C:\Programs\Qt-static\5.6.1\</td></tr>
 </table>
 <p>From further on we will omit the prefix <code>C:\Programs\Qt-static\</code>.</p>
 <ol>
-  <li>For static build, special compiler flags are recommended (otherwise, the binary will require <code>msvcrNNN.dll</code> and <code>msvcpNNN.dll</code> which may not be present on all systems). Open the file <code>5.4.1-src\qtbase\mkspecs\win32-msvc2013\qmake.conf</code> and replace the <code>-MD</code> and <code>-MDd</code> flags with <code>-MT</code> and <code>-MTd</code>, respectively (there should be 3 instances). If you are using different version of Visual Studio/SDK, use the file from the correct toolchain subdirectory (e.g. <code>win32-msvc2010</code> for VS2010).</li>
-  <li>Open the 32-bit SDK command prompt, change directory to <code>5.4.1-build\</code>.</li>
+  <!--li>Since Qt 5.5 there is a configure option -static-runtime which makes msvcrt linked statically. For the former Qt versions, special compiler flags are required for that (otherwise, the binary will require <code>msvcrNNN.dll</code> and <code>msvcpNNN.dll</code> which may not be present on all systems). Open the file <code>5.x.y-src\qtbase\mkspecs\win32-msvc2013\qmake.conf</code> and replace the <code>-MD</code> and <code>-MDd</code> flags with <code>-MT</code> and <code>-MTd</code>, respectively (there should be 3 instances). If you are using different version of Visual Studio/SDK, use the file from the correct toolchain subdirectory (e.g. <code>win32-msvc2010</code> for VS2010).</li-->
+  <li>Open the 32-bit SDK command prompt, change directory to <code>5.6.1-build\</code>.</li>
   <li>
     Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
-    <div class="code">..\5.4.1-src\configure -prefix C:\Programs\Qt-static\5.4.1 -opensource -confirm-license -release -static -target xp -qmake -gui -widgets -accessibility -no-angle -no-audio-backend -no-dbus -no-direct2d -no-directwrite -no-evdev -no-eventfd -no-fontconfig -no-freetype -no-gif -no-harfbuzz -no-iconv -no-icu -no-inotify -largefile -no-libjpeg -qt-libpng -mp -no-mtdev -no-native-gestures -no-nis -no-opengl -no-openssl -no-openvg -qt-pcre -no-plugin-manifests -no-qml-debug -qreal double -rtti -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -no-ssl -strip -no-style-fusion -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-system-proxies -no-use-gold-linker -warnings-are-errors -no-wmf-backend -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtx11extras</div>
+    <div class="code">..\5.6.1-src\configure -prefix C:\Programs\Qt-static\5.6.1 -opensource -confirm-license -release -static -static-runtime -target xp -qmake -gui -widgets -accessibility -no-angle -no-audio-backend -no-dbus -no-direct2d -no-directwrite -no-evdev -no-eventfd -no-fontconfig -no-freetype -no-gif -no-harfbuzz -no-iconv -no-icu -no-inotify -largefile -no-libjpeg -qt-libpng -mp -no-mtdev -no-native-gestures -no-nis -no-opengl -no-openssl -no-openvg -qt-pcre -no-plugin-manifests -no-qml-debug -qreal double -rtti -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -no-ssl -strip -no-style-fusion -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-system-proxies -no-use-gold-linker -warnings-are-errors -no-wmf-backend -qt-zlib -nomake examples -nomake tests -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtquickcontrols -skip qtquickcontrols2 -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview -skip qtx11extras -skip qtxmlpatterns</div>
   </li>
   <li>When configuring completes, check carefully the status information. Particularly, make sure that correct toolchain is used, otherwise you'll have to specify the toolchain manually (using the <code>QMAKESPEC</code> variable) and reconfigure Qt.</li>
   <li>Now run <code>nmake</code> and then <code>nmake install</code>.</li>
   <li>
     Add Qt binaries path to the environment variable PATH:<br/>
-    <div class="code">set PATH=C:\Programs\Qt-static\5.4.1\bin;%PATH%</div>
+    <div class="code">set PATH=C:\Programs\Qt-static\5.6.1\bin;%PATH%</div>
   </li>
 </ol>
 <h3>Building RIW</h3>
@@ -97,13 +97,13 @@
       copy ..\doc\README.html pkg\RosaImageWriter\<br/>
       copy ..\doc\LICENSE.html pkg\RosaImageWriter\<br/>
       copy ..\lang\*.qm pkg\RosaImageWriter\lang\<br/>
-      copy C:\Programs\Qt-static\5.4.1\translations\qtbase_ru.qm pkg\RosaImageWriter\lang\<br/>
-      copy C:\Programs\Qt-static\5.4.1\translations\qtbase_de.qm pkg\RosaImageWriter\lang\<br/>
-      copy C:\Programs\Qt-static\5.4.1\translations\qt_fr.qm pkg\RosaImageWriter\lang\<br/>
+      copy C:\Programs\Qt-static\5.6.1\translations\qtbase_ru.qm pkg\RosaImageWriter\lang\<br/>
+      copy C:\Programs\Qt-static\5.6.1\translations\qtbase_de.qm pkg\RosaImageWriter\lang\<br/>
+      copy C:\Programs\Qt-static\5.6.1\translations\qtbase_fr.qm pkg\RosaImageWriter\lang\<br/>
       cd pkg<br/>
       7z a RosaImageWriter-win.zip RosaImageWriter
     </div><br/>
-    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files (like <code>qt_fr.qm</code> for French, but <code>qtbase_ru.qm</code> for Russian).<br/>
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. If translation is split into separate files you need only the <code>qtbase_xx.qm</code> file, otherwise get the main <code>qt_xx.qm</code> file.<br/>
     The last command uses 7-Zip archiver to create ZIP archive; you can use any other tool for that purpose. ZIP format is recommended for distributing the application: though it is not the best one in terms of compression, it's supported by all decompressors and even by Windows itself, so users will have no trouble unpacking it.
   </li>
   <li>The file <code>RosaImageWriter-win.zip</code> is ready for publishing.</li>
@@ -114,9 +114,9 @@
 <h3>Configuring and building Qt</h3>
 <p>Here we suppose that the following paths are used:</p>
 <table class="collapsed">
-  <tr><td>Qt sources:</td><td class="code">~/Qt-static/5.4.1-src/</td></tr>
-  <tr><td>Qt build directory:</td><td class="code">~/Qt-static/5.4.1-build/</td></tr>
-  <tr><td>Qt installation directory:</td><td class="code">~/Qt-static/5.4.1/</td></tr>
+  <tr><td>Qt sources:</td><td class="code">~/Qt-static/5.6.1-src/</td></tr>
+  <tr><td>Qt build directory:</td><td class="code">~/Qt-static/5.6.1-build/</td></tr>
+  <tr><td>Qt installation directory:</td><td class="code">~/Qt-static/5.6.1/</td></tr>
 </table>
 <p>From further on we will omit the prefix <code>~/Qt-static/</code>.</p>
 <ol>
@@ -126,23 +126,23 @@
       <li>Some debug information remains in the executables even with debug options turned off and executable stripped.</li>
       <li><code>libstdc++</code> library uses symbol versions massively. So, the executable we get may not run on a different operating system because of the version mismatch. If you want to avoid this you can use static linking for <code>libstdc++</code>. Of course, you'll need a static version of it (e.g. in ROSA the package <code>libstdc++-static-devel</code> or <code>lib64stdc++-static-devel</code> should be installed).</li>
     </ul>
-    To fix these two issues, open the file <code>5.4.1-src/qtbase/mkspecs/linux-g++/qmake.conf</code> and add the following directives to the end of the file:<br/>
+    To fix these two issues, open the file <code>5.6.1-src/qtbase/mkspecs/linux-g++/qmake.conf</code> and add the following directives to the end of the file:<br/>
     <div class="code">
       QMAKE_CFLAGS += -fno-asynchronous-unwind-tables<br/>
       QMAKE_CXXFLAGS += -fno-asynchronous-unwind-tables<br/>
       QMAKE_LFLAGS += -static-libstdc++
     </div>
   </li>
-  <li>Now, open terminal, change directory to <code>5.4.1-build/</code>.</li>
+  <li>Now, open terminal, change directory to <code>5.6.1-build/</code>.</li>
   <li>
     Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
-    <div class="code">../5.4.1-src/configure -prefix ~/Qt-static/5.4.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -fontconfig -qt-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -use-gold-linker -no-warnings-are-errors -xcb -qt-xcb -no-xcb-xlib -xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtwinextras -no-libudev</div>
+    <div class="code">../5.6.1-src/configure -prefix ~/Qt-static/5.6.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -fontconfig -qt-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -use-gold-linker -no-warnings-are-errors -xcb -qt-xcb -no-xcb-xlib -xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtquickcontrols -skip qtquickcontrols2 -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtxmlpatterns -no-libudev</div>
   </li>
   <li>When configuring completes, check carefully the status information. Particularly, make sure that correct toolchain is used, otherwise you'll have to specify the toolchain manually (using the <code>QMAKESPEC</code> variable) and reconfigure Qt.</li>
   <li>Now run <code>make</code> and then <code>make install</code>.</li>
   <li>
     Add Qt binaries path to the environment variable PATH:<br/>
-    <div class="code">export PATH=~/Qt-static/5.4.1/bin:$PATH</div>
+    <div class="code">export PATH=~/Qt-static/5.6.1/bin:$PATH</div>
   </li>
 </ol>
 <h3>Building RIW</h3>
@@ -162,11 +162,11 @@
     <div class="code">
       mkdir -p pkg/RosaImageWriter/lang<br/>
       cp RosaImageWriter ../doc/README.html ../doc/LICENSE.html pkg/RosaImageWriter/<br/>
-      cp ../lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qtbase_de,qt_fr}.qm pkg/RosaImageWriter/lang/<br/>
+      cp ../lang/*.qm ~/Qt-static/5.6.1/translations/{qtbase_ru,qtbase_de,qtbase_fr}.qm pkg/RosaImageWriter/lang/<br/>
       cd pkg<br/>
       tar cJf RosaImageWriter-lin.tar.xz RosaImageWriter
     </div><br/>
-    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files (like <code>qt_fr.qm</code> for French, but <code>qtbase_ru.qm</code> for Russian).
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. If translation is split into separate files you need only the <code>qtbase_xx.qm</code> file, otherwise get the main <code>qt_xx.qm</code> file.<br/>
   </li>
   <li>The file <code>RosaImageWriter-lin.tar.xz</code> is ready for publishing.</li>
 </ol>
@@ -176,35 +176,35 @@
 <h3>Configuring and building Qt</h3>
 <p>Here we suppose that the following paths are used:</p>
 <table class="collapsed">
-  <tr><td>Qt sources:</td><td class="code">~/Qt-static/5.4.1-src/</td></tr>
-  <tr><td>Qt build directory:</td><td class="code">~/Qt-static/5.4.1-build/</td></tr>
-  <tr><td>Qt installation directory:</td><td class="code">~/Qt-static/5.4.1/</td></tr>
+  <tr><td>Qt sources:</td><td class="code">~/Qt-static/5.6.1-src/</td></tr>
+  <tr><td>Qt build directory:</td><td class="code">~/Qt-static/5.6.1-build/</td></tr>
+  <tr><td>Qt installation directory:</td><td class="code">~/Qt-static/5.6.1/</td></tr>
 </table>
 <p>From further on we will omit the prefix <code>~/Qt-static/</code>.</p>
 <ol>
   <li>If you installed Xcode first time you need to start it and accept the license agreement. Otherwise command-line build tools will not work.</li>
-  <li>Open terminal, change directory to <code>5.4.1-build/</code>.</li>
+  <li>Open terminal, change directory to <code>5.6.1-build/</code>.</li>
   <li>
     Configure the Qt. For decreasing RIW executable size and speed up Qt build process, we recommend to turn off all unused features and modules. The following command can be used:<br/>
-    <div class="code">../5.4.1-src/configure -prefix ~/Qt-static/5.4.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -no-fontconfig -no-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -no-reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -no-use-gold-linker -no-warnings-are-errors -no-xcb -no-xcb-xlib -no-xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip declarative -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtlocation -skip qtmultimedia -skip qtscript -skip qtscript -skip qtsensors -skip qtserialport -skip qtwebchannel -skip quick1 -skip quickcontrols -skip wayland -skip webkit -skip webkit-examples -skip websockets -skip qtwinextras -skip qtx11extras -no-libudev -no-framework</div>
+    <div class="code">../5.6.1-src/configure -prefix ~/Qt-static/5.6.1 -opensource -confirm-license -release -static -optimized-qmake -gui -widgets -accessibility -no-alsa -no-cups -no-dbus -no-directfb -no-eglfs -no-evdev -no-fontconfig -no-freetype -no-gif -no-glib -no-gtkstyle -qt-harfbuzz -no-iconv -no-icu -no-journald -no-kms -largefile -no-libjpeg -qt-libpng -no-linuxfb -no-mtdev -no-nis -no-opengl -no-openssl -no-pch -qt-pcre -no-pkg-config -no-pulseaudio -no-qml-debug -qreal double -no-reduce-relocations -no-rpath -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -strip -no-system-proxies -no-use-gold-linker -no-warnings-are-errors -no-xcb -no-xcb-xlib -no-xinput2 -qt-xkbcommon -qt-zlib -nomake examples -nomake tests -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtlocation -skip qtmultimedia -skip qtquickcontrols -skip qtquickcontrols2 -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns -no-libudev -no-framework</div>
   </li>
   <li>When configuring completes, check carefully the status information.</li>
   <li>Now run <code>make</code> and then <code>make install</code>.</li>
   <li>
     Add Qt binaries path to the environment variable PATH:<br/>
-    <div class="code">export PATH=~/Qt-static/5.4.1/bin:$PATH</div>
+    <div class="code">export PATH=~/Qt-static/5.6.1/bin:$PATH</div>
   </li>
 </ol>
 <h3>Building RIW</h3>
-<p>Now we can build RIW. Under OS X we have to do it in the sources directory, otherwise the <code>Info.plist</code> for some reason cannot be processed.</p>
+<p>Now we can build RIW. It is better to do it in a separate subdirectory to avoid polluting the sources with temporary files.</p>
 <ol>
-  <li>Go to the RIW sources directory.</li>
+  <li>Create a new directory and go there. Here we suppose that it is subdirectory <code>build/</code> in RIW sources.</li>
   <li>
     Run the commands:<br/>
     <div class="code">
-      qmake RosaImageWriter.pro<br/>
+      qmake ../RosaImageWriter.pro<br/>
       make<br/>
-      lrelease RosaImageWriter.pro
+      lrelease ../RosaImageWriter.pro
     </div>
   </li>
   <li>
@@ -213,14 +213,14 @@
       mkdir pkg<br/>
       mv RosaImageWriter.app pkg/<br/>
       mkdir pkg/RosaImageWriter.app/Contents/MacOS/lang<br/>
-      cp doc/README.html doc/LICENSE.html pkg/<br/>
-      cp lang/*.qm ~/Qt-static/5.4.1/translations/{qtbase_ru,qtbase_de,qt_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
+      cp ../doc/README.html ../doc/LICENSE.html pkg/<br/>
+      cp ../lang/*.qm ~/Qt-static/5.6.1/translations/{qtbase_ru,qtbase_de,qtbase_fr}.qm pkg/RosaImageWriter.app/Contents/MacOS/lang/<br/>
       hdiutil create -format UDBZ -volname 'ROSA ImageWriter' -scrub -srcfolder pkg/ temp.dmg<br/>
       hdiutil convert temp.dmg -format UDBZ -o RosaImageWriter-osx.dmg<br/>
       rm -f temp.dmg
     </div><br/>
     (Converting from UDBZ to UDBZ is not required but, though it looks strange, it might decrease the DMG image size by 4%.)<br/>
-    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. Besides, if Qt translation files become split or combined you should take the appropriate files (like <code>qt_fr.qm</code> for French, but <code>qtbase_ru.qm</code> for Russian).
+    Please, keep in mind that if new RIW translations appear, the commands given above should be amended to also include Qt translations on the same languages. If translation is split into separate files you need only the <code>qtbase_xx.qm</code> file, otherwise get the main <code>qt_xx.qm</code> file.<br/>
   </li>
   <li>The file <code>RosaImageWriter-osx.dmg</code> is ready for publishing.</li>
 </ol>
@@ -230,7 +230,7 @@ Some outdated command lines from OS X build process (Qt 5.1.0 bundle from offici
 /Users/rosa/Qt5.1.0/5.1.0/clang_64/bin/macdeployqt /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app
 mkdir /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/MacOS/lang
 /Users/rosa/Qt5.1.0/5.1.0/clang_64/bin/lrelease /Users/rosa/Documents/devel/rosa-image-writer/RosaImageWriter.pro
-cp /Users/rosa/Qt5.1.0/5.1.0/clang_64/translations/{qtbase_ru.qm,qt_fr.qm} /Users/rosa/Documents/devel/rosa-image-writer/lang/*.qm /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/MacOS/lang/
+cp /Users/rosa/Qt5.1.0/5.1.0/clang_64/translations/{qtbase_ru.qm,qtbase_fr.qm} /Users/rosa/Documents/devel/rosa-image-writer/lang/*.qm /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/MacOS/lang/
 echo 'Translations = MacOS/lang' >> /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/Resources/qt.conf
 rm -f /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/RosaImageWriter.app/Contents/PlugIns/imageformats/lib{qgif,qjpeg,qmng,qtga,qtiff,qwbmp}.dylib
 rm -rf /Users/rosa/Documents/devel/build-RosaImageWriter-Desktop_Qt_5_1_0_clang_64bit-Release/{temp,temp.dmg,RosaImageWriter.dmg}

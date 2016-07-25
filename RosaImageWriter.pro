@@ -78,6 +78,10 @@ win32 {
 	CONFIG -= embed_manifest_dll embed_manifest_exe
 	msvc {
 		LIBS += Ole32.lib OleAut32.lib
+		QMAKE_CXXFLAGS -= -Zc:strictStrings
+		QMAKE_CXXFLAGS_RELEASE -= -Zc:strictStrings
+		QMAKE_CFLAGS -= -Zc:strictStrings
+		QMAKE_CFLAGS_RELEASE -= -Zc:strictStrings
 	}
 	mingw {
 		QMAKE_CXXFLAGS += -std=gnu++11
