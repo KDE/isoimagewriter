@@ -61,10 +61,16 @@ MainDialog::MainDialog(QWidget *parent) :
     setWindowTitle("ROSA Image Writer");
     ui->logo->setPixmap(QPixmap(QStandardPaths::locate(QStandardPaths::AppDataLocation, "logo-rosa.png")));
 #else
-    ui->logo->setPixmap(QIcon::fromTheme("drive-removable-media").pixmap(QSize(100, 100)));
+    ui->logo->setPixmap(QIcon::fromTheme("drive-removable-media").pixmap(QSize(50, 50)));
 #endif
+    ui->introLabel->setText(i18n("Select an ISO image file to write to a USB disk"));
     ui->imageSelectButton->setIcon(QIcon::fromTheme("folder-open"));
     ui->deviceRefreshButton->setIcon(QIcon::fromTheme("view-refresh"));
+    QPushButton *clearButton = ui->buttonBox->button(QDialogButtonBox::Reset);
+    clearButton->setText(i18n("Clear USB Disk"));
+    QPushButton *writeButton = ui->buttonBox->button(QDialogButtonBox::Yes);
+    writeButton->setText(i18n("Write"));
+    ui->buttonBox->button(QDialogButtonBox::Cancel)->hide();
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
     // Disallow to change the dialog height
@@ -118,7 +124,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     m_ImageSize = f.size();
     f.close();
     m_ImageFile = newImageFile;
-    ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + i18n("(%1 MB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
+    ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " " + i18n("(%1 MiB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
     // Enable the Write button (if there are USB flash disks present)
     ui->writeButton->setEnabled(ui->deviceList->count() > 0);
 }
@@ -294,8 +300,8 @@ void MainDialog::writeToDevice(bool zeroing)
             this,
             ApplicationTitle,
             i18n("The image is larger than your selected device!") + "\n" +
-            i18n("Image size: %1MB (%2b)", QString::number(m_ImageSize / DEFAULT_UNIT), currentLocale.toString(m_ImageSize)) + "\n" +
-            i18n("Disk size: %1MB (%2b)", QString::number(selectedDevice->m_Size / DEFAULT_UNIT), currentLocale.toString(selectedDevice->m_Size)),
+            i18n("Image size: %1MiB (%2b)", QString::number(m_ImageSize / DEFAULT_UNIT), currentLocale.toString(m_ImageSize)) + "\n" +
+            i18n("Disk size: %1MiB (%2b)", QString::number(selectedDevice->m_Size / DEFAULT_UNIT), currentLocale.toString(selectedDevice->m_Size)),
             QMessageBox::Ok
         );
         return;

@@ -63,6 +63,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="introLabel">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -261,6 +268,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Reset|QDialogButtonBox::Yes</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
