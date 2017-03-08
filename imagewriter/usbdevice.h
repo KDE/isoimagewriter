@@ -24,11 +24,13 @@
 
 #include <QStringList>
 
+#include <KLocalizedString>
+
 class UsbDevice
 {
 public:
     UsbDevice() :
-        m_VisibleName(QObject::tr("Unknown Device")),
+        m_VisibleName(i18n("Unknown Device")),
         m_Volumes(),
         m_Size(0),
         m_SectorSize(512),
@@ -37,7 +39,7 @@ public:
     // Formats the device description for GUI
     // The format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
     QString formatDisplayName() const {
-        return ((m_Volumes.size() == 0) ? QObject::tr("<unmounted>") : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + QString::number(alignNumberDiv(m_Size, DEFAULT_UNIT)) + " " + QObject::tr("MB") + ")";
+        return ((m_Volumes.size() == 0) ? i18n("<unmounted>") : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + QString::number(alignNumberDiv(m_Size, DEFAULT_UNIT)) + " " + i18n("MB") + ")";
     }
 
     // User-friendly name of the device

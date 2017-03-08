@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>550</width>
-    <height>155</height>
+    <height>160</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,14 +32,11 @@
    <bool>true</bool>
   </property>
   <property name="windowTitle">
-   <string notr="true">ROSA Image Writer</string>
+   <string notr="true">Image Writer</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="RosaImageWriter.qrc">
+   <iconset>
     <normaloff>:/res/icon-rosa.svg</normaloff>:/res/icon-rosa.svg</iconset>
-  </property>
-  <property name="windowFlags">
-   <enum>Qt::WindowCloseButtonHint</enum>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -65,7 +62,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="RosaImageWriter.qrc">:/res/logo-rosa.png</pixmap>
+        <pixmap>:/res/logo-rosa.png</pixmap>
        </property>
        <property name="margin">
         <number>0</number>
@@ -147,7 +144,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="RosaImageWriter.qrc">
+        <iconset>
          <normaloff>:/res/icon-open.ico</normaloff>:/res/icon-open.ico</iconset>
        </property>
       </widget>
@@ -161,7 +158,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="RosaImageWriter.qrc">
+        <iconset>
          <normaloff>:/res/icon-refresh.ico</normaloff>:/res/icon-refresh.ico</iconset>
        </property>
       </widget>
@@ -192,7 +189,7 @@
         <number>0</number>
        </property>
        <property name="format">
-        <string>%v / %m MB</string>
+        <string>XXX</string>
        </property>
       </widget>
      </item>

@@ -17,6 +17,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of ImageWriter
 
+#include <KLocalizedString>
 
 #include <QFile>
 
@@ -52,11 +53,11 @@ void ImageWriter::writeImage()
         // direct access to devices and for unbuffered reading/writing)
         buffer = VirtualAlloc(NULL, TRANSFER_BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
         if (buffer == NULL)
-            throw formatErrorMessageFromCode(tr("Failed to allocate memory for buffer:"));
+            throw formatErrorMessageFromCode(i18n("Failed to allocate memory for buffer:"));
 #elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
         buffer = malloc(TRANSFER_BLOCK_SIZE);
         if (buffer == NULL)
-            throw tr("Failed to allocate memory for buffer.");
+            throw i18n("Failed to allocate memory for buffer.");
 #endif
 
         QFile imageFile;
@@ -70,7 +71,7 @@ void ImageWriter::writeImage()
             // Open the source image file for reading
             imageFile.setFileName(m_ImageFile);
             if (!imageFile.open(QIODevice::ReadOnly))
-                throw tr("Failed to open the image file:") + "\n" + imageFile.errorString();
+                throw i18n("Failed to open the image file: %1", imageFile.errorString());
         }
 
         // Unmount volumes that belong to the selected target device
@@ -93,14 +94,14 @@ void ImageWriter::writeImage()
             );
             if (volume == INVALID_HANDLE_VALUE)
             {
-                errMessages << formatErrorMessageFromCode(tr("Failed to open the drive") + " " + m_Device->m_Volumes[i]);
+                errMessages << formatErrorMessageFromCode(i18n("Failed to open the drive %1", m_Device->m_Volumes[i]));
                 continue;
             }
             // Trying to lock the volume but ignore if we failed (such call seems to be required for
             // dismounting the volume on WinXP)
             DeviceIoControl(volume, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL);
             if (!DeviceIoControl(volume, FSCTL_DISMOUNT_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
-                errMessages << formatErrorMessageFromCode(tr("Failed to unmount the drive") + " " + m_Device->m_Volumes[i]);
+                errMessages << formatErrorMessageFromCode(i18n("Failed to unmount the drive %1", m_Device->m_Volumes[i]));
             CloseHandle(volume);
             volume = INVALID_HANDLE_VALUE;
         }
@@ -117,7 +118,7 @@ void ImageWriter::writeImage()
                 {
                     // Mount point is the selected device or one of its partitions - try to unmount it
                     if (unmount(mntEntries[i].f_mntonname, MNT_FORCE) != 0)
-                        errMessages << tr("Failed to unmount the volume") + " " + m_Device->m_Volumes[i] + "\n" + strerror(errno);
+                        errMessages << i18n("Failed to unmount the volume %1\n%2", m_Device->m_Volumes[i], strerror(errno));
                 }
             }
         }
@@ -128,7 +129,7 @@ void ImageWriter::writeImage()
         // Open the target USB device for writing and lock it
         PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
         if (!deviceFile.open())
-            throw tr("Failed to open the target device:") + "\n" + deviceFile.errorString();
+            throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
 
         qint64 readBytes;
         qint64 writtenBytes;
@@ -148,9 +149,9 @@ void ImageWriter::writeImage()
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
             writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
             if (writtenBytes < 0)
-                throw tr("Failed to write to the device:") + "\n" + deviceFile.errorString();
+                throw i18n("Failed to write to the device:\n%1", deviceFile.errorString());
             if (writtenBytes != readBytes)
-                throw tr("The last block was not fully written (%1 of %2 bytes)!\nAborting.").arg(writtenBytes).arg(readBytes);
+                throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
             // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
@@ -182,7 +183,7 @@ void ImageWriter::writeImage()
         if (!zeroing)
         {
             if (readBytes < 0)
-                throw tr("Failed to read the image file:") + "\n" + imageFile.errorString();
+                throw i18n("Failed to read the image file:\n%1", imageFile.errorString());
             imageFile.close();
         }
         deviceFile.close();
@@ -204,9 +205,9 @@ void ImageWriter::writeImage()
     // If no errors occurred and user did not stop the operation, it means everything went fine
     if (!isError && !cancelRequested)
         emit success(
-            tr("The operation completed successfully.") +
+            i18n("The operation completed successfully.") +
             "<br><br>" +
-            (zeroing ? tr("Now you need to format your device.") : tr("To be able to store data on this device again, please, use the button \"Clear\"."))
+            (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Clear\"."))
         );
 
     // In any case the operation is finished

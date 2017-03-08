@@ -97,7 +97,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
         QMessageBox::critical(
             this,
             ApplicationTitle,
-            tr("Failed to open the image file:") + "\n" +
+            i18n("Failed to open the image file:") + "\n" +
             QDir::toNativeSeparators(newImageFile) + "\n" +
             f.errorString()
         );
@@ -106,7 +106,7 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     m_ImageSize = f.size();
     f.close();
     m_ImageFile = newImageFile;
-    ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " (" + QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT)) + " " + tr("MB") + ")");
+    ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + i18n("(%1 MB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
     // Enable the Write button (if there are USB flash disks present)
     ui->writeButton->setEnabled(ui->deviceList->count() > 0);
 }
@@ -185,7 +185,7 @@ void MainDialog::closeEvent(QCloseEvent* event)
 {
     if (m_IsWriting)
     {
-        if (QMessageBox::question(this, ApplicationTitle, tr("Writing is in progress, abort it?")) == QMessageBox::No)
+        if (QMessageBox::question(this, ApplicationTitle, i18n("Writing is in progress, abort it?")) == QMessageBox::No)
             event->ignore();
     }
 }
@@ -196,7 +196,7 @@ void MainDialog::keyPressEvent(QKeyEvent* event)
 {
     if ((event->key() == Qt::Key_Escape) && m_IsWriting)
     {
-        if (QMessageBox::question(this, ApplicationTitle, tr("Writing is in progress, abort it?")) == QMessageBox::No)
+        if (QMessageBox::question(this, ApplicationTitle, i18n("Writing is in progress, abort it?")) == QMessageBox::No)
             return;
     }
     QDialog::keyPressEvent(event);
@@ -205,7 +205,9 @@ void MainDialog::keyPressEvent(QKeyEvent* event)
 // Suggests to select image file using the Open File dialog
 void MainDialog::openImageFile()
 {
-    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, tr("Disk Images") + " (*.iso *.bin *.img);;" + tr("All Files") + " (*.*)", NULL, QFileDialog::ReadOnly);
+    QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, 
+                                                        i18n("Disk Images (%1)", QString("*.iso *.bin *.img")) + ";;" + i18n("All Files (%1)", QString("(*)")),
+                                                        NULL, QFileDialog::ReadOnly);
     if (newImageFile != "")
     {
         m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
@@ -279,9 +281,9 @@ void MainDialog::writeToDevice(bool zeroing)
         QMessageBox::critical(
             this,
             ApplicationTitle,
-            tr("The image is larger than your selected device!") + "\n" +
-            tr("Image size:") + " " + QString::number(m_ImageSize / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(m_ImageSize) + " " + tr("b") + ")\n" +
-            tr("Disk size:") + " " + QString::number(selectedDevice->m_Size / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(selectedDevice->m_Size) + " " + tr("b") + ")",
+            i18n("The image is larger than your selected device!") + "\n" +
+            i18n("Image size: %1MB (%2b)", QString::number(m_ImageSize / DEFAULT_UNIT), currentLocale.toString(m_ImageSize)) + "\n" +
+            i18n("Disk size: %1MB (%2b)", QString::number(selectedDevice->m_Size / DEFAULT_UNIT), currentLocale.toString(selectedDevice->m_Size)),
             QMessageBox::Ok
         );
         return;
@@ -289,8 +291,8 @@ void MainDialog::writeToDevice(bool zeroing)
     if (QMessageBox::warning(
             this,
             ApplicationTitle,
-            "<font color=\"red\">" + tr("Warning!") + "</font> " + tr("All existing data on the selected device will be lost!") + "<br>" +
-            tr("Are you sure you wish to proceed?"),
+            "<font color=\"red\">" + i18n("Warning!") + "</font> " + i18n("All existing data on the selected device will be lost!") + "<br>" +
+            i18n("Are you sure you wish to proceed?"),
             QMessageBox::Yes | QMessageBox::No,
             QMessageBox::No) == QMessageBox::No)
         return;

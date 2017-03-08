@@ -41,23 +41,6 @@ int main(int argc, char *argv[])
 
     MainApplication a(argc, argv);
 
-    QString langName = a.getLocale();
-
-    // Load main Qt translation for those languages that do not split into modules
-    QTranslator qtTranslator;
-    qtTranslator.load("qt_" + langName, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    a.installTranslator(&qtTranslator);
-
-    // For those languages that come splitted, load only the base Qt module translation
-    QTranslator qtBaseTranslator;
-    qtBaseTranslator.load("qtbase_" + langName, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    a.installTranslator(&qtBaseTranslator);
-
-    // Finally, load the translation of the application itself
-    QTranslator appTranslator;
-    appTranslator.load(langName, QCoreApplication::applicationDirPath() + "/lang");
-    a.installTranslator(&appTranslator);
-
     if (!ensureElevated())
         return 1;
 

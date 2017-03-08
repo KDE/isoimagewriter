@@ -54,7 +54,7 @@
         name = SysAllocString(str);                                           \
         if (name == NULL)                                                     \
         {                                                                     \
-            throw QObject::tr("Memory allocation for %1 failed.").arg(#name); \
+            throw i18n("Memory allocation for %1 failed.").arg(#name); \
         }                                                                     \
     }
 
@@ -102,9 +102,9 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         ALLOC_BSTR(strQueryDisks, L"SELECT * FROM Win32_DiskDrive WHERE InterfaceType = \"USB\"");
 
         // Create the IWbemLocator and execute the first query (list of physical disks attached via USB)
-        CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, reinterpret_cast<void**>(&pIWbemLocator)), QObject::tr("CoCreateInstance(WbemAdministrativeLocator) failed."));
-        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace, NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), QObject::tr("ConnectServer failed."));
-        CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), QObject::tr("Failed to query USB flash devices."));
+        CHECK_OK(CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, IID_IUnknown, reinterpret_cast<void**>(&pIWbemLocator)), i18n("CoCreateInstance(WbemAdministrativeLocator) failed."));
+        CHECK_OK(pIWbemLocator->ConnectServer(strNamespace, NULL, NULL, NULL, 0, NULL, NULL, &pWbemServices), i18n("ConnectServer failed."));
+        CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryDisks, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumDisksObject), i18n("Failed to query USB flash devices."));
 
         // Enumerate the received list of devices
         for (;;)
@@ -168,7 +168,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
             ALLOC_BSTR(strQueryPartitions, reinterpret_cast<const wchar_t*>(qstrQueryPartitions.utf16()));
 
             // Execute the query
-            CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), QObject::tr("Failed to query list of partitions."));
+            CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryPartitions, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumPartitionsObject), i18n("Failed to query list of partitions."));
 
             // Enumerate the received list of partitions
             for (;;)
@@ -200,7 +200,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
                     ALLOC_BSTR(strQueryLetters, reinterpret_cast<const wchar_t*>(qstrQueryLetters.utf16()));
 
                     // Execute the query
-                    CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), QObject::tr("Failed to query list of logical disks."));
+                    CHECK_OK(pWbemServices->ExecQuery(strQL, strQueryLetters, WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumLettersObject), i18n("Failed to query list of logical disks."));
 
                     // Enumerate the received list of logical disks
                     for (;;)

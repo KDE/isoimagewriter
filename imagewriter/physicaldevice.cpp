@@ -50,7 +50,7 @@ bool PhysicalDevice::open()
     // Lock the opened device
     if (!DeviceIoControl(m_fileHandle, FSCTL_LOCK_VOLUME, NULL, 0, NULL, 0, &bret, NULL))
     {
-        setErrorString(formatErrorMessageFromCode(tr("Could not acquire lock:")));
+        setErrorString(formatErrorMessageFromCode(i18n("Could not acquire lock:")));
         return false;
     }
     // Construct QFile around the device handle; close() will now close the handle automatically

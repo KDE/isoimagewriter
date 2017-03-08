@@ -17,6 +17,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains Linux implementation of platform-dependent functions
 
+#include <KLocalizedString>
+
 #include <QMessageBox>
 #include <QDir>
 #include <QRegularExpression>
@@ -163,8 +165,8 @@ bool ensureElevated()
         QMessageBox::critical(
             NULL,
             ApplicationTitle,
-            "<font color=\"red\">" + QObject::tr("Error!") + "</font> " + QObject::tr("No appropriate su-application found!") + "<br>" +
-            QObject::tr("Please, restart the program with root privileges."),
+            "<font color=\"red\">" + i18n("Error!") + "</font> " + i18n("No appropriate su-application found!") + "<br>" +
+            i18n("Please, restart the program with root privileges."),
             QMessageBox::Ok
         );
         return false;
@@ -195,8 +197,8 @@ bool ensureElevated()
     QMessageBox::critical(
         NULL,
         ApplicationTitle,
-        "<font color=\"red\">" + QObject::tr("Error!") + "</font> " + QObject::tr("Failed to restart with root privileges! (Error code: %1)").arg(errno) + "<br>" +
-        QObject::tr("Please, restart the program with root privileges."),
+        "<font color=\"red\">" + i18n("Error!") + "</font> " + i18n("Failed to restart with root privileges! (Error code: %1)").arg(errno) + "<br>" +
+        i18n("Please, restart the program with root privileges."),
         QMessageBox::Ok
     );
     return false;
