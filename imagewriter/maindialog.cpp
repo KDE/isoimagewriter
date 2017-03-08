@@ -58,7 +58,7 @@ MainDialog::MainDialog(QWidget *parent) :
     ui->setupUi(this);
 
 #if defined(ROSA_BRANDING)
-    // Compile with -DROSA_BRANDING to use the ROSA name
+    // Compile with -DROSA_BRANDING=On to use the ROSA name
     setWindowTitle("ROSA Image Writer");
     ui->logo->setPixmap(QPixmap(QStandardPaths::locate(QStandardPaths::AppDataLocation, "logo-rosa.png")));
 #endif
