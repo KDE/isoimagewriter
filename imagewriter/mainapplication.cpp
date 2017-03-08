@@ -50,6 +50,7 @@ MainApplication::MainApplication(int& argc, char** argv) :
     m_Options.process(arguments());
     aboutData.processCommandLine(&m_Options);
     KAboutData::setApplicationData(aboutData);
+    QLoggingCategory::setFilterRules(QStringLiteral("org.kde.imagewriter = true"));
 }
 
 // Returns the language id to be used by the application (specified by --lang, or system locale otherwise)

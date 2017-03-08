@@ -53,7 +53,6 @@ MainDialog::MainDialog(QWidget *parent) :
     void disableHideOnDeactivate(WId wid);
     disableHideOnDeactivate(winId());
 #endif
-    QLoggingCategory::setFilterRules(QStringLiteral("org.kde.imagewriter = true"));
 
     ui->setupUi(this);
 
@@ -61,6 +60,8 @@ MainDialog::MainDialog(QWidget *parent) :
     // Compile with -DROSA_BRANDING=On to use the ROSA name
     setWindowTitle("ROSA Image Writer");
     ui->logo->setPixmap(QPixmap(QStandardPaths::locate(QStandardPaths::AppDataLocation, "logo-rosa.png")));
+#else
+    ui->logo->setPixmap(QIcon::fromTheme("drive-removable-media").pixmap(QSize(100, 100)));
 #endif
     ui->imageSelectButton->setIcon(QIcon::fromTheme("folder-open"));
     ui->deviceRefreshButton->setIcon(QIcon::fromTheme("view-refresh"));
