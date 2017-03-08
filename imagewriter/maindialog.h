@@ -40,6 +40,7 @@ public:
 
 private:
     Ui::MainDialog *ui;
+    QPushButton *m_writeButton, *m_clearButton, *m_cancelButton;
 
 protected:
     // Image file currently selected by the user
