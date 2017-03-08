@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
 
     MainApplication a(argc, argv);
 
-    KLocalizedString::setApplicationDomain("imagewriterXXX");
-    KAboutData aboutData( QStringLiteral("imagewriterYYY"),
+    KLocalizedString::setApplicationDomain("imagewriter");
+    KAboutData aboutData( QStringLiteral("imagewriter"),
                           i18n("Image Writer"),
                           "1.0", //QStringLiteral("PROJECT_VERSION 1.0"),
                           i18n("Write an ISO Image to a USB Disk"),
