@@ -15,6 +15,9 @@ ki18n_wrap_ui(imagewriter_SRCS maindialog.ui)
 
 add_executable(imagewriter ${imagewriter_SRCS})
 
+if (ROSA_BRANDING)
+    target_compile_definitions(imagewriter PRIVATE -DROSA_BRANDING="1")
+endif (ROSA_BRANDING)
 target_compile_definitions(imagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(imagewriter

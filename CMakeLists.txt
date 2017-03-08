@@ -13,6 +13,8 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMPackageConfigHelpers)
 include(ECMOptionalAddSubdirectory)
 
+option(ROSA_BRANDING "Build with ROSA branding" OFF)
+
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
 find_package(KF5 REQUIRED COMPONENTS

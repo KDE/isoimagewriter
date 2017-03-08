@@ -53,6 +53,11 @@ MainDialog::MainDialog(QWidget *parent) :
 #endif
 
     ui->setupUi(this);
+
+#if defined(ROSA_BRANDING)
+    // Compile with -DROSA_BRANDING to use the ROSA name
+    setWindowTitle("ROSA Image Writer");
+#endif
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
     // Disallow to change the dialog height
