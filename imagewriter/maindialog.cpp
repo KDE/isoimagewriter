@@ -27,6 +27,8 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QRegularExpression>
+#include <QDebug>
+#include <QLoggingCategory>
 
 #include "common.h"
 #include "mainapplication.h"
@@ -51,6 +53,7 @@ MainDialog::MainDialog(QWidget *parent) :
     void disableHideOnDeactivate(WId wid);
     disableHideOnDeactivate(winId());
 #endif
+    QLoggingCategory::setFilterRules(QStringLiteral("org.kde.imagewriter = true"));
 
     ui->setupUi(this);
 
@@ -59,6 +62,7 @@ MainDialog::MainDialog(QWidget *parent) :
     setWindowTitle("ROSA Image Writer");
     ui->logo->setPixmap(QPixmap(QStandardPaths::locate(QStandardPaths::AppDataLocation, "logo-rosa.png")));
 #endif
+    ui->imageSelectButton->setIcon(QIcon::fromTheme("folder-open"));
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
     // Disallow to change the dialog height

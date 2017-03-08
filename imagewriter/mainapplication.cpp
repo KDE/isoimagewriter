@@ -19,11 +19,18 @@
 #include <KAboutData>
 #include <KLocalizedString>
 
+#include "common.h"
 #include "mainapplication.h"
+
+// in one source file
+Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.imagewriter");
 
 MainApplication::MainApplication(int& argc, char** argv) :
     QApplication(argc, argv)
 {
+
+    //FIXME why is this needed? because it's root?
+    QIcon::setThemeName("breeze");
     setWindowIcon(QIcon::fromTheme("drive-removable-media"));
     KLocalizedString::setApplicationDomain("imagewriter");
     KAboutData aboutData( QStringLiteral("imagewriter"),

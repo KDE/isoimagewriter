@@ -20,9 +20,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains some commonly-used constants and function declarations
 
-
+#include <QDebug>
 #include <QObject>
 #include <QString>
+#include <QLoggingCategory>
 
 #include <type_traits>
 
@@ -30,6 +31,7 @@
 
 class UsbDevice;
 
+Q_DECLARE_LOGGING_CATEGORY(IMAGEWRITER);
 
 // Default unit to be used when displaying file/device sizes (MB)
 const quint64 DEFAULT_UNIT = 1048576;

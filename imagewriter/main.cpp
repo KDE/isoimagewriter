@@ -18,6 +18,7 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QIcon>
+#include <QLoggingCategory>
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -30,6 +31,7 @@
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC)
 #error Unsupported platform!
 #endif
+
 
 int main(int argc, char *argv[])
 {
