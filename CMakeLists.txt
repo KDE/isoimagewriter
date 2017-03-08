@@ -17,6 +17,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
 find_package(KF5 REQUIRED COMPONENTS
     I18n
+    CoreAddons
 )
 
 KDE_ENABLE_EXCEPTIONS()
@@ -38,9 +39,12 @@ ki18n_wrap_ui(imagewriter_SRCS maindialog.ui)
 
 add_executable(imagewriter ${imagewriter_SRCS})
 
+target_compile_definitions(imagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
+
 target_link_libraries(imagewriter
     Qt5::Widgets
     KF5::I18n
+    KF5::CoreAddons
     dl
 )
 

@@ -1,14 +1,32 @@
 #include <QStandardPaths>
+#include <QIcon>
+#include <KAboutData>
+#include <KLocalizedString>
 
 #include "mainapplication.h"
 
 MainApplication::MainApplication(int& argc, char** argv) :
     QApplication(argc, argv)
 {
+    setWindowIcon(QIcon::fromTheme("drive-removable-media"));
+    KLocalizedString::setApplicationDomain("imagewriter");
+    KAboutData aboutData( QStringLiteral("imagewriter"),
+                          i18n("Image Writer"),
+                          QStringLiteral("PROJECT_VERSION"),
+                          i18n("Write an ISO Image to a USB Disk"),
+                          KAboutLicense::GPL,
+                          i18n("Copyright (c) 2016 ROSA"));
+
+    aboutData.addAuthor(i18n("Konstantin Vlasov"), i18n("Author"), QStringLiteral("konstantin.vlasov@rosalab.ru"));
+    aboutData.addAuthor(i18n("Jonathan Riddell"), i18n("Author"), QStringLiteral("jr@jriddell.org"));
     m_Options.addOption(QCommandLineOption("lang", "", "language"));
     m_Options.addOption(QCommandLineOption("dir", "", "path"));
-    // Command line interface is internal, so using parse() instead of process() to ignore unknown options
-    m_Options.parse(arguments());
+    m_Options.addHelpOption();
+    m_Options.addVersionOption();
+    aboutData.setupCommandLine(&m_Options);
+    m_Options.process(arguments());
+    aboutData.processCommandLine(&m_Options);
+    KAboutData::setApplicationData(aboutData);
 }
 
 // Returns the language id to be used by the application (specified by --lang, or system locale otherwise)
