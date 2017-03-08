@@ -63,6 +63,7 @@ MainDialog::MainDialog(QWidget *parent) :
     ui->logo->setPixmap(QPixmap(QStandardPaths::locate(QStandardPaths::AppDataLocation, "logo-rosa.png")));
 #endif
     ui->imageSelectButton->setIcon(QIcon::fromTheme("folder-open"));
+    ui->deviceRefreshButton->setIcon(QIcon::fromTheme("view-refresh"));
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
     // Disallow to change the dialog height

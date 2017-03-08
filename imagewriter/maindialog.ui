@@ -34,10 +34,6 @@
   <property name="windowTitle">
    <string notr="true">Image Writer</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/res/icon-rosa.svg</normaloff>:/res/icon-rosa.svg</iconset>
-  </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
@@ -143,10 +139,6 @@
        <property name="text">
         <string/>
        </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/res/icon-open.ico</normaloff>:/res/icon-open.ico</iconset>
-       </property>
       </widget>
      </item>
      <item row="1" column="2">
@@ -156,10 +148,6 @@
        </property>
        <property name="text">
         <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/res/icon-refresh.ico</normaloff>:/res/icon-refresh.ico</iconset>
        </property>
       </widget>
      </item>
