@@ -21,6 +21,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 find_package(KF5 REQUIRED COMPONENTS
     I18n
     CoreAddons
+    Auth
 )
 
 KDE_ENABLE_EXCEPTIONS()
