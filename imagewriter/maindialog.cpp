@@ -36,6 +36,7 @@
 #include "ui_maindialog.h"
 #include "imagewriter.h"
 #include "usbdevice.h"
+#include "imagewriter_debug.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -68,12 +69,13 @@ MainDialog::MainDialog(QWidget *parent) :
     ui->deviceRefreshButton->setIcon(QIcon::fromTheme("view-refresh"));
     m_writeButton = ui->buttonBox->button(QDialogButtonBox::Yes);
     m_clearButton = ui->buttonBox->button(QDialogButtonBox::Reset);
-    m_cancelButton = ui->buttonBox->button(QDialogButtonBox::Reset);
+    m_cancelButton = ui->buttonBox->button(QDialogButtonBox::Cancel);
 
     m_clearButton->setText(i18n("Clear USB Disk"));
     m_writeButton->setText(i18n("Write"));
     connect(m_writeButton, &QPushButton::clicked, this, &MainDialog::writeImageToDevice);
     m_clearButton->setText("Wipe USB Disk");
+    connect(m_clearButton, &QPushButton::clicked, this, &MainDialog::clearDevice);
     m_cancelButton->hide();
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
@@ -130,7 +132,6 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     m_ImageFile = newImageFile;
     ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " " + i18n("(%1 MiB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
     // Enable the Write button (if there are USB flash disks present)
-    ui->writeButton->setEnabled(ui->deviceList->count() > 0);
     m_writeButton->setEnabled(ui->deviceList->count() > 0);
 }
 
@@ -288,10 +289,8 @@ void MainDialog::enumFlashDevices()
     ui->deviceList->setEnabled(true);
     // Update the Write button enabled/disabled state
     m_writeButton->setEnabled((ui->deviceList->count() > 0) && (m_ImageFile != ""));
-    ui->writeButton->setEnabled((ui->deviceList->count() > 0) && (m_ImageFile != ""));
     // Update the Clear button enabled/disabled state
     m_clearButton->setEnabled(ui->deviceList->count() > 0);
-    ui->clearButton->setEnabled(ui->deviceList->count() > 0);
 }
 
 // Starts writing data to the device
@@ -339,8 +338,8 @@ void MainDialog::writeToDevice(bool zeroing)
 
     // If the Cancel button is pressed, inform the writer to stop the operation
     // Using DirectConnection because the thread does not read its own event queue until completion
+    m_cancelButton->show();
     connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
-    connect(ui->cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
 
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
@@ -396,10 +395,7 @@ void MainDialog::showWritingProgress(int maxValue)
     ui->progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
     m_writeButton->setVisible(false);
     m_clearButton->setVisible(false);
-    m_cancelButton->setVisible(false);
-    ui->writeButton->setVisible(false);
-    ui->clearButton->setVisible(false);
-    ui->cancelButton->setVisible(true);
+    m_cancelButton->setVisible(true);
 
     // Expose the progress bar state to the OS
     m_ExtProgressBar.InitProgressBar(maxValue);
@@ -427,9 +423,6 @@ void MainDialog::hideWritingProgress()
     m_writeButton->setVisible(true);
     m_clearButton->setVisible(true);
     m_cancelButton->setVisible(false);
-    ui->writeButton->setVisible(true);
-    ui->clearButton->setVisible(true);
-    ui->cancelButton->setVisible(false);
 
     // Send a signal that progressbar is no longer present
     m_ExtProgressBar.DestroyProgressBar();

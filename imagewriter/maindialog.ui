@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>204</height>
+    <width>538</width>
+    <height>196</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -201,72 +201,6 @@
        </property>
       </spacer>
      </item>
-     <item>
-      <widget class="QPushButton" name="clearButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="toolTip">
-        <string>Delete partitions and make all space available for storing data</string>
-       </property>
-       <property name="text">
-        <string>Clea&amp;r</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="writeButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>&amp;Write</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="cancelButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>&amp;Cancel</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>
@@ -295,28 +229,12 @@
    <slot>openImageFile()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>700</x>
-     <y>76</y>
+     <x>678</x>
+     <y>68</y>
     </hint>
     <hint type="destinationlabel">
-     <x>467</x>
+     <x>425</x>
      <y>7</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>writeButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainDialog</receiver>
-   <slot>writeImageToDevice()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>137</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>507</x>
-     <y>13</y>
     </hint>
    </hints>
   </connection>
@@ -327,28 +245,12 @@
    <slot>scheduleEnumFlashDevices()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>685</x>
-     <y>92</y>
+     <x>678</x>
+     <y>108</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
+     <x>425</x>
      <y>18</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clearButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainDialog</receiver>
-   <slot>clearDevice()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>321</x>
-     <y>133</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>274</x>
-     <y>77</y>
     </hint>
    </hints>
   </connection>

@@ -31,8 +31,6 @@
 
 class UsbDevice;
 
-Q_DECLARE_LOGGING_CATEGORY(IMAGEWRITER);
-
 // Default unit to be used when displaying file/device sizes (MB)
 const quint64 DEFAULT_UNIT = 1048576;
 

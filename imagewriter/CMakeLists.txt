@@ -13,6 +13,12 @@ set(imagewriter_SRCS
 )
 ki18n_wrap_ui(imagewriter_SRCS maindialog.ui)
 
+ecm_qt_declare_logging_category(imagewriter_SRCS
+                                HEADER imagewriter_debug.h
+                                IDENTIFIER IMAGEWRITER_LOG
+                                CATEGORY_NAME org.kde.imagewriter
+                                DEFAULT_SEVERITY Debug)
+
 add_executable(imagewriter ${imagewriter_SRCS})
 
 if (ROSA_BRANDING)
