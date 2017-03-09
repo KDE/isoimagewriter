@@ -22,7 +22,7 @@
 
 #include <QObject>
 #include <QPushButton>
-
+#include <KJob>
 
 /**
  * @todo write docs
@@ -34,6 +34,9 @@ public:
     Testy(int argc, char *argv[]);
 public slots:
     void run();
+    void runAsync();
+    void progressStep(KJob* job, unsigned long step);
+    void finished(KJob* job);
 private:
     QPushButton *m_button;
 };

@@ -23,6 +23,7 @@
 #include <KAuth>
 #include <QApplication>
 #include <QMessageBox>
+#include <QTimer>
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +36,7 @@ Testy::Testy(int argc, char *argv[]) {
     m_button = new QPushButton("hello");
     m_button->show();
     connect(m_button, SIGNAL(clicked()), this, SLOT(run()));
+    QTimer::singleShot(0, this, SLOT(runAsync()));
     app.exec();    
 }
 
@@ -61,4 +63,23 @@ void Testy::run() {
         QString contents = job->data()["contents"].toString();
         qCDebug(IMAGEWRITER_LOG) << "returned: " << contents;
     }
+}
+
+void Testy::runAsync() {
+    qCDebug(IMAGEWRITER_LOG) << "runAsync";
+    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
+    action.setHelperId("org.kde.imagewriter");
+    KAuth::ExecuteJob *job = action.execute();
+    connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(finished(KJob*)));
+    job->start();
+    qCDebug(IMAGEWRITER_LOG) << "runAsync start()";
+}
+
+void Testy::progressStep(KJob* job, unsigned long step) {
+    qCDebug(IMAGEWRITER_LOG) << "progressStep() " << step;
+}
+
+void Testy::finished(KJob* job) {
+    qCDebug(IMAGEWRITER_LOG) << "finished() ";
 }
