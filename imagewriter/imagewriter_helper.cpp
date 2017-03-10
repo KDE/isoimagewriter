@@ -57,6 +57,12 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     reply.setData(retdata);
     qDebug() << "I'm in the helper";
     for (int i = 0; i < 5; i++) {
+        if (KAuth::HelperSupport::isStopped()) {
+            qDebug("HELPER STOPPED");
+            reply.setError(KAuth::ActionReply::HelperErrorType);
+            reply.setErrorDescription("foo");
+            return reply;
+        }
         qDebug() << "helper: " << i;
         QFile file("/tmp/foo");
 
@@ -70,6 +76,10 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
         file.close();
         struct timespec ts = { 1000 / 1000, (1000 % 1000) * 1000 * 1000 };
         nanosleep(&ts, NULL);
+        KAuth::HelperSupport::progressStep(i);
+        QVariantMap progress;
+        progress["value"] = i;
+        KAuth::HelperSupport::progressStep(progress);
     }
     return reply;
 }

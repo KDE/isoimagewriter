@@ -74,15 +74,28 @@ void Testy::runAsync() {
     action.setArguments(helperargs);
     KAuth::ExecuteJob *job = action.execute();
     connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(finished(KJob*)));
+    connect(job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     job->start();
     qCDebug(IMAGEWRITER_LOG) << "runAsync start()";
+    qDebug() << "DAVE" << action.isValid();
 }
 
 void Testy::progressStep(KJob* job, unsigned long step) {
-    qCDebug(IMAGEWRITER_LOG) << "progressStep() " << step;
+    qCDebug(IMAGEWRITER_LOG) << "progressStep %() " << step;
+    if (step == 2) {
+        qDebug() << "KILL!";
+        KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
+        job2->kill();
+    }
+}
+
+void Testy::progressStep(const QVariantMap &) {
+    qCDebug(IMAGEWRITER_LOG) << "progressStep() ";// << step;
 }
 
 void Testy::finished(KJob* job) {
-    qCDebug(IMAGEWRITER_LOG) << "finished() ";
+    qCDebug(IMAGEWRITER_LOG) << "finished() " << job->error();
+    KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
+    qCDebug(IMAGEWRITER_LOG) << "finished() " << job2->data();
 }

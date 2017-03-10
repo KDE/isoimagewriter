@@ -35,7 +35,8 @@ public:
 public slots:
     void run();
     void runAsync();
-    void progressStep(KJob* job, unsigned long step);
+    void progressStep(KJob*, unsigned long step) ;
+    void progressStep(const QVariantMap &);
     void finished(KJob* job);
 private:
     QPushButton *m_button;
