@@ -1,0 +1,9 @@
+[Domain]
+Name=Image Writer
+Icon=drive-removable-media
+
+[org.kde.imagewriter.writefile]
+Name=Write an ISO image to a USB disk
+Description=Write an ISO image to a USB disk
+Policy=auth_admin
+Persistence=session
