@@ -312,14 +312,17 @@ void MainDialog::writeToDevice(bool zeroing)
         );
         return;
     }
-    if (QMessageBox::warning(
-            this,
-            ApplicationTitle,
-            "<font color=\"red\">" + i18n("Warning!") + "</font> " + i18n("All existing data on the selected device will be lost!") + "<br>" +
-            i18n("Are you sure you wish to proceed?"),
-            QMessageBox::Yes | QMessageBox::No,
-            QMessageBox::No) == QMessageBox::No)
+    QMessageBox wipeWarningBox;
+    wipeWarningBox.setText(i18n("All existing data on the selected device will be lost."));
+    wipeWarningBox.setInformativeText("Are you sure you wish to proceed?");
+    wipeWarningBox.setIcon(QMessageBox::Warning);
+    wipeWarningBox.addButton(QMessageBox::Ok);
+    wipeWarningBox.addButton(QMessageBox::Cancel);
+    wipeWarningBox.button(QMessageBox::Ok)->setText("Clear Disk");
+    wipeWarningBox.exec();
+    if (wipeWarningBox.result() != QMessageBox::Ok) {
         return;
+    }
 
     showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
 
