@@ -69,6 +69,9 @@ void Testy::runAsync() {
     qCDebug(IMAGEWRITER_LOG) << "runAsync";
     KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
     action.setHelperId("org.kde.imagewriter");
+    QVariantMap helperargs;
+    helperargs[QStringLiteral("filename")] = "bar";
+    action.setArguments(helperargs);
     KAuth::ExecuteJob *job = action.execute();
     connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(finished(KJob*)));
