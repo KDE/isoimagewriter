@@ -20,6 +20,8 @@
 #ifndef TESTY_H
 #define TESTY_H
 
+#include <KAuthAction>
+
 #include <QObject>
 #include <QPushButton>
 #include <KJob>
@@ -35,7 +37,8 @@ public:
 public slots:
     void run();
     void runAsync();
-    void progressStep(KJob*, unsigned long step) ;
+    void statusChanged(KAuth::Action::AuthStatus status);
+    void progressStep(KJob*, unsigned long step);
     void progressStep(const QVariantMap &);
     void finished(KJob* job);
 private:

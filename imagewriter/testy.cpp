@@ -75,6 +75,7 @@ void Testy::runAsync() {
     KAuth::ExecuteJob *job = action.execute();
     connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
     connect(job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     job->start();
     qCDebug(IMAGEWRITER_LOG) << "runAsync start()";
@@ -88,6 +89,11 @@ void Testy::progressStep(KJob* job, unsigned long step) {
         KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
         job2->kill();
     }
+}
+
+
+void Testy::statusChanged(KAuth::Action::AuthStatus status) {
+    qCDebug(IMAGEWRITER_LOG) << "status: " << status;
 }
 
 void Testy::progressStep(const QVariantMap &) {
