@@ -61,6 +61,7 @@ protected:
     void preprocessImageFile(const QString& newImageFile);
     // Starts writing data to the device
     void writeToDevice(bool zeroing);
+    void writeToDeviceKAuth(bool zeroing);
     // Frees the GUI-specific allocated resources
     void cleanup();
 

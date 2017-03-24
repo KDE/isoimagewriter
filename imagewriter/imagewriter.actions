@@ -7,3 +7,9 @@ Name=Write an ISO image to a USB disk
 Description=Write an ISO image to a USB disk
 Policy=auth_admin
 Persistence=session
+
+[org.kde.imagewriter.writeimage]
+Name=Write an ISO image to a USB disk
+Description=Write an ISO image to a USB disk
+Policy=auth_admin
+Persistence=session

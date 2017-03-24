@@ -29,7 +29,8 @@ class ImageWriterHelper : public QObject
         ImageWriterHelper();
 
     public Q_SLOTS:
-        ActionReply writefile(const QVariantMap &map);
+        ActionReply writefile(const QVariantMap &args);
+        ActionReply writeimage(const QVariantMap &args);
 };
 
 #endif // IMAGEWRITER_HELPER_H

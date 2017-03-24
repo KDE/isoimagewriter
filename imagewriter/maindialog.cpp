@@ -17,6 +17,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of MainDialog
 
+#include <KAuth>
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -361,10 +362,110 @@ void MainDialog::writeToDevice(bool zeroing)
     writerThread->start();
 }
 
+
+// Starts writing data to the device
+void MainDialog::writeToDeviceKAuth(bool zeroing)
+{
+    qCDebug(IMAGEWRITER_LOG) << "writeToDeviceKAuth()";
+    if ((ui->deviceList->count() == 0) || (!zeroing && (m_ImageFile == "")))
+        return;
+    UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
+    if (!zeroing && (m_ImageSize > selectedDevice->m_Size))
+    {
+        QLocale currentLocale;
+        QMessageBox::critical(
+            this,
+            ApplicationTitle,
+            i18n("The image is larger than your selected device!") + "\n" +
+            i18n("Image size: %1MiB (%2b)", QString::number(m_ImageSize / DEFAULT_UNIT), currentLocale.toString(m_ImageSize)) + "\n" +
+            i18n("Disk size: %1MiB (%2b)", QString::number(selectedDevice->m_Size / DEFAULT_UNIT), currentLocale.toString(selectedDevice->m_Size)),
+            QMessageBox::Ok
+        );
+        return;
+    }
+    QMessageBox wipeWarningBox;
+    wipeWarningBox.setText(i18n("All existing data on the selected device will be lost."));
+    wipeWarningBox.setInformativeText("Are you sure you wish to proceed?");
+    wipeWarningBox.setIcon(QMessageBox::Warning);
+    wipeWarningBox.addButton(QMessageBox::Ok);
+    wipeWarningBox.addButton(QMessageBox::Cancel);
+    wipeWarningBox.button(QMessageBox::Ok)->setText("Clear Disk");
+    wipeWarningBox.exec();
+    if (wipeWarningBox.result() != QMessageBox::Ok) {
+        return;
+    }
+
+    qCDebug(IMAGEWRITER_LOG) << "runWriteImage";
+//    KAuth::Action action(QLatin1String("org.kde.imagewriter.writeimage"));
+    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
+    action.setHelperId("org.kde.imagewriter");
+    QVariantMap helperargs;
+    //helperargs[QStringLiteral("filename")] = "bar";
+    helperargs[QStringLiteral("zeroing")] = QVariant(zeroing);
+    helperargs[QStringLiteral("imagefile")] = m_ImageFile;
+    helperargs[QStringLiteral("usbdevice_visiblename")] = selectedDevice->m_VisibleName;
+    helperargs[QStringLiteral("usbdevice_volumes")] = selectedDevice->m_Volumes[0];
+    qCDebug(IMAGEWRITER_LOG) << "volumes" << selectedDevice->m_Volumes[0];
+    qCDebug(IMAGEWRITER_LOG) << "size" << selectedDevice->m_Size;
+    qCDebug(IMAGEWRITER_LOG) << "m_SectorSize" << selectedDevice->m_SectorSize;
+    helperargs[QStringLiteral("usbdevice_size")] = QString("%1").arg(selectedDevice->m_Size);
+    helperargs[QStringLiteral("usbdevice_sectorsize")] = selectedDevice->m_SectorSize;
+    helperargs[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
+    
+    action.setArguments(helperargs);
+    KAuth::ExecuteJob *job = action.execute();
+    /*
+    connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
+    connect(job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
+    */
+    qCDebug(IMAGEWRITER_LOG) << "runWriteImage start()";
+    job->start();
+    qCDebug(IMAGEWRITER_LOG) << "action.isValid()? " << action.isValid();
+    /*
+    showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
+
+    ImageWriter* writer = new ImageWriter(zeroing ? "" : m_ImageFile, selectedDevice);
+    QThread *writerThread = new QThread(this);
+
+    // Connect start and end signals
+    connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
+
+    // When writer finishes its job, quit the thread
+    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
+
+    // Guarantee deleting the objects after completion
+    connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
+    connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
+
+    // If the Cancel button is pressed, inform the writer to stop the operation
+    // Using DirectConnection because the thread does not read its own event queue until completion
+    m_cancelButton->show();
+    connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+
+    // Each time a block is written, update the progress bar
+    connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
+
+    // Show the message about successful completion on success
+    connect(writer, &ImageWriter::success, this, &MainDialog::showSuccessMessage);
+
+    // Show error message if error is sent by the worker
+    connect(writer, &ImageWriter::error, this, &MainDialog::showErrorMessage);
+
+    // Silently return back to normal dialog form if the operation was cancelled
+    connect(writer, &ImageWriter::cancelled, this, &MainDialog::hideWritingProgress);
+
+    // Now start the writer thread
+    writer->moveToThread(writerThread);
+    writerThread->start();
+    */
+}
+
 // Starts writing the image
 void MainDialog::writeImageToDevice()
 {
-    writeToDevice(false);
+    writeToDeviceKAuth(false);
 }
 
 // Clears the selected USB device

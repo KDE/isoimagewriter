@@ -24,6 +24,9 @@
 
 #include <QObject>
 #include <QPushButton>
+#include <QComboBox>
+#include <QHBoxLayout>
+#include <QWidget>
 #include <KJob>
 
 /**
@@ -37,12 +40,17 @@ public:
 public slots:
     void run();
     void runAsync();
+    void runWriteImage();
+    void enumFlashDevices();
     void statusChanged(KAuth::Action::AuthStatus status);
     void progressStep(KJob*, unsigned long step);
     void progressStep(const QVariantMap &);
     void finished(KJob* job);
 private:
     QPushButton *m_button;
+    QComboBox *m_deviceList;
+    QHBoxLayout *m_layout;
+    QWidget *m_widget;
 };
 
 #endif // TESTY_H

@@ -1,4 +1,7 @@
-set(imagewriter_common_SRCS)
+set(imagewriter_common_SRCS
+    platform_lin.cpp
+    platform_lin_suprogram.cpp
+    common.cpp)
 ecm_qt_declare_logging_category(imagewriter_common_SRCS
                                 HEADER imagewriter_debug.h
                                 IDENTIFIER IMAGEWRITER_LOG
@@ -23,8 +26,8 @@ ki18n_wrap_ui(imagewriter_SRCS maindialog.ui)
 
 add_executable(imagewriter ${imagewriter_SRCS})
 
-add_executable(testy testy.cpp ${imagewriter_common_SRCS})
-target_link_libraries(testy Qt5::Widgets KF5::Auth)
+#add_executable(testy testy.cpp ${imagewriter_common_SRCS})
+#target_link_libraries(testy Qt5::Widgets KF5::Auth)
 
 if (ROSA_BRANDING)
     target_compile_definitions(imagewriter PRIVATE -DROSA_BRANDING="1")
@@ -35,8 +38,15 @@ target_link_libraries(imagewriter
     Qt5::Widgets
     KF5::I18n
     KF5::CoreAddons
+    KF5::Auth
     dl
 )
+#target_link_libraries(testy
+#    Qt5::Widgets
+#    KF5::I18n
+#    KF5::CoreAddons
+#    dl
+#)
 
 install(TARGETS imagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.imagewriter.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
