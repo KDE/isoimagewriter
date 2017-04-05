@@ -139,6 +139,12 @@ void ImageWriter::writeImage()
         for (;;)
         {
             qDebug("For Loop");
+            qDebug("For Loop2");
+            if (KAuth::HelperSupport::isStopped()) {
+                qDebug("isStopped");
+            } else {
+                qDebug("not isStopped");
+            }
             if (zeroing)
             {
                 readBytes = TRANSFER_BLOCK_SIZE;
@@ -170,10 +176,12 @@ void ImageWriter::writeImage()
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();
-            cancelRequested = m_CancelWriting;
+            //cancelRequested = m_CancelWriting;
+            cancelRequested = KAuth::HelperSupport::isStopped();
             m_Mutex.unlock();
             if (cancelRequested)
             {
+                qDebug("cancelRequested");
                 // The cancel request was issued
                 emit cancelled();
                 break;
