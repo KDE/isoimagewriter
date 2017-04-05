@@ -20,6 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MainDialog is the main application window
 
+#include <KAuth>
 
 #include <QDialog>
 
@@ -41,6 +42,7 @@ public:
 private:
     Ui::MainDialog *ui;
     QPushButton *m_writeButton, *m_clearButton, *m_cancelButton;
+    KAuth::ExecuteJob *m_job;
 
 protected:
     // Image file currently selected by the user
@@ -96,6 +98,12 @@ public slots:
     void showSuccessMessage(QString msg);
     // Displays the specified error message and returns to the "idle" mode
     void showErrorMessage(QString msg);
+    //cancel button clicked
+    void cancelWriting();
+    void progressStep(KJob* job, unsigned long step);
+    void progressStep(const QVariantMap &);
+    void statusChanged(KAuth::Action::AuthStatus status);
+    void finished(KJob* job);
 };
 
 

@@ -38,7 +38,6 @@ ImageWriterHelper::ImageWriterHelper()
     KLocalizedString::setApplicationDomain("imagewriter");
 }
 
-/*
 ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
 {
     qDebug("ImageWriterHelper::writeimage()");
@@ -88,7 +87,6 @@ ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
     }
     return reply;
 }
-*/
 
 ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 {
@@ -107,13 +105,14 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     selectedDevice->m_Size = size;
     selectedDevice->m_SectorSize = sectorSize;
     selectedDevice->m_PhysicalDevice = physicalDevice;
-    qDebug("ImageWriterHelper::writeimage() zeroing:" + QString::number(zeroing).toLatin1());
-    qDebug("ImageWriterHelper::writeimage() imageFile:" + imageFile.toLatin1());
-    qDebug("ImageWriterHelper::writeimage() physicalDevice:" + physicalDevice.toLatin1());
-    qDebug("ImageWriterHelper::writeimage() volumes:" + volumes[0].toLatin1());
-    qDebug("ImageWriterHelper::writeimage() size:" + QString("%1").arg(size).toLatin1());
-    qDebug("ImageWriterHelper::writeimage() sectorSize:" + QString("%1").arg(sectorSize).toLatin1());
+    qDebug("ImageWriterHelper::writefile() zeroing:" + QString::number(zeroing).toLatin1());
+    qDebug("ImageWriterHelper::writefile() imageFile:" + imageFile.toLatin1());
+    qDebug("ImageWriterHelper::writefile() physicalDevice:" + physicalDevice.toLatin1());
+    qDebug("ImageWriterHelper::writefile() volumes:" + volumes[0].toLatin1());
+    qDebug("ImageWriterHelper::writefile() size:" + QString("%1").arg(size).toLatin1());
+    qDebug("ImageWriterHelper::writefile() sectorSize:" + QString("%1").arg(sectorSize).toLatin1());
     ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
+    /*
     QThread *writerThread = new QThread(this);
 
     // Connect start and end signals
@@ -125,13 +124,7 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     // Guarantee deleting the objects after completion
     connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
     connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
-
-    // If the Cancel button is pressed, inform the writer to stop the operation
-    // Using DirectConnection because the thread does not read its own event queue until completion
-    /*
-    m_cancelButton->show();
-    connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
-    */
+    connect(writerThread, &QThread::finished, this, &ImageWriter::threadFinished);
 
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &ImageWriterHelper::updateProgressBar);
@@ -147,21 +140,25 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 
     // Now start the writer thread
     writer->moveToThread(writerThread);
-    writerThread->start();    
+    writerThread->start();
+    //wait for thread to finish
+    */
+    writer->writeImage();
     ActionReply reply;
     return reply;    
 }
 
 void ImageWriterHelper::updateProgressBar(int progress) {
     qDebug("ImageWriterHelper::updateProgressBar()" + QString::number(progress).toLatin1());
+    KAuth::HelperSupport::progressStep(progress);
 }
 
 void ImageWriterHelper::showSuccessMessage(QString message) {
-    qDebug("ImageWriterHelper::updateProgressBar()" + message.toLatin1());
+    qDebug("ImageWriterHelper::showSuccessMessage()" + message.toLatin1());
 }
 
 void ImageWriterHelper::showErrorMessage(QString message) {
-    qDebug("ImageWriterHelper::updateProgressBar()" + message.toLatin1());
+    qDebug("ImageWriterHelper::showErrorMessage()" + message.toLatin1());
 }
 
 void ImageWriterHelper::hideWritingProgress() {

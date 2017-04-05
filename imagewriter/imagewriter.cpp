@@ -18,6 +18,7 @@
 // Implementation of ImageWriter
 
 #include <KLocalizedString>
+#include <KAuth>
 
 #include <QFile>
 
@@ -36,6 +37,7 @@ ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *p
 // The main method that writes the image
 void ImageWriter::writeImage()
 {
+    qDebug("XX writeImage()");
     const qint64 TRANSFER_BLOCK_SIZE = 1024 * 1024;
     void* buffer = NULL;
 
@@ -136,6 +138,7 @@ void ImageWriter::writeImage()
         // Start reading/writing cycle
         for (;;)
         {
+            qDebug("For Loop");
             if (zeroing)
             {
                 readBytes = TRANSFER_BLOCK_SIZE;
@@ -163,6 +166,7 @@ void ImageWriter::writeImage()
             // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
             // this still works or at least fails compilation
             emit blockWritten(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
+            KAuth::HelperSupport::progressStep(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();

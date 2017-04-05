@@ -17,8 +17,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of MainDialog
 
-#include <KAuth>
-
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDropEvent>
@@ -326,6 +324,7 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
         return;
     }
 
+    connect(m_cancelButton, &QPushButton::clicked, this, &MainDialog::cancelWriting);
     KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
     action.setHelperId("org.kde.imagewriter");
     QVariantMap helperargs;
@@ -340,57 +339,44 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     helperargs[QStringLiteral("usbdevice_size")] = QString("%1").arg(selectedDevice->m_Size);
     helperargs[QStringLiteral("usbdevice_sectorsize")] = selectedDevice->m_SectorSize;
     helperargs[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
-    
+
     action.setArguments(helperargs);
-    KAuth::ExecuteJob *job = action.execute();
-    /*
-    connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
-    connect(job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
-    connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
-    */
+    m_job = action.execute();
+    connect(m_job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
+    connect(m_job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(m_job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
+    connect(m_job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     qCDebug(IMAGEWRITER_LOG) << "runWriteImage start()";
-    job->start();
+    m_job->start();
     qCDebug(IMAGEWRITER_LOG) << "action.isValid()? " << action.isValid();
-    /*
     showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
-
-    ImageWriter* writer = new ImageWriter(zeroing ? "" : m_ImageFile, selectedDevice);
-    QThread *writerThread = new QThread(this);
-
-    // Connect start and end signals
-    connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
-
-    // When writer finishes its job, quit the thread
-    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
-
-    // Guarantee deleting the objects after completion
-    connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
-    connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
-
-    // If the Cancel button is pressed, inform the writer to stop the operation
-    // Using DirectConnection because the thread does not read its own event queue until completion
-    m_cancelButton->show();
-    connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
-
-    // Each time a block is written, update the progress bar
-    connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
-
-    // Show the message about successful completion on success
-    connect(writer, &ImageWriter::success, this, &MainDialog::showSuccessMessage);
-
-    // Show error message if error is sent by the worker
-    connect(writer, &ImageWriter::error, this, &MainDialog::showErrorMessage);
-
-    // Silently return back to normal dialog form if the operation was cancelled
-    connect(writer, &ImageWriter::cancelled, this, &MainDialog::hideWritingProgress);
-
-    // Now start the writer thread
-    writer->moveToThread(writerThread);
-    writerThread->start();
-    */
 }
 
+void MainDialog::cancelWriting() {
+    qCDebug(IMAGEWRITER_LOG) << "cancelWriting()";
+    m_job->kill();
+    qCDebug(IMAGEWRITER_LOG) << "cancelWriting() done";
+}
+
+void MainDialog::progressStep(KJob* job, unsigned long step) {
+    qCDebug(IMAGEWRITER_LOG) << "progressStep %() " << step;
+}
+
+
+void MainDialog::progressStep(const QVariantMap &) {
+    qCDebug(IMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
+}
+
+void MainDialog::statusChanged(KAuth::Action::AuthStatus status) {
+    qCDebug(IMAGEWRITER_LOG) << "statusChanged: " << status;
+}
+
+void MainDialog::finished(KJob* job) {
+    qCDebug(IMAGEWRITER_LOG) << "finished() " << job->error();
+    KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
+    qCDebug(IMAGEWRITER_LOG) << "finished() " << job2->data();
+}
+     
 // Starts writing the image
 void MainDialog::writeImageToDevice()
 {

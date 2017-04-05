@@ -44,12 +44,13 @@ Testy::Testy(int argc, char *argv[]) {
     connect(m_button, SIGNAL(clicked()), this, SLOT(run()));
     //QTimer::singleShot(0, this, SLOT(runAsync()));
     QTimer::singleShot(0, this, SLOT(runWriteImage()));
+    m_widget->show();
     app.exec();    
 }
 
 void Testy::run() {
     qCDebug(IMAGEWRITER_LOG) << "run";
-    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile));
+    KAuth::Action action(QLatin1String("org.kde.imagewriter.writeimage"));
     action.setHelperId("org.kde.imagewriter");
     //KAuth::Action action(QLatin1String("org.kde.kcontrol.kcmplymouth.install"));
     //action.setHelperId("org.kde.kcontrol.kcmplymouth");
