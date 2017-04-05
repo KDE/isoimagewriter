@@ -136,23 +136,14 @@ void ImageWriter::writeImage()
         // Start reading/writing cycle
         for (;;)
         {
-            qDebug("imagewriter in for loop");
             if (zeroing)
             {
                 readBytes = TRANSFER_BLOCK_SIZE;
             }
             else
             {
-                /*
                 if ((readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0)
                     break;
-                */
-                qDebug("imagewriter about to readBytes:");
-                readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE);
-                qDebug("XX readBytes: " + QString::number(readBytes).toLatin1());
-                if (readBytes <= 0) {
-                    break;
-                }
             }
             // Align the number of bytes to the sector size
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
@@ -188,9 +179,7 @@ void ImageWriter::writeImage()
                 // In zeroing mode only write 1 block - 1 MB is enough to clear both MBR and GPT
                 break;
             }
-            qDebug("imagewriter end of for loop");
         }
-        qDebug("imagewriter out of for loop");
         if (!zeroing)
         {
             if (readBytes < 0)
@@ -228,7 +217,6 @@ void ImageWriter::writeImage()
 // Implements reaction to the cancel request from user
 void ImageWriter::cancelWriting()
 {
-    qDebug("XXX cancelwriting");
     m_Mutex.lock();
     m_CancelWriting = true;
     m_Mutex.unlock();
