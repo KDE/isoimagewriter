@@ -60,7 +60,6 @@ protected:
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
     // Starts writing data to the device
-    void writeToDevice(bool zeroing);
     void writeToDeviceKAuth(bool zeroing);
     // Frees the GUI-specific allocated resources
     void cleanup();

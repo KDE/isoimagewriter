@@ -49,7 +49,7 @@ Testy::Testy(int argc, char *argv[]) {
 
 void Testy::run() {
     qCDebug(IMAGEWRITER_LOG) << "run";
-    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
+    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile));
     action.setHelperId("org.kde.imagewriter");
     //KAuth::Action action(QLatin1String("org.kde.kcontrol.kcmplymouth.install"));
     //action.setHelperId("org.kde.kcontrol.kcmplymouth");
@@ -74,7 +74,7 @@ void Testy::run() {
 
 void Testy::runAsync() {
     qCDebug(IMAGEWRITER_LOG) << "runAsync";
-    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
+    KAuth::Action action(QLatin1String("org.kde.imagewriter.writeimage"));
     action.setHelperId("org.kde.imagewriter");
     QVariantMap helperargs;
     helperargs[QStringLiteral("filename")] = "bar";
@@ -167,7 +167,7 @@ void Testy::enumFlashDevices()
 
 void Testy::runWriteImage() {
     qCDebug(IMAGEWRITER_LOG) << "runWriteImage";
-    KAuth::Action action(QLatin1String("org.kde.imagewriter.writeimage"));
+    KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
     action.setHelperId("org.kde.imageimage");
     QVariantMap helperargs;
     helperargs[QStringLiteral("zeroing")] = "false";

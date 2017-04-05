@@ -38,8 +38,10 @@ ImageWriterHelper::ImageWriterHelper()
     KLocalizedString::setApplicationDomain("imagewriter");
 }
 
+/*
 ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
 {
+    qDebug("ImageWriterHelper::writeimage()");
     ActionReply reply;
     QString filename = args["filename"].toString();
     QFile file("/root/" + filename);
@@ -86,10 +88,11 @@ ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
     }
     return reply;
 }
+*/
 
 ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 {
-    qDebug("ImageWriterHelper::writeimage()");
+    qDebug("ImageWriterHelper::writefile()");
     bool zeroing = args["zeroing"].toBool();
     QString imageFile = args["imagefile"].toString();
     QString visibleName = args[QStringLiteral("usbdevice_visiblename")].toString();
