@@ -27,6 +27,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
+#include <QThread>
 
 #include <stdio.h>
 #include <iostream>
@@ -98,16 +99,17 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     quint32 sectorSize = args[QStringLiteral("usbdevice_sectorsize")].toUInt();
     QString physicalDevice = args[QStringLiteral("usbdevice_physicaldevice")].toString();
     UsbDevice* selectedDevice = new UsbDevice();
-    selectedDevice->m_VisibleName = args[QStringLiteral("usbdevice_visiblename")].toString();
-    selectedDevice->m_Volumes = QStringList(args[QStringLiteral("usbdevice_volumes")].toString());
-    //selectedDevice->m_Size = args[QStringLiteral("usbdevice_size")].toString();
+    selectedDevice->m_VisibleName = visibleName;
+    selectedDevice->m_Volumes = volumes;
+    selectedDevice->m_Size = size;
+    selectedDevice->m_SectorSize = sectorSize;
+    selectedDevice->m_PhysicalDevice = physicalDevice;
     qDebug("ImageWriterHelper::writeimage() zeroing:" + QString::number(zeroing).toLatin1());
     qDebug("ImageWriterHelper::writeimage() imageFile:" + imageFile.toLatin1());
     qDebug("ImageWriterHelper::writeimage() physicalDevice:" + physicalDevice.toLatin1());
     qDebug("ImageWriterHelper::writeimage() volumes:" + volumes[0].toLatin1());
     qDebug("ImageWriterHelper::writeimage() size:" + QString("%1").arg(size).toLatin1());
     qDebug("ImageWriterHelper::writeimage() sectorSize:" + QString("%1").arg(sectorSize).toLatin1());
-/*
     ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
 
@@ -123,12 +125,14 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 
     // If the Cancel button is pressed, inform the writer to stop the operation
     // Using DirectConnection because the thread does not read its own event queue until completion
+    /*
     m_cancelButton->show();
     connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+    */
 
     // Each time a block is written, update the progress bar
-    connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
-
+    connect(writer, &ImageWriter::blockWritten, this, &ImageWriterHelper::updateProgressBar);
+/*
     // Show the message about successful completion on success
     connect(writer, &ImageWriter::success, this, &MainDialog::showSuccessMessage);
 
@@ -138,12 +142,16 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     // Silently return back to normal dialog form if the operation was cancelled
     connect(writer, &ImageWriter::cancelled, this, &MainDialog::hideWritingProgress);
 
+    */
     // Now start the writer thread
     writer->moveToThread(writerThread);
     writerThread->start();    
-    */
     ActionReply reply;
     return reply;    
+}
+
+void ImageWriterHelper::updateProgressBar(int progress) {
+    qDebug("ImageWriterHelper::updateProgressBar()" + QString::number(progress).toLatin1());
 }
 
 KAUTH_HELPER_MAIN("org.kde.imagewriter", ImageWriterHelper)

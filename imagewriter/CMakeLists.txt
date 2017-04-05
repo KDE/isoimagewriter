@@ -52,7 +52,7 @@ install(TARGETS imagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.imagewriter.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES org.kde.imagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
-add_executable(imagewriter_helper imagewriter_helper.cpp ${libkalarm_common_SRCS})
+add_executable(imagewriter_helper imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
 target_link_libraries(imagewriter_helper Qt5::Widgets KF5::Auth KF5::I18n)
 install(TARGETS imagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 kauth_install_helper_files(imagewriter_helper org.kde.imagewriter root)

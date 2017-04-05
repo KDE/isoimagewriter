@@ -31,6 +31,7 @@ class ImageWriterHelper : public QObject
     public Q_SLOTS:
         ActionReply writefile(const QVariantMap &args);
         ActionReply writeimage(const QVariantMap &args);
+        void updateProgressBar(int);
 };
 
 #endif // IMAGEWRITER_HELPER_H
