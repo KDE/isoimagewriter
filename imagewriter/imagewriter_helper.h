@@ -32,6 +32,9 @@ class ImageWriterHelper : public QObject
         ActionReply writefile(const QVariantMap &args);
         ActionReply writeimage(const QVariantMap &args);
         void updateProgressBar(int);
+        void showSuccessMessage(QString);
+        void showErrorMessage(QString);
+        void hideWritingProgress();
 };
 
 #endif // IMAGEWRITER_HELPER_H

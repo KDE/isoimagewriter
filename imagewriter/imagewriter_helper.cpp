@@ -132,17 +132,16 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &ImageWriterHelper::updateProgressBar);
-/*
+
     // Show the message about successful completion on success
-    connect(writer, &ImageWriter::success, this, &MainDialog::showSuccessMessage);
+    connect(writer, &ImageWriter::success, this, &ImageWriterHelper::showSuccessMessage);
 
     // Show error message if error is sent by the worker
-    connect(writer, &ImageWriter::error, this, &MainDialog::showErrorMessage);
+    connect(writer, &ImageWriter::error, this, &ImageWriterHelper::showErrorMessage);
 
     // Silently return back to normal dialog form if the operation was cancelled
-    connect(writer, &ImageWriter::cancelled, this, &MainDialog::hideWritingProgress);
+    connect(writer, &ImageWriter::cancelled, this, &ImageWriterHelper::hideWritingProgress);
 
-    */
     // Now start the writer thread
     writer->moveToThread(writerThread);
     writerThread->start();    
@@ -152,6 +151,18 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 
 void ImageWriterHelper::updateProgressBar(int progress) {
     qDebug("ImageWriterHelper::updateProgressBar()" + QString::number(progress).toLatin1());
+}
+
+void ImageWriterHelper::showSuccessMessage(QString message) {
+    qDebug("ImageWriterHelper::updateProgressBar()" + message.toLatin1());
+}
+
+void ImageWriterHelper::showErrorMessage(QString message) {
+    qDebug("ImageWriterHelper::updateProgressBar()" + message.toLatin1());
+}
+
+void ImageWriterHelper::hideWritingProgress() {
+    qDebug("ImageWriterHelper::hideWritingProgress()");
 }
 
 KAUTH_HELPER_MAIN("org.kde.imagewriter", ImageWriterHelper)
