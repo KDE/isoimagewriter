@@ -111,58 +111,12 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     qDebug("ImageWriterHelper::writefile() volumes:" + volumes[0].toLatin1());
     qDebug("ImageWriterHelper::writefile() size:" + QString("%1").arg(size).toLatin1());
     qDebug("ImageWriterHelper::writefile() sectorSize:" + QString("%1").arg(sectorSize).toLatin1());
+
     ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
-    /*
-    QThread *writerThread = new QThread(this);
-
-    // Connect start and end signals
-    connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
-
-    // When writer finishes its job, quit the thread
-    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
-
-    // Guarantee deleting the objects after completion
-    connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
-    connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
-    connect(writerThread, &QThread::finished, this, &ImageWriter::threadFinished);
-
-    // Each time a block is written, update the progress bar
-    connect(writer, &ImageWriter::blockWritten, this, &ImageWriterHelper::updateProgressBar);
-
-    // Show the message about successful completion on success
-    connect(writer, &ImageWriter::success, this, &ImageWriterHelper::showSuccessMessage);
-
-    // Show error message if error is sent by the worker
-    connect(writer, &ImageWriter::error, this, &ImageWriterHelper::showErrorMessage);
-
-    // Silently return back to normal dialog form if the operation was cancelled
-    connect(writer, &ImageWriter::cancelled, this, &ImageWriterHelper::hideWritingProgress);
-
-    // Now start the writer thread
-    writer->moveToThread(writerThread);
-    writerThread->start();
-    //wait for thread to finish
-    */
     writer->writeImage();
-    ActionReply reply;
+    ActionReply reply; // success by default
     return reply;
 }
 
-void ImageWriterHelper::updateProgressBar(int progress) {
-    qDebug("ImageWriterHelper::updateProgressBar()" + QString::number(progress).toLatin1());
-    KAuth::HelperSupport::progressStep(progress);
-}
-
-void ImageWriterHelper::showSuccessMessage(QString message) {
-    qDebug("ImageWriterHelper::showSuccessMessage()" + message.toLatin1());
-}
-
-void ImageWriterHelper::showErrorMessage(QString message) {
-    qDebug("ImageWriterHelper::showErrorMessage()" + message.toLatin1());
-}
-
-void ImageWriterHelper::hideWritingProgress() {
-    qDebug("ImageWriterHelper::hideWritingProgress()");
-}
 
 KAUTH_HELPER_MAIN("org.kde.imagewriter", ImageWriterHelper)

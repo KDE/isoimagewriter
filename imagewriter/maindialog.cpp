@@ -366,8 +366,12 @@ void MainDialog::progressStep(KJob* job, unsigned long step) {
 void MainDialog::progressStep(const QVariantMap & data) {
     qCDebug(IMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
     if (data[QStringLiteral("progress")].isValid()) {
-      int step = data[QStringLiteral("progress")].toInt();
-      updateProgressBar(step);
+        int step = data[QStringLiteral("progress")].toInt();
+        updateProgressBar(step);
+    } else if (data[QStringLiteral("error")].isValid()) {
+        showErrorMessage(data[QStringLiteral("error")].toString());
+    } else if (data[QStringLiteral("success")].isValid()) {
+        showSuccessMessage(data[QStringLiteral("success")].toString());
     }
 }
 
