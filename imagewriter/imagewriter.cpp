@@ -138,8 +138,7 @@ void ImageWriter::writeImage()
         // Start reading/writing cycle
         for (;;)
         {
-            qDebug("For Loop");
-            qDebug("For Loop2");
+            qDebug("For Loop3");
             if (KAuth::HelperSupport::isStopped()) {
                 qDebug("isStopped");
             } else {
@@ -172,7 +171,10 @@ void ImageWriter::writeImage()
             // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
             // this still works or at least fails compilation
             emit blockWritten(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
-            KAuth::HelperSupport::progressStep(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
+            KAuth::HelperSupport::progressStep(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT); // FIXME why doesn't this work?
+            QVariantMap progressArgs;
+            progressArgs[QStringLiteral("progress")] = TRANSFER_BLOCK_SIZE / DEFAULT_UNIT;
+            KAuth::HelperSupport::progressStep(progressArgs); // used because above doesn't work
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();
@@ -202,6 +204,7 @@ void ImageWriter::writeImage()
     }
     catch (QString msg)
     {
+        qDebug("helper error!" + msg);
         // Something went wrong :-(
         emit error(msg);
         isError = true;

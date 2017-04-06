@@ -342,7 +342,7 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
 
     action.setArguments(helperargs);
     m_job = action.execute();
-    connect(m_job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
+    connect(m_job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)), Qt::DirectConnection);
     connect(m_job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
     connect(m_job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
@@ -360,11 +360,15 @@ void MainDialog::cancelWriting() {
 
 void MainDialog::progressStep(KJob* job, unsigned long step) {
     qCDebug(IMAGEWRITER_LOG) << "progressStep %() " << step;
+    updateProgressBar(step);
 }
 
-
-void MainDialog::progressStep(const QVariantMap &) {
+void MainDialog::progressStep(const QVariantMap & data) {
     qCDebug(IMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
+    if (data[QStringLiteral("progress")].isValid()) {
+      int step = data[QStringLiteral("progress")].toInt();
+      updateProgressBar(step);
+    }
 }
 
 void MainDialog::statusChanged(KAuth::Action::AuthStatus status) {
@@ -375,6 +379,7 @@ void MainDialog::finished(KJob* job) {
     qCDebug(IMAGEWRITER_LOG) << "finished() " << job->error();
     KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
     qCDebug(IMAGEWRITER_LOG) << "finished() " << job2->data();
+    hideWritingProgress();
 }
      
 // Starts writing the image

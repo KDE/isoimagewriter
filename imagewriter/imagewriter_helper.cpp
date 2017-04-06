@@ -145,7 +145,7 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     */
     writer->writeImage();
     ActionReply reply;
-    return reply;    
+    return reply;
 }
 
 void ImageWriterHelper::updateProgressBar(int progress) {
