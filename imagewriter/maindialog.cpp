@@ -341,6 +341,7 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     helperargs[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
 
     action.setArguments(helperargs);
+    action.setTimeout(3600000); // an hour
     m_job = action.execute();
     connect(m_job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)), Qt::DirectConnection);
     connect(m_job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
