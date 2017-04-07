@@ -60,7 +60,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
     BSTR strQL              = NULL;
     // Query string for requesting physical devices
     BSTR strQueryDisks      = NULL;
-    // Query string for requesting partitions for each of the the physical devices
+    // Query string for requesting partitions for each of the physical devices
     BSTR strQueryPartitions = NULL;
     // Query string for requesting logical disks for each of the partitions
     BSTR strQueryLetters    = NULL;
