@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>org.kde.imagewriter.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>imagewriter</name>
+  <summary>Write an ISO Image to a USB Disk</summary>
+  <description>
+    <p>Write an ISO Image to a USB Disk</p>
+  </description>
+  <url type="homepage">https://www.kde.org</url>
+  <url type="bugtracker">https://bugs.kde.org</url>
+  <url type="donation">https://www.kde.org/community/donations</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>
+	https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-screenshots
+	Central hosting is still being sorted out, poke sitter@kde.org for more info.
+      </image>
+    </screenshot>
+  </screenshots>
+  <provides>
+    <binary>imagewritter</binary>
+  </provides>
+  <project_group>KDE</project_group>
+</component>

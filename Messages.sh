@@ -1,2 +1,4 @@
-#!/bin/sh
-$EXTRACT_TR_STRINGS `find . -name \*.cpp -o -name \*.h -o -name \*.ui` -o $podir/imagewriter_qt.pot
+#! /bin/sh
+$EXTRACTRC `find . -name \*.ui` >> ./rc.cpp || exit 11
+$XGETTEXT `find . -name \*.h -o -name \*.cpp` -o $podir/imagewriter.pot
+rm -f rc.cpp

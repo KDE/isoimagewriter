@@ -1,0 +1,40 @@
+/*
+ * Copyright 2017 Jonathan Riddell <jr@jriddell.org>
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef IMAGEWRITER_HELPER_H
+#define IMAGEWRITER_HELPER_H
+
+#include <kauth.h>
+
+using namespace KAuth;
+
+class ImageWriterHelper : public QObject
+{
+        Q_OBJECT
+    public:
+        ImageWriterHelper();
+
+    public Q_SLOTS:
+        ActionReply writefile(const QVariantMap &args);
+        ActionReply writeimage(const QVariantMap &args);
+        void updateProgressBar(int);
+        void showSuccessMessage(QString);
+        void showErrorMessage(QString);
+        void hideWritingProgress();
+};
+
+#endif // IMAGEWRITER_HELPER_H
