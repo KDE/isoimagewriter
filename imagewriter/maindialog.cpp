@@ -75,7 +75,7 @@ MainDialog::MainDialog(QWidget *parent) :
     m_clearButton->setText(i18n("Clear USB Disk"));
     m_writeButton->setText(i18n("Write"));
     connect(m_writeButton, &QPushButton::clicked, this, &MainDialog::writeImageToDevice);
-    m_clearButton->setText("Wipe USB Disk");
+    m_clearButton->setText(i18n("Wipe USB Disk"));
     connect(m_clearButton, &QPushButton::clicked, this, &MainDialog::clearDevice);
     m_cancelButton->hide();
     // Remove the Context Help button and add the Minimize button to the titlebar
@@ -316,11 +316,11 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     }
     QMessageBox wipeWarningBox;
     wipeWarningBox.setText(i18n("All existing data on the selected device will be lost."));
-    wipeWarningBox.setInformativeText("Are you sure you wish to proceed?");
+    wipeWarningBox.setInformativeText(i18n("Are you sure you wish to proceed?"));
     wipeWarningBox.setIcon(QMessageBox::Warning);
     wipeWarningBox.addButton(QMessageBox::Ok);
     wipeWarningBox.addButton(QMessageBox::Cancel);
-    wipeWarningBox.button(QMessageBox::Ok)->setText("Clear Disk");
+    wipeWarningBox.button(QMessageBox::Ok)->setText(i18n("Clear Disk"));
     wipeWarningBox.exec();
     if (wipeWarningBox.result() != QMessageBox::Ok) {
         return;
