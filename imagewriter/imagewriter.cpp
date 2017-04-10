@@ -204,7 +204,7 @@ void ImageWriter::writeImage()
     }
     catch (QString msg)
     {
-        qDebug("helper error!" + msg);
+        qDebug("helper error!" + msg.toLatin1());
         // Something went wrong :-(
         emit error(msg);
         isError = true;
