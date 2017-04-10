@@ -1,15 +1,55 @@
 [Domain]
 Name=Image Writer
+Name[ca]=Escriu imatges
+Name[ca@valencia]=Escriu imatges
+Name[es]=Image Writer
+Name[ia]=Image Writer /Scriptor de imagine)
+Name[nl]=Image-schrijver
+Name[pt]=Gravador de Imagens
+Name[uk]=Записувач образів
+Name[x-test]=xxImage Writerxx
 Icon=drive-removable-media
 
 [org.kde.imagewriter.writefile]
 Name=Write an ISO image to a USB disk
+Name[ca]=Escriu una imatge ISO a un disc USB
+Name[ca@valencia]=Escriu una imatge ISO a un disc USB
+Name[es]=Escribir una imagen ISO en un disco USB
+Name[ia]=Scribe un imagine ISO a un disco USB
+Name[nl]=Een ISO-image naar een USB-schijf schrijven
+Name[pt]=Gravar uma imagem ISO num disco USB
+Name[uk]=Програма для запису образів ISO на диски USB
+Name[x-test]=xxWrite an ISO image to a USB diskxx
 Description=Write an ISO image to a USB disk
+Description[ca]=Escriu una imatge ISO a un disc USB
+Description[ca@valencia]=Escriu una imatge ISO a un disc USB
+Description[es]=Escribir una imagen ISO en un disco USB
+Description[ia]=Scribe un imagine ISO a un disco USB
+Description[nl]=Een ISO-image naar een USB-schijf schrijven
+Description[pt]=Gravar uma imagem ISO num disco USB
+Description[uk]=Програма для запису образів ISO на диски USB
+Description[x-test]=xxWrite an ISO image to a USB diskxx
 Policy=auth_admin
 Persistence=session
 
 [org.kde.imagewriter.writeimage]
 Name=Write an ISO image to a USB disk
+Name[ca]=Escriu una imatge ISO a un disc USB
+Name[ca@valencia]=Escriu una imatge ISO a un disc USB
+Name[es]=Escribir una imagen ISO en un disco USB
+Name[ia]=Scribe un imagine ISO a un disco USB
+Name[nl]=Een ISO-image naar een USB-schijf schrijven
+Name[pt]=Gravar uma imagem ISO num disco USB
+Name[uk]=Програма для запису образів ISO на диски USB
+Name[x-test]=xxWrite an ISO image to a USB diskxx
 Description=Write an ISO image to a USB disk
+Description[ca]=Escriu una imatge ISO a un disc USB
+Description[ca@valencia]=Escriu una imatge ISO a un disc USB
+Description[es]=Escribir una imagen ISO en un disco USB
+Description[ia]=Scribe un imagine ISO a un disco USB
+Description[nl]=Een ISO-image naar een USB-schijf schrijven
+Description[pt]=Gravar uma imagem ISO num disco USB
+Description[uk]=Програма для запису образів ISO на диски USB
+Description[x-test]=xxWrite an ISO image to a USB diskxx
 Policy=auth_admin
 Persistence=session
