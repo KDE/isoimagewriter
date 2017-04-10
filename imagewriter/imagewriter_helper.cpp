@@ -40,7 +40,7 @@ ImageWriterHelper::ImageWriterHelper()
 
 ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
 {
-    qDebug("ImageWriterHelper::writeimage()");
+    qDebug() << "ImageWriterHelper::writeimage()";
     ActionReply reply;
     QString filename = args["filename"].toString();
     QFile file("/root/" + filename);
@@ -62,7 +62,7 @@ ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
     qDebug() << "I'm in the helper";
     for (int i = 0; i < 5; i++) {
         if (KAuth::HelperSupport::isStopped()) {
-            qDebug("HELPER STOPPED");
+            qDebug() << "HELPER STOPPED";
             reply.setError(KAuth::ActionReply::HelperErrorType);
             reply.setErrorDescription("foo");
             return reply;
@@ -90,7 +90,7 @@ ActionReply ImageWriterHelper::writeimage(const QVariantMap &args)
 
 ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 {
-    qDebug("ImageWriterHelper::writefile()");
+    qDebug() << "ImageWriterHelper::writefile()";
     bool zeroing = args["zeroing"].toBool();
     QString imageFile = args["imagefile"].toString();
     QString visibleName = args[QStringLiteral("usbdevice_visiblename")].toString();
@@ -105,12 +105,12 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     selectedDevice->m_Size = size;
     selectedDevice->m_SectorSize = sectorSize;
     selectedDevice->m_PhysicalDevice = physicalDevice;
-    qDebug("ImageWriterHelper::writefile() zeroing:" + QString::number(zeroing).toLatin1());
-    qDebug("ImageWriterHelper::writefile() imageFile:" + imageFile.toLatin1());
-    qDebug("ImageWriterHelper::writefile() physicalDevice:" + physicalDevice.toLatin1());
-    qDebug("ImageWriterHelper::writefile() volumes:" + volumes[0].toLatin1());
-    qDebug("ImageWriterHelper::writefile() size:" + QString("%1").arg(size).toLatin1());
-    qDebug("ImageWriterHelper::writefile() sectorSize:" + QString("%1").arg(sectorSize).toLatin1());
+    qDebug() << "ImageWriterHelper::writefile() zeroing:" << zeroing;
+    qDebug() << "ImageWriterHelper::writefile() imageFile:" << imageFile;
+    qDebug() << "ImageWriterHelper::writefile() physicalDevice:" << physicalDevice;
+    qDebug() << "ImageWriterHelper::writefile() volumes:" << volumes[0];
+    qDebug() << "ImageWriterHelper::writefile() size:" << size;
+    qDebug() << "ImageWriterHelper::writefile() sectorSize:" << sectorSize;
     ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     /*
     QThread *writerThread = new QThread(this);
@@ -149,20 +149,20 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 }
 
 void ImageWriterHelper::updateProgressBar(int progress) {
-    qDebug("ImageWriterHelper::updateProgressBar()" + QString::number(progress).toLatin1());
+    qDebug() << "ImageWriterHelper::updateProgressBar()" << progress;
     KAuth::HelperSupport::progressStep(progress);
 }
 
 void ImageWriterHelper::showSuccessMessage(QString message) {
-    qDebug("ImageWriterHelper::showSuccessMessage()" + message.toLatin1());
+    qDebug() << "ImageWriterHelper::showSuccessMessage()" << message;
 }
 
 void ImageWriterHelper::showErrorMessage(QString message) {
-    qDebug("ImageWriterHelper::showErrorMessage()" + message.toLatin1());
+    qDebug() << "ImageWriterHelper::showErrorMessage()" << message;
 }
 
 void ImageWriterHelper::hideWritingProgress() {
-    qDebug("ImageWriterHelper::hideWritingProgress()");
+    qDebug() << "ImageWriterHelper::hideWritingProgress()";
 }
 
 KAUTH_HELPER_MAIN("org.kde.isoimagewriter", ImageWriterHelper)

@@ -37,7 +37,7 @@ ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *p
 // The main method that writes the image
 void ImageWriter::writeImage()
 {
-    qDebug("XX writeImage()");
+    qDebug() << "XX writeImage()";
     const qint64 TRANSFER_BLOCK_SIZE = 1024 * 1024;
     void* buffer = NULL;
 
@@ -138,11 +138,11 @@ void ImageWriter::writeImage()
         // Start reading/writing cycle
         for (;;)
         {
-            qDebug("For Loop3");
+            qDebug() << "For Loop3";
             if (KAuth::HelperSupport::isStopped()) {
-                qDebug("isStopped");
+                qDebug() << "isStopped";
             } else {
-                qDebug("not isStopped");
+                qDebug() << "not isStopped";
             }
             if (zeroing)
             {
@@ -183,7 +183,7 @@ void ImageWriter::writeImage()
             m_Mutex.unlock();
             if (cancelRequested)
             {
-                qDebug("cancelRequested");
+                qDebug() << "cancelRequested";
                 // The cancel request was issued
                 emit cancelled();
                 break;
@@ -204,7 +204,7 @@ void ImageWriter::writeImage()
     }
     catch (QString msg)
     {
-        qDebug("helper error!" + msg.toLatin1());
+        qDebug() << "helper error!" << msg;
         // Something went wrong :-(
         emit error(msg);
         isError = true;
