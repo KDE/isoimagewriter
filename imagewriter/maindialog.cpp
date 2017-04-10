@@ -1,5 +1,7 @@
 /*
  * Copyright 2016 ROSA
+ * Copyright 2017 Jonathan Riddell <jr@jriddell.org>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 3 of
@@ -35,7 +37,7 @@
 #include "ui_maindialog.h"
 #include "imagewriter.h"
 #include "usbdevice.h"
-#include "imagewriter_debug.h"
+#include "isoimagewriter_debug.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -295,7 +297,7 @@ void MainDialog::enumFlashDevices()
 // Starts writing data to the device
 void MainDialog::writeToDeviceKAuth(bool zeroing)
 {
-    qCDebug(IMAGEWRITER_LOG) << "writeToDeviceKAuth()";
+    qCDebug(ISOIMAGEWRITER_LOG) << "writeToDeviceKAuth()";
     if ((ui->deviceList->count() == 0) || (!zeroing && (m_ImageFile == "")))
         return;
     UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
@@ -333,9 +335,9 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     helperargs[QStringLiteral("imagefile")] = m_ImageFile;
     helperargs[QStringLiteral("usbdevice_visiblename")] = selectedDevice->m_VisibleName;
     helperargs[QStringLiteral("usbdevice_volumes")] = selectedDevice->m_Volumes[0];
-    qCDebug(IMAGEWRITER_LOG) << "volumes" << selectedDevice->m_Volumes[0];
-    qCDebug(IMAGEWRITER_LOG) << "size" << selectedDevice->m_Size;
-    qCDebug(IMAGEWRITER_LOG) << "m_SectorSize" << selectedDevice->m_SectorSize;
+    qCDebug(ISOIMAGEWRITER_LOG) << "volumes" << selectedDevice->m_Volumes[0];
+    qCDebug(ISOIMAGEWRITER_LOG) << "size" << selectedDevice->m_Size;
+    qCDebug(ISOIMAGEWRITER_LOG) << "m_SectorSize" << selectedDevice->m_SectorSize;
     helperargs[QStringLiteral("usbdevice_size")] = QString("%1").arg(selectedDevice->m_Size);
     helperargs[QStringLiteral("usbdevice_sectorsize")] = selectedDevice->m_SectorSize;
     helperargs[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
@@ -346,25 +348,25 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     connect(m_job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
     connect(m_job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
-    qCDebug(IMAGEWRITER_LOG) << "runWriteImage start()";
+    qCDebug(ISOIMAGEWRITER_LOG) << "runWriteImage start()";
     m_job->start();
-    qCDebug(IMAGEWRITER_LOG) << "action.isValid()? " << action.isValid();
+    qCDebug(ISOIMAGEWRITER_LOG) << "action.isValid()? " << action.isValid();
     showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
 }
 
 void MainDialog::cancelWriting() {
-    qCDebug(IMAGEWRITER_LOG) << "cancelWriting()";
+    qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting()";
     m_job->kill();
-    qCDebug(IMAGEWRITER_LOG) << "cancelWriting() done";
+    qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting() done";
 }
 
 void MainDialog::progressStep(KJob* job, unsigned long step) {
-    qCDebug(IMAGEWRITER_LOG) << "progressStep %() " << step;
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep %() " << step;
     updateProgressBar(step);
 }
 
 void MainDialog::progressStep(const QVariantMap & data) {
-    qCDebug(IMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
     if (data[QStringLiteral("progress")].isValid()) {
       int step = data[QStringLiteral("progress")].toInt();
       updateProgressBar(step);
@@ -372,13 +374,13 @@ void MainDialog::progressStep(const QVariantMap & data) {
 }
 
 void MainDialog::statusChanged(KAuth::Action::AuthStatus status) {
-    qCDebug(IMAGEWRITER_LOG) << "statusChanged: " << status;
+    qCDebug(ISOIMAGEWRITER_LOG) << "statusChanged: " << status;
 }
 
 void MainDialog::finished(KJob* job) {
-    qCDebug(IMAGEWRITER_LOG) << "finished() " << job->error();
+    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job->error();
     KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
-    qCDebug(IMAGEWRITER_LOG) << "finished() " << job2->data();
+    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
     hideWritingProgress();
 }
      

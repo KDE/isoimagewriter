@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
-  <id>org.kde.imagewriter.desktop</id>
+  <id>org.kde.isoimagewriter.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
-  <name>imagewriter</name>
+  <name>ISO Image Writer</name>
   <name xml:lang="ca">Imagewriter</name>
   <name xml:lang="ca-valencia">Imagewriter</name>
   <name xml:lang="es">imagewriter</name>
@@ -44,7 +44,7 @@
     </screenshot>
   </screenshots>
   <provides>
-    <binary>imagewritter</binary>
+    <binary>isoimagewriter</binary>
   </provides>
   <project_group>KDE</project_group>
 </component>

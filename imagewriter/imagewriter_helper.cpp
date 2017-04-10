@@ -16,7 +16,7 @@
  */
 
 #include "imagewriter_helper.h"
-#include "imagewriter_debug.h"
+#include "isoimagewriter_debug.h"
 #include "imagewriter.h"
 #include "usbdevice.h"
 
@@ -165,4 +165,4 @@ void ImageWriterHelper::hideWritingProgress() {
     qDebug("ImageWriterHelper::hideWritingProgress()");
 }
 
-KAUTH_HELPER_MAIN("org.kde.imagewriter", ImageWriterHelper)
+KAUTH_HELPER_MAIN("org.kde.isoimagewriter", ImageWriterHelper)

@@ -32,7 +32,7 @@
    <bool>true</bool>
   </property>
   <property name="windowTitle">
-   <string notr="true">Image Writer</string>
+   <string notr="true">ISO Image Writer</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>

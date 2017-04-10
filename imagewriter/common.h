@@ -38,7 +38,7 @@ const quint64 DEFAULT_UNIT = 1048576;
 #if defined(ROSA_BRANDING)
 const QString ApplicationTitle = "ROSA Image Writer";
 #else
-const QString ApplicationTitle = "Image Writer";
+const QString ApplicationTitle = "ISO Image Writer";
 #endif
 
 // Pointer to correctly typed application instance

@@ -23,7 +23,7 @@
 #include "mainapplication.h"
 
 // in one source file
-Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.imagewriter");
+Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.isoimagewriter");
 
 MainApplication::MainApplication(int& argc, char** argv) :
     QApplication(argc, argv)
@@ -32,9 +32,9 @@ MainApplication::MainApplication(int& argc, char** argv) :
     //FIXME why is this needed? because it's root?
     QIcon::setThemeName("breeze");
     setWindowIcon(QIcon::fromTheme("drive-removable-media"));
-    KLocalizedString::setApplicationDomain("imagewriter");
-    KAboutData aboutData( QStringLiteral("imagewriter"),
-                          i18n("Image Writer"),
+    KLocalizedString::setApplicationDomain("isoimagewriter");
+    KAboutData aboutData( QStringLiteral("isoimagewriter"),
+                          i18n("ISO Image Writer"),
                           QStringLiteral("PROJECT_VERSION"),
                           i18n("Write an ISO Image to a USB Disk"),
                           KAboutLicense::GPL,
@@ -50,7 +50,7 @@ MainApplication::MainApplication(int& argc, char** argv) :
     m_Options.process(arguments());
     aboutData.processCommandLine(&m_Options);
     KAboutData::setApplicationData(aboutData);
-    QLoggingCategory::setFilterRules(QStringLiteral("org.kde.imagewriter = true"));
+    QLoggingCategory::setFilterRules(QStringLiteral("org.kde.isoimagewriter = true"));
 }
 
 // Returns the language id to be used by the application (specified by --lang, or system locale otherwise)

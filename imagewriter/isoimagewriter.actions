@@ -1,5 +1,5 @@
 [Domain]
-Name=Image Writer
+Name=ISO Image Writer
 Name[ca]=Escriu imatges
 Name[ca@valencia]=Escriu imatges
 Name[es]=Image Writer
@@ -10,7 +10,7 @@ Name[uk]=Записувач образів
 Name[x-test]=xxImage Writerxx
 Icon=drive-removable-media
 
-[org.kde.imagewriter.writefile]
+[org.kde.isoimagewriter.writefile]
 Name=Write an ISO image to a USB disk
 Name[ca]=Escriu una imatge ISO a un disc USB
 Name[ca@valencia]=Escriu una imatge ISO a un disc USB
@@ -32,7 +32,7 @@ Description[x-test]=xxWrite an ISO image to a USB diskxx
 Policy=auth_admin
 Persistence=session
 
-[org.kde.imagewriter.writeimage]
+[org.kde.isoimagewriter.writeimage]
 Name=Write an ISO image to a USB disk
 Name[ca]=Escriu una imatge ISO a un disc USB
 Name[ca@valencia]=Escriu una imatge ISO a un disc USB

@@ -18,7 +18,7 @@
  */
 
 #include "testy.h"
-#include "imagewriter_debug.h"
+#include "isoimagewriter_debug.h"
 #include "usbdevice.h"
 
 #include <KAuth>
@@ -49,7 +49,7 @@ Testy::Testy(int argc, char *argv[]) {
 }
 
 void Testy::run() {
-    qCDebug(IMAGEWRITER_LOG) << "run";
+    qCDebug(ISOIMAGEWRITER_LOG) << "run";
     KAuth::Action action(QLatin1String("org.kde.imagewriter.writeimage"));
     action.setHelperId("org.kde.imagewriter");
     //KAuth::Action action(QLatin1String("org.kde.kcontrol.kcmplymouth.install"));
@@ -64,17 +64,17 @@ void Testy::run() {
     if (!execSuccess) {
         QMessageBox::information(m_button, "Error", QString("KAuth returned an error code: %1 string: %2").arg(job->error()).arg(job->errorString()));
     } else {
-        qCDebug(IMAGEWRITER_LOG) << "all good";
+        qCDebug(ISOIMAGEWRITER_LOG) << "all good";
         QVariantMap data = job->data();
-        qCDebug(IMAGEWRITER_LOG) << "returned: " << data["contents"].value<QString>();
-        qCDebug(IMAGEWRITER_LOG) << "returned: " << data.value("contents").value<QString>();
+        qCDebug(ISOIMAGEWRITER_LOG) << "returned: " << data["contents"].value<QString>();
+        qCDebug(ISOIMAGEWRITER_LOG) << "returned: " << data.value("contents").value<QString>();
         QString contents = job->data()["contents"].toString();
-        qCDebug(IMAGEWRITER_LOG) << "returned: " << contents;
+        qCDebug(ISOIMAGEWRITER_LOG) << "returned: " << contents;
     }
 }
 
 void Testy::runAsync() {
-    qCDebug(IMAGEWRITER_LOG) << "runAsync";
+    qCDebug(ISOIMAGEWRITER_LOG) << "runAsync";
     KAuth::Action action(QLatin1String("org.kde.imagewriter.writeimage"));
     action.setHelperId("org.kde.imagewriter");
     QVariantMap helperargs;
@@ -86,12 +86,12 @@ void Testy::runAsync() {
     connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     job->start();
-    qCDebug(IMAGEWRITER_LOG) << "runAsync start()";
+    qCDebug(ISOIMAGEWRITER_LOG) << "runAsync start()";
     qDebug() << "DAVE" << action.isValid();
 }
 
 void Testy::progressStep(KJob* job, unsigned long step) {
-    qCDebug(IMAGEWRITER_LOG) << "progressStep %() " << step;
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep %() " << step;
     if (step == 2) {
         qDebug() << "KILL!";
         KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
@@ -101,22 +101,22 @@ void Testy::progressStep(KJob* job, unsigned long step) {
 
 
 void Testy::statusChanged(KAuth::Action::AuthStatus status) {
-    qCDebug(IMAGEWRITER_LOG) << "status: " << status;
+    qCDebug(ISOIMAGEWRITER_LOG) << "status: " << status;
 }
 
 void Testy::progressStep(const QVariantMap &) {
-    qCDebug(IMAGEWRITER_LOG) << "progressStep() ";// << step;
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep() ";// << step;
 }
 
 void Testy::finished(KJob* job) {
-    qCDebug(IMAGEWRITER_LOG) << "finished() " << job->error();
+    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job->error();
     KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
-    qCDebug(IMAGEWRITER_LOG) << "finished() " << job2->data();
+    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
 }
 
 void addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 {
-    qCDebug(IMAGEWRITER_LOG) << "addFlashDeviceCallback";
+    qCDebug(ISOIMAGEWRITER_LOG) << "addFlashDeviceCallback";
     /*
     Ui::MainDialog* ui = (Ui::MainDialog*)cbParam;
     ui->deviceList->addItem(device->formatDisplayName(), QVariant::fromValue(device));
@@ -167,7 +167,7 @@ void Testy::enumFlashDevices()
 }
 
 void Testy::runWriteImage() {
-    qCDebug(IMAGEWRITER_LOG) << "runWriteImage";
+    qCDebug(ISOIMAGEWRITER_LOG) << "runWriteImage";
     KAuth::Action action(QLatin1String("org.kde.imagewriter.writefile"));
     action.setHelperId("org.kde.imageimage");
     QVariantMap helperargs;
@@ -182,6 +182,6 @@ void Testy::runWriteImage() {
     connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     job->start();
-    qCDebug(IMAGEWRITER_LOG) << "runWriteImage start()";
+    qCDebug(ISOIMAGEWRITER_LOG) << "runWriteImage start()";
     qDebug() << "action.isValid()? " << action.isValid();
 }
