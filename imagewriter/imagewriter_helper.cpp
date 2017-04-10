@@ -111,8 +111,8 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     qDebug() << "ImageWriterHelper::writefile() volumes:" << volumes[0];
     qDebug() << "ImageWriterHelper::writefile() size:" << size;
     qDebug() << "ImageWriterHelper::writefile() sectorSize:" << sectorSize;
-    ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     /*
+    ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     QThread *writerThread = new QThread(this);
 
     // Connect start and end signals
@@ -128,28 +128,12 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
 
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &ImageWriterHelper::updateProgressBar);
+    */
 
     ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     writer->writeImage();
     ActionReply reply; // success by default
     return reply;
-}
-
-void ImageWriterHelper::updateProgressBar(int progress) {
-    qDebug() << "ImageWriterHelper::updateProgressBar()" << progress;
-    KAuth::HelperSupport::progressStep(progress);
-}
-
-void ImageWriterHelper::showSuccessMessage(QString message) {
-    qDebug() << "ImageWriterHelper::showSuccessMessage()" << message;
-}
-
-void ImageWriterHelper::showErrorMessage(QString message) {
-    qDebug() << "ImageWriterHelper::showErrorMessage()" << message;
-}
-
-void ImageWriterHelper::hideWritingProgress() {
-    qDebug() << "ImageWriterHelper::hideWritingProgress()";
 }
 
 KAUTH_HELPER_MAIN("org.kde.isoimagewriter", ImageWriterHelper)
