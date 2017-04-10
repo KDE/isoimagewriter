@@ -204,8 +204,10 @@ void ImageWriter::writeImage()
     }
     catch (QString msg)
     {
-        qDebug() << "helper error!" << msg;
         // Something went wrong :-(
+        QVariantMap args;
+        args[QStringLiteral("error")] = msg;
+        KAuth::HelperSupport::progressStep(args);
         emit error(msg);
         isError = true;
     }
@@ -218,12 +220,15 @@ void ImageWriter::writeImage()
 #endif
 
     // If no errors occurred and user did not stop the operation, it means everything went fine
-    if (!isError && !cancelRequested)
-        emit success(
-            i18n("The operation completed successfully.") +
+    if (!isError && !cancelRequested) {
+        QString message = i18n("The operation completed successfully.") +
             "<br><br>" +
-            (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Clear\"."))
-        );
+            (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Clear\"."));
+        QVariantMap args;
+        args[QStringLiteral("success")] = message;
+        KAuth::HelperSupport::progressStep(args);
+        emit success(message);
+    }
 
     // In any case the operation is finished
     emit finished();

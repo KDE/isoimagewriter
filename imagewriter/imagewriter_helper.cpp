@@ -129,22 +129,9 @@ ActionReply ImageWriterHelper::writefile(const QVariantMap &args)
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &ImageWriterHelper::updateProgressBar);
 
-    // Show the message about successful completion on success
-    connect(writer, &ImageWriter::success, this, &ImageWriterHelper::showSuccessMessage);
-
-    // Show error message if error is sent by the worker
-    connect(writer, &ImageWriter::error, this, &ImageWriterHelper::showErrorMessage);
-
-    // Silently return back to normal dialog form if the operation was cancelled
-    connect(writer, &ImageWriter::cancelled, this, &ImageWriterHelper::hideWritingProgress);
-
-    // Now start the writer thread
-    writer->moveToThread(writerThread);
-    writerThread->start();
-    //wait for thread to finish
-    */
+    ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     writer->writeImage();
-    ActionReply reply;
+    ActionReply reply; // success by default
     return reply;
 }
 

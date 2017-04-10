@@ -343,6 +343,7 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     helperargs[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
 
     action.setArguments(helperargs);
+    action.setTimeout(3600000); // an hour
     m_job = action.execute();
     connect(m_job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)), Qt::DirectConnection);
     connect(m_job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
@@ -368,8 +369,12 @@ void MainDialog::progressStep(KJob* job, unsigned long step) {
 void MainDialog::progressStep(const QVariantMap & data) {
     qCDebug(ISOIMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
     if (data[QStringLiteral("progress")].isValid()) {
-      int step = data[QStringLiteral("progress")].toInt();
-      updateProgressBar(step);
+        int step = data[QStringLiteral("progress")].toInt();
+        updateProgressBar(step);
+    } else if (data[QStringLiteral("error")].isValid()) {
+        showErrorMessage(data[QStringLiteral("error")].toString());
+    } else if (data[QStringLiteral("success")].isValid()) {
+        showSuccessMessage(data[QStringLiteral("success")].toString());
     }
 }
 
