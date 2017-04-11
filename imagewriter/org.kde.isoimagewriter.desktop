@@ -1,13 +1,5 @@
 [Desktop Entry]
 Name=ISO Image Writer
-Name[ca]=Imagewriter
-Name[ca@valencia]=Imagewriter
-Name[es]=imagewriter
-Name[ia]=imagewriter
-Name[nl]=imagewriter
-Name[pt]=Gravador de Imagens
-Name[uk]=imagewriter
-Name[x-test]=xximagewriterxx
 Exec=isoimagewriter
 Icon=drive-removable-media
 Type=Application
@@ -18,5 +10,6 @@ GenericName[es]=Escribir una imagen ISO en un disco USB
 GenericName[ia]=Scribe un imagine ISO a un disco USB
 GenericName[nl]=Een ISO-image naar een USB-schijf schrijven
 GenericName[pt]=Gravar uma Imagem ISO num Disco USB
+GenericName[sv]=Skriv en ISO-avbild till en USB-disk
 GenericName[uk]=Програма для запису образів ISO на диски USB
 GenericName[x-test]=xxWrite an ISO Image to a USB Diskxx

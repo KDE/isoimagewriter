@@ -1,13 +1,5 @@
 [Domain]
 Name=ISO Image Writer
-Name[ca]=Escriu imatges
-Name[ca@valencia]=Escriu imatges
-Name[es]=Image Writer
-Name[ia]=Image Writer /Scriptor de imagine)
-Name[nl]=Image-schrijver
-Name[pt]=Gravador de Imagens
-Name[uk]=Записувач образів
-Name[x-test]=xxImage Writerxx
 Icon=drive-removable-media
 
 [org.kde.isoimagewriter.writefile]
@@ -18,6 +10,7 @@ Name[es]=Escribir una imagen ISO en un disco USB
 Name[ia]=Scribe un imagine ISO a un disco USB
 Name[nl]=Een ISO-image naar een USB-schijf schrijven
 Name[pt]=Gravar uma imagem ISO num disco USB
+Name[sv]=Skriv en ISO-avbild till en USB-disk
 Name[uk]=Програма для запису образів ISO на диски USB
 Name[x-test]=xxWrite an ISO image to a USB diskxx
 Description=Write an ISO image to a USB disk
@@ -27,6 +20,7 @@ Description[es]=Escribir una imagen ISO en un disco USB
 Description[ia]=Scribe un imagine ISO a un disco USB
 Description[nl]=Een ISO-image naar een USB-schijf schrijven
 Description[pt]=Gravar uma imagem ISO num disco USB
+Description[sv]=Skriv en ISO-avbild till en USB-disk
 Description[uk]=Програма для запису образів ISO на диски USB
 Description[x-test]=xxWrite an ISO image to a USB diskxx
 Policy=auth_admin
@@ -40,6 +34,7 @@ Name[es]=Escribir una imagen ISO en un disco USB
 Name[ia]=Scribe un imagine ISO a un disco USB
 Name[nl]=Een ISO-image naar een USB-schijf schrijven
 Name[pt]=Gravar uma imagem ISO num disco USB
+Name[sv]=Skriv en ISO-avbild till en USB-disk
 Name[uk]=Програма для запису образів ISO на диски USB
 Name[x-test]=xxWrite an ISO image to a USB diskxx
 Description=Write an ISO image to a USB disk
@@ -49,6 +44,7 @@ Description[es]=Escribir una imagen ISO en un disco USB
 Description[ia]=Scribe un imagine ISO a un disco USB
 Description[nl]=Een ISO-image naar een USB-schijf schrijven
 Description[pt]=Gravar uma imagem ISO num disco USB
+Description[sv]=Skriv en ISO-avbild till en USB-disk
 Description[uk]=Програма для запису образів ISO на диски USB
 Description[x-test]=xxWrite an ISO image to a USB diskxx
 Policy=auth_admin
