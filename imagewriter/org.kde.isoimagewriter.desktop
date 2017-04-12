@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=ISO Image Writer
+Name[ca]=Escriu imatges ISO
+Name[es]=ISO Image Writer
+Name[nl]=ISO-image-schrijver
+Name[pt]=Gravador de Imagens ISO
+Name[sv]=ISO-avbildsskrivning
+Name[uk]=Записувач образів ISO
+Name[x-test]=xxISO Image Writerxx
 Exec=isoimagewriter
 Icon=drive-removable-media
 Type=Application
