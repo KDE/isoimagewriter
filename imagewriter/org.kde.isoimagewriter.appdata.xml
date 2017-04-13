@@ -4,6 +4,12 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <name>ISO Image Writer</name>
+  <name xml:lang="ca">Escriu imatges ISO</name>
+  <name xml:lang="es">ISO Image Writer</name>
+  <name xml:lang="nl">ISO-image-schrijver</name>
+  <name xml:lang="pt">Gravador de Imagens ISO</name>
+  <name xml:lang="sv">ISO-avbildsskrivning</name>
+  <name xml:lang="uk">Записувач образів ISO</name>
   <name xml:lang="x-test">xxISO Image Writerxx</name>
   <summary>Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="ca">Escriu una imatge ISO a un disc USB</summary>
