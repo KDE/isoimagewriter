@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=ISO Image Writer
 Name[ca]=Escriu imatges ISO
+Name[ca@valencia]=Escriu imatges ISO
 Name[es]=ISO Image Writer
+Name[it]=Scrittore di immagini ISO
 Name[nl]=ISO-image-schrijver
 Name[pt]=Gravador de Imagens ISO
 Name[sk]=Zapisovač ISO obrazov
@@ -16,6 +18,7 @@ GenericName[ca]=Escriu una imatge ISO a un disc USB
 GenericName[ca@valencia]=Escriu una imatge ISO a un disc USB
 GenericName[es]=Escribir una imagen ISO en un disco USB
 GenericName[ia]=Scribe un imagine ISO a un disco USB
+GenericName[it]=Scrive un'immagine ISO in un disco USB
 GenericName[nl]=Een ISO-image naar een USB-schijf schrijven
 GenericName[pt]=Gravar uma Imagem ISO num Disco USB
 GenericName[sk]=Zapísať ISO obraz na USB disk
