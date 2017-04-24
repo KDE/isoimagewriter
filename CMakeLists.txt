@@ -29,7 +29,7 @@ find_package(KF5 REQUIRED COMPONENTS
 
 KDE_ENABLE_EXCEPTIONS()
 
-add_subdirectory(imagewriter)
+add_subdirectory(isoimagewriter)
 add_subdirectory(images)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
