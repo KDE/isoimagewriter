@@ -17,7 +17,7 @@ include(ECMQtDeclareLoggingCategory)
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules('libudev' REQUIRED)
+pkg_check_modules(LIBUDEV REQUIRED libudev)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
