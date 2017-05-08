@@ -1,6 +1,10 @@
+find_package(QGpgme)
+
 set(isoimagewriter_common_SRCS
     platform_lin.cpp
-    common.cpp)
+    common.cpp
+    verifyiso.cpp
+    verifyneoniso.cpp)
 ecm_qt_declare_logging_category(isoimagewriter_common_SRCS
                                 HEADER isoimagewriter_debug.h
                                 IDENTIFIER ISOIMAGEWRITER_LOG
@@ -44,6 +48,7 @@ target_link_libraries(testy
     KF5::I18n
     KF5::CoreAddons
     dl
+    QGpgme
 )
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})

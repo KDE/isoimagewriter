@@ -39,6 +39,7 @@ public:
     Testy(int argc, char *argv[]);
 public slots:
     void run();
+    void runVerify();
     void runAsync();
     void runWriteImage();
     void enumFlashDevices();

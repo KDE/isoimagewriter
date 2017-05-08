@@ -20,6 +20,7 @@
 #include "testy.h"
 #include "isoimagewriter_debug.h"
 #include "usbdevice.h"
+#include "verifyneoniso.h"
 
 #include <KAuth>
 #include <QApplication>
@@ -41,11 +42,19 @@ Testy::Testy(int argc, char *argv[]) {
     m_layout->addWidget(m_button);
     m_deviceList = new QComboBox;
     m_layout->addWidget(m_deviceList);
-    connect(m_button, SIGNAL(clicked()), this, SLOT(run()));
+    connect(m_button, SIGNAL(clicked()), this, SLOT(runVerify()));
     //QTimer::singleShot(0, this, SLOT(runAsync()));
-    QTimer::singleShot(0, this, SLOT(runWriteImage()));
+    //QTimer::singleShot(0, this, SLOT(runWriteImage()));
     m_widget->show();
     app.exec();    
+}
+
+void Testy::runVerify() {
+    qDebug() << "runVerify()";
+    VerifyNeonISO verify("/home/jr/src/iso/neon-useredition-20170119-1018-amd64.iso");
+    qDebug() << verify.getFilename();
+    qDebug() << verify.canVerify() << verify.getError();
+    qDebug() << verify.isValid() << verify.getError();
 }
 
 void Testy::run() {
