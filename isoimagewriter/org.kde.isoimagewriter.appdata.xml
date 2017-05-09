@@ -17,6 +17,7 @@
   <name xml:lang="sv">ISO-avbildsskrivning</name>
   <name xml:lang="uk">Записувач образів ISO</name>
   <name xml:lang="x-test">xxISO Image Writerxx</name>
+  <name xml:lang="zh-CN">ISO 镜像文件写入器</name>
   <summary>Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="ca">Escriu una imatge ISO a un disc USB</summary>
   <summary xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</summary>
@@ -31,6 +32,7 @@
   <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
   <summary xml:lang="uk">Програма для запису образів ISO на флешки USB</summary>
   <summary xml:lang="x-test">xxWrite an ISO Image to a USB Diskxx</summary>
+  <summary xml:lang="zh-CN">将 ISO 镜像写入 USB 盘</summary>
   <description>
     <p>Write an ISO Image to a USB Disk</p>
     <p xml:lang="ca">Escriu una imatge ISO a un disc USB</p>
@@ -46,6 +48,7 @@
     <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
     <p xml:lang="uk">Програма для запису образів ISO на флешки USB</p>
     <p xml:lang="x-test">xxWrite an ISO Image to a USB Diskxx</p>
+    <p xml:lang="zh-CN">将 ISO 镜像写入 USB 盘</p>
   </description>
   <url type="homepage">https://www.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org</url>
