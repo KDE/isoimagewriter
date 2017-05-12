@@ -19,6 +19,7 @@
 
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
+#include <gpgme++/verificationresult.h>
 
 #include <QDebug>
 #include <QFile>
@@ -52,7 +53,33 @@ bool VerifyNeonISO::isValid() {
         m_error = i18n("Could not find %1, please download PGP signature file to same directory.", fileName+".sig");
         return false;
     }
+    QFile signatureFile(m_filename + ".sig");
+    if (!signatureFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error",signatureFile.errorString();
+    }
+    QByteArray signatureData = signatureFile.readAll();
+    QFile isoFile(m_filename);
+    if (!isoFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error",isoFile.errorString();
+    }
+    QByteArray isoData = signatureFile.readAll();
     QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
-    //GpgME::VerificationResult* result = job->exec(QStringList() << QStringLiteral("neon@kde.org"), m_filename);
+    GpgME::VerificationResult result = job->exec(signatureData, isoData);
+    qDebug() << "numSignatures " << result.numSignatures();
+    qDebug() << "filename " << result.fileName();
+    GpgME::Signature signature = result.signature(0);
+    qDebug() << "fingerprint " << signature.fingerprint();
+    if (strcmp(signature.fingerprint(), "DEACEA00075E1D76") == 0) {
+        qDebug() << "Uses right signature!";
+    } else {
+        qDebug() << "Uses wrong signature!!";
+        m_error = i18n("Uses wrong signature.");
+        return false;
+    }
+    if (signature.summary() & GpgME::Signature::KeyRevoked) {
+        qDebug() << "Key is revoked" << signature.summary();
+        m_error = i18n("Key is revoked.");
+        return false;
+    }
     return true;
 }

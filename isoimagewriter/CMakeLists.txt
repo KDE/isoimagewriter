@@ -1,4 +1,5 @@
 find_package(QGpgme)
+find_package(Gpgmepp)
 
 set(isoimagewriter_common_SRCS
     platform_lin.cpp
@@ -41,6 +42,7 @@ target_link_libraries(isoimagewriter
     KF5::I18n
     KF5::CoreAddons
     KF5::Auth
+    QGpgme
     dl
 )
 target_link_libraries(testy
@@ -49,6 +51,7 @@ target_link_libraries(testy
     KF5::CoreAddons
     dl
     QGpgme
+    Gpgmepp
 )
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
