@@ -318,9 +318,9 @@ IsoResult MainDialog::verifyISO() {
         } else {
             QString error(i18n("Invalid Neon image"));
             ui->verificationResultLabel->show();
-            ui->verificationResultLabel->setText(error);
+            ui->verificationResultLabel->setText(verifyNeon.m_error);
             result.resultType = Invalid;
-            result.error = error;
+            result.error = verifyNeon.m_error;
             return result;
         }
     }

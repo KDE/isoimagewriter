@@ -48,6 +48,7 @@ public:
 
     virtual bool canVerify() = 0;
     virtual bool isValid() = 0;
+    QString m_error;
 
 public Q_SLOTS:
     /**
@@ -58,7 +59,6 @@ public Q_SLOTS:
     void setFilename(const QString& filename);
 
 protected:
-    QString m_error;
     QString m_filename;
 };
 
