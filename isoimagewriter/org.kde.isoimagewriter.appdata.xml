@@ -12,6 +12,7 @@
   <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
   <name xml:lang="it">Scrittore di immagini ISO</name>
   <name xml:lang="nl">ISO-image-schrijver</name>
+  <name xml:lang="pl">Wgrywanie obrazów ISO</name>
   <name xml:lang="pt">Gravador de Imagens ISO</name>
   <name xml:lang="sk">Zapisovač ISO obrazov</name>
   <name xml:lang="sv">ISO-avbildsskrivning</name>
@@ -27,6 +28,7 @@
   <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
   <summary xml:lang="it">Scrive un'immagine ISO in un disco USB</summary>
   <summary xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</summary>
+  <summary xml:lang="pl">Wgrywa obraz ISO na nośnik USB</summary>
   <summary xml:lang="pt">Gravar uma Imagem ISO num Disco USB</summary>
   <summary xml:lang="sk">Zapísať ISO obraz na USB disk</summary>
   <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
@@ -43,6 +45,7 @@
     <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
     <p xml:lang="it">Scrive un'immagine ISO in un disco USB</p>
     <p xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</p>
+    <p xml:lang="pl">Wgrywa obraz ISO na nośnik USB</p>
     <p xml:lang="pt">Gravar uma Imagem ISO num Disco USB</p>
     <p xml:lang="sk">Zapísať ISO obraz na USB disk</p>
     <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
