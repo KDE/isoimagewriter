@@ -33,6 +33,10 @@ namespace Ui {
 }
 
 enum VerificationResult { Fine, DinnaeKen, Invalid };
+struct IsoResult {
+    VerificationResult resultType;
+    QString error;
+};
 
 class MainDialog : public QDialog
 {
@@ -46,7 +50,7 @@ private:
     Ui::MainDialog *ui;
     QPushButton *m_writeButton, *m_clearButton, *m_cancelButton;
     KAuth::ExecuteJob *m_job;
-    VerificationResult verifyISO(QString*);
+    IsoResult verifyISO();
 
 protected:
 

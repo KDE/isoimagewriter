@@ -132,15 +132,13 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     f.close();
     m_ImageFile = newImageFile;
     ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " " + i18n("(%1 MiB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
-    QString* error;
-    VerificationResult verificationResult = verifyISO(error);
-    qDebug() << "error: " << *error;
-    if (verificationResult == Invalid) {
-        QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", *error));
+    IsoResult isoResult = verifyISO();
+    if (isoResult.resultType == Invalid) {
+        QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", isoResult.error));
         return;
-    } else if (verificationResult == DinnaeKen) {
-        QMessageBox::StandardButton warningResult = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue"),//, *error), 
-                                                                  QMessageBox::Yes|QMessageBox::No);
+    } else if (isoResult.resultType == DinnaeKen) {
+        QMessageBox::StandardButton warningResult = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue", isoResult.error), 
+                                                                         QMessageBox::Yes|QMessageBox::No);
         if (warningResult == QMessageBox::No) {
             return;
         }
@@ -307,24 +305,32 @@ void MainDialog::enumFlashDevices()
     m_clearButton->setEnabled(ui->deviceList->count() > 0);
 }
 
-VerificationResult MainDialog::verifyISO(QString* error) {
+IsoResult MainDialog::verifyISO() {
+    IsoResult result;
     VerifyNeonISO verifyNeon(m_ImageFile);
     if (verifyNeon.canVerify()) {
         if (verifyNeon.isValid()) {
             ui->verificationResultLabel->show();
             ui->verificationResultLabel->setText(i18n("Verified as valid KDE neon ISO"));
-            return Fine;
+            result.resultType = Fine;
+            result.error = i18n("Verified as valid KDE neon ISO");
+            return result;
         } else {
-            error = new QString(i18n("Invalid Neon image"));
+            QString error(i18n("Invalid Neon image"));
             ui->verificationResultLabel->show();
-            ui->verificationResultLabel->setText(*error);
-            return Invalid;
+            ui->verificationResultLabel->setText(error);
+            result.resultType = Invalid;
+            result.error = error;
+            return result;
         }
     }
-    error = new QString(i18n("Could not verify as a known distro image."));
+    QString error(i18n("Could not verify as a known distro image."));
+    qDebug() << "verifyNeon error: " << error;
     ui->verificationResultLabel->show();
-    ui->verificationResultLabel->setText(*error);
-    return DinnaeKen;
+    ui->verificationResultLabel->setText(error);
+    result.resultType = DinnaeKen;
+    result.error = QString(i18n("Could not verify as a known distro image."));
+    return result;
 }
 
 // Starts writing data to the device
