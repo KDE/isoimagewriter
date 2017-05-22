@@ -26,10 +26,13 @@
 
 #include "common.h"
 #include "externalprogressbar.h"
+#include "verifyneoniso.h"
 
 namespace Ui {
     class MainDialog;
 }
+
+enum VerificationResult { Fine, DinnaeKen, Invalid };
 
 class MainDialog : public QDialog
 {
@@ -43,8 +46,10 @@ private:
     Ui::MainDialog *ui;
     QPushButton *m_writeButton, *m_clearButton, *m_cancelButton;
     KAuth::ExecuteJob *m_job;
+    VerificationResult verifyISO(QString*);
 
 protected:
+
     // Image file currently selected by the user
     QString m_ImageFile;
     // Size of the image file (cached here to avoid excessive file system requests)

@@ -62,13 +62,13 @@ bool VerifyNeonISO::canVerify() {
         qDebug() << "Could not import gpg signature";
         return false;
     }
-    if (!verifyFilename()) {
-        return false;
-    }
     return true;
 }
 
 bool VerifyNeonISO::isValid() {
+    if (!verifyFilename()) {
+        return false;
+    }
     QStringList splits = m_filename.split('/');
     QString fileName = splits[splits.size()-1];
     if (!QFile::exists(m_filename+".sig")) {

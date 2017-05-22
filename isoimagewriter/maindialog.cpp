@@ -294,6 +294,20 @@ void MainDialog::enumFlashDevices()
     m_clearButton->setEnabled(ui->deviceList->count() > 0);
 }
 
+VerificationResult MainDialog::verifyISO(QString* error) {
+    VerifyNeonISO verifyNeon(m_ImageFile);
+    if (verifyNeon.canVerify()) {
+        if (verifyNeon.isValid()) {
+            return Fine;
+        } else {
+            error = new QString("Invalid Neon image");
+            return Invalid;
+        }
+    }
+    error = new QString("Could not verify as a known distro image.");
+    return DinnaeKen;
+}
+
 // Starts writing data to the device
 void MainDialog::writeToDeviceKAuth(bool zeroing)
 {
@@ -314,13 +328,23 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
         );
         return;
     }
+    QString* error;
+    if (verifyISO(error) == Invalid) {
+        QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", *error));
+        return;
+    } else if (verifyISO(error) == DinnaeKen) {
+        QMessageBox::StandardButton result = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue", *error), QMessageBox::Yes|QMessageBox::No);
+        if (result == QMessageBox::No) {
+            return;
+        }
+    }
     QMessageBox wipeWarningBox;
     wipeWarningBox.setText(i18n("All existing data on the selected device will be lost."));
     wipeWarningBox.setInformativeText(i18n("Are you sure you wish to proceed?"));
     wipeWarningBox.setIcon(QMessageBox::Warning);
     wipeWarningBox.addButton(QMessageBox::Ok);
     wipeWarningBox.addButton(QMessageBox::Cancel);
-    wipeWarningBox.button(QMessageBox::Ok)->setText(i18n("Clear Disk"));
+    wipeWarningBox.button(QMessageBox::Ok)->setText(i18n("Clear Disk and Write Image"));
     wipeWarningBox.exec();
     if (wipeWarningBox.result() != QMessageBox::Ok) {
         return;
