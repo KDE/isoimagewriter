@@ -19,10 +19,13 @@
 
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
+#include <QGpgME/ImportJob>
 #include <gpgme++/verificationresult.h>
+#include <gpgme++/importresult.h>
 
 #include <QDebug>
 #include <QFile>
+#include <QStandardPaths>
 
 #include <KLocalizedString>
 
@@ -39,13 +42,33 @@ bool VerifyNeonISO::canVerify() {
         m_error = i18n("Filename does not match KDE neon ISO files");
         return false;
     }
+    QString neonSigningKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, "neon-signing-key.gpg");
+    if (neonSigningKeyFile.isEmpty()) {
+        qDebug() << "error can't find neon-signing-key" << neonSigningKeyFile;
+        return false;
+    }
+    QFile signingKey(neonSigningKeyFile);
+    if (!signingKey.open(QIODevice::ReadOnly)) {
+        qDebug() << "error" << signingKey.errorString();
+        return false;
+    }
+    QByteArray signingKeyData = signingKey.readAll();
+    QGpgME::ImportJob *importJob = QGpgME::openpgp()->importJob();
+    GpgME::ImportResult importResult = importJob->exec(signingKeyData);
+    qDebug() << "numConsidered " << importResult.numConsidered();
+    qDebug() << "numImported " << importResult.numImported();
+    qDebug() << "numUnchanged " << importResult.numUnchanged();
+    if (!(importResult.numConsidered() == 1 && (importResult.numImported() == 1 || importResult.numUnchanged() == 1))) {
+        qDebug() << "Could not import gpg signature";
+        return false;
+    }
+    if (!verifyFilename()) {
+        return false;
+    }
     return true;
 }
 
 bool VerifyNeonISO::isValid() {
-    if (!verifyFilename()) {
-        return false;
-    }
     QStringList splits = m_filename.split('/');
     QString fileName = splits[splits.size()-1];
     if (!QFile::exists(m_filename+".sig")) {
