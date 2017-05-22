@@ -134,6 +134,16 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " " + i18n("(%1 MiB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
     // Enable the Write button (if there are USB flash disks present)
     m_writeButton->setEnabled(ui->deviceList->count() > 0);
+    QString* error;
+    if (verifyISO(error) == Invalid) {
+        QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", *error));
+        return;
+    } else if (verifyISO(error) == DinnaeKen) {
+        QMessageBox::StandardButton result = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue", *error), QMessageBox::Yes|QMessageBox::No);
+        if (result == QMessageBox::No) {
+            return;
+        }
+    }
 }
 
 // Frees the GUI-specific allocated resources
@@ -298,13 +308,19 @@ VerificationResult MainDialog::verifyISO(QString* error) {
     VerifyNeonISO verifyNeon(m_ImageFile);
     if (verifyNeon.canVerify()) {
         if (verifyNeon.isValid()) {
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(i18n("Verified as valid KDE neon ISO"));
             return Fine;
         } else {
-            error = new QString("Invalid Neon image");
+            error = new QString(i18n("Invalid Neon image"));
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(*error);
             return Invalid;
         }
     }
-    error = new QString("Could not verify as a known distro image.");
+    error = new QString(i18n("Could not verify as a known distro image."));
+    ui->verificationResultLabel->show();
+    ui->verificationResultLabel->setText(*error);
     return DinnaeKen;
 }
 
@@ -327,16 +343,6 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
             QMessageBox::Ok
         );
         return;
-    }
-    QString* error;
-    if (verifyISO(error) == Invalid) {
-        QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", *error));
-        return;
-    } else if (verifyISO(error) == DinnaeKen) {
-        QMessageBox::StandardButton result = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue", *error), QMessageBox::Yes|QMessageBox::No);
-        if (result == QMessageBox::No) {
-            return;
-        }
     }
     QMessageBox wipeWarningBox;
     wipeWarningBox.setText(i18n("All existing data on the selected device will be lost."));
@@ -472,7 +478,8 @@ void MainDialog::hideWritingProgress()
     ui->deviceList->setEnabled(true);
     ui->deviceRefreshButton->setEnabled(true);
 
-    // Hide the progress bar
+    // Hide the progress bar and verifiction label
+    ui->verificationResultLabel->hide();
     ui->progressBar->setVisible(false);
     ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_writeButton->setVisible(true);
