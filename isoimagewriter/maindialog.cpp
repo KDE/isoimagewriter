@@ -132,18 +132,21 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     f.close();
     m_ImageFile = newImageFile;
     ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " " + i18n("(%1 MiB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
-    // Enable the Write button (if there are USB flash disks present)
-    m_writeButton->setEnabled(ui->deviceList->count() > 0);
     QString* error;
-    if (verifyISO(error) == Invalid) {
+    VerificationResult verificationResult = verifyISO(error);
+    qDebug() << "error: " << *error;
+    if (verificationResult == Invalid) {
         QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", *error));
         return;
-    } else if (verifyISO(error) == DinnaeKen) {
-        QMessageBox::StandardButton result = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue", *error), QMessageBox::Yes|QMessageBox::No);
-        if (result == QMessageBox::No) {
+    } else if (verificationResult == DinnaeKen) {
+        QMessageBox::StandardButton warningResult = QMessageBox::warning(this, i18n("Could not Verify ISO"), i18n("%1<p>Do you want to continue"),//, *error), 
+                                                                  QMessageBox::Yes|QMessageBox::No);
+        if (warningResult == QMessageBox::No) {
             return;
         }
     }
+    // Enable the Write button (if there are USB flash disks present)
+    m_writeButton->setEnabled(ui->deviceList->count() > 0);
 }
 
 // Frees the GUI-specific allocated resources
