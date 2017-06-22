@@ -1,5 +1,5 @@
-find_package(QGpgme)
-find_package(Gpgmepp)
+find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
+find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
 
 set(isoimagewriter_common_SRCS
     platform_lin.cpp
