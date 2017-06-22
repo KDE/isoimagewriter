@@ -307,12 +307,16 @@ void MainDialog::enumFlashDevices()
     m_clearButton->setEnabled(ui->deviceList->count() > 0);
 }
 
+// TODO currently separate classes for each distro, should be made 
+// much more generic to avoid overhead and repetition
 IsoResult MainDialog::verifyISO() {
+    ui->verificationResultLabel->show();
+    ui->verificationResultLabel->setText(i18n("Running ISO verifiction, please wait..."));
+    QCoreApplication::instance()->processEvents();
     IsoResult result;
     VerifyNeonISO verifyNeon(m_ImageFile);
     if (verifyNeon.canVerify()) {
         if (verifyNeon.isValid()) {
-            ui->verificationResultLabel->show();
             ui->verificationResultLabel->setText(i18n("Verified as valid KDE neon ISO"));
             result.resultType = Fine;
             result.error = i18n("Verified as valid KDE neon ISO");
@@ -329,14 +333,12 @@ IsoResult MainDialog::verifyISO() {
     VerifyNetrunnerISO verifyNetrunner(m_ImageFile);
     if (verifyNetrunner.canVerify()) {
         if (verifyNetrunner.isValid()) {
-            ui->verificationResultLabel->show();
             ui->verificationResultLabel->setText(i18n("Verified as valid Netrunner ISO"));
             result.resultType = Fine;
             result.error = i18n("Verified as valid Netrunner ISO");
             return result;
         } else {
             QString error(i18n("Invalid Netrunner image"));
-            ui->verificationResultLabel->show();
             ui->verificationResultLabel->setText(verifyNetrunner.m_error);
             result.resultType = Invalid;
             result.error = verifyNetrunner.m_error;
@@ -346,7 +348,6 @@ IsoResult MainDialog::verifyISO() {
     VerifyKubuntuISO verifyKubuntu(m_ImageFile);
     if (verifyKubuntu.canVerify()) {
         if (verifyKubuntu.isValid()) {
-            ui->verificationResultLabel->show();
             ui->verificationResultLabel->setText(i18n("Verified as valid Kubuntu ISO"));
             result.resultType = Fine;
             result.error = i18n("Verified as valid Kubuntu ISO");
@@ -362,7 +363,6 @@ IsoResult MainDialog::verifyISO() {
     }    
     QString error(i18n("Could not verify as a known distro image."));
     qDebug() << "verify error: " << error;
-    ui->verificationResultLabel->show();
     ui->verificationResultLabel->setText(error);
     result.resultType = DinnaeKen;
     result.error = QString(i18n("Could not verify as a known distro image."));
