@@ -84,33 +84,36 @@ bool VerifyKubuntuISO::isValid() {
     if (!iso.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not read file");
     }
+    // slow, threadify me
     if (!hash.addData(&iso)) {
         m_error = i18n("Could not perform checksum");
         return false;
     }
-    // slow, threadify me
     QByteArray hashResult = hash.result();
     
     QFile fileChecksums(fileNameChecksums);
     if (!fileChecksums.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
-            return false;
+        m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
+        return false;
     }
-    // make regex for sha line
-    // find sha line and sha
-    // if sha matches good
-    // if gpg matches good
-
-        /*
-        qDebug() << "text " << text;
-        if (text == hashResult.toHex()) {
-            return true;
-        } else {
-            m_error = i18n("Checksum did not match");
-            return false;
-        }
+    QString checksum;
+    qDebug() << "regex " << "([\\dabcdef]+) \*"+fi.fileName();
+    //QRegExp rx("([\\dabcdef]+) \*"+fi.fileName());
+    QRegExp rx("([abcdef\\d]+).."+fi.fileName());
+    QByteArray checksumData = fileChecksums.readAll();
+    qDebug() << "checksumData " << checksumData;
+    int pos = rx.indexIn(QString(checksumData));
+    if (pos > -1) {
+        checksum = rx.cap(1);
+    } else {
+        m_error = i18n("Could not find checksum in SHA256SUMS file");
+        return false;
     }
-    */
+    qDebug() << "checksum: " << checksum;
+    if (checksum != hashResult.toHex()) {
+        m_error = i18n("Checksum of .iso file does not match value in SHA256SUMS file");
+        return false;
+    }
 
     // check gpg signature
     QStringList splits = m_filename.split('/');
@@ -132,7 +135,7 @@ bool VerifyKubuntuISO::isValid() {
     qDebug() << "filename " << result.fileName();
     GpgME::Signature signature = result.signature(0);
     qDebug() << "fingerprint " << signature.fingerprint();
-    if (strcmp(signature.fingerprint(), "C5986B4F1257FFA86632CBA746181433FBB75451") == 0) {
+    if (strcmp(signature.fingerprint(), "46181433FBB75451") == 0) {
         qDebug() << "Uses right signature!" << signature.fingerprint();
     } else {
         qDebug() << "Uses wrong signature!!" << signature.fingerprint();
