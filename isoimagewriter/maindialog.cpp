@@ -316,7 +316,7 @@ IsoResult MainDialog::verifyISO() {
             result.error = i18n("Verified as valid KDE neon ISO");
             return result;
         } else {
-            QString error(i18n("Invalid Neon image"));
+            QString error(i18n("Invalid KDE neon image"));
             ui->verificationResultLabel->show();
             ui->verificationResultLabel->setText(verifyNeon.m_error);
             result.resultType = Invalid;

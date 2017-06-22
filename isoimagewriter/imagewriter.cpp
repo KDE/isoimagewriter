@@ -223,7 +223,7 @@ void ImageWriter::writeImage()
     if (!isError && !cancelRequested) {
         QString message = i18n("The operation completed successfully.") +
             "<br><br>" +
-            (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Clear\"."));
+            (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Wipe USB Disk\"."));
         QVariantMap args;
         args[QStringLiteral("success")] = message;
         KAuth::HelperSupport::progressStep(args);
