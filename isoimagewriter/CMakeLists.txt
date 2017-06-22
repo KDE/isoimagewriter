@@ -6,7 +6,8 @@ set(isoimagewriter_common_SRCS
     platform_lin.cpp
     common.cpp
     verifyiso.cpp
-    verifyneoniso.cpp)
+    verifyneoniso.cpp
+    verifynetrunneriso.cpp)
 ecm_qt_declare_logging_category(isoimagewriter_common_SRCS
                                 HEADER isoimagewriter_debug.h
                                 IDENTIFIER ISOIMAGEWRITER_LOG

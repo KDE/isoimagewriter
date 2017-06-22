@@ -38,6 +38,8 @@
 #include "imagewriter.h"
 #include "usbdevice.h"
 #include "isoimagewriter_debug.h"
+#include "verifyneoniso.h"
+#include "verifynetrunneriso.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -68,6 +70,7 @@ MainDialog::MainDialog(QWidget *parent) :
     ui->introLabel->setText(i18n("Select an ISO image file to write to a USB disk"));
     ui->imageSelectButton->setIcon(QIcon::fromTheme("folder-open"));
     ui->deviceRefreshButton->setIcon(QIcon::fromTheme("view-refresh"));
+    ui->verificationResultLabel->hide();
     m_writeButton = ui->buttonBox->button(QDialogButtonBox::Yes);
     m_clearButton = ui->buttonBox->button(QDialogButtonBox::Reset);
     m_cancelButton = ui->buttonBox->button(QDialogButtonBox::Cancel);
@@ -322,8 +325,24 @@ IsoResult MainDialog::verifyISO() {
             return result;
         }
     }
-    QString error(i18n("Could not verify as a known distro image."));
-    qDebug() << "verifyNeon error: " << error;
+    VerifyNetrunnerISO verifyNetrunner(m_ImageFile);
+    if (verifyNetrunner.canVerify()) {
+        if (verifyNetrunner.isValid()) {
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(i18n("Verified as valid Netrunner ISO"));
+            result.resultType = Fine;
+            result.error = i18n("Verified as valid Netrunner ISO");
+            return result;
+        } else {
+            QString error(i18n("Invalid Netrunner image"));
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(verifyNetrunner.m_error);
+            result.resultType = Invalid;
+            result.error = verifyNetrunner.m_error;
+            return result;
+        }
+    }    QString error(i18n("Could not verify as a known distro image."));
+    qDebug() << "verify error: " << error;
     ui->verificationResultLabel->show();
     ui->verificationResultLabel->setText(error);
     result.resultType = DinnaeKen;

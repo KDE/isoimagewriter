@@ -26,7 +26,6 @@
 
 #include "common.h"
 #include "externalprogressbar.h"
-#include "verifyneoniso.h"
 
 namespace Ui {
     class MainDialog;
