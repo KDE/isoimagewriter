@@ -80,8 +80,6 @@ MainDialog::MainDialog(QWidget *parent) :
     m_cancelButton->hide();
     // Remove the Context Help button and add the Minimize button to the titlebar
     setWindowFlags((windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint) & ~Qt::WindowContextHelpButtonHint);
-    // Disallow to change the dialog height
-    setFixedHeight(size().height());
     // Start in the "idle" mode
     hideWritingProgress();
     // Change default open dir
