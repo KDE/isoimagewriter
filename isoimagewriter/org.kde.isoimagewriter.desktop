@@ -34,4 +34,4 @@ GenericName[sv]=Skriv en ISO-avbild till en USB-disk
 GenericName[uk]=Програма для запису образів ISO на диски USB
 GenericName[x-test]=xxWrite an ISO Image to a USB Diskxx
 GenericName[zh_CN]=将 ISO 镜像写入 USB 盘
-Categories=System;Utility;Archiving;
+Categories=System;Utility;
