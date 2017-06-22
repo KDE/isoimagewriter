@@ -21,6 +21,7 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QCryptographicHash>
+#include <QInputDialog>
 
 #include <KLocalizedString>
 
@@ -49,8 +50,25 @@ bool VerifyNetrunnerISO::isValid() {
     if (!iso.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not read file");
     }
-    hash.addData(&iso);
+    if (!hash.addData(&iso)) {
+        m_error = i18n("Could not perform checksum");
+        return false;
+    }
     QByteArray hashResult = hash.result();
-    qDebug() << "result " << hashResult;
-    return true;
+    qDebug() << "result " << hashResult.toHex();
+    bool ok;
+    QString text = QInputDialog::getText(0, i18n("SHA256 Checksum"),
+                                         i18n("Paste the SHA256 checksum for this ISO:"), QLineEdit::Normal,
+                                         "", &ok);
+    if (ok && !text.isEmpty()) {
+        qDebug() << "text " << text;
+        if (text == hashResult.toHex()) {
+            return true;
+        } else {
+            m_error = i18n("Checksum did not match");
+            return false;
+        }
+    }
+    m_error = i18n("Requires an SHA256 checksum");
+    return false;
 }
