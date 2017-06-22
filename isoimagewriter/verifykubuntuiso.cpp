@@ -27,24 +27,26 @@
 
 #include "verifynetrunneriso.h"
 
-VerifyNetrunnerISO::VerifyNetrunnerISO(QString filename) : VerifyISO(filename)
+VerifyKubuntuISO::VerifyKubuntuISO(QString filename) : VerifyISO(filename)
 {
 }
 
-bool VerifyNetrunnerISO::canVerify() {
+bool VerifykubuntuISO::canVerify() {
     QStringList splits = m_filename.split('/');
     QString fileName = splits[splits.size()-1];
-    if (!fileName.startsWith("netrunner-")) {
+    if (!fileName.startsWith("kubuntu-")) {
         m_error = i18n("Filename does not match Netrunner ISO files");
         return false;
     }
     return true;
 }
 
-bool VerifyNetrunnerISO::isValid() {
+bool VerifyKubuntuISO::isValid() {
     if (!verifyFilename()) {
         return false;
     }
+    QString fileNameChecksums = splits[splits.size()0] + "/SHA256SUMS;
+    QString fileNameChecksumsSig = splits[splits.size()0] + "/SHA256SUMS.gpg;
     QCryptographicHash hash(QCryptographicHash::Sha256);
     QFile iso(m_filename);
     if (!iso.open(QIODevice::ReadOnly)) {
@@ -57,11 +59,9 @@ bool VerifyNetrunnerISO::isValid() {
     // slow, threadify me
     QByteArray hashResult = hash.result();
     qDebug() << "result " << hashResult.toHex();
-    bool ok;
-    QString text = QInputDialog::getText(0, i18n("SHA256 Checksum"),
-                                         i18n("Paste the SHA256 checksum for this ISO:"), QLineEdit::Normal,
-                                         "", &ok);
-    if (ok && !text.isEmpty()) {
+    
+    QFile fileChecksums(fileNameChecksums);
+    if (!fileChecksums.open(QIODevice::ReadOnly | QIODevice::Text))
         qDebug() << "text " << text;
         if (text == hashResult.toHex()) {
             return true;

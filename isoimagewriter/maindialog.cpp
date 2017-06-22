@@ -341,7 +341,25 @@ IsoResult MainDialog::verifyISO() {
             result.error = verifyNetrunner.m_error;
             return result;
         }
-    }    QString error(i18n("Could not verify as a known distro image."));
+    }    
+    VerifyKubuntuISO verifyKubuntu(m_ImageFile);
+    if (verifyKubuntu.canVerify()) {
+        if (verifyKubuntu.isValid()) {
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(i18n("Verified as valid Kubuntu ISO"));
+            result.resultType = Fine;
+            result.error = i18n("Verified as valid Kubuntu ISO");
+            return result;
+        } else {
+            QString error(i18n("Invalid Kubuntu image"));
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(verifyKubuntu.m_error);
+            result.resultType = Invalid;
+            result.error = verifyKubuntu.m_error;
+            return result;
+        }
+    }    
+    QString error(i18n("Could not verify as a known distro image."));
     qDebug() << "verify error: " << error;
     ui->verificationResultLabel->show();
     ui->verificationResultLabel->setText(error);
