@@ -31,5 +31,6 @@ KDE_ENABLE_EXCEPTIONS()
 
 add_subdirectory(isoimagewriter)
 add_subdirectory(images)
+add_subdirectory(signing-keys)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

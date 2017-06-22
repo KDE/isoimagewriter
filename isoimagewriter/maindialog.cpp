@@ -40,6 +40,7 @@
 #include "isoimagewriter_debug.h"
 #include "verifyneoniso.h"
 #include "verifynetrunneriso.h"
+#include "verifykubuntuiso.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),

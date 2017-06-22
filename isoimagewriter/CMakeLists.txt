@@ -7,6 +7,7 @@ set(isoimagewriter_common_SRCS
     common.cpp
     verifyiso.cpp
     verifyneoniso.cpp
+    verifykubuntuiso.cpp
     verifynetrunneriso.cpp)
 ecm_qt_declare_logging_category(isoimagewriter_common_SRCS
                                 HEADER isoimagewriter_debug.h
@@ -33,9 +34,6 @@ add_executable(isoimagewriter ${isoimagewriter_SRCS})
 
 add_executable(testy testy.cpp ${isoimagewriter_common_SRCS})
 target_link_libraries(testy Qt5::Widgets KF5::Auth)
-
-install(FILES neon-signing-key.gpg DESTINATION ${DATA_INSTALL_DIR}/isoimagewriter/)
-install(FILES neon-signing-key.gpg DESTINATION ${DATA_INSTALL_DIR}/testy/)
 
 if (ROSA_BRANDING)
     target_compile_definitions(isoimagewriter PRIVATE -DROSA_BRANDING="1")
