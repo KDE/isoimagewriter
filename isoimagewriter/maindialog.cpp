@@ -311,7 +311,7 @@ void MainDialog::enumFlashDevices()
 // much more generic to avoid overhead and repetition
 IsoResult MainDialog::verifyISO() {
     ui->verificationResultLabel->show();
-    ui->verificationResultLabel->setText(i18n("Running ISO verifiction, please wait..."));
+    ui->verificationResultLabel->setText(i18n("Running ISO verification, please wait..."));
     QCoreApplication::instance()->processEvents();
     IsoResult result;
     VerifyNeonISO verifyNeon(m_ImageFile);
@@ -523,7 +523,7 @@ void MainDialog::hideWritingProgress()
     ui->deviceList->setEnabled(true);
     ui->deviceRefreshButton->setEnabled(true);
 
-    // Hide the progress bar and verifiction label
+    // Hide the progress bar and verification label
     ui->verificationResultLabel->hide();
     ui->progressBar->setVisible(false);
     ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
