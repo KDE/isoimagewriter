@@ -58,9 +58,8 @@
   <url type="donation">https://www.kde.org/community/donations</url>
   <screenshots>
     <screenshot type="default">
-      <image>
-	https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-screenshots
-	Central hosting is still being sorted out, poke sitter@kde.org for more info.
+      <image width="659" height="311">
+	https://cdn.kde.org/screenshots/isoimagewriter/isoimagewriter.png
       </image>
     </screenshot>
   </screenshots>
