@@ -46,6 +46,7 @@ public:
     QString getError() const;
     bool verifyFileExists();
     bool verifyFileMatches(QString startsWith);
+    bool importSigningKey(QString keyFilename);
 
     virtual bool canVerify() = 0;
     virtual bool isValid() = 0;

@@ -18,10 +18,18 @@
  */
 #include <QFile>
 #include <QFileInfo>
+#include <QDebug>
+#include <QStandardPaths>
 
 #include <KLocalizedString>
 
 #include "verifyiso.h"
+
+#include <QGpgME/Protocol>
+#include <QGpgME/VerifyDetachedJob>
+#include <QGpgME/ImportJob>
+#include <gpgme++/verificationresult.h>
+#include <gpgme++/importresult.h>
 
 VerifyISO::VerifyISO(QString filename): m_filename(filename)
 {
@@ -40,6 +48,30 @@ bool VerifyISO::verifyFileMatches(QString startsWith) {
     QString fileName = fileInfo.fileName();
     if (!fileName.startsWith(startsWith)) {
         m_error = i18n("Filename does not match %1 ISO files", m_humanReadableDistroName);
+        return false;
+    }
+    return true;
+}
+
+bool VerifyISO::importSigningKey(QString keyFilename) {
+    QString signingKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, keyFilename);
+    if (signingKeyFile.isEmpty()) {
+        qDebug() << "error can't find signing key" << signingKeyFile;
+        return false;
+    }
+    QFile signingKey(signingKeyFile);
+    if (!signingKey.open(QIODevice::ReadOnly)) {
+        qDebug() << "error" << signingKey.errorString();
+        return false;
+    }
+    QByteArray signingKeyData = signingKey.readAll();
+    QGpgME::ImportJob *importJob = QGpgME::openpgp()->importJob();
+    GpgME::ImportResult importResult = importJob->exec(signingKeyData);
+    qDebug() << "numConsidered " << importResult.numConsidered();
+    qDebug() << "numImported " << importResult.numImported();
+    qDebug() << "numUnchanged " << importResult.numUnchanged();
+    if (!(importResult.numConsidered() == 1 && (importResult.numImported() == 1 || importResult.numUnchanged() == 1))) {
+        qDebug() << "Could not import gpg signature";
         return false;
     }
     return true;

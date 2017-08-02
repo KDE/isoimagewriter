@@ -40,24 +40,7 @@ bool VerifyNeonISO::canVerify() {
     if (!verifyFileMatches("neon-")) {
         return false;
     }
-    QString neonSigningKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, "neon-signing-key.gpg");
-    if (neonSigningKeyFile.isEmpty()) {
-        qDebug() << "error can't find neon-signing-key" << neonSigningKeyFile;
-        return false;
-    }
-    QFile signingKey(neonSigningKeyFile);
-    if (!signingKey.open(QIODevice::ReadOnly)) {
-        qDebug() << "error" << signingKey.errorString();
-        return false;
-    }
-    QByteArray signingKeyData = signingKey.readAll();
-    QGpgME::ImportJob *importJob = QGpgME::openpgp()->importJob();
-    GpgME::ImportResult importResult = importJob->exec(signingKeyData);
-    qDebug() << "numConsidered " << importResult.numConsidered();
-    qDebug() << "numImported " << importResult.numImported();
-    qDebug() << "numUnchanged " << importResult.numUnchanged();
-    if (!(importResult.numConsidered() == 1 && (importResult.numImported() == 1 || importResult.numUnchanged() == 1))) {
-        qDebug() << "Could not import gpg signature";
+    if (!importSigningKey("neon-signing-key.gpg")) {
         return false;
     }
     return true;

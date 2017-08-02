@@ -43,25 +43,7 @@ bool VerifyKubuntuISO::canVerify() {
     if (!verifyFileMatches("kubuntu-")) {
         return false;
     }
-
-    QString signingKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, "ubuntu-signing-key.gpg");
-    if (signingKeyFile.isEmpty()) {
-        qDebug() << "error can't find ubuntu-signing-key" << signingKeyFile;
-        return false;
-    }
-    QFile signingKey(signingKeyFile);
-    if (!signingKey.open(QIODevice::ReadOnly)) {
-        qDebug() << "error" << signingKey.errorString();
-        return false;
-    }
-    QByteArray signingKeyData = signingKey.readAll();
-    QGpgME::ImportJob *importJob = QGpgME::openpgp()->importJob();
-    GpgME::ImportResult importResult = importJob->exec(signingKeyData);
-    qDebug() << "numConsidered " << importResult.numConsidered();
-    qDebug() << "numImported " << importResult.numImported();
-    qDebug() << "numUnchanged " << importResult.numUnchanged();
-    if (!(importResult.numConsidered() == 1 && (importResult.numImported() == 1 || importResult.numUnchanged() == 1))) {
-        qDebug() << "Could not import gpg signature";
+    if (!importSigningKey("ubuntu-signing-key.gpg")) {
         return false;
     }
     return true;
