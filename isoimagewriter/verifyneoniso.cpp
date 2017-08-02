@@ -62,14 +62,14 @@ bool VerifyNeonISO::isValid() {
     if (!isoFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error",isoFile.errorString();
     }
-    QByteArray isoData = signatureFile.readAll();
+    QByteArray isoData = isoFile.readAll();
     QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
     GpgME::VerificationResult result = job->exec(signatureData, isoData);
     qDebug() << "numSignatures " << result.numSignatures();
     qDebug() << "filename " << result.fileName();
     GpgME::Signature signature = result.signature(0);
     qDebug() << "fingerprint " << signature.fingerprint();
-    if (strcmp(signature.fingerprint(), "DEACEA00075E1D76") == 0) {
+    if (strcmp(signature.fingerprint(), "348C8651206633FD983A8FC4DEACEA00075E1D76") == 0) {
         qDebug() << "Uses right signature!";
     } else {
         qDebug() << "Uses wrong signature!!";

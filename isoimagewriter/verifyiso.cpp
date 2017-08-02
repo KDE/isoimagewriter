@@ -1,6 +1,6 @@
 /*
  * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2017 Jonathan Riddell <jr@jriddell.org>
+ * Copyright 2017 Jonathan Riddell <jr@jriddell.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
