@@ -47,6 +47,7 @@ public:
     bool verifyFileExists();
     bool verifyFileMatches(QString startsWith);
     bool importSigningKey(QString keyFilename);
+    bool verifySignatureFileExists(QString filename);
 
     virtual bool canVerify() = 0;
     virtual bool isValid() = 0;

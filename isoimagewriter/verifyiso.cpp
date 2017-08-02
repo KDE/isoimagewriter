@@ -43,6 +43,18 @@ bool VerifyISO::verifyFileExists() {
     return true;
 }
 
+bool VerifyISO::verifySignatureFileExists(QString filename) {
+    qDebug() << "verifySignatureFileExists" << filename;
+    QFileInfo fileInfo(filename);
+    QString sigFileName = fileInfo.fileName();
+    qDebug() << "verifySignatureFileExists sigFileName" << sigFileName;
+    if (!QFile::exists(filename)) {
+        m_error = i18n("Could not find %1, please download PGP signature file to same directory.", sigFileName);
+        return false;
+    }
+    return true;
+}
+
 bool VerifyISO::verifyFileMatches(QString startsWith) {
     QFileInfo fileInfo(getFilename());
     QString fileName = fileInfo.fileName();

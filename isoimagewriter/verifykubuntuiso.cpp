@@ -57,6 +57,13 @@ bool VerifyKubuntuISO::isValid() {
     QFileInfo fi(m_filename);
     QString fileNameChecksums = fi.absolutePath() + "/SHA256SUMS";
     QString fileNameChecksumsSig = fi.absolutePath() + "/SHA256SUMS.gpg";
+    if (!verifySignatureFileExists(fileNameChecksums)) {
+        return false;
+    }
+    if (!verifySignatureFileExists(fileNameChecksumsSig)) {
+        return false;
+    }
+
     qDebug() << "fileNameChecksums " << fileNameChecksums;
     QFile fileChecksums(fileNameChecksums);
     if (!fileChecksums.open(QIODevice::ReadOnly | QIODevice::Text)) {

@@ -437,6 +437,7 @@ void MainDialog::cancelWriting() {
 }
 
 void MainDialog::progressStep(KJob* job, unsigned long step) {
+    Q_UNUSED(job)
     qCDebug(ISOIMAGEWRITER_LOG) << "progressStep %() " << step;
     updateProgressBar(step);
 }

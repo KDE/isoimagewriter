@@ -50,11 +50,7 @@ bool VerifyNeonISO::isValid() {
     if (!verifyFileExists()) {
         return false;
     }
-    QStringList splits = m_filename.split('/');
-    QString fileName = splits[splits.size()-1];
-    if (!QFile::exists(m_filename+".sig")) {
-        qDebug() << "does not exist .sig" << fileName+".sig";
-        m_error = i18n("Could not find %1, please download PGP signature file to same directory.", fileName+".sig");
+    if (!verifySignatureFileExists(m_filename+".sig")) {
         return false;
     }
     QFile signatureFile(m_filename + ".sig");
