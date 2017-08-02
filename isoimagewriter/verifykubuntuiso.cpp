@@ -76,6 +76,11 @@ bool VerifyKubuntuISO::isValid() {
     QString fileNameChecksums = fi.absolutePath() + "/SHA256SUMS";
     QString fileNameChecksumsSig = fi.absolutePath() + "/SHA256SUMS.gpg";
     qDebug() << "fileNameChecksums " << fileNameChecksums;
+    QFile fileChecksums(fileNameChecksums);
+    if (!fileChecksums.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
+        return false;
+    }
     QCryptographicHash hash(QCryptographicHash::Sha256);
     QFile iso(m_filename);
     if (!iso.open(QIODevice::ReadOnly)) {
@@ -88,11 +93,6 @@ bool VerifyKubuntuISO::isValid() {
     }
     QByteArray hashResult = hash.result();
     
-    QFile fileChecksums(fileNameChecksums);
-    if (!fileChecksums.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
-        return false;
-    }
     QString checksum;
     qDebug() << "regex " << "([\\dabcdef]+) \*"+fi.fileName();
     //QRegExp rx("([\\dabcdef]+) \*"+fi.fileName());
