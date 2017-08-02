@@ -1,6 +1,6 @@
 /*
  * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2017  KDE neon <email>
+ * Copyright (C) 2017 Jonathan Riddell <jr@jriddell.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,8 @@ public:
      * @return the m_error string
      */
     QString getError() const;
-    bool verifyFilename();
+    bool verifyFileExists();
+    bool verifyFileMatches(QString startsWith);
 
     virtual bool canVerify() = 0;
     virtual bool isValid() = 0;
@@ -60,6 +61,7 @@ public Q_SLOTS:
 
 protected:
     QString m_filename;
+    QString m_humanReadableDistroName;
 };
 
 #endif // VERIFYISO_H

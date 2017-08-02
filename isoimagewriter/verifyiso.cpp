@@ -1,6 +1,6 @@
 /*
  * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2017  KDE neon <email>
+ * Copyright (C) 2017 Jonathan Riddell <jr@jriddell.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
  *
  */
 #include <QFile>
+#include <QFileInfo>
 
 #include <KLocalizedString>
 
@@ -26,11 +27,21 @@ VerifyISO::VerifyISO(QString filename): m_filename(filename)
 {
 }
 
-bool VerifyISO::verifyFilename() {
+bool VerifyISO::verifyFileExists() {
     if (!QFile::exists(getFilename())) {
-        m_error = i18n("ISO File %1 does not exist");
+        m_error = i18n("ISO File %1 does not exist", getFilename());
         return false;
     } 
+    return true;
+}
+
+bool VerifyISO::verifyFileMatches(QString startsWith) {
+    QFileInfo fileInfo(getFilename());
+    QString fileName = fileInfo.fileName();
+    if (!fileName.startsWith(startsWith)) {
+        m_error = i18n("Filename does not match %1 ISO files", m_humanReadableDistroName);
+        return false;
+    }
     return true;
 }
 

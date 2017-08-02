@@ -1,6 +1,6 @@
 /*
  * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2017  KDE neon <email>
+ * Copyright (C) 2017 Jonathan Riddell <jr@jriddell.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,14 +36,11 @@
 
 VerifyKubuntuISO::VerifyKubuntuISO(QString filename) : VerifyISO(filename)
 {
+    m_humanReadableDistroName = "Kubuntu";
 }
 
 bool VerifyKubuntuISO::canVerify() {
-    QStringList splits = m_filename.split('/');
-    QFileInfo fi(m_filename);
-    QString fileName = fi.fileName();
-    if (!fileName.startsWith("kubuntu-")) {
-        m_error = i18n("Filename does not match Netrunner ISO files");
+    if (!verifyFileMatches("kubuntu-")) {
         return false;
     }
 
@@ -71,7 +68,7 @@ bool VerifyKubuntuISO::canVerify() {
 }
 
 bool VerifyKubuntuISO::isValid() {
-    if (!verifyFilename()) {
+    if (!verifyFileExists()) {
         return false;
     }
     qDebug() << "m_filename " << m_filename;

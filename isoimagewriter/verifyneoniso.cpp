@@ -1,6 +1,6 @@
 /*
  * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2017  KDE neon <email>
+ * Copyright (C) 2017 Jonathan Riddell <jr@jriddell.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,13 +33,11 @@
 
 VerifyNeonISO::VerifyNeonISO(QString filename) : VerifyISO(filename)
 {
+    m_humanReadableDistroName = "KDE neon";
 }
 
 bool VerifyNeonISO::canVerify() {
-    QStringList splits = m_filename.split('/');
-    QString fileName = splits[splits.size()-1];
-    if (!fileName.startsWith("neon-")) {
-        m_error = i18n("Filename does not match KDE neon ISO files");
+    if (!verifyFileMatches("neon-")) {
         return false;
     }
     QString neonSigningKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, "neon-signing-key.gpg");
@@ -66,7 +64,7 @@ bool VerifyNeonISO::canVerify() {
 }
 
 bool VerifyNeonISO::isValid() {
-    if (!verifyFilename()) {
+    if (!verifyFileExists()) {
         return false;
     }
     QStringList splits = m_filename.split('/');
