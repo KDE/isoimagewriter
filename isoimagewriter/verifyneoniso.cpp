@@ -60,7 +60,7 @@ bool VerifyNeonISO::isValid() {
     if (!signatureFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error",signatureFile.errorString();
     }
-    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename, true);
+    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename, Neon);
     connect(verifyISOWorker, &QThread::finished, verifyISOWorker, &QObject::deleteLater);
     verifyISOWorker->start();
     while (verifyISOWorker->isResultReady() == false) {

@@ -26,47 +26,42 @@
 #include <QDebug>
 #include <QFile>
 #include <QStandardPaths>
-#include <QCryptographicHash>
-#include <QInputDialog>
-#include <QFileInfo>
+#include <QThread>
 #include <QCoreApplication>
 
 #include <KLocalizedString>
 
-#include "verifykubuntuiso.h"
+#include "verifyarchiso.h"
 #include "verifyisoworker.h"
 
-VerifyKubuntuISO::VerifyKubuntuISO(QString filename) : VerifyISO(filename)
+VerifyArchISO::VerifyArchISO(QString filename) : VerifyISO(filename)
 {
-    m_humanReadableDistroName = "Kubuntu";
+    m_humanReadableDistroName = "Arch";
 }
 
-bool VerifyKubuntuISO::canVerify() {
-    if (!verifyFileMatches("kubuntu-")) {
+bool VerifyArchISO::canVerify() {
+    qDebug() << "canVerify arch";
+    if (!verifyFileMatches("archlinux-")) {
         return false;
     }
-    if (!importSigningKey("ubuntu-signing-key.gpg")) {
+    if (!importSigningKey("arch-signing-key.gpg")) {
         return false;
     }
     return true;
 }
 
-bool VerifyKubuntuISO::isValid() {
+bool VerifyArchISO::isValid() {
     if (!verifyFileExists()) {
         return false;
     }
-    qDebug() << "m_filename " << m_filename;
-    QFileInfo fi(m_filename);
-    QString fileNameChecksums = fi.absolutePath() + "/SHA256SUMS";
-    QString fileNameChecksumsSig = fi.absolutePath() + "/SHA256SUMS.gpg";
-    if (!verifySignatureFileExists(fileNameChecksums)) {
+    if (!verifySignatureFileExists(m_filename + ".sig")) {
         return false;
     }
-    if (!verifySignatureFileExists(fileNameChecksumsSig)) {
-        return false;
+    QFile signatureFile(m_filename + ".sig");
+    if (!signatureFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error",signatureFile.errorString();
     }
-    
-    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename, Kubuntu);
+    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename, Arch);
     connect(verifyISOWorker, &QThread::finished, verifyISOWorker, &QObject::deleteLater);
     verifyISOWorker->start();
     while (verifyISOWorker->isResultReady() == false) {
@@ -76,6 +71,5 @@ bool VerifyKubuntuISO::isValid() {
         m_error = verifyISOWorker->getErrorMessage();
         return false;
     }
-
     return true;
 }

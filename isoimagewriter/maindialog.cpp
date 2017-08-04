@@ -45,6 +45,7 @@
 #include "verifyneoniso.h"
 #include "verifynetrunneriso.h"
 #include "verifykubuntuiso.h"
+#include "verifyarchiso.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -348,6 +349,22 @@ IsoResult MainDialog::verifyISO() {
             ui->verificationResultLabel->setText(verifyNeon.m_error);
             result.resultType = Invalid;
             result.error = verifyNeon.m_error;
+            return result;
+        }
+    }
+    VerifyArchISO verifyArch(m_ImageFile);
+    if (verifyArch.canVerify()) {
+        if (verifyArch.isValid()) {
+            ui->verificationResultLabel->setText(i18n("Verified as valid Arch ISO"));
+            result.resultType = Fine;
+            result.error = i18n("Verified as valid Arch ISO");
+            return result;
+        } else {
+            QString error(i18n("Invalid Arch image"));
+            ui->verificationResultLabel->show();
+            ui->verificationResultLabel->setText(verifyArch.m_error);
+            result.resultType = Invalid;
+            result.error = verifyArch.m_error;
             return result;
         }
     }
