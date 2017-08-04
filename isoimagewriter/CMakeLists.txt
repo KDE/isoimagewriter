@@ -27,6 +27,7 @@ set(isoimagewriter_SRCS
     physicaldevice.cpp
     usbdevicemonitor_lin.cpp
     main.cpp
+    verifyisoworker.cpp
 )
 ki18n_wrap_ui(isoimagewriter_SRCS maindialog.ui)
 

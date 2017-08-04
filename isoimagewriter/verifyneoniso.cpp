@@ -26,10 +26,13 @@
 #include <QDebug>
 #include <QFile>
 #include <QStandardPaths>
+#include <QThread>
+#include <QCoreApplication>
 
 #include <KLocalizedString>
 
 #include "verifyneoniso.h"
+#include "verifyisoworker.h"
 
 VerifyNeonISO::VerifyNeonISO(QString filename) : VerifyISO(filename)
 {
@@ -50,13 +53,14 @@ bool VerifyNeonISO::isValid() {
     if (!verifyFileExists()) {
         return false;
     }
-    if (!verifySignatureFileExists(m_filename+".sig")) {
+    if (!verifySignatureFileExists(m_filename + ".sig")) {
         return false;
     }
     QFile signatureFile(m_filename + ".sig");
     if (!signatureFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error",signatureFile.errorString();
     }
+    /*
     QByteArray signatureData = signatureFile.readAll();
     QFile isoFile(m_filename);
     if (!isoFile.open(QIODevice::ReadOnly)) {
@@ -81,5 +85,15 @@ bool VerifyNeonISO::isValid() {
         m_error = i18n("Key is revoked.");
         return false;
     }
+    */
+    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename);
+    connect(verifyISOWorker, &QThread::finished, verifyISOWorker, &QObject::deleteLater);
+    verifyISOWorker->start();
+
+    while (verifyISOWorker->isResultReady() == false) {
+        qDebug() << "isResultReady() while loop";
+        QCoreApplication::processEvents();
+    }
+
     return true;
 }
