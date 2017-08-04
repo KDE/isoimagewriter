@@ -65,7 +65,7 @@ bool VerifyKubuntuISO::isValid() {
     if (!verifySignatureFileExists(fileNameChecksumsSig)) {
         return false;
     }
-    
+
     VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename, Kubuntu);
     connect(verifyISOWorker, &QThread::finished, verifyISOWorker, &QObject::deleteLater);
     verifyISOWorker->start();
