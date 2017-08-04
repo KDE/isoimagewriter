@@ -21,6 +21,7 @@
 // MainDialog is the main application window
 
 #include <KAuth>
+#include <KPixmapSequenceOverlayPainter>
 
 #include <QDialog>
 
@@ -84,6 +85,8 @@ protected:
 
     // Reloads the list of USB flash disks
     void enumFlashDevices();
+
+    KPixmapSequenceOverlayPainter *m_busyWidget;
 
 public slots:
     // Suggests to select image file using the Open File dialog

@@ -60,40 +60,15 @@ bool VerifyNeonISO::isValid() {
     if (!signatureFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error",signatureFile.errorString();
     }
-    /*
-    QByteArray signatureData = signatureFile.readAll();
-    QFile isoFile(m_filename);
-    if (!isoFile.open(QIODevice::ReadOnly)) {
-        qDebug() << "error",isoFile.errorString();
-    }
-    QByteArray isoData = isoFile.readAll();
-    QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
-    GpgME::VerificationResult result = job->exec(signatureData, isoData);
-    qDebug() << "numSignatures " << result.numSignatures();
-    qDebug() << "filename " << result.fileName();
-    GpgME::Signature signature = result.signature(0);
-    qDebug() << "fingerprint " << signature.fingerprint();
-    if (strcmp(signature.fingerprint(), "348C8651206633FD983A8FC4DEACEA00075E1D76") == 0) {
-        qDebug() << "Uses right signature!";
-    } else {
-        qDebug() << "Uses wrong signature!!";
-        m_error = i18n("Uses wrong signature.");
-        return false;
-    }
-    if (signature.summary() & GpgME::Signature::KeyRevoked) {
-        qDebug() << "Key is revoked" << signature.summary();
-        m_error = i18n("Key is revoked.");
-        return false;
-    }
-    */
-    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename);
+    VerifyISOWorker* verifyISOWorker = new VerifyISOWorker(m_filename, true);
     connect(verifyISOWorker, &QThread::finished, verifyISOWorker, &QObject::deleteLater);
     verifyISOWorker->start();
-
     while (verifyISOWorker->isResultReady() == false) {
-        qDebug() << "isResultReady() while loop";
         QCoreApplication::processEvents();
     }
-
+    if (verifyISOWorker->getResult() == false) {
+        m_error = verifyISOWorker->getErrorMessage();
+        return false;
+    }
     return true;
 }

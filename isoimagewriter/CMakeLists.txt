@@ -48,6 +48,8 @@ target_link_libraries(isoimagewriter
     KF5::Auth
     QGpgme
     dl
+    KF5::WidgetsAddons
+    KF5::IconThemes
 )
 target_link_libraries(testy
     Qt5::Widgets

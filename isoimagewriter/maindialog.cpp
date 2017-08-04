@@ -19,6 +19,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of MainDialog
 
+#include <KIconLoader>
+#include <KPixmapSequence>
+
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDropEvent>
@@ -30,6 +33,7 @@
 #include <QRegularExpression>
 #include <QDebug>
 #include <QLoggingCategory>
+#include <QMovie>
 
 #include "common.h"
 #include "mainapplication.h"
@@ -134,7 +138,23 @@ void MainDialog::preprocessImageFile(const QString& newImageFile)
     f.close();
     m_ImageFile = newImageFile;
     ui->imageEdit->setText(QDir::toNativeSeparators(m_ImageFile) + " " + i18n("(%1 MiB)", QString::number(alignNumberDiv(m_ImageSize, DEFAULT_UNIT))));
+
+    m_busyWidget = new KPixmapSequenceOverlayPainter(this);
+    m_busyWidget->setSequence(KIconLoader::global()->loadPixmapSequence("process-working", KIconLoader::SizeSmallMedium));
+    m_busyWidget->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    m_busyWidget->setWidget(ui->busySpinner);
+    ui->busySpinner->setFixedSize(24, 24);
+    ui->busySpinner->show();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    m_busyWidget->start();
+
     IsoResult isoResult = verifyISO();
+
+    ui->busySpinner->hide();
+    m_busyWidget->stop();
+    QApplication::setOverrideCursor(Qt::ArrowCursor);
+    delete m_busyWidget;
+    
     if (isoResult.resultType == Invalid) {
         QMessageBox::critical(this, i18n("Invalid ISO"), i18n("ISO is invalid:<p>%1", isoResult.error));
         return;
@@ -312,6 +332,7 @@ void MainDialog::enumFlashDevices()
 IsoResult MainDialog::verifyISO() {
     ui->verificationResultLabel->show();
     ui->verificationResultLabel->setText(i18n("Running ISO verification, please wait..."));
+
     QCoreApplication::instance()->processEvents();
     IsoResult result;
     VerifyNeonISO verifyNeon(m_ImageFile);
@@ -527,6 +548,7 @@ void MainDialog::hideWritingProgress()
     // Hide the progress bar and verification label
     ui->verificationResultLabel->hide();
     ui->progressBar->setVisible(false);
+    ui->busySpinner->hide();
     ui->progressBarSpacer->changeSize(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_writeButton->setVisible(true);
     m_clearButton->setVisible(true);

@@ -27,6 +27,8 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
     CoreAddons
     Auth
+    WidgetsAddons
+    IconThemes
 )
 
 KDE_ENABLE_EXCEPTIONS()
