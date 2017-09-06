@@ -59,7 +59,7 @@ bool VerifyISO::verifyFileMatches(QString startsWith) {
     QFileInfo fileInfo(getFilename());
     QString fileName = fileInfo.fileName();
     if (!fileName.startsWith(startsWith)) {
-        m_error = i18n("Filename does not match %1 ISO files", m_humanReadableDistroName);
+        m_error = i18nc("%1 is the name of the distribution", "Filename does not match %1 ISO files", m_humanReadableDistroName);
         return false;
     }
     return true;
