@@ -9,6 +9,7 @@
   <name xml:lang="cs">Nástroj pro zapisování obrazů ISO</name>
   <name xml:lang="da">ISO-aftryksskriver</name>
   <name xml:lang="el">ISO Image Writer</name>
+  <name xml:lang="en-GB">ISO Image Writer</name>
   <name xml:lang="es">ISO Image Writer</name>
   <name xml:lang="gl">Gravadora de imaxes ISO</name>
   <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
@@ -29,6 +30,7 @@
   <summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
   <summary xml:lang="da">Skriv et ISO-aftryk til en USB-disk</summary>
   <summary xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</summary>
+  <summary xml:lang="en-GB">Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
   <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
   <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
@@ -50,6 +52,7 @@
     <p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
     <p xml:lang="da">Skriv et ISO-aftryk til en USB-disk</p>
     <p xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</p>
+    <p xml:lang="en-GB">Write an ISO Image to a USB Disk</p>
     <p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
     <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
     <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
