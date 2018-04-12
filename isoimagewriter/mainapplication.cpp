@@ -28,9 +28,7 @@ Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.isoimagewriter");
 MainApplication::MainApplication(int& argc, char** argv) :
     QApplication(argc, argv)
 {
-
-    //FIXME why is this needed? because it's root?
-    QIcon::setThemeName("breeze");
+    
     setWindowIcon(QIcon::fromTheme("drive-removable-media"));
     KLocalizedString::setApplicationDomain("isoimagewriter");
     KAboutData aboutData( QStringLiteral("isoimagewriter"),
