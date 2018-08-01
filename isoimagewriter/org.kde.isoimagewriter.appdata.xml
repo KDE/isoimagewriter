@@ -13,6 +13,7 @@
   <name xml:lang="en-GB">ISO Image Writer</name>
   <name xml:lang="es">ISO Image Writer</name>
   <name xml:lang="fi">ISO-levykirjoitin</name>
+  <name xml:lang="fr">ISO Image Writer</name>
   <name xml:lang="gl">Gravadora de imaxes ISO</name>
   <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
   <name xml:lang="id">ISO Image Writer</name>
@@ -21,6 +22,7 @@
   <name xml:lang="nl">ISO-image-schrijver</name>
   <name xml:lang="pl">Wgrywanie obrazów ISO</name>
   <name xml:lang="pt">Gravador de Imagens ISO</name>
+  <name xml:lang="pt-BR">Gravador de imagem ISO</name>
   <name xml:lang="ru">Запись образов ISO</name>
   <name xml:lang="sk">Zapisovač ISO obrazov</name>
   <name xml:lang="sv">ISO-avbildsskrivning</name>
@@ -38,6 +40,7 @@
   <summary xml:lang="en-GB">Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
   <summary xml:lang="fi">Kirjoittaa ISO-levykuvan USB-levylle</summary>
+  <summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
   <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
   <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
   <summary xml:lang="id">Tulis sebuah Image ISO ke sebuah Disk USB</summary>
@@ -46,6 +49,7 @@
   <summary xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</summary>
   <summary xml:lang="pl">Wgrywa obraz ISO na nośnik USB</summary>
   <summary xml:lang="pt">Gravar uma Imagem ISO num Disco USB</summary>
+  <summary xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</summary>
   <summary xml:lang="ru">Запись образов дисков на USB-накопитель</summary>
   <summary xml:lang="sk">Zapísať ISO obraz na USB disk</summary>
   <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
@@ -64,6 +68,7 @@
     <p xml:lang="en-GB">Write an ISO Image to a USB Disk</p>
     <p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
     <p xml:lang="fi">Kirjoittaa ISO-levykuvan USB-levylle</p>
+    <p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
     <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
     <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
     <p xml:lang="id">Tulis sebuah Image ISO ke sebuah Disk USB</p>
@@ -72,6 +77,7 @@
     <p xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</p>
     <p xml:lang="pl">Wgrywa obraz ISO na nośnik USB</p>
     <p xml:lang="pt">Gravar uma Imagem ISO num Disco USB</p>
+    <p xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</p>
     <p xml:lang="ru">Запись образов дисков на USB-накопитель</p>
     <p xml:lang="sk">Zapísať ISO obraz na USB disk</p>
     <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
