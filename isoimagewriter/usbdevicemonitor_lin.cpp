@@ -40,6 +40,7 @@
 UsbDeviceMonitorPrivate::UsbDeviceMonitorPrivate(QObject *parent) :
     QObject(parent)
 {
+    //TODO replace this with QLibrary to deal with segfault if symbols/functions do not exist
     m_udevLib = dlopen("libudev.so.1", RTLD_NOW | RTLD_GLOBAL);
     if (m_udevLib == NULL)
         m_udevLib = dlopen("libudev.so.0", RTLD_NOW | RTLD_GLOBAL);
