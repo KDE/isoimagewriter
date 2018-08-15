@@ -234,7 +234,7 @@ void MainDialog::dropEvent(QDropEvent* event)
     }
     if (newImageFile != "")
     {
-        // If something was realy received update the information
+        // If something was really received update the information
         preprocessImageFile(newImageFile);
     }
 }

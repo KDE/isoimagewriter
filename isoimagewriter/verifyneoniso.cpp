@@ -17,6 +17,8 @@
  *
  */
 
+#include "verifyneoniso.h"
+
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
 #include <QGpgME/ImportJob>
@@ -31,7 +33,6 @@
 
 #include <KLocalizedString>
 
-#include "verifyneoniso.h"
 #include "verifyisoworker.h"
 
 VerifyNeonISO::VerifyNeonISO(QString filename) : VerifyISO(filename)

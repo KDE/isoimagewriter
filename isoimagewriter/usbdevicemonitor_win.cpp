@@ -17,10 +17,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Windows implementation of UsbDeviceMonitor
 
-#include <QApplication>
-
-#include "usbdevicemonitor.h"
 #include "usbdevicemonitor_win_p.h"
+#include "usbdevicemonitor.h"
+
+#include <QApplication>
 
 
 // Private class implementation

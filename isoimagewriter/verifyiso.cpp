@@ -16,14 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#include "verifyiso.h"
+
 #include <QFile>
 #include <QFileInfo>
 #include <QDebug>
 #include <QStandardPaths>
 
 #include <KLocalizedString>
-
-#include "verifyiso.h"
 
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>

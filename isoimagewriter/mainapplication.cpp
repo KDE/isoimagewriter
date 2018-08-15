@@ -14,13 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "mainapplication.h"
+
 #include <QStandardPaths>
 #include <QIcon>
 #include <KAboutData>
 #include <KLocalizedString>
 
 #include "common.h"
-#include "mainapplication.h"
 
 // in one source file
 Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.isoimagewriter");

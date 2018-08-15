@@ -19,6 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "verifyisoworker.h"
+
 #include <QFile>
 #include <QByteArray>
 #include <QDebug>
@@ -30,8 +32,6 @@
 #include <QGpgME/ImportJob>
 #include <gpgme++/verificationresult.h>
 #include <gpgme++/importresult.h>
-
-#include "verifyisoworker.h"
 
 #include <KLocalizedString>
 

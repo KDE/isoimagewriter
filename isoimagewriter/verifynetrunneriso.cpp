@@ -17,6 +17,8 @@
  *
  */
 
+#include "verifynetrunneriso.h"
+
 #include <QDebug>
 #include <QFile>
 #include <QStandardPaths>
@@ -24,8 +26,6 @@
 #include <QInputDialog>
 
 #include <KLocalizedString>
-
-#include "verifynetrunneriso.h"
 
 VerifyNetrunnerISO::VerifyNetrunnerISO(QString filename) : VerifyISO(filename)
 {

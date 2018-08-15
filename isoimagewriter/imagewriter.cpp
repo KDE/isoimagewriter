@@ -17,13 +17,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of ImageWriter
 
+#include "imagewriter.h"
+
 #include <KLocalizedString>
 #include <KAuth>
 
 #include <QFile>
 
 #include "common.h"
-#include "imagewriter.h"
 #include "physicaldevice.h"
 
 ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent) :

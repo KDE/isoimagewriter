@@ -17,6 +17,8 @@
  *
  */
 
+#include "verifykubuntuiso.h"
+
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
 #include <QGpgME/ImportJob>
@@ -33,7 +35,6 @@
 
 #include <KLocalizedString>
 
-#include "verifykubuntuiso.h"
 #include "verifyisoworker.h"
 
 VerifyKubuntuISO::VerifyKubuntuISO(QString filename) : VerifyISO(filename)

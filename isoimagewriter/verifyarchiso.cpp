@@ -17,6 +17,8 @@
  *
  */
 
+#include "verifyarchiso.h"
+
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
 #include <QGpgME/ImportJob>
@@ -31,7 +33,6 @@
 
 #include <KLocalizedString>
 
-#include "verifyarchiso.h"
 #include "verifyisoworker.h"
 
 VerifyArchISO::VerifyArchISO(QString filename) : VerifyISO(filename)
