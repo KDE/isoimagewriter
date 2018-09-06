@@ -21,6 +21,7 @@
 
 #if defined(Q_OS_WIN32)
 #include <windows.h>
+#include <WinIoCtl.h>
 #include <dbt.h>
 #include <Wbemidl.h>
 #include <Shobjidl.h>
