@@ -68,7 +68,6 @@ target_link_libraries(isoimagewriter
     KF5::CoreAddons
     KF5::Auth
     QGpgme
-    KF5::QGpgme
     dl
     KF5::WidgetsAddons
     KF5::IconThemes
