@@ -62,7 +62,7 @@ bool UsbDeviceMonitor::nativeEventFilter(const QByteArray& eventType, void* mess
     if ((msg->message == WM_DEVICECHANGE) &&
         ((msg->wParam == DBT_DEVICEARRIVAL) || (msg->wParam == DBT_DEVICEREMOVECOMPLETE)))
     {
-        // If the event was caused by adding or remiving a device, mark the WinAPI message as processed
+        // If the event was caused by adding or removing a device, mark the WinAPI message as processed
         // and emit the notification signal
         *result = TRUE;
         emit deviceChanged();

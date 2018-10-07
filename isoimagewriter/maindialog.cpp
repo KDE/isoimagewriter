@@ -99,7 +99,7 @@ MainDialog::MainDialog(QWidget *parent) :
     {
         if (newImageFile.left(7) == "file://")
             newImageFile = QUrl(newImageFile).toLocalFile();
-        if (newImageFile != "")
+        if (!newImageFile.isEmpty())
         {
             newImageFile = QDir(newImageFile).absolutePath();
             // Update the default open dir
@@ -232,7 +232,7 @@ void MainDialog::dropEvent(QDropEvent* event)
             }
         }
     }
-    if (newImageFile != "")
+    if (!newImageFile.isEmpty())
     {
         // If something was really received update the information
         preprocessImageFile(newImageFile);
@@ -267,7 +267,7 @@ void MainDialog::openImageFile()
     QString newImageFile = QFileDialog::getOpenFileName(this, "", m_LastOpenedDir, 
                                                         i18n("Disk Images (%1)", QString("*.iso *.bin *.img")) + ";;" + i18n("All Files (%1)", QString("(*)")),
                                                         NULL, QFileDialog::ReadOnly);
-    if (newImageFile != "")
+    if (!newImageFile.isEmpty())
     {
         m_LastOpenedDir = newImageFile.left(newImageFile.lastIndexOf('/'));
         preprocessImageFile(newImageFile);
@@ -310,7 +310,7 @@ void MainDialog::enumFlashDevices()
     platformEnumFlashDevices(addFlashDeviceCallback, ui);
 
     // Restore the previously selected device (if present)
-    if (selectedDevice != "")
+    if (!selectedDevice.isEmpty())
         for (int i = 0; i < ui->deviceList->count(); ++i)
         {
             UsbDevice* dev = ui->deviceList->itemData(i).value<UsbDevice*>();
@@ -411,7 +411,7 @@ IsoResult MainDialog::verifyISO() {
 void MainDialog::writeToDeviceKAuth(bool zeroing)
 {
     qCDebug(ISOIMAGEWRITER_LOG) << "writeToDeviceKAuth()";
-    if ((ui->deviceList->count() == 0) || (!zeroing && (m_ImageFile == "")))
+    if ((ui->deviceList->count() == 0) || (!zeroing && (m_ImageFile.isEmpty())))
         return;
     UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
     if (!zeroing && (m_ImageSize > selectedDevice->m_Size))
@@ -458,8 +458,8 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     action.setArguments(helperargs);
     action.setTimeout(3600000); // an hour
     m_job = action.execute();
-    connect(m_job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)), Qt::DirectConnection);
-    connect(m_job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(m_job, SIGNAL(percent(KJob*,ulong)), this, SLOT(progressStep(KJob*,ulong)), Qt::DirectConnection);
+    connect(m_job, SIGNAL(newData(QVariantMap)), this, SLOT(progressStep(QVariantMap)));
     connect(m_job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     qCDebug(ISOIMAGEWRITER_LOG) << "runWriteImage start()";

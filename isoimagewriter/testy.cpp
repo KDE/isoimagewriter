@@ -90,8 +90,8 @@ void Testy::runAsync() {
     helperargs[QStringLiteral("filename")] = "bar";
     action.setArguments(helperargs);
     KAuth::ExecuteJob *job = action.execute();
-    connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
-    connect(job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(job, SIGNAL(percent(KJob*,ulong)), this, SLOT(progressStep(KJob*,ulong)));
+    connect(job, SIGNAL(newData(QVariantMap)), this, SLOT(progressStep(QVariantMap)));
     connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     job->start();
@@ -155,7 +155,7 @@ void Testy::enumFlashDevices()
     platformEnumFlashDevices(addFlashDeviceCallback, this);
 
     // Restore the previously selected device (if present)
-    if (selectedDevice != "")
+    if (!selectedDevice.isEmpty())
         for (int i = 0; i < m_deviceList->count(); ++i)
         {
             UsbDevice* dev = m_deviceList->itemData(i).value<UsbDevice*>();
@@ -186,8 +186,8 @@ void Testy::runWriteImage() {
     
     action.setArguments(helperargs);
     KAuth::ExecuteJob *job = action.execute();
-    connect(job, SIGNAL(percent(KJob*, unsigned long)), this, SLOT(progressStep(KJob*, unsigned long)));
-    connect(job, SIGNAL(newData(const QVariantMap &)), this, SLOT(progressStep(const QVariantMap &)));
+    connect(job, SIGNAL(percent(KJob*,ulong)), this, SLOT(progressStep(KJob*,ulong)));
+    connect(job, SIGNAL(newData(QVariantMap)), this, SLOT(progressStep(QVariantMap)));
     connect(job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
     connect(job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
     job->start();

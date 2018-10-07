@@ -193,7 +193,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
                 SAFE_RELEASE(pPartitionObject);
 
                 // If DeviceID was fetched proceed to the logical disks
-                if (qstrQueryLetters != "")
+                if (!qstrQueryLetters.isEmpty())
                 {
                     // Construct the request for listing the logical disks related to the current partition
                     qstrQueryLetters = "ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + qstrQueryLetters + "'} WHERE AssocClass = Win32_LogicalDiskToPartition";
