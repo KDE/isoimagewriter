@@ -66,7 +66,7 @@ target_link_libraries(isoimagewriter
     Qt5::Widgets
     KF5::I18n
     KF5::CoreAddons
-    KF5::Auth
+    KF5::AuthCore
     QGpgme
     dl
     KF5::WidgetsAddons
@@ -86,7 +86,7 @@ install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${XDG_APPS_INSTALL_
 install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
-target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::Auth KF5::I18n KF5::WidgetsAddons)
+target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons)
 install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
 kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)
