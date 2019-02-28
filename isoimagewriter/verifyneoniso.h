@@ -37,8 +37,8 @@ public:
      * Default constructor
      */
     VerifyNeonISO(QString filename);
-    bool canVerify();
-    bool isValid();
+    bool canVerify() override;
+    bool isValid() override;
 };
 
 #endif // VERIFYNEONISO_H

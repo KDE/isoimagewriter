@@ -37,8 +37,8 @@ public:
      * Default constructor
      */
     VerifyKubuntuISO(QString filename);
-    bool canVerify();
-    bool isValid();
+    bool canVerify() override;
+    bool isValid() override;
 };
 
 #endif // VERIFYKUBUNTUISO_H

@@ -44,7 +44,7 @@ public:
     void doVerificationNeon();
     void doVerificationKubuntu();
     bool isResultReady();
-    void run();
+    void run() override;
 
 private:
     bool m_result;

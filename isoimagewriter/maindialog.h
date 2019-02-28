@@ -76,12 +76,12 @@ protected:
     void cleanup();
 
     // Reimplemented event handlers for drag&drop support
-    void dragEnterEvent(QDragEnterEvent* event);
-    void dropEvent(QDropEvent* event);
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 
     // Reimplemented event handlers for protecting dialog closing during operation
-    void closeEvent(QCloseEvent* event);
-    void keyPressEvent(QKeyEvent* event);
+    void closeEvent(QCloseEvent* event) override;
+    void keyPressEvent(QKeyEvent* event) override;
 
     // Reloads the list of USB flash disks
     void enumFlashDevices();

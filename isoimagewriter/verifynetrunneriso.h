@@ -37,8 +37,8 @@ public:
      * Default constructor
      */
     VerifyNetrunnerISO(QString filename);
-    bool canVerify();
-    bool isValid();
+    bool canVerify() override;
+    bool isValid() override;
 };
 
 #endif // VERIFYNETRUNNERISO_H
