@@ -68,10 +68,13 @@ target_link_libraries(isoimagewriter
     KF5::CoreAddons
     KF5::AuthCore
     QGpgme
-    dl
     KF5::WidgetsAddons
     KF5::IconThemes
 )
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+  target_link_libraries(isoimagewriter udev)
+endif()
+
 #target_link_libraries(testy
 #    Qt5::Widgets
 #    KF5::I18n

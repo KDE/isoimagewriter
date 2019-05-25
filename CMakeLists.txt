@@ -18,8 +18,7 @@ include(ECMQtDeclareLoggingCategory)
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  find_package(PkgConfig REQUIRED)
-  pkg_check_modules(LIBUDEV REQUIRED libudev)
+  find_package(UDev REQUIRED)
 endif()
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)

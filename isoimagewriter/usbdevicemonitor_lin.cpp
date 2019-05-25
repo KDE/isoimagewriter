@@ -17,23 +17,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Linux implementation of UsbDeviceMonitor
 
+#include <libudev.h>
+
 #include "usbdevicemonitor_lin_p.h"
-
-#include <dlfcn.h>
-
 #include "usbdevicemonitor.h"
-
-// Declare required functions as weak so that they were not reported as missing at compile time.
-// In runtime it is required to ensure they are defined: we do it by checking that libudev is loaded.
-#pragma weak udev_device_unref
-#pragma weak udev_monitor_enable_receiving
-#pragma weak udev_monitor_filter_add_match_subsystem_devtype
-#pragma weak udev_monitor_get_fd
-#pragma weak udev_monitor_new_from_netlink
-#pragma weak udev_monitor_receive_device
-#pragma weak udev_monitor_unref
-#pragma weak udev_new
-#pragma weak udev_unref
 
 
 // Private class implementation
@@ -41,24 +28,16 @@
 UsbDeviceMonitorPrivate::UsbDeviceMonitorPrivate(QObject *parent) :
     QObject(parent)
 {
-    //TODO replace this with QLibrary to deal with segfault if symbols/functions do not exist
-    m_udevLib = dlopen("libudev.so.1", RTLD_NOW | RTLD_GLOBAL);
-    if (m_udevLib == NULL)
-        m_udevLib = dlopen("libudev.so.0", RTLD_NOW | RTLD_GLOBAL);
 }
 
 UsbDeviceMonitorPrivate::~UsbDeviceMonitorPrivate()
 {
-    if (m_udevLib != NULL)
-        dlclose(m_udevLib);
 }
 
 // Processes udev socket notification
 void UsbDeviceMonitorPrivate::processUdevNotification(int socket)
 {
     Q_UNUSED(socket);
-    if (m_udevLib == NULL)
-        return;
 
     // Read the device information
     // We don't really need it, but we have to empty the queue
@@ -92,8 +71,6 @@ UsbDeviceMonitor::~UsbDeviceMonitor()
 // Closes handles and frees resources
 void UsbDeviceMonitor::cleanup()
 {
-    if (d_ptr->m_udevLib == NULL)
-        return;
     if (d_ptr->m_udevMonitor != NULL)
     {
         udev_monitor_unref(d_ptr->m_udevMonitor);
@@ -123,9 +100,6 @@ bool UsbDeviceMonitor::nativeEventFilter(const QByteArray& eventType, void* mess
 
 bool UsbDeviceMonitor::startMonitoring()
 {
-    // In Linux we use udev monitor
-    if (d_ptr->m_udevLib == NULL)
-        return false;
     try
     {
         d_ptr->m_udev = udev_new();
