@@ -15,6 +15,7 @@ private:
     QComboBox *m_usbDriveComboBox;
 
     void setupUi();
+    QWidget* createFormWidget();
 };
 
 #endif // MAINWINDOW_H

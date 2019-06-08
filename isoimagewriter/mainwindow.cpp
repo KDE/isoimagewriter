@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QStackedWidget>
 #include <KLocalizedString>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,14 +15,21 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupUi()
 {
-    // Logo
-    QLabel *logoLabel = new QLabel;    
+    QStackedWidget *stackedWidget = new QStackedWidget;
+    stackedWidget->addWidget(createFormWidget());
+
+    setCentralWidget(stackedWidget);
+}
+
+QWidget* MainWindow::createFormWidget()
+{    // Logo
+    QLabel *logoLabel = new QLabel;
     logoLabel->setPixmap(QIcon::fromTheme("drive-removable-media").pixmap(QSize(50, 50)));
 
     QLabel *titleLabel = new QLabel;
     titleLabel->setTextFormat(Qt::RichText);
     titleLabel->setText("<h2 style='margin-bottom: 0;'>KDE ISO Image Writer</h2>"
-                   "A quick and simple way to create a bootable USB drive.");
+                        "A quick and simple way to create a bootable USB drive.");
 
     QHBoxLayout *headerHBoxLayout = new QHBoxLayout;
     headerHBoxLayout->addWidget(logoLabel);
@@ -47,7 +55,8 @@ void MainWindow::setupUi()
     mainVBoxLayout->addSpacing(15);
     mainVBoxLayout->addWidget(createButton, 0, Qt::AlignRight);
 
-    QWidget *centralWidget = new QWidget;
-    centralWidget->setLayout(mainVBoxLayout);
-    setCentralWidget(centralWidget);
+    QWidget *formWidget = new QWidget;
+    formWidget->setLayout(mainVBoxLayout);
+
+    return formWidget;
 }
