@@ -20,6 +20,7 @@ set(isoimagewriter_SRCS
     common.cpp
     mainapplication.cpp
     maindialog.cpp
+    mainwindow.cpp
     externalprogressbar_lin.cpp
     imagewriter.cpp
     physicaldevice.cpp

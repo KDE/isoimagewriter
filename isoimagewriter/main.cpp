@@ -26,6 +26,7 @@
 #include "common.h"
 #include "mainapplication.h"
 #include "maindialog.h"
+#include "mainwindow.h"
 #include "usbdevicemonitor.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC)
@@ -58,6 +59,9 @@ int main(int argc, char *argv[])
 
     MainDialog w;
     w.show();
+
+    MainWindow w2;
+    w2.show();
 
     UsbDeviceMonitor deviceMonitor;
     deviceMonitor.startMonitoring();
