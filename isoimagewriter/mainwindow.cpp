@@ -35,6 +35,7 @@ QWidget* MainWindow::createFormWidget()
 {    // Logo
     QLabel *logoLabel = new QLabel;
     logoLabel->setPixmap(QIcon::fromTheme("drive-removable-media").pixmap(QSize(50, 50)));
+    logoLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     QLabel *titleLabel = new QLabel;
     titleLabel->setTextFormat(Qt::RichText);
@@ -66,7 +67,7 @@ QWidget* MainWindow::createFormWidget()
     mainVBoxLayout->addSpacing(5);
     mainVBoxLayout->addWidget(new QLabel(i18n("To this USB drive:")));
     mainVBoxLayout->addWidget(m_usbDriveComboBox);
-    mainVBoxLayout->addSpacing(15);
+    mainVBoxLayout->addStretch(15);
     mainVBoxLayout->addWidget(createButton, 0, Qt::AlignRight);
 
     QWidget *formWidget = new QWidget;
