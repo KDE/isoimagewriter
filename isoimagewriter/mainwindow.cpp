@@ -1,16 +1,26 @@
 #include "mainwindow.h"
+#include "mainapplication.h"
+#include "common.h"
 
 #include <QLabel>
+#include <QAction>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QFileDialog>
+#include <QMessageBox>
 #include <QStackedWidget>
+#include <KFormat>
 #include <KLocalizedString>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent),
+      m_lastOpenedDir("")
 {
     setupUi();
+
+    m_lastOpenedDir = mApp->getInitialDir();
+    // TODO: Use ISO image from command line args
 }
 
 void MainWindow::setupUi()
@@ -40,6 +50,10 @@ QWidget* MainWindow::createFormWidget()
     m_isoImageLineEdit->setReadOnly(true);
     m_isoImageLineEdit->setPlaceholderText(i18n("Path to ISO image..."));
 
+    QAction *openIsoImageAction = m_isoImageLineEdit->addAction(
+        QIcon::fromTheme("folder-open"), QLineEdit::TrailingPosition);
+    connect(openIsoImageAction, &QAction::triggered, this, &MainWindow::openIsoImage);
+
     m_usbDriveComboBox = new QComboBox;
 
     QPushButton *createButton = new QPushButton(i18n("Create"));
@@ -59,4 +73,40 @@ QWidget* MainWindow::createFormWidget()
     formWidget->setLayout(mainVBoxLayout);
 
     return formWidget;
+}
+
+void MainWindow::openIsoImage()
+{
+    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img"))
+        + ";;" + i18n("All Files (%1)", QString("*"));
+    QString isoImagePath = QFileDialog::getOpenFileName(this, "", m_lastOpenedDir, 
+                                                        filter, nullptr,
+                                                        QFileDialog::ReadOnly);
+    if (!isoImagePath.isEmpty())
+    {
+        m_lastOpenedDir = isoImagePath.left(isoImagePath.lastIndexOf('/'));
+        preprocessIsoImage(isoImagePath);
+    }
+}
+
+void MainWindow::preprocessIsoImage(const QString& isoImagePath)
+{
+    QFile file(isoImagePath);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::critical(this, "Error",
+                              i18n("Failed to open the image file:")
+                              + "\n" + QDir::toNativeSeparators(isoImagePath)
+                              + "\n" + file.errorString());
+        return;
+    }
+
+    m_isoImageSize = file.size();
+    m_isoImagePath = isoImagePath;
+    m_isoImageLineEdit->setText(QDir::toNativeSeparators(m_isoImagePath) + " ("
+                                + KFormat().formatByteSize(m_isoImageSize) + ")");
+
+    file.close();
+
+    // TODO: Verify ISO image
 }
