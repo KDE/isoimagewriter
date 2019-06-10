@@ -25,14 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupUi()
 {
-    QStackedWidget *stackedWidget = new QStackedWidget;
-    stackedWidget->addWidget(createFormWidget());
-
-    setCentralWidget(stackedWidget);
-}
-
-QWidget* MainWindow::createFormWidget()
-{    // Logo
+    // Logo
     QLabel *logoLabel = new QLabel;
     logoLabel->setPixmap(QIcon::fromTheme("drive-removable-media").pixmap(QSize(50, 50)));
     logoLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -46,6 +39,22 @@ QWidget* MainWindow::createFormWidget()
     headerHBoxLayout->addWidget(logoLabel);
     headerHBoxLayout->addWidget(titleLabel);
 
+    QStackedWidget *stackedWidget = new QStackedWidget;
+    stackedWidget->addWidget(createFormWidget());
+
+    QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
+    mainVBoxLayout->addLayout(headerHBoxLayout);
+    mainVBoxLayout->addSpacing(15);
+    mainVBoxLayout->addWidget(stackedWidget);
+
+    QWidget *centralWidget = new QWidget;
+    centralWidget->setLayout(mainVBoxLayout);
+
+    setCentralWidget(centralWidget);
+}
+
+QWidget* MainWindow::createFormWidget()
+{
     // Form
     m_isoImageLineEdit = new QLineEdit;
     m_isoImageLineEdit->setReadOnly(true);
@@ -60,8 +69,6 @@ QWidget* MainWindow::createFormWidget()
     QPushButton *createButton = new QPushButton(i18n("Create"));
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
-    mainVBoxLayout->addLayout(headerHBoxLayout);
-    mainVBoxLayout->addSpacing(15);
     mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
     mainVBoxLayout->addWidget(m_isoImageLineEdit);
     mainVBoxLayout->addSpacing(5);
