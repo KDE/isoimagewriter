@@ -19,8 +19,23 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setupUi();
 
+    // Set initial directory
     m_lastOpenedDir = mApp->getInitialDir();
-    // TODO: Use ISO image from command line args
+    // Get path to ISO image from command line args (if supplied)
+    QString isoImagePath = mApp->getInitialImage();
+    if (!isoImagePath.isEmpty())
+    {
+        if (isoImagePath.left(7) == "file://")
+            isoImagePath = QUrl(isoImagePath).toLocalFile();
+
+        if (!isoImagePath.isEmpty())
+        {
+            isoImagePath = QDir(isoImagePath).absolutePath();
+            // Update the default open dir
+            m_lastOpenedDir = isoImagePath.left(isoImagePath.lastIndexOf('/'));
+            preprocessIsoImage(isoImagePath);
+        }
+    }
 }
 
 void MainWindow::setupUi()
