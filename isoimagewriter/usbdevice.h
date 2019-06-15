@@ -25,6 +25,7 @@
 #include <QStringList>
 
 #include <KLocalizedString>
+#include <KFormat>
 
 class UsbDevice
 {
@@ -39,7 +40,8 @@ public:
     // Formats the device description for GUI
     // The format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
     QString formatDisplayName() const {
-        return ((m_Volumes.size() == 0) ? i18n("<unmounted>") : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + QString::number(alignNumberDiv(m_Size, DEFAULT_UNIT)) + " " + i18n("MiB") + ")";
+        return ((m_Volumes.size() == 0) ? i18n("<unmounted>")
+                : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + KFormat().formatByteSize(m_Size) + ")";
     }
 
     // User-friendly name of the device
