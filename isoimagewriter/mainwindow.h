@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "usbdevice.h"
+
 #include <QMainWindow>
 #include <QLineEdit>
 #include <QComboBox>
@@ -21,6 +23,10 @@ private:
     void setupUi();
     QWidget* createFormWidget();
     void preprocessIsoImage(const QString& isoImagePath);
+    void cleanUp();
+    void enumFlashDevices();
+
+    static void addFlashDeviceCallback(void* cbParam, UsbDevice* device);
 
 private slots:
     void openIsoImage();

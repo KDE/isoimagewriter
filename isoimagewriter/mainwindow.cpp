@@ -3,6 +3,7 @@
 #include "common.h"
 
 #include <QLabel>
+#include <QTimer>
 #include <QAction>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -36,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent)
             preprocessIsoImage(isoImagePath);
         }
     }
+
+    // Load the list of USB flash devices
+    QTimer::singleShot(0, this, &MainWindow::enumFlashDevices);
 }
 
 void MainWindow::setupUi()
@@ -132,4 +136,57 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     file.close();
 
     // TODO: Verify ISO image
+}
+
+void MainWindow::cleanUp()
+{
+    // Delete all the allocated UsbDevice objects attached to the combobox
+    for (int i = 0; i < m_usbDriveComboBox->count(); ++i)
+    {
+        delete m_usbDriveComboBox->itemData(i).value<UsbDevice*>();
+    }
+}
+
+void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
+{
+    auto usbDriveComboBox = (QComboBox*)cbParam;
+    usbDriveComboBox->addItem(device->formatDisplayName(),
+                              QVariant::fromValue(device));
+}
+
+void MainWindow::enumFlashDevices()
+{
+    // Remember the currently selected device
+    QString selectedDevice = "";
+    int idx = m_usbDriveComboBox->currentIndex();
+    if (idx >= 0)
+    {
+        UsbDevice* dev = m_usbDriveComboBox->itemData(idx).value<UsbDevice*>();
+        selectedDevice = dev->m_PhysicalDevice;
+    }
+    // Remove the existing entries
+    cleanUp();
+    m_usbDriveComboBox->clear();
+    // Disable the combobox
+    m_usbDriveComboBox->setEnabled(false);
+
+    platformEnumFlashDevices(addFlashDeviceCallback, m_usbDriveComboBox);
+
+    // Restore the previously selected device (if present)
+    if (!selectedDevice.isEmpty())
+        for (int i = 0; i < m_usbDriveComboBox->count(); ++i)
+        {
+            UsbDevice* dev = m_usbDriveComboBox->itemData(i).value<UsbDevice*>();
+            if (dev->m_PhysicalDevice == selectedDevice)
+            {
+                m_usbDriveComboBox->setCurrentIndex(i);
+                break;
+            }
+        }
+    // Reenable the combobox
+    m_usbDriveComboBox->setEnabled(true);
+    // Update the Write button enabled/disabled state
+    // m_writeButton->setEnabled((m_usbDriveComboBox->count() > 0) && (m_isoImagePath != ""));
+    // Update the Clear button enabled/disabled state
+    // m_clearButton->setEnabled(m_usbDriveComboBox->count() > 0);
 }
