@@ -70,5 +70,8 @@ int main(int argc, char *argv[])
     // Using QueuedConnection to avoid delays in processing the message
     QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w, &MainDialog::scheduleEnumFlashDevices, Qt::QueuedConnection);
 
+    QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w2,
+                     &MainWindow::scheduleEnumFlashDevices, Qt::QueuedConnection);
+
     return a.exec();
 }

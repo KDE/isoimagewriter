@@ -12,6 +12,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
 
+public slots:
+    void scheduleEnumFlashDevices();
+
 private:
     QLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
@@ -19,6 +22,8 @@ private:
     QString m_isoImagePath;
     quint64 m_isoImageSize;
     QString m_lastOpenedDir;
+    bool m_isWriting;
+    bool m_enumFlashDevicesWaiting;
 
     void setupUi();
     QWidget* createFormWidget();

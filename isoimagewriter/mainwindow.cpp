@@ -16,7 +16,9 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-      m_lastOpenedDir("")
+      m_lastOpenedDir(""),
+      m_isWriting(false),
+      m_enumFlashDevicesWaiting(false)
 {
     setupUi();
 
@@ -40,6 +42,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Load the list of USB flash devices
     QTimer::singleShot(0, this, &MainWindow::enumFlashDevices);
+}
+
+void MainWindow::scheduleEnumFlashDevices()
+{
+    if (m_isWriting)
+        m_enumFlashDevicesWaiting = true;
+    else
+        enumFlashDevices();
 }
 
 void MainWindow::setupUi()
@@ -156,6 +166,8 @@ void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 
 void MainWindow::enumFlashDevices()
 {
+    m_enumFlashDevicesWaiting = false;
+
     // Remember the currently selected device
     QString selectedDevice = "";
     int idx = m_usbDriveComboBox->currentIndex();
@@ -164,12 +176,15 @@ void MainWindow::enumFlashDevices()
         UsbDevice* dev = m_usbDriveComboBox->itemData(idx).value<UsbDevice*>();
         selectedDevice = dev->m_PhysicalDevice;
     }
+
     // Remove the existing entries
     cleanUp();
     m_usbDriveComboBox->clear();
+
     // Disable the combobox
     m_usbDriveComboBox->setEnabled(false);
 
+    // Add the USB flash devices to the combobox
     platformEnumFlashDevices(addFlashDeviceCallback, m_usbDriveComboBox);
 
     // Restore the previously selected device (if present)
@@ -183,7 +198,8 @@ void MainWindow::enumFlashDevices()
                 break;
             }
         }
-    // Reenable the combobox
+
+    // Re-enable the combobox
     m_usbDriveComboBox->setEnabled(true);
     // Update the Write button enabled/disabled state
     // m_writeButton->setEnabled((m_usbDriveComboBox->count() > 0) && (m_isoImagePath != ""));
