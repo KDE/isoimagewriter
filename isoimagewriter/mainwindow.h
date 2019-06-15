@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QPushButton>
 
 class MainWindow : public QMainWindow
 {
@@ -18,6 +19,7 @@ public slots:
 private:
     QLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
+    QPushButton *m_createButton;
 
     QString m_isoImagePath;
     quint64 m_isoImageSize;

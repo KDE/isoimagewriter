@@ -5,7 +5,6 @@
 #include <QLabel>
 #include <QTimer>
 #include <QAction>
-#include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFileDialog>
@@ -95,7 +94,8 @@ QWidget* MainWindow::createFormWidget()
 
     m_usbDriveComboBox = new QComboBox;
 
-    QPushButton *createButton = new QPushButton(i18n("Create"));
+    m_createButton = new QPushButton(i18n("Create"));
+    m_createButton->setEnabled(false);
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
@@ -104,7 +104,7 @@ QWidget* MainWindow::createFormWidget()
     mainVBoxLayout->addWidget(new QLabel(i18n("To this USB drive:")));
     mainVBoxLayout->addWidget(m_usbDriveComboBox);
     mainVBoxLayout->addStretch(15);
-    mainVBoxLayout->addWidget(createButton, 0, Qt::AlignRight);
+    mainVBoxLayout->addWidget(m_createButton, 0, Qt::AlignRight);
 
     QWidget *formWidget = new QWidget;
     formWidget->setLayout(mainVBoxLayout);
@@ -146,6 +146,9 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     file.close();
 
     // TODO: Verify ISO image
+
+    // Enable the Write button (if there are USB flash disks present)
+    m_createButton->setEnabled(m_usbDriveComboBox->count() > 0);
 }
 
 void MainWindow::cleanUp()
@@ -202,7 +205,8 @@ void MainWindow::enumFlashDevices()
     // Re-enable the combobox
     m_usbDriveComboBox->setEnabled(true);
     // Update the Write button enabled/disabled state
-    // m_writeButton->setEnabled((m_usbDriveComboBox->count() > 0) && (m_isoImagePath != ""));
+    m_createButton->setEnabled(m_usbDriveComboBox->count() > 0
+                               && m_isoImagePath != "");
     // Update the Clear button enabled/disabled state
     // m_clearButton->setEnabled(m_usbDriveComboBox->count() > 0);
 }
