@@ -9,7 +9,6 @@
 #include <QHBoxLayout>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QStackedWidget>
 #include <KFormat>
 #include <KLocalizedString>
 
@@ -67,13 +66,14 @@ void MainWindow::setupUi()
     headerHBoxLayout->addWidget(logoLabel);
     headerHBoxLayout->addWidget(titleLabel);
 
-    QStackedWidget *stackedWidget = new QStackedWidget;
-    stackedWidget->addWidget(createFormWidget());
+    m_centralStackedWidget = new QStackedWidget;
+    m_centralStackedWidget->addWidget(createFormWidget());
+    m_centralStackedWidget->addWidget(createConfirmWidget());
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addLayout(headerHBoxLayout);
     mainVBoxLayout->addSpacing(15);
-    mainVBoxLayout->addWidget(stackedWidget);
+    mainVBoxLayout->addWidget(m_centralStackedWidget);
 
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(mainVBoxLayout);
@@ -96,6 +96,8 @@ QWidget* MainWindow::createFormWidget()
 
     m_createButton = new QPushButton(i18n("Create"));
     m_createButton->setEnabled(false);
+    connect(m_createButton, &QPushButton::clicked,
+            [this] { m_centralStackedWidget->setCurrentIndex(1); });
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
@@ -103,13 +105,48 @@ QWidget* MainWindow::createFormWidget()
     mainVBoxLayout->addSpacing(5);
     mainVBoxLayout->addWidget(new QLabel(i18n("To this USB drive:")));
     mainVBoxLayout->addWidget(m_usbDriveComboBox);
-    mainVBoxLayout->addStretch(15);
+    mainVBoxLayout->addSpacing(15);
+    mainVBoxLayout->addStretch();
     mainVBoxLayout->addWidget(m_createButton, 0, Qt::AlignRight);
 
     QWidget *formWidget = new QWidget;
     formWidget->setLayout(mainVBoxLayout);
 
     return formWidget;
+}
+
+QWidget* MainWindow::createConfirmWidget()
+{
+    QLabel *iconLabel = new QLabel;
+    iconLabel->setPixmap(QIcon::fromTheme("dialog-warning").pixmap(QSize(64, 64)));
+    iconLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    QLabel *messageLabel = new QLabel(i18n("Everything on the USB drive will "
+                                           "be overwritten."
+                                           "\n\nDo you want to continue?"));
+
+    QHBoxLayout *messageHBoxLayout = new QHBoxLayout;
+    messageHBoxLayout->addWidget(iconLabel, 0, Qt::AlignTop);
+    messageHBoxLayout->addWidget(messageLabel, 0, Qt::AlignTop);
+
+    QPushButton *abortButton = new QPushButton(i18n("Abort"));
+    connect(abortButton, &QPushButton::clicked,
+            [this] { m_centralStackedWidget->setCurrentIndex(0); });
+
+    QPushButton *continueButton = new QPushButton(i18n("Continue"));
+
+    QHBoxLayout *buttonsHBoxLayout = new QHBoxLayout;
+    buttonsHBoxLayout->addWidget(abortButton, 0, Qt::AlignLeft);
+    buttonsHBoxLayout->addWidget(continueButton, 0, Qt::AlignRight);
+
+    QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
+    mainVBoxLayout->addLayout(messageHBoxLayout);
+    mainVBoxLayout->addLayout(buttonsHBoxLayout);
+
+    QWidget *confirmWidget = new QWidget;
+    confirmWidget->setLayout(mainVBoxLayout);
+
+    return confirmWidget;
 }
 
 void MainWindow::openIsoImage()

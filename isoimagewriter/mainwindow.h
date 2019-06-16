@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
+#include <QStackedWidget>
 
 class MainWindow : public QMainWindow
 {
@@ -20,6 +21,7 @@ private:
     QLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
     QPushButton *m_createButton;
+    QStackedWidget *m_centralStackedWidget;
 
     QString m_isoImagePath;
     quint64 m_isoImageSize;
@@ -29,6 +31,7 @@ private:
 
     void setupUi();
     QWidget* createFormWidget();
+    QWidget* createConfirmWidget();
     void preprocessIsoImage(const QString& isoImagePath);
     void cleanUp();
     void enumFlashDevices();
