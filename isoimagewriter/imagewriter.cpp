@@ -20,7 +20,10 @@
 #include "imagewriter.h"
 
 #include <KLocalizedString>
+
+#if defined(Q_OS_LINUX)
 #include <KAuth>
+#endif
 
 #include <QFile>
 
@@ -140,11 +143,13 @@ void ImageWriter::writeImage()
         for (;;)
         {
             qDebug() << "For Loop3";
+#if defined(Q_OS_LINUX)
             if (KAuth::HelperSupport::isStopped()) {
                 qDebug() << "isStopped";
             } else {
                 qDebug() << "not isStopped";
             }
+#endif
             if (zeroing)
             {
                 readBytes = TRANSFER_BLOCK_SIZE;
@@ -172,16 +177,23 @@ void ImageWriter::writeImage()
             // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
             // this still works or at least fails compilation
             emit blockWritten(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
+
+#if defined(Q_OS_LINUX)
             KAuth::HelperSupport::progressStep(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT); // FIXME why doesn't this work?
             QVariantMap progressArgs;
             progressArgs[QStringLiteral("progress")] = TRANSFER_BLOCK_SIZE / DEFAULT_UNIT;
             KAuth::HelperSupport::progressStep(progressArgs); // used because above doesn't work
+#endif
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();
-            //cancelRequested = m_CancelWriting;
+#if defined(Q_OS_LINUX)
             cancelRequested = KAuth::HelperSupport::isStopped();
+#else
+            cancelRequested = m_CancelWriting;
+#endif
             m_Mutex.unlock();
+
             if (cancelRequested)
             {
                 qDebug() << "cancelRequested";
@@ -206,9 +218,12 @@ void ImageWriter::writeImage()
     catch (QString msg)
     {
         // Something went wrong :-(
+#if defined(Q_OS_LINUX)
         QVariantMap args;
         args[QStringLiteral("error")] = msg;
         KAuth::HelperSupport::progressStep(args);
+#endif
+
         emit error(msg);
         isError = true;
     }
@@ -225,9 +240,13 @@ void ImageWriter::writeImage()
         QString message = i18n("The operation completed successfully.") +
             "<br><br>" +
             (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Wipe USB Disk\"."));
+
+#if defined(Q_OS_LINUX)
         QVariantMap args;
         args[QStringLiteral("success")] = message;
         KAuth::HelperSupport::progressStep(args);
+#endif
+
         emit success(message);
     }
 

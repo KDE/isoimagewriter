@@ -119,10 +119,11 @@ public slots:
     void showSuccessMessage(QString msg);
     // Displays the specified error message and returns to the "idle" mode
     void showErrorMessage(QString msg);
+
+#if defined(Q_OS_LINUX)
     //cancel button clicked
     void cancelWriting();
 
-#if defined(Q_OS_LINUX)
     void progressStep(KJob* job, unsigned long step);
     void progressStep(const QVariantMap &);
     void statusChanged(KAuth::Action::AuthStatus status);
