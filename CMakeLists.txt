@@ -17,19 +17,19 @@ include(ECMQtDeclareLoggingCategory)
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  find_package(UDev REQUIRED)
-endif()
-
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
 find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     I18n
     CoreAddons
-    Auth
     WidgetsAddons
     IconThemes
 )
+
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+  find_package(UDev REQUIRED)
+  find_package(KF5Auth REQUIRED)
+endif()
 
 KDE_ENABLE_EXCEPTIONS()
 

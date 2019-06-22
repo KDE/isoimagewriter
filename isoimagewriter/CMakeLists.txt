@@ -4,24 +4,12 @@ find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
 
 #find_package(KF5 REQUIRED COMPONENTS QGpgme)
 
-set(isoimagewriter_common_SRCS
-    platform_lin.cpp
-    common.cpp
-)
-ecm_qt_declare_logging_category(isoimagewriter_common_SRCS
-                                HEADER isoimagewriter_debug.h
-                                IDENTIFIER ISOIMAGEWRITER_LOG
-                                CATEGORY_NAME org.kde.isoimagewriter
-                                DEFAULT_SEVERITY Debug)
-
 set(isoimagewriter_SRCS
-    ${isoimagewriter_common_SRCS}
     usbdevicemonitor.h
     common.cpp
     mainapplication.cpp
     maindialog.cpp
     mainwindow.cpp
-    externalprogressbar_lin.cpp
     imagewriter.cpp
     physicaldevice.cpp
     main.cpp
@@ -32,6 +20,12 @@ set(isoimagewriter_SRCS
     verifynetrunneriso.cpp
     verifyarchiso.cpp
 )
+
+ecm_qt_declare_logging_category(isoimagewriter_SRCS
+                                HEADER isoimagewriter_debug.h
+                                IDENTIFIER ISOIMAGEWRITER_LOG
+                                CATEGORY_NAME org.kde.isoimagewriter
+                                DEFAULT_SEVERITY Debug)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)
     message("Compiling isoimagewriter for Windaes")
@@ -46,6 +40,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
         ${isoimagewriter_SRCS}
         platform_lin.cpp
         usbdevicemonitor_lin.cpp
+        externalprogressbar_lin.cpp
     )
 else()
     message("Unsupported Platform " . ${CMAKE_SYSTEM_NAME})
@@ -67,13 +62,12 @@ target_link_libraries(isoimagewriter
     Qt5::Widgets
     KF5::I18n
     KF5::CoreAddons
-    KF5::AuthCore
     QGpgme
     KF5::WidgetsAddons
     KF5::IconThemes
 )
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  target_link_libraries(isoimagewriter udev)
+  target_link_libraries(isoimagewriter udev KF5::AuthCore)
 endif()
 
 #target_link_libraries(testy
@@ -86,11 +80,16 @@ endif()
 #)
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+    install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
+    install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+endif()
 
-add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
-target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons)
-install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
-kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
-kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)
+# KAuth
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+    add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
+    target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons)
+    install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
+    kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
+    kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)
+endif()

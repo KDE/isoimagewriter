@@ -407,6 +407,7 @@ IsoResult MainDialog::verifyISO() {
     return result;
 }
 
+#if defined(Q_OS_LINUX)
 // Starts writing data to the device
 void MainDialog::writeToDeviceKAuth(bool zeroing)
 {
@@ -502,17 +503,89 @@ void MainDialog::finished(KJob* job) {
     qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
     hideWritingProgress();
 }
-     
+#else
+void MainDialog::writeToDevice(bool zeroing)
+{
+    if ((ui->deviceList->count() == 0) || (!zeroing && (m_ImageFile == "")))
+        return;
+    UsbDevice* selectedDevice = ui->deviceList->itemData(ui->deviceList->currentIndex()).value<UsbDevice*>();
+    if (!zeroing && (m_ImageSize > selectedDevice->m_Size))
+    {
+        QLocale currentLocale;
+        QMessageBox::critical(
+            this,
+            ApplicationTitle,
+            tr("The image is larger than your selected device!") + "\n" +
+            tr("Image size:") + " " + QString::number(m_ImageSize / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(m_ImageSize) + " " + tr("b") + ")\n" +
+            tr("Disk size:") + " " + QString::number(selectedDevice->m_Size / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(selectedDevice->m_Size) + " " + tr("b") + ")",
+            QMessageBox::Ok
+            );
+        return;
+    }
+    if (QMessageBox::warning(
+            this,
+            ApplicationTitle,
+            "<font color=\"red\">" + tr("Warning!") + "</font> " + tr("All existing data on the selected device will be lost!") + "<br>" +
+            tr("Are you sure you wish to proceed?"),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No) == QMessageBox::No)
+        return;
+
+    showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_ImageSize), DEFAULT_UNIT));
+
+    ImageWriter* writer = new ImageWriter(zeroing ? "" : m_ImageFile, selectedDevice);
+    QThread *writerThread = new QThread(this);
+
+    // Connect start and end signals
+    connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
+
+    // When writer finishes its job, quit the thread
+    connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
+
+    // Guarantee deleting the objects after completion
+    connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
+    connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
+
+    // If the Cancel button is pressed, inform the writer to stop the operation
+    // Using DirectConnection because the thread does not read its own event queue until completion
+    connect(ui->cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+
+    // Each time a block is written, update the progress bar
+    connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
+
+    // Show the message about successful completion on success
+    connect(writer, &ImageWriter::success, this, &MainDialog::showSuccessMessage);
+
+    // Show error message if error is sent by the worker
+    connect(writer, &ImageWriter::error, this, &MainDialog::showErrorMessage);
+
+    // Silently return back to normal dialog form if the operation was cancelled
+    connect(writer, &ImageWriter::cancelled, this, &MainDialog::hideWritingProgress);
+
+    // Now start the writer thread
+    writer->moveToThread(writerThread);
+    writerThread->start();
+}
+#endif
+
 // Starts writing the image
 void MainDialog::writeImageToDevice()
 {
+#if defined(Q_OS_LINUX)
     writeToDeviceKAuth(false);
+#else
+    writeToDevice(false);
+#endif
 }
 
 // Clears the selected USB device
 void MainDialog::clearDevice()
 {
+#if defined(Q_OS_LINUX)
     writeToDeviceKAuth(true);
+#else
+    writeToDevice(true);
+#endif
 }
 
 // Updates GUI to the "writing" mode (progress bar shown, controls disabled)

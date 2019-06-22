@@ -20,7 +20,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MainDialog is the main application window
 
+#if defined(Q_OS_LINUX)
 #include <KAuth>
+#endif
+
 #include <KPixmapSequenceOverlayPainter>
 
 #include <QDialog>
@@ -41,7 +44,7 @@ struct IsoResult {
 class MainDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     explicit MainDialog(QWidget *parent = 0);
     ~MainDialog();
@@ -49,7 +52,9 @@ public:
 private:
     Ui::MainDialog *ui;
     QPushButton *m_writeButton, *m_clearButton, *m_cancelButton;
+#if defined(Q_OS_LINUX)
     KAuth::ExecuteJob *m_job;
+#endif
     IsoResult verifyISO();
 
 protected:
@@ -71,7 +76,12 @@ protected:
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
     // Starts writing data to the device
+#if defined(Q_OS_LINUX)
     void writeToDeviceKAuth(bool zeroing);
+#else
+    void writeToDevice(bool zeroing);
+#endif
+
     // Frees the GUI-specific allocated resources
     void cleanup();
 
@@ -111,10 +121,13 @@ public slots:
     void showErrorMessage(QString msg);
     //cancel button clicked
     void cancelWriting();
+
+#if defined(Q_OS_LINUX)
     void progressStep(KJob* job, unsigned long step);
     void progressStep(const QVariantMap &);
     void statusChanged(KAuth::Action::AuthStatus status);
     void finished(KJob* job);
+#endif
 };
 
 
