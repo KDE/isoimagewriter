@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
+#include <QProgressBar>
 #include <QStackedWidget>
 
 class MainWindow : public QMainWindow
@@ -23,6 +24,8 @@ private:
     QLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
     QPushButton *m_createButton;
+    QPushButton *m_cancelButton;
+    QProgressBar *m_progressBar;
     QStackedWidget *m_centralStackedWidget;
 
     QString m_isoImagePath;
@@ -34,14 +37,22 @@ private:
     void setupUi();
     QWidget* createFormWidget();
     QWidget* createConfirmWidget();
+    QWidget* createProgressWidget();
+    QWidget* createSuccessWidget();
     void preprocessIsoImage(const QString& isoImagePath);
     void cleanUp();
     void enumFlashDevices();
+    void writeToDevice(bool zeroing);
 
     static void addFlashDeviceCallback(void* cbParam, UsbDevice* device);
 
 private slots:
     void openIsoImage();
+    void writeIsoImage();
+    void updateProgressBar(int increment);
+    void showWritingProgress(int maxValue);
+    void hideWritingProgress();
+    void showErrorMessage(const QString &message);
 };
 
 #endif // MAINWINDOW_H
