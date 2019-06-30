@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MainDialog is the main application window
 
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
 #include <KAuth>
 #endif
 
@@ -52,7 +52,7 @@ public:
 private:
     Ui::MainDialog *ui;
     QPushButton *m_writeButton, *m_clearButton, *m_cancelButton;
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
     KAuth::ExecuteJob *m_job;
 #endif
     IsoResult verifyISO();
@@ -76,7 +76,7 @@ protected:
     // Retrieves information about the selected file and displays it in the dialog
     void preprocessImageFile(const QString& newImageFile);
     // Starts writing data to the device
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
     void writeToDeviceKAuth(bool zeroing);
 #else
     void writeToDevice(bool zeroing);
@@ -120,7 +120,7 @@ public slots:
     // Displays the specified error message and returns to the "idle" mode
     void showErrorMessage(QString msg);
 
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
     //cancel button clicked
     void cancelWriting();
 

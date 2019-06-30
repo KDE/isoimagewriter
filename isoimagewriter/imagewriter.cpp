@@ -21,7 +21,7 @@
 
 #include <KLocalizedString>
 
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
 #include <KAuth>
 #endif
 
@@ -143,7 +143,7 @@ void ImageWriter::writeImage()
         for (;;)
         {
             qDebug() << "For Loop3";
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
             if (KAuth::HelperSupport::isStopped()) {
                 qDebug() << "isStopped";
             } else {
@@ -178,7 +178,7 @@ void ImageWriter::writeImage()
             // this still works or at least fails compilation
             emit blockWritten(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
 
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
             KAuth::HelperSupport::progressStep(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT); // FIXME why doesn't this work?
             QVariantMap progressArgs;
             progressArgs[QStringLiteral("progress")] = TRANSFER_BLOCK_SIZE / DEFAULT_UNIT;
@@ -187,7 +187,7 @@ void ImageWriter::writeImage()
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
             cancelRequested = KAuth::HelperSupport::isStopped();
 #else
             cancelRequested = m_CancelWriting;
@@ -218,7 +218,7 @@ void ImageWriter::writeImage()
     catch (QString msg)
     {
         // Something went wrong :-(
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
         QVariantMap args;
         args[QStringLiteral("error")] = msg;
         KAuth::HelperSupport::progressStep(args);
@@ -241,7 +241,7 @@ void ImageWriter::writeImage()
             "<br><br>" +
             (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Wipe USB Disk\"."));
 
-#if defined(Q_OS_LINUX)
+#if defined(KAUTH)
         QVariantMap args;
         args[QStringLiteral("success")] = message;
         KAuth::HelperSupport::progressStep(args);

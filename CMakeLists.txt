@@ -16,6 +16,7 @@ include(ECMOptionalAddSubdirectory)
 include(ECMQtDeclareLoggingCategory)
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
+option(KAUTH "Build with KAuth support")
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
@@ -26,9 +27,12 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     IconThemes
 )
 
+if(KAUTH)
+    find_package(KF5Auth REQUIRED)
+endif()
+
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  find_package(UDev REQUIRED)
-  find_package(KF5Auth REQUIRED)
+    find_package(UDev REQUIRED)
 endif()
 
 KDE_ENABLE_EXCEPTIONS()
