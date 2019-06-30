@@ -548,7 +548,7 @@ void MainDialog::writeToDevice(bool zeroing)
 
     // If the Cancel button is pressed, inform the writer to stop the operation
     // Using DirectConnection because the thread does not read its own event queue until completion
-    connect(ui->cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
+    connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
 
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &MainDialog::updateProgressBar);
