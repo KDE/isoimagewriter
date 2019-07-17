@@ -10,6 +10,10 @@
 #include <QProgressBar>
 #include <QStackedWidget>
 
+#if defined(Q_OS_LINUX)
+#include <KAuth>
+#endif
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -34,6 +38,10 @@ private:
     bool m_isWriting;
     bool m_enumFlashDevicesWaiting;
 
+#if defined(Q_OS_LINUX)
+    KAuth::ExecuteJob *m_job;
+#endif
+
     void setupUi();
     QWidget* createFormWidget();
     QWidget* createConfirmWidget();
@@ -53,6 +61,15 @@ private slots:
     void showWritingProgress(int maxValue);
     void hideWritingProgress();
     void showErrorMessage(const QString &message);
+    void showSuccessMessage();
+
+#if defined(Q_OS_LINUX)
+    void cancelWriting();
+    void progressStep(KJob* job, unsigned long step);
+    void progressStep(const QVariantMap &);
+    void statusChanged(KAuth::Action::AuthStatus status);
+    void finished(KJob* job);
+#endif
 };
 
 #endif // MAINWINDOW_H

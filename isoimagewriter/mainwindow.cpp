@@ -2,6 +2,7 @@
 #include "mainapplication.h"
 #include "common.h"
 #include "imagewriter.h"
+#include "isoimagewriter_debug.h"
 
 #include <QLabel>
 #include <QTimer>
@@ -277,61 +278,65 @@ void MainWindow::enumFlashDevices()
 
 void MainWindow::writeToDevice(bool zeroing)
 {
-    if ((m_usbDriveComboBox->count() == 0) || (!zeroing && (m_isoImagePath == "")))
-        return;
-
     UsbDevice* selectedDevice = m_usbDriveComboBox->itemData(
         m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
 
-    if (!zeroing && (m_isoImageSize > selectedDevice->m_Size))
-    {
-        QLocale currentLocale;
-        QMessageBox::critical(
-            this,
-            i18n("Error"),
-            tr("The image is larger than your selected device!") + "\n" +
-            tr("Image size:") + " " + QString::number(m_isoImageSize / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(m_isoImageSize) + " " + tr("b") + ")\n" +
-            tr("Disk size:") + " " + QString::number(selectedDevice->m_Size / DEFAULT_UNIT) + " " + tr("MB") + " (" + currentLocale.toString(selectedDevice->m_Size) + " " + tr("b") + ")",
-            QMessageBox::Ok
-            );
-        return;
-    }
+// Use KAuth to get required previleges in supported platforms
+#if defined(Q_OS_LINUX)
+    connect(m_cancelButton, &QPushButton::clicked, this, &MainWindow::cancelWriting);
 
-    showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_isoImageSize), DEFAULT_UNIT));
+    KAuth::Action action("org.kde.isoimagewriter.writefile");
+    action.setHelperId("org.kde.isoimagewriter");
 
+    QVariantMap args;
+    args[QStringLiteral("zeroing")] = QVariant(zeroing);
+    args[QStringLiteral("imagefile")] = m_isoImagePath;
+    args[QStringLiteral("usbdevice_visiblename")] = selectedDevice->m_VisibleName;
+    args[QStringLiteral("usbdevice_volumes")] = selectedDevice->m_Volumes[0];
+    args[QStringLiteral("usbdevice_size")] = QString("%1").arg(selectedDevice->m_Size);
+    args[QStringLiteral("usbdevice_sectorsize")] = selectedDevice->m_SectorSize;
+    args[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
+
+    action.setArguments(args);
+    action.setTimeout(3600000); // an hour
+
+    m_job = action.execute();
+
+    connect(m_job, SIGNAL(percent(KJob*,ulong)), this, SLOT(progressStep(KJob*,ulong)), Qt::DirectConnection);
+    connect(m_job, SIGNAL(newData(QVariantMap)), this, SLOT(progressStep(QVariantMap)));
+    connect(m_job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
+    connect(m_job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
+
+    m_job->start();
+#else
     ImageWriter* writer = new ImageWriter(zeroing ? "" : m_isoImagePath, selectedDevice);
     QThread *writerThread = new QThread(this);
 
     // Connect start and end signals
     connect(writerThread, &QThread::started, writer, &ImageWriter::writeImage);
-
     // When writer finishes its job, quit the thread
     connect(writer, &ImageWriter::finished, writerThread, &QThread::quit);
-
     // Guarantee deleting the objects after completion
     connect(writer, &ImageWriter::finished, writer, &ImageWriter::deleteLater);
     connect(writerThread, &QThread::finished, writerThread, &QThread::deleteLater);
-
     // If the Cancel button is pressed, inform the writer to stop the operation
     // Using DirectConnection because the thread does not read its own event queue until completion
     connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
-
     // Each time a block is written, update the progress bar
     connect(writer, &ImageWriter::blockWritten, this, &MainWindow::updateProgressBar);
-
     // Show the message about successful completion on success
-    connect(writer, &ImageWriter::success,
-            [this] { m_centralStackedWidget->setCurrentIndex(3); });
-
+    connect(writer, &ImageWriter::success, this, &MainWindow::showSuccessMessage);
     // Show error message if error is sent by the worker
     connect(writer, &ImageWriter::error, this, &MainWindow::showErrorMessage);
-
     // Silently return back to normal dialog form if the operation was cancelled
     connect(writer, &ImageWriter::cancelled, this, &MainWindow::hideWritingProgress);
 
     // Now start the writer thread
     writer->moveToThread(writerThread);
     writerThread->start();
+#endif
+
+    showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_isoImageSize), DEFAULT_UNIT));
 }
 
 void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
@@ -357,6 +362,28 @@ void MainWindow::openIsoImage()
 
 void MainWindow::writeIsoImage()
 {
+    if (m_usbDriveComboBox->count() == 0 || m_isoImagePath == "")
+        return;
+
+    UsbDevice* selectedDevice = m_usbDriveComboBox->itemData(
+        m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
+
+    if (m_isoImageSize > selectedDevice->m_Size)
+    {
+        QMessageBox::critical(
+            this,
+            i18n("Error"),
+            i18n("The image is larger than your selected device!\n\n"
+                 "Image size: %1 (%2 b)\n"
+                 "Disk size: %3 (%4 b)",
+                 KFormat().formatByteSize(m_isoImageSize),
+                 m_isoImageSize,
+                 KFormat().formatByteSize(selectedDevice->m_Size),
+                 selectedDevice->m_Size),
+            QMessageBox::Ok);
+        return;
+    }
+
     writeToDevice(false);
 }
 
@@ -416,4 +443,46 @@ void MainWindow::showErrorMessage(const QString &message)
     QMessageBox::critical(this, i18n("Error"), message);
 
     hideWritingProgress();
+}
+
+void MainWindow::showSuccessMessage()
+{
+    m_centralStackedWidget->setCurrentIndex(3);
+}
+
+void MainWindow::cancelWriting() {
+    qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting()";
+    m_job->kill();
+    qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting() done";
+}
+
+void MainWindow::progressStep(KJob* job, unsigned long step) {
+    Q_UNUSED(job)
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep %() " << step;
+    updateProgressBar(step);
+}
+
+void MainWindow::progressStep(const QVariantMap & data) {
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
+    if (data[QStringLiteral("progress")].isValid()) {
+        int step = data[QStringLiteral("progress")].toInt();
+        updateProgressBar(step);
+    } else if (data[QStringLiteral("error")].isValid()) {
+        showErrorMessage(data[QStringLiteral("error")].toString());
+    } else if (data[QStringLiteral("success")].isValid()) {
+        showSuccessMessage();
+    }
+}
+
+void MainWindow::statusChanged(KAuth::Action::AuthStatus status) {
+    qCDebug(ISOIMAGEWRITER_LOG) << "statusChanged: " << status;
+}
+
+void MainWindow::finished(KJob* job) {
+    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job->error();
+    KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
+    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
+
+    if (job2->data()[QStringLiteral("success")].isValid())
+        showSuccessMessage();
 }
