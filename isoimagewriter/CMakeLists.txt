@@ -59,10 +59,6 @@ if (ROSA_BRANDING)
 endif (ROSA_BRANDING)
 target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
-if(KAUTH)
-   add_compile_definitions(KAUTH)
-endif()
-
 target_link_libraries(isoimagewriter
     Qt5::Widgets
     KF5::I18n
@@ -72,10 +68,7 @@ target_link_libraries(isoimagewriter
     KF5::IconThemes
 )
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-    target_link_libraries(isoimagewriter udev)
-endif()
-if(KAUTH)
-    target_link_libraries(isoimagewriter KF5::AuthCore)
+  target_link_libraries(isoimagewriter udev KF5::AuthCore)
 endif()
 
 #target_link_libraries(testy
@@ -94,7 +87,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL Linux)
 endif()
 
 # KAuth
-if(KAUTH)
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
     add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
     target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons)
     install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})

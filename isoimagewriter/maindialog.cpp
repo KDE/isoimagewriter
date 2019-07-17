@@ -407,7 +407,7 @@ IsoResult MainDialog::verifyISO() {
     return result;
 }
 
-#if defined(KAUTH)
+#if defined(Q_OS_LINUX)
 // Starts writing data to the device
 void MainDialog::writeToDeviceKAuth(bool zeroing)
 {
@@ -571,7 +571,7 @@ void MainDialog::writeToDevice(bool zeroing)
 // Starts writing the image
 void MainDialog::writeImageToDevice()
 {
-#if defined(KAUTH)
+#if defined(Q_OS_LINUX)
     writeToDeviceKAuth(false);
 #else
     writeToDevice(false);
@@ -581,7 +581,7 @@ void MainDialog::writeImageToDevice()
 // Clears the selected USB device
 void MainDialog::clearDevice()
 {
-#if defined(KAUTH)
+#if defined(Q_OS_LINUX)
     writeToDeviceKAuth(true);
 #else
     writeToDevice(true);
