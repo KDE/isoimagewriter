@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "usbdevice.h"
+#include "externalprogressbar.h"
 
 #include <QMainWindow>
 #include <QLineEdit>
@@ -37,6 +38,7 @@ private:
     QString m_lastOpenedDir;
     bool m_isWriting;
     bool m_enumFlashDevicesWaiting;
+    ExternalProgressBar m_externalProgressBar;
 
 #if defined(Q_OS_LINUX)
     KAuth::ExecuteJob *m_job;

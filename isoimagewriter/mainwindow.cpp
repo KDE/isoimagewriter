@@ -19,7 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_lastOpenedDir(""),
       m_isWriting(false),
-      m_enumFlashDevicesWaiting(false)
+      m_enumFlashDevicesWaiting(false),
+      m_externalProgressBar(this)
 {
     setupUi();
 
@@ -391,8 +392,7 @@ void MainWindow::updateProgressBar(int increment)
 {
     int newValue = m_progressBar->value() + increment;
     m_progressBar->setValue(newValue);
-    // TODO: Enable external progress bar
-    // m_ExtProgressBar.SetProgressValue(newValue);
+    m_externalProgressBar.SetProgressValue(newValue);
 }
 
 void MainWindow::showWritingProgress(int maxValue)
@@ -409,9 +409,8 @@ void MainWindow::showWritingProgress(int maxValue)
     m_progressBar->setValue(0);
     // m_progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    // TODO: Enable external progress bar
     // Expose the progress bar state to the OS
-    // m_ExtProgressBar.InitProgressBar(maxValue);
+    m_externalProgressBar.InitProgressBar(maxValue);
 
     m_centralStackedWidget->setCurrentIndex(2);
 }
@@ -425,8 +424,7 @@ void MainWindow::hideWritingProgress()
     // setAcceptDrops(true);
 
     // Send a signal that progressbar is no longer present
-    // TODO: Enable external progress bar
-    // m_ExtProgressBar.DestroyProgressBar();
+    m_externalProgressBar.DestroyProgressBar();
 
     m_centralStackedWidget->setCurrentIndex(0);
 
@@ -437,8 +435,7 @@ void MainWindow::hideWritingProgress()
 
 void MainWindow::showErrorMessage(const QString &message)
 {
-    // TODO: Enable external progress bar
-    // m_ExtProgressBar.ProgressSetError();
+    m_externalProgressBar.ProgressSetError();
 
     QMessageBox::critical(this, i18n("Error"), message);
 
