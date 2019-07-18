@@ -24,13 +24,13 @@ using namespace KAuth;
 
 class ImageWriterHelper : public QObject
 {
-        Q_OBJECT
-    public:
-        ImageWriterHelper();
+    Q_OBJECT
 
-    public Q_SLOTS:
-        ActionReply writefile(const QVariantMap &args);
-        ActionReply writeimage(const QVariantMap &args);
+public:
+    ImageWriterHelper();
+
+public Q_SLOTS:
+    ActionReply write(const QVariantMap &args);
 };
 
 #endif // IMAGEWRITER_HELPER_H

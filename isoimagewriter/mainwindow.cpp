@@ -286,7 +286,7 @@ void MainWindow::writeToDevice(bool zeroing)
 #if defined(Q_OS_LINUX)
     connect(m_cancelButton, &QPushButton::clicked, this, &MainWindow::cancelWriting);
 
-    KAuth::Action action("org.kde.isoimagewriter.writefile");
+    KAuth::Action action("org.kde.isoimagewriter.write");
     action.setHelperId("org.kde.isoimagewriter");
 
     QVariantMap args;

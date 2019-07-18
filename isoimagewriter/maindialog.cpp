@@ -441,7 +441,7 @@ void MainDialog::writeToDeviceKAuth(bool zeroing)
     }
 
     connect(m_cancelButton, &QPushButton::clicked, this, &MainDialog::cancelWriting);
-    KAuth::Action action(QLatin1String("org.kde.isoimagewriter.writefile"));
+    KAuth::Action action(QLatin1String("org.kde.isoimagewriter.write"));
     action.setHelperId("org.kde.isoimagewriter");
     QVariantMap helperargs;
     //helperargs[QStringLiteral("filename")] = "bar";
