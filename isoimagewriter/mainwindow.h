@@ -56,6 +56,7 @@ private:
 
     void dragEnterEvent(QDragEnterEvent* event) override;
     void dropEvent(QDropEvent* event) override;
+    void closeEvent(QCloseEvent* event) override;
 
     static void addFlashDeviceCallback(void* cbParam, UsbDevice* device);
 

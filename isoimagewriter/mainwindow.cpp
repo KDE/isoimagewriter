@@ -391,6 +391,20 @@ void MainWindow::dropEvent(QDropEvent* event)
     }
 }
 
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    if (m_isWriting)
+    {
+        const int answer = QMessageBox::question(
+            this,
+            i18n("Cancel?"),
+            i18n("Writing is in progress, abort it?"));
+
+        if (answer == QMessageBox::No)
+            event->ignore();
+    }
+}
+
 void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 {
     auto usbDriveComboBox = (QComboBox*)cbParam;
