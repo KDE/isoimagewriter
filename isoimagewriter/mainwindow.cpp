@@ -8,6 +8,8 @@
 #include <QTimer>
 #include <QAction>
 #include <QThread>
+#include <QMimeData>
+#include <QDropEvent>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFileDialog>
@@ -23,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_externalProgressBar(this)
 {
     setupUi();
+    setAcceptDrops(true);
 
     // Set initial directory
     m_lastOpenedDir = mApp->getInitialDir();
@@ -102,8 +105,7 @@ QWidget* MainWindow::createFormWidget()
 
     m_createButton = new QPushButton(i18n("Create"));
     m_createButton->setEnabled(false);
-    connect(m_createButton, &QPushButton::clicked,
-            [this] { m_centralStackedWidget->setCurrentIndex(1); });
+    connect(m_createButton, &QPushButton::clicked, this, &MainWindow::showConfirmMessage);
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
@@ -136,8 +138,7 @@ QWidget* MainWindow::createConfirmWidget()
     messageHBoxLayout->addWidget(messageLabel, 0, Qt::AlignTop);
 
     QPushButton *abortButton = new QPushButton(i18n("Abort"));
-    connect(abortButton, &QPushButton::clicked,
-            [this] { m_centralStackedWidget->setCurrentIndex(0); });
+    connect(abortButton, &QPushButton::clicked, this, &MainWindow::hideWritingProgress);
 
     QPushButton *continueButton = new QPushButton(i18n("Continue"));
     connect(continueButton, &QPushButton::clicked, this, &MainWindow::writeIsoImage);
@@ -340,6 +341,56 @@ void MainWindow::writeToDevice(bool zeroing)
     showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_isoImageSize), DEFAULT_UNIT));
 }
 
+void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+{
+    // Accept only files with ANSI or Unicode paths (Windows) and URIs (Linux)
+    if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"") ||
+        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\"") ||
+        event->mimeData()->hasFormat("text/uri-list"))
+        event->accept();
+}
+
+void MainWindow::dropEvent(QDropEvent* event)
+{
+    QString newImageFile = "";
+    QByteArray droppedFileName;
+
+    // First, try to use the Unicode file name
+    droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileNameW\"");
+    if (!droppedFileName.isEmpty()) {
+        newImageFile = QString::fromWCharArray(reinterpret_cast<const wchar_t*>(droppedFileName.constData()));
+    } else {
+        // If failed, use the ANSI name with the local codepage
+        droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileName\"");
+        if (!droppedFileName.isEmpty()) {
+            newImageFile = QString::fromLocal8Bit(droppedFileName.constData());
+        } else {
+            // And, finally, try the URI
+            droppedFileName = event->mimeData()->data("text/uri-list");
+            if (!droppedFileName.isEmpty()) {
+                // If several files are dropped they are separated by newlines,
+                // take the first file
+                int newLineIndexLF = droppedFileName.indexOf('\n');
+                int newLineIndex = droppedFileName.indexOf("\r\n");
+                // Make sure both CRLF and LF are accepted
+                if ((newLineIndexLF != -1) && (newLineIndexLF < newLineIndex))
+                    newLineIndex = newLineIndexLF;
+                if (newLineIndex != -1)
+                    droppedFileName = droppedFileName.left(newLineIndex);
+                // Decode the file path from percent-encoding
+                QUrl url = QUrl::fromEncoded(droppedFileName);
+                if (url.isLocalFile())
+                    newImageFile = url.toLocalFile();
+            }
+        }
+    }
+
+    if (!newImageFile.isEmpty()) {
+        // If something was really received update the information
+        preprocessIsoImage(newImageFile);
+    }
+}
+
 void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 {
     auto usbDriveComboBox = (QComboBox*)cbParam;
@@ -399,9 +450,8 @@ void MainWindow::showWritingProgress(int maxValue)
 {
     m_isWriting = true;
 
-    // TODO: Re-enable once drag & drop is implemented
     // Do not accept dropped files while writing
-    // setAcceptDrops(false);
+    setAcceptDrops(false);
 
     // Display and customize the progress bar part
     m_progressBar->setMinimum(0);
@@ -419,9 +469,8 @@ void MainWindow::hideWritingProgress()
 {
     m_isWriting = false;
 
-    // Reenable drag&drop
-    // TODO: Re-enable once drag & drop is implemented
-    // setAcceptDrops(true);
+    // Enable drag & drop
+    setAcceptDrops(true);
 
     // Send a signal that progressbar is no longer present
     m_externalProgressBar.DestroyProgressBar();
@@ -444,7 +493,18 @@ void MainWindow::showErrorMessage(const QString &message)
 
 void MainWindow::showSuccessMessage()
 {
+    // Do not accept dropped files
+    setAcceptDrops(false);
+
     m_centralStackedWidget->setCurrentIndex(3);
+}
+
+void MainWindow::showConfirmMessage()
+{
+    // Do not accept dropped files
+    setAcceptDrops(false);
+
+    m_centralStackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::cancelWriting() {

@@ -54,6 +54,9 @@ private:
     void enumFlashDevices();
     void writeToDevice(bool zeroing);
 
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
+
     static void addFlashDeviceCallback(void* cbParam, UsbDevice* device);
 
 private slots:
@@ -64,6 +67,7 @@ private slots:
     void hideWritingProgress();
     void showErrorMessage(const QString &message);
     void showSuccessMessage();
+    void showConfirmMessage();
 
 #if defined(Q_OS_LINUX)
     void cancelWriting();
