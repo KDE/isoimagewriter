@@ -304,8 +304,8 @@ void MainWindow::writeToDevice(bool zeroing)
 
     connect(m_job, SIGNAL(percent(KJob*,ulong)), this, SLOT(progressStep(KJob*,ulong)), Qt::DirectConnection);
     connect(m_job, SIGNAL(newData(QVariantMap)), this, SLOT(progressStep(QVariantMap)));
-    connect(m_job, SIGNAL(statusChanged(KAuth::Action::AuthStatus)), this, SLOT(statusChanged(KAuth::Action::AuthStatus)));
-    connect(m_job, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
+    connect(m_job, &KAuth::ExecuteJob::statusChanged, this, &MainWindow::statusChanged);
+    connect(m_job, &KAuth::ExecuteJob::result, this, &MainWindow::finished);
 
     m_job->start();
 #else
