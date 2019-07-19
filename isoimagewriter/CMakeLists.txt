@@ -33,6 +33,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL Windows)
         platform_win.cpp
         usbdevicemonitor_win.cpp
         externalprogressbar_win.cpp
+        isoimagewriter.rc
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
     message("Compiling isoimagewriter for Linux")
