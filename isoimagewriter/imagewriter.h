@@ -24,7 +24,6 @@
 #include <QObject>
 #include <QMutex>
 
-#include "maindialog.h"
 #include "usbdevice.h"
 
 class ImageWriter : public QObject

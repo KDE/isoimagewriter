@@ -471,7 +471,6 @@ void MainWindow::showWritingProgress(int maxValue)
     m_progressBar->setMinimum(0);
     m_progressBar->setMaximum(maxValue);
     m_progressBar->setValue(0);
-    // m_progressBarSpacer->changeSize(0, 10, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     // Expose the progress bar state to the OS
     m_externalProgressBar.InitProgressBar(maxValue);

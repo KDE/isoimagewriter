@@ -8,7 +8,6 @@ set(isoimagewriter_SRCS
     usbdevicemonitor.h
     common.cpp
     mainapplication.cpp
-    maindialog.cpp
     mainwindow.cpp
     imagewriter.cpp
     physicaldevice.cpp
@@ -46,8 +45,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 else()
     message("Unsupported Platform " . ${CMAKE_SYSTEM_NAME})
 endif()
-
-ki18n_wrap_ui(isoimagewriter_SRCS maindialog.ui)
 
 add_executable(isoimagewriter ${isoimagewriter_SRCS})
 

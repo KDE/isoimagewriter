@@ -25,7 +25,6 @@
 
 #include "common.h"
 #include "mainapplication.h"
-#include "maindialog.h"
 #include "mainwindow.h"
 #include "usbdevicemonitor.h"
 
@@ -57,20 +56,15 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    MainDialog w;
+    MainWindow w;
     w.show();
-
-    MainWindow w2;
-    w2.show();
 
     UsbDeviceMonitor deviceMonitor;
     deviceMonitor.startMonitoring();
 
     // When device changing event comes, refresh the list of USB flash disks
     // Using QueuedConnection to avoid delays in processing the message
-    QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w, &MainDialog::scheduleEnumFlashDevices, Qt::QueuedConnection);
-
-    QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w2,
+    QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w,
                      &MainWindow::scheduleEnumFlashDevices, Qt::QueuedConnection);
 
     return a.exec();
