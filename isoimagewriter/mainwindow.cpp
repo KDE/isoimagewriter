@@ -520,6 +520,7 @@ void MainWindow::showConfirmMessage()
     m_centralStackedWidget->setCurrentIndex(1);
 }
 
+#if defined(Q_OS_LINUX)
 void MainWindow::cancelWriting() {
     qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting()";
     m_job->kill();
@@ -556,3 +557,4 @@ void MainWindow::finished(KJob* job) {
     if (job2->data()[QStringLiteral("success")].isValid())
         showSuccessMessage();
 }
+#endif
