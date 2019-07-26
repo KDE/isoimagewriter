@@ -506,6 +506,8 @@ void MainWindow::showErrorMessage(const QString &message)
 
 void MainWindow::showSuccessMessage()
 {
+    m_isWriting = false;
+
     // Do not accept dropped files
     setAcceptDrops(false);
 
