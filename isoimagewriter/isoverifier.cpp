@@ -5,6 +5,7 @@
 #include <QFileInfo>
 #include <QByteArray>
 #include <QStandardPaths>
+#include <QCryptographicHash>
 
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
@@ -45,7 +46,7 @@ void IsoVerifier::verifyIso()
         verifyWithDotSigFile(keyFingerprint);
         break;
     case VerificationMean::Sha256SumsFile:
-        verifyWithSha256SumsFile();
+        verifyWithSha256SumsFile(keyFingerprint);
         break;
     }
 
@@ -123,6 +124,65 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
     }
 }
 
-void IsoVerifier::verifyWithSha256SumsFile()
+void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
 {
+    QFileInfo fileInfo(m_filePath);
+    QFile checksumsFile(fileInfo.absolutePath() + "/SHA256SUMS");
+    if (!checksumsFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
+        return;
+    }
+
+    // Calculate SHA256 checksum of the ISO image
+    QCryptographicHash hash(QCryptographicHash::Sha256);
+    QFile isoFile(m_filePath);
+    if (!isoFile.open(QIODevice::ReadOnly)) {
+        m_error = i18n("Could not read ISO image");
+        return;
+    }
+    if (!hash.addData(&isoFile)) {
+        m_error = i18n("Could not perform checksum");
+        return;
+    }
+    QByteArray hashResult = hash.result();
+
+    // Extract checksum from the SHA256SUMS file
+    QString checksum;
+    QRegExp rx("([abcdef\\d]+).." + fileInfo.fileName());
+    QByteArray checksumsData = checksumsFile.readAll();
+    int pos = rx.indexIn(QString(checksumsData));
+    if (pos > -1) {
+        checksum = rx.cap(1);
+    } else {
+        m_error = i18n("Could not find checksum in SHA256SUMS file");
+        return;
+    }
+    if (checksum != hashResult.toHex()) {
+        m_error = i18n("Checksum of .iso file does not match value in SHA256SUMS file");
+        return;
+    }
+
+    // Check GPG signature
+    QString isoFileName = fileInfo.fileName();
+    QFile signatureFile(fileInfo.absolutePath() + "/SHA256SUMS.gpg");
+    if (!signatureFile.open(QIODevice::ReadOnly)) {
+        m_error = i18n("Could not find SHA256SUMS.gpg, please download PGP signature file to same directory.");
+        return;
+    }
+
+    QByteArray signatureData = signatureFile.readAll();
+    QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
+    GpgME::VerificationResult result = job->exec(signatureData, checksumsData);
+    GpgME::Signature signature = result.signature(0);
+
+    if (signature.summary() == GpgME::Signature::None
+        && signature.fingerprint() == keyFingerprint) {
+        m_isIsoValid = true;
+    } else if (signature.summary() & GpgME::Signature::Valid) {
+        m_isIsoValid = true;
+    } else if (signature.summary() & GpgME::Signature::KeyRevoked) {
+        m_error = i18n("Key is revoked.");
+    } else {
+        m_error = i18n("Uses wrong signature.");
+    }
 }

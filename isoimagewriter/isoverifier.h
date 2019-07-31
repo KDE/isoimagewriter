@@ -24,7 +24,7 @@ private:
 
     bool importSigningKey(const QString &fileName, QString &keyFingerPrint);
     void verifyWithDotSigFile(const QString &keyFingerPrint);
-    void verifyWithSha256SumsFile();
+    void verifyWithSha256SumsFile(const QString &keyFingerPrint);
 };
 
 #endif // ISOVERIFIER_H
