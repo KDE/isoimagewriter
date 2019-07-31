@@ -74,6 +74,7 @@ private slots:
     void showErrorMessage(const QString &message);
     void showSuccessMessage();
     void showConfirmMessage();
+    void showIsoVerificationResult(const bool &isIsoValid, const QString &error);
 
 #if defined(Q_OS_LINUX)
     void cancelWriting();

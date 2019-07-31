@@ -239,7 +239,6 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     m_busyWidget->show();
     m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("process-working", KIconLoader::SizeSmallMedium));
     m_busySpinner->start();
-    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     IsoVerifier *isoVerifier = new IsoVerifier(m_isoImagePath);
     QThread *verifierThread = new QThread(this);
@@ -249,18 +248,7 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 
     connect(isoVerifier, &IsoVerifier::finished, verifierThread, &QThread::quit);
     connect(isoVerifier, &IsoVerifier::finished, isoVerifier, &IsoVerifier::deleteLater);
-    connect(isoVerifier, &IsoVerifier::finished,
-            this, [this](const bool &isIsoValid, const QString &error) {
-                      QApplication::setOverrideCursor(Qt::ArrowCursor);
-
-                      if (isIsoValid) {
-                          m_busyLabel->setText(i18n("The ISO image is valid"));
-                          m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("checkmark", KIconLoader::SizeSmallMedium));
-                      } else {
-                          m_busyLabel->setText(error);
-                          m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("error", KIconLoader::SizeSmallMedium));
-                      }
-                  });
+    connect(isoVerifier, &IsoVerifier::finished, this, &MainWindow::showIsoVerificationResult);
 
     isoVerifier->moveToThread(verifierThread);
     verifierThread->start();
@@ -564,6 +552,19 @@ void MainWindow::showConfirmMessage()
     setAcceptDrops(false);
 
     m_centralStackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::showIsoVerificationResult(const bool &isIsoValid, const QString &error)
+{
+    if (isIsoValid) {
+        m_busyLabel->setText(i18n("The ISO image is valid"));
+        m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("checkmark", KIconLoader::SizeSmallMedium));
+    } else {
+        m_busyLabel->setText(i18n("Could not verify ISO image"));
+        m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("error", KIconLoader::SizeSmallMedium));
+
+        QMessageBox::warning(this, i18n("ISO Verification failed"), error);
+    }
 }
 
 #if defined(Q_OS_LINUX)
