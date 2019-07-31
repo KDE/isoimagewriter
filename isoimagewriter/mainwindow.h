@@ -5,11 +5,13 @@
 #include "externalprogressbar.h"
 
 #include <QMainWindow>
+#include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
 #include <QProgressBar>
 #include <QStackedWidget>
+#include <KPixmapSequenceOverlayPainter>
 
 #if defined(Q_OS_LINUX)
 #include <KAuth>
@@ -26,12 +28,15 @@ public slots:
     void scheduleEnumFlashDevices();
 
 private:
+    QLabel *m_busyLabel;
+    QWidget *m_busyWidget;
     QLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
     QPushButton *m_createButton;
     QPushButton *m_cancelButton;
     QProgressBar *m_progressBar;
     QStackedWidget *m_centralStackedWidget;
+    KPixmapSequenceOverlayPainter *m_busySpinner;
 
     QString m_isoImagePath;
     quint64 m_isoImageSize;

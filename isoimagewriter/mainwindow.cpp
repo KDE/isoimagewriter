@@ -2,6 +2,7 @@
 #include "mainapplication.h"
 #include "common.h"
 #include "imagewriter.h"
+#include "isoverifier.h"
 #include "isoimagewriter_debug.h"
 
 #include <QLabel>
@@ -15,6 +16,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <KFormat>
+#include <KIconLoader>
+#include <KPixmapSequence>
 #include <KLocalizedString>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -107,6 +110,18 @@ QWidget* MainWindow::createFormWidget()
     m_createButton->setEnabled(false);
     connect(m_createButton, &QPushButton::clicked, this, &MainWindow::showConfirmMessage);
 
+    m_busyLabel = new QLabel;
+    m_busyWidget = new QWidget;
+    m_busySpinner = new KPixmapSequenceOverlayPainter(this);
+    m_busySpinner->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    m_busySpinner->setWidget(m_busyWidget);
+    m_busyWidget->setFixedSize(24, 24);
+
+    QHBoxLayout *footerBoxLayout = new QHBoxLayout;
+    footerBoxLayout->addWidget(m_busyWidget);
+    footerBoxLayout->addWidget(m_busyLabel);
+    footerBoxLayout->addWidget(m_createButton, 0, Qt::AlignRight);
+
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
     mainVBoxLayout->addWidget(m_isoImageLineEdit);
@@ -115,7 +130,7 @@ QWidget* MainWindow::createFormWidget()
     mainVBoxLayout->addWidget(m_usbDriveComboBox);
     mainVBoxLayout->addSpacing(15);
     mainVBoxLayout->addStretch();
-    mainVBoxLayout->addWidget(m_createButton, 0, Qt::AlignRight);
+    mainVBoxLayout->addLayout(footerBoxLayout);
 
     QWidget *formWidget = new QWidget;
     formWidget->setLayout(mainVBoxLayout);
@@ -219,7 +234,36 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 
     file.close();
 
-    // TODO: Verify ISO image
+    // Verify ISO image
+    m_busyLabel->setText(i18n("Verifying ISO image"));
+    m_busyWidget->show();
+    m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("process-working", KIconLoader::SizeSmallMedium));
+    m_busySpinner->start();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
+    IsoVerifier *isoVerifier = new IsoVerifier(m_isoImagePath);
+    QThread *verifierThread = new QThread(this);
+
+    connect(verifierThread, &QThread::started, isoVerifier, &IsoVerifier::verifyIso);
+    connect(verifierThread, &QThread::finished, verifierThread, &QThread::deleteLater);
+
+    connect(isoVerifier, &IsoVerifier::finished, verifierThread, &QThread::quit);
+    connect(isoVerifier, &IsoVerifier::finished, isoVerifier, &IsoVerifier::deleteLater);
+    connect(isoVerifier, &IsoVerifier::finished,
+            this, [this](const bool &isIsoValid, const QString &error) {
+                      QApplication::setOverrideCursor(Qt::ArrowCursor);
+
+                      if (isIsoValid) {
+                          m_busyLabel->setText(i18n("The ISO image is valid"));
+                          m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("checkmark", KIconLoader::SizeSmallMedium));
+                      } else {
+                          m_busyLabel->setText(error);
+                          m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("error", KIconLoader::SizeSmallMedium));
+                      }
+                  });
+
+    isoVerifier->moveToThread(verifierThread);
+    verifierThread->start();
 
     // Enable the Write button (if there are USB flash disks present)
     m_createButton->setEnabled(m_usbDriveComboBox->count() > 0);

@@ -18,6 +18,7 @@ set(isoimagewriter_SRCS
     verifykubuntuiso.cpp
     verifynetrunneriso.cpp
     verifyarchiso.cpp
+    isoverifier.cpp
 )
 
 ecm_qt_declare_logging_category(isoimagewriter_SRCS
