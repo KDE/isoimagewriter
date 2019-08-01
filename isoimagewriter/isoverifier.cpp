@@ -18,7 +18,8 @@
 IsoVerifier::IsoVerifier(const QString &filePath)
     : m_filePath(filePath),
       m_error(),
-      m_isIsoValid(false)
+      m_isIsoValid(false),
+      m_verificationMean(VerificationMean::None)
 {}
 
 void IsoVerifier::verifyIso()
@@ -29,16 +30,16 @@ void IsoVerifier::verifyIso()
 
     if (fileName.startsWith("neon-")) {
         m_verificationMean = VerificationMean::DotSigFile;
-        if (!importSigningKey("neon-signing-key.gpg", keyFingerprint)) return;
+        if (!importSigningKey("neon-signing-key.gpg", keyFingerprint)) goto finish;
     } else if (fileName.startsWith("archlinux-")) {
         m_verificationMean = VerificationMean::DotSigFile;
-        if (!importSigningKey("arch-signing-key.gpg", keyFingerprint)) return;
+        if (!importSigningKey("arch-signing-key.gpg", keyFingerprint)) goto finish;
     } else if (fileName.startsWith("kubuntu-")) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
-        if (!importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) return;
+        if (!importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) goto finish;
     } else {
         m_error = QString(i18n("Could not verify as a known distro image."));
-        return;
+        goto finish;
     }
 
     switch (m_verificationMean) {
@@ -48,8 +49,12 @@ void IsoVerifier::verifyIso()
     case VerificationMean::Sha256SumsFile:
         verifyWithSha256SumsFile(keyFingerprint);
         break;
+    default:
+        goto finish;
+        break;
     }
 
+finish:
     emit finished(m_isIsoValid, m_error);
 }
 

@@ -20,7 +20,7 @@ private:
     QString m_filePath;
     QString m_error;
     bool m_isIsoValid;
-    enum VerificationMean { DotSigFile, Sha256SumsFile } m_verificationMean;
+    enum VerificationMean { None, DotSigFile, Sha256SumsFile } m_verificationMean;
 
     bool importSigningKey(const QString &fileName, QString &keyFingerPrint);
     void verifyWithDotSigFile(const QString &keyFingerPrint);
