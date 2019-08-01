@@ -141,6 +141,18 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         return;
     }
 
+    // Extract checksum from the SHA256SUMS file
+    QString checksum;
+    QRegExp rx("([abcdef\\d]+).." + fileInfo.fileName());
+    QByteArray checksumsData = checksumsFile.readAll();
+    int pos = rx.indexIn(QString(checksumsData));
+    if (pos > -1) {
+        checksum = rx.cap(1);
+    } else {
+        m_error = i18n("Could not find checksum in SHA256SUMS file");
+        return;
+    }
+
     // Calculate SHA256 checksum of the ISO image
     QCryptographicHash hash(QCryptographicHash::Sha256);
     QFile isoFile(m_filePath);
@@ -153,18 +165,6 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         return;
     }
     QByteArray hashResult = hash.result();
-
-    // Extract checksum from the SHA256SUMS file
-    QString checksum;
-    QRegExp rx("([abcdef\\d]+).." + fileInfo.fileName());
-    QByteArray checksumsData = checksumsFile.readAll();
-    int pos = rx.indexIn(QString(checksumsData));
-    if (pos > -1) {
-        checksum = rx.cap(1);
-    } else {
-        m_error = i18n("Could not find checksum in SHA256SUMS file");
-        return;
-    }
     if (checksum != hashResult.toHex()) {
         m_error = i18n("Checksum of .iso file does not match value in SHA256SUMS file");
         return;
