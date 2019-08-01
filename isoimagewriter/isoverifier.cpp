@@ -37,6 +37,9 @@ void IsoVerifier::verifyIso()
     } else if (fileName.startsWith("kubuntu-")) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
         if (!importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) goto finish;
+    } else if (fileName.startsWith("ubuntu-")) {
+        m_verificationMean = VerificationMean::Sha256SumsFile;
+        if (!importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) goto finish;
     } else {
         m_error = QString(i18n("Could not verify as a known distro image."));
         goto finish;
