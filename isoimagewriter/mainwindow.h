@@ -26,6 +26,10 @@ public:
 
 public slots:
     void scheduleEnumFlashDevices();
+    void showInputDialog(const QString &title, const QString &body);
+
+signals:
+    void inputTextReady(bool ok, const QString &text);
 
 private:
     QLabel *m_busyLabel;

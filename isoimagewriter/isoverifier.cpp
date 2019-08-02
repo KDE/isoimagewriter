@@ -40,6 +40,8 @@ void IsoVerifier::verifyIso()
     } else if (fileName.startsWith("ubuntu-")
                && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
+    } else if (fileName.startsWith("netrunner-")) {
+        m_verificationMean = VerificationMean::Sha256SumInput;
     } else {
         m_error = QString(i18n("Could not verify as a known distro image."));
     }
@@ -50,6 +52,22 @@ void IsoVerifier::verifyIso()
         break;
     case VerificationMean::Sha256SumsFile:
         verifyWithSha256SumsFile(keyFingerprint);
+        break;
+    case VerificationMean::Sha256SumInput:
+        emit inputRequested(i18n("SHA256 Checksum"),
+                            i18n("Paste the SHA256 checksum for this ISO:"));
+        break;
+    default:
+        emit finished(m_isIsoValid, m_error);
+        break;
+    }
+}
+
+void IsoVerifier::verifyWithInputText(bool ok, const QString &text)
+{
+    switch (m_verificationMean) {
+    case VerificationMean::Sha256SumInput:
+        verifyWithSha256Sum(ok, text);
         break;
     default:
         emit finished(m_isIsoValid, m_error);
@@ -192,5 +210,35 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         m_error = i18n("Uses wrong signature.");
     }
 
+    emit finished(m_isIsoValid, m_error);
+}
+
+void IsoVerifier::verifyWithSha256Sum(bool ok, const QString &checksum)
+{
+    if (ok && !checksum.isEmpty()) {
+        QCryptographicHash hash(QCryptographicHash::Sha256);
+        QFile iso(m_filePath);
+        if (!iso.open(QIODevice::ReadOnly)) {
+            m_error = i18n("Could not read ISO image");
+            goto finish;
+        }
+        if (!hash.addData(&iso)) {
+            m_error = i18n("Could not perform checksum");
+            goto finish;
+        }
+        QByteArray hashResult = hash.result();
+
+        if (checksum == hashResult.toHex()) {
+            m_isIsoValid = true;
+            goto finish;
+        } else {
+            m_error = i18n("Checksum did not match");
+            goto finish;
+        }
+    }
+
+    m_error = i18n("Requires an SHA256 checksum");
+
+finish:
     emit finished(m_isIsoValid, m_error);
 }

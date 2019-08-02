@@ -15,6 +15,7 @@
 #include <QHBoxLayout>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QInputDialog>
 #include <KFormat>
 #include <KIconLoader>
 #include <KPixmapSequence>
@@ -58,6 +59,14 @@ void MainWindow::scheduleEnumFlashDevices()
         m_enumFlashDevicesWaiting = true;
     else
         enumFlashDevices();
+}
+
+void MainWindow::showInputDialog(const QString &title, const QString &body)
+{
+    bool ok;
+    QString text = QInputDialog::getText(this, title, body, QLineEdit::Normal, "", &ok);
+
+    emit inputTextReady(ok, text);
 }
 
 void MainWindow::setupUi()
@@ -249,6 +258,9 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     connect(isoVerifier, &IsoVerifier::finished, verifierThread, &QThread::quit);
     connect(isoVerifier, &IsoVerifier::finished, isoVerifier, &IsoVerifier::deleteLater);
     connect(isoVerifier, &IsoVerifier::finished, this, &MainWindow::showIsoVerificationResult);
+    connect(isoVerifier, &IsoVerifier::inputRequested, this, &MainWindow::showInputDialog);
+
+    connect(this, &MainWindow::inputTextReady, isoVerifier, &IsoVerifier::verifyWithInputText);
 
     isoVerifier->moveToThread(verifierThread);
     verifierThread->start();
