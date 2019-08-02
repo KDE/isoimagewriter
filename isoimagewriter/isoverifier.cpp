@@ -113,20 +113,20 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
     if (!QFile::exists(sigFilePath)) {
         m_error = i18n("Could not find %1, please download PGP signature file "
                        "to same directory.", sigFileName);
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
 
     QFile signatureFile(sigFilePath);
     if (!signatureFile.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open signature file");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
     QByteArray signatureData = signatureFile.readAll();
 
     QFile isoFile(m_filePath);
     if (!isoFile.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open ISO image");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
     QByteArray isoData = isoFile.readAll();
 
@@ -154,7 +154,7 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     QFile checksumsFile(fileInfo.absolutePath() + "/SHA256SUMS");
     if (!checksumsFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
 
     // Extract checksum from the SHA256SUMS file
@@ -166,7 +166,7 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         checksum = rx.cap(1);
     } else {
         m_error = i18n("Could not find checksum in SHA256SUMS file");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
 
     // Calculate SHA256 checksum of the ISO image
@@ -174,16 +174,16 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     QFile isoFile(m_filePath);
     if (!isoFile.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not read ISO image");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
     if (!hash.addData(&isoFile)) {
         m_error = i18n("Could not perform checksum");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
     QByteArray hashResult = hash.result();
     if (checksum != hashResult.toHex()) {
         m_error = i18n("Checksum of .iso file does not match value in SHA256SUMS file");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
 
     // Check GPG signature
@@ -191,7 +191,7 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     QFile signatureFile(fileInfo.absolutePath() + "/SHA256SUMS.gpg");
     if (!signatureFile.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not find SHA256SUMS.gpg, please download PGP signature file to same directory.");
-        return;
+        emit finished(m_isIsoValid, m_error); return;
     }
 
     QByteArray signatureData = signatureFile.readAll();
