@@ -28,21 +28,20 @@ void IsoVerifier::verifyIso()
     QString fileName = fileInfo.fileName();
     QString keyFingerprint;
 
-    if (fileName.startsWith("neon-")) {
+    if (fileName.startsWith("neon-")
+        && importSigningKey("neon-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::DotSigFile;
-        if (!importSigningKey("neon-signing-key.gpg", keyFingerprint)) goto finish;
-    } else if (fileName.startsWith("archlinux-")) {
+    } else if (fileName.startsWith("archlinux-")
+               && importSigningKey("arch-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::DotSigFile;
-        if (!importSigningKey("arch-signing-key.gpg", keyFingerprint)) goto finish;
-    } else if (fileName.startsWith("kubuntu-")) {
+    } else if (fileName.startsWith("kubuntu-")
+               && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
-        if (!importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) goto finish;
-    } else if (fileName.startsWith("ubuntu-")) {
+    } else if (fileName.startsWith("ubuntu-")
+               && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
-        if (!importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) goto finish;
     } else {
         m_error = QString(i18n("Could not verify as a known distro image."));
-        goto finish;
     }
 
     switch (m_verificationMean) {
@@ -53,12 +52,9 @@ void IsoVerifier::verifyIso()
         verifyWithSha256SumsFile(keyFingerprint);
         break;
     default:
-        goto finish;
+        emit finished(m_isIsoValid, m_error);
         break;
     }
-
-finish:
-    emit finished(m_isIsoValid, m_error);
 }
 
 bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerprint)
@@ -130,6 +126,8 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
     } else {
         m_error = i18n("Uses wrong signature.");
     }
+
+    emit finished(m_isIsoValid, m_error);
 }
 
 void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
@@ -193,4 +191,6 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     } else {
         m_error = i18n("Uses wrong signature.");
     }
+
+    emit finished(m_isIsoValid, m_error);
 }
