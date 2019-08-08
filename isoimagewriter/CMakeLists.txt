@@ -12,12 +12,6 @@ set(isoimagewriter_SRCS
     imagewriter.cpp
     physicaldevice.cpp
     main.cpp
-    verifyisoworker.cpp
-    verifyiso.cpp
-    verifyneoniso.cpp
-    verifykubuntuiso.cpp
-    verifynetrunneriso.cpp
-    verifyarchiso.cpp
     isoverifier.cpp
 )
 
