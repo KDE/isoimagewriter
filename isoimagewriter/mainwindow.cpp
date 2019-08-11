@@ -213,10 +213,21 @@ QWidget* MainWindow::createSuccessWidget()
     QLabel *successIconLabel = new QLabel();
     successIconLabel->setPixmap(QIcon::fromTheme("emblem-success").pixmap(QSize(64, 64)));
 
+    QPushButton *backButton = new QPushButton(i18n("Back"));
+    connect(backButton, &QPushButton::clicked, this, &MainWindow::hideWritingProgress);
+
+    QPushButton *closeButton = new QPushButton(i18n("Close"));
+    connect(closeButton, &QPushButton::clicked, this, &MainWindow::close);
+
+    QHBoxLayout *buttonsHBoxLayout = new QHBoxLayout;
+    buttonsHBoxLayout->addWidget(backButton, 0, Qt::AlignLeft);
+    buttonsHBoxLayout->addWidget(closeButton, 0, Qt::AlignRight);
+
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(messageLabel, 0, Qt::AlignCenter);
     mainVBoxLayout->addWidget(successIconLabel, 0, Qt::AlignHCenter);
     mainVBoxLayout->addSpacing(15);
+    mainVBoxLayout->addLayout(buttonsHBoxLayout);
 
     QWidget *successWidget = new QWidget;
     successWidget->setLayout(mainVBoxLayout);
