@@ -626,5 +626,7 @@ void MainWindow::finished(KJob* job) {
 
     if (job2->data()[QStringLiteral("success")].isValid())
         showSuccessMessage();
+    else
+        hideWritingProgress();
 }
 #endif
