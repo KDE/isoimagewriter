@@ -331,6 +331,16 @@ void MainWindow::enumFlashDevices()
                                && m_isoImagePath != "");
     // Update the Clear button enabled/disabled state
     // m_clearButton->setEnabled(m_usbDriveComboBox->count() > 0);
+
+    if (m_usbDriveComboBox->count() < 1) {
+        m_usbDriveComboBox->setEnabled(false);
+        m_usbDriveComboBox->setEditable(true);
+        m_usbDriveComboBox->lineEdit()
+            ->setPlaceholderText(i18n("Please plug in a USB drive"));
+    } else {
+        m_usbDriveComboBox->setEnabled(true);
+        m_usbDriveComboBox->setEditable(false);
+    }
 }
 
 void MainWindow::writeToDevice(bool zeroing)
