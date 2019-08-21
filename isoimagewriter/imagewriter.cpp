@@ -196,6 +196,12 @@ void ImageWriter::writeImage()
 
             if (cancelRequested)
             {
+#if defined(Q_OS_LINUX)
+                QVariantMap progressArgs;
+                progressArgs[QStringLiteral("cancel")] = true;
+                KAuth::HelperSupport::progressStep(progressArgs);
+#endif
+
                 qDebug() << "cancelRequested";
                 // The cancel request was issued
                 emit cancelled();
