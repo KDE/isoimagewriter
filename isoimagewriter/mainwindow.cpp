@@ -341,14 +341,11 @@ void MainWindow::enumFlashDevices()
             }
         }
 
-    // Re-enable the combobox
-    m_usbDriveComboBox->setEnabled(true);
     // Update the Write button enabled/disabled state
     m_createButton->setEnabled(m_usbDriveComboBox->count() > 0
                                && m_isoImagePath != "");
-    // Update the Clear button enabled/disabled state
-    // m_clearButton->setEnabled(m_usbDriveComboBox->count() > 0);
 
+    // Enable/disable the usb drive combobox
     if (m_usbDriveComboBox->count() < 1) {
         m_usbDriveComboBox->setEnabled(false);
         m_usbDriveComboBox->setEditable(true);
