@@ -44,9 +44,6 @@ endif()
 
 add_executable(isoimagewriter ${isoimagewriter_SRCS})
 
-#add_executable(testy testy.cpp ${isoimagewriter_common_SRCS})
-#target_link_libraries(testy Qt5::Widgets KF5::Auth)
-
 if (ROSA_BRANDING)
     target_compile_definitions(isoimagewriter PRIVATE -DROSA_BRANDING="1")
 endif (ROSA_BRANDING)
@@ -63,15 +60,6 @@ target_link_libraries(isoimagewriter
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter udev KF5::AuthCore)
 endif()
-
-#target_link_libraries(testy
-#    Qt5::Widgets
-#    KF5::I18n
-#    KF5::CoreAddons
-#    dl
-#    QGpgme
-#    Gpgmepp
-#)
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
