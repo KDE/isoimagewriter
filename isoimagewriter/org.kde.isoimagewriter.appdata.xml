@@ -106,4 +106,7 @@
     <binary>isoimagewriter</binary>
   </provides>
   <project_group>KDE</project_group>
+  <releases>
+    <release version="0.8" date="2019-08-21"/>
+  </releases>
 </component>
