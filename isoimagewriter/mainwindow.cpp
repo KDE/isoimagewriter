@@ -636,6 +636,8 @@ void MainWindow::progressStep(const QVariantMap & data) {
         showErrorMessage(data[QStringLiteral("error")].toString());
     } else if (data[QStringLiteral("success")].isValid()) {
         showSuccessMessage();
+    } else if (data[QStringLiteral("cancel")].isValid()) {
+        hideWritingProgress();
     }
 }
 
@@ -648,9 +650,7 @@ void MainWindow::finished(KJob* job) {
     KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
     qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
 
-    if (job2->data()[QStringLiteral("success")].isValid())
-        showSuccessMessage();
-    else
+    if (job->error() != 0)
         hideWritingProgress();
 }
 #endif
