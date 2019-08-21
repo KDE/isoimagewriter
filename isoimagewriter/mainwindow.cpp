@@ -649,5 +649,8 @@ void MainWindow::finished(KJob* job) {
     qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job->error();
     KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
     qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
+
+    if (job->error() != 0)
+        hideWritingProgress();
 }
 #endif
