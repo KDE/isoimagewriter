@@ -267,7 +267,7 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     m_isoImageSize = file.size();
     m_isoImagePath = isoImagePath;
     m_isoImageLineEdit->setText(QDir::toNativeSeparators(m_isoImagePath) + " ("
-                                + KFormat().formatByteSize(m_isoImageSize) + ")");
+                                + KFormat().formatByteSize(m_isoImageSize) + QLatin1Char(')'));
 
     file.close();
 
@@ -455,7 +455,7 @@ void MainWindow::dropEvent(QDropEvent* event)
                 if ((newLineIndexLF != -1) && (newLineIndexLF < newLineIndex))
                     newLineIndex = newLineIndexLF;
                 if (newLineIndex != -1)
-                    droppedFileName = droppedFileName.left(newLineIndex);
+                    droppedFileName.truncate(newLineIndex);
                 // Decode the file path from percent-encoding
                 QUrl url = QUrl::fromEncoded(droppedFileName);
                 if (url.isLocalFile())

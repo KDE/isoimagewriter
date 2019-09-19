@@ -41,7 +41,7 @@ public:
     // The format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
     QString formatDisplayName() const {
         return ((m_Volumes.size() == 0) ? i18n("<unmounted>")
-                : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + KFormat().formatByteSize(m_Size) + ")";
+                : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + KFormat().formatByteSize(m_Size) + QLatin1Char(')');
     }
 
     // User-friendly name of the device
