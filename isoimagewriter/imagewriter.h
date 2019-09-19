@@ -31,7 +31,7 @@ class ImageWriter : public QObject
     Q_OBJECT
 
 public:
-    explicit ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent = 0);
+    explicit ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent = nullptr);
 
 protected:
     // Information about the selected USB flash disk

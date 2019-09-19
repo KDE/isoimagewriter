@@ -25,7 +25,7 @@ class IsoVerifier : public QObject
     Q_OBJECT
 
 public:
-    IsoVerifier(const QString &filePath);
+    explicit IsoVerifier(const QString &filePath);
 
 public slots:
     void verifyIso();

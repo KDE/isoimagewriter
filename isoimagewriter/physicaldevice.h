@@ -29,7 +29,7 @@ class PhysicalDevice : public QFile
 {
     Q_OBJECT
 public:
-    PhysicalDevice(const QString& name);
+    explicit PhysicalDevice(const QString& name);
 
     // Opens the selected device in WriteOnly mode
     virtual bool open();

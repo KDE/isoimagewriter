@@ -82,8 +82,8 @@ QString MainApplication::getInitialDir()
 // Returns the fila path passed to the application as command-line parameter
 QString MainApplication::getInitialImage()
 {
-    QStringList args = m_Options.positionalArguments();
-    if (args.size() > 0)
+    const QStringList args = m_Options.positionalArguments();
+    if (!args.isEmpty())
         return args.at(0);
     else
         return "";

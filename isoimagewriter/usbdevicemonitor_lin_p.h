@@ -27,7 +27,7 @@ class UsbDeviceMonitorPrivate : public QObject
     Q_OBJECT
 
 public:
-    explicit UsbDeviceMonitorPrivate(QObject *parent = 0);
+    explicit UsbDeviceMonitorPrivate(QObject *parent = nullptr);
     virtual ~UsbDeviceMonitorPrivate();
 
     UsbDeviceMonitor* q_ptr;

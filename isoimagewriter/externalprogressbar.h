@@ -31,7 +31,7 @@ protected:
     ExternalProgressBarPrivate* const d_ptr;
 
 public:
-    ExternalProgressBar(QWidget* mainWindow);
+    explicit ExternalProgressBar(QWidget* mainWindow);
     ~ExternalProgressBar();
 
     // Initializes the external progress bar and sets its limits
