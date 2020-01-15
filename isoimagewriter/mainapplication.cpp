@@ -42,8 +42,6 @@ MainApplication::MainApplication(int& argc, char** argv) :
     aboutData.addAuthor(i18n("Jonathan Riddell"), i18n("Author"), QStringLiteral("jr@jriddell.org"));
     m_Options.addOption(QCommandLineOption("lang", "", "language"));
     m_Options.addOption(QCommandLineOption("dir", "", "path"));
-    m_Options.addHelpOption();
-    m_Options.addVersionOption();
     aboutData.setupCommandLine(&m_Options);
     m_Options.process(arguments());
     aboutData.processCommandLine(&m_Options);
