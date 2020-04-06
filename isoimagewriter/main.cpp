@@ -22,6 +22,7 @@
 
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KCrash>
 
 #include "common.h"
 #include "mainapplication.h"
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
 #endif
 
     MainApplication a(argc, argv);
+    KCrash::initialize();
 
     if (!ensureElevated())
         return 1;
