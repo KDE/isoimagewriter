@@ -25,9 +25,8 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     IconThemes
     Crash
 )
-if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
-endif()
+
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   find_package(UDev REQUIRED)
