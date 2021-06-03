@@ -57,6 +57,7 @@ target_link_libraries(isoimagewriter
     KF5::WidgetsAddons
     KF5::IconThemes
     KF5::Crash
+    KF5::Archive
 )
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter udev KF5::AuthCore)
@@ -71,7 +72,7 @@ endif()
 # KAuth
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
     add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
-    target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons)
+    target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons KF5::Archive)
     install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
     kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
     kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)

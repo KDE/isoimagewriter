@@ -23,6 +23,7 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     CoreAddons
     WidgetsAddons
     IconThemes
+    Archive
     Crash
 )
 

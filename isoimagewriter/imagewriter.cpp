@@ -15,6 +15,7 @@
 #endif
 
 #include <QFile>
+#include <KCompressionDevice>
 
 #include "common.h"
 #include "physicaldevice.h"
@@ -67,6 +68,16 @@ void ImageWriter::writeImage()
             imageFile.setFileName(m_ImageFile);
             if (!imageFile.open(QIODevice::ReadOnly))
                 throw i18n("Failed to open the image file: %1", imageFile.errorString());
+        }
+
+        QIODevice* device;
+        if (imageFile.fileName().endsWith(".gz")) {
+            device = new KCompressionDevice(&imageFile, true, KCompressionDevice::GZip);
+            if (!device->open(QIODevice::ReadOnly)) {
+                throw i18n("Failed to open compression device: %1", device->errorString());
+            }
+        } else {
+            device = &imageFile;
         }
 
         // Unmount volumes that belong to the selected target device
@@ -145,7 +156,7 @@ void ImageWriter::writeImage()
             }
             else
             {
-                if ((readBytes = imageFile.read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0)
+                if ((readBytes = device->read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0)
                     break;
             }
             // Align the number of bytes to the sector size
@@ -204,8 +215,9 @@ void ImageWriter::writeImage()
         }
         if (!zeroing)
         {
-            if (readBytes < 0)
-                throw i18n("Failed to read the image file:\n%1", imageFile.errorString());
+            if (readBytes < 0) {
+                throw i18n("Failed to read the image file:\n%1", device->errorString());
+            }
             imageFile.close();
         }
         deviceFile.close();
