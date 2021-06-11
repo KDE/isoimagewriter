@@ -590,16 +590,20 @@ void MainWindow::showConfirmMessage()
     m_centralStackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::showIsoVerificationResult(const bool &isIsoValid, const QString &error)
+void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, const QString &error)
 {
-    if (isIsoValid) {
+    if (verify == IsoVerifier::VerifyResult::Successful) {
         m_busyLabel->setText(i18n("The ISO image is valid"));
         m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("checkmark", KIconLoader::SizeSmallMedium));
     } else {
-        m_busyLabel->setText(i18n("Could not verify ISO image"));
         m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("error", KIconLoader::SizeSmallMedium));
 
-        QMessageBox::warning(this, i18n("ISO Verification failed"), error);
+        if (verify == IsoVerifier::VerifyResult::KeyNotFound) {
+            m_busyLabel->setText(i18n("Could not find the key to verify the ISO image"));
+        } else if (verify == IsoVerifier::VerifyResult::Failed) {
+            m_busyLabel->setText(i18n("Could not verify ISO image"));
+            QMessageBox::warning(this, i18n("ISO Verification failed"), error);
+        }
     }
 }
 

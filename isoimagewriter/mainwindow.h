@@ -9,6 +9,7 @@
 
 #include "usbdevice.h"
 #include "externalprogressbar.h"
+#include "isoverifier.h"
 
 #include <QMainWindow>
 #include <QLabel>
@@ -84,7 +85,7 @@ private slots:
     void showErrorMessage(const QString &message);
     void showSuccessMessage();
     void showConfirmMessage();
-    void showIsoVerificationResult(const bool &isIsoValid, const QString &error);
+    void showIsoVerificationResult(IsoVerifier::VerifyResult result, const QString &error);
 
 #if defined(Q_OS_LINUX)
     void cancelWriting();

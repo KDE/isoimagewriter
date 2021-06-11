@@ -16,18 +16,25 @@ class IsoVerifier : public QObject
 public:
     explicit IsoVerifier(const QString &filePath);
 
+    enum class VerifyResult {
+        Successful,
+        Failed,
+        KeyNotFound,
+    };
+    Q_ENUM(VerifyResult);
+
 public slots:
     void verifyIso();
     void verifyWithInputText(bool ok, const QString &text);
 
 signals:
-    void finished(const bool &isIsoValid, const QString &error);
+    void finished(IsoVerifier::VerifyResult result, const QString &error);
     void inputRequested(const QString &title, const QString &body);
 
 private:
     QString m_filePath;
     QString m_error;
-    bool m_isIsoValid;
+    VerifyResult m_isIsoValid = VerifyResult::Failed;
     enum VerificationMean {
         None,
         DotSigFile,

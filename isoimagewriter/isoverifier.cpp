@@ -24,9 +24,10 @@
 IsoVerifier::IsoVerifier(const QString &filePath)
     : m_filePath(filePath),
       m_error(),
-      m_isIsoValid(false),
       m_verificationMean(VerificationMean::None)
-{}
+{
+    qRegisterMetaType<VerifyResult>();
+}
 
 void IsoVerifier::verifyIso()
 {
@@ -49,7 +50,8 @@ void IsoVerifier::verifyIso()
     } else if (fileName.startsWith("netrunner-")) {
         m_verificationMean = VerificationMean::Sha256SumInput;
     } else {
-        m_error = QString(i18n("Could not verify as a known distro image."));
+        m_error = i18n("Could not verify as a known distro image.");
+        m_isIsoValid = VerifyResult::KeyNotFound;
     }
 
     switch (m_verificationMean) {
@@ -142,13 +144,15 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
 
     if (signature.summary() == GpgME::Signature::None
         && signature.fingerprint() == keyFingerprint) {
-        m_isIsoValid = true;
+        m_isIsoValid = VerifyResult::Successful;
     } else if (signature.summary() & GpgME::Signature::Valid) {
-        m_isIsoValid = true;
+        m_isIsoValid = VerifyResult::Successful;
     } else if (signature.summary() & GpgME::Signature::KeyRevoked) {
         m_error = i18n("Key is revoked.");
+        m_isIsoValid = VerifyResult::Failed;
     } else {
         m_error = i18n("Uses wrong signature.");
+        m_isIsoValid = VerifyResult::Failed;
     }
 
     emit finished(m_isIsoValid, m_error);
@@ -207,13 +211,15 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
 
     if (signature.summary() == GpgME::Signature::None
         && signature.fingerprint() == keyFingerprint) {
-        m_isIsoValid = true;
+        m_isIsoValid = VerifyResult::Successful;
     } else if (signature.summary() & GpgME::Signature::Valid) {
-        m_isIsoValid = true;
+        m_isIsoValid = VerifyResult::Successful;
     } else if (signature.summary() & GpgME::Signature::KeyRevoked) {
         m_error = i18n("Key is revoked.");
+        m_isIsoValid = VerifyResult::Failed;
     } else {
         m_error = i18n("Uses wrong signature.");
+        m_isIsoValid = VerifyResult::Failed;
     }
 
     emit finished(m_isIsoValid, m_error);
@@ -235,10 +241,11 @@ void IsoVerifier::verifyWithSha256Sum(bool ok, const QString &checksum)
         QByteArray hashResult = hash.result();
 
         if (checksum == hashResult.toHex()) {
-            m_isIsoValid = true;
+            m_isIsoValid = VerifyResult::Successful;
             goto finish;
         } else {
             m_error = i18n("Checksum did not match");
+            m_isIsoValid = VerifyResult::Failed;
             goto finish;
         }
     }
