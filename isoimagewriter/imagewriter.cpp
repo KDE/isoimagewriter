@@ -76,6 +76,16 @@ void ImageWriter::writeImage()
             if (!device->open(QIODevice::ReadOnly)) {
                 throw i18n("Failed to open compression device: %1", device->errorString());
             }
+        } else if (imageFile.fileName().endsWith(".xz")) {
+            device = new KCompressionDevice(&imageFile, true, KCompressionDevice::Xz);
+            if (!device->open(QIODevice::ReadOnly)) {
+                throw i18n("Failed to open compression device: %1", device->errorString());
+            }
+        } else if (imageFile.fileName().endsWith(".zstd")) {
+            device = new KCompressionDevice(&imageFile, true, KCompressionDevice::Zstd);
+            if (!device->open(QIODevice::ReadOnly)) {
+                throw i18n("Failed to open compression device: %1", device->errorString());
+            }
         } else {
             device = &imageFile;
         }
