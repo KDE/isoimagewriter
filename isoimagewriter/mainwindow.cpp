@@ -258,10 +258,8 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 
     if (isoImageFileSuffix == "gz" || isoImageFileSuffix == "xz" || isoImageFileSuffix == "zstd") {
         m_isoImageSize = 0;
-        qDebug() << "compressed file :" << isoImagePath;
     } else {
         m_isoImageSize = file.size();
-        qDebug() << "non-zip file size:" << m_isoImageSize;
     }
     m_isoImagePath = isoImagePath;
     m_isoImageLineEdit->setText(QDir::toNativeSeparators(m_isoImagePath) + " ("
