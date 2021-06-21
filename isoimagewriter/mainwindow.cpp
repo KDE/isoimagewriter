@@ -26,9 +26,6 @@
 #include <KIconLoader>
 #include <KPixmapSequence>
 #include <KLocalizedString>
-#include <KArchive>
-#include <KTar>
-#include <KArchiveDirectory>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -260,16 +257,8 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     QString isoImageFileSuffix = isoImageFileInfo.suffix();
 
     if (isoImageFileSuffix == "gz" || isoImageFileSuffix == "xz" || isoImageFileSuffix == "zstd") {
+        m_isoImageSize = 0;
         qDebug() << "compressed file :" << isoImagePath;
-        KTar isoImageArchive(isoImagePath);
-        isoImageArchive.open(QIODevice::ReadOnly);
-        qDebug() << "compressed file open";
-        const KArchiveDirectory* directory = isoImageArchive.directory();
-        qDebug() << "compressed file directory" << directory->entries(); //FIXME no entries?
-        const KArchiveFile* file = directory->file(isoImageFileInfo.completeBaseName());
-        qDebug() << "compressed file file";
-        m_isoImageSize = file->size();
-        qDebug() << "compressed file size:" << m_isoImageSize;
     } else {
         m_isoImageSize = file.size();
         qDebug() << "non-zip file size:" << m_isoImageSize;
