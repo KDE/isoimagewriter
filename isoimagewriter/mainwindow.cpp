@@ -502,8 +502,19 @@ void MainWindow::writeIsoImage()
     UsbDevice* selectedDevice = m_usbDriveComboBox->itemData(
         m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
 
-    if (m_isoImageSize > selectedDevice->m_Size)
-    {
+    if (selectedDevice->m_Size == 0) {
+        int warningReturn = QMessageBox::warning(
+            this,
+            i18n("Unknown Disk Size"),
+            i18n("The selected disk is of unknown size, please check the image will fit before writing.\n\n"
+                 "Image size: %1 (%2 b)",
+                 KFormat().formatByteSize(m_isoImageSize),
+                 m_isoImageSize),
+            QMessageBox::Ok | QMessageBox::Cancel);
+        if (warningReturn != QMessageBox::Ok) {
+            return;
+        }
+    } else if (m_isoImageSize > selectedDevice->m_Size) {
         QMessageBox::critical(
             this,
             i18n("Error"),
