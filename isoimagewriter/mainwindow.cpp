@@ -482,7 +482,7 @@ void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 
 void MainWindow::openIsoImage()
 {
-    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img"))
+    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img *.iso.gz *.iso.xz *.img.zstd *.img.gz *.img.zx *.img.zstd"))
         + ";;" + i18n("All Files (%1)", QString("*"));
     QString isoImagePath = QFileDialog::getOpenFileName(this, "", m_lastOpenedDir, 
                                                         filter, nullptr,
