@@ -182,17 +182,14 @@ void ImageWriter::writeImage()
             // For unknown reason, deviceFile.flush() does not work as intended here.
             fsync(deviceFile.handle());
 #endif
-
+            const int percent = (100 * imageFile.pos()) / imageFile.size();
             // Inform the GUI thread that next block was written
             // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
             // this still works or at least fails compilation
-            emit blockWritten(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT);
+            emit progressChanged(percent);
 
 #if defined(Q_OS_LINUX)
-            KAuth::HelperSupport::progressStep(TRANSFER_BLOCK_SIZE / DEFAULT_UNIT); // FIXME why doesn't this work?
-            QVariantMap progressArgs;
-            progressArgs[QStringLiteral("progress")] = TRANSFER_BLOCK_SIZE / DEFAULT_UNIT;
-            KAuth::HelperSupport::progressStep(progressArgs); // used because above doesn't work
+            KAuth::HelperSupport::progressStep(percent);
 #endif
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)

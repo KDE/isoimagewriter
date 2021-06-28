@@ -372,8 +372,8 @@ void MainWindow::writeToDevice(bool zeroing)
 
     m_job = action.execute();
 
-    connect(m_job, SIGNAL(percent(KJob*,ulong)), this, SLOT(progressStep(KJob*,ulong)), Qt::DirectConnection);
-    connect(m_job, SIGNAL(newData(QVariantMap)), this, SLOT(progressStep(QVariantMap)));
+    connect(m_job, &KAuth::ExecuteJob::percentChanged, this, &MainWindow::progressPercentUpdate);
+    connect(m_job, &KAuth::ExecuteJob::newData, this, &MainWindow::progressStep);
     connect(m_job, &KAuth::ExecuteJob::statusChanged, this, &MainWindow::statusChanged);
     connect(m_job, &KAuth::ExecuteJob::result, this, &MainWindow::finished);
 
@@ -406,7 +406,7 @@ void MainWindow::writeToDevice(bool zeroing)
     writerThread->start();
 #endif
 
-    showWritingProgress(alignNumberDiv((zeroing ? DEFAULT_UNIT : m_isoImageSize), DEFAULT_UNIT));
+    showWritingProgress();
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
@@ -521,14 +521,13 @@ void MainWindow::writeIsoImage()
     writeToDevice(false);
 }
 
-void MainWindow::updateProgressBar(int increment)
+void MainWindow::updateProgressBar(int percent)
 {
-    int newValue = m_progressBar->value() + increment;
-    m_progressBar->setValue(newValue);
-    m_externalProgressBar.SetProgressValue(newValue);
+    m_progressBar->setValue(percent);
+    m_externalProgressBar.SetProgressValue(percent);
 }
 
-void MainWindow::showWritingProgress(int maxValue)
+void MainWindow::showWritingProgress()
 {
     m_isWriting = true;
 
@@ -537,11 +536,11 @@ void MainWindow::showWritingProgress(int maxValue)
 
     // Display and customize the progress bar part
     m_progressBar->setMinimum(0);
-    m_progressBar->setMaximum(maxValue);
+    m_progressBar->setMaximum(100);
     m_progressBar->setValue(0);
 
     // Expose the progress bar state to the OS
-    m_externalProgressBar.InitProgressBar(maxValue);
+    m_externalProgressBar.InitProgressBar(100);
 
     m_centralStackedWidget->setCurrentIndex(2);
 }
@@ -614,18 +613,15 @@ void MainWindow::cancelWriting() {
     qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting() done";
 }
 
-void MainWindow::progressStep(KJob* job, unsigned long step) {
+void MainWindow::progressPercentUpdate(KJob* job, unsigned long step) {
     Q_UNUSED(job)
     qCDebug(ISOIMAGEWRITER_LOG) << "progressStep %() " << step;
     updateProgressBar(step);
 }
 
 void MainWindow::progressStep(const QVariantMap & data) {
-    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep(QVariantMap) ";// << step;
-    if (data[QStringLiteral("progress")].isValid()) {
-        int step = data[QStringLiteral("progress")].toInt();
-        updateProgressBar(step);
-    } else if (data[QStringLiteral("error")].isValid()) {
+    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep(QVariantMap)" << data;// << step;
+    if (data[QStringLiteral("error")].isValid()) {
         showErrorMessage(data[QStringLiteral("error")].toString());
     } else if (data[QStringLiteral("success")].isValid()) {
         showSuccessMessage();

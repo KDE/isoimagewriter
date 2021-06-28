@@ -41,8 +41,8 @@ signals:
     void error(QString msg);
     // Emitted when processed the cancel request from user
     void cancelled();
-    // Emitted each time a block is written, <count> is a number of DEFAULT_UNIT-size blocks
-    void blockWritten(int count);
+    // Emitted as the progress percentage changes
+    void progressChanged(int percent);
 
 public slots:
     // The main method that writes the image

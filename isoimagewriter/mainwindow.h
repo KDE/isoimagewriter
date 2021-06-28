@@ -80,7 +80,7 @@ private slots:
     void openIsoImage();
     void writeIsoImage();
     void updateProgressBar(int increment);
-    void showWritingProgress(int maxValue);
+    void showWritingProgress();
     void hideWritingProgress();
     void showErrorMessage(const QString &message);
     void showSuccessMessage();
@@ -89,7 +89,7 @@ private slots:
 
 #if defined(Q_OS_LINUX)
     void cancelWriting();
-    void progressStep(KJob* job, unsigned long step);
+    void progressPercentUpdate(KJob* job, unsigned long percent);
     void progressStep(const QVariantMap &);
     void statusChanged(KAuth::Action::AuthStatus status);
     void finished(KJob* job);
