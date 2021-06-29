@@ -13,6 +13,7 @@ set(isoimagewriter_SRCS
     physicaldevice.cpp
     main.cpp
     isoverifier.cpp
+    fetchisojob.cpp
 )
 
 ecm_qt_declare_logging_category(isoimagewriter_SRCS
@@ -51,6 +52,7 @@ target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_V
 
 target_link_libraries(isoimagewriter
     Qt5::Widgets
+    Qt5::Network
     KF5::I18n
     KF5::CoreAddons
     QGpgme

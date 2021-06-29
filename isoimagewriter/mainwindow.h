@@ -24,6 +24,8 @@
 #include <KAuth>
 #endif
 
+class FetchIsoJob;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -37,10 +39,13 @@ public slots:
 
 signals:
     void inputTextReady(bool ok, const QString &text);
+    void downloadProgressChanged(int percentage);
+    void verificationResult(bool verified);
 
 private:
     QLabel *m_busyLabel;
     QWidget *m_busyWidget;
+    QLabel *m_isoImageSizeLabel;
     QLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
     QPushButton *m_createButton;
@@ -48,6 +53,7 @@ private:
     QProgressBar *m_progressBar;
     QStackedWidget *m_centralStackedWidget;
     KPixmapSequenceOverlayPainter *m_busySpinner;
+    FetchIsoJob *m_fetchIso = nullptr;
 
     QString m_isoImagePath;
     quint64 m_isoImageSize;
@@ -86,6 +92,7 @@ private slots:
     void showSuccessMessage();
     void showConfirmMessage();
     void showIsoVerificationResult(IsoVerifier::VerifyResult result, const QString &error);
+    void openUrl(const QUrl &url);
 
 #if defined(Q_OS_LINUX)
     void cancelWriting();

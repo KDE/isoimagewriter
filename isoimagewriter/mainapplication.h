@@ -17,8 +17,8 @@ public:
     QString getLocale();
     // Returns the start-up directory that will be shown by default in the Open File dialog
     QString getInitialDir();
-    // Returns the fila path passed to the application as command-line parameter
-    QString getInitialImage();
+    // Returns the file url passed to the application as command-line parameter
+    QUrl getInitialImage();
 
 protected:
     QCommandLineParser m_Options;

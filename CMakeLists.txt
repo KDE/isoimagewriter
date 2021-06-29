@@ -16,7 +16,7 @@ include(ECMQtDeclareLoggingCategory)
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets)
 
 find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     I18n

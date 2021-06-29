@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include "mainapplication.h"
 #include "common.h"
+#include "fetchisojob.h"
 #include "imagewriter.h"
 #include "isoverifier.h"
 #include "isoimagewriter_debug.h"
@@ -22,6 +23,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QStandardPaths>
 #include <KFormat>
 #include <KIconLoader>
 #include <KPixmapSequence>
@@ -29,7 +31,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-      m_lastOpenedDir(""),
+      m_lastOpenedDir(),
       m_isWriting(false),
       m_enumFlashDevicesWaiting(false),
       m_externalProgressBar(this)
@@ -40,19 +42,13 @@ MainWindow::MainWindow(QWidget *parent)
     // Set initial directory
     m_lastOpenedDir = mApp->getInitialDir();
     // Get path to ISO image from command line args (if supplied)
-    QString isoImagePath = mApp->getInitialImage();
-    if (!isoImagePath.isEmpty())
-    {
-        if (isoImagePath.left(7) == "file://")
-            isoImagePath = QUrl(isoImagePath).toLocalFile();
-
-        if (!isoImagePath.isEmpty())
-        {
-            isoImagePath = QDir(isoImagePath).absolutePath();
-            // Update the default open dir
-            m_lastOpenedDir = isoImagePath.left(isoImagePath.lastIndexOf('/'));
-            preprocessIsoImage(isoImagePath);
-        }
+    QUrl isoImagePath = mApp->getInitialImage();
+    if (isoImagePath.isLocalFile()) {
+        const QString path = isoImagePath.toLocalFile();
+        m_lastOpenedDir = path.left(path.lastIndexOf('/'));
+        preprocessIsoImage(path);
+    } else {
+        m_isoImageLineEdit->setText(isoImagePath.toString());
     }
 
     // Load the list of USB flash devices
@@ -114,6 +110,7 @@ QWidget* MainWindow::createFormWidget()
     m_isoImageLineEdit = new QLineEdit;
     m_isoImageLineEdit->setReadOnly(true);
     m_isoImageLineEdit->setPlaceholderText(i18n("Path to ISO image..."));
+    m_isoImageSizeLabel = new QLabel;
 
     QAction *openIsoImageAction = m_isoImageLineEdit->addAction(
         QIcon::fromTheme("folder-open"), QLineEdit::TrailingPosition);
@@ -122,7 +119,6 @@ QWidget* MainWindow::createFormWidget()
     m_usbDriveComboBox = new QComboBox;
 
     m_createButton = new QPushButton(i18n("Create"));
-    m_createButton->setEnabled(false);
     connect(m_createButton, &QPushButton::clicked, this, &MainWindow::showConfirmMessage);
 
     m_busyLabel = new QLabel;
@@ -137,9 +133,13 @@ QWidget* MainWindow::createFormWidget()
     footerBoxLayout->addWidget(m_busyLabel);
     footerBoxLayout->addWidget(m_createButton, 0, Qt::AlignRight);
 
+    QHBoxLayout *isoImageLayout = new QHBoxLayout;
+    isoImageLayout->addWidget(m_isoImageLineEdit);
+    isoImageLayout->addWidget(m_isoImageSizeLabel);
+
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
-    mainVBoxLayout->addWidget(m_isoImageLineEdit);
+    mainVBoxLayout->addLayout(isoImageLayout);
     mainVBoxLayout->addSpacing(5);
     mainVBoxLayout->addWidget(new QLabel(i18n("To this USB drive:")));
     mainVBoxLayout->addWidget(m_usbDriveComboBox);
@@ -159,19 +159,37 @@ QWidget* MainWindow::createConfirmWidget()
     iconLabel->setPixmap(QIcon::fromTheme("dialog-warning").pixmap(QSize(64, 64)));
     iconLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    QLabel *messageLabel = new QLabel(i18n("Everything on the USB drive will "
+    static const QString overwriteMessage = i18n("Everything on the USB drive will "
                                            "be overwritten."
-                                           "\n\nDo you want to continue?"));
+                                           "\n\nDo you want to continue?");
+    QLabel *messageLabel = new QLabel(overwriteMessage);
+    connect(this, &MainWindow::downloadProgressChanged, messageLabel, [messageLabel, iconLabel, this] {
+        iconLabel->setPixmap(QIcon::fromTheme("download").pixmap(QSize(64, 64)));
+        messageLabel->setText(i18n("Downloading %1...", m_fetchIso->fetchUrl().toDisplayString()));
+    });
+    connect(this, &MainWindow::verificationResult, messageLabel, [messageLabel, iconLabel] {
+        messageLabel->setText(overwriteMessage);
+        iconLabel->setPixmap(QIcon::fromTheme("dialog-warning").pixmap(QSize(64, 64)));
+    });
 
     QHBoxLayout *messageHBoxLayout = new QHBoxLayout;
     messageHBoxLayout->addWidget(iconLabel, 0, Qt::AlignTop);
     messageHBoxLayout->addWidget(messageLabel, 0, Qt::AlignTop);
+
+    QProgressBar *downloadProgressBar = new QProgressBar();
+    downloadProgressBar->setVisible(false);
+    downloadProgressBar->setMinimum(0);
+    downloadProgressBar->setMaximum(100);
+    connect(this, &MainWindow::downloadProgressChanged, downloadProgressBar, &QProgressBar::show);
+    connect(this, &MainWindow::downloadProgressChanged, downloadProgressBar, &QProgressBar::setValue);
 
     QPushButton *abortButton = new QPushButton(i18n("Abort"));
     connect(abortButton, &QPushButton::clicked, this, &MainWindow::hideWritingProgress);
 
     QPushButton *continueButton = new QPushButton(i18n("Continue"));
     connect(continueButton, &QPushButton::clicked, this, &MainWindow::writeIsoImage);
+    connect(this, &MainWindow::downloadProgressChanged, continueButton, [continueButton] { continueButton->setEnabled(false); });
+    connect(this, &MainWindow::verificationResult, continueButton, [continueButton] { continueButton->setEnabled(true); });
 
     QHBoxLayout *buttonsHBoxLayout = new QHBoxLayout;
     buttonsHBoxLayout->addWidget(abortButton, 0, Qt::AlignLeft);
@@ -179,6 +197,7 @@ QWidget* MainWindow::createConfirmWidget()
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addLayout(messageHBoxLayout);
+    mainVBoxLayout->addWidget(downloadProgressBar);
     mainVBoxLayout->addLayout(buttonsHBoxLayout);
 
     QWidget *confirmWidget = new QWidget;
@@ -255,8 +274,8 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 
     m_isoImageSize = file.size();
     m_isoImagePath = isoImagePath;
-    m_isoImageLineEdit->setText(QDir::toNativeSeparators(m_isoImagePath) + " ("
-                                + KFormat().formatByteSize(m_isoImageSize) + QLatin1Char(')'));
+    m_isoImageLineEdit->setText(QDir::toNativeSeparators(m_isoImagePath));
+    m_isoImageSizeLabel->setText(KFormat().formatByteSize(m_isoImageSize));
 
     file.close();
 
@@ -452,11 +471,6 @@ void MainWindow::dropEvent(QDropEvent* event)
             }
         }
     }
-
-    if (!newImageFile.isEmpty()) {
-        // If something was really received update the information
-        preprocessIsoImage(newImageFile);
-    }
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -484,14 +498,36 @@ void MainWindow::openIsoImage()
 {
     const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img *.iso.gz *.iso.xz *.img.zstd *.img.gz *.img.zx *.img.zstd"))
         + ";;" + i18n("All Files (%1)", QString("*"));
-    QString isoImagePath = QFileDialog::getOpenFileName(this, "", m_lastOpenedDir, 
+    QUrl isoImageUrl = QFileDialog::getOpenFileUrl(this, i18n("Select image to flash"), QUrl::fromLocalFile(m_lastOpenedDir),
                                                         filter, nullptr,
                                                         QFileDialog::ReadOnly);
-    if (!isoImagePath.isEmpty())
-    {
-        m_lastOpenedDir = isoImagePath.left(isoImagePath.lastIndexOf('/'));
-        preprocessIsoImage(isoImagePath);
+    openUrl(isoImageUrl);
+}
+
+void MainWindow::openUrl(const QUrl& url)
+{
+    if (url.isEmpty()) {
+        return;
     }
+
+    if (url.isLocalFile()) {
+        const QString path = url.toLocalFile();
+        m_lastOpenedDir = path.left(path.lastIndexOf('/'));
+        preprocessIsoImage(path);
+        return;
+    } else {
+        m_isoImageLineEdit->setText(url.toString());
+    }
+
+    delete m_fetchIso;
+    m_fetchIso = new FetchIsoJob(this);
+    connect(m_fetchIso, &FetchIsoJob::downloadProgressChanged, this, &MainWindow::downloadProgressChanged);
+    connect(m_fetchIso, &FetchIsoJob::failed, this, &MainWindow::hideWritingProgress);
+    connect(m_fetchIso, &FetchIsoJob::finished, this, [this] (const QString &file) {
+        m_isoImagePath = file;
+        preprocessIsoImage(file);
+    });
+    m_fetchIso->fetch(url);
 }
 
 void MainWindow::writeIsoImage()
@@ -594,6 +630,8 @@ void MainWindow::showSuccessMessage()
 
 void MainWindow::showConfirmMessage()
 {
+    openUrl(QUrl::fromUserInput(m_isoImageLineEdit->text(), {}, QUrl::AssumeLocalFile));
+
     // Do not accept dropped files
     setAcceptDrops(false);
 
@@ -615,6 +653,7 @@ void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, con
             QMessageBox::warning(this, i18n("ISO Verification failed"), error);
         }
     }
+    Q_EMIT verificationResult(verify == IsoVerifier::VerifyResult::Successful);
 }
 
 #if defined(Q_OS_LINUX)

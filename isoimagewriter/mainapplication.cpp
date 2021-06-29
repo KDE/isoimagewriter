@@ -7,6 +7,7 @@
 
 #include <QStandardPaths>
 #include <QIcon>
+#include <QUrl>
 #include <KAboutData>
 #include <KLocalizedString>
 
@@ -67,11 +68,11 @@ QString MainApplication::getInitialDir()
 }
 
 // Returns the fila path passed to the application as command-line parameter
-QString MainApplication::getInitialImage()
+QUrl MainApplication::getInitialImage()
 {
     const QStringList args = m_Options.positionalArguments();
     if (!args.isEmpty())
-        return args.at(0);
+        return QUrl::fromUserInput(args.first(), getInitialDir(), QUrl::AssumeLocalFile);
     else
-        return "";
+        return {};
 }
