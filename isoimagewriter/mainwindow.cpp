@@ -525,8 +525,13 @@ void MainWindow::openUrl(const QUrl& url)
     connect(m_fetchIso, &FetchIsoJob::failed, this, &MainWindow::hideWritingProgress);
     connect(m_fetchIso, &FetchIsoJob::finished, this, [this] (const QString &file) {
         m_isoImagePath = file;
+        m_busySpinner->stop();
         preprocessIsoImage(file);
     });
+    m_busyLabel->setText(i18n("Downloading ISO image"));
+    m_busyWidget->show();
+    m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("process-working", KIconLoader::SizeSmallMedium));
+    m_busySpinner->start();
     m_fetchIso->fetch(url);
 }
 
