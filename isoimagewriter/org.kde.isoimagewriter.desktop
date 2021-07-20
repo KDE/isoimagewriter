@@ -68,6 +68,6 @@ GenericName[sv]=Skriv en ISO-avbild till en USB-disk
 GenericName[tr]=ISO görüntüsünü bir USB diske yaz
 GenericName[uk]=Програма для запису образів ISO на диски USB
 GenericName[x-test]=xxWrite an ISO Image to a USB Diskxx
-GenericName[zh_CN]=将 ISO 镜像写入 USB 盘
+GenericName[zh_CN]=将 ISO 镜像写入 U 盘
 GenericName[zh_TW]=將 ISO 映像檔寫入 USB 裝置
 Categories=Qt;KDE;System;
