@@ -20,6 +20,7 @@ class UsbDeviceMonitorPrivate;
 class UsbDeviceMonitor : public QObject, public QAbstractNativeEventFilter
 {
     Q_OBJECT
+    Q_DISABLE_COPY_MOVE(UsbDeviceMonitor)
 
 protected:
     UsbDeviceMonitorPrivate* const d_ptr;

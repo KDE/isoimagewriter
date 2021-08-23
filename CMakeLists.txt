@@ -25,6 +25,7 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     IconThemes
     Archive
     Crash
+    Solid
 )
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
