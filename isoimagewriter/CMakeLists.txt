@@ -62,7 +62,7 @@ target_link_libraries(isoimagewriter
     KF5::Archive
 )
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  target_link_libraries(isoimagewriter udev KF5::AuthCore)
+  target_link_libraries(isoimagewriter KF5::Solid KF5::AuthCore)
 endif()
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
