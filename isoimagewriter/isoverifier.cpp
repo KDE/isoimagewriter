@@ -13,11 +13,14 @@
 #include <QStandardPaths>
 #include <QCryptographicHash>
 
+#ifdef _USE_GPG
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
 #include <QGpgME/ImportJob>
+
 #include <gpgme++/verificationresult.h>
 #include <gpgme++/importresult.h>
+#endif
 
 #include <KLocalizedString>
 
@@ -98,6 +101,8 @@ bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerpr
     }
 
     QByteArray signingKeyData = signingKey.readAll();
+
+#ifdef _USE_GPG
     QGpgME::ImportJob *importJob = QGpgME::openpgp()->importJob();
     GpgME::ImportResult importResult = importJob->exec(signingKeyData);
 
@@ -111,6 +116,8 @@ bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerpr
     keyFingerprint = QString(importResult.import(0).fingerprint());
 
     return true;
+#endif
+    return false;
 }
 
 void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
@@ -138,6 +145,8 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
     }
     QByteArray isoData = isoFile.readAll();
 
+
+#ifdef _USE_GPG
     QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
     GpgME::VerificationResult result = job->exec(signatureData, isoData);
     GpgME::Signature signature = result.signature(0);
@@ -154,6 +163,10 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
         m_error = i18n("Uses wrong signature.");
         m_isIsoValid = VerifyResult::Failed;
     }
+#else
+        m_error = i18n("This app is built without verification support.");
+        m_isIsoValid = VerifyResult::KeyNotFound;
+#endif
 
     emit finished(m_isIsoValid, m_error);
 }
@@ -204,6 +217,8 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         emit finished(m_isIsoValid, m_error); return;
     }
 
+
+#ifdef _USE_GPG
     QByteArray signatureData = signatureFile.readAll();
     QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
     GpgME::VerificationResult result = job->exec(signatureData, checksumsData);
@@ -221,7 +236,10 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         m_error = i18n("Uses wrong signature.");
         m_isIsoValid = VerifyResult::Failed;
     }
-
+#else
+        m_error = i18n("This app is built without verification support.");
+        m_isIsoValid = VerifyResult::KeyNotFound;
+#endif
     emit finished(m_isIsoValid, m_error);
 }
 

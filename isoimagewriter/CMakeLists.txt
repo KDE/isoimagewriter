@@ -1,6 +1,6 @@
 set(GPGME_REQUIRED_VERSION "1.8.0")
-find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
-find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
+find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG)
+find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG)
 
 #find_package(KF5 REQUIRED COMPONENTS QGpgme)
 
@@ -55,12 +55,18 @@ target_link_libraries(isoimagewriter
     Qt5::Network
     KF5::I18n
     KF5::CoreAddons
-    QGpgme
     KF5::WidgetsAddons
     KF5::IconThemes
     KF5::Crash
     KF5::Archive
 )
+if(QGpgme_FOUND)
+add_definitions(-D_USE_GPG)
+target_link_libraries(isoimagewriter
+    QGpgme
+)
+endif()
+
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter KF5::Solid KF5::AuthCore)
 endif()

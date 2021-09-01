@@ -20,6 +20,7 @@ public:
         Successful,
         Failed,
         KeyNotFound,
+        NoGpg,
     };
     Q_ENUM(VerifyResult);
 
