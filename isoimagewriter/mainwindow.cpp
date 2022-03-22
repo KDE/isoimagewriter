@@ -412,7 +412,7 @@ void MainWindow::writeToDevice(bool zeroing)
     // Using DirectConnection because the thread does not read its own event queue until completion
     connect(m_cancelButton, &QPushButton::clicked, writer, &ImageWriter::cancelWriting, Qt::DirectConnection);
     // Each time a block is written, update the progress bar
-    connect(writer, &ImageWriter::blockWritten, this, &MainWindow::updateProgressBar);
+    connect(writer, &ImageWriter::progressChanged, this, &MainWindow::updateProgressBar);
     // Show the message about successful completion on success
     connect(writer, &ImageWriter::success, this, &MainWindow::showSuccessMessage);
     // Show error message if error is sent by the worker
