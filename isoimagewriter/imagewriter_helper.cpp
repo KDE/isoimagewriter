@@ -10,7 +10,12 @@
 #include "usbdevice.h"
 
 #include <KLocalizedString>
+#include <kauth_version.h>
+#if KAUTH_VERSION >= QT_VERSION_CHECK(5, 92, 0)
+#include <KAuth/ActionReply>
+#else
 #include <KAuthActionReply>
+#endif
 
 #include <QProcess>
 #include <QDateTime>

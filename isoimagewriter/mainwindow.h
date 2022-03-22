@@ -21,7 +21,12 @@
 #include <KPixmapSequenceOverlayPainter>
 
 #if defined(Q_OS_LINUX)
+#include <kauth_version.h>
+#if KAUTH_VERSION >= QT_VERSION_CHECK(5, 92, 0)
+#include <KAuth/ExecuteJob>
+#else
 #include <KAuth>
+#endif
 #endif
 
 class FetchIsoJob;
