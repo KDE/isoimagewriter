@@ -1,4 +1,0 @@
-#include <windows.h>
-
-CREATEPROCESS_MANIFEST_RESOURCE_ID      RT_MANIFEST    "..\\res\\isoimagewriter.manifest"
-IDI_ICON1                   ICON        DISCARDABLE    "..\\res\\drive-removable-media.ico"
