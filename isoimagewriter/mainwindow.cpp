@@ -28,7 +28,6 @@
 #include <KIconLoader>
 #include <KPixmapSequence>
 #include <KLocalizedString>
-#include <KIconTheme>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -37,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent)
       m_enumFlashDevicesWaiting(false),
       m_externalProgressBar(this)
 {
-    qDebug() << KIconTheme::current();
     setupUi();
     setAcceptDrops(true);
 
