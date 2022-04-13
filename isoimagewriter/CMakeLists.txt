@@ -24,6 +24,7 @@ ecm_qt_declare_logging_category(isoimagewriter_SRCS
 
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)
     message("Compiling isoimagewriter for Windaes")
+    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
     set(isoimagewriter_SRCS
         ${isoimagewriter_SRCS}
         platform_win.cpp
