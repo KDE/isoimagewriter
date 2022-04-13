@@ -43,7 +43,7 @@
         name = SysAllocString(str);                                           \
         if (name == NULL)                                                     \
         {                                                                     \
-            throw i18n("Memory allocation for %1 failed.", #name); \
+            throw "Memory allocation for string failed."; \
         }                                                                     \
     }
 
