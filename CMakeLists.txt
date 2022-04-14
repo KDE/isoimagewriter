@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(imagewriter)
-set(PROJECT_VERSION "0.8")
+set(PROJECT_VERSION "0.9")
 
 set(QT_MIN_VERSION "5.10.0")
 set(KF5_REQUIRED_VERSION "5.56.0")
