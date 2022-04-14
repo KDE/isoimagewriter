@@ -14,6 +14,7 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMOptionalAddSubdirectory)
 include(ECMQtDeclareLoggingCategory)
+include(ECMSetupVersion)
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 

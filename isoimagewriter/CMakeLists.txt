@@ -4,6 +4,8 @@ find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG)
 
 #find_package(KF5 REQUIRED COMPONENTS QGpgme)
 
+ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX ISOIMAGEWRITER VERSION_HEADER isoimagewriter_version.h)
+
 set(isoimagewriter_SRCS
     usbdevicemonitor.h
     common.cpp

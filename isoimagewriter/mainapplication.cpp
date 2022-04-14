@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2016 ROSA
+    SPDX-FileCopyrightText: 2016 ROSA, 2022 Jonathan Esk-Riddell <jr@jriddell.org>
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
@@ -12,6 +12,7 @@
 #include <KLocalizedString>
 
 #include "common.h"
+#include "isoimagewriter_version.h"
 
 // in one source file
 Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.isoimagewriter");
@@ -23,19 +24,22 @@ MainApplication::MainApplication(int& argc, char** argv) :
     KLocalizedString::setApplicationDomain("isoimagewriter");
     KAboutData aboutData( QStringLiteral("isoimagewriter"),
                           i18n("ISO Image Writer"),
-                          QStringLiteral("PROJECT_VERSION"),
+                          QStringLiteral(ISOIMAGEWRITER_VERSION_STRING),
                           i18n("Write an ISO Image to a USB Disk"),
                           KAboutLicense::GPL,
-                          i18n("Copyright (c) 2016 ROSA"));
+                          i18n("Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell <jr@jriddell.org>"));
 
     aboutData.addAuthor(i18n("Konstantin Vlasov"), i18n("Author"), QStringLiteral("konstantin.vlasov@rosalab.ru"));
     aboutData.addAuthor(i18n("Jonathan Riddell"), i18n("Author"), QStringLiteral("jr@jriddell.org"));
+    m_Options.addVersionOption();
     m_Options.addOption(QCommandLineOption("lang", "", "language"));
     m_Options.addOption(QCommandLineOption("dir", "", "path"));
+    m_Options.addPositionalArgument("[File]", i18n("ISO file to open"));
     aboutData.setupCommandLine(&m_Options);
     m_Options.process(arguments());
     aboutData.processCommandLine(&m_Options);
     KAboutData::setApplicationData(aboutData);
+
     QLoggingCategory::setFilterRules(QStringLiteral("org.kde.isoimagewriter = true"));
 }
 
