@@ -279,6 +279,7 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 
     file.close();
 
+#ifdef _USE_GPG
     // Verify ISO image
     m_busyLabel->setText(i18n("Verifying ISO image"));
     m_busyWidget->show();
@@ -300,6 +301,7 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 
     isoVerifier->moveToThread(verifierThread);
     verifierThread->start();
+#endif
 
     // Enable the Write button (if there are USB flash disks present)
     m_createButton->setEnabled(m_usbDriveComboBox->count() > 0);
