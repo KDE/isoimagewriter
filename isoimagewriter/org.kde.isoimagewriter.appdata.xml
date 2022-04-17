@@ -24,6 +24,7 @@
   <name xml:lang="lt">ISO atvaizdžių rašymo programa</name>
   <name xml:lang="nl">ISO-image-schrijver</name>
   <name xml:lang="nn">ISO-diskbiletskrivar</name>
+  <name xml:lang="pa">ISO ਈਮੇਜ਼ ਰਾਇਟਰ</name>
   <name xml:lang="pl">Wgrywanie obrazów ISO</name>
   <name xml:lang="pt">Gravador de Imagens ISO</name>
   <name xml:lang="pt-BR">Gravador de imagem ISO</name>
@@ -58,6 +59,7 @@
   <summary xml:lang="lt">Rašyti ISO atvaizdį į USB diską</summary>
   <summary xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</summary>
   <summary xml:lang="nn">Skriv ISO-diskbilete til USB-diskar</summary>
+  <summary xml:lang="pa">ISO ਈਮੇਜ਼ ਨੂੰ USB ਡਿਸਕ ਉੱਤੇ ਲਿਖੋ</summary>
   <summary xml:lang="pl">Wgrywa obraz ISO na nośnik USB</summary>
   <summary xml:lang="pt">Gravar uma Imagem ISO num Disco USB</summary>
   <summary xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</summary>
@@ -93,6 +95,7 @@
     <p xml:lang="lt">Rašyti ISO atvaizdį į USB diską</p>
     <p xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</p>
     <p xml:lang="nn">Skriv ISO-diskbilete til USB-diskar</p>
+    <p xml:lang="pa">ISO ਈਮੇਜ਼ ਨੂੰ USB ਡਿਸਕ ਉੱਤੇ ਲਿਖੋ</p>
     <p xml:lang="pl">Wgrywa obraz ISO na nośnik USB</p>
     <p xml:lang="pt">Gravar uma Imagem ISO num Disco USB</p>
     <p xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</p>
