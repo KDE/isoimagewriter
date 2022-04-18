@@ -373,7 +373,7 @@ void MainWindow::writeToDevice(bool zeroing)
         m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
 
 // Use KAuth to get required previleges in supported platforms
-#if defined(Q_OS_LINUX)
+#if defined(USE_KAUTH)
     connect(m_cancelButton, &QPushButton::clicked, this, &MainWindow::cancelWriting);
 
     KAuth::Action action("org.kde.isoimagewriter.write");
@@ -663,7 +663,7 @@ void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, con
     Q_EMIT verificationResult(verify == IsoVerifier::VerifyResult::Successful);
 }
 
-#if defined(Q_OS_LINUX)
+#if defined(USE_KAUTH)
 void MainWindow::cancelWriting() {
     qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting()";
     m_job->kill();

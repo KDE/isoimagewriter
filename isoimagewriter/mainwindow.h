@@ -20,7 +20,7 @@
 #include <QStackedWidget>
 #include <KPixmapSequenceOverlayPainter>
 
-#if defined(Q_OS_LINUX)
+#if defined(USE_KAUTH)
 #include <kauth_version.h>
 #if KAUTH_VERSION >= QT_VERSION_CHECK(5, 92, 0)
 #include <KAuth/ExecuteJob>
@@ -67,7 +67,7 @@ private:
     bool m_enumFlashDevicesWaiting;
     ExternalProgressBar m_externalProgressBar;
 
-#if defined(Q_OS_LINUX)
+#if defined(USE_KAUTH)
     KAuth::ExecuteJob *m_job;
 #endif
 
@@ -99,7 +99,7 @@ private slots:
     void showIsoVerificationResult(IsoVerifier::VerifyResult result, const QString &error);
     void openUrl(const QUrl &url);
 
-#if defined(Q_OS_LINUX)
+#if defined(USE_KAUTH)
     void cancelWriting();
     void progressPercentUpdate(KJob* job, unsigned long percent);
     void progressStep(const QVariantMap &);

@@ -71,7 +71,11 @@ target_link_libraries(isoimagewriter
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  target_link_libraries(isoimagewriter KF5::Solid KF5::AuthCore)
+  target_link_libraries(isoimagewriter KF5::Solid)
+endif()
+
+if(USE_KAUTH)
+  target_link_libraries(isoimagewriter KF5::AuthCore)
 endif()
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -81,7 +85,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL Linux)
 endif()
 
 # KAuth
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+if(USE_KAUTH)
     add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
     target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons KF5::Archive)
     install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})

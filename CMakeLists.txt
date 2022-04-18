@@ -18,6 +18,20 @@ include(ECMSetupVersion)
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+    option(USE_KAUTH "Build with KAuth (default on for Linux, off for Windows)" ON)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+    option(USE_KAUTH "Build with KAuth (default on for Linux, off for Windows)" OFF)
+endif()
+
+if(USE_KAUTH AND CMAKE_SYSTEM_NAME STREQUAL Linux)
+    find_package(KF5Auth REQUIRED)
+    add_definitions(-DUSE_KAUTH=ON)
+    message("XX using KAuth")
+else()
+    message("XX not using KAuth")
+endif()
+
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets)
 
 find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
@@ -31,10 +45,6 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
 )
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
-
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  find_package(KF5Auth REQUIRED)
-endif()
 
 KDE_ENABLE_EXCEPTIONS()
 
