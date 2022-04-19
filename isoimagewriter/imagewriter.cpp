@@ -20,8 +20,19 @@
 #endif
 #endif
 
+#include <QtDBus/QtDBus>
 #include <QFile>
 #include <KCompressionDevice>
+
+#include <fcntl.h>
+#include <unistd.h>
+
+typedef QHash<QString, QVariant> Properties;
+typedef QHash<QString, Properties> InterfacesAndProperties;
+typedef QHash<QDBusObjectPath, InterfacesAndProperties> DBusIntrospection;
+Q_DECLARE_METATYPE(Properties)
+Q_DECLARE_METATYPE(InterfacesAndProperties)
+Q_DECLARE_METATYPE(DBusIntrospection)
 
 #include "common.h"
 #include "physicaldevice.h"
@@ -149,10 +160,19 @@ void ImageWriter::writeImage()
             throw errMessages.join("\n\n");
 
         // Open the target USB device for writing and lock it
+        /*
         PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
         qDebug() << "writeImage() opening m_PhysicalDevice: " << m_Device->m_PhysicalDevice;
         if (!deviceFile.open())
             throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
+        */
+        // temperarily? calling udisks locally to get a file descriptor and pass that to QFile to open for writing
+        // not working so try to copy whatever mediawriter/helper/write.cpp WriteJob::writePlain(int fd) does
+        QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
+        QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_DIRECT | O_SYNC | O_CLOEXEC}} );
+        QDBusUnixFileDescriptor fd = reply.value();
+        //QFile deviceFile;
+        //deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly);
 
         qint64 readBytes;
         qint64 writtenBytes;
@@ -177,17 +197,22 @@ void ImageWriter::writeImage()
                     break;
             }
             // Align the number of bytes to the sector size
+            //writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
-            writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
-            if (writtenBytes < 0)
-                throw i18n("Failed to write to the device:\n%1", deviceFile.errorString());
-            if (writtenBytes != readBytes)
+            writtenBytes = ::write(fd.fileDescriptor(), buffer, readBytes);
+            //if (writtenBytes != readBytes) {
+            if (writtenBytes < 0) {
+                qDebug() << "write writtenBytes: " << writtenBytes;
+                //throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
+            }
+            if (writtenBytes != readBytes) {
                 throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
+            }
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
             // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
             // For unknown reason, deviceFile.flush() does not work as intended here.
-            fsync(deviceFile.handle());
+            //fsync(deviceFile.handle());
 #endif
             const int percent = (100 * imageFile.pos()) / imageFile.size();
             // Inform the GUI thread that next block was written
@@ -234,7 +259,7 @@ void ImageWriter::writeImage()
             }
             imageFile.close();
         }
-        deviceFile.close();
+        //deviceFile.close();
     }
     catch (QString msg)
     {
