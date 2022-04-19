@@ -72,6 +72,7 @@ endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter KF5::Solid)
+  target_link_libraries(isoimagewriter Qt5::DBus)
 endif()
 
 if(USE_KAUTH)

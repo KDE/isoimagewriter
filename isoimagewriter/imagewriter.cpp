@@ -150,6 +150,7 @@ void ImageWriter::writeImage()
 
         // Open the target USB device for writing and lock it
         PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
+        qDebug() << "writeImage() opening m_PhysicalDevice: " << m_Device->m_PhysicalDevice;
         if (!deviceFile.open())
             throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
 
