@@ -33,7 +33,7 @@
   <name xml:lang="sk">Zapisovač ISO obrazov</name>
   <name xml:lang="sl">ISO Image Writer</name>
   <name xml:lang="sv">ISO-avbildsskrivning</name>
-  <name xml:lang="tr">ISO Görüntüsü Yazıcı</name>
+  <name xml:lang="tr">ISO Kalıbı Yazıcı</name>
   <name xml:lang="uk">Записувач образів ISO</name>
   <name xml:lang="x-test">xxISO Image Writerxx</name>
   <name xml:lang="zh-CN">ISO 镜像文件写入器</name>
@@ -68,7 +68,7 @@
   <summary xml:lang="sk">Zapísať ISO obraz na USB disk</summary>
   <summary xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</summary>
   <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
-  <summary xml:lang="tr">ISO Görüntüsünü bir USB Diske Yaz</summary>
+  <summary xml:lang="tr">ISO Kalıbını bir USB Diske Yaz</summary>
   <summary xml:lang="uk">Програма для запису образів ISO на флешки USB</summary>
   <summary xml:lang="x-test">xxWrite an ISO Image to a USB Diskxx</summary>
   <summary xml:lang="zh-CN">将 ISO 镜像写入 U 盘</summary>
@@ -104,7 +104,7 @@
     <p xml:lang="sk">Zapísať ISO obraz na USB disk</p>
     <p xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</p>
     <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
-    <p xml:lang="tr">ISO Görüntüsünü bir USB Diske Yaz</p>
+    <p xml:lang="tr">ISO Kalıbını bir USB Diske Yaz</p>
     <p xml:lang="uk">Програма для запису образів ISO на флешки USB</p>
     <p xml:lang="x-test">xxWrite an ISO Image to a USB Diskxx</p>
     <p xml:lang="zh-CN">将 ISO 镜像写入 U 盘</p>
