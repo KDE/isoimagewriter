@@ -5,8 +5,10 @@
 */
 
 #include "fetchisojob.h"
+#include <QDebug>
 #include <QDir>
 #include <QNetworkReply>
+#include <QSharedPointer>
 #include <QStandardPaths>
 
 FetchIsoJob::FetchIsoJob(QObject *parent)
