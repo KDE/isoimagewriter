@@ -5,7 +5,7 @@
   <project_license>GPL-3.0</project_license>
   <name>ISO Image Writer</name>
   <name xml:lang="ca">Escriu imatges ISO</name>
-  <name xml:lang="ca-valencia">Escriu imatges ISO</name>
+  <name xml:lang="ca-valencia">Escriu imàgens ISO</name>
   <name xml:lang="cs">Nástroj pro zapisování obrazů ISO</name>
   <name xml:lang="da">ISO-aftryksskriver</name>
   <name xml:lang="de">ISO Image Writer</name>
@@ -40,7 +40,7 @@
   <name xml:lang="zh-TW">ISO 映像寫入工具</name>
   <summary>Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="ca">Escriu una imatge ISO a un disc USB</summary>
-  <summary xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</summary>
+  <summary xml:lang="ca-valencia">Escriu una image ISO a un disc USB</summary>
   <summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
   <summary xml:lang="da">Skriv et ISO-aftryk til en USB-disk</summary>
   <summary xml:lang="de">ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
@@ -76,7 +76,7 @@
   <description>
     <p>Write an ISO Image to a USB Disk</p>
     <p xml:lang="ca">Escriu una imatge ISO a un disc USB</p>
-    <p xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</p>
+    <p xml:lang="ca-valencia">Escriu una image ISO a un disc USB</p>
     <p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
     <p xml:lang="da">Skriv et ISO-aftryk til en USB-disk</p>
     <p xml:lang="de">ISO-Abbild auf ein USB-Speichermedium schreiben</p>
