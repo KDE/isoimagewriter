@@ -1,7 +1,7 @@
 [Domain]
 Name=ISO Image Writer
 Name[ca]=Escriu imatges ISO
-Name[ca@valencia]=Escriu imàgens ISO
+Name[ca@valencia]=Escriu imatges ISO
 Name[cs]=Nástroj pro zapisování obrazů ISO
 Name[da]=ISO-aftryksskriver
 Name[de]=ISO Image Writer
@@ -39,7 +39,7 @@ Icon=drive-removable-media
 [org.kde.isoimagewriter.write]
 Name=Write an ISO image to a USB disk
 Name[ca]=Escriu una imatge ISO a un disc USB
-Name[ca@valencia]=Escriu una image ISO a un disc USB
+Name[ca@valencia]=Escriu una imatge ISO a un disc USB
 Name[cs]=Zapsat obraz na ISO na disk USB
 Name[da]=Skriv et ISO-aftryk til en USB-disk
 Name[de]=ISO-Abbild auf ein USB-Speichermedium schreiben
@@ -74,7 +74,7 @@ Name[zh_CN]=将 ISO 镜像写入 USB 盘
 Name[zh_TW]=將 ISO 映像檔寫入 USB 裝置
 Description=Write an ISO image to a USB disk
 Description[ca]=Escriu una imatge ISO a un disc USB
-Description[ca@valencia]=Escriu una image ISO a un disc USB
+Description[ca@valencia]=Escriu una imatge ISO a un disc USB
 Description[cs]=Zapsat obraz na ISO na disk USB
 Description[da]=Skriv et ISO-aftryk til en USB-disk
 Description[de]=ISO-Abbild auf ein USB-Speichermedium schreiben
