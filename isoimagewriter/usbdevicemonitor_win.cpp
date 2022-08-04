@@ -43,7 +43,11 @@ void UsbDeviceMonitor::cleanup()
 }
 
 // Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages (Windows)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 bool UsbDeviceMonitor::nativeEventFilter(const QByteArray& eventType, void* message, long* result)
+#else
+bool UsbDeviceMonitor::nativeEventFilter(const QByteArray& eventType, void* message, qintptr* result)
+#endif
 {
     Q_UNUSED(eventType);
 
