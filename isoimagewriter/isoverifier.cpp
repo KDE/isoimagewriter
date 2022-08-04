@@ -12,6 +12,7 @@
 #include <QByteArray>
 #include <QStandardPaths>
 #include <QCryptographicHash>
+#include <QRegularExpression>
 
 #ifdef _USE_GPG
 #include <QGpgME/Protocol>
@@ -182,11 +183,13 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
 
     // Extract checksum from the SHA256SUMS file
     QString checksum;
-    QRegExp rx("([abcdef\\d]+).." + fileInfo.fileName());
+    QRegularExpression rx("([abcdef\\d]+).." + fileInfo.fileName());
     QByteArray checksumsData = checksumsFile.readAll();
-    int pos = rx.indexIn(QString(checksumsData));
-    if (pos > -1) {
-        checksum = rx.cap(1);
+
+    QRegularExpressionMatch match = rx.match(checksumsData);
+
+    if (match.hasMatch()) {
+        checksum = match.captured(1);
     } else {
         m_error = i18n("Could not find checksum in SHA256SUMS file");
         emit finished(m_isIsoValid, m_error); return;
