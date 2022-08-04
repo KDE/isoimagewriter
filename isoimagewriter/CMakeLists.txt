@@ -78,7 +78,7 @@ if(USE_KAUTH)
   target_link_libraries(isoimagewriter KF5::AuthCore)
 endif()
 
-install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS isoimagewriter ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
     install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
     install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
