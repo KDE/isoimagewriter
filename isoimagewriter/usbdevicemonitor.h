@@ -30,7 +30,11 @@ public:
     ~UsbDeviceMonitor();
     
     // Implements QAbstractNativeEventFilter interface for processing WM_DEVICECHANGE messages (Windows)
-    bool nativeEventFilter(const QByteArray& eventType, void* message, long* result) override;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    bool nativeEventFilter(const QByteArray &theEventType, void *theMessage, long * theResult) override;
+#else
+    bool nativeEventFilter(const QByteArray &theEventType, void *theMessage, qintptr *theResult) override;
+#endif
 
 protected:
     // Closes handles and frees resources
