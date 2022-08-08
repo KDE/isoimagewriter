@@ -3,8 +3,9 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(imagewriter)
 set(PROJECT_VERSION "0.9")
 
-set(QT_MIN_VERSION "5.10.0")
-set(KF5_REQUIRED_VERSION "5.56.0")
+set(QT_MIN_VERSION "5.15.2")
+set(KF5_REQUIRED_VERSION "5.90.0")
+set(KDE_COMPILERSETTINGS_LEVEL "5.82.0")
 
 find_package(ECM ${KF5_REQUIRED_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -32,7 +33,7 @@ else()
     message("XX not using KAuth")
 endif()
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets)
 
 find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     I18n

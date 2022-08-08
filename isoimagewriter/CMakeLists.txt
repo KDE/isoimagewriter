@@ -54,8 +54,8 @@ endif (ROSA_BRANDING)
 target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(isoimagewriter
-    Qt5::Widgets
-    Qt5::Network
+    Qt::Widgets
+    Qt::Network
     KF5::I18n
     KF5::CoreAddons
     KF5::WidgetsAddons
@@ -80,14 +80,14 @@ endif()
 
 install(TARGETS isoimagewriter ${INSTALL_TARGETS_DEFAULT_ARGS})
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-    install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
+    install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
     install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 endif()
 
 # KAuth
 if(USE_KAUTH)
     add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
-    target_link_libraries(isoimagewriter_helper Qt5::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons KF5::Archive)
+    target_link_libraries(isoimagewriter_helper Qt::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons KF5::Archive)
     install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
     kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
     kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)
