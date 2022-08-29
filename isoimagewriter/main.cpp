@@ -18,7 +18,7 @@
 #include "mainwindow.h"
 #include "usbdevicemonitor.h"
 
-#if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC)
+#if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC) && !defined(Q_OS_FREEBSD)
 #error Unsupported platform!
 #endif
 

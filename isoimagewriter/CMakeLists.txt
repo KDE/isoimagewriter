@@ -42,6 +42,14 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
         usbdevicemonitor_lin.cpp
         externalprogressbar_lin.cpp
     )
+elseif(CMAKE_SYSTEM_NAME STREQUAL FreeBSD)
+    message("Compiling isoimagewriter for FreeBSD")
+    set(isoimagewriter_SRCS
+        ${isoimagewriter_SRCS}
+        platform_lin.cpp
+        usbdevicemonitor_lin.cpp
+        externalprogressbar_lin.cpp
+    )
 else()
     message("Unsupported Platform " . ${CMAKE_SYSTEM_NAME})
 endif()
@@ -62,6 +70,7 @@ target_link_libraries(isoimagewriter
     KF5::IconThemes
     KF5::Crash
     KF5::Archive
+    KF5::Solid
 )
 if(QGpgme_FOUND)
 add_definitions(-D_USE_GPG)
