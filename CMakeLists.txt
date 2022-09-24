@@ -21,7 +21,7 @@ option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
     option(USE_KAUTH "Build with KAuth (default on for Linux, off for Windows)" ON)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Windows)
     option(USE_KAUTH "Build with KAuth (default on for Linux, off for Windows)" OFF)
 endif()
 
