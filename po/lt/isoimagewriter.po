@@ -1,0 +1,575 @@
+# Lithuanian translations for isoimagewriter package.
+# Copyright (C) 2019 This file is copyright:
+# This file is distributed under the same license as the isoimagewriter package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: isoimagewriter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"PO-Revision-Date: 2021-08-21 13:37+0300\n"
+"Last-Translator: Moo\n"
+"Language-Team: lt\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Moo"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "<>"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr "Klaidos kodas: %1"
+
+#: isoimagewriter/imagewriter.cpp:58
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr "Nepavyko paskirstyti atminties buferiui:"
+
+#: isoimagewriter/imagewriter.cpp:62
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr "Nepavyko paskirstyti atminties buferiui."
+
+#: isoimagewriter/imagewriter.cpp:76
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr "Nepavyko atverti atvaizdžio failo: %1"
+
+#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
+#: isoimagewriter/imagewriter.cpp:93
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr "Nepavyko atverti glaudinimo įrenginio: %1"
+
+#: isoimagewriter/imagewriter.cpp:119
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr "Nepavyko atverti disko %1"
+
+#: isoimagewriter/imagewriter.cpp:126
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr "Nepavyko atjungti disko %1"
+
+#: isoimagewriter/imagewriter.cpp:143
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr ""
+"Nepavyko atjungti tomo %1\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"Nepavyko atverti paskirties įrenginio:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:182
+#, kde-format
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"Nepavyko rašyti į įrenginį:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:184
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+"Paskutinis blokas nebuvo pilnai įrašytas (%1 iš %2 baitų)!\n"
+"Nutraukiama."
+
+#: isoimagewriter/imagewriter.cpp:232
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+"Nepavyko perskaityti atvaizdžio failo:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:260
+#, kde-format
+msgid "The operation completed successfully."
+msgstr "Operacija sėkmingai užbaigta."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid "Now you need to format your device."
+msgstr "Dabar, turite suformatuoti savo įrenginį."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+"Norėdami ir vėl saugoti duomenis šiame įrenginyje, naudokite mygtuką "
+"\"Ištrinti USB diską\"."
+
+#: isoimagewriter/isoverifier.cpp:57
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr "Nepavyko patikrinti kaip žinomo platinimo atvaizdžio."
+
+#: isoimagewriter/isoverifier.cpp:69
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr "SHA256 kontrolinė suma"
+
+#: isoimagewriter/isoverifier.cpp:70
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr "Įdėkite šio ISO atvaizdžio SHA256 kontrolinę sumą:"
+
+#: isoimagewriter/isoverifier.cpp:130
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr "Nepavyko rasti %1, atsisiųskite į tą patį katalogą PGP parašą."
+
+#: isoimagewriter/isoverifier.cpp:137
+#, kde-format
+msgid "Could not open signature file"
+msgstr "Nepavyko atverti parašo failo"
+
+#: isoimagewriter/isoverifier.cpp:144
+#, kde-format
+msgid "Could not open ISO image"
+msgstr "Nepavyko atverti ISO atvaizdžio"
+
+#: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
+#, kde-format
+msgid "Key is revoked."
+msgstr "Raktas yra panaikintas."
+
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#, kde-format
+msgid "Uses wrong signature."
+msgstr "Naudoja neteisingą parašą."
+
+#: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
+#, kde-format
+msgid "This app is built without verification support."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:180
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr "Nepavyko atverti SHA256SUMS failo, atsisiųskite jį į tą patį katalogą"
+
+#: isoimagewriter/isoverifier.cpp:194
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr "Nepavyko rasti kontrolinės sumos SHA256SUMS faile"
+
+#: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
+#, kde-format
+msgid "Could not read ISO image"
+msgstr "Nepavyko perskaityti ISO atvaizdžio"
+
+#: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
+#, kde-format
+msgid "Could not perform checksum"
+msgstr "Nepavyko atlikti kontrolinės sumos patikrinimo"
+
+#: isoimagewriter/isoverifier.cpp:211
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr ""
+".iso failo kontrolinė suma nesutampa su SHA256SUMS faile nurodyta reikšme"
+
+#: isoimagewriter/isoverifier.cpp:219
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+"Nepavyko rasti SHA256SUMS.gpg, atsisiųskite PGP parašo failą į tą patį "
+"katalogą."
+
+#: isoimagewriter/isoverifier.cpp:268
+#, kde-format
+msgid "Checksum did not match"
+msgstr "Kontrolinė suma nesutapo"
+
+#: isoimagewriter/isoverifier.cpp:274
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr "Reikalauja SHA256 kontrolinės sumos"
+
+#: isoimagewriter/mainapplication.cpp:26
+#, kde-format
+msgid "ISO Image Writer"
+msgstr "ISO atvaizdžių rašymo programa"
+
+#: isoimagewriter/mainapplication.cpp:28
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr "Rašyti ISO atvaizdį į USB diską"
+
+#: isoimagewriter/mainapplication.cpp:30
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:32
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr "Konstantin Vlasov"
+
+#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Author"
+msgstr "Autorius"
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr "Jonathan Riddell"
+
+#: isoimagewriter/mainapplication.cpp:37
+#, kde-format
+msgid "ISO file to open"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:112
+#, kde-format
+msgid "Path to ISO image..."
+msgstr "Kelias į ISO atvaizdį..."
+
+#: isoimagewriter/mainwindow.cpp:121
+#, kde-format
+msgid "Create"
+msgstr "Sukurti"
+
+#: isoimagewriter/mainwindow.cpp:141
+#, kde-format
+msgid "Write this ISO image:"
+msgstr "Įrašyti šį ISO atvaizdį:"
+
+#: isoimagewriter/mainwindow.cpp:144
+#, kde-format
+msgid "To this USB drive:"
+msgstr "Į šį USB atmintuką:"
+
+#: isoimagewriter/mainwindow.cpp:162
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"Visi duomenys USB atmintuke bus perrašyti.\n"
+"\n"
+"Ar norite tęsti?"
+
+#: isoimagewriter/mainwindow.cpp:168
+#, kde-format
+msgid "Downloading %1..."
+msgstr "Atsiunčiama %1..."
+
+#: isoimagewriter/mainwindow.cpp:186
+#, kde-format
+msgid "Abort"
+msgstr "Nutraukti"
+
+#: isoimagewriter/mainwindow.cpp:189
+#, kde-format
+msgid "Continue"
+msgstr "Tęsti"
+
+#: isoimagewriter/mainwindow.cpp:211
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+"Jūsų USB atmintukas yra kuriamas.\n"
+"\n"
+"Tai gali šiek tiek užtrukti, priklausomai nuo ISO atvaizdžio failo dydžio ir "
+"persiuntimo greičio."
+
+#: isoimagewriter/mainwindow.cpp:218
+#, kde-format
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+#: isoimagewriter/mainwindow.cpp:234
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr "Dabar, jūsų USB atmintukas yra užbaigtas ir paruoštas naudoti!"
+
+#: isoimagewriter/mainwindow.cpp:241
+#, kde-format
+msgid "Back"
+msgstr "Atgal"
+
+#: isoimagewriter/mainwindow.cpp:244
+#, kde-format
+msgid "Close"
+msgstr "Užverti"
+
+#: isoimagewriter/mainwindow.cpp:269
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr "Nepavyko atverti atvaizdžio failo:"
+
+#: isoimagewriter/mainwindow.cpp:284
+#, kde-format
+msgid "Verifying ISO image"
+msgstr "Tikrinamas ISO atvaizdis"
+
+#: isoimagewriter/mainwindow.cpp:363
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr "Įkiškite USB atmintuką"
+
+#: isoimagewriter/mainwindow.cpp:484
+#, kde-format
+msgid "Cancel?"
+msgstr "Atsisakyti?"
+
+#: isoimagewriter/mainwindow.cpp:485
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr "Vyksta rašymas, nutraukti jį?"
+
+#: isoimagewriter/mainwindow.cpp:501
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr "Disko atvaizdžiai (%1)"
+
+#: isoimagewriter/mainwindow.cpp:502
+#, kde-format
+msgid "All Files (%1)"
+msgstr "Visi failai (%1)"
+
+#: isoimagewriter/mainwindow.cpp:503
+#, kde-format
+msgid "Select image to flash"
+msgstr "Pasirinkite atvaizdį, kurį įrašyti"
+
+#: isoimagewriter/mainwindow.cpp:533
+#, kde-format
+msgid "Downloading ISO image"
+msgstr "Atsiunčiamas ISO atvaizdis"
+
+#: isoimagewriter/mainwindow.cpp:551
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr "Nežinomas disko dydis"
+
+#: isoimagewriter/mainwindow.cpp:552
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+"Pasirinktas diskas yra nežinomo dydžio, prieš rašydami, įsitikinkite, kad "
+"atvaizdžiui pakaks vietos.\n"
+"\n"
+"Atvaizdžio dydis: %1 (%2 b)"
+
+#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#, kde-format
+msgid "Error"
+msgstr "Klaida"
+
+#: isoimagewriter/mainwindow.cpp:564
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+"Atvaizdis yra didesnis, nei jūsų pasirinktas įrenginys!\n"
+"\n"
+"Atvaizdžio dydis: %1 (%2 b)\n"
+"Disko dydis: %3 (%4 b)"
+
+#: isoimagewriter/mainwindow.cpp:651
+#, kde-format
+msgid "The ISO image is valid"
+msgstr "ISO atvaizdis yra teisingas"
+
+#: isoimagewriter/mainwindow.cpp:657
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr "Nepavyko rasti rakto, kad būtų patikrintas ISO atvaizdis"
+
+#: isoimagewriter/mainwindow.cpp:659
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr "Nepavyko patikrinti ISO atvaizdžio"
+
+#: isoimagewriter/mainwindow.cpp:660
+#, kde-format
+msgid "ISO Verification failed"
+msgstr "ISO patikrinimas patyrė nesėkmę"
+
+#: isoimagewriter/physicaldevice.cpp:43
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr "Nepavyko gauti užrakto:"
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr "CoCreateInstance(WbemAdministrativeLocator) patyrė nesėkmę."
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr "ConnectServer patyrė nesėkmę."
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr "Nepavyko užklausti USB atmintukų įrenginių."
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr "Nepavyko užklausti skaidinių sąrašo."
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr "Nepavyko užklausti loginių diskų sąrašo."
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr "Nežinomas įrenginys"
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr "<neprijungtas>"
+
+#~ msgid "Copyright (c) 2016 ROSA"
+#~ msgstr "Autorių teisės (c) 2016 ROSA"
+
+#~ msgid "Memory allocation for %1 failed."
+#~ msgstr "Nepavyko paskirstyti %1 atminties."
+
+#~ msgid "Select an ISO image file to write to a USB disk"
+#~ msgstr "Pasirinkite ISO atvaizdžio failą, kurį rašyti į USB diską"
+
+#~ msgid "Clear USB Disk"
+#~ msgstr "Išvalyti USB diską"
+
+#~ msgid "Write"
+#~ msgstr "Rašyti"
+
+#~ msgid "Wipe USB Disk"
+#~ msgstr "Ištrinti USB diską"
+
+#~ msgid "(%1 MiB)"
+#~ msgstr "(%1 MiB)"
+
+#~ msgid "Invalid ISO"
+#~ msgstr "Neteisingas ISO"
+
+#~ msgid "ISO is invalid:<p>%1"
+#~ msgstr "ISO yra neteisingas:<p>%1"
+
+#~ msgid "%1<p>Do you want to continue"
+#~ msgstr "%1<p>Ar norite tęsti"
+
+#~ msgid "Running ISO verification, please wait..."
+#~ msgstr "Vykdomas ISO patikrinimas, palaukite..."
+
+#~ msgid "Verified as valid KDE neon ISO"
+#~ msgstr "Patikrinta kaip teisingas KDE neon ISO atvaizdis"
+
+#~ msgid "Invalid KDE neon image"
+#~ msgstr "Neteisingas KDE neon atvaizdis"
+
+#~ msgid "Verified as valid Arch ISO"
+#~ msgstr "Patikrinta kaip teisingas Arch ISO atvaizdis"
+
+#~ msgid "Invalid Arch image"
+#~ msgstr "Neteisingas Arch atvaizdis"
+
+#~ msgid "Verified as valid Netrunner ISO"
+#~ msgstr "Patikrinta kaip teisingas Netrunner ISO atvaizdis"
+
+#~ msgid "Invalid Netrunner image"
+#~ msgstr "Neteisingas Netrunner atvaizdis"
+
+#~ msgid "Verified as valid Kubuntu ISO"
+#~ msgstr "Patikrinta kaip teisingas Kubuntu ISO atvaizdis"
+
+#~ msgid "Invalid Kubuntu image"
+#~ msgstr "Neteisingas Kubuntu atvaizdis"
+
+#~ msgid "Image size: %1MiB (%2b)"
+#~ msgstr "Atvaizdžio dydis: %1MiB (%2b)"
+
+#~ msgid "Disk size: %1MiB (%2b)"
+#~ msgstr "Disko dydis: %1MiB (%2b)"
+
+#~ msgid "All existing data on the selected device will be lost."
+#~ msgstr "Visi pasirinktame įrenginyje esantys duomenys bus prarasti."
+
+#~ msgid "Are you sure you wish to proceed?"
+#~ msgstr "Ar tikrai norite tęsti?"
+
+#~ msgid "Clear Disk and Write Image"
+#~ msgstr "Išvalyti diską ir rašyti atvaizdį"
+
+#~ msgid "Image:"
+#~ msgstr "Atvaizdis:"
+
+#~ msgid "Open image file"
+#~ msgstr "Atverti atvaizdžio failą"
+
+#~ msgid "&USB Device:"
+#~ msgstr "&USB įrenginys:"
+
+#~ msgid "Refresh the list"
+#~ msgstr "Įkelti sąrašą iš naujo"
+
+#~ msgid "%v / %m MiB"
+#~ msgstr "%v / %m MiB"
+
+#~ msgid "MiB"
+#~ msgstr "MiB"
+
+#~ msgid "ISO File %1 does not exist"
+#~ msgstr "ISO failo %1 nėra"
+
+#~ msgctxt "%1 is the name of the distribution"
+#~ msgid "Filename does not match %1 ISO files"
+#~ msgstr "Failo pavadinimas neatitinka %1 ISO failų"

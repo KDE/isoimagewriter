@@ -1,0 +1,579 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2017, 2019, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"PO-Revision-Date: 2022-04-19 19:38+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stefan Asserhäll"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "stefan.asserhall@bredband.net"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr "Felkod: %1"
+
+#: isoimagewriter/imagewriter.cpp:58
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr "Misslyckades reservera minne för buffert:"
+
+#: isoimagewriter/imagewriter.cpp:62
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr "Misslyckades reservera minne för buffert."
+
+#: isoimagewriter/imagewriter.cpp:76
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr "Misslyckades öppna avbildsfil: %1"
+
+#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
+#: isoimagewriter/imagewriter.cpp:93
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr "Misslyckades öppna komprimeringsenhet: %1"
+
+#: isoimagewriter/imagewriter.cpp:119
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr "Misslyckades öppna drivenheten %1"
+
+#: isoimagewriter/imagewriter.cpp:126
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr "Misslyckades avmontera drivenheten %1"
+
+#: isoimagewriter/imagewriter.cpp:143
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr ""
+"Misslyckades avmontera volym %1\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"Misslyckades öppna målenheten:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:182
+#, kde-format
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"Misslyckades skriva till enheten:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:184
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+"Det senaste blocket skrevs inte helt (%1 av %2 byte).\n"
+"Avbryter."
+
+#: isoimagewriter/imagewriter.cpp:232
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+"Misslyckades läsa avbildsfilen:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:260
+#, kde-format
+msgid "The operation completed successfully."
+msgstr "Åtgärden slutfördes med lyckat resultat."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid "Now you need to format your device."
+msgstr "Nu måste enheten formateras."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+"För att kunna lagra data på enheten igen, använd knappen \"Rensa USB-disk\"."
+
+#: isoimagewriter/isoverifier.cpp:57
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr "Kunde inte verifiera som känd distributionsavbild."
+
+#: isoimagewriter/isoverifier.cpp:69
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr "SHA256-checksumma"
+
+#: isoimagewriter/isoverifier.cpp:70
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr "Klistra in SHA256-checksumman för ISO-filen:"
+
+#: isoimagewriter/isoverifier.cpp:130
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr "Kunde inte hitta %1. Ladda ner en PGP-signaturfil till samma katalog."
+
+#: isoimagewriter/isoverifier.cpp:137
+#, kde-format
+msgid "Could not open signature file"
+msgstr "Kunde inte öppna signaturfil"
+
+#: isoimagewriter/isoverifier.cpp:144
+#, kde-format
+msgid "Could not open ISO image"
+msgstr "Kunde inte öppna ISO-avbild"
+
+#: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
+#, kde-format
+msgid "Key is revoked."
+msgstr "Nyckeln är återkallad."
+
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#, kde-format
+msgid "Uses wrong signature."
+msgstr "Använder felaktig signatur."
+
+#: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
+#, kde-format
+msgid "This app is built without verification support."
+msgstr "Programmet är byggt utan stöd för verifikation."
+
+#: isoimagewriter/isoverifier.cpp:180
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr "Kunde inte öppna SHA256SUMS-fil, ladda ner till samma katalog"
+
+#: isoimagewriter/isoverifier.cpp:194
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr "Kunde inte hitta checksumma i SHA256SUMS-filen"
+
+#: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
+#, kde-format
+msgid "Could not read ISO image"
+msgstr "Kunde inte läsa ISO-avbild"
+
+#: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
+#, kde-format
+msgid "Could not perform checksum"
+msgstr "Kunde inte beräkna checksumma"
+
+#: isoimagewriter/isoverifier.cpp:211
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr "Checksumman av .iso-filen stämmer inte med värdet i SHA256SUMS-filen"
+
+#: isoimagewriter/isoverifier.cpp:219
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+"Kunde inte hitta SHA256SUMS.gpg, ladda ner PGP-signaturfil till samma "
+"katalog."
+
+#: isoimagewriter/isoverifier.cpp:268
+#, kde-format
+msgid "Checksum did not match"
+msgstr "Checksumman stämde inte"
+
+#: isoimagewriter/isoverifier.cpp:274
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr "Kräver en SHA256-checksumma"
+
+#: isoimagewriter/mainapplication.cpp:26
+#, kde-format
+msgid "ISO Image Writer"
+msgstr "ISO-avbildsskrivning"
+
+#: isoimagewriter/mainapplication.cpp:28
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr "Skriv en ISO-avbild till en USB-disk"
+
+#: isoimagewriter/mainapplication.cpp:30
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+"Copyright © 2016 ROSA, Copyright © 2022 Jonathan Esk-Riddell <jr@jriddell."
+"org>"
+
+#: isoimagewriter/mainapplication.cpp:32
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr "Konstantin Vlasov"
+
+#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Author"
+msgstr "Upphovsman"
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr "Jonathan Riddell"
+
+#: isoimagewriter/mainapplication.cpp:37
+#, kde-format
+msgid "ISO file to open"
+msgstr "ISO-fil att öppna"
+
+#: isoimagewriter/mainwindow.cpp:112
+#, kde-format
+msgid "Path to ISO image..."
+msgstr "Sökväg till egen ISO-avbild..."
+
+#: isoimagewriter/mainwindow.cpp:121
+#, kde-format
+msgid "Create"
+msgstr "Skapa"
+
+#: isoimagewriter/mainwindow.cpp:141
+#, kde-format
+msgid "Write this ISO image:"
+msgstr "Skriv ISO-avbilden:"
+
+#: isoimagewriter/mainwindow.cpp:144
+#, kde-format
+msgid "To this USB drive:"
+msgstr "Till den här USB-minnesstickan:"
+
+#: isoimagewriter/mainwindow.cpp:162
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"Allting på USB-enheten kommer att skrivas över.\n"
+"\n"
+"Vill du fortsätta?"
+
+#: isoimagewriter/mainwindow.cpp:168
+#, kde-format
+msgid "Downloading %1..."
+msgstr "Laddar ner %1..."
+
+#: isoimagewriter/mainwindow.cpp:186
+#, kde-format
+msgid "Abort"
+msgstr "Avbryt"
+
+#: isoimagewriter/mainwindow.cpp:189
+#, kde-format
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: isoimagewriter/mainwindow.cpp:211
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+"USB-enheten håller på att skapas.\n"
+"\n"
+"Det kan ta en stund beroende på ISO-avbildsfilens storlek och "
+"överföringshastigheten."
+
+#: isoimagewriter/mainwindow.cpp:218
+#, kde-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: isoimagewriter/mainwindow.cpp:234
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr "USB-minnesenheten är nu färdig och redo för användning."
+
+#: isoimagewriter/mainwindow.cpp:241
+#, kde-format
+msgid "Back"
+msgstr "Tillbaka"
+
+#: isoimagewriter/mainwindow.cpp:244
+#, kde-format
+msgid "Close"
+msgstr "Stäng"
+
+#: isoimagewriter/mainwindow.cpp:269
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr "Misslyckades öppna avbildsfilen:"
+
+#: isoimagewriter/mainwindow.cpp:284
+#, kde-format
+msgid "Verifying ISO image"
+msgstr "Verifierar ISO-avbild"
+
+#: isoimagewriter/mainwindow.cpp:363
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr "Koppla in en USB-enhet"
+
+#: isoimagewriter/mainwindow.cpp:484
+#, kde-format
+msgid "Cancel?"
+msgstr "Avbryt?"
+
+#: isoimagewriter/mainwindow.cpp:485
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr "Skrivning pågår. Avbryt den?"
+
+#: isoimagewriter/mainwindow.cpp:501
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr "Diskavbilder (%1)"
+
+#: isoimagewriter/mainwindow.cpp:502
+#, kde-format
+msgid "All Files (%1)"
+msgstr "Alla filer (%1)"
+
+#: isoimagewriter/mainwindow.cpp:503
+#, kde-format
+msgid "Select image to flash"
+msgstr "Välj avbild att programmera"
+
+#: isoimagewriter/mainwindow.cpp:533
+#, kde-format
+msgid "Downloading ISO image"
+msgstr "Laddar ner ISO-avbild"
+
+#: isoimagewriter/mainwindow.cpp:551
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr "Okänd diskstorlek"
+
+#: isoimagewriter/mainwindow.cpp:552
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+"Den valda disken har okänd storlek. Kontrollera att avbilden får plats innan "
+"skrivning.\n"
+"\n"
+"Avbildsstorlek: %1 (%2 byte)"
+
+#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#, kde-format
+msgid "Error"
+msgstr "Fel"
+
+#: isoimagewriter/mainwindow.cpp:564
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+"Avbilden är större en den valda enheten.\n"
+"\n"
+"Avbildsstorlek: %1 (%2 b)\n"
+"Diskstorlek: %3 (%4 b)"
+
+#: isoimagewriter/mainwindow.cpp:651
+#, kde-format
+msgid "The ISO image is valid"
+msgstr "ISO-avbilden är giltig"
+
+#: isoimagewriter/mainwindow.cpp:657
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr "Kunde inte hitta nyckeln för att verifiera ISO-avbild"
+
+#: isoimagewriter/mainwindow.cpp:659
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr "Kunde inte verifiera ISO-avbild"
+
+#: isoimagewriter/mainwindow.cpp:660
+#, kde-format
+msgid "ISO Verification failed"
+msgstr "ISO-verifikation misslyckades"
+
+#: isoimagewriter/physicaldevice.cpp:43
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr "Kunde inte erhålla lås:"
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr "CoCreateInstance(WbemAdministrativeLocator) misslyckades."
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr "ConnectServer misslyckades."
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr "Misslyckades hämta information om USB-minnesenheter."
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr "Misslyckades hämta partitionslista."
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr "Misslyckades hämta information om logiska diskar."
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr "Okänd enhet"
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr "<avmonterad>"
+
+#~ msgid "Copyright (c) 2016 ROSA"
+#~ msgstr "Copyright © 2016 ROSA"
+
+#~ msgid "Memory allocation for %1 failed."
+#~ msgstr "Minnestilldelning för %1 misslyckades."
+
+#~ msgid "Select an ISO image file to write to a USB disk"
+#~ msgstr "Välj en ISO-avbildsfil att skriva till en USB-disk"
+
+#~ msgid "Clear USB Disk"
+#~ msgstr "Rensa USB-disk"
+
+#~ msgid "Write"
+#~ msgstr "Skriv"
+
+#~ msgid "Wipe USB Disk"
+#~ msgstr "Radera USB-disk"
+
+#~ msgid "(%1 MiB)"
+#~ msgstr "(%1 MiB)"
+
+#~ msgid "Invalid ISO"
+#~ msgstr "Ogiltig ISO"
+
+#~ msgid "ISO is invalid:<p>%1"
+#~ msgstr "ISO är ogiltig:<p>%1"
+
+#~ msgid "%1<p>Do you want to continue"
+#~ msgstr "%1<p>Vill du fortsätta"
+
+#~ msgid "Running ISO verification, please wait..."
+#~ msgstr "Utför verifiering av ISO, vänta ..."
+
+#~ msgid "Verified as valid KDE neon ISO"
+#~ msgstr "Verifierad som giltig KDE neon ISO"
+
+#~ msgid "Invalid KDE neon image"
+#~ msgstr "Ogiltig KDE Neon-avbild"
+
+#~ msgid "Verified as valid Arch ISO"
+#~ msgstr "Verifierad som giltig Arch ISO"
+
+#~ msgid "Invalid Arch image"
+#~ msgstr "Ogiltig Arch-avbild"
+
+#~ msgid "Verified as valid Netrunner ISO"
+#~ msgstr "Verifierad som giltig Netrunner ISO"
+
+#~ msgid "Invalid Netrunner image"
+#~ msgstr "Ogiltig Netrunner-avbild"
+
+#~ msgid "Verified as valid Kubuntu ISO"
+#~ msgstr "Verifierad som giltig Kubuntu ISO"
+
+#~ msgid "Invalid Kubuntu image"
+#~ msgstr "Ogiltig Kubuntu-avbild"
+
+#~ msgid "Image size: %1MiB (%2b)"
+#~ msgstr "Avbildsstorlek: %1 MiB (%2 B)"
+
+#~ msgid "Disk size: %1MiB (%2b)"
+#~ msgstr "Diskstorlek: %1 MiB (%2 B)"
+
+#~ msgid "All existing data on the selected device will be lost."
+#~ msgstr "All befintlig data på den valda enheten kommer att gå förlorad."
+
+#~ msgid "Are you sure you wish to proceed?"
+#~ msgstr "Är du säker på att du vill fortsätta?"
+
+#~ msgid "Clear Disk and Write Image"
+#~ msgstr "Rensa disk och skriv avbild"
+
+#~ msgid "Image:"
+#~ msgstr "Avbild:"
+
+#~ msgid "Open image file"
+#~ msgstr "Öppna avbildsfil"
+
+#~ msgid "&USB Device:"
+#~ msgstr "&USB-enhet:"
+
+#~ msgid "Refresh the list"
+#~ msgstr "Uppdatera listan"
+
+#~ msgid "%v / %m MiB"
+#~ msgstr "%v / %m MiB"
+
+#~ msgid "MiB"
+#~ msgstr "MiB"
+
+#~ msgid "ISO File %1 does not exist"
+#~ msgstr "ISO-filen %1 finns inte"
+
+#~ msgctxt "%1 is the name of the distribution"
+#~ msgid "Filename does not match %1 ISO files"
+#~ msgstr "Filnamnet motsvarar inte %1 ISO-filer"
+
+#~ msgid "Filename does not match Netrunner ISO files"
+#~ msgstr "Filnamnet motsvarar inte Netrunner ISO-filer"
+
+#~ msgid "Clear Disk"
+#~ msgstr "Rensa disk"

@@ -1,0 +1,573 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Shinjo Park <kde@peremen.name>, 2017, 2019, 2021, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"PO-Revision-Date: 2022-05-07 00:16+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "박신조"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde@peremen.name"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr "오류 코드: %1"
+
+#: isoimagewriter/imagewriter.cpp:58
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr "버퍼 메모리를 할당할 수 없음:"
+
+#: isoimagewriter/imagewriter.cpp:62
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr "버퍼 메모리를 할당할 수 없습니다."
+
+#: isoimagewriter/imagewriter.cpp:76
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr "이미지 파일을 열 수 없음: %1"
+
+#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
+#: isoimagewriter/imagewriter.cpp:93
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr "압축 장치를 열 수 없음: %1"
+
+#: isoimagewriter/imagewriter.cpp:119
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr "%1 드라이브를 열 수 없음"
+
+#: isoimagewriter/imagewriter.cpp:126
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr "%1 드라이브를 마운트 해제할 수 없음"
+
+#: isoimagewriter/imagewriter.cpp:143
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr ""
+"%1 볼륨을 마운트 해제할 수 없음\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"대상 장치를 열 수 없음:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:182
+#, kde-format
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"장치에 기록할 수 없음:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:184
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+"마지막 블록을 완전히 기록할 수 없었습니다(%2바이트 중 %1바이트)!\n"
+"종료합니다."
+
+#: isoimagewriter/imagewriter.cpp:232
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+"이미지 파일을 읽을 수 없음:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:260
+#, kde-format
+msgid "The operation completed successfully."
+msgstr "작업이 완료되었습니다."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid "Now you need to format your device."
+msgstr "이제 장치를 포맷해야 합니다."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+"이 장치에 데이터를 다시 저장하려면 \"USB 디스크 지우기\" 단추를 누르십시오."
+
+#: isoimagewriter/isoverifier.cpp:57
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr "알려진 배포판 이미지인지 검사할 수 없습니다."
+
+#: isoimagewriter/isoverifier.cpp:69
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr "SHA256 체크섬"
+
+#: isoimagewriter/isoverifier.cpp:70
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr "이 ISO 파일의 SHA256 체크섬을 붙여 넣으십시오:"
+
+#: isoimagewriter/isoverifier.cpp:130
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr ""
+"%1을(를) 찾을 수 없습니다. 같은 디렉터리에 PGP 서명을 다운로드하십시오."
+
+#: isoimagewriter/isoverifier.cpp:137
+#, kde-format
+msgid "Could not open signature file"
+msgstr "서명 파일을 열 수 없음"
+
+#: isoimagewriter/isoverifier.cpp:144
+#, kde-format
+msgid "Could not open ISO image"
+msgstr "ISO 이미지를 열 수 없음"
+
+#: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
+#, kde-format
+msgid "Key is revoked."
+msgstr "키가 철회되었습니다."
+
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#, kde-format
+msgid "Uses wrong signature."
+msgstr "잘못된 서명을 사용합니다."
+
+#: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
+#, kde-format
+msgid "This app is built without verification support."
+msgstr "이 앱이 검증 지원 없이 빌드되었습니다."
+
+#: isoimagewriter/isoverifier.cpp:180
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr "SHA256SUMS를 찾을 수 없습니다. 같은 디렉터리에 다운로드하십시오"
+
+#: isoimagewriter/isoverifier.cpp:194
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr "SHA256SUMS 파일에서 체크섬을 찾을 수 없음"
+
+#: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
+#, kde-format
+msgid "Could not read ISO image"
+msgstr "ISO 이미지를 읽을 수 없음"
+
+#: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
+#, kde-format
+msgid "Could not perform checksum"
+msgstr "체크섬을 계산할 수 없음"
+
+#: isoimagewriter/isoverifier.cpp:211
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr ".iso 파일의 체크섬이 SHA256SUMS 파일과 일치하지 않음"
+
+#: isoimagewriter/isoverifier.cpp:219
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+"SHA256SUMS.gpg를 찾을 수 없습니다. 같은 디렉터리에 PGP 서명을 다운로드하십시"
+"오."
+
+#: isoimagewriter/isoverifier.cpp:268
+#, kde-format
+msgid "Checksum did not match"
+msgstr "체크섬이 일치하지 않음"
+
+#: isoimagewriter/isoverifier.cpp:274
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr "SHA256 체크섬이 필요함"
+
+#: isoimagewriter/mainapplication.cpp:26
+#, kde-format
+msgid "ISO Image Writer"
+msgstr "ISO 이미지 기록 도구"
+
+#: isoimagewriter/mainapplication.cpp:28
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr "ISO 이미지를 USB 메모리에 기록합니다"
+
+#: isoimagewriter/mainapplication.cpp:30
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+
+#: isoimagewriter/mainapplication.cpp:32
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr "Konstantin Vlasov"
+
+#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Author"
+msgstr "작성자"
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr "Jonathan Riddell"
+
+#: isoimagewriter/mainapplication.cpp:37
+#, kde-format
+msgid "ISO file to open"
+msgstr "열 ISO 파일"
+
+#: isoimagewriter/mainwindow.cpp:112
+#, kde-format
+msgid "Path to ISO image..."
+msgstr "ISO 이미지 경로..."
+
+#: isoimagewriter/mainwindow.cpp:121
+#, kde-format
+msgid "Create"
+msgstr "생성"
+
+#: isoimagewriter/mainwindow.cpp:141
+#, kde-format
+msgid "Write this ISO image:"
+msgstr "이 ISO 이미지 기록:"
+
+#: isoimagewriter/mainwindow.cpp:144
+#, kde-format
+msgid "To this USB drive:"
+msgstr "다음 USB 드라이브 사용:"
+
+#: isoimagewriter/mainwindow.cpp:162
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"USB 드라이브에 있는 모든 내용을 삭제합니다.\n"
+"\n"
+"계속 진행하시겠습니까?"
+
+#: isoimagewriter/mainwindow.cpp:168
+#, kde-format
+msgid "Downloading %1..."
+msgstr "%1 다운로드 중..."
+
+#: isoimagewriter/mainwindow.cpp:186
+#, kde-format
+msgid "Abort"
+msgstr "중지"
+
+#: isoimagewriter/mainwindow.cpp:189
+#, kde-format
+msgid "Continue"
+msgstr "계속"
+
+#: isoimagewriter/mainwindow.cpp:211
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+"USB 드라이브를 준비하고 있습니다.\n"
+"\n"
+"ISO 이미지 파일의 크기와 전송 속도에 따라서 시간이 걸릴 수 있습니다."
+
+#: isoimagewriter/mainwindow.cpp:218
+#, kde-format
+msgid "Cancel"
+msgstr "취소"
+
+#: isoimagewriter/mainwindow.cpp:234
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr "이제 라이브 USB 플래시 드라이브를 사용할 수 있습니다!"
+
+#: isoimagewriter/mainwindow.cpp:241
+#, kde-format
+msgid "Back"
+msgstr "뒤로"
+
+#: isoimagewriter/mainwindow.cpp:244
+#, kde-format
+msgid "Close"
+msgstr "닫기"
+
+#: isoimagewriter/mainwindow.cpp:269
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr "이미지 파일을 열 수 없음:"
+
+#: isoimagewriter/mainwindow.cpp:284
+#, kde-format
+msgid "Verifying ISO image"
+msgstr "ISO 이미지 검사 중"
+
+#: isoimagewriter/mainwindow.cpp:363
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr "USB 드라이브를 연결하십시오"
+
+#: isoimagewriter/mainwindow.cpp:484
+#, kde-format
+msgid "Cancel?"
+msgstr "취소하시겠습니까?"
+
+#: isoimagewriter/mainwindow.cpp:485
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr "기록 중입니다. 중단하시겠습니까?"
+
+#: isoimagewriter/mainwindow.cpp:501
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr "디스크 이미지 (%1)"
+
+#: isoimagewriter/mainwindow.cpp:502
+#, kde-format
+msgid "All Files (%1)"
+msgstr "모든 파일 (%1)"
+
+#: isoimagewriter/mainwindow.cpp:503
+#, kde-format
+msgid "Select image to flash"
+msgstr "기록할 이미지 선택"
+
+#: isoimagewriter/mainwindow.cpp:533
+#, kde-format
+msgid "Downloading ISO image"
+msgstr "ISO 이미지 다운로드 중"
+
+#: isoimagewriter/mainwindow.cpp:551
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr "알 수 없는 디스크 크기"
+
+#: isoimagewriter/mainwindow.cpp:552
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+"선택한 디스크 크기를 알 수 없습니다. 기록하기 전에 이미지 크기가 맞는지 확인"
+"하십시오.\n"
+"\n"
+"이미지 크기: %1(%2바이트)"
+
+#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#, kde-format
+msgid "Error"
+msgstr "오류"
+
+#: isoimagewriter/mainwindow.cpp:564
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+"이미지 크기가 선택한 장치보다 큽니다!\n"
+"\n"
+"이미지 크기: %1(%2바이트)\n"
+"디스크 크기: %3(%4바이트)"
+
+#: isoimagewriter/mainwindow.cpp:651
+#, kde-format
+msgid "The ISO image is valid"
+msgstr "ISO 이미지가 올바름"
+
+#: isoimagewriter/mainwindow.cpp:657
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr "ISO 이미지를 검증할 키를 찾을 수 없음"
+
+#: isoimagewriter/mainwindow.cpp:659
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr "ISO 이미지를 검증할 수 없음"
+
+#: isoimagewriter/mainwindow.cpp:660
+#, kde-format
+msgid "ISO Verification failed"
+msgstr "ISO 검증 실패"
+
+#: isoimagewriter/physicaldevice.cpp:43
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr "잠글 수 없음:"
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr "CoCreateInstance(WbemAdministrativeLocator)가 실패했습니다."
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr "ConnectServer가 실패했습니다."
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr "USB 플래시 장치를 조회할 수 없습니다."
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr "파티션 목록을 조회할 수 없습니다."
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr "논리 디스크 목록을 조회할 수 없습니다."
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr "알 수 없는 장치"
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr "<마운트되지 않음>"
+
+#~ msgid "Copyright (c) 2016 ROSA"
+#~ msgstr "Copyright (c) 2016 ROSA"
+
+#~ msgid "Memory allocation for %1 failed."
+#~ msgstr "%1 메모리 할당이 실패했습니다."
+
+#~ msgid "Select an ISO image file to write to a USB disk"
+#~ msgstr "USB 디스크에 기록할 ISO 이미지 파일 선택"
+
+#~ msgid "Clear USB Disk"
+#~ msgstr "USB 디스크 비우기"
+
+#~ msgid "Write"
+#~ msgstr "기록"
+
+#~ msgid "Wipe USB Disk"
+#~ msgstr "USB 디스크 지우기"
+
+#~ msgid "(%1 MiB)"
+#~ msgstr "(%1 MiB)"
+
+#~ msgid "Invalid ISO"
+#~ msgstr "잘못된 ISO"
+
+#~ msgid "ISO is invalid:<p>%1"
+#~ msgstr "ISO가 잘못되었습니다: <p>%1"
+
+#~ msgid "%1<p>Do you want to continue"
+#~ msgstr "%1 <p>계속 진행하시겠습니까"
+
+#~ msgid "Running ISO verification, please wait..."
+#~ msgstr "ISO 검사 중, 잠시 기다려 주십시오..."
+
+#~ msgid "Verified as valid KDE neon ISO"
+#~ msgstr "올바른 KDE neon ISO로 확인됨"
+
+#~ msgid "Invalid KDE neon image"
+#~ msgstr "잘못된 KDE neon 이미지"
+
+#~ msgid "Verified as valid Arch ISO"
+#~ msgstr "올바른 Arch ISO로 확인됨"
+
+#~ msgid "Invalid Arch image"
+#~ msgstr "잘못된 Arch 이미지"
+
+#~ msgid "Verified as valid Netrunner ISO"
+#~ msgstr "올바른 Netrunner ISO로 확인됨"
+
+#~ msgid "Invalid Netrunner image"
+#~ msgstr "잘못된 Netrunner 이미지"
+
+#~ msgid "Verified as valid Kubuntu ISO"
+#~ msgstr "올바른 Kubuntu ISO로 확인됨"
+
+#~ msgid "Invalid Kubuntu image"
+#~ msgstr "잘못된 Kubuntu 이미지"
+
+#~ msgid "Image size: %1MiB (%2b)"
+#~ msgstr "이미지 크기: %1MiB (%2b)"
+
+#~ msgid "Disk size: %1MiB (%2b)"
+#~ msgstr "디스크 크기: %1MiB (%2b)"
+
+#~ msgid "All existing data on the selected device will be lost."
+#~ msgstr "선택한 장치의 모든 존재하는 데이터가 삭제됩니다."
+
+#~ msgid "Are you sure you wish to proceed?"
+#~ msgstr "계속 진행하시겠습니까?"
+
+#~ msgid "Clear Disk and Write Image"
+#~ msgstr "디스크를 지우고 이미지 기록하기"
+
+#~ msgid "Image:"
+#~ msgstr "이미지:"
+
+#~ msgid "Open image file"
+#~ msgstr "이미지 파일 열기"
+
+#~ msgid "&USB Device:"
+#~ msgstr "USB 장치(&U):"
+
+#~ msgid "Refresh the list"
+#~ msgstr "목록 새로 고침"
+
+#~ msgid "%v / %m MiB"
+#~ msgstr "%v / %m MiB"
+
+#~ msgid "MiB"
+#~ msgstr "MiB"
+
+#~ msgid "ISO File %1 does not exist"
+#~ msgstr "%1 ISO 파일이 존재하지 않음"
+
+#~ msgctxt "%1 is the name of the distribution"
+#~ msgid "Filename does not match %1 ISO files"
+#~ msgstr "파일 이름이 %1 ISO 파일과 일치하지 않음"
