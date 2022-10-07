@@ -1,0 +1,455 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the isoimagewriter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: isoimagewriter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"PO-Revision-Date: 2022-10-06 08:10+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Temuri Doghonadze"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Temuri.doghonadze@gmail.com"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr "შეცდომის კოდი: %1"
+
+#: isoimagewriter/imagewriter.cpp:58
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr "ბუფერისთვის მეხსიერების გამოყოფის შეცდომა:"
+
+#: isoimagewriter/imagewriter.cpp:62
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr "ბუფერისთვის მეხსიერების გამოყოფის შეცდომა."
+
+#: isoimagewriter/imagewriter.cpp:76
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr "ასლის ფაილის გახსნის შეცდომა: %1"
+
+#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
+#: isoimagewriter/imagewriter.cpp:93
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr "შეკუმშვის მოწყობილობის გახსნის შეცდომა: %1"
+
+#: isoimagewriter/imagewriter.cpp:119
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr "დისკის გახსნის შეცდომა: %1"
+
+#: isoimagewriter/imagewriter.cpp:126
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr "დისკის მოხსნის შეცდომა: %1"
+
+#: isoimagewriter/imagewriter.cpp:143
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr "ტომის მოხსნის შეცდომა: %1 %2"
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"სამიზნე მოწყობილობის გახსნის შეცდომა:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:182
+#, kde-format
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"მოწყობილობაზე ჩაწერის შეცდომა:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:184
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:232
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+"ასლის ფაილის წაკითხვის შეცდომა:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:260
+#, kde-format
+msgid "The operation completed successfully."
+msgstr "ოპერაცია წარმატებით დასრულდა."
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid "Now you need to format your device."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:262
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:57
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:69
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr "SHA256 საკონტროლო ჯამი"
+
+#: isoimagewriter/isoverifier.cpp:70
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:130
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:137
+#, kde-format
+msgid "Could not open signature file"
+msgstr "ხელმოწერის ფაილის გახსნის შეცდომა"
+
+#: isoimagewriter/isoverifier.cpp:144
+#, kde-format
+msgid "Could not open ISO image"
+msgstr "ISO ასლის გახსნის შეცდომა"
+
+#: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
+#, kde-format
+msgid "Key is revoked."
+msgstr "გასაღები გაუქმებულია."
+
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#, kde-format
+msgid "Uses wrong signature."
+msgstr "იყენებს არასწორ ხელმოწერას."
+
+#: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
+#, kde-format
+msgid "This app is built without verification support."
+msgstr "ეს აპი გადამოწმების მხარდაჭერის გარეშეა აგებული."
+
+#: isoimagewriter/isoverifier.cpp:180
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:194
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr "SHA256UMS ფაილში საკონტროლო ჯამი ვერ ვიპოვე"
+
+#: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
+#, kde-format
+msgid "Could not read ISO image"
+msgstr "ISO ასლის წაკითხვის შეცდომა"
+
+#: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
+#, kde-format
+msgid "Could not perform checksum"
+msgstr "საკონტროლო ჯამის გამოთვლის შეცდომა"
+
+#: isoimagewriter/isoverifier.cpp:211
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:219
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:268
+#, kde-format
+msgid "Checksum did not match"
+msgstr "საკონტროლო ჯამი არ ემთხვევა"
+
+#: isoimagewriter/isoverifier.cpp:274
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr "SHA256 საკონტროლო ჯამი აუცილებელია"
+
+#: isoimagewriter/mainapplication.cpp:26
+#, kde-format
+msgid "ISO Image Writer"
+msgstr "ISO ასლის ჩამწერი"
+
+#: isoimagewriter/mainapplication.cpp:28
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr "ISO ასლის USB-ზე ჩაწერა"
+
+#: isoimagewriter/mainapplication.cpp:30
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+
+#: isoimagewriter/mainapplication.cpp:32
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr "Konstantin Vlasov"
+
+#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Author"
+msgstr "ავტორი"
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr "Jonathan Riddell"
+
+#: isoimagewriter/mainapplication.cpp:37
+#, kde-format
+msgid "ISO file to open"
+msgstr "გასახსნელი ISO ფაილი"
+
+#: isoimagewriter/mainwindow.cpp:112
+#, kde-format
+msgid "Path to ISO image..."
+msgstr "ბილიკი ISO ასლამდე..."
+
+#: isoimagewriter/mainwindow.cpp:121
+#, kde-format
+msgid "Create"
+msgstr "შექმნა"
+
+#: isoimagewriter/mainwindow.cpp:141
+#, kde-format
+msgid "Write this ISO image:"
+msgstr "ამ ISO ასლის ჩაწერა:"
+
+#: isoimagewriter/mainwindow.cpp:144
+#, kde-format
+msgid "To this USB drive:"
+msgstr "ამ USB დისკზე:"
+
+#: isoimagewriter/mainwindow.cpp:162
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:168
+#, kde-format
+msgid "Downloading %1..."
+msgstr "%1-ის გადმოწერა..."
+
+#: isoimagewriter/mainwindow.cpp:186
+#, kde-format
+msgid "Abort"
+msgstr "შეწყვეტა"
+
+#: isoimagewriter/mainwindow.cpp:189
+#, kde-format
+msgid "Continue"
+msgstr "გაგრძელება"
+
+#: isoimagewriter/mainwindow.cpp:211
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:218
+#, kde-format
+msgid "Cancel"
+msgstr "შეწყვეტა"
+
+#: isoimagewriter/mainwindow.cpp:234
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:241
+#, kde-format
+msgid "Back"
+msgstr "უკან"
+
+#: isoimagewriter/mainwindow.cpp:244
+#, kde-format
+msgid "Close"
+msgstr "დაკეტვა"
+
+#: isoimagewriter/mainwindow.cpp:269
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr "ასლის ფაილის გახსნის შეცდომა:"
+
+#: isoimagewriter/mainwindow.cpp:284
+#, kde-format
+msgid "Verifying ISO image"
+msgstr "ISO ასლის შემოწმება"
+
+#: isoimagewriter/mainwindow.cpp:363
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr "შეაერთეთ USB"
+
+#: isoimagewriter/mainwindow.cpp:484
+#, kde-format
+msgid "Cancel?"
+msgstr "გავაუქმო?"
+
+#: isoimagewriter/mainwindow.cpp:485
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:501
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr "დისკის ასლები (%1)"
+
+#: isoimagewriter/mainwindow.cpp:502
+#, kde-format
+msgid "All Files (%1)"
+msgstr "ყველა ფაილი (%1)"
+
+#: isoimagewriter/mainwindow.cpp:503
+#, kde-format
+msgid "Select image to flash"
+msgstr "აირჩიეთ ჩასაწერი ასლი"
+
+#: isoimagewriter/mainwindow.cpp:533
+#, kde-format
+msgid "Downloading ISO image"
+msgstr "ISO ფაილის გადმოწერა"
+
+#: isoimagewriter/mainwindow.cpp:551
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr "დისკის უცნობი ზომა"
+
+#: isoimagewriter/mainwindow.cpp:552
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#, kde-format
+msgid "Error"
+msgstr "შეცდომა"
+
+#: isoimagewriter/mainwindow.cpp:564
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:651
+#, kde-format
+msgid "The ISO image is valid"
+msgstr "ISO ასლი სწორია"
+
+#: isoimagewriter/mainwindow.cpp:657
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:659
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr "ISO ასლის გადამოწმების შეცდომა"
+
+#: isoimagewriter/mainwindow.cpp:660
+#, kde-format
+msgid "ISO Verification failed"
+msgstr "ISO-ის გადამოწმების შეცდომა"
+
+#: isoimagewriter/physicaldevice.cpp:43
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr "ბლოკის მიღების შეცდომა:"
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr "CoCreateInstance(WbemAdministrativeLocator) -ის შეცდომა."
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr "ConnectServer -ის შეცდომა."
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr "USB დისკების მოთხოვის შეცდომა."
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr "დანაყოფების სიის გამოთხოვის შეცდომა."
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr "ლოკგიკური დისკების სიის გამოთხოვის შეცდომა."
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr "უცნობი მოწყობილობა"
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr "<მოხსნილია>"
