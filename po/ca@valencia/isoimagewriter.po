@@ -264,7 +264,7 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:37
 #, kde-format
 msgid "ISO file to open"
-msgstr "Fitxer ISO que s'obrirà"
+msgstr "Fitxer ISO que s'ha d'obrir"
 
 #: isoimagewriter/mainwindow.cpp:112
 #, kde-format
