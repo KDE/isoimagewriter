@@ -7,9 +7,10 @@
 // Implementation of PhysicalDevice
 
 #include <KLocalizedString>
-#include <QtDBus>
-#include <QDBusInterface>
-#include <QDBusUnixFileDescriptor>
+#include <QtDBus/QDBusArgument>
+#include <QtDBus/QDBusReply>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusUnixFileDescriptor>
 #include <fcntl.h>
 
 #include "physicaldevice.h"

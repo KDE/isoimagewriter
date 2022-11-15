@@ -56,6 +56,7 @@ target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_V
 target_link_libraries(isoimagewriter
     Qt5::Widgets
     Qt5::Network
+    Qt5::DBus
     KF5::I18n
     KF5::CoreAddons
     KF5::WidgetsAddons
