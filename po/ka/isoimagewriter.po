@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-15 00:47+0000\n"
-"PO-Revision-Date: 2022-10-06 08:10+0200\n"
+"PO-Revision-Date: 2022-12-01 08:58+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -95,6 +95,8 @@ msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
 "Aborting."
 msgstr ""
+"ბოლო ბლოკი ბოლომდე არ ჩაწერილა (%1 ბაიტი %2 -დან)!\n"
+"მუშაობა დასრულდა."
 
 #: isoimagewriter/imagewriter.cpp:232
 #, kde-format
@@ -113,7 +115,7 @@ msgstr "ოპერაცია წარმატებით დასრუ�
 #: isoimagewriter/imagewriter.cpp:262
 #, kde-format
 msgid "Now you need to format your device."
-msgstr ""
+msgstr "ახლა საჭიროა დააფორმატოთ თქვენი მოწყობილობა."
 
 #: isoimagewriter/imagewriter.cpp:262
 #, kde-format
@@ -121,11 +123,13 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
+"იმისათვის, რომ ამ მოწყობილობაზე მონაცემები ისევ შეინახოთ, გამოიყენეთ ღილაკი "
+"\"USB დისკის წაშლა\"."
 
 #: isoimagewriter/isoverifier.cpp:57
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr ""
+msgstr "ცნობილი დისტროს ასლის შემოწმების შეცდომა."
 
 #: isoimagewriter/isoverifier.cpp:69
 #, kde-format
@@ -135,13 +139,13 @@ msgstr "SHA256 საკონტროლო ჯამი"
 #: isoimagewriter/isoverifier.cpp:70
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
-msgstr ""
+msgstr "ჩასვით ISO ფაილის SHA256 საკონტროლო ჯამი:"
 
 #: isoimagewriter/isoverifier.cpp:130
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
-msgstr ""
+msgstr "%1 ვერ ვიპოვე. გადმოწერეთ PGP ხელმოწერის ფაილი იგივე საქაღალდეში."
 
 #: isoimagewriter/isoverifier.cpp:137
 #, kde-format
@@ -171,7 +175,7 @@ msgstr "ეს აპი გადამოწმების მხარდა
 #: isoimagewriter/isoverifier.cpp:180
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
-msgstr ""
+msgstr "SHA256SUMS ფაილის ვერ ვიპოვე. გადმოწერეთ ის იგივე საქაღალდეში"
 
 #: isoimagewriter/isoverifier.cpp:194
 #, kde-format
@@ -191,7 +195,7 @@ msgstr "საკონტროლო ჯამის გამოთვლი�
 #: isoimagewriter/isoverifier.cpp:211
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
-msgstr ""
+msgstr ".iso ფაილის საკონტროლო ჯამი SHA256SUMS ფაილს არ ემთხვევა"
 
 #: isoimagewriter/isoverifier.cpp:219
 #, kde-format
@@ -199,6 +203,7 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
+"SHA256SUMS.gpg ვერ ვიპოვე. გადმოწერეთ PGP ხელმოწერის ფაილი იგივე საქაღალდეში."
 
 #: isoimagewriter/isoverifier.cpp:268
 #, kde-format
@@ -276,6 +281,9 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"ყველაფერ ამ USB დისკზე წაიშლება.\n"
+"\n"
+"გნებავთ, გააგრძელოთ?"
 
 #: isoimagewriter/mainwindow.cpp:168
 #, kde-format
@@ -300,6 +308,10 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
+"მიმდინარეობს თქვენი USB დისკის შექმნა.\n"
+"\n"
+"ამას საკმაო დრო შეიძლება დასჭირდეს, ISO ასლის ფაილის ზომაზე და გადაცემის "
+"სიჩქარეზე დამოკიდებულებით."
 
 #: isoimagewriter/mainwindow.cpp:218
 #, kde-format
@@ -309,7 +321,7 @@ msgstr "შეწყვეტა"
 #: isoimagewriter/mainwindow.cpp:234
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr ""
+msgstr "თქვენი USB დისკი ახლა დასრულებულია და მზადაა გამოსაყენებლად!"
 
 #: isoimagewriter/mainwindow.cpp:241
 #, kde-format
@@ -344,7 +356,7 @@ msgstr "გავაუქმო?"
 #: isoimagewriter/mainwindow.cpp:485
 #, kde-format
 msgid "Writing is in progress, abort it?"
-msgstr ""
+msgstr "მიმდინარეობს ჩაწერა. გავაუქმო?"
 
 #: isoimagewriter/mainwindow.cpp:501
 #, kde-format
@@ -379,6 +391,10 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
+"მონიშნული დისკი უცნობი ზომისაა. ჩაწერამდე შეამოწმეთ, ეტევა თუ არა ასლის "
+"ფაილი.\n"
+"\n"
+"ასლის ზომა: %1 (%2 ბაიტი)"
 
 #: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
 #, kde-format
@@ -393,6 +409,10 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
+"ასლის ფაილი თქვენს არჩეულ მოწყობილობაზე დიდია!\n"
+"\n"
+"ასლის ზომა: %1 (%2 ბაიტი)\n"
+"დისკის ზომა: %3 (%4 ბაიტი)"
 
 #: isoimagewriter/mainwindow.cpp:651
 #, kde-format
@@ -402,7 +422,7 @@ msgstr "ISO ასლი სწორია"
 #: isoimagewriter/mainwindow.cpp:657
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr ""
+msgstr "ISO ასლის შესამოწმებლად გასაღები ვერ ვიპოვე"
 
 #: isoimagewriter/mainwindow.cpp:659
 #, kde-format
