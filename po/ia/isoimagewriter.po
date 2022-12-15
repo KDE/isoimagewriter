@@ -1,10 +1,10 @@
-# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021.
+# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-15 00:47+0000\n"
-"PO-Revision-Date: 2021-08-30 16:05+0200\n"
+"PO-Revision-Date: 2022-12-14 15:54+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -128,23 +128,25 @@ msgstr ""
 #: isoimagewriter/isoverifier.cpp:57
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr ""
+msgstr "Non poteva verificar como imagine de distro cognoscite."
 
 #: isoimagewriter/isoverifier.cpp:69
 #, kde-format
 msgid "SHA256 Checksum"
-msgstr ""
+msgstr "SHA256 Checksum"
 
 #: isoimagewriter/isoverifier.cpp:70
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
-msgstr ""
+msgstr "Colla le SHA256 checksum per iste ISO:"
 
 #: isoimagewriter/isoverifier.cpp:130
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr ""
+"Non pote trovar %1, pro favor discarga le file de signatura PGP al mesme "
+"directorio."
 
 #: isoimagewriter/isoverifier.cpp:137
 #, kde-format
@@ -159,27 +161,28 @@ msgstr "Non pote aperir image ISO"
 #: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
 #, kde-format
 msgid "Key is revoked."
-msgstr ""
+msgstr "Clave es revocate."
 
 #: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
 #, kde-format
 msgid "Uses wrong signature."
-msgstr ""
+msgstr "Usa signatura errate."
 
 #: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
 #, kde-format
 msgid "This app is built without verification support."
-msgstr ""
+msgstr "Iste app es construite sin supporto de verification."
 
 #: isoimagewriter/isoverifier.cpp:180
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
+"Non pote aperir file SHA256SUMS, pro favor discarga al mesme directorio"
 
 #: isoimagewriter/isoverifier.cpp:194
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr ""
+msgstr "Nonpoite trovar checksum in file SHA256SUMS "
 
 #: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
 #, kde-format
@@ -189,12 +192,12 @@ msgstr "Non pote leger image ISO"
 #: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
 #, kde-format
 msgid "Could not perform checksum"
-msgstr ""
+msgstr "Non pote executar checksum"
 
 #: isoimagewriter/isoverifier.cpp:211
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
-msgstr ""
+msgstr "Checksum de file .iso non corresponde al valor in file SHA256SUMS"
 
 #: isoimagewriter/isoverifier.cpp:219
 #, kde-format
@@ -202,16 +205,18 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
+"Non pote trovar SHA256SUMS.gpg, pro favor tu discarga file de signatura PGP "
+"al mesme directorio."
 
 #: isoimagewriter/isoverifier.cpp:268
 #, kde-format
 msgid "Checksum did not match"
-msgstr ""
+msgstr "Checksum non corresponde"
 
 #: isoimagewriter/isoverifier.cpp:274
 #, kde-format
 msgid "Requires an SHA256 checksum"
-msgstr ""
+msgstr "Require un checksum de SHA256"
 
 #: isoimagewriter/mainapplication.cpp:26
 #, kde-format
@@ -229,6 +234,8 @@ msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:32
 #, kde-format
@@ -248,12 +255,12 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:37
 #, kde-format
 msgid "ISO file to open"
-msgstr ""
+msgstr "ISO file a aperir"
 
 #: isoimagewriter/mainwindow.cpp:112
 #, kde-format
 msgid "Path to ISO image..."
-msgstr ""
+msgstr "Percurso a imagine ISO..."
 
 #: isoimagewriter/mainwindow.cpp:121
 #, kde-format
@@ -263,12 +270,12 @@ msgstr "Crea"
 #: isoimagewriter/mainwindow.cpp:141
 #, kde-format
 msgid "Write this ISO image:"
-msgstr ""
+msgstr "Scribe iste imagine ISO:"
 
 #: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "To this USB drive:"
-msgstr ""
+msgstr "A iste drive USB:"
 
 #: isoimagewriter/mainwindow.cpp:162
 #, kde-format
@@ -277,6 +284,9 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"Toto sur le drive USB essera superscribite.\n"
+"\n"
+"Tu vole continuar?"
 
 #: isoimagewriter/mainwindow.cpp:168
 #, kde-format
@@ -301,6 +311,10 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
+"Tu drive USB es in creation.\n"
+"\n"
+"Isto pote prender alcun tempore dependente del grandor del file de imagine "
+"ISO e del velocitate de transferentia."
 
 #: isoimagewriter/mainwindow.cpp:218
 #, kde-format
@@ -310,7 +324,7 @@ msgstr "Cancella"
 #: isoimagewriter/mainwindow.cpp:234
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr ""
+msgstr "Tu live drive de flash USB nunc es complete e preste a usar!"
 
 #: isoimagewriter/mainwindow.cpp:241
 #, kde-format
@@ -330,12 +344,12 @@ msgstr "Falleva aperir le file de imagine:"
 #: isoimagewriter/mainwindow.cpp:284
 #, kde-format
 msgid "Verifying ISO image"
-msgstr ""
+msgstr "Verificante imagine ISO"
 
 #: isoimagewriter/mainwindow.cpp:363
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr ""
+msgstr "Pro favor inserta un drive USB"
 
 #: isoimagewriter/mainwindow.cpp:484
 #, kde-format
@@ -360,7 +374,7 @@ msgstr "Omne files (%1)"
 #: isoimagewriter/mainwindow.cpp:503
 #, kde-format
 msgid "Select image to flash"
-msgstr ""
+msgstr "Selige un imagine a fulgurar"
 
 #: isoimagewriter/mainwindow.cpp:533
 #, kde-format
@@ -380,6 +394,10 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
+"Le disco seligite es de grandor incognite, pro favor tu verifica que le "
+"image essera adapte ante scriber.\n"
+"\n"
+"Grandor de image: %1 (%2 b)"
 
 #: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
 #, kde-format
@@ -402,7 +420,7 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:651
 #, kde-format
 msgid "The ISO image is valid"
-msgstr ""
+msgstr "Le imagien ISO es valide"
 
 #: isoimagewriter/mainwindow.cpp:657
 #, kde-format
@@ -417,7 +435,7 @@ msgstr "Non pote verificar image ISO"
 #: isoimagewriter/mainwindow.cpp:660
 #, kde-format
 msgid "ISO Verification failed"
-msgstr ""
+msgstr "Le verification ISO falleva"
 
 #: isoimagewriter/physicaldevice.cpp:43
 #, kde-format
