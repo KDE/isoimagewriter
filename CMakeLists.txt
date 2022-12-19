@@ -56,4 +56,6 @@ add_subdirectory(isoimagewriter)
 add_subdirectory(images)
 add_subdirectory(signing-keys)
 
+ki18n_install(po)
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
