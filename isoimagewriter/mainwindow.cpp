@@ -28,6 +28,7 @@
 #include <KIconLoader>
 #include <KPixmapSequence>
 #include <KLocalizedString>
+#include "isolineedit.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -107,9 +108,11 @@ void MainWindow::setupUi()
 QWidget* MainWindow::createFormWidget()
 {
     // Form
-    m_isoImageLineEdit = new QLineEdit;
+    m_isoImageLineEdit = new IsoLineEdit;
     m_isoImageLineEdit->setReadOnly(true);
     m_isoImageLineEdit->setPlaceholderText(i18n("Path to ISO image..."));
+    connect(m_isoImageLineEdit, &IsoLineEdit::clicked, this, &MainWindow::openIsoImage);
+
     m_isoImageSizeLabel = new QLabel;
 
     QAction *openIsoImageAction = m_isoImageLineEdit->addAction(

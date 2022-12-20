@@ -13,7 +13,6 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
 #include <QProgressBar>
@@ -30,6 +29,7 @@
 #endif
 
 class FetchIsoJob;
+class IsoLineEdit;
 
 class MainWindow : public QMainWindow
 {
@@ -51,7 +51,7 @@ private:
     QLabel *m_busyLabel;
     QWidget *m_busyWidget;
     QLabel *m_isoImageSizeLabel;
-    QLineEdit *m_isoImageLineEdit;
+    IsoLineEdit *m_isoImageLineEdit;
     QComboBox *m_usbDriveComboBox;
     QPushButton *m_createButton;
     QPushButton *m_cancelButton;

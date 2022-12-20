@@ -16,6 +16,7 @@ set(isoimagewriter_SRCS
     main.cpp
     isoverifier.cpp
     fetchisojob.cpp
+    isolineedit.cpp
 )
 
 ecm_qt_declare_logging_category(isoimagewriter_SRCS
