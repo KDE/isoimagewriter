@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"POT-Creation-Date: 2022-12-21 00:50+0000\n"
 "PO-Revision-Date: 2022-04-19 12:05+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -266,27 +266,27 @@ msgstr "Jonathan Riddell"
 msgid "ISO file to open"
 msgstr "Fitxer ISO que s'ha d'obrir"
 
-#: isoimagewriter/mainwindow.cpp:112
+#: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Camí cap a la imatge ISO..."
 
-#: isoimagewriter/mainwindow.cpp:121
+#: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
 msgstr "Crea"
 
-#: isoimagewriter/mainwindow.cpp:141
+#: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Escriu esta imatge ISO:"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
 msgstr "A esta unitat USB:"
 
-#: isoimagewriter/mainwindow.cpp:162
+#: isoimagewriter/mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -297,22 +297,22 @@ msgstr ""
 "\n"
 "Voleu continuar?"
 
-#: isoimagewriter/mainwindow.cpp:168
+#: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
 msgstr "S'està descarregant %1..."
 
-#: isoimagewriter/mainwindow.cpp:186
+#: isoimagewriter/mainwindow.cpp:189
 #, kde-format
 msgid "Abort"
 msgstr "Interromp"
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:192
 #, kde-format
 msgid "Continue"
 msgstr "Continua"
 
-#: isoimagewriter/mainwindow.cpp:211
+#: isoimagewriter/mainwindow.cpp:214
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -325,78 +325,78 @@ msgstr ""
 "Açò pot tardar algun temps segons la mida del fitxer de la imatge ISO i la "
 "velocitat de transferència."
 
-#: isoimagewriter/mainwindow.cpp:218
+#: isoimagewriter/mainwindow.cpp:221
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: isoimagewriter/mainwindow.cpp:234
+#: isoimagewriter/mainwindow.cpp:237
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr ""
 "La vostra unitat flaix USB en viu ara està completa i llesta per a utilitzar!"
 
-#: isoimagewriter/mainwindow.cpp:241
+#: isoimagewriter/mainwindow.cpp:244
 #, kde-format
 msgid "Back"
 msgstr "Arrere"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:247
 #, kde-format
 msgid "Close"
 msgstr "Tanca"
 
-#: isoimagewriter/mainwindow.cpp:269
+#: isoimagewriter/mainwindow.cpp:272
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "No s'ha pogut obrir el fitxer d'imatge:"
 
-#: isoimagewriter/mainwindow.cpp:284
+#: isoimagewriter/mainwindow.cpp:287
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "S'està verificant la imatge ISO"
 
-#: isoimagewriter/mainwindow.cpp:363
+#: isoimagewriter/mainwindow.cpp:366
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Per favor, connecteu una unitat USB"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:487
 #, kde-format
 msgid "Cancel?"
 msgstr "Voleu cancel·lar?"
 
-#: isoimagewriter/mainwindow.cpp:485
+#: isoimagewriter/mainwindow.cpp:488
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "L'escriptura està en curs, l'interromp?"
 
-#: isoimagewriter/mainwindow.cpp:501
+#: isoimagewriter/mainwindow.cpp:504
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Imatges de disc (%1)"
 
-#: isoimagewriter/mainwindow.cpp:502
+#: isoimagewriter/mainwindow.cpp:505
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Tots els fitxers (%1)"
 
-#: isoimagewriter/mainwindow.cpp:503
+#: isoimagewriter/mainwindow.cpp:506
 #, kde-format
 msgid "Select image to flash"
 msgstr "Seleccioneu la imatge per a flaix"
 
-#: isoimagewriter/mainwindow.cpp:533
+#: isoimagewriter/mainwindow.cpp:536
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "S'està descarregant la imatge ISO"
 
-#: isoimagewriter/mainwindow.cpp:551
+#: isoimagewriter/mainwindow.cpp:554
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Mida del disc desconeguda"
 
-#: isoimagewriter/mainwindow.cpp:552
+#: isoimagewriter/mainwindow.cpp:555
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -409,12 +409,12 @@ msgstr ""
 "\n"
 "Mida de la imatge: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
 #, kde-format
 msgid "Error"
 msgstr "S'ha produït un error"
 
-#: isoimagewriter/mainwindow.cpp:564
+#: isoimagewriter/mainwindow.cpp:567
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -427,22 +427,22 @@ msgstr ""
 "Mida de la imatge: %1 (%2 b)\n"
 "Mida del disc: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:651
+#: isoimagewriter/mainwindow.cpp:654
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "La imatge ISO és vàlida"
 
-#: isoimagewriter/mainwindow.cpp:657
+#: isoimagewriter/mainwindow.cpp:660
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "No s'ha trobat la clau per a verificar la imatge ISO"
 
-#: isoimagewriter/mainwindow.cpp:659
+#: isoimagewriter/mainwindow.cpp:662
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "No s'ha pogut verificar la imatge ISO"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:663
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "La verificació de l'ISO ha fallat"

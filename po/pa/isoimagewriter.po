@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"POT-Creation-Date: 2022-12-21 00:50+0000\n"
 "PO-Revision-Date: 2022-04-16 11:52-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -248,27 +248,27 @@ msgstr ""
 msgid "ISO file to open"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:112
+#: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "...ISO ਈਮੇਜ਼ ਲਈ ਮਾਰਗ"
 
-#: isoimagewriter/mainwindow.cpp:121
+#: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
 msgstr "ਬਣਾਓ"
 
-#: isoimagewriter/mainwindow.cpp:141
+#: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "ਇਹ ISO ਈਮੇਜ਼ ਲਿਖੋ:"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
 msgstr "ਇਸ USB ਡਰਾਇਵ ਉੱਤੇ:"
 
-#: isoimagewriter/mainwindow.cpp:162
+#: isoimagewriter/mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -279,22 +279,22 @@ msgstr ""
 "\n"
 "ਕੀ ਤੁਸੀਂ ਜਾਰੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: isoimagewriter/mainwindow.cpp:168
+#: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
 msgstr "...%1 ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: isoimagewriter/mainwindow.cpp:186
+#: isoimagewriter/mainwindow.cpp:189
 #, kde-format
 msgid "Abort"
 msgstr "ਛੱਡੋ"
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:192
 #, kde-format
 msgid "Continue"
 msgstr "ਜਾਰੀ ਰੱਖੋ"
 
-#: isoimagewriter/mainwindow.cpp:211
+#: isoimagewriter/mainwindow.cpp:214
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -305,77 +305,77 @@ msgstr ""
 "ਤੁਹਾਡੀ USB ਡਰਾਇਵ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ।\n"
 "ISO ਈਮੇਜ਼ ਫਾਇਲ ਦੇ ਆਕਾਰ ਅਤੇ ਟਰਾਂਸਫਰ ਸਪੀਡ ਦੇ ਮੁਤਾਬਕ ਇਸ ਨੂੰ ਕੁਝ ਮਸਾਂ ਲੱਗ ਸਕਦਾ ਹੈ।"
 
-#: isoimagewriter/mainwindow.cpp:218
+#: isoimagewriter/mainwindow.cpp:221
 #, kde-format
 msgid "Cancel"
 msgstr "ਰੱਦ ਕਰੋ"
 
-#: isoimagewriter/mainwindow.cpp:234
+#: isoimagewriter/mainwindow.cpp:237
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "ਤੁਹਾਡੀ ਲਾਈਵ USB ਫਲੈਸ਼ ਡਰਾਇਵ ਹੁਣ ਪੂਰੀ ਹੋਈ ਤੇ ਵਰਤਣ ਲਈ ਤਿਆਰ ਹੈ!"
 
-#: isoimagewriter/mainwindow.cpp:241
+#: isoimagewriter/mainwindow.cpp:244
 #, kde-format
 msgid "Back"
 msgstr "ਪਿੱਛੇ"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:247
 #, kde-format
 msgid "Close"
 msgstr "ਬੰਦ ਕਰੋ"
 
-#: isoimagewriter/mainwindow.cpp:269
+#: isoimagewriter/mainwindow.cpp:272
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "ਈਮੇਜ਼ ਫਾਇਲ ਖੋਲ੍ਹਣ ਲਈ ਅਸਫ਼ਲ ਹੈ:"
 
-#: isoimagewriter/mainwindow.cpp:284
+#: isoimagewriter/mainwindow.cpp:287
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "ISO ਈਮੇਜ਼ ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: isoimagewriter/mainwindow.cpp:363
+#: isoimagewriter/mainwindow.cpp:366
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "USB ਡਰਾਇਵ ਲਗਾਓ"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:487
 #, kde-format
 msgid "Cancel?"
 msgstr "ਰੱਦ ਕਰਨਾ ਹੈ?"
 
-#: isoimagewriter/mainwindow.cpp:485
+#: isoimagewriter/mainwindow.cpp:488
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "ਲਿਖਣਾ ਜਾਰੀ ਹੈ, ਵਿਚੇ ਛੱਡਣਾ ਹੈ?"
 
-#: isoimagewriter/mainwindow.cpp:501
+#: isoimagewriter/mainwindow.cpp:504
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "ਡਿਸਕ ਈਮੇਜ਼ (%1)"
 
-#: isoimagewriter/mainwindow.cpp:502
+#: isoimagewriter/mainwindow.cpp:505
 #, kde-format
 msgid "All Files (%1)"
 msgstr "ਸਭ ਫਾਇਲਾਂ (%1)"
 
-#: isoimagewriter/mainwindow.cpp:503
+#: isoimagewriter/mainwindow.cpp:506
 #, kde-format
 msgid "Select image to flash"
 msgstr "ਫਲੈਸ਼ ਕਰਨ ਲਈ ਈਮੇਜ਼ ਚੁਣੋ"
 
-#: isoimagewriter/mainwindow.cpp:533
+#: isoimagewriter/mainwindow.cpp:536
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "ISO ਈਮੇਜ਼ ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: isoimagewriter/mainwindow.cpp:551
+#: isoimagewriter/mainwindow.cpp:554
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "ਅਣਪਛਾਤਾ ਡਿਸਕ ਆਕਾਰ"
 
-#: isoimagewriter/mainwindow.cpp:552
+#: isoimagewriter/mainwindow.cpp:555
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -384,12 +384,12 @@ msgid ""
 "Image size: %1 (%2 b)"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
 #, kde-format
 msgid "Error"
 msgstr "ਗਲਤੀ"
 
-#: isoimagewriter/mainwindow.cpp:564
+#: isoimagewriter/mainwindow.cpp:567
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -398,22 +398,22 @@ msgid ""
 "Disk size: %3 (%4 b)"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:651
+#: isoimagewriter/mainwindow.cpp:654
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "ISO ਈਮੇਜ਼ ਢੁੱਕਵਾਂ ਹੈ"
 
-#: isoimagewriter/mainwindow.cpp:657
+#: isoimagewriter/mainwindow.cpp:660
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:659
+#: isoimagewriter/mainwindow.cpp:662
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "ISO ਈਮੇਜ਼ ਦੀ ਜਾਂਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ ਹੈ"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:663
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO ਜਾਂਚ ਅਸਫ਼ਲ ਹੈ"

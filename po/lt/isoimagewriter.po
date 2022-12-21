@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-15 00:47+0000\n"
+"POT-Creation-Date: 2022-12-21 00:50+0000\n"
 "PO-Revision-Date: 2022-11-16 23:00+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -259,27 +259,27 @@ msgstr "Jonathan Riddell"
 msgid "ISO file to open"
 msgstr "ISO failas, kurį atverti"
 
-#: isoimagewriter/mainwindow.cpp:112
+#: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Kelias į ISO atvaizdį..."
 
-#: isoimagewriter/mainwindow.cpp:121
+#: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
 msgstr "Sukurti"
 
-#: isoimagewriter/mainwindow.cpp:141
+#: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Įrašyti šį ISO atvaizdį:"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Į šį USB atmintuką:"
 
-#: isoimagewriter/mainwindow.cpp:162
+#: isoimagewriter/mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -290,22 +290,22 @@ msgstr ""
 "\n"
 "Ar norite tęsti?"
 
-#: isoimagewriter/mainwindow.cpp:168
+#: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
 msgstr "Atsiunčiama %1..."
 
-#: isoimagewriter/mainwindow.cpp:186
+#: isoimagewriter/mainwindow.cpp:189
 #, kde-format
 msgid "Abort"
 msgstr "Nutraukti"
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:192
 #, kde-format
 msgid "Continue"
 msgstr "Tęsti"
 
-#: isoimagewriter/mainwindow.cpp:211
+#: isoimagewriter/mainwindow.cpp:214
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -318,77 +318,77 @@ msgstr ""
 "Tai gali šiek tiek užtrukti, priklausomai nuo ISO atvaizdžio failo dydžio ir "
 "persiuntimo greičio."
 
-#: isoimagewriter/mainwindow.cpp:218
+#: isoimagewriter/mainwindow.cpp:221
 #, kde-format
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: isoimagewriter/mainwindow.cpp:234
+#: isoimagewriter/mainwindow.cpp:237
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Dabar, jūsų USB atmintukas yra užbaigtas ir paruoštas naudoti!"
 
-#: isoimagewriter/mainwindow.cpp:241
+#: isoimagewriter/mainwindow.cpp:244
 #, kde-format
 msgid "Back"
 msgstr "Atgal"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:247
 #, kde-format
 msgid "Close"
 msgstr "Užverti"
 
-#: isoimagewriter/mainwindow.cpp:269
+#: isoimagewriter/mainwindow.cpp:272
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Nepavyko atverti atvaizdžio failo:"
 
-#: isoimagewriter/mainwindow.cpp:284
+#: isoimagewriter/mainwindow.cpp:287
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Tikrinamas ISO atvaizdis"
 
-#: isoimagewriter/mainwindow.cpp:363
+#: isoimagewriter/mainwindow.cpp:366
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Įkiškite USB atmintuką"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:487
 #, kde-format
 msgid "Cancel?"
 msgstr "Atsisakyti?"
 
-#: isoimagewriter/mainwindow.cpp:485
+#: isoimagewriter/mainwindow.cpp:488
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Vyksta rašymas, nutraukti jį?"
 
-#: isoimagewriter/mainwindow.cpp:501
+#: isoimagewriter/mainwindow.cpp:504
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Disko atvaizdžiai (%1)"
 
-#: isoimagewriter/mainwindow.cpp:502
+#: isoimagewriter/mainwindow.cpp:505
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Visi failai (%1)"
 
-#: isoimagewriter/mainwindow.cpp:503
+#: isoimagewriter/mainwindow.cpp:506
 #, kde-format
 msgid "Select image to flash"
 msgstr "Pasirinkite atvaizdį, kurį įrašyti"
 
-#: isoimagewriter/mainwindow.cpp:533
+#: isoimagewriter/mainwindow.cpp:536
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "Atsiunčiamas ISO atvaizdis"
 
-#: isoimagewriter/mainwindow.cpp:551
+#: isoimagewriter/mainwindow.cpp:554
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Nežinomas disko dydis"
 
-#: isoimagewriter/mainwindow.cpp:552
+#: isoimagewriter/mainwindow.cpp:555
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -401,12 +401,12 @@ msgstr ""
 "\n"
 "Atvaizdžio dydis: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:563 isoimagewriter/mainwindow.cpp:623
+#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
 #, kde-format
 msgid "Error"
 msgstr "Klaida"
 
-#: isoimagewriter/mainwindow.cpp:564
+#: isoimagewriter/mainwindow.cpp:567
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -419,22 +419,22 @@ msgstr ""
 "Atvaizdžio dydis: %1 (%2 b)\n"
 "Disko dydis: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:651
+#: isoimagewriter/mainwindow.cpp:654
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "ISO atvaizdis yra teisingas"
 
-#: isoimagewriter/mainwindow.cpp:657
+#: isoimagewriter/mainwindow.cpp:660
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "Nepavyko rasti rakto, kad būtų patikrintas ISO atvaizdis"
 
-#: isoimagewriter/mainwindow.cpp:659
+#: isoimagewriter/mainwindow.cpp:662
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Nepavyko patikrinti ISO atvaizdžio"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:663
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO patikrinimas patyrė nesėkmę"
