@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stelios <sstavra@gmail.com>, 2017, 2019, 2021.
+# Stelios <sstavra@gmail.com>, 2017, 2019, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-21 00:50+0000\n"
-"PO-Revision-Date: 2021-09-03 08:56+0300\n"
+"PO-Revision-Date: 2023-01-05 09:21+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -238,6 +238,8 @@ msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:32
 #, kde-format
@@ -257,7 +259,7 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:37
 #, kde-format
 msgid "ISO file to open"
-msgstr ""
+msgstr "ISO αρχείο για άνοιγμα"
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
