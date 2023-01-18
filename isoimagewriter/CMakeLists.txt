@@ -1,6 +1,10 @@
 set(GPGME_REQUIRED_VERSION "1.8.0")
 find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG)
-find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(QGpgmeQt6 ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
+else()
+    find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
+endif()
 
 #find_package(KF5 REQUIRED COMPONENTS QGpgme)
 
@@ -73,10 +77,12 @@ target_link_libraries(isoimagewriter
     KF5::Solid
 )
 if(QGpgme_FOUND)
-add_definitions(-D_USE_GPG)
-target_link_libraries(isoimagewriter
-    QGpgme
-)
+    add_definitions(-D_USE_GPG)
+    if (QT_MAJOR_VERSION STREQUAL "6")
+        target_link_libraries(isoimagewriter QGpgmeQt6)
+    else()
+        target_link_libraries(isoimagewriter QGpgme)
+    endif()
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
