@@ -17,10 +17,19 @@ set(isoimagewriter_SRCS
     mainwindow.cpp
     imagewriter.cpp
     physicaldevice.cpp
-    main.cpp
     isoverifier.cpp
     fetchisojob.cpp
     isolineedit.cpp
+
+    common.h
+    mainapplication.h
+    mainwindow.h
+    imagewriter.h
+    physicaldevice.h
+    isoverifier.h
+    fetchisojob.h
+    isolineedit.h
+    main.cpp
 )
 
 ecm_qt_declare_logging_category(isoimagewriter_SRCS
