@@ -1,9 +1,9 @@
 set(GPGME_REQUIRED_VERSION "1.8.0")
 find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG)
 if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(QGpgmeQt6 ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
+    find_package(QGpgmeQt6 ${GPGME_REQUIRED_VERSION} CONFIG)
 else()
-    find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG REQUIRED)
+    find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG)
 endif()
 
 #find_package(KF5 REQUIRED COMPONENTS QGpgme)
