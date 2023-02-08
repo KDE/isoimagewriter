@@ -6,7 +6,7 @@ else()
     find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG)
 endif()
 
-#find_package(KF5 REQUIRED COMPONENTS QGpgme)
+#find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS QGpgme)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX ISOIMAGEWRITER VERSION_HEADER isoimagewriter_version.h)
 
@@ -77,13 +77,13 @@ target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_V
 target_link_libraries(isoimagewriter
     Qt::Widgets
     Qt::Network
-    KF5::I18n
-    KF5::CoreAddons
-    KF5::WidgetsAddons
-    KF5::IconThemes
-    KF5::Crash
-    KF5::Archive
-    KF5::Solid
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::CoreAddons
+    KF${KF_MAJOR_VERSION}::WidgetsAddons
+    KF${KF_MAJOR_VERSION}::IconThemes
+    KF${KF_MAJOR_VERSION}::Crash
+    KF${KF_MAJOR_VERSION}::Archive
+    KF${KF_MAJOR_VERSION}::Solid
 )
 if(QGpgme_FOUND)
     add_definitions(-D_USE_GPG)
@@ -95,11 +95,11 @@ if(QGpgme_FOUND)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  target_link_libraries(isoimagewriter KF5::Solid)
+  target_link_libraries(isoimagewriter KF${KF_MAJOR_VERSION}::Solid)
 endif()
 
 if(USE_KAUTH)
-  target_link_libraries(isoimagewriter KF5::AuthCore)
+  target_link_libraries(isoimagewriter KF${KF_MAJOR_VERSION}::AuthCore)
 endif()
 
 install(TARGETS isoimagewriter ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -111,7 +111,7 @@ endif()
 # KAuth
 if(USE_KAUTH)
     add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
-    target_link_libraries(isoimagewriter_helper Qt::Widgets KF5::AuthCore KF5::I18n KF5::WidgetsAddons KF5::Archive)
+    target_link_libraries(isoimagewriter_helper Qt::Widgets KF${KF_MAJOR_VERSION}::AuthCore KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::Archive)
     install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
     kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
     kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)
