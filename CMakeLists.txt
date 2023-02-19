@@ -51,8 +51,9 @@ find_package(KF${KF_MAJOR_VERSION} ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     Archive
     Crash
     Solid
-    Auth
 )
+
+
 
 ecm_set_disabled_deprecation_versions(QT 6.4
      KF 5.101.0
