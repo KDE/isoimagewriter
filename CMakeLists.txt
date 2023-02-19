@@ -34,7 +34,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Windows)
 endif()
 
 if(USE_KAUTH AND CMAKE_SYSTEM_NAME STREQUAL Linux)
-    find_package(KF5Auth REQUIRED)
+    find_package(KF${KF_MAJOR_VERSION}Auth REQUIRED)
     add_definitions(-DUSE_KAUTH=ON)
     message("XX using KAuth")
 else()
