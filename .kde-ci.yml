@@ -13,6 +13,9 @@ Dependencies:
     'frameworks/karchive': '@latest-kf6'
     'frameworks/kcrash': '@latest-kf6'
     'frameworks/solid': '@latest-kf6'
+
+- 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
+  'require':
     'frameworks/kauth': '@latest-kf6'
 
 - 'on': ['Linux/Qt5', 'FreeBSD/Qt5', 'Windows/Qt5']
@@ -26,4 +29,7 @@ Dependencies:
     'frameworks/karchive': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/solid': '@stable'
-    'frameworks/kauth': '@stable'
+
+- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
+  'require':
+    'frameworks/kauth': '@stable'  
