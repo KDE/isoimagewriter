@@ -77,6 +77,7 @@ target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_V
 target_link_libraries(isoimagewriter
     Qt::Widgets
     Qt::Network
+    Qt::DBus
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::CoreAddons
     KF${KF_MAJOR_VERSION}::WidgetsAddons
@@ -96,6 +97,7 @@ endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter KF${KF_MAJOR_VERSION}::Solid)
+  target_link_libraries(isoimagewriter Qt::DBus)
 endif()
 
 if(USE_KAUTH)

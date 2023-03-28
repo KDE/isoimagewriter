@@ -41,7 +41,7 @@ else()
     message("XX not using KAuth")
 endif()
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus)
 
 find_package(KF${KF_MAJOR_VERSION} ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     I18n
