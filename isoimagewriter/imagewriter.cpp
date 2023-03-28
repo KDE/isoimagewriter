@@ -20,8 +20,19 @@
 #endif
 #endif
 
+#include <QtDBus/QtDBus>
 #include <QFile>
 #include <KCompressionDevice>
+
+#include <fcntl.h>
+#include <unistd.h>
+
+typedef QHash<QString, QVariant> Properties;
+typedef QHash<QString, Properties> InterfacesAndProperties;
+typedef QHash<QDBusObjectPath, InterfacesAndProperties> DBusIntrospection;
+Q_DECLARE_METATYPE(Properties)
+Q_DECLARE_METATYPE(InterfacesAndProperties)
+Q_DECLARE_METATYPE(DBusIntrospection)
 
 #include "common.h"
 #include "physicaldevice.h"
@@ -148,10 +159,21 @@ void ImageWriter::writeImage()
         if (errMessages.size() > 0)
             throw errMessages.join("\n\n");
 
+        /*
         // Open the target USB device for writing and lock it
         PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
+        qDebug() << "writeImage() opening m_PhysicalDevice: " << m_Device->m_PhysicalDevice;
         if (!deviceFile.open())
             throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
+        */
+
+        // temperarily? calling udisks locally to get a file descriptor and pass that to QFile to open for writing
+        // not working so try to copy whatever mediawriter/helper/write.cpp WriteJob::writePlain(int fd) does
+        QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
+        QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_DIRECT | O_SYNC | O_CLOEXEC}} );
+        QDBusUnixFileDescriptor fd = reply.value();
+        QFile deviceFile;
+        deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly);
 
         qint64 readBytes;
         qint64 writtenBytes;
