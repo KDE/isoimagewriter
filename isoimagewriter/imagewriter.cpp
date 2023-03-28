@@ -197,18 +197,25 @@ void ImageWriter::writeImage()
                 if ((readBytes = device->read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0)
                     break;
             }
+            qDebug() << "readBytes: " << readBytes;
+            qDebug() << "buffer: " << buffer;
             // Align the number of bytes to the sector size
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
+            qDebug() << "readBytes after alignNumber: " << readBytes;
+            //writtenBytes = ::write(fd.fileDescriptor(), buffer, readBytes);
+            // FIXME why does write not work?
             writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
-            if (writtenBytes < 0)
-                throw i18n("Failed to write to the device:\n%1", deviceFile.errorString());
+            qDebug() << "writtenBytes: " << writtenBytes;
+            if (writtenBytes < 0) {
+                qDebug() << "write writtenBytes: " << writtenBytes;
+                //throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
+            }
             if (writtenBytes != readBytes)
                 throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
             // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
             // For unknown reason, deviceFile.flush() does not work as intended here.
-            fsync(deviceFile.handle());
+            //fsync(deviceFile.handle());
 #endif
             const int percent = (100 * imageFile.pos()) / imageFile.size();
             // Inform the GUI thread that next block was written
@@ -255,7 +262,7 @@ void ImageWriter::writeImage()
             }
             imageFile.close();
         }
-        deviceFile.close();
+        //deviceFile.close();
     }
     catch (QString msg)
     {
