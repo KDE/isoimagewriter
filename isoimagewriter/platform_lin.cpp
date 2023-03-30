@@ -66,7 +66,9 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
         qDebug() << "New drive" << driveId.path() << "-" << name << "(" << size << "bytes;" << (isValid ? "removable;" : "nonremovable;") << connectionBus << ")";
 
         deviceData->m_PhysicalDevice = object_path.path();
+        qDebug() << "XXX UsbDevice m_PhysicalDevice: " << deviceData->m_PhysicalDevice;
         deviceData->m_Volumes = QStringList{ deviceData->m_PhysicalDevice };
+        qDebug() << "XXX UsbDevice m_Volumes: " << deviceData->m_Volumes;
         /*
         const QString logicalBlockSizeFile = QStringLiteral("/sys/dev/block/%1:%2/queue/logical_block_size").arg(block->deviceMajor())
                                                                                                             .arg(block->deviceMinor());
@@ -76,7 +78,9 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
         */
         deviceData->m_SectorSize = 512;
         deviceData->m_Size = driveInterface.property("Size").toULongLong();
+        qDebug() << "XXX UsbDevice m_Size: " << deviceData->m_Size;
         deviceData->m_VisibleName = name;
+        qDebug() << "XXX UsbDevice m_VisibleName: " << deviceData->m_VisibleName;
 
         if (isValid) {
             return deviceData;

@@ -170,7 +170,7 @@ void ImageWriter::writeImage()
         // temperarily? calling udisks locally to get a file descriptor and pass that to QFile to open for writing
         // not working so try to copy whatever mediawriter/helper/write.cpp WriteJob::writePlain(int fd) does
         QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
-        QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_DIRECT | O_SYNC | O_CLOEXEC}} );
+        QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}} );
         QDBusUnixFileDescriptor fd = reply.value();
         QFile deviceFile;
         deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly);
@@ -194,8 +194,10 @@ void ImageWriter::writeImage()
             }
             else
             {
-                if ((readBytes = device->read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0)
+                if ((readBytes = device->read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0) {
+                    qDebug() << "XXX input device->read() was 0";
                     break;
+                }
             }
             qDebug() << "readBytes: " << readBytes;
             qDebug() << "buffer: " << buffer;
