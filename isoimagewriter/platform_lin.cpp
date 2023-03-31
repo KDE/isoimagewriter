@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2021 Aleix Pol Gonzalez <aleixpol@kde.org>
+    SPDX-FileCopyrightText: 2021 Aleix Pol Gonzalez <aleixpol@kde.org>, 2023 Jonathan Esk-Riddell <jr@jriddell.org>
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
@@ -153,6 +153,6 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
 
 bool ensureElevated()
 {
-    // on Linux we use KAuth which uses polkit to run necessary bits as root
+    // on Linux we use udisks2 which uses polkit to run necessary bits as root
     return true;
 }

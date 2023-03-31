@@ -1,6 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2019 Farid Boudedja <farid.boudedja@gmail.com>
-
+    SPDX-FileCopyrightText: 2019 Farid Boudedja <farid.boudedja@gmail.com>, 2023 Jonathan Esk-Riddell <jr@jriddell.org>
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 

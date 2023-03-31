@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2016 ROSA, 2022 Jonathan Esk-Riddell <jr@jriddell.org>
+
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
