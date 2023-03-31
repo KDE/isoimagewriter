@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(imagewriter)
-set(PROJECT_VERSION "0.9")
+set(PROJECT_VERSION "0.9.1")
 
 set(QT_MIN_VERSION "5.15.2")
 set(KF5_REQUIRED_VERSION "5.91.0")
@@ -27,20 +27,6 @@ endif()
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-    option(USE_KAUTH "Build with KAuth (default on for Linux, off for Windows)" ON)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Windows)
-    option(USE_KAUTH "Build with KAuth (default on for Linux, off for Windows)" OFF)
-endif()
-
-if(USE_KAUTH AND CMAKE_SYSTEM_NAME STREQUAL Linux)
-    find_package(KF${KF_MAJOR_VERSION}Auth REQUIRED)
-    add_definitions(-DUSE_KAUTH=ON)
-    message("XX using KAuth")
-else()
-    message("XX not using KAuth")
-endif()
-
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus)
 
 find_package(KF${KF_MAJOR_VERSION} ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
@@ -52,8 +38,6 @@ find_package(KF${KF_MAJOR_VERSION} ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     Crash
     Solid
 )
-
-
 
 ecm_set_disabled_deprecation_versions(QT 6.4
      KF 5.101.0
