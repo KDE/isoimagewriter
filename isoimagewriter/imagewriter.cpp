@@ -38,7 +38,6 @@ ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *p
 // The main method that writes the image
 void ImageWriter::writeImage()
 {
-    qDebug() << "XX writeImage()";
     const qint64 TRANSFER_BLOCK_SIZE = 1024 * 1024;
     void* buffer = NULL;
 
@@ -149,16 +148,6 @@ void ImageWriter::writeImage()
         if (errMessages.size() > 0)
             throw errMessages.join("\n\n");
 
-        /*
-        // Open the target USB device for writing and lock it
-        PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
-        qDebug() << "writeImage() opening m_PhysicalDevice: " << m_Device->m_PhysicalDevice;
-        if (!deviceFile.open())
-            throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
-        */
-
-        // temperarily? calling udisks locally to get a file descriptor and pass that to QFile to open for writing
-        // not working so try to copy whatever mediawriter/helper/write.cpp WriteJob::writePlain(int fd) does
         QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
         QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}} );
         QDBusUnixFileDescriptor fd = reply.value();
@@ -170,8 +159,6 @@ void ImageWriter::writeImage()
         // Start reading/writing cycle
         for (;;)
         {
-            qDebug() << "For Loop3";
-
             if (zeroing)
             {
                 readBytes = TRANSFER_BLOCK_SIZE;
@@ -179,19 +166,12 @@ void ImageWriter::writeImage()
             else
             {
                 if ((readBytes = device->read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0) {
-                    qDebug() << "XXX input device->read() was 0";
                     break;
                 }
             }
-            qDebug() << "readBytes: " << readBytes;
-            qDebug() << "buffer: " << buffer;
             // Align the number of bytes to the sector size
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
-            qDebug() << "readBytes after alignNumber: " << readBytes;
-            //writtenBytes = ::write(fd.fileDescriptor(), buffer, readBytes);
-            // FIXME why does write not work?
             writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
-            qDebug() << "writtenBytes: " << writtenBytes;
             if (writtenBytes < 0) {
                 qDebug() << "write writtenBytes: " << writtenBytes;
                 //throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
@@ -209,7 +189,6 @@ void ImageWriter::writeImage()
             // this still works or at least fails compilation
             emit progressChanged(percent);
 
-
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
             m_Mutex.lock();
             cancelRequested = m_CancelWriting;
@@ -217,7 +196,6 @@ void ImageWriter::writeImage()
 
             if (cancelRequested)
             {
-                qDebug() << "cancelRequested";
                 // The cancel request was issued
                 emit cancelled();
                 break;
@@ -235,7 +213,7 @@ void ImageWriter::writeImage()
             }
             imageFile.close();
         }
-        //deviceFile.close();
+        deviceFile.close();
     }
     catch (QString msg)
     {

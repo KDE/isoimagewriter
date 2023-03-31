@@ -15,9 +15,6 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QRegularExpression>
-#include <Solid/Block>
-#include <Solid/Device>
-#include <Solid/StorageDrive>
 
 #include "mainapplication.h"
 #include "usbdevice.h"
@@ -63,24 +60,13 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
             else
                 name = QString("%1 %2").arg(vendor).arg(model);
 
-        qDebug() << "New drive" << driveId.path() << "-" << name << "(" << size << "bytes;" << (isValid ? "removable;" : "nonremovable;") << connectionBus << ")";
+        //qDebug() << "New drive" << driveId.path() << "-" << name << "(" << size << "bytes;" << (isValid ? "removable;" : "nonremovable;") << connectionBus << ")";
 
         deviceData->m_PhysicalDevice = object_path.path();
-        qDebug() << "XXX UsbDevice m_PhysicalDevice: " << deviceData->m_PhysicalDevice;
         deviceData->m_Volumes = QStringList{ deviceData->m_PhysicalDevice };
-        qDebug() << "XXX UsbDevice m_Volumes: " << deviceData->m_Volumes;
-        /*
-        const QString logicalBlockSizeFile = QStringLiteral("/sys/dev/block/%1:%2/queue/logical_block_size").arg(block->deviceMajor())
-                                                                                                            .arg(block->deviceMinor());
-        deviceData->m_SectorSize = readFileContents(logicalBlockSizeFile).toUInt();
-        if (deviceData->m_SectorSize == 0)
-            deviceData->m_SectorSize = 512;
-        */
         deviceData->m_SectorSize = 512;
         deviceData->m_Size = driveInterface.property("Size").toULongLong();
-        qDebug() << "XXX UsbDevice m_Size: " << deviceData->m_Size;
         deviceData->m_VisibleName = name;
-        qDebug() << "XXX UsbDevice m_VisibleName: " << deviceData->m_VisibleName;
 
         if (isValid) {
             return deviceData;
@@ -94,9 +80,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
 
     qDBusRegisterMetaType<InterfacesAndProperties>();
     qDBusRegisterMetaType<DBusIntrospection>();
-    qDebug() << "XXX platformEnumFlashDevices()";
     QDBusInterface* m_objManager = new QDBusInterface("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", "org.freedesktop.DBus.ObjectManager", QDBusConnection::systemBus());
-    //QDBusReply<int> reply = m_objManager->call("GetManagedObjects");
     QDBusPendingReply<DBusIntrospection> reply = m_objManager->asyncCall("GetManagedObjects");
     reply.waitForFinished();
     if (reply.isError()) {
@@ -109,8 +93,6 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         if (!i.path().startsWith("/org/freedesktop/UDisks2/block_devices")) {
             continue;
         }
-        qDebug() << "XXX platformEnumFlashDevices() path: " << i.path();
-
         UsbDevice* deviceData = nullptr;
         deviceData = handleObject(i, introspection[i]);
         if (deviceData) {
@@ -118,36 +100,6 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         }
     }
 
-    /* Old Code
-    const auto devices = Solid::Device::listFromType(Solid::DeviceInterface::StorageDrive);
-    for (const auto &device : devices) {
-        if (!device.is<Solid::StorageDrive>()) {
-            qDebug() << "Ignoring" << device.displayName() << device.udi();
-            continue;
-        }
-
-        auto storageDrive = device.as<Solid::StorageDrive>();
-        auto block = device.as<Solid::Block>();
-        if (storageDrive->isInUse()) {
-            qDebug() << "Skipping" << device.displayName() << device.udi();
-            continue;
-        }
-
-        UsbDevice* deviceData = new UsbDevice;
-        deviceData->m_PhysicalDevice = block->device();
-        deviceData->m_Volumes = QStringList{ deviceData->m_PhysicalDevice };
-
-        const QString logicalBlockSizeFile = QStringLiteral("/sys/dev/block/%1:%2/queue/logical_block_size").arg(block->deviceMajor())
-                                                                                                            .arg(block->deviceMinor());
-        deviceData->m_SectorSize = readFileContents(logicalBlockSizeFile).toUInt();
-        if (deviceData->m_SectorSize == 0)
-            deviceData->m_SectorSize = 512;
-        deviceData->m_Size = storageDrive->size();
-        deviceData->m_VisibleName = device.displayName();
-
-        callback(cbParam, deviceData);
-    }
-    */
     return true;
 }
 

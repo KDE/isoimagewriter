@@ -65,12 +65,7 @@ bool PhysicalDevice::open()
         return false;
     }
 #elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
-    // Simply use QFile, it works fine in Linux
-    // TODO: Use system call open with O_DIRECT
-    //return QFile::open(QIODevice::WriteOnly);
-    qDebug() << "XXX getDescriptor() " << fileName();
     int fd = getDescriptor();
-    qDebug() << "XXX getDescriptor() done";
     return QFile::open(fd, QIODevice::WriteOnly);
 #else
     return false;
@@ -80,12 +75,10 @@ bool PhysicalDevice::open()
 int PhysicalDevice::getDescriptor() {
     // fileName == e.g. /org/freedesktop/UDisks2/block_devices/sda
     // drivePath == e.g. /org/freedesktop/UDisks2/drives/JetFlash_Transcend_8GB_2H1NKR5V
-    qDebug() << "XXX getDescriptor() 1";
     QDBusInterface device("org.freedesktop.UDisks2", fileName(), "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
     QString drivePath = qvariant_cast<QDBusObjectPath>(device.property("Drive")).path();
     QDBusInterface manager("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", "org.freedesktop.DBus.ObjectManager", QDBusConnection::systemBus());
     QDBusMessage message = manager.call("GetManagedObjects");
-    qDebug() << "XXX getDescriptor() 2";
 
     if (message.arguments().length() == 1) {
         QDBusArgument arg = qvariant_cast<QDBusArgument>(message.arguments().first());
@@ -102,7 +95,6 @@ int PhysicalDevice::getDescriptor() {
         }
     } else {
         setErrorString(message.errorMessage());
-        qDebug() << "XXX getDescriptor() error 1";
         return -1;
     }
 
@@ -111,10 +103,8 @@ int PhysicalDevice::getDescriptor() {
 
     if (!fd.isValid()) {
         setErrorString(reply.error().message());
-        qDebug() << "XXX getDescriptor() error 2: " << reply.error().message();
         return -1;
     }
 
-    qDebug() << "XXX getDescriptor() return fd: " << fd.fileDescriptor();
     return fd.fileDescriptor();
 }
