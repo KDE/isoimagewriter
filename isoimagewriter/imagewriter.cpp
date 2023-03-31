@@ -15,7 +15,6 @@
 #include <KCompressionDevice>
 
 #include <fcntl.h>
-#include <unistd.h>
 
 typedef QHash<QString, QVariant> Properties;
 typedef QHash<QString, Properties> InterfacesAndProperties;
