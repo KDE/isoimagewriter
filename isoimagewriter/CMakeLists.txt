@@ -100,21 +100,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter Qt::DBus)
 endif()
 
-if(USE_KAUTH)
-  target_link_libraries(isoimagewriter KF${KF_MAJOR_VERSION}::AuthCore)
-endif()
-
 install(TARGETS isoimagewriter ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
     install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
     install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
-endif()
-
-# KAuth
-if(USE_KAUTH)
-    add_executable(isoimagewriter_helper common.cpp imagewriter_helper.cpp imagewriter.cpp physicaldevice.cpp)
-    target_link_libraries(isoimagewriter_helper Qt::Widgets KF${KF_MAJOR_VERSION}::AuthCore KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::Archive)
-    install(TARGETS isoimagewriter_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
-    kauth_install_helper_files(isoimagewriter_helper org.kde.isoimagewriter root)
-    kauth_install_actions(org.kde.isoimagewriter isoimagewriter.actions)
 endif()

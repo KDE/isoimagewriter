@@ -19,15 +19,6 @@
 #include <QStackedWidget>
 #include <KPixmapSequenceOverlayPainter>
 
-#if defined(USE_KAUTH)
-#include <kauth_version.h>
-#if KAUTH_VERSION >= QT_VERSION_CHECK(5, 92, 0)
-#include <KAuth/ExecuteJob>
-#else
-#include <KAuth>
-#endif
-#endif
-
 class FetchIsoJob;
 class IsoLineEdit;
 
@@ -67,10 +58,6 @@ private:
     bool m_enumFlashDevicesWaiting;
     ExternalProgressBar m_externalProgressBar;
 
-#if defined(USE_KAUTH)
-    KAuth::ExecuteJob *m_job;
-#endif
-
     void setupUi();
     QWidget* createFormWidget();
     QWidget* createConfirmWidget();
@@ -98,14 +85,6 @@ private slots:
     void showConfirmMessage();
     void showIsoVerificationResult(IsoVerifier::VerifyResult result, const QString &error);
     void openUrl(const QUrl &url);
-
-#if defined(USE_KAUTH)
-    void cancelWriting();
-    void progressPercentUpdate(KJob* job, unsigned long percent);
-    void progressStep(const QVariantMap &);
-    void statusChanged(KAuth::Action::AuthStatus status);
-    void finished(KJob* job);
-#endif
 };
 
 #endif // MAINWINDOW_H

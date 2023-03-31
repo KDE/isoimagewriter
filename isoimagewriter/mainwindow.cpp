@@ -374,34 +374,6 @@ void MainWindow::writeToDevice(bool zeroing)
     UsbDevice* selectedDevice = m_usbDriveComboBox->itemData(
         m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
 
-// Use KAuth to get required previleges in supported platforms
-#if defined(USE_KAUTH)
-    connect(m_cancelButton, &QPushButton::clicked, this, &MainWindow::cancelWriting);
-
-    KAuth::Action action("org.kde.isoimagewriter.write");
-    action.setHelperId("org.kde.isoimagewriter");
-
-    QVariantMap args;
-    args[QStringLiteral("zeroing")] = QVariant(zeroing);
-    args[QStringLiteral("imagefile")] = m_isoImagePath;
-    args[QStringLiteral("usbdevice_visiblename")] = selectedDevice->m_VisibleName;
-    args[QStringLiteral("usbdevice_volumes")] = selectedDevice->m_Volumes[0];
-    args[QStringLiteral("usbdevice_size")] = QString("%1").arg(selectedDevice->m_Size);
-    args[QStringLiteral("usbdevice_sectorsize")] = selectedDevice->m_SectorSize;
-    args[QStringLiteral("usbdevice_physicaldevice")] = selectedDevice->m_PhysicalDevice;
-
-    action.setArguments(args);
-    action.setTimeout(3600000); // an hour
-
-    m_job = action.execute();
-
-    connect(m_job, &KAuth::ExecuteJob::percentChanged, this, &MainWindow::progressPercentUpdate);
-    connect(m_job, &KAuth::ExecuteJob::newData, this, &MainWindow::progressStep);
-    connect(m_job, &KAuth::ExecuteJob::statusChanged, this, &MainWindow::statusChanged);
-    connect(m_job, &KAuth::ExecuteJob::result, this, &MainWindow::finished);
-
-    m_job->start();
-#else
     ImageWriter* writer = new ImageWriter(zeroing ? "" : m_isoImagePath, selectedDevice);
     QThread *writerThread = new QThread(this);
 
@@ -427,7 +399,6 @@ void MainWindow::writeToDevice(bool zeroing)
     // Now start the writer thread
     writer->moveToThread(writerThread);
     writerThread->start();
-#endif
 
     showWritingProgress();
 }
@@ -664,41 +635,3 @@ void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, con
     }
     Q_EMIT verificationResult(verify == IsoVerifier::VerifyResult::Successful);
 }
-
-#if defined(USE_KAUTH)
-void MainWindow::cancelWriting() {
-    qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting()";
-    m_job->kill();
-    qCDebug(ISOIMAGEWRITER_LOG) << "cancelWriting() done";
-}
-
-void MainWindow::progressPercentUpdate(KJob* job, unsigned long step) {
-    Q_UNUSED(job)
-    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep %() " << step;
-    updateProgressBar(step);
-}
-
-void MainWindow::progressStep(const QVariantMap & data) {
-    qCDebug(ISOIMAGEWRITER_LOG) << "progressStep(QVariantMap)" << data;// << step;
-    if (data[QStringLiteral("error")].isValid()) {
-        showErrorMessage(data[QStringLiteral("error")].toString());
-    } else if (data[QStringLiteral("success")].isValid()) {
-        showSuccessMessage();
-    } else if (data[QStringLiteral("cancel")].isValid()) {
-        hideWritingProgress();
-    }
-}
-
-void MainWindow::statusChanged(KAuth::Action::AuthStatus status) {
-    qCDebug(ISOIMAGEWRITER_LOG) << "statusChanged: " << status;
-}
-
-void MainWindow::finished(KJob* job) {
-    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job->error();
-    KAuth::ExecuteJob *job2 = (KAuth::ExecuteJob *)job;
-    qCDebug(ISOIMAGEWRITER_LOG) << "finished() " << job2->data();
-
-    if (job->error() != 0)
-        hideWritingProgress();
-}
-#endif
