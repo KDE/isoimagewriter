@@ -25,15 +25,17 @@ Q_DECLARE_METATYPE(InterfacesAndProperties)
 Q_DECLARE_METATYPE(DBusIntrospection)
 
 UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndProperties &interfaces_and_properties) {
-    QRegExp numberRE("[0-9]$");
-    QRegExp mmcRE("[0-9]p[0-9]$");
+    QRegularExpression numberRE("[0-9]$");
+    QRegularExpressionMatch numberREMatch = numberRE.match(object_path.path());
+    QRegularExpression mmcRE("[0-9]p[0-9]$");
+    QRegularExpressionMatch mmcREMatch = mmcRE.match(object_path.path());
     QDBusObjectPath driveId = qvariant_cast<QDBusObjectPath>(interfaces_and_properties["org.freedesktop.UDisks2.Block"]["Drive"]);
 
     QDBusInterface driveInterface("org.freedesktop.UDisks2", driveId.path(), "org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus());
     UsbDevice* deviceData = new UsbDevice;
 
-    if ((numberRE.indexIn(object_path.path()) >= 0 && !object_path.path().startsWith("/org/freedesktop/UDisks2/block_devices/mmcblk")) ||
-            mmcRE.indexIn(object_path.path()) >= 0)
+    if ((numberREMatch.hasMatch() && !object_path.path().startsWith("/org/freedesktop/UDisks2/block_devices/mmcblk")) ||
+            mmcREMatch.hasMatch())
         return nullptr;
 
     if (!driveId.path().isEmpty() && driveId.path() != "/") {
