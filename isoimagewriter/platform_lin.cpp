@@ -46,7 +46,7 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
         QString vendor = driveInterface.property("Vendor").toString();
         QString model = driveInterface.property("Model").toString();
         uint64_t size = driveInterface.property("Size").toULongLong();
-        bool isoLayout = interfaces_and_properties["org.freedesktop.UDisks2.Block"]["IdType"].toString() == "iso9660";
+        //bool isoLayout = interfaces_and_properties["org.freedesktop.UDisks2.Block"]["IdType"].toString() == "iso9660";
 
         QString name;
         if (vendor.isEmpty())
@@ -65,7 +65,7 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
         deviceData->m_PhysicalDevice = object_path.path();
         deviceData->m_Volumes = QStringList{ deviceData->m_PhysicalDevice };
         deviceData->m_SectorSize = 512;
-        deviceData->m_Size = driveInterface.property("Size").toULongLong();
+        deviceData->m_Size = size;
         deviceData->m_VisibleName = name;
 
         if (isValid) {
