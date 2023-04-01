@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-21 00:50+0000\n"
+"POT-Creation-Date: 2023-04-01 00:53+0000\n"
 "PO-Revision-Date: 2019-12-05 19:02+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -32,23 +32,23 @@ msgstr "qiilaq69@gmail.com"
 msgid "Error code: %1"
 msgstr "Veakood: %1"
 
-#: isoimagewriter/imagewriter.cpp:58
+#: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "Mälu eraldamine puhvrile nurjus:"
 
-#: isoimagewriter/imagewriter.cpp:62
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "Mälu eraldamine puhvrile nurjus."
 
-#: isoimagewriter/imagewriter.cpp:76
+#: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Tõmmisefaili avamine nurjus: %1"
 
-#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
-#: isoimagewriter/imagewriter.cpp:93
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
 #, fuzzy, kde-format
 #| msgid ""
 #| "Failed to open the target device:\n"
@@ -58,17 +58,17 @@ msgstr ""
 "Sihtseadme avamine nurjus:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:119
+#: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Pulga %1 avamine nurjus"
 
-#: isoimagewriter/imagewriter.cpp:126
+#: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Pulga %1 lahutamine nurjus"
 
-#: isoimagewriter/imagewriter.cpp:143
+#: isoimagewriter/imagewriter.cpp:142
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -77,25 +77,7 @@ msgstr ""
 "Ketta %1 lahutamine nurjus\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
-#, kde-format
-msgid ""
-"Failed to open the target device:\n"
-"%1"
-msgstr ""
-"Sihtseadme avamine nurjus:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:182
-#, kde-format
-msgid ""
-"Failed to write to the device:\n"
-"%1"
-msgstr ""
-"Seadmesse kirjutamine nurjus:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:184
+#: isoimagewriter/imagewriter.cpp:179
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -104,24 +86,24 @@ msgstr ""
 "Viimane plokk jäi lõpuni kirjutamata (%1 / %2 baidist)!\n"
 "Loobutakse."
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:211
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr "Tõmmisefaili lugemine nurjus:\\ %1"
 
-#: isoimagewriter/imagewriter.cpp:260
+#: isoimagewriter/imagewriter.cpp:233
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Toiming sooritati edukalt."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Nüüd tuleb seade vormindada."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -223,64 +205,64 @@ msgstr "Kontrollsummad ei sobi kokku"
 msgid "Requires an SHA256 checksum"
 msgstr "Nõutav on SHA256 kontrollsumma"
 
-#: isoimagewriter/mainapplication.cpp:26
+#: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
 msgstr "ISO-tõmmise kirjutaja"
 
-#: isoimagewriter/mainapplication.cpp:28
+#: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
 msgstr "ISO-tõmmise kirjutamine USB-pulgale"
 
-#: isoimagewriter/mainapplication.cpp:30
+#: isoimagewriter/mainapplication.cpp:31
 #, kde-format
 msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
 
-#: isoimagewriter/mainapplication.cpp:32
+#: isoimagewriter/mainapplication.cpp:33
 #, kde-format
 msgid "Konstantin Vlasov"
 msgstr "Konstantin Vlasov"
 
-#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Author"
 msgstr "Autor"
 
-#: isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Jonathan Riddell"
 msgstr "Jonathan Riddell"
 
-#: isoimagewriter/mainapplication.cpp:37
+#: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:113
+#: isoimagewriter/mainwindow.cpp:112
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "ISO-tõmmise asukoht ..."
 
-#: isoimagewriter/mainwindow.cpp:124
+#: isoimagewriter/mainwindow.cpp:123
 #, kde-format
 msgid "Create"
 msgstr "Loo"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:143
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "See ISO-tõmmis kirjutatakse:"
 
-#: isoimagewriter/mainwindow.cpp:147
+#: isoimagewriter/mainwindow.cpp:146
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Sellele USB-pulgale:"
 
-#: isoimagewriter/mainwindow.cpp:165
+#: isoimagewriter/mainwindow.cpp:164
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -291,22 +273,22 @@ msgstr ""
 "\n"
 "Kas jätkata?"
 
-#: isoimagewriter/mainwindow.cpp:171
+#: isoimagewriter/mainwindow.cpp:170
 #, kde-format
 msgid "Downloading %1..."
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:188
 #, kde-format
 msgid "Abort"
 msgstr "Loobu"
 
-#: isoimagewriter/mainwindow.cpp:192
+#: isoimagewriter/mainwindow.cpp:191
 #, kde-format
 msgid "Continue"
 msgstr "Jätka"
 
-#: isoimagewriter/mainwindow.cpp:214
+#: isoimagewriter/mainwindow.cpp:213
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -319,79 +301,79 @@ msgstr ""
 "See võib võtta veidi aega sõltuvalt ISO-tõmmise suurusest ja "
 "ülekandekiirusest."
 
-#: isoimagewriter/mainwindow.cpp:221
+#: isoimagewriter/mainwindow.cpp:220
 #, kde-format
 msgid "Cancel"
 msgstr "Loobu"
 
-#: isoimagewriter/mainwindow.cpp:237
+#: isoimagewriter/mainwindow.cpp:236
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Sinu USB-puhk on nüüd valmis kasutamiseks!"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:243
 #, kde-format
 msgid "Back"
 msgstr "Tagasi"
 
-#: isoimagewriter/mainwindow.cpp:247
+#: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Close"
 msgstr "Sulge"
 
-#: isoimagewriter/mainwindow.cpp:272
+#: isoimagewriter/mainwindow.cpp:271
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Tõmmisefaili avamine nurjus:"
 
-#: isoimagewriter/mainwindow.cpp:287
+#: isoimagewriter/mainwindow.cpp:286
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "ISO-tõmmise kontrollimine"
 
-#: isoimagewriter/mainwindow.cpp:366
+#: isoimagewriter/mainwindow.cpp:365
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Palun ühenda USB-pulk"
 
-#: isoimagewriter/mainwindow.cpp:487
+#: isoimagewriter/mainwindow.cpp:457
 #, kde-format
 msgid "Cancel?"
 msgstr "Kas loobuda?"
 
-#: isoimagewriter/mainwindow.cpp:488
+#: isoimagewriter/mainwindow.cpp:458
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Kirjutamine käib, kas loobuda?"
 
-#: isoimagewriter/mainwindow.cpp:504
+#: isoimagewriter/mainwindow.cpp:474
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Tõmmisefailid (%1)"
 
-#: isoimagewriter/mainwindow.cpp:505
+#: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Kõik failid (%1)"
 
-#: isoimagewriter/mainwindow.cpp:506
+#: isoimagewriter/mainwindow.cpp:476
 #, kde-format
 msgid "Select image to flash"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:536
+#: isoimagewriter/mainwindow.cpp:506
 #, fuzzy, kde-format
 #| msgid "Could not read ISO image"
 msgid "Downloading ISO image"
 msgstr "ISO-tõmmise lugemine nurjus"
 
-#: isoimagewriter/mainwindow.cpp:554
+#: isoimagewriter/mainwindow.cpp:524
 #, fuzzy, kde-format
 #| msgid "Unknown Device"
 msgid "Unknown Disk Size"
 msgstr "Tundmatu seade"
 
-#: isoimagewriter/mainwindow.cpp:555
+#: isoimagewriter/mainwindow.cpp:525
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -400,12 +382,12 @@ msgid ""
 "Image size: %1 (%2 b)"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
+#: isoimagewriter/mainwindow.cpp:536 isoimagewriter/mainwindow.cpp:596
 #, kde-format
 msgid "Error"
 msgstr "Tõrge"
 
-#: isoimagewriter/mainwindow.cpp:567
+#: isoimagewriter/mainwindow.cpp:537
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -418,28 +400,28 @@ msgstr ""
 "Tõmmise suurus: %1 (%2 b)\n"
 "Pulga suurus: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:624
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "ISO-tõmmis on korras"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:630
 #, fuzzy, kde-format
 #| msgid "Could not verify ISO image"
 msgid "Could not find the key to verify the ISO image"
 msgstr "ISO-tõmmise kontrollimine nurjus"
 
-#: isoimagewriter/mainwindow.cpp:662
+#: isoimagewriter/mainwindow.cpp:632
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "ISO-tõmmise kontrollimine nurjus"
 
-#: isoimagewriter/mainwindow.cpp:663
+#: isoimagewriter/mainwindow.cpp:633
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO-tõmmise kontrollimine nurjus"
 
-#: isoimagewriter/physicaldevice.cpp:43
+#: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
 msgstr "Lukustust ei õnnestunud hankida:"
@@ -478,6 +460,20 @@ msgstr "Tundmatu seade"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<lahutatud>"
+
+#~ msgid ""
+#~ "Failed to open the target device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Sihtseadme avamine nurjus:\n"
+#~ "%1"
+
+#~ msgid ""
+#~ "Failed to write to the device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Seadmesse kirjutamine nurjus:\n"
+#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "Autoriõigus (c) 2016: ROSA"

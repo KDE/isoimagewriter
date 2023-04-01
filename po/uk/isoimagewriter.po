@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-21 00:50+0000\n"
+"POT-Creation-Date: 2023-04-01 00:53+0000\n"
 "PO-Revision-Date: 2022-04-19 08:54+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -36,38 +36,38 @@ msgstr "yurchor@ukr.net"
 msgid "Error code: %1"
 msgstr "Код помилки: %1"
 
-#: isoimagewriter/imagewriter.cpp:58
+#: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "Не вдалося отримати область пам’яті під буфер:"
 
-#: isoimagewriter/imagewriter.cpp:62
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "Не вдалося отримати область пам’яті під буфер."
 
-#: isoimagewriter/imagewriter.cpp:76
+#: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Не вдалося відкрити файл образу: %1"
 
-#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
-#: isoimagewriter/imagewriter.cpp:93
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
 msgstr "Не вдалося відкрити пристрій стикання: %1"
 
-#: isoimagewriter/imagewriter.cpp:119
+#: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Не вдалося відкрити пристрій %1"
 
-#: isoimagewriter/imagewriter.cpp:126
+#: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Не вдалося демонтувати пристрій %1"
 
-#: isoimagewriter/imagewriter.cpp:143
+#: isoimagewriter/imagewriter.cpp:142
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -76,25 +76,7 @@ msgstr ""
 "Не вдалося демонтувати том %1\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
-#, kde-format
-msgid ""
-"Failed to open the target device:\n"
-"%1"
-msgstr ""
-"Не вдалося відкрити пристрій призначення:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:182
-#, kde-format
-msgid ""
-"Failed to write to the device:\n"
-"%1"
-msgstr ""
-"Не вдалося виконати запис на пристрій:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:184
+#: isoimagewriter/imagewriter.cpp:179
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -103,7 +85,7 @@ msgstr ""
 "Останній блок було записано не повністю (%1 з %2 байтів)!\n"
 "Перериваємо обробку."
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:211
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -112,17 +94,17 @@ msgstr ""
 "Не вдалося прочитати файл образу:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:260
+#: isoimagewriter/imagewriter.cpp:233
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Дію успішно виконано."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Вам слід форматувати пристрій."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -226,64 +208,64 @@ msgstr "Контрольна сума не збігається з еталон�
 msgid "Requires an SHA256 checksum"
 msgstr "Потрібна контрольна сума SHA256"
 
-#: isoimagewriter/mainapplication.cpp:26
+#: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
 msgstr "Записувач образів ISO"
 
-#: isoimagewriter/mainapplication.cpp:28
+#: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
 msgstr "Програма для запису образів ISO на флешки USB"
 
-#: isoimagewriter/mainapplication.cpp:30
+#: isoimagewriter/mainapplication.cpp:31
 #, kde-format
 msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr "© ROSA, 2016; © Jonathan Esk-Riddell <jr@jriddell.org>, 2022"
 
-#: isoimagewriter/mainapplication.cpp:32
+#: isoimagewriter/mainapplication.cpp:33
 #, kde-format
 msgid "Konstantin Vlasov"
 msgstr "Konstantin Vlasov"
 
-#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Author"
 msgstr "Автор"
 
-#: isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Jonathan Riddell"
 msgstr "Jonathan Riddell"
 
-#: isoimagewriter/mainapplication.cpp:37
+#: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
 msgstr "Файл ISO, який слід відкрити"
 
-#: isoimagewriter/mainwindow.cpp:113
+#: isoimagewriter/mainwindow.cpp:112
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Шлях до образу ISO…"
 
-#: isoimagewriter/mainwindow.cpp:124
+#: isoimagewriter/mainwindow.cpp:123
 #, kde-format
 msgid "Create"
 msgstr "Створити"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:143
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Записати цей образ ISO:"
 
-#: isoimagewriter/mainwindow.cpp:147
+#: isoimagewriter/mainwindow.cpp:146
 #, kde-format
 msgid "To this USB drive:"
 msgstr "На цей пристрій USB:"
 
-#: isoimagewriter/mainwindow.cpp:165
+#: isoimagewriter/mainwindow.cpp:164
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -294,22 +276,22 @@ msgstr ""
 "\n"
 "Хочете продовжити запис попри це?"
 
-#: isoimagewriter/mainwindow.cpp:171
+#: isoimagewriter/mainwindow.cpp:170
 #, kde-format
 msgid "Downloading %1..."
 msgstr "Отримуємо %1…"
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:188
 #, kde-format
 msgid "Abort"
 msgstr "Перервати"
 
-#: isoimagewriter/mainwindow.cpp:192
+#: isoimagewriter/mainwindow.cpp:191
 #, kde-format
 msgid "Continue"
 msgstr "Продовжити"
 
-#: isoimagewriter/mainwindow.cpp:214
+#: isoimagewriter/mainwindow.cpp:213
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -322,79 +304,79 @@ msgstr ""
 "Процедура запису може бути доволі тривалою, залежно від розміру файла образу "
 "ISO та швидкості передавання даних."
 
-#: isoimagewriter/mainwindow.cpp:221
+#: isoimagewriter/mainwindow.cpp:220
 #, kde-format
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: isoimagewriter/mainwindow.cpp:237
+#: isoimagewriter/mainwindow.cpp:236
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr ""
 "Запис пристрою USB із портативною системою завершено. Він готовий до "
 "використання!"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:243
 #, kde-format
 msgid "Back"
 msgstr "Назад"
 
-#: isoimagewriter/mainwindow.cpp:247
+#: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Close"
 msgstr "Закрити"
 
-#: isoimagewriter/mainwindow.cpp:272
+#: isoimagewriter/mainwindow.cpp:271
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Не вдалося відкрити файл образу:"
 
-#: isoimagewriter/mainwindow.cpp:287
+#: isoimagewriter/mainwindow.cpp:286
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Перевіряємо образ ISO"
 
-#: isoimagewriter/mainwindow.cpp:366
+#: isoimagewriter/mainwindow.cpp:365
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Будь ласка, з'єднайте пристрій USB"
 
-#: isoimagewriter/mainwindow.cpp:487
+#: isoimagewriter/mainwindow.cpp:457
 #, kde-format
 msgid "Cancel?"
 msgstr "Скасувати?"
 
-#: isoimagewriter/mainwindow.cpp:488
+#: isoimagewriter/mainwindow.cpp:458
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Триває записування даних. Перервати його?"
 
-#: isoimagewriter/mainwindow.cpp:504
+#: isoimagewriter/mainwindow.cpp:474
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Образи дисків (%1)"
 
-#: isoimagewriter/mainwindow.cpp:505
+#: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Усі файли (%1)"
 
-#: isoimagewriter/mainwindow.cpp:506
+#: isoimagewriter/mainwindow.cpp:476
 #, kde-format
 msgid "Select image to flash"
 msgstr "Виберіть образ для запису"
 
-#: isoimagewriter/mainwindow.cpp:536
+#: isoimagewriter/mainwindow.cpp:506
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "Отримання образу ISO"
 
-#: isoimagewriter/mainwindow.cpp:554
+#: isoimagewriter/mainwindow.cpp:524
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Невідомий розмір диска"
 
-#: isoimagewriter/mainwindow.cpp:555
+#: isoimagewriter/mainwindow.cpp:525
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -407,12 +389,12 @@ msgstr ""
 "\n"
 "Розмір образу: %1 (%2 Б)"
 
-#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
+#: isoimagewriter/mainwindow.cpp:536 isoimagewriter/mainwindow.cpp:596
 #, kde-format
 msgid "Error"
 msgstr "Помилка"
 
-#: isoimagewriter/mainwindow.cpp:567
+#: isoimagewriter/mainwindow.cpp:537
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -426,27 +408,27 @@ msgstr ""
 "Розмір образу: %1 (%2 Б)\n"
 "Розмір диска: %3 (%4 Б)"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:624
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "Образ ISO є коректним"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:630
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "Не вдалося знайти ключ для перевірки образу ISO"
 
-#: isoimagewriter/mainwindow.cpp:662
+#: isoimagewriter/mainwindow.cpp:632
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Не вдалося перевірити образ ISO"
 
-#: isoimagewriter/mainwindow.cpp:663
+#: isoimagewriter/mainwindow.cpp:633
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO не пройшов перевірки"
 
-#: isoimagewriter/physicaldevice.cpp:43
+#: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
 msgstr "Не вдалося виконати блокування:"
@@ -485,6 +467,20 @@ msgstr "Невідомий пристрій"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<демонтовано>"
+
+#~ msgid ""
+#~ "Failed to open the target device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Не вдалося відкрити пристрій призначення:\n"
+#~ "%1"
+
+#~ msgid ""
+#~ "Failed to write to the device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Не вдалося виконати запис на пристрій:\n"
+#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "© ROSA, 2016"

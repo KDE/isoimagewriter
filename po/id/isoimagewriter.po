@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-21 00:50+0000\n"
+"POT-Creation-Date: 2023-04-01 00:53+0000\n"
 "PO-Revision-Date: 2022-08-26 23:44+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: https://t.me/Localizations_KDE_Indonesia\n"
@@ -33,23 +33,23 @@ msgstr "wantoyek@gmail.com,linerly@protonmail.com"
 msgid "Error code: %1"
 msgstr "Kode galat: %1"
 
-#: isoimagewriter/imagewriter.cpp:58
+#: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "Gagal mengalokasikan memori untuk buffer:"
 
-#: isoimagewriter/imagewriter.cpp:62
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "Gagal mengalokasikan memori untuk buffer."
 
-#: isoimagewriter/imagewriter.cpp:76
+#: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Gagal membuka file citra: %1"
 
-#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
-#: isoimagewriter/imagewriter.cpp:93
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
 #, fuzzy, kde-format
 #| msgid ""
 #| "Failed to open the target device:\n"
@@ -59,17 +59,17 @@ msgstr ""
 "Gagal membuka sasaran perangkat:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:119
+#: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Gagal membuka perangkat: %1"
 
-#: isoimagewriter/imagewriter.cpp:126
+#: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Gagal melepas kait drive: %1"
 
-#: isoimagewriter/imagewriter.cpp:143
+#: isoimagewriter/imagewriter.cpp:142
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -78,25 +78,7 @@ msgstr ""
 "Gagal melepas kait volume %1\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
-#, kde-format
-msgid ""
-"Failed to open the target device:\n"
-"%1"
-msgstr ""
-"Gagal membuka sasaran peranti:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:182
-#, kde-format
-msgid ""
-"Failed to write to the device:\n"
-"%1"
-msgstr ""
-"Gagal menulis ke peranti:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:184
+#: isoimagewriter/imagewriter.cpp:179
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -105,7 +87,7 @@ msgstr ""
 "Blok terakhir tidak tertulis secara penuh (%1 dari %2 bita)!\n"
 "Gugur."
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:211
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -114,17 +96,17 @@ msgstr ""
 "Gagal membaca file citra:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:260
+#: isoimagewriter/imagewriter.cpp:233
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Operasi lengkap dengan sukses."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Sekarang Anda harus memformat peranti Anda."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -226,64 +208,64 @@ msgstr "Checksum tidak cocok"
 msgid "Requires an SHA256 checksum"
 msgstr "Diperlukan sebuah checksum SHA256"
 
-#: isoimagewriter/mainapplication.cpp:26
+#: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
 msgstr "Penulis Citra ISO"
 
-#: isoimagewriter/mainapplication.cpp:28
+#: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
 msgstr "Tulis sebuah Citra ISO ke sebuah disk USB"
 
-#: isoimagewriter/mainapplication.cpp:30
+#: isoimagewriter/mainapplication.cpp:31
 #, kde-format
 msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
 
-#: isoimagewriter/mainapplication.cpp:32
+#: isoimagewriter/mainapplication.cpp:33
 #, kde-format
 msgid "Konstantin Vlasov"
 msgstr "Konstantin Vlasov"
 
-#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Author"
 msgstr "Penulis"
 
-#: isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Jonathan Riddell"
 msgstr "Jonathan Riddell"
 
-#: isoimagewriter/mainapplication.cpp:37
+#: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:113
+#: isoimagewriter/mainwindow.cpp:112
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Alur ke citra ISO..."
 
-#: isoimagewriter/mainwindow.cpp:124
+#: isoimagewriter/mainwindow.cpp:123
 #, kde-format
 msgid "Create"
 msgstr "Ciptakan"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:143
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Tulis citra ISO ini:"
 
-#: isoimagewriter/mainwindow.cpp:147
+#: isoimagewriter/mainwindow.cpp:146
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Ke drive USB ini:"
 
-#: isoimagewriter/mainwindow.cpp:165
+#: isoimagewriter/mainwindow.cpp:164
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -294,22 +276,22 @@ msgstr ""
 "\n"
 "Apakah Anda ingin melanjutkan?"
 
-#: isoimagewriter/mainwindow.cpp:171
+#: isoimagewriter/mainwindow.cpp:170
 #, kde-format
 msgid "Downloading %1..."
 msgstr "Mengunduh %1..."
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:188
 #, kde-format
 msgid "Abort"
 msgstr "Gugurkan"
 
-#: isoimagewriter/mainwindow.cpp:192
+#: isoimagewriter/mainwindow.cpp:191
 #, kde-format
 msgid "Continue"
 msgstr "Lanjutkan"
 
-#: isoimagewriter/mainwindow.cpp:214
+#: isoimagewriter/mainwindow.cpp:213
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -322,79 +304,79 @@ msgstr ""
 "Ini mungkin memakan beberapa waktu tergantung pada ukuran file citra ISO-nya "
 "dan kecepatan transfer."
 
-#: isoimagewriter/mainwindow.cpp:221
+#: isoimagewriter/mainwindow.cpp:220
 #, kde-format
 msgid "Cancel"
 msgstr "Batal"
 
-#: isoimagewriter/mainwindow.cpp:237
+#: isoimagewriter/mainwindow.cpp:236
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "USB flash drive live Anda telah selesai dan sudah siap digunakan!"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:243
 #, kde-format
 msgid "Back"
 msgstr "Kembali"
 
-#: isoimagewriter/mainwindow.cpp:247
+#: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Close"
 msgstr "Tutup"
 
-#: isoimagewriter/mainwindow.cpp:272
+#: isoimagewriter/mainwindow.cpp:271
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Gagal membuka file citra:"
 
-#: isoimagewriter/mainwindow.cpp:287
+#: isoimagewriter/mainwindow.cpp:286
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Memverifikasi citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:366
+#: isoimagewriter/mainwindow.cpp:365
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Silakan colokkan sebuah drive USB"
 
-#: isoimagewriter/mainwindow.cpp:487
+#: isoimagewriter/mainwindow.cpp:457
 #, kde-format
 msgid "Cancel?"
 msgstr "Batal?"
 
-#: isoimagewriter/mainwindow.cpp:488
+#: isoimagewriter/mainwindow.cpp:458
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Penulisan sedang berlangsung, gugurkan?"
 
-#: isoimagewriter/mainwindow.cpp:504
+#: isoimagewriter/mainwindow.cpp:474
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Citra Disk (%1)"
 
-#: isoimagewriter/mainwindow.cpp:505
+#: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Semua File (%1)"
 
-#: isoimagewriter/mainwindow.cpp:506
+#: isoimagewriter/mainwindow.cpp:476
 #, kde-format
 msgid "Select image to flash"
 msgstr "Pilih citra untuk diflash"
 
-#: isoimagewriter/mainwindow.cpp:536
+#: isoimagewriter/mainwindow.cpp:506
 #, fuzzy, kde-format
 #| msgid "Could not read ISO image"
 msgid "Downloading ISO image"
 msgstr "Tidak bisa membaca citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:554
+#: isoimagewriter/mainwindow.cpp:524
 #, fuzzy, kde-format
 #| msgid "Unknown Device"
 msgid "Unknown Disk Size"
 msgstr "Perangkat Tak Diketahui"
 
-#: isoimagewriter/mainwindow.cpp:555
+#: isoimagewriter/mainwindow.cpp:525
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -407,12 +389,12 @@ msgstr ""
 "\n"
 "Ukuran citra: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
+#: isoimagewriter/mainwindow.cpp:536 isoimagewriter/mainwindow.cpp:596
 #, kde-format
 msgid "Error"
 msgstr "Galat"
 
-#: isoimagewriter/mainwindow.cpp:567
+#: isoimagewriter/mainwindow.cpp:537
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -425,28 +407,28 @@ msgstr ""
 "Ukuran citra: %1 (%2 b)\n"
 "Ukuran disk: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:624
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "Citra ISO valid"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:630
 #, fuzzy, kde-format
 #| msgid "Could not verify ISO image"
 msgid "Could not find the key to verify the ISO image"
 msgstr "Tidak bisa memverifikasi citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:662
+#: isoimagewriter/mainwindow.cpp:632
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Tidak bisa memverifikasi citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:663
+#: isoimagewriter/mainwindow.cpp:633
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "Verifikasi ISO gagal"
 
-#: isoimagewriter/physicaldevice.cpp:43
+#: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
 msgstr "Tidak bisa meraih kunci:"
@@ -485,6 +467,20 @@ msgstr "Peranti Tak Diketahui"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<terlepaskait>"
+
+#~ msgid ""
+#~ "Failed to open the target device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Gagal membuka sasaran peranti:\n"
+#~ "%1"
+
+#~ msgid ""
+#~ "Failed to write to the device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Gagal menulis ke peranti:\n"
+#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "Hak Cipta (c) 2016 ROSA"

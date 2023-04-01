@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-21 00:50+0000\n"
+"POT-Creation-Date: 2023-04-01 00:53+0000\n"
 "PO-Revision-Date: 2022-04-19 13:30+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -30,38 +30,38 @@ msgstr "freekdekruijf@kde.nl"
 msgid "Error code: %1"
 msgstr "Foutcode: %1"
 
-#: isoimagewriter/imagewriter.cpp:58
+#: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "Toewijzen van geheugen voor buffer is mislukt:"
 
-#: isoimagewriter/imagewriter.cpp:62
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "Toewijzen van geheugen voor buffer is mislukt."
 
-#: isoimagewriter/imagewriter.cpp:76
+#: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Imagebestand openen is mislukt: %1"
 
-#: isoimagewriter/imagewriter.cpp:83 isoimagewriter/imagewriter.cpp:88
-#: isoimagewriter/imagewriter.cpp:93
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
 msgstr "Compressieapparaat openen is mislukt: %1"
 
-#: isoimagewriter/imagewriter.cpp:119
+#: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Het station openen is mislukt %1"
 
-#: isoimagewriter/imagewriter.cpp:126
+#: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Het station %1 afkoppelen is mislukt"
 
-#: isoimagewriter/imagewriter.cpp:143
+#: isoimagewriter/imagewriter.cpp:142
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -70,25 +70,7 @@ msgstr ""
 "Het volume %1 afkoppelen is mislukt\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
-#, kde-format
-msgid ""
-"Failed to open the target device:\n"
-"%1"
-msgstr ""
-"Het doelapparaat openen is mislukt:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:182
-#, kde-format
-msgid ""
-"Failed to write to the device:\n"
-"%1"
-msgstr ""
-"Naar het apparaat schrijven is mislukt:\n"
-"%1"
-
-#: isoimagewriter/imagewriter.cpp:184
+#: isoimagewriter/imagewriter.cpp:179
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -97,7 +79,7 @@ msgstr ""
 "Het laatste blok is niet volledig geschreven (%1 uit %2 bytes)!\n"
 "Afbreken."
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:211
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -106,17 +88,17 @@ msgstr ""
 "Het imagebestand lezen is mislukt:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:260
+#: isoimagewriter/imagewriter.cpp:233
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "De bewerking is met succes voltooid."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "U moet nu het apparaat formatteren."
 
-#: isoimagewriter/imagewriter.cpp:262
+#: isoimagewriter/imagewriter.cpp:235
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -218,17 +200,17 @@ msgstr "Controlesom komt niet overeen"
 msgid "Requires an SHA256 checksum"
 msgstr "Vereist een SHA256 controlesom"
 
-#: isoimagewriter/mainapplication.cpp:26
+#: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
 msgstr "ISO-image-schrijver"
 
-#: isoimagewriter/mainapplication.cpp:28
+#: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
 msgstr "Een ISO-image naar een USB-schijf schrijven"
 
-#: isoimagewriter/mainapplication.cpp:30
+#: isoimagewriter/mainapplication.cpp:31
 #, kde-format
 msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
@@ -237,47 +219,47 @@ msgstr ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 
-#: isoimagewriter/mainapplication.cpp:32
+#: isoimagewriter/mainapplication.cpp:33
 #, kde-format
 msgid "Konstantin Vlasov"
 msgstr "Konstantin Vlasov"
 
-#: isoimagewriter/mainapplication.cpp:32 isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Author"
 msgstr "Auteur"
 
-#: isoimagewriter/mainapplication.cpp:33
+#: isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Jonathan Riddell"
 msgstr "Jonathan Riddell"
 
-#: isoimagewriter/mainapplication.cpp:37
+#: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
 msgstr "Te openen ISO-bestand"
 
-#: isoimagewriter/mainwindow.cpp:113
+#: isoimagewriter/mainwindow.cpp:112
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Pad naar ISO-image..."
 
-#: isoimagewriter/mainwindow.cpp:124
+#: isoimagewriter/mainwindow.cpp:123
 #, kde-format
 msgid "Create"
 msgstr "Aanmaken"
 
-#: isoimagewriter/mainwindow.cpp:144
+#: isoimagewriter/mainwindow.cpp:143
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Deze ISO-image schrijven:"
 
-#: isoimagewriter/mainwindow.cpp:147
+#: isoimagewriter/mainwindow.cpp:146
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Naar dit USB-station:"
 
-#: isoimagewriter/mainwindow.cpp:165
+#: isoimagewriter/mainwindow.cpp:164
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -288,22 +270,22 @@ msgstr ""
 "\n"
 "Wilt u doorgaan?"
 
-#: isoimagewriter/mainwindow.cpp:171
+#: isoimagewriter/mainwindow.cpp:170
 #, kde-format
 msgid "Downloading %1..."
 msgstr "Downloaden van %1..."
 
-#: isoimagewriter/mainwindow.cpp:189
+#: isoimagewriter/mainwindow.cpp:188
 #, kde-format
 msgid "Abort"
 msgstr "Afbreken"
 
-#: isoimagewriter/mainwindow.cpp:192
+#: isoimagewriter/mainwindow.cpp:191
 #, kde-format
 msgid "Continue"
 msgstr "Doorgaan"
 
-#: isoimagewriter/mainwindow.cpp:214
+#: isoimagewriter/mainwindow.cpp:213
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -316,77 +298,77 @@ msgstr ""
 "Dit ka enige tijd kosten afhankelijk van de grootte van het ISO-image file "
 "en de overdrachtssnelheid."
 
-#: isoimagewriter/mainwindow.cpp:221
+#: isoimagewriter/mainwindow.cpp:220
 #, kde-format
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: isoimagewriter/mainwindow.cpp:237
+#: isoimagewriter/mainwindow.cpp:236
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Uw live USB-flashdrive is nu gereed en klaar voor gebruik!"
 
-#: isoimagewriter/mainwindow.cpp:244
+#: isoimagewriter/mainwindow.cpp:243
 #, kde-format
 msgid "Back"
 msgstr "Terug"
 
-#: isoimagewriter/mainwindow.cpp:247
+#: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Close"
 msgstr "Sluiten"
 
-#: isoimagewriter/mainwindow.cpp:272
+#: isoimagewriter/mainwindow.cpp:271
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Imagebestand openen is mislukt:"
 
-#: isoimagewriter/mainwindow.cpp:287
+#: isoimagewriter/mainwindow.cpp:286
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "ISO-image verifiëren"
 
-#: isoimagewriter/mainwindow.cpp:366
+#: isoimagewriter/mainwindow.cpp:365
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Steek een USB-station in"
 
-#: isoimagewriter/mainwindow.cpp:487
+#: isoimagewriter/mainwindow.cpp:457
 #, kde-format
 msgid "Cancel?"
 msgstr "Annuleren?"
 
-#: isoimagewriter/mainwindow.cpp:488
+#: isoimagewriter/mainwindow.cpp:458
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Er wordt geschreven, afbreken?"
 
-#: isoimagewriter/mainwindow.cpp:504
+#: isoimagewriter/mainwindow.cpp:474
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Schijfimages (%1)"
 
-#: isoimagewriter/mainwindow.cpp:505
+#: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Alle bestanden (%1)"
 
-#: isoimagewriter/mainwindow.cpp:506
+#: isoimagewriter/mainwindow.cpp:476
 #, kde-format
 msgid "Select image to flash"
 msgstr "In flash te schrijven image selecteren"
 
-#: isoimagewriter/mainwindow.cpp:536
+#: isoimagewriter/mainwindow.cpp:506
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "ISO-image wordt gedownload"
 
-#: isoimagewriter/mainwindow.cpp:554
+#: isoimagewriter/mainwindow.cpp:524
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Onbekend schijfgrootte"
 
-#: isoimagewriter/mainwindow.cpp:555
+#: isoimagewriter/mainwindow.cpp:525
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -399,12 +381,12 @@ msgstr ""
 "\n"
 "Imagegrootte: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:566 isoimagewriter/mainwindow.cpp:626
+#: isoimagewriter/mainwindow.cpp:536 isoimagewriter/mainwindow.cpp:596
 #, kde-format
 msgid "Error"
 msgstr "Fout"
 
-#: isoimagewriter/mainwindow.cpp:567
+#: isoimagewriter/mainwindow.cpp:537
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -417,27 +399,27 @@ msgstr ""
 "Image-grootte: %1 (%2 b)\n"
 "Schijfgrootte: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:624
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "De ISO-image is geldig"
 
-#: isoimagewriter/mainwindow.cpp:660
+#: isoimagewriter/mainwindow.cpp:630
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "Kon de sleutel niet vinden om de ISO-image te verifiëren"
 
-#: isoimagewriter/mainwindow.cpp:662
+#: isoimagewriter/mainwindow.cpp:632
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Kon ISO-image niet verifiëren"
 
-#: isoimagewriter/mainwindow.cpp:663
+#: isoimagewriter/mainwindow.cpp:633
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "Verificatie van ISO is mislukt"
 
-#: isoimagewriter/physicaldevice.cpp:43
+#: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
 msgstr "Kon vergrendeling niet verkrijgen:"
@@ -476,6 +458,20 @@ msgstr "Onbekend apparaat"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<afgekoppeld>"
+
+#~ msgid ""
+#~ "Failed to open the target device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Het doelapparaat openen is mislukt:\n"
+#~ "%1"
+
+#~ msgid ""
+#~ "Failed to write to the device:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Naar het apparaat schrijven is mislukt:\n"
+#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "Copyright (c) 2016 ROSA"
