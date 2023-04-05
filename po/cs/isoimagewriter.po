@@ -460,17 +460,3 @@ msgstr "Neznámé zařízení"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<nepřipojený>"
-
-#~ msgid ""
-#~ "Failed to open the target device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Otevření cílového zařízení selhalo:\n"
-#~ "%1"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Zápis na zařízení selhal:\n"
-#~ "%1"
