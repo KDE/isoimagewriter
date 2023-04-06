@@ -55,7 +55,7 @@ void ImageWriter::writeImage()
         buffer = VirtualAlloc(NULL, TRANSFER_BLOCK_SIZE, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
         if (buffer == NULL)
             throw formatErrorMessageFromCode(i18n("Failed to allocate memory for buffer:"));
-#elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
+#elif defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_FREEBSD)
         buffer = malloc(TRANSFER_BLOCK_SIZE);
         if (buffer == NULL)
             throw i18n("Failed to allocate memory for buffer.");
@@ -153,7 +153,7 @@ void ImageWriter::writeImage()
         if (!deviceFile.open())
             throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
         QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}} );
         QDBusUnixFileDescriptor fd = reply.value();
@@ -185,7 +185,7 @@ void ImageWriter::writeImage()
             }
             if (writtenBytes != readBytes)
                 throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
-#if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
+#if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_FREEBSD)
             // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
             // For unknown reason, deviceFile.flush() does not work as intended here.
             fsync(deviceFile.handle());
