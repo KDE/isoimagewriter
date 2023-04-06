@@ -64,7 +64,9 @@ bool PhysicalDevice::open()
         CloseHandle(m_fileHandle);
         return false;
     }
-#elif defined(Q_OS_LINUX) || defined(Q_OS_MAC)
+#elif defined(Q_OS_MAC)
+    return QFile::open(QIODevice::WriteOnly);
+#elif defined(Q_OS_LINUX)
     int fd = getDescriptor();
     return QFile::open(fd, QIODevice::WriteOnly);
 #else
@@ -72,6 +74,7 @@ bool PhysicalDevice::open()
 #endif
 }
 
+#if defined(Q_OS_LINUX)
 int PhysicalDevice::getDescriptor() {
     // fileName == e.g. /org/freedesktop/UDisks2/block_devices/sda
     // drivePath == e.g. /org/freedesktop/UDisks2/drives/JetFlash_Transcend_8GB_2H1NKR5V
@@ -108,3 +111,4 @@ int PhysicalDevice::getDescriptor() {
 
     return fd.fileDescriptor();
 }
+#endif

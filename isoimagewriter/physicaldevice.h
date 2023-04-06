@@ -24,7 +24,9 @@ public:
     virtual bool open();
 
 protected:
+#if defined(Q_OS_LINUX)
     int getDescriptor();
+#endif
 #if defined(Q_OS_WIN32)
     HANDLE m_fileHandle;
 #endif
