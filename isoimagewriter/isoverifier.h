@@ -31,8 +31,10 @@ public slots:
 signals:
     void finished(IsoVerifier::VerifyResult result, const QString &error);
     void inputRequested(const QString &title, const QString &body);
+    void asyncDone();
 
 private:
+    int summaryResult;
     QString m_filePath;
     QString m_error;
     VerifyResult m_isIsoValid = VerifyResult::Failed;

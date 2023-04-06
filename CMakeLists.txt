@@ -27,7 +27,7 @@ endif()
 
 option(ROSA_BRANDING "Build with ROSA branding" OFF)
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus Test)
 
 find_package(KF${KF_MAJOR_VERSION} ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     I18n

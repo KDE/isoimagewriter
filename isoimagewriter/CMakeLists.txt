@@ -78,6 +78,7 @@ target_link_libraries(isoimagewriter
     Qt::Widgets
     Qt::Network
     Qt::DBus
+    Qt::Test
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::CoreAddons
     KF${KF_MAJOR_VERSION}::WidgetsAddons

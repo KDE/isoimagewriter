@@ -13,6 +13,7 @@
 #include <QStandardPaths>
 #include <QCryptographicHash>
 #include <QRegularExpression>
+#include <QSignalSpy>
 
 #ifdef _USE_GPG
 #include <QGpgME/Protocol>
@@ -97,10 +98,8 @@ bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerpr
 
     QFile signingKey(signingKeyFile);
     if (!signingKey.open(QIODevice::ReadOnly)) {
-        qDebug() << "error" << signingKey.errorString();
         return false;
     }
-
     QByteArray signingKeyData = signingKey.readAll();
 
 #ifdef _USE_GPG
@@ -132,32 +131,34 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
         emit finished(m_isIsoValid, m_error); return;
     }
 
-    QFile signatureFile(sigFilePath);
-    if (!signatureFile.open(QIODevice::ReadOnly)) {
+    auto signatureFile = std::shared_ptr<QIODevice>(new QFile(sigFilePath));
+    if (!signatureFile->open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open signature file");
         emit finished(m_isIsoValid, m_error); return;
     }
-    QByteArray signatureData = signatureFile.readAll();
 
-    QFile isoFile(m_filePath);
-    if (!isoFile.open(QIODevice::ReadOnly)) {
+    auto isoFile = std::shared_ptr<QIODevice>(new QFile(m_filePath));
+    if (!isoFile->open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open ISO image");
         emit finished(m_isIsoValid, m_error); return;
     }
-    QByteArray isoData = isoFile.readAll();
 
 
 #ifdef _USE_GPG
     QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
-    GpgME::VerificationResult result = job->exec(signatureData, isoData);
-    GpgME::Signature signature = result.signature(0);
+    connect(job, &QGpgME::VerifyDetachedJob::result, this, [this](GpgME::VerificationResult result)
+    {
+        GpgME::Signature signature = result.signature(0);
+        this->summaryResult = signature.summary();
+        Q_EMIT asyncDone();
+    });
+    job->start(signatureFile, isoFile);
+    QSignalSpy spy(this, SIGNAL(asyncDone()));
+    spy.wait(20000); // Set a long timeout as it can take time to read the whole ISO file
 
-    if (signature.summary() == GpgME::Signature::None
-        && signature.fingerprint() == keyFingerprint) {
+    if (summaryResult & GpgME::Signature::Valid) {
         m_isIsoValid = VerifyResult::Successful;
-    } else if (signature.summary() & GpgME::Signature::Valid) {
-        m_isIsoValid = VerifyResult::Successful;
-    } else if (signature.summary() & GpgME::Signature::KeyRevoked) {
+    } else if (summaryResult & GpgME::Signature::KeyRevoked) {
         m_error = i18n("Key is revoked.");
         m_isIsoValid = VerifyResult::Failed;
     } else {
