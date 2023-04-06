@@ -147,11 +147,19 @@ void ImageWriter::writeImage()
         if (errMessages.size() > 0)
             throw errMessages.join("\n\n");
 
+#if defined(Q_OS_WIN32) || defined(Q_OS_MAC)
+        // Open the target USB device for writing and lock it
+        PhysicalDevice deviceFile(m_Device->m_PhysicalDevice);
+        if (!deviceFile.open())
+            throw i18n("Failed to open the target device:\n%1", deviceFile.errorString());
+#endif
+#if defined(Q_OS_LINUX)
         QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
         QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}} );
         QDBusUnixFileDescriptor fd = reply.value();
         QFile deviceFile;
         deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly);
+#endif
 
         qint64 readBytes;
         qint64 writtenBytes;
@@ -180,7 +188,7 @@ void ImageWriter::writeImage()
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
             // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
             // For unknown reason, deviceFile.flush() does not work as intended here.
-            //fsync(deviceFile.handle());
+            fsync(deviceFile.handle());
 #endif
             const int percent = (100 * imageFile.pos()) / imageFile.size();
             // Inform the GUI thread that next block was written
