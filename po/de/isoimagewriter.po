@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-01 00:53+0000\n"
+"POT-Creation-Date: 2023-04-07 00:49+0000\n"
 "PO-Revision-Date: 2022-06-10 00:22+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -73,7 +73,16 @@ msgstr ""
 "Aushängen des Datenträgers %1 fehlgeschlagen\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:179
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"Fehler beim Öffnen des Zielgeräts:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:187
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -83,7 +92,7 @@ msgstr ""
 "Bytes).\n"
 "Abbruch."
 
-#: isoimagewriter/imagewriter.cpp:211
+#: isoimagewriter/imagewriter.cpp:219
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -92,17 +101,17 @@ msgstr ""
 "Das Lesen der Abbilddatei ist fehlgeschlagen:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:233
+#: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Der Vorgang wurde erfolgreich beendet."
 
-#: isoimagewriter/imagewriter.cpp:235
+#: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Das Gerät muss jetzt formatiert werden."
 
-#: isoimagewriter/imagewriter.cpp:235
+#: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -111,22 +120,22 @@ msgstr ""
 "Um wieder Daten auf diesem Gerät speichern zu können, klicken Sie bitte "
 "zuerst auf „USB-Speichermedium löschen“."
 
-#: isoimagewriter/isoverifier.cpp:57
+#: isoimagewriter/isoverifier.cpp:58
 #, kde-format
 msgid "Could not verify as a known distro image."
 msgstr "Kann nicht als bekanntes Distributionsabbild verifiziert werden."
 
-#: isoimagewriter/isoverifier.cpp:69
+#: isoimagewriter/isoverifier.cpp:70
 #, kde-format
 msgid "SHA256 Checksum"
 msgstr "SHA256-Prüfsumme"
 
-#: isoimagewriter/isoverifier.cpp:70
+#: isoimagewriter/isoverifier.cpp:71
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
 msgstr "Fügen Sie die SHA256-Prüfsumme für diese ISO-Datei ein:"
 
-#: isoimagewriter/isoverifier.cpp:130
+#: isoimagewriter/isoverifier.cpp:129
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
@@ -134,62 +143,62 @@ msgstr ""
 "%1 kann nicht gefunden werden. Bitte laden Sie die PGP-Signaturdatei "
 "herunter und speichern Sie sie im selben Ordner."
 
-#: isoimagewriter/isoverifier.cpp:137
+#: isoimagewriter/isoverifier.cpp:136
 #, kde-format
 msgid "Could not open signature file"
 msgstr "Öffnen der Signaturdatei nicht möglich"
 
-#: isoimagewriter/isoverifier.cpp:144
+#: isoimagewriter/isoverifier.cpp:142
 #, kde-format
 msgid "Could not open ISO image"
 msgstr "Das ISO-Abbild kann nicht geöffnet werden"
 
-#: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
+#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
 #, kde-format
 msgid "Key is revoked."
 msgstr "Der Schlüssel wurde zurückgezogen."
 
-#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
 #, kde-format
 msgid "Uses wrong signature."
 msgstr "Verwendet falsche Signatur."
 
-#: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
+#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
 #, kde-format
 msgid "This app is built without verification support."
 msgstr ""
 "Diese App wurde ohne Unterstützung für die Überprüfung von ISO-Abbildern "
 "gebaut."
 
-#: isoimagewriter/isoverifier.cpp:180
+#: isoimagewriter/isoverifier.cpp:181
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
 "Die Datei SHA256SUMS kann nicht geöffnet werden. Bitte laden Sie sie in den "
 "selben Ordner herunter."
 
-#: isoimagewriter/isoverifier.cpp:194
+#: isoimagewriter/isoverifier.cpp:195
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
 msgstr "Die Prüfsumme wurde in der Datei SHA256SUMS nicht gefunden"
 
-#: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
+#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
 #, kde-format
 msgid "Could not read ISO image"
 msgstr "Lesen des ISO-Abbilds nicht möglich"
 
-#: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
+#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not perform checksum"
 msgstr "Die Prüfsumme kann nicht ermittelt werden"
 
-#: isoimagewriter/isoverifier.cpp:211
+#: isoimagewriter/isoverifier.cpp:212
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
 "Die Prüfsumme der ISO-Datei passt nicht zum Wert in der Datei SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:219
+#: isoimagewriter/isoverifier.cpp:220
 #, kde-format
 msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
@@ -198,12 +207,12 @@ msgstr ""
 "Die Datei SHA256SUMS.gpg wurde nicht gefunden. Bitte laden Sie die PGP-"
 "Signaturdatei herunter und speichern Sie sie im selben Ordner."
 
-#: isoimagewriter/isoverifier.cpp:268
+#: isoimagewriter/isoverifier.cpp:269
 #, kde-format
 msgid "Checksum did not match"
 msgstr "Prüfsumme stimmt nicht übereinDie "
 
-#: isoimagewriter/isoverifier.cpp:274
+#: isoimagewriter/isoverifier.cpp:275
 #, kde-format
 msgid "Requires an SHA256 checksum"
 msgstr "Erfordert eine SHA256-Prüfsumme"
@@ -467,13 +476,6 @@ msgstr "Unbekanntes Gerät"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<Nicht eingehängt>"
-
-#~ msgid ""
-#~ "Failed to open the target device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Fehler beim Öffnen des Zielgeräts:\n"
-#~ "%1"
 
 #~ msgid ""
 #~ "Failed to write to the device:\n"

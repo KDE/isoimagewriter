@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-01 00:53+0000\n"
+"POT-Creation-Date: 2023-04-07 00:49+0000\n"
 "PO-Revision-Date: 2023-01-05 09:21+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -72,7 +72,16 @@ msgstr ""
 "Αποτυχία αποπροσάρτησης του τόμου %1\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:179
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"Αποτυχία ανοίγματος της συσκευής προορισμού:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:187
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -81,7 +90,7 @@ msgstr ""
 "Το τελευταίο μπλοκ δεν εγγράφηκε πλήρως (%1 από %2 bytes)!\n"
 "Εγκατάλειψη."
 
-#: isoimagewriter/imagewriter.cpp:211
+#: isoimagewriter/imagewriter.cpp:219
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -90,17 +99,17 @@ msgstr ""
 "ΑΠοτυχία ανάγνωσης του αρχείου εικόνας:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:233
+#: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Η λειτουργία ολοκληρώθηκε επιτυχώς."
 
-#: isoimagewriter/imagewriter.cpp:235
+#: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Τώρα πρέπει να διαμορφώσετε τη συσκευή σας."
 
-#: isoimagewriter/imagewriter.cpp:235
+#: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -109,22 +118,22 @@ msgstr ""
 "Για να μπορείτε και πάλι να αποθηκεύετε δεδομένα στε αυτήν τη συσκευή, "
 "χρησιμοποιήστε το κουμπί «Καθαρισμός USB δίσκου»."
 
-#: isoimagewriter/isoverifier.cpp:57
+#: isoimagewriter/isoverifier.cpp:58
 #, kde-format
 msgid "Could not verify as a known distro image."
 msgstr "Αδυναμία επιβεβαίωσης ως εικόνας γνωστής διανομής."
 
-#: isoimagewriter/isoverifier.cpp:69
+#: isoimagewriter/isoverifier.cpp:70
 #, kde-format
 msgid "SHA256 Checksum"
 msgstr "Άθροισμα ελέγχου SHA256"
 
-#: isoimagewriter/isoverifier.cpp:70
+#: isoimagewriter/isoverifier.cpp:71
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
 msgstr "Επικόλληση του αθροίσματος ελέγχου SHA256 για αυτό το ISO:"
 
-#: isoimagewriter/isoverifier.cpp:130
+#: isoimagewriter/isoverifier.cpp:129
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
@@ -132,60 +141,60 @@ msgstr ""
 "Αδυναμία εύρεσης του %1, κάνετε λήψη του αρχείου PGP υπογραφής στον ίδιο "
 "κατάλογο."
 
-#: isoimagewriter/isoverifier.cpp:137
+#: isoimagewriter/isoverifier.cpp:136
 #, kde-format
 msgid "Could not open signature file"
 msgstr "Αδυναμία ανοίγματος αρχείου υπογραφής"
 
-#: isoimagewriter/isoverifier.cpp:144
+#: isoimagewriter/isoverifier.cpp:142
 #, kde-format
 msgid "Could not open ISO image"
 msgstr "Αδυναμία ανοίγματος εικόνας ISO"
 
-#: isoimagewriter/isoverifier.cpp:161 isoimagewriter/isoverifier.cpp:236
+#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
 #, kde-format
 msgid "Key is revoked."
 msgstr "Το κλειδί ανακλήθηκε."
 
-#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
 #, kde-format
 msgid "Uses wrong signature."
 msgstr "Χρησιμοποιεί λανθασμένη υπογραφή."
 
-#: isoimagewriter/isoverifier.cpp:168 isoimagewriter/isoverifier.cpp:243
+#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
 #, kde-format
 msgid "This app is built without verification support."
 msgstr "Αυτή η εφαρμογή κατασκευάστηκε χωρίς υποστήριξη επαλήθευσης."
 
-#: isoimagewriter/isoverifier.cpp:180
+#: isoimagewriter/isoverifier.cpp:181
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
 "Αδυναμία ανοίγματος του αρχείου SHA256SUMS, κάνετε λήψη στον ίδιο κατάλογο."
 
-#: isoimagewriter/isoverifier.cpp:194
+#: isoimagewriter/isoverifier.cpp:195
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
 msgstr "Αδυναμία εύρεσης του αθροίσματος ελέγχου στο αρχείο SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:202 isoimagewriter/isoverifier.cpp:255
+#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
 #, kde-format
 msgid "Could not read ISO image"
 msgstr "Αδυναμία ανάγνωσης εικόνας ISO"
 
-#: isoimagewriter/isoverifier.cpp:206 isoimagewriter/isoverifier.cpp:259
+#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not perform checksum"
 msgstr "Αδυναμία υπολογισμού αθροίσματος ελέγχου"
 
-#: isoimagewriter/isoverifier.cpp:211
+#: isoimagewriter/isoverifier.cpp:212
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
 "Το άθροισμα ελέγχου του .iso αρχείου δεν ταιριάζει με την τιμή στο "
 "SHA256SUMS αρχείο"
 
-#: isoimagewriter/isoverifier.cpp:219
+#: isoimagewriter/isoverifier.cpp:220
 #, kde-format
 msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
@@ -194,12 +203,12 @@ msgstr ""
 "Αδυναμία εύρεσης του SHA256SUMS.gpg, κάνετε λήψη του αρχείου PGP υπογραφής "
 "στον ίδιο κατάλογο."
 
-#: isoimagewriter/isoverifier.cpp:268
+#: isoimagewriter/isoverifier.cpp:269
 #, kde-format
 msgid "Checksum did not match"
 msgstr "Το άθροισμα ελέγχου δεν ταιριάζει"
 
-#: isoimagewriter/isoverifier.cpp:274
+#: isoimagewriter/isoverifier.cpp:275
 #, kde-format
 msgid "Requires an SHA256 checksum"
 msgstr "Απαιτεί άθροισμα ελέγχου SHA256"
@@ -462,13 +471,6 @@ msgstr "Άγνωστη συσκευή"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<unmounted>"
-
-#~ msgid ""
-#~ "Failed to open the target device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Αποτυχία ανοίγματος της συσκευής προορισμού:\n"
-#~ "%1"
 
 #~ msgid ""
 #~ "Failed to write to the device:\n"
