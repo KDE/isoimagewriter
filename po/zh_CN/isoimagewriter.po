@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-07 00:49+0000\n"
-"PO-Revision-Date: 2023-03-27 11:58\n"
+"PO-Revision-Date: 2023-04-10 14:10\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -220,6 +220,8 @@ msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:33
 #, kde-format
@@ -239,7 +241,7 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
-msgstr ""
+msgstr "要打开的 ISO 文件"
 
 #: isoimagewriter/mainwindow.cpp:112
 #, kde-format
@@ -458,10 +460,3 @@ msgstr "未知设备"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<未挂载>"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "无法写入设备：\n"
-#~ "%1"
