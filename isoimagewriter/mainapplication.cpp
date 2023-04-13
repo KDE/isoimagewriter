@@ -77,7 +77,7 @@ QUrl MainApplication::getInitialImage()
 {
     const QStringList args = m_Options.positionalArguments();
     if (!args.isEmpty())
-        return QUrl::fromUserInput(args.first(), getInitialDir(), QUrl::AssumeLocalFile);
+        return QUrl::fromUserInput(args.first(), QString(), QUrl::AssumeLocalFile);
     else
         return {};
 }
