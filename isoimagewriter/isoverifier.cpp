@@ -262,7 +262,7 @@ void IsoVerifier::verifyWithSha256Sum(bool ok, const QString &checksum)
         }
         QByteArray hashResult = hash.result();
 
-        if (checksum == hashResult.toHex()) {
+        if (checksum.toLower() == hashResult.toHex().toLower()) {
             m_isIsoValid = VerifyResult::Successful;
             goto finish;
         } else {
