@@ -74,12 +74,13 @@ msgstr ""
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:154
-#, fuzzy, kde-format
-#| msgid "Failed to open the image file: %1"
+#, kde-format
 msgid ""
 "Failed to open the target device:\n"
 "%1"
-msgstr "Nepodařilo se otevřít soubor obrazu %1"
+msgstr ""
+"Otevření cílového zařízení selhalo:\n"
+"%1"
 
 #: isoimagewriter/imagewriter.cpp:187
 #, kde-format
