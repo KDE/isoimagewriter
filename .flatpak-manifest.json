@@ -1,0 +1,35 @@
+{
+    "id": "org.kde.isoimagewriter",
+    "branch": "master",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "5.15-22.08",
+    "sdk": "org.kde.Sdk",
+    "command": "isoimagewriter",
+    "tags": [
+        "nightly"
+    ],
+    "desktop-file-name-suffix": " (Nightly)",
+    "finish-args": [
+        "--device=dri",
+        "--filesystem=host",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--system-talk-name=org.freedesktop.UDisks2",
+        "--talk-name=org.freedesktop.Flatpak"
+    ],
+    "separate-locales": false,
+    "id": "org.kde.isoimagewriter",
+    "modules": [
+       {
+          "buildsystem": "cmake-ninja",
+          "name": "isoimagewriter",
+          "sources": [
+             {
+                "type": "git",
+                "url": "https://invent.kde.org/utilities/isoimagewriter.git"
+             }
+          ]
+       }
+    ]
+}
