@@ -131,7 +131,7 @@
   </provides>
   <project_group>KDE</project_group>
   <releases>
-    <release version="0.8" date="2019-08-21"/>
+    <release version="1.0" date="2019-04-18"/>
   </releases>
   <content_rating type="oars-1.1"/>
 </component>
