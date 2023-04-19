@@ -1,0 +1,82 @@
+# appimage-builder recipe see https://appimage-builder.readthedocs.io for details
+version: 1
+
+script: |
+  # remove any existent binaries
+  rm AppDir | true
+  # compile and install binaries into AppDir
+  cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+  make install DESTDIR=AppDir
+
+AppDir:
+  path: ./AppDir
+  app_info:
+    id: org.kde.isoimagewriter
+    name: KDE ISO Image Writer
+    icon: drive-removable-media
+    version: 1.0.0
+    exec: usr/bin/isoimagewriter
+    exec_args: $@
+  apt:
+    arch:
+    - amd64
+    allow_unauthenticated: true
+    sources:
+    - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe
+        multiverse
+    - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted
+        universe multiverse
+    - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+        universe multiverse
+    - sourceline: deb http://archive.neon.kde.org/tmp/unstable jammy main
+    - sourceline: deb https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu/
+        jammy main
+    include:
+    - libc6:amd64
+    - libudev1
+    - libgcc-s1
+    - libgpgmepp6
+    - libkf5archive5
+    - libkf5coreaddons5
+    - libkf5crash5
+    - libkf5i18n5
+    - libkf5iconthemes5
+    - libkf5solid5
+    - libkf5widgetsaddons5
+    - libqgpgme7
+    - libqt5core5a
+    - libqt5dbus5
+    - libqt5gui5
+    - libqt5network5
+    - libqt5test5
+    - libqt5widgets5
+    - libstdc++6
+    - bash
+    - libwayland-cursor0
+    - libwayland-client0
+  files:
+    include: []
+    exclude:
+    - usr/share/man
+    - usr/share/doc/*/README.*
+    - usr/share/doc/*/changelog.*
+    - usr/share/doc/*/NEWS.*
+    - usr/share/doc/*/TODO.*
+  test:
+    fedora-30:
+      image: appimagecrafters/tests-env:fedora-30
+      command: ./AppRun
+    debian-stable:
+      image: appimagecrafters/tests-env:debian-stable
+      command: ./AppRun
+    centos-7:
+      image: appimagecrafters/tests-env:centos-7
+      command: ./AppRun
+    ubuntu-xenial:
+      image: appimagecrafters/tests-env:ubuntu-xenial
+      command: ./AppRun
+AppImage:
+  arch: x86_64
+  update-information: guess
+  sign-key: E0A3EB202F8E57528E13E72FD7574483BB57B18D
+

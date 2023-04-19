@@ -1,3 +1,7 @@
+= AppImage
+https://appimage-builder.readthedocs.io/en/latest/intro/tutorial.html
+
+
 = Windows builds
 
 - Update version in https://invent.kde.org/packaging/craft-blueprints-kde/-/blob/master/kde/unreleased/isoimagewriter/isoimagewriter.py
