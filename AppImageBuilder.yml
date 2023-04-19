@@ -28,9 +28,7 @@ AppDir:
         universe multiverse
     - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
         universe multiverse
-    - sourceline: deb http://archive.neon.kde.org/tmp/unstable jammy main
-    - sourceline: deb https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu/
-        jammy main
+    - sourceline: deb http://archive.neon.kde.org/user jammy main
     include:
     - libc6:amd64
     - libudev1

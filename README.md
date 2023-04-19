@@ -1,6 +1,7 @@
 = AppImage
 https://appimage-builder.readthedocs.io/en/latest/intro/tutorial.html
 
+run appimage-builder
 
 = Windows builds
 
