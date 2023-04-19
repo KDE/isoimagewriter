@@ -49,6 +49,7 @@ AppDir:
     - libqt5test5
     - libqt5widgets5
     - libstdc++6
+    - qtwayland5
     - bash
     - libwayland-cursor0
     - libwayland-client0
