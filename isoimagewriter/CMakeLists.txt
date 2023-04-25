@@ -46,6 +46,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL Windows)
         platform_win.cpp
         usbdevicemonitor_win.cpp
         externalprogressbar_win.cpp
+	../res/isoimagewriter.manifest
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
     message("Compiling isoimagewriter for Linux")
