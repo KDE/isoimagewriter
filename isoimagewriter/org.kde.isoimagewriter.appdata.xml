@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
   <id>org.kde.isoimagewriter.desktop</id>
+  <launchable type="desktop-id">org.kde.isoimagewriter.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <name>ISO Image Writer</name>
@@ -131,7 +132,22 @@
   </provides>
   <project_group>KDE</project_group>
   <releases>
-    <release version="1.0.0" date="2023-04-19"/>
+    <release version="1.0.0" date="2023-04-19">
+      <artifacts>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://download.kde.org/stable/isoimagewriter/1.0.0/KDE%20ISO%20Image%20Writer-1.0.0-x86_64.AppImage</location>
+          <checksum type="sha256">2654d8cc8334d1e1db9a396679b606ca7073ae06d273d7e8a085d665d96f8b5e</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-windows-msvc">
+          <location>https://download.kde.org/stable/isoimagewriter/1.0.0/isoimagewriter-1.0.0.exe</location>
+          <checksum type="sha256">467aefa7a893b323932c858c8bc6f3b6574c8d6f830e48e140d13941787393c6</checksum>
+        </artifact>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/isoimagewriter/1.0.0/isoimagewriter-1.0.0.tar.xz</location>
+          <checksum type="sha256">a69022303ec1beb6b7b4f0d68e59e4199d3c9868767cb9eb23c6dd1999e06a5d</checksum>
+        </artifact>
+      </artifacts>
+    </release>
   </releases>
   <content_rating type="oars-1.1"/>
 </component>
