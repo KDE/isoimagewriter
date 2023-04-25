@@ -75,7 +75,7 @@ void MainWindow::setupUi()
 {
     // Logo
     QLabel *logoLabel = new QLabel;
-    logoLabel->setPixmap(KIconLoader::global()->loadIcon("drive-removable-media", KIconLoader::Desktop));
+    logoLabel->setPixmap(KIconLoader::global()->loadIcon("org.kde.isoimagewriter", KIconLoader::Desktop));
     logoLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     QLabel *titleLabel = new QLabel;

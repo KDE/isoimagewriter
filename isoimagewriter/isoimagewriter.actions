@@ -36,7 +36,7 @@ Name[uk]=Записувач образів ISO
 Name[x-test]=xxISO Image Writerxx
 Name[zh_CN]=ISO 镜像文件写入器
 Name[zh_TW]=ISO 映像檔寫入工具
-Icon=drive-removable-media
+Icon=org.kde.isoimagewriter
 
 [org.kde.isoimagewriter.write]
 Name=Write an ISO image to a USB disk

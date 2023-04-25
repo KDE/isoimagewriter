@@ -51,4 +51,6 @@ add_subdirectory(signing-keys)
 
 ki18n_install(po)
 
+install(FILES org.kde.isoimagewriter.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

@@ -13,7 +13,7 @@ AppDir:
   app_info:
     id: org.kde.isoimagewriter
     name: KDE ISO Image Writer
-    icon: drive-removable-media
+    icon: org.kde.isoimagewriter
     version: 1.0.0
     exec: usr/bin/isoimagewriter
     exec_args: $@

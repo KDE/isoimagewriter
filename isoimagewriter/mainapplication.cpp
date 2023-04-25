@@ -21,7 +21,7 @@ Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.isoimagewriter");
 MainApplication::MainApplication(int& argc, char** argv) :
     QApplication(argc, argv)
 {
-    setWindowIcon(QIcon::fromTheme("drive-removable-media"));
+    setWindowIcon(QIcon::fromTheme("org.kde.isoimagewriter"));
     KLocalizedString::setApplicationDomain("isoimagewriter");
     KAboutData aboutData( QStringLiteral("isoimagewriter"),
                           i18n("ISO Image Writer"),
