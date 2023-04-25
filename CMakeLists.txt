@@ -25,8 +25,6 @@ else()
     set(KF_MAJOR_VERSION "5")
 endif()
 
-option(ROSA_BRANDING "Build with ROSA branding" OFF)
-
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus Test)
 
 find_package(KF${KF_MAJOR_VERSION} ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
@@ -46,7 +44,6 @@ ecm_set_disabled_deprecation_versions(QT 6.4
 KDE_ENABLE_EXCEPTIONS()
 
 add_subdirectory(isoimagewriter)
-add_subdirectory(images)
 add_subdirectory(signing-keys)
 
 ki18n_install(po)

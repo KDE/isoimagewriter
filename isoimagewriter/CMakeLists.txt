@@ -70,9 +70,6 @@ endif()
 
 add_executable(isoimagewriter ${isoimagewriter_SRCS})
 
-if (ROSA_BRANDING)
-    target_compile_definitions(isoimagewriter PRIVATE -DROSA_BRANDING="1")
-endif (ROSA_BRANDING)
 target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(isoimagewriter
