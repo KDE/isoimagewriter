@@ -23,3 +23,4 @@ Or builds on binary-factory but needs global theme icon made a local app icon.
 - Run   `craft -i isoimagewriter`
 - Run   `craft package --target=0.9.2 isoimagewriter`
 - MS Store rejects it beacause it does not allow administrator for apps, there seems to be no equivalent of udisks2 so it can not be used there
+- Builds on binary-factory https://binary-factory.kde.org/view/Windows%2064-bit/job/KDE%20ISO%20Image%20Writer_Release_win64/
