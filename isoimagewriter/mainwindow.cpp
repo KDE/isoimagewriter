@@ -80,8 +80,7 @@ void MainWindow::setupUi()
 
     QLabel *titleLabel = new QLabel;
     titleLabel->setTextFormat(Qt::RichText);
-    titleLabel->setText("<h2 style='margin-bottom: 0;'>KDE ISO Image Writer</h2>"
-                        "A quick and simple way to create a bootable USB drive.");
+    titleLabel->setText(QStringLiteral("<h2 style='margin-bottom: 0;'>%1</h2>%2").arg(i18n("KDE ISO Image Writer")).arg(i18n("A quick and simple way to create a bootable USB drive.")));
 
     QHBoxLayout *headerHBoxLayout = new QHBoxLayout;
     headerHBoxLayout->addWidget(logoLabel);
