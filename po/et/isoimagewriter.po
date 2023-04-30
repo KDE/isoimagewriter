@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-30 00:51+0000\n"
 "PO-Revision-Date: 2019-12-05 19:02+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -251,27 +251,38 @@ msgstr "Jonathan Riddell"
 msgid "ISO file to open"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:112
+#: isoimagewriter/mainwindow.cpp:83
+#, fuzzy, kde-format
+#| msgid "ISO Image Writer"
+msgid "KDE ISO Image Writer"
+msgstr "ISO-tõmmise kirjutaja"
+
+#: isoimagewriter/mainwindow.cpp:83
+#, kde-format
+msgid "A quick and simple way to create a bootable USB drive."
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:111
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "ISO-tõmmise asukoht ..."
 
-#: isoimagewriter/mainwindow.cpp:123
+#: isoimagewriter/mainwindow.cpp:122
 #, kde-format
 msgid "Create"
 msgstr "Loo"
 
-#: isoimagewriter/mainwindow.cpp:143
+#: isoimagewriter/mainwindow.cpp:142
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "See ISO-tõmmis kirjutatakse:"
 
-#: isoimagewriter/mainwindow.cpp:146
+#: isoimagewriter/mainwindow.cpp:145
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Sellele USB-pulgale:"
 
-#: isoimagewriter/mainwindow.cpp:164
+#: isoimagewriter/mainwindow.cpp:163
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -282,22 +293,22 @@ msgstr ""
 "\n"
 "Kas jätkata?"
 
-#: isoimagewriter/mainwindow.cpp:170
+#: isoimagewriter/mainwindow.cpp:169
 #, kde-format
 msgid "Downloading %1..."
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:188
+#: isoimagewriter/mainwindow.cpp:187
 #, kde-format
 msgid "Abort"
 msgstr "Loobu"
 
-#: isoimagewriter/mainwindow.cpp:191
+#: isoimagewriter/mainwindow.cpp:190
 #, kde-format
 msgid "Continue"
 msgstr "Jätka"
 
-#: isoimagewriter/mainwindow.cpp:213
+#: isoimagewriter/mainwindow.cpp:212
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -310,79 +321,79 @@ msgstr ""
 "See võib võtta veidi aega sõltuvalt ISO-tõmmise suurusest ja "
 "ülekandekiirusest."
 
-#: isoimagewriter/mainwindow.cpp:220
+#: isoimagewriter/mainwindow.cpp:219
 #, kde-format
 msgid "Cancel"
 msgstr "Loobu"
 
-#: isoimagewriter/mainwindow.cpp:236
+#: isoimagewriter/mainwindow.cpp:235
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Sinu USB-puhk on nüüd valmis kasutamiseks!"
 
-#: isoimagewriter/mainwindow.cpp:243
+#: isoimagewriter/mainwindow.cpp:242
 #, kde-format
 msgid "Back"
 msgstr "Tagasi"
 
-#: isoimagewriter/mainwindow.cpp:246
+#: isoimagewriter/mainwindow.cpp:245
 #, kde-format
 msgid "Close"
 msgstr "Sulge"
 
-#: isoimagewriter/mainwindow.cpp:271
+#: isoimagewriter/mainwindow.cpp:270
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Tõmmisefaili avamine nurjus:"
 
-#: isoimagewriter/mainwindow.cpp:286
+#: isoimagewriter/mainwindow.cpp:285
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "ISO-tõmmise kontrollimine"
 
-#: isoimagewriter/mainwindow.cpp:365
+#: isoimagewriter/mainwindow.cpp:364
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Palun ühenda USB-pulk"
 
-#: isoimagewriter/mainwindow.cpp:457
+#: isoimagewriter/mainwindow.cpp:456
 #, kde-format
 msgid "Cancel?"
 msgstr "Kas loobuda?"
 
-#: isoimagewriter/mainwindow.cpp:458
+#: isoimagewriter/mainwindow.cpp:457
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Kirjutamine käib, kas loobuda?"
 
-#: isoimagewriter/mainwindow.cpp:474
+#: isoimagewriter/mainwindow.cpp:473
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Tõmmisefailid (%1)"
 
-#: isoimagewriter/mainwindow.cpp:475
+#: isoimagewriter/mainwindow.cpp:474
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Kõik failid (%1)"
 
-#: isoimagewriter/mainwindow.cpp:476
+#: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "Select image to flash"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:506
+#: isoimagewriter/mainwindow.cpp:505
 #, fuzzy, kde-format
 #| msgid "Could not read ISO image"
 msgid "Downloading ISO image"
 msgstr "ISO-tõmmise lugemine nurjus"
 
-#: isoimagewriter/mainwindow.cpp:524
+#: isoimagewriter/mainwindow.cpp:523
 #, fuzzy, kde-format
 #| msgid "Unknown Device"
 msgid "Unknown Disk Size"
 msgstr "Tundmatu seade"
 
-#: isoimagewriter/mainwindow.cpp:525
+#: isoimagewriter/mainwindow.cpp:524
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -391,12 +402,12 @@ msgid ""
 "Image size: %1 (%2 b)"
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:536 isoimagewriter/mainwindow.cpp:596
+#: isoimagewriter/mainwindow.cpp:535 isoimagewriter/mainwindow.cpp:595
 #, kde-format
 msgid "Error"
 msgstr "Tõrge"
 
-#: isoimagewriter/mainwindow.cpp:537
+#: isoimagewriter/mainwindow.cpp:536
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -409,23 +420,23 @@ msgstr ""
 "Tõmmise suurus: %1 (%2 b)\n"
 "Pulga suurus: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:624
+#: isoimagewriter/mainwindow.cpp:623
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "ISO-tõmmis on korras"
 
-#: isoimagewriter/mainwindow.cpp:630
+#: isoimagewriter/mainwindow.cpp:629
 #, fuzzy, kde-format
 #| msgid "Could not verify ISO image"
 msgid "Could not find the key to verify the ISO image"
 msgstr "ISO-tõmmise kontrollimine nurjus"
 
-#: isoimagewriter/mainwindow.cpp:632
+#: isoimagewriter/mainwindow.cpp:631
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "ISO-tõmmise kontrollimine nurjus"
 
-#: isoimagewriter/mainwindow.cpp:633
+#: isoimagewriter/mainwindow.cpp:632
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO-tõmmise kontrollimine nurjus"

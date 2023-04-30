@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-30 00:51+0000\n"
 "PO-Revision-Date: 2022-12-01 08:58+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -245,27 +245,38 @@ msgstr "Jonathan Riddell"
 msgid "ISO file to open"
 msgstr "გასახსნელი ISO ფაილი"
 
-#: isoimagewriter/mainwindow.cpp:112
+#: isoimagewriter/mainwindow.cpp:83
+#, fuzzy, kde-format
+#| msgid "ISO Image Writer"
+msgid "KDE ISO Image Writer"
+msgstr "ISO ასლის ჩამწერი"
+
+#: isoimagewriter/mainwindow.cpp:83
+#, kde-format
+msgid "A quick and simple way to create a bootable USB drive."
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:111
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "ბილიკი ISO ასლამდე..."
 
-#: isoimagewriter/mainwindow.cpp:123
+#: isoimagewriter/mainwindow.cpp:122
 #, kde-format
 msgid "Create"
 msgstr "შექმნა"
 
-#: isoimagewriter/mainwindow.cpp:143
+#: isoimagewriter/mainwindow.cpp:142
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "ამ ISO ასლის ჩაწერა:"
 
-#: isoimagewriter/mainwindow.cpp:146
+#: isoimagewriter/mainwindow.cpp:145
 #, kde-format
 msgid "To this USB drive:"
 msgstr "ამ USB დისკზე:"
 
-#: isoimagewriter/mainwindow.cpp:164
+#: isoimagewriter/mainwindow.cpp:163
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -276,22 +287,22 @@ msgstr ""
 "\n"
 "გნებავთ, გააგრძელოთ?"
 
-#: isoimagewriter/mainwindow.cpp:170
+#: isoimagewriter/mainwindow.cpp:169
 #, kde-format
 msgid "Downloading %1..."
 msgstr "%1-ის გადმოწერა..."
 
-#: isoimagewriter/mainwindow.cpp:188
+#: isoimagewriter/mainwindow.cpp:187
 #, kde-format
 msgid "Abort"
 msgstr "შეწყვეტა"
 
-#: isoimagewriter/mainwindow.cpp:191
+#: isoimagewriter/mainwindow.cpp:190
 #, kde-format
 msgid "Continue"
 msgstr "გაგრძელება"
 
-#: isoimagewriter/mainwindow.cpp:213
+#: isoimagewriter/mainwindow.cpp:212
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -304,77 +315,77 @@ msgstr ""
 "ამას საკმაო დრო შეიძლება დასჭირდეს, ISO ასლის ფაილის ზომაზე და გადაცემის "
 "სიჩქარეზე დამოკიდებულებით."
 
-#: isoimagewriter/mainwindow.cpp:220
+#: isoimagewriter/mainwindow.cpp:219
 #, kde-format
 msgid "Cancel"
 msgstr "შეწყვეტა"
 
-#: isoimagewriter/mainwindow.cpp:236
+#: isoimagewriter/mainwindow.cpp:235
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "თქვენი USB დისკი ახლა დასრულებულია და მზადაა გამოსაყენებლად!"
 
-#: isoimagewriter/mainwindow.cpp:243
+#: isoimagewriter/mainwindow.cpp:242
 #, kde-format
 msgid "Back"
 msgstr "უკან"
 
-#: isoimagewriter/mainwindow.cpp:246
+#: isoimagewriter/mainwindow.cpp:245
 #, kde-format
 msgid "Close"
 msgstr "დაკეტვა"
 
-#: isoimagewriter/mainwindow.cpp:271
+#: isoimagewriter/mainwindow.cpp:270
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "ასლის ფაილის გახსნის შეცდომა:"
 
-#: isoimagewriter/mainwindow.cpp:286
+#: isoimagewriter/mainwindow.cpp:285
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "ISO ასლის შემოწმება"
 
-#: isoimagewriter/mainwindow.cpp:365
+#: isoimagewriter/mainwindow.cpp:364
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "შეაერთეთ USB"
 
-#: isoimagewriter/mainwindow.cpp:457
+#: isoimagewriter/mainwindow.cpp:456
 #, kde-format
 msgid "Cancel?"
 msgstr "გავაუქმო?"
 
-#: isoimagewriter/mainwindow.cpp:458
+#: isoimagewriter/mainwindow.cpp:457
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "მიმდინარეობს ჩაწერა. გავაუქმო?"
 
-#: isoimagewriter/mainwindow.cpp:474
+#: isoimagewriter/mainwindow.cpp:473
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "დისკის ასლები (%1)"
 
-#: isoimagewriter/mainwindow.cpp:475
+#: isoimagewriter/mainwindow.cpp:474
 #, kde-format
 msgid "All Files (%1)"
 msgstr "ყველა ფაილი (%1)"
 
-#: isoimagewriter/mainwindow.cpp:476
+#: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "Select image to flash"
 msgstr "აირჩიეთ ჩასაწერი ასლი"
 
-#: isoimagewriter/mainwindow.cpp:506
+#: isoimagewriter/mainwindow.cpp:505
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "ISO ფაილის გადმოწერა"
 
-#: isoimagewriter/mainwindow.cpp:524
+#: isoimagewriter/mainwindow.cpp:523
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "დისკის უცნობი ზომა"
 
-#: isoimagewriter/mainwindow.cpp:525
+#: isoimagewriter/mainwindow.cpp:524
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -387,12 +398,12 @@ msgstr ""
 "\n"
 "ასლის ზომა: %1 (%2 ბაიტი)"
 
-#: isoimagewriter/mainwindow.cpp:536 isoimagewriter/mainwindow.cpp:596
+#: isoimagewriter/mainwindow.cpp:535 isoimagewriter/mainwindow.cpp:595
 #, kde-format
 msgid "Error"
 msgstr "შეცდომა"
 
-#: isoimagewriter/mainwindow.cpp:537
+#: isoimagewriter/mainwindow.cpp:536
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -405,22 +416,22 @@ msgstr ""
 "ასლის ზომა: %1 (%2 ბაიტი)\n"
 "დისკის ზომა: %3 (%4 ბაიტი)"
 
-#: isoimagewriter/mainwindow.cpp:624
+#: isoimagewriter/mainwindow.cpp:623
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "ISO ასლი სწორია"
 
-#: isoimagewriter/mainwindow.cpp:630
+#: isoimagewriter/mainwindow.cpp:629
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "ISO ასლის შესამოწმებლად გასაღები ვერ ვიპოვე"
 
-#: isoimagewriter/mainwindow.cpp:632
+#: isoimagewriter/mainwindow.cpp:631
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "ISO ასლის გადამოწმების შეცდომა"
 
-#: isoimagewriter/mainwindow.cpp:633
+#: isoimagewriter/mainwindow.cpp:632
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO-ის გადამოწმების შეცდომა"
