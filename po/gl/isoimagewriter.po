@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2019-08-24 17:01+0200\n"
+"PO-Revision-Date: 2023-04-30 09:26+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -49,14 +49,9 @@ msgstr "Non se puido abrir o ficheiro de imaxe: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgid "Failed to open compression device: %1"
-msgstr ""
-"Non se puido abrir o dispositivo de destino:\n"
-"%1"
+msgstr "Non se puido abrir o dispositivo de compresión: %1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
@@ -169,7 +164,7 @@ msgstr "Usa unha sinatura incorrecta."
 #: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
 #, kde-format
 msgid "This app is built without verification support."
-msgstr ""
+msgstr "Esta aplicación está construída sen funcionalidade de verificación."
 
 #: isoimagewriter/isoverifier.cpp:181
 #, kde-format
@@ -233,7 +228,7 @@ msgstr "Gravar unha imaxe ISO nun disco USB"
 msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
-msgstr ""
+msgstr "© 2016 ROSA, © 2022 Jonathan Esk-Riddell <jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:33
 #, kde-format
@@ -253,7 +248,7 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
-msgstr ""
+msgstr "Ficheiro ISO para abrir"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, fuzzy, kde-format
@@ -300,7 +295,7 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:169
 #, kde-format
 msgid "Downloading %1..."
-msgstr ""
+msgstr "Descargando %1…"
 
 #: isoimagewriter/mainwindow.cpp:187
 #, kde-format
@@ -383,19 +378,17 @@ msgstr "Todos os ficheiros (%1)"
 #: isoimagewriter/mainwindow.cpp:475
 #, kde-format
 msgid "Select image to flash"
-msgstr ""
+msgstr "Selecciona a imaxe para aplicar"
 
 #: isoimagewriter/mainwindow.cpp:505
-#, fuzzy, kde-format
-#| msgid "Could not read ISO image"
+#, kde-format
 msgid "Downloading ISO image"
-msgstr "Non se puido ler a imaxe ISO"
+msgstr "Descargando a imaxe ISO"
 
 #: isoimagewriter/mainwindow.cpp:523
-#, fuzzy, kde-format
-#| msgid "Unknown Device"
+#, kde-format
 msgid "Unknown Disk Size"
-msgstr "Dispositivo descoñecido"
+msgstr "Tamaño de disco descoñecido"
 
 #: isoimagewriter/mainwindow.cpp:524
 #, kde-format
@@ -405,6 +398,10 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
+"O disco seleccionado ten un tamaño descoñecido, comproba que a imaxe caberá "
+"antes de escribila.\n"
+"\n"
+"Tamaño da imaxe: %1 (%2 b)"
 
 #: isoimagewriter/mainwindow.cpp:535 isoimagewriter/mainwindow.cpp:595
 #, kde-format
@@ -430,10 +427,9 @@ msgid "The ISO image is valid"
 msgstr "A imaxe ISO é válida"
 
 #: isoimagewriter/mainwindow.cpp:629
-#, fuzzy, kde-format
-#| msgid "Could not verify ISO image"
+#, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr "Non se puido verificar a imaxe ISO"
+msgstr "Non se puido atopar a chave para verificar a imaxe ISO"
 
 #: isoimagewriter/mainwindow.cpp:631
 #, kde-format

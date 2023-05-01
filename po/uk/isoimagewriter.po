@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2017, 2019, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2017, 2019, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-04-19 08:54+0300\n"
+"PO-Revision-Date: 2023-04-30 09:53+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -255,15 +255,15 @@ msgid "ISO file to open"
 msgstr "Файл ISO, який слід відкрити"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "Записувач образів ISO"
+msgstr "Записувач образів ISO KDE"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
 msgstr ""
+"Швидкий і простий спосіб створення приданого до завантаження носія USB."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format

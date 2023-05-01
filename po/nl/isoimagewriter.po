@@ -1,10 +1,10 @@
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2017, 2019, 2021, 2022.
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2017, 2019, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-04-19 13:30+0200\n"
+"PO-Revision-Date: 2023-04-30 14:27+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Freek de Kruijf - t/m 2019;2021 t/m 2022"
+msgstr "Freek de Kruijf - t/m 2019;2021 t/m 2023"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -249,15 +249,15 @@ msgid "ISO file to open"
 msgstr "Te openen ISO-bestand"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO-image-schrijver"
+msgstr "KDE ISO-image-schrijver"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
 msgstr ""
+"Een snelle en eenvoudige manier om een op te starten USB-stick te maken."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format

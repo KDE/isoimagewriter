@@ -1,10 +1,10 @@
-# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022.
+# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-12-14 15:54+0100\n"
+"PO-Revision-Date: 2023-04-30 21:21+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -249,15 +249,14 @@ msgid "ISO file to open"
 msgstr "ISO file a aperir"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "Scriptor de imagine ISO"
+msgstr "Scriptor de imagine ISO de KDE"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Un modo simple e rapide pro crear un unitate de USB boot-abile"
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format

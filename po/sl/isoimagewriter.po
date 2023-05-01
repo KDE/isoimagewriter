@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-04-20 09:49+0200\n"
+"PO-Revision-Date: 2023-04-30 05:52+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -250,15 +250,14 @@ msgid "ISO file to open"
 msgstr "Datoteka ISO za odpiranje"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO Image Writer"
+msgstr "KDE ISO Image Writer"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Hitri in enostavni način za kreiranje zagonskega USB medija."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format

@@ -5,14 +5,14 @@
 # Sofía Priego <spriego@darksylvania.net>, %Y.
 # Automatically generated, 2017.
 # Eloy <ecuadra@eloihr.net>, 2017.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2017, 2019, 2021, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2017, 2019, 2021, 2022, 2023.
 # Sofia Priego <spriego@darksylvania.net>, 2017, %Y.
 msgid ""
 msgstr ""
 "Project-Id-Version: imagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-04-22 22:05+0100\n"
+"PO-Revision-Date: 2023-04-30 17:37+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.03.90\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -223,7 +223,7 @@ msgstr "Necesita una suma de verificación SHA256"
 #: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
-msgstr "ISO Image Writer"
+msgstr "Grabador de imágenes ISO"
 
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
@@ -260,15 +260,14 @@ msgid "ISO file to open"
 msgstr "Archivo ISO para abrir"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO Image Writer"
+msgstr "Grabador de imágenes ISO de KDE"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Un modo rápido y sencillo de crear una unidad USB de arranque."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2023-03-21 15:09+0300\n"
+"PO-Revision-Date: 2023-04-30 13:21+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -35,17 +35,17 @@ msgstr "Hata kodu: %1"
 #: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr "Tampon için bellek ayırma başarısız:"
+msgstr "Arabellek ayrılamadı:"
 
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr "Tampon için bellek ayırma başarısız oldu."
+msgstr "Arabellek ayrılamadı."
 
 #: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr "Kalıp dosyası açma başarısız oldu: %1"
+msgstr "Kalıp dosyası açılamadı: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
@@ -56,12 +56,12 @@ msgstr "Sıkıştırma aygıtı açılamadı: %1"
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr "%1 sürücüsünü açma başarısız oldu"
+msgstr "%1 sürücüsü açılamadı"
 
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr "%1 sürücüsünü ayırma başarısız oldu"
+msgstr "%1 sürücüsünün bağlantısı kesilemedi"
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -69,7 +69,7 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
-"%1 disk bölümü bağlantısını kesme başarısız oldu\n"
+"%1 disk bölümünün bağlantısı kesilemedi\n"
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:154
@@ -78,7 +78,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"Hedef aygıtı açma başarısız oldu:\n"
+"Hedef aygıt açılamadı:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:187
@@ -87,7 +87,7 @@ msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
 "Aborting."
 msgstr ""
-"Son blok tamamen yazılmadı (%1/%2 bayt)!\n"
+"Son blok tümüyle yazılmadı (%1/%2 bayt)!\n"
 "İptal ediliyor."
 
 #: isoimagewriter/imagewriter.cpp:219
@@ -96,7 +96,7 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"Kalıp dosyası okuma başarısız oldu:\n"
+"Kalıp dosyası okunamadı:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
@@ -115,7 +115,7 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
-"Bu aygıtta tekrardan veri depolayabilmek için, lütfen, \"USB Diski Sil\" "
+"Bu aygıtta yeniden veri depolayabilmek için lütfen, \"USB Diski Sil\" "
 "düğmesini kullanın."
 
 #: isoimagewriter/isoverifier.cpp:58
@@ -182,7 +182,7 @@ msgstr "ISO kalıbı okunamadı"
 #: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not perform checksum"
-msgstr "Sağlama özeti çıkarılamadı"
+msgstr "Sağlama toplamı özeti çıkarılamadı"
 
 #: isoimagewriter/isoverifier.cpp:212
 #, kde-format
@@ -209,7 +209,7 @@ msgstr "SHA256 sağlama toplamı gerektiriyor"
 #: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
-msgstr "ISO Kalıbı Yazıcı"
+msgstr "ISO Kalıbı Yazıcısı"
 
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
@@ -246,15 +246,14 @@ msgid "ISO file to open"
 msgstr "Açılacak ISO dosyası"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO Kalıbı Yazıcı"
+msgstr "KDE ISO Kalıbı Yazıcısı"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Önyüklenebilir bir USB sürücüsü oluşturmanın tez ve kolay bir yolu."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format
@@ -274,7 +273,7 @@ msgstr "Bu ISO kalıbını yazın:"
 #: isoimagewriter/mainwindow.cpp:145
 #, kde-format
 msgid "To this USB drive:"
-msgstr "Bu USB sürücüye:"
+msgstr "Şu USB sürücüye:"
 
 #: isoimagewriter/mainwindow.cpp:163
 #, kde-format
@@ -338,7 +337,7 @@ msgstr "Kapat"
 #: isoimagewriter/mainwindow.cpp:270
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr "Kalıp dosyasını açma başarısız oldu:"
+msgstr "Kalıp dosyası açılamadı:"
 
 #: isoimagewriter/mainwindow.cpp:285
 #, kde-format
@@ -454,17 +453,17 @@ msgstr "ConnectServer başarısız oldu."
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr "USB flaş aygıtları sorgulama başarısız oldu."
+msgstr "USB flaş aygıtları sorgulanamadı."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr "Bölüntülerin listesini sorgulama başarısız oldu."
+msgstr "Bölüntülerin listesini sorgulanamadı."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr "Mantıksal disklerin listesini sorgulama başarısız oldu."
+msgstr "Mantıksal disklerin listesini sorgulanamadı."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
