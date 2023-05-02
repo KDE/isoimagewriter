@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2023-04-30 09:26+0200\n"
+"PO-Revision-Date: 2023-05-01 08:46+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -251,15 +251,14 @@ msgid "ISO file to open"
 msgstr "Ficheiro ISO para abrir"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "Gravadora de imaxes ISO"
+msgstr "Gravadora de imaxes ISO de KDE"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Unha forma rápida e sinxela de crear unidades USB arrincábeis."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format
