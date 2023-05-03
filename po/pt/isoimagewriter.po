@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: imagewriter_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-04-20 17:40+0100\n"
+"PO-Revision-Date: 2023-05-02 11:03+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -256,15 +256,14 @@ msgid "ISO file to open"
 msgstr "Ficheiro ISO a abrir"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "Gravador de Imagens ISO"
+msgstr "Gravador de Imagens ISO do KDE"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Uma forma simples e rápida de criar um dispositivo USB de arranque."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format
@@ -485,10 +484,3 @@ msgstr "Dispositivo Desconhecido"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<desmontado>"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Não foi possível gravar no dispositivo:\n"
-#~ "%1"
