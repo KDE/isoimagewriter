@@ -1,0 +1,450 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the isoimagewriter package.
+#
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: isoimagewriter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-04-30 00:51+0000\n"
+"PO-Revision-Date: 2023-05-11 11:09+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "زايد السعيدي"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "zayed.alsaidi@gmail.com"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:57
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:61
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:75
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:118
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:125
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:142
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:187
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:219
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:241
+#, kde-format
+msgid "The operation completed successfully."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:243
+#, kde-format
+msgid "Now you need to format your device."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:243
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:58
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:70
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:71
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:129
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:136
+#, kde-format
+msgid "Could not open signature file"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:142
+#, kde-format
+msgid "Could not open ISO image"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
+#, kde-format
+msgid "Key is revoked."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
+#, kde-format
+msgid "Uses wrong signature."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
+#, kde-format
+msgid "This app is built without verification support."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:181
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:195
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
+#, kde-format
+msgid "Could not read ISO image"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
+#, kde-format
+msgid "Could not perform checksum"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:212
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:220
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:269
+#, kde-format
+msgid "Checksum did not match"
+msgstr ""
+
+#: isoimagewriter/isoverifier.cpp:275
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:27
+#, kde-format
+msgid "ISO Image Writer"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:29
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:31
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
+#, kde-format
+msgid "Author"
+msgstr "المؤلف"
+
+#: isoimagewriter/mainapplication.cpp:34
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr ""
+
+#: isoimagewriter/mainapplication.cpp:38
+#, kde-format
+msgid "ISO file to open"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:83
+#, kde-format
+msgid "KDE ISO Image Writer"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:83
+#, kde-format
+msgid "A quick and simple way to create a bootable USB drive."
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:111
+#, kde-format
+msgid "Path to ISO image..."
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:122
+#, kde-format
+msgid "Create"
+msgstr "أنشئ"
+
+#: isoimagewriter/mainwindow.cpp:142
+#, kde-format
+msgid "Write this ISO image:"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:145
+#, kde-format
+msgid "To this USB drive:"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:163
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:169
+#, kde-format
+msgid "Downloading %1..."
+msgstr "يُنزّل %1..."
+
+#: isoimagewriter/mainwindow.cpp:187
+#, kde-format
+msgid "Abort"
+msgstr "أجهض"
+
+#: isoimagewriter/mainwindow.cpp:190
+#, kde-format
+msgid "Continue"
+msgstr "تابع"
+
+#: isoimagewriter/mainwindow.cpp:212
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:219
+#, kde-format
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: isoimagewriter/mainwindow.cpp:235
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:242
+#, kde-format
+msgid "Back"
+msgstr "للخلف"
+
+#: isoimagewriter/mainwindow.cpp:245
+#, kde-format
+msgid "Close"
+msgstr "أغلق"
+
+#: isoimagewriter/mainwindow.cpp:270
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:285
+#, kde-format
+msgid "Verifying ISO image"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:364
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:456
+#, kde-format
+msgid "Cancel?"
+msgstr "ألغِ؟"
+
+#: isoimagewriter/mainwindow.cpp:457
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:473
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:474
+#, kde-format
+msgid "All Files (%1)"
+msgstr "كلّ الملفّات (%1)"
+
+#: isoimagewriter/mainwindow.cpp:475
+#, kde-format
+msgid "Select image to flash"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:505
+#, kde-format
+msgid "Downloading ISO image"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:523
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:524
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:535 isoimagewriter/mainwindow.cpp:595
+#, kde-format
+msgid "Error"
+msgstr "خطأ"
+
+#: isoimagewriter/mainwindow.cpp:536
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:623
+#, kde-format
+msgid "The ISO image is valid"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:629
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:631
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:632
+#, kde-format
+msgid "ISO Verification failed"
+msgstr ""
+
+#: isoimagewriter/physicaldevice.cpp:56
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr ""
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr ""
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr ""
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr ""
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr ""
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr ""
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr ""
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr ""
