@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2017, 2019, 2020, 2021, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2017, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:51+0000\n"
-"PO-Revision-Date: 2022-06-05 11:20+0200\n"
+"PO-Revision-Date: 2023-05-13 08:56+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -251,15 +251,15 @@ msgid "ISO file to open"
 msgstr "Plik ISO do otwarcia"
 
 #: isoimagewriter/mainwindow.cpp:83
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "Wgrywanie obrazów ISO"
+msgstr "Wgrywanie obrazów ISO od KDE"
 
 #: isoimagewriter/mainwindow.cpp:83
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
 msgstr ""
+"Szybki i prosty sposób na tworzenie samouruchamiających się napędów USB."
 
 #: isoimagewriter/mainwindow.cpp:111
 #, kde-format
