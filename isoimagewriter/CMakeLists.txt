@@ -94,6 +94,10 @@ if(QGpgme_FOUND)
     endif()
 endif()
 
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(isoimagewriter KF6::IconWidgets)
+endif()
+
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
   target_link_libraries(isoimagewriter KF${KF_MAJOR_VERSION}::Solid)
   target_link_libraries(isoimagewriter Qt::DBus)
