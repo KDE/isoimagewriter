@@ -183,6 +183,7 @@ QWidget* MainWindow::createConfirmWidget()
 
     QProgressBar *downloadProgressBar = new QProgressBar();
     downloadProgressBar->setVisible(false);
+    downloadProgressBar->setFormat(i18nc("Progress percent value", "%1%"));
     downloadProgressBar->setMinimum(0);
     downloadProgressBar->setMaximum(100);
     connect(this, &MainWindow::downloadProgressChanged, downloadProgressBar, &QProgressBar::show);
@@ -220,6 +221,7 @@ QWidget* MainWindow::createProgressWidget()
     messageLabel->setWordWrap(true);
 
     m_progressBar = new QProgressBar;
+    m_progressBar->setFormat(i18nc("Progress percent value", "%1%"));
     m_cancelButton = new QPushButton(i18n("Cancel"));
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
