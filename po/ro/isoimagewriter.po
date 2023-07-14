@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:49+0000\n"
+"POT-Creation-Date: 2023-07-14 00:51+0000\n"
 "PO-Revision-Date: 2022-04-30 12:14+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -299,17 +299,23 @@ msgstr ""
 msgid "Downloading %1..."
 msgstr "Se descarcă %1..."
 
-#: isoimagewriter/mainwindow.cpp:191
+#: isoimagewriter/mainwindow.cpp:186 isoimagewriter/mainwindow.cpp:224
+#, kde-format
+msgctxt "Progress percent value"
+msgid "%1%"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:192
 #, kde-format
 msgid "Abort"
 msgstr "Abandonează"
 
-#: isoimagewriter/mainwindow.cpp:194
+#: isoimagewriter/mainwindow.cpp:195
 #, kde-format
 msgid "Continue"
 msgstr "Continuă"
 
-#: isoimagewriter/mainwindow.cpp:216
+#: isoimagewriter/mainwindow.cpp:217
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -322,77 +328,77 @@ msgstr ""
 "Aceasta poate dura ceva timp în dependență de dimensiunea imaginii ISO și de "
 "viteza transferului."
 
-#: isoimagewriter/mainwindow.cpp:223
+#: isoimagewriter/mainwindow.cpp:225
 #, kde-format
 msgid "Cancel"
 msgstr "Renunță"
 
-#: isoimagewriter/mainwindow.cpp:239
+#: isoimagewriter/mainwindow.cpp:241
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Unitatea USB e completă și gata de utilizare!"
 
-#: isoimagewriter/mainwindow.cpp:246
+#: isoimagewriter/mainwindow.cpp:248
 #, kde-format
 msgid "Back"
 msgstr "Înapoi"
 
-#: isoimagewriter/mainwindow.cpp:249
+#: isoimagewriter/mainwindow.cpp:251
 #, kde-format
 msgid "Close"
 msgstr "Închide"
 
-#: isoimagewriter/mainwindow.cpp:274
+#: isoimagewriter/mainwindow.cpp:276
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Deschiderea fișierului cu imagine a eșuat:"
 
-#: isoimagewriter/mainwindow.cpp:289
+#: isoimagewriter/mainwindow.cpp:291
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Se verifică imaginea ISO"
 
-#: isoimagewriter/mainwindow.cpp:373
+#: isoimagewriter/mainwindow.cpp:375
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Atașați o unitate USB"
 
-#: isoimagewriter/mainwindow.cpp:465
+#: isoimagewriter/mainwindow.cpp:467
 #, kde-format
 msgid "Cancel?"
 msgstr "Renunțați?"
 
-#: isoimagewriter/mainwindow.cpp:466
+#: isoimagewriter/mainwindow.cpp:468
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Scrierea e în curs, o abandonați?"
 
-#: isoimagewriter/mainwindow.cpp:482
+#: isoimagewriter/mainwindow.cpp:484
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Imagini de disc (%1)"
 
-#: isoimagewriter/mainwindow.cpp:483
+#: isoimagewriter/mainwindow.cpp:485
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Toate fișierele (%1)"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:486
 #, kde-format
 msgid "Select image to flash"
 msgstr "Alegeți imaginea de scris"
 
-#: isoimagewriter/mainwindow.cpp:514
+#: isoimagewriter/mainwindow.cpp:516
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "Se descarcă imaginea ISO"
 
-#: isoimagewriter/mainwindow.cpp:537
+#: isoimagewriter/mainwindow.cpp:539
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Dimensiune disc necunoscută"
 
-#: isoimagewriter/mainwindow.cpp:538
+#: isoimagewriter/mainwindow.cpp:540
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -405,12 +411,12 @@ msgstr ""
 "\n"
 "Dimensiunea imaginii: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:549 isoimagewriter/mainwindow.cpp:609
+#: isoimagewriter/mainwindow.cpp:551 isoimagewriter/mainwindow.cpp:611
 #, kde-format
 msgid "Error"
 msgstr "Eroare"
 
-#: isoimagewriter/mainwindow.cpp:550
+#: isoimagewriter/mainwindow.cpp:552
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -423,22 +429,22 @@ msgstr ""
 "Dimensiune imagine: %1 (%2 o)\n"
 "Dimensiune disc: %3 (%4 o)"
 
-#: isoimagewriter/mainwindow.cpp:637
+#: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "Imaginea ISO e validă"
 
-#: isoimagewriter/mainwindow.cpp:652
+#: isoimagewriter/mainwindow.cpp:654
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "Nu s-a putut găsi cheia pentru verificarea imaginii ISO"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:656
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Imaginea ISO nu a putut fi verificată"
 
-#: isoimagewriter/mainwindow.cpp:655
+#: isoimagewriter/mainwindow.cpp:657
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "Verificarea ISO a eșuat"

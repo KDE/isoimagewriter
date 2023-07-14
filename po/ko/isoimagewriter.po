@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:49+0000\n"
+"POT-Creation-Date: 2023-07-14 00:51+0000\n"
 "PO-Revision-Date: 2022-05-07 00:16+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -294,17 +294,23 @@ msgstr ""
 msgid "Downloading %1..."
 msgstr "%1 다운로드 중..."
 
-#: isoimagewriter/mainwindow.cpp:191
+#: isoimagewriter/mainwindow.cpp:186 isoimagewriter/mainwindow.cpp:224
+#, kde-format
+msgctxt "Progress percent value"
+msgid "%1%"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:192
 #, kde-format
 msgid "Abort"
 msgstr "중지"
 
-#: isoimagewriter/mainwindow.cpp:194
+#: isoimagewriter/mainwindow.cpp:195
 #, kde-format
 msgid "Continue"
 msgstr "계속"
 
-#: isoimagewriter/mainwindow.cpp:216
+#: isoimagewriter/mainwindow.cpp:217
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -316,77 +322,77 @@ msgstr ""
 "\n"
 "ISO 이미지 파일의 크기와 전송 속도에 따라서 시간이 걸릴 수 있습니다."
 
-#: isoimagewriter/mainwindow.cpp:223
+#: isoimagewriter/mainwindow.cpp:225
 #, kde-format
 msgid "Cancel"
 msgstr "취소"
 
-#: isoimagewriter/mainwindow.cpp:239
+#: isoimagewriter/mainwindow.cpp:241
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "이제 라이브 USB 플래시 드라이브를 사용할 수 있습니다!"
 
-#: isoimagewriter/mainwindow.cpp:246
+#: isoimagewriter/mainwindow.cpp:248
 #, kde-format
 msgid "Back"
 msgstr "뒤로"
 
-#: isoimagewriter/mainwindow.cpp:249
+#: isoimagewriter/mainwindow.cpp:251
 #, kde-format
 msgid "Close"
 msgstr "닫기"
 
-#: isoimagewriter/mainwindow.cpp:274
+#: isoimagewriter/mainwindow.cpp:276
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "이미지 파일을 열 수 없음:"
 
-#: isoimagewriter/mainwindow.cpp:289
+#: isoimagewriter/mainwindow.cpp:291
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "ISO 이미지 검사 중"
 
-#: isoimagewriter/mainwindow.cpp:373
+#: isoimagewriter/mainwindow.cpp:375
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "USB 드라이브를 연결하십시오"
 
-#: isoimagewriter/mainwindow.cpp:465
+#: isoimagewriter/mainwindow.cpp:467
 #, kde-format
 msgid "Cancel?"
 msgstr "취소하시겠습니까?"
 
-#: isoimagewriter/mainwindow.cpp:466
+#: isoimagewriter/mainwindow.cpp:468
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "기록 중입니다. 중단하시겠습니까?"
 
-#: isoimagewriter/mainwindow.cpp:482
+#: isoimagewriter/mainwindow.cpp:484
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "디스크 이미지 (%1)"
 
-#: isoimagewriter/mainwindow.cpp:483
+#: isoimagewriter/mainwindow.cpp:485
 #, kde-format
 msgid "All Files (%1)"
 msgstr "모든 파일 (%1)"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:486
 #, kde-format
 msgid "Select image to flash"
 msgstr "기록할 이미지 선택"
 
-#: isoimagewriter/mainwindow.cpp:514
+#: isoimagewriter/mainwindow.cpp:516
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "ISO 이미지 다운로드 중"
 
-#: isoimagewriter/mainwindow.cpp:537
+#: isoimagewriter/mainwindow.cpp:539
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "알 수 없는 디스크 크기"
 
-#: isoimagewriter/mainwindow.cpp:538
+#: isoimagewriter/mainwindow.cpp:540
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -399,12 +405,12 @@ msgstr ""
 "\n"
 "이미지 크기: %1(%2바이트)"
 
-#: isoimagewriter/mainwindow.cpp:549 isoimagewriter/mainwindow.cpp:609
+#: isoimagewriter/mainwindow.cpp:551 isoimagewriter/mainwindow.cpp:611
 #, kde-format
 msgid "Error"
 msgstr "오류"
 
-#: isoimagewriter/mainwindow.cpp:550
+#: isoimagewriter/mainwindow.cpp:552
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -417,22 +423,22 @@ msgstr ""
 "이미지 크기: %1(%2바이트)\n"
 "디스크 크기: %3(%4바이트)"
 
-#: isoimagewriter/mainwindow.cpp:637
+#: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "ISO 이미지가 올바름"
 
-#: isoimagewriter/mainwindow.cpp:652
+#: isoimagewriter/mainwindow.cpp:654
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "ISO 이미지를 검증할 키를 찾을 수 없음"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:656
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "ISO 이미지를 검증할 수 없음"
 
-#: isoimagewriter/mainwindow.cpp:655
+#: isoimagewriter/mainwindow.cpp:657
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "ISO 검증 실패"

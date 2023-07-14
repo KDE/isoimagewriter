@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:49+0000\n"
+"POT-Creation-Date: 2023-07-14 00:51+0000\n"
 "PO-Revision-Date: 2022-08-26 23:44+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: https://t.me/Localizations_KDE_Indonesia\n"
@@ -301,17 +301,23 @@ msgstr ""
 msgid "Downloading %1..."
 msgstr "Mengunduh %1..."
 
-#: isoimagewriter/mainwindow.cpp:191
+#: isoimagewriter/mainwindow.cpp:186 isoimagewriter/mainwindow.cpp:224
+#, kde-format
+msgctxt "Progress percent value"
+msgid "%1%"
+msgstr ""
+
+#: isoimagewriter/mainwindow.cpp:192
 #, kde-format
 msgid "Abort"
 msgstr "Gugurkan"
 
-#: isoimagewriter/mainwindow.cpp:194
+#: isoimagewriter/mainwindow.cpp:195
 #, kde-format
 msgid "Continue"
 msgstr "Lanjutkan"
 
-#: isoimagewriter/mainwindow.cpp:216
+#: isoimagewriter/mainwindow.cpp:217
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -324,79 +330,79 @@ msgstr ""
 "Ini mungkin memakan beberapa waktu tergantung pada ukuran file citra ISO-nya "
 "dan kecepatan transfer."
 
-#: isoimagewriter/mainwindow.cpp:223
+#: isoimagewriter/mainwindow.cpp:225
 #, kde-format
 msgid "Cancel"
 msgstr "Batal"
 
-#: isoimagewriter/mainwindow.cpp:239
+#: isoimagewriter/mainwindow.cpp:241
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "USB flash drive live Anda telah selesai dan sudah siap digunakan!"
 
-#: isoimagewriter/mainwindow.cpp:246
+#: isoimagewriter/mainwindow.cpp:248
 #, kde-format
 msgid "Back"
 msgstr "Kembali"
 
-#: isoimagewriter/mainwindow.cpp:249
+#: isoimagewriter/mainwindow.cpp:251
 #, kde-format
 msgid "Close"
 msgstr "Tutup"
 
-#: isoimagewriter/mainwindow.cpp:274
+#: isoimagewriter/mainwindow.cpp:276
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Gagal membuka file citra:"
 
-#: isoimagewriter/mainwindow.cpp:289
+#: isoimagewriter/mainwindow.cpp:291
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Memverifikasi citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:373
+#: isoimagewriter/mainwindow.cpp:375
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Silakan colokkan sebuah drive USB"
 
-#: isoimagewriter/mainwindow.cpp:465
+#: isoimagewriter/mainwindow.cpp:467
 #, kde-format
 msgid "Cancel?"
 msgstr "Batal?"
 
-#: isoimagewriter/mainwindow.cpp:466
+#: isoimagewriter/mainwindow.cpp:468
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Penulisan sedang berlangsung, gugurkan?"
 
-#: isoimagewriter/mainwindow.cpp:482
+#: isoimagewriter/mainwindow.cpp:484
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Citra Disk (%1)"
 
-#: isoimagewriter/mainwindow.cpp:483
+#: isoimagewriter/mainwindow.cpp:485
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Semua File (%1)"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:486
 #, kde-format
 msgid "Select image to flash"
 msgstr "Pilih citra untuk diflash"
 
-#: isoimagewriter/mainwindow.cpp:514
+#: isoimagewriter/mainwindow.cpp:516
 #, fuzzy, kde-format
 #| msgid "Could not read ISO image"
 msgid "Downloading ISO image"
 msgstr "Tidak bisa membaca citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:537
+#: isoimagewriter/mainwindow.cpp:539
 #, fuzzy, kde-format
 #| msgid "Unknown Device"
 msgid "Unknown Disk Size"
 msgstr "Perangkat Tak Diketahui"
 
-#: isoimagewriter/mainwindow.cpp:538
+#: isoimagewriter/mainwindow.cpp:540
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -409,12 +415,12 @@ msgstr ""
 "\n"
 "Ukuran citra: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:549 isoimagewriter/mainwindow.cpp:609
+#: isoimagewriter/mainwindow.cpp:551 isoimagewriter/mainwindow.cpp:611
 #, kde-format
 msgid "Error"
 msgstr "Galat"
 
-#: isoimagewriter/mainwindow.cpp:550
+#: isoimagewriter/mainwindow.cpp:552
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -427,23 +433,23 @@ msgstr ""
 "Ukuran citra: %1 (%2 b)\n"
 "Ukuran disk: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:637
+#: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "Citra ISO valid"
 
-#: isoimagewriter/mainwindow.cpp:652
+#: isoimagewriter/mainwindow.cpp:654
 #, fuzzy, kde-format
 #| msgid "Could not verify ISO image"
 msgid "Could not find the key to verify the ISO image"
 msgstr "Tidak bisa memverifikasi citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:656
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Tidak bisa memverifikasi citra ISO"
 
-#: isoimagewriter/mainwindow.cpp:655
+#: isoimagewriter/mainwindow.cpp:657
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "Verifikasi ISO gagal"
