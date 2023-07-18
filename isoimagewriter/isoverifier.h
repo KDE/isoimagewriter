@@ -22,7 +22,7 @@ public:
         KeyNotFound,
         NoGpg,
     };
-    Q_ENUM(VerifyResult);
+    Q_ENUM(VerifyResult)
 
 public slots:
     void verifyIso();
