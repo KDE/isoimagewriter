@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Burkhard Lück <lueck@hube-lueck.de>, 2017, 2019, 2020, 2021.
-# Frederik Schwarzer <schwarzer@kde.org>, 2017, 2022.
+# Frederik Schwarzer <schwarzer@kde.org>, 2017, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-14 00:51+0000\n"
-"PO-Revision-Date: 2022-06-10 00:22+0200\n"
+"PO-Revision-Date: 2023-07-24 21:29+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -257,10 +257,9 @@ msgid "ISO file to open"
 msgstr "Zu öffnende ISO-Datei"
 
 #: isoimagewriter/mainwindow.cpp:87
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO Image Writer"
+msgstr "KDE ISO Image Writer"
 
 #: isoimagewriter/mainwindow.cpp:87
 #, kde-format
@@ -307,7 +306,7 @@ msgstr "%1 wird heruntergeladen ..."
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%1%"
-msgstr ""
+msgstr "%1 %"
 
 #: isoimagewriter/mainwindow.cpp:192
 #, kde-format
