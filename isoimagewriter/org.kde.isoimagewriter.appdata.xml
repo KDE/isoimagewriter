@@ -12,6 +12,7 @@
   <name xml:lang="de">ISO Image Writer</name>
   <name xml:lang="el">ISO Image Writer</name>
   <name xml:lang="en-GB">ISO Image Writer</name>
+  <name xml:lang="eo">ISO-Bitkopia Skribilo</name>
   <name xml:lang="es">ISO Image Writer</name>
   <name xml:lang="et">ISO-tõmmise kirjutaja</name>
   <name xml:lang="eu">ISO irudi idazlea</name>
@@ -49,6 +50,7 @@
   <summary xml:lang="de">ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
   <summary xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</summary>
   <summary xml:lang="en-GB">Write an ISO Image to a USB Disk</summary>
+  <summary xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</summary>
   <summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
   <summary xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</summary>
   <summary xml:lang="eu">Idatzi ISO irudia USB disko batean</summary>
@@ -87,6 +89,7 @@
     <p xml:lang="de">ISO-Abbild auf ein USB-Speichermedium schreiben</p>
     <p xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</p>
     <p xml:lang="en-GB">Write an ISO Image to a USB Disk</p>
+    <p xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</p>
     <p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
     <p xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</p>
     <p xml:lang="eu">Idatzi ISO irudia USB disko batean</p>
