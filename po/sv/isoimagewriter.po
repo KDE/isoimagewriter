@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2017, 2019, 2021, 2022.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2017, 2019, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-14 00:51+0000\n"
-"PO-Revision-Date: 2022-04-19 19:38+0200\n"
+"PO-Revision-Date: 2023-07-30 17:25+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -247,15 +247,14 @@ msgid "ISO file to open"
 msgstr "ISO-fil att öppna"
 
 #: isoimagewriter/mainwindow.cpp:87
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO-avbildsskrivning"
+msgstr "KDE ISO-avbildsskrivning"
 
 #: isoimagewriter/mainwindow.cpp:87
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Ett snabbt och enkelt sätt att skapa en startbar USB-enhet."
 
 #: isoimagewriter/mainwindow.cpp:115
 #, kde-format
@@ -297,7 +296,7 @@ msgstr "Laddar ner %1..."
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%1%"
-msgstr ""
+msgstr "%1 %"
 
 #: isoimagewriter/mainwindow.cpp:192
 #, kde-format
