@@ -35,33 +35,33 @@ msgstr "Código de erro: %1"
 #: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr "Non se puido asignar memoria para o búfer:"
+msgstr "Non foi posíbel asignar memoria para o búfer:"
 
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr "Non se puido asignar memoria para o búfer."
+msgstr "Non foi posíbel asignar memoria para o búfer."
 
 #: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr "Non se puido abrir o ficheiro de imaxe: %1"
+msgstr "Non foi posíbel abrir o ficheiro de imaxe: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
-msgstr "Non se puido abrir o dispositivo de compresión: %1"
+msgstr "Non foi posíbel abrir o dispositivo de compresión: %1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr "Non se puido abrir a unidade %1."
+msgstr "Non foi posíbel abrir a unidade %1."
 
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr "Non se puido desmontar a unidade %1."
+msgstr "Non foi posíbel desmontar a unidade %1."
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -69,7 +69,7 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
-"Non se puido desmontar o volume %1.\n"
+"Non foi posíbel desmontar o volume %1.\n"
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:154
@@ -78,7 +78,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"Non se puido abrir o dispositivo de destino:\n"
+"Non foi posíbel abrir o dispositivo de destino:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:187
@@ -96,7 +96,7 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"Non se puido ler o ficheiro de imaxe:\n"
+"Non foi posíbel ler o ficheiro de imaxe:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
@@ -121,7 +121,7 @@ msgstr ""
 #: isoimagewriter/isoverifier.cpp:58
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr "Non se puido verificar como unha imaxe de distro coñecida."
+msgstr "Non foi posíbel verificar como unha imaxe de distro coñecida."
 
 #: isoimagewriter/isoverifier.cpp:70
 #, kde-format
@@ -138,18 +138,18 @@ msgstr "Pegue a suma de comprobación SHA256 para esta ISO:"
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr ""
-"Non se puido atopar %1, descargue o ficheiro de sinatura PGP no mesmo "
+"Non foi posíbel atopar %1, descargue o ficheiro de sinatura PGP no mesmo "
 "cartafol."
 
 #: isoimagewriter/isoverifier.cpp:136
 #, kde-format
 msgid "Could not open signature file"
-msgstr "Non se puido abrir o ficheiro de sinatura"
+msgstr "Non foi posíbel abrir o ficheiro de sinatura"
 
 #: isoimagewriter/isoverifier.cpp:142
 #, kde-format
 msgid "Could not open ISO image"
-msgstr "Non se puido abrir a imaxe ISO"
+msgstr "Non foi posíbel abrir a imaxe ISO"
 
 #: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
 #, kde-format
@@ -170,22 +170,22 @@ msgstr "Esta aplicación está construída sen funcionalidade de verificación."
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
-"Non se puido abrir o ficheiro de SHA256SUMS, descárgueo no mesmo cartafol."
+"Non foi posíbel abrir o ficheiro de SHA256SUMS, descárgueo no mesmo cartafol."
 
 #: isoimagewriter/isoverifier.cpp:195
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr "Non se puido atopar a suma de comprobación no ficheiro SHA256SUMS."
+msgstr "Non foi posíbel atopar a suma de comprobación no ficheiro SHA256SUMS."
 
 #: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
 #, kde-format
 msgid "Could not read ISO image"
-msgstr "Non se puido ler a imaxe ISO"
+msgstr "Non foi posíbel ler a imaxe ISO"
 
 #: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not perform checksum"
-msgstr "Non se puido realizar a comprobación da suma de comprobación."
+msgstr "Non foi posíbel realizar a comprobación da suma de comprobación."
 
 #: isoimagewriter/isoverifier.cpp:212
 #, kde-format
@@ -200,8 +200,8 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
-"Non se puido atopar SHA256SUMS.gpg, descargue o ficheiro de sinatura PGP no "
-"mesmo cartafol."
+"Non foi posíbel atopar SHA256SUMS.gpg, descargue o ficheiro de sinatura PGP "
+"no mesmo cartafol."
 
 #: isoimagewriter/isoverifier.cpp:269
 #, kde-format
@@ -348,7 +348,7 @@ msgstr "Pechar"
 #: isoimagewriter/mainwindow.cpp:276
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr "Non se puido abrir o ficheiro de imaxe:"
+msgstr "Non foi posíbel abrir o ficheiro de imaxe:"
 
 #: isoimagewriter/mainwindow.cpp:291
 #, kde-format
@@ -434,12 +434,12 @@ msgstr "A imaxe ISO é válida"
 #: isoimagewriter/mainwindow.cpp:654
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr "Non se puido atopar a chave para verificar a imaxe ISO"
+msgstr "Non foi posíbel atopar a chave para verificar a imaxe ISO"
 
 #: isoimagewriter/mainwindow.cpp:656
 #, kde-format
 msgid "Could not verify ISO image"
-msgstr "Non se puido verificar a imaxe ISO"
+msgstr "Non foi posíbel verificar a imaxe ISO"
 
 #: isoimagewriter/mainwindow.cpp:657
 #, kde-format
@@ -449,7 +449,7 @@ msgstr "Fallou a verificación da ISO"
 #: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
-msgstr "Non se puido obter acceso exclusivo:"
+msgstr "Non foi posíbel obter acceso exclusivo:"
 
 #: isoimagewriter/platform_win.cpp:94
 #, kde-format
@@ -464,17 +464,17 @@ msgstr "ConnectServer fallou."
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr "Non se puideron consultar os dispositivos de memoria USB."
+msgstr "Non foi posíbel consultar os dispositivos de memoria USB."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr "Non se puido consultar a lista de particións."
+msgstr "Non foi posíbel consultar a lista de particións."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr "Non se puido consultar a lista de discos lóxicos."
+msgstr "Non foi posíbel consultar a lista de discos lóxicos."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
