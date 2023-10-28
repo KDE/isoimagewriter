@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-14 00:51+0000\n"
-"PO-Revision-Date: 2023-09-09 14:16+0200\n"
+"PO-Revision-Date: 2023-10-26 18:04+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -174,8 +174,8 @@ msgstr ""
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
-"Impossible d'ouvrir le fichier SHA256SUMS, veuillez le télécharger dans le "
-"même dossier"
+"Impossible d'ouvrir le fichier « SHA256SUMS », veuillez le télécharger dans "
+"le même dossierSUMS"
 
 #: isoimagewriter/isoverifier.cpp:195
 #, kde-format
@@ -460,7 +460,7 @@ msgstr "Impossible de verrouiller :"
 #: isoimagewriter/platform_win.cpp:94
 #, kde-format
 msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
-msgstr "Échec de CoCreateInstance(WbemAdministrativeLocator)."
+msgstr "Échec de CoCreateInstance (WbemAdministrativeLocator)."
 
 #: isoimagewriter/platform_win.cpp:95
 #, kde-format
