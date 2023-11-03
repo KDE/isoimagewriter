@@ -17,19 +17,3 @@ Dependencies:
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
   'require':
     'frameworks/kauth': '@latest-kf6'
-
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5', 'Windows/Qt5']
-  'require':
-    'frameworks/extra-cmake-modules': '@stable'
-    'frameworks/kcoreaddons': '@stable'
-    'frameworks/kconfig': '@stable'
-    'frameworks/ki18n': '@stable'
-    'frameworks/kwidgetsaddons': '@stable'
-    'frameworks/kiconthemes': '@stable'
-    'frameworks/karchive': '@stable'
-    'frameworks/kcrash': '@stable'
-    'frameworks/solid': '@stable'
-
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
-  'require':
-    'frameworks/kauth': '@stable'  
