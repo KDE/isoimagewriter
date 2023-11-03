@@ -1,12 +1,8 @@
 set(GPGME_REQUIRED_VERSION "1.8.0")
 find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG)
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(QGpgmeQt6 ${GPGME_REQUIRED_VERSION} CONFIG)
-else()
-    find_package(QGpgme ${GPGME_REQUIRED_VERSION} CONFIG)
-endif()
+find_package(QGpgmeQt6 ${GPGME_REQUIRED_VERSION} CONFIG)
 
-#find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS QGpgme)
+#find_package(KF6 REQUIRED COMPONENTS QGpgme)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX ISOIMAGEWRITER VERSION_HEADER isoimagewriter_version.h)
 
@@ -77,29 +73,23 @@ target_link_libraries(isoimagewriter
     Qt::Network
     Qt::DBus
     Qt::Test
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::CoreAddons
-    KF${KF_MAJOR_VERSION}::WidgetsAddons
-    KF${KF_MAJOR_VERSION}::IconThemes
-    KF${KF_MAJOR_VERSION}::Crash
-    KF${KF_MAJOR_VERSION}::Archive
-    KF${KF_MAJOR_VERSION}::Solid
+    KF6::I18n
+    KF6::CoreAddons
+    KF6::WidgetsAddons
+    KF6::IconThemes
+    KF6::Crash
+    KF6::Archive
+    KF6::Solid
 )
 if(QGpgme_FOUND)
     add_definitions(-D_USE_GPG)
-    if (QT_MAJOR_VERSION STREQUAL "6")
-        target_link_libraries(isoimagewriter QGpgmeQt6)
-    else()
-        target_link_libraries(isoimagewriter QGpgme)
-    endif()
+    target_link_libraries(isoimagewriter QGpgmeQt6)
 endif()
 
-if (QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(isoimagewriter KF6::IconWidgets)
-endif()
+target_link_libraries(isoimagewriter KF6::IconWidgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  target_link_libraries(isoimagewriter KF${KF_MAJOR_VERSION}::Solid)
+  target_link_libraries(isoimagewriter KF6::Solid)
   target_link_libraries(isoimagewriter Qt::DBus)
 endif()
 
