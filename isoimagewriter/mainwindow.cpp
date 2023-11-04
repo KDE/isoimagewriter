@@ -29,9 +29,7 @@
 #include <KLocalizedString>
 #include "isolineedit.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <KPixmapSequenceLoader>
-#endif
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -290,12 +288,8 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     // Verify ISO image
     m_busyLabel->setText(i18n("Verifying ISO image"));
     m_busyWidget->show();
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("process-working", KIconLoader::SizeSmallMedium));
-#else
     m_busySpinner->setSequence(KPixmapSequenceLoader::load(
         "process-working", KIconLoader::SizeSmallMedium));
-#endif
     m_busySpinner->start();
 
     IsoVerifier *isoVerifier = new IsoVerifier(m_isoImagePath);
@@ -515,12 +509,8 @@ void MainWindow::openUrl(const QUrl& url)
     });
     m_busyLabel->setText(i18n("Downloading ISO image"));
     m_busyWidget->show();
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("process-working", KIconLoader::SizeSmallMedium));
-#else
     m_busySpinner->setSequence(KPixmapSequenceLoader::load(
         "process-working", KIconLoader::SizeSmallMedium));
-#endif
     m_busySpinner->start();
     m_fetchIso->fetch(url);
 }
@@ -637,19 +627,11 @@ void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, con
 {
     if (verify == IsoVerifier::VerifyResult::Successful) {
         m_busyLabel->setText(i18n("The ISO image is valid"));
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("checkmark", KIconLoader::SizeSmallMedium));
-#else
         m_busySpinner->setSequence(KPixmapSequenceLoader::load(
             "checkmark", KIconLoader::SizeSmallMedium));
-#endif
     } else {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        m_busySpinner->setSequence(KIconLoader::global()->loadPixmapSequence("error", KIconLoader::SizeSmallMedium));
-#else
         m_busySpinner->setSequence(
             KPixmapSequenceLoader::load("error", KIconLoader::SizeSmallMedium));
-#endif
         if (verify == IsoVerifier::VerifyResult::KeyNotFound) {
             m_busyLabel->setText(i18n("Could not find the key to verify the ISO image"));
         } else if (verify == IsoVerifier::VerifyResult::Failed) {
