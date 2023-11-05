@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-14 00:51+0000\n"
+"POT-Creation-Date: 2023-11-05 12:40+0000\n"
 "PO-Revision-Date: 2023-08-07 11:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -250,37 +250,37 @@ msgstr "Jonathan Riddell"
 msgid "ISO file to open"
 msgstr "Soubor ISO k otevření"
 
-#: isoimagewriter/mainwindow.cpp:87
+#: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "KDE ISO Image Writer"
 msgstr "Nástroj pro zapisování obrazů ISO v KDE"
 
-#: isoimagewriter/mainwindow.cpp:87
+#: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
 msgstr ""
 
-#: isoimagewriter/mainwindow.cpp:115
+#: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Cesta k obrazu ISO..."
 
-#: isoimagewriter/mainwindow.cpp:126
+#: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
 msgstr "Vytvořit"
 
-#: isoimagewriter/mainwindow.cpp:146
+#: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Zapsat tento obraz ISO:"
 
-#: isoimagewriter/mainwindow.cpp:149
+#: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Na tento disk USB:"
 
-#: isoimagewriter/mainwindow.cpp:167
+#: isoimagewriter/mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -291,28 +291,28 @@ msgstr ""
 "\n"
 "Chcete pokračovat?"
 
-#: isoimagewriter/mainwindow.cpp:173
+#: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
 msgstr "Stahování %1..."
 
-#: isoimagewriter/mainwindow.cpp:186 isoimagewriter/mainwindow.cpp:224
+#: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%1%"
 msgstr "%1%"
 
-#: isoimagewriter/mainwindow.cpp:192
+#: isoimagewriter/mainwindow.cpp:190
 #, kde-format
 msgid "Abort"
 msgstr "Přerušit"
 
-#: isoimagewriter/mainwindow.cpp:195
+#: isoimagewriter/mainwindow.cpp:193
 #, kde-format
 msgid "Continue"
 msgstr "Pokračovat"
 
-#: isoimagewriter/mainwindow.cpp:217
+#: isoimagewriter/mainwindow.cpp:215
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -325,77 +325,77 @@ msgstr ""
 "V závislosti na velikosti obrazu ISO a rychlosti přenosu tohle může nějakou "
 "dobu trvat."
 
-#: isoimagewriter/mainwindow.cpp:225
+#: isoimagewriter/mainwindow.cpp:223
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: isoimagewriter/mainwindow.cpp:241
+#: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Váš disk live USB je dokončen a připraven k použití."
 
-#: isoimagewriter/mainwindow.cpp:248
+#: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Back"
 msgstr "Zpět"
 
-#: isoimagewriter/mainwindow.cpp:251
+#: isoimagewriter/mainwindow.cpp:249
 #, kde-format
 msgid "Close"
 msgstr "Zavřít"
 
-#: isoimagewriter/mainwindow.cpp:276
+#: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Nepodařilo se otevřít soubor obrazu:"
 
-#: isoimagewriter/mainwindow.cpp:291
+#: isoimagewriter/mainwindow.cpp:289
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Ověřuji obraz ISO"
 
-#: isoimagewriter/mainwindow.cpp:375
+#: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Prosím připojte disk USB"
 
-#: isoimagewriter/mainwindow.cpp:467
+#: isoimagewriter/mainwindow.cpp:461
 #, kde-format
 msgid "Cancel?"
 msgstr "Zrušit?"
 
-#: isoimagewriter/mainwindow.cpp:468
+#: isoimagewriter/mainwindow.cpp:462
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Probíhá zápis. Přerušit jej?"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:478
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Obrazy disku (%1)"
 
-#: isoimagewriter/mainwindow.cpp:485
+#: isoimagewriter/mainwindow.cpp:479
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Všechny soubory (%1)"
 
-#: isoimagewriter/mainwindow.cpp:486
+#: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
 msgstr "Vyberte obraz pro nahrání"
 
-#: isoimagewriter/mainwindow.cpp:516
+#: isoimagewriter/mainwindow.cpp:510
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "Stahuji obraz ISO"
 
-#: isoimagewriter/mainwindow.cpp:539
+#: isoimagewriter/mainwindow.cpp:529
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Neznámá velikost disku"
 
-#: isoimagewriter/mainwindow.cpp:540
+#: isoimagewriter/mainwindow.cpp:530
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -408,12 +408,12 @@ msgstr ""
 "\n"
 "Velikost obrazu: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:551 isoimagewriter/mainwindow.cpp:611
+#: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
 msgid "Error"
 msgstr "Chyba"
 
-#: isoimagewriter/mainwindow.cpp:552
+#: isoimagewriter/mainwindow.cpp:542
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -426,22 +426,22 @@ msgstr ""
 "Velikost obrazu: %1 (%2 b)\n"
 "Velikost zařízení: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:639
+#: isoimagewriter/mainwindow.cpp:629
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "Obraz ISO je platný"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:636
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "Nelze najít klíč pro ověření obrazu ISO"
 
-#: isoimagewriter/mainwindow.cpp:656
+#: isoimagewriter/mainwindow.cpp:638
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Obraz ISO nelze ověřit"
 
-#: isoimagewriter/mainwindow.cpp:657
+#: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "Ověřování ISO selhalo"

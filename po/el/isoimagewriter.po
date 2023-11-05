@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-14 00:51+0000\n"
+"POT-Creation-Date: 2023-11-05 12:40+0000\n"
 "PO-Revision-Date: 2023-07-30 00:22+0300\n"
 "Last-Translator: George Stefanakis <george.stefanakis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -253,37 +253,37 @@ msgstr "Jonathan Riddell"
 msgid "ISO file to open"
 msgstr "ISO αρχείο για άνοιγμα"
 
-#: isoimagewriter/mainwindow.cpp:87
+#: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "KDE ISO Image Writer"
 msgstr "Εγγραφέας εικόνων ISO του KDE"
 
-#: isoimagewriter/mainwindow.cpp:87
+#: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
 msgstr "Ένας γρήγορος και απλός τρόπος για τη δημιουργία bootable USB."
 
-#: isoimagewriter/mainwindow.cpp:115
+#: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
 msgstr "Διαδρομή προς την εικόνα ISO..."
 
-#: isoimagewriter/mainwindow.cpp:126
+#: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
 msgstr "Δημιουργία"
 
-#: isoimagewriter/mainwindow.cpp:146
+#: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
 msgstr "Εγγραφή αυτής της εικόνας ISO:"
 
-#: isoimagewriter/mainwindow.cpp:149
+#: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
 msgstr "Σε αυτήν τη συσκευή USB:"
 
-#: isoimagewriter/mainwindow.cpp:167
+#: isoimagewriter/mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Everything on the USB drive will be overwritten.\n"
@@ -294,28 +294,28 @@ msgstr ""
 "\n"
 "Θέλετε να συνεχίσετε;"
 
-#: isoimagewriter/mainwindow.cpp:173
+#: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
 msgstr "Γίνεται λήψη %1..."
 
-#: isoimagewriter/mainwindow.cpp:186 isoimagewriter/mainwindow.cpp:224
+#: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%1%"
 msgstr "%1%"
 
-#: isoimagewriter/mainwindow.cpp:192
+#: isoimagewriter/mainwindow.cpp:190
 #, kde-format
 msgid "Abort"
 msgstr "Εγκατάλειψη"
 
-#: isoimagewriter/mainwindow.cpp:195
+#: isoimagewriter/mainwindow.cpp:193
 #, kde-format
 msgid "Continue"
 msgstr "Συνέχεια"
 
-#: isoimagewriter/mainwindow.cpp:217
+#: isoimagewriter/mainwindow.cpp:215
 #, kde-format
 msgid ""
 "Your USB drive is being created.\n"
@@ -328,77 +328,77 @@ msgstr ""
 "Αυτό ίσως χρειαστεί κάποιο χρόνο ανάλογα με το μέγεθος του αρχείου της "
 "εικόνας ISO και της ταχύτητας μεταφοράς."
 
-#: isoimagewriter/mainwindow.cpp:225
+#: isoimagewriter/mainwindow.cpp:223
 #, kde-format
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: isoimagewriter/mainwindow.cpp:241
+#: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
 msgstr "Η συσκευή USB flash είναι τώρα πλήρης και έτοιμη για χρήση!"
 
-#: isoimagewriter/mainwindow.cpp:248
+#: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Back"
 msgstr "Πίσω"
 
-#: isoimagewriter/mainwindow.cpp:251
+#: isoimagewriter/mainwindow.cpp:249
 #, kde-format
 msgid "Close"
 msgstr "Κλείσιμο"
 
-#: isoimagewriter/mainwindow.cpp:276
+#: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
 msgstr "Αποτυχία ανοίγματος του αρχείου εικόνας:"
 
-#: isoimagewriter/mainwindow.cpp:291
+#: isoimagewriter/mainwindow.cpp:289
 #, kde-format
 msgid "Verifying ISO image"
 msgstr "Επαλήθευση εικόνας ISO"
 
-#: isoimagewriter/mainwindow.cpp:375
+#: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
 msgstr "Συνδέστε μια USB συσκευή"
 
-#: isoimagewriter/mainwindow.cpp:467
+#: isoimagewriter/mainwindow.cpp:461
 #, kde-format
 msgid "Cancel?"
 msgstr "Να ακυρωθεί;"
 
-#: isoimagewriter/mainwindow.cpp:468
+#: isoimagewriter/mainwindow.cpp:462
 #, kde-format
 msgid "Writing is in progress, abort it?"
 msgstr "Η εγγραφή είναι σε εξέλιξη, να εγκαταλειφθεί;"
 
-#: isoimagewriter/mainwindow.cpp:484
+#: isoimagewriter/mainwindow.cpp:478
 #, kde-format
 msgid "Disk Images (%1)"
 msgstr "Εικόνες δίσκων (%1)"
 
-#: isoimagewriter/mainwindow.cpp:485
+#: isoimagewriter/mainwindow.cpp:479
 #, kde-format
 msgid "All Files (%1)"
 msgstr "Όλα τα αρχεία (%1)"
 
-#: isoimagewriter/mainwindow.cpp:486
+#: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
 msgstr "Επιλογή εικόνας για τη συσκευή flash"
 
-#: isoimagewriter/mainwindow.cpp:516
+#: isoimagewriter/mainwindow.cpp:510
 #, kde-format
 msgid "Downloading ISO image"
 msgstr "Λήψη εικόνας ISO"
 
-#: isoimagewriter/mainwindow.cpp:539
+#: isoimagewriter/mainwindow.cpp:529
 #, kde-format
 msgid "Unknown Disk Size"
 msgstr "Άγνωστο μέγεθος δίσκου"
 
-#: isoimagewriter/mainwindow.cpp:540
+#: isoimagewriter/mainwindow.cpp:530
 #, kde-format
 msgid ""
 "The selected disk is of unknown size, please check the image will fit before "
@@ -411,12 +411,12 @@ msgstr ""
 "\n"
 "Μέγεθος εικόνας: %1 (%2 b)"
 
-#: isoimagewriter/mainwindow.cpp:551 isoimagewriter/mainwindow.cpp:611
+#: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: isoimagewriter/mainwindow.cpp:552
+#: isoimagewriter/mainwindow.cpp:542
 #, kde-format
 msgid ""
 "The image is larger than your selected device!\n"
@@ -429,22 +429,22 @@ msgstr ""
 "Μέγεθος εικόνας: %1 (%2 b)\n"
 "Μέγεθος δίσκου: %3 (%4 b)"
 
-#: isoimagewriter/mainwindow.cpp:639
+#: isoimagewriter/mainwindow.cpp:629
 #, kde-format
 msgid "The ISO image is valid"
 msgstr "Η εικόνα ISO είναι έγκυρη"
 
-#: isoimagewriter/mainwindow.cpp:654
+#: isoimagewriter/mainwindow.cpp:636
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
 msgstr "Αδυναμία εύρεσης του κλειδιού για επιβεβαίωση της εικόνας ISO"
 
-#: isoimagewriter/mainwindow.cpp:656
+#: isoimagewriter/mainwindow.cpp:638
 #, kde-format
 msgid "Could not verify ISO image"
 msgstr "Αδυναμία επιβεβαίωσης της εικόνας ISO"
 
-#: isoimagewriter/mainwindow.cpp:657
+#: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "ISO Verification failed"
 msgstr "Αποτυχία επιβεβαίωσης του ISO"
