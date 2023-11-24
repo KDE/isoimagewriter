@@ -81,7 +81,7 @@ target_link_libraries(isoimagewriter
     KF6::Archive
     KF6::Solid
 )
-if(QGpgme_FOUND)
+if(QGpgmeQt6_FOUND)
     add_definitions(-D_USE_GPG)
     target_link_libraries(isoimagewriter QGpgmeQt6)
 endif()
