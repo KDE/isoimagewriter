@@ -77,3 +77,5 @@ void FetchIsoJob::fetch(const QUrl& url)
 
     m_fetchUrl = url;
 }
+
+#include "moc_fetchisojob.cpp"

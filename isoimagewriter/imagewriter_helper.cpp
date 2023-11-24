@@ -65,3 +65,5 @@ ActionReply ImageWriterHelper::write(const QVariantMap &args)
 }
 
 KAUTH_HELPER_MAIN("org.kde.isoimagewriter", ImageWriterHelper)
+
+#include "moc_imagewriter_helper.cpp"

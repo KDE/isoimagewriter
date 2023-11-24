@@ -255,3 +255,5 @@ void ImageWriter::cancelWriting()
     m_CancelWriting = true;
     m_Mutex.unlock();
 }
+
+#include "moc_imagewriter.cpp"

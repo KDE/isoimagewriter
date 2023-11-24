@@ -10,3 +10,5 @@ IsoLineEdit::IsoLineEdit(QWidget* parent)
 {
     installEventFilter(this);
 }
+
+#include "moc_isolineedit.cpp"

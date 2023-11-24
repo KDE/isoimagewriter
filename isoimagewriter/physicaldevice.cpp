@@ -112,3 +112,5 @@ int PhysicalDevice::getDescriptor() {
     return fd.fileDescriptor();
 }
 #endif
+
+#include "moc_physicaldevice.cpp"

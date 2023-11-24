@@ -641,3 +641,5 @@ void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, con
     }
     Q_EMIT verificationResult(verify == IsoVerifier::VerifyResult::Successful);
 }
+
+#include "moc_mainwindow.cpp"

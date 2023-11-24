@@ -277,3 +277,5 @@ void IsoVerifier::verifyWithSha256Sum(bool ok, const QString &checksum)
 finish:
     emit finished(m_isIsoValid, m_error);
 }
+
+#include "moc_isoverifier.cpp"
