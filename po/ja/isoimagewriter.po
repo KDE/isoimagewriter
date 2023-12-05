@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:40+0000\n"
+"POT-Creation-Date: 2023-12-05 00:43+0000\n"
 "PO-Revision-Date: 2017-04-08 19:42-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -276,7 +276,7 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
 msgctxt "Progress percent value"
-msgid "%1%"
+msgid "%p%"
 msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:190
