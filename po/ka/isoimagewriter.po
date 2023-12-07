@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2023-07-15 06:27+0200\n"
+"PO-Revision-Date: 2023-12-06 06:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -292,12 +292,10 @@ msgid "Downloading %1..."
 msgstr "%1-ის გადმოწერა..."
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
-#, fuzzy, kde-format
-#| msgctxt "Progress percent value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr "%1%"
+msgstr "%p%"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
