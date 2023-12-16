@@ -3,30 +3,31 @@
 #
 # pan93412 <pan93412@gmail.com>, 2019.
 # Jeff Huang <s8321414@gmail.com>, 2020.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2020-09-17 14:53+0800\n"
-"Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
+"PO-Revision-Date: 2023-12-15 21:11+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 24.01.80\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "pan93412, Jeff Huang"
+msgstr "pan93412, Jeff Huang, Kisaragi Hiu"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "pan93412@gmail.com, s8321414@gmail.com"
+msgstr "pan93412@gmail.com, s8321414@gmail.com, mail@kisaragi-hiu.com"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
@@ -50,14 +51,9 @@ msgstr "無法開啟映像檔：%1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgid "Failed to open compression device: %1"
-msgstr ""
-"無法開啟目標裝置：\n"
-"%1"
+msgstr "無法開啟壓縮裝置：%1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
@@ -166,7 +162,7 @@ msgstr "使用錯誤簽名。"
 #: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
 #, kde-format
 msgid "This app is built without verification support."
-msgstr ""
+msgstr "這個應用程式編譯時未包含驗證支援。"
 
 #: isoimagewriter/isoverifier.cpp:181
 #, kde-format
@@ -226,6 +222,8 @@ msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:33
 #, kde-format
@@ -245,18 +243,17 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
-msgstr ""
+msgstr "要開啟的 ISO 映像檔"
 
 #: isoimagewriter/mainwindow.cpp:85
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "ISO 映像檔寫入工具"
+msgstr "KDE ISO 映像檔寫入工具"
 
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "快速且簡單地建立可開機的 USB 磁碟。"
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
@@ -292,13 +289,13 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
-msgstr ""
+msgstr "正在下載 %1..."
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
@@ -380,19 +377,17 @@ msgstr "所有檔案 (%1)"
 #: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
-msgstr ""
+msgstr "選擇要寫入的映像檔"
 
 #: isoimagewriter/mainwindow.cpp:510
-#, fuzzy, kde-format
-#| msgid "Could not read ISO image"
+#, kde-format
 msgid "Downloading ISO image"
-msgstr "無法讀取 ISO 映像檔"
+msgstr "正在下載 ISO 映像檔"
 
 #: isoimagewriter/mainwindow.cpp:529
-#, fuzzy, kde-format
-#| msgid "Unknown Device"
+#, kde-format
 msgid "Unknown Disk Size"
-msgstr "未知裝置"
+msgstr "未知裝置大小"
 
 #: isoimagewriter/mainwindow.cpp:530
 #, kde-format
@@ -402,6 +397,9 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
+"選取的磁碟大小不明，請在寫入前自行確認映像檔不會太大。\n"
+"\n"
+"映像檔大小：%1（%2 b）"
 
 #: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
@@ -427,10 +425,9 @@ msgid "The ISO image is valid"
 msgstr "ISO 映像檔有效"
 
 #: isoimagewriter/mainwindow.cpp:636
-#, fuzzy, kde-format
-#| msgid "Could not verify ISO image"
+#, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr "無法驗證 ISO 映像檔"
+msgstr "無法找到驗證 ISO 映像檔用的金鑰"
 
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
