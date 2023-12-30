@@ -3,7 +3,6 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2017, 2019, 2020, 2021.
 # Frederik Schwarzer <schwarzer@kde.org>, 2017, 2022, 2023.
 #
-# Johannes Obermayr <johannesobermayr@gmx.de>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
