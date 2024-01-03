@@ -24,11 +24,11 @@
           "buildsystem": "cmake-ninja",
           "name": "isoimagewriter",
           "sources": [
-             {
-                "type": "git",
-                "url": "https://invent.kde.org/utilities/isoimagewriter.git"
-             }
-          ]
+               {
+                  "type": "dir",
+                  "path": "."
+               }
+            ]
        }
     ]
 }
