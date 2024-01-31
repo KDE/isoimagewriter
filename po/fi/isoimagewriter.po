@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2021, 2022, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2023-08-26 17:48+0300\n"
+"PO-Revision-Date: 2024-01-18 17:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -295,12 +295,10 @@ msgid "Downloading %1..."
 msgstr "Ladataan: %1…"
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
-#, fuzzy, kde-format
-#| msgctxt "Progress percent value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr "%1 %"
+msgstr "%p %"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
