@@ -6,5 +6,5 @@ include:
     file:
       - /gitlab-templates/linux-qt6.yml
       - /gitlab-templates/freebsd-qt6.yml
-    #    - /gitlab-templates/flatpak.yml
+      - /gitlab-templates/flatpak.yml
       - /gitlab-templates/craft-appimage-qt6.yml

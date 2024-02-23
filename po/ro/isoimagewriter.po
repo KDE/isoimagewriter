@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the isoimagewriter package.
-# Sergiu Bivol <sergiu@cip.md>, 2020, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2020, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2022-04-30 12:14+0100\n"
+"PO-Revision-Date: 2024-02-18 14:47+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -253,15 +253,14 @@ msgid "ISO file to open"
 msgstr "fișier ISO de deschis"
 
 #: isoimagewriter/mainwindow.cpp:85
-#, fuzzy, kde-format
-#| msgid "ISO Image Writer"
+#, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "Inscriptor de imagini ISO"
+msgstr "Inscriptor KDE de imagini ISO"
 
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Metodă rapidă și simplă de a crea o unitate USB demarabilă."
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
@@ -303,7 +302,7 @@ msgstr "Se descarcă %1..."
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format

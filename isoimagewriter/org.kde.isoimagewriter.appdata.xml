@@ -19,6 +19,7 @@
   <name xml:lang="fi">ISO-levykirjoitin</name>
   <name xml:lang="fr">ISO Image Writer</name>
   <name xml:lang="gl">Gravadora de imaxes ISO</name>
+  <name xml:lang="hu">ISO-lemezképíró</name>
   <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
   <name xml:lang="id">Penulis Citra ISO</name>
   <name xml:lang="ie">Scritor de images ISO</name>
@@ -57,6 +58,7 @@
   <summary xml:lang="fi">Kirjoittaa ISO-levykuvan USB-levylle</summary>
   <summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
   <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
+  <summary xml:lang="hu">ISO-lemezkép írása USB-lemezre</summary>
   <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
   <summary xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</summary>
   <summary xml:lang="ie">Scrir un image ISO a un unité USB</summary>
@@ -96,6 +98,7 @@
     <p xml:lang="fi">Kirjoittaa ISO-levykuvan USB-levylle</p>
     <p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
     <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
+    <p xml:lang="hu">ISO-lemezkép írása USB-lemezre</p>
     <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
     <p xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</p>
     <p xml:lang="ie">Scrir un image ISO a un unité USB</p>
@@ -135,6 +138,7 @@
   </provides>
   <project_group>KDE</project_group>
   <releases>
+    <release version="24.02.0" date="2024-02-28"/>
     <release version="1.0.0" date="2023-04-19">
       <artifacts>
         <artifact type="binary" platform="x86_64-linux-gnu">

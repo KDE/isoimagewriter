@@ -2,7 +2,7 @@
     "id": "org.kde.isoimagewriter",
     "branch": "master",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.15-22.08",
+    "runtime-version": "6.6-kf6preview",
     "sdk": "org.kde.Sdk",
     "command": "isoimagewriter",
     "tags": [
@@ -19,17 +19,16 @@
         "--talk-name=org.freedesktop.Flatpak"
     ],
     "separate-locales": false,
-    "id": "org.kde.isoimagewriter",
     "modules": [
        {
           "buildsystem": "cmake-ninja",
           "name": "isoimagewriter",
           "sources": [
-             {
-                "type": "git",
-                "url": "https://invent.kde.org/utilities/isoimagewriter.git"
-             }
-          ]
+               {
+                  "type": "dir",
+                  "path": "."
+               }
+            ]
        }
     ]
 }
