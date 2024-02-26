@@ -1,10 +1,11 @@
+# SPDX-FileCopyrightText: 2024 Tarot Osuji <tarot@sdf.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: imagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2017-04-08 19:42-0700\n"
-"Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2024-02-25 00:08+0900\n"
+"Last-Translator: Tarot Osuji <tarot@sdf.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -13,52 +14,53 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Tarot Osuji"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "tarot@sdf.org"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
 msgid "Error code: %1"
-msgstr ""
+msgstr "エラーコード: %1"
 
 #: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr ""
+msgstr "バッファのメモリが確保できませんでした:"
 
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr ""
+msgstr "バッファのメモリが確保できませんでした。"
 
 #: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr ""
+msgstr "イメージファイルを開けませんでした: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
-msgstr ""
+msgstr "圧縮デバイスを開けませんでした: %1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr ""
+msgstr "ドライブ %1 を開けませんでした"
 
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr ""
+msgstr "ドライブ %1 をアンマウントできませんでした"
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -66,6 +68,8 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
+"ボリューム %1 をアンマウントできませんでした\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:154
 #, kde-format
@@ -73,6 +77,8 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
+"ターゲットデバイスを開けませんでした:\n"
+"%1"
 
 #: isoimagewriter/imagewriter.cpp:187
 #, kde-format
@@ -80,6 +86,8 @@ msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
 "Aborting."
 msgstr ""
+"最後のブロックが完全に書き込まれませんでした (%2 中の %1 バイト)!\n"
+"中止します。"
 
 #: isoimagewriter/imagewriter.cpp:219
 #, kde-format
@@ -87,16 +95,18 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
+"イメージファイルを読み取れませんでした:\n"
+"%1"
 
 #: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid "The operation completed successfully."
-msgstr ""
+msgstr "操作は正常に完了しました。"
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid "Now you need to format your device."
-msgstr ""
+msgstr "デバイスをフォーマットする必要があります。"
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
@@ -104,77 +114,83 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
+"再度このデバイスにデータを保存できるようにするには、\"USB ディスクをワイプ\" "
+"ボタンを使用してください。"
 
 #: isoimagewriter/isoverifier.cpp:58
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr ""
+msgstr "既知のディストリビューションのイメージとして検証できませんでした。"
 
 #: isoimagewriter/isoverifier.cpp:70
 #, kde-format
 msgid "SHA256 Checksum"
-msgstr ""
+msgstr "SHA256 チェックサム"
 
 #: isoimagewriter/isoverifier.cpp:71
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
-msgstr ""
+msgstr "この ISO の SHA256 チェックサムを貼り付けます:"
 
 #: isoimagewriter/isoverifier.cpp:129
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr ""
+"%1 が見つかりませんでした。PGP 署名ファイルを同じディレクトリにダウンロードし"
+"てください。"
 
 #: isoimagewriter/isoverifier.cpp:136
 #, kde-format
 msgid "Could not open signature file"
-msgstr ""
+msgstr "署名ファイルを開けませんでした"
 
 #: isoimagewriter/isoverifier.cpp:142
 #, kde-format
 msgid "Could not open ISO image"
-msgstr ""
+msgstr "ISO イメージを開けませんでした"
 
 #: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
 #, kde-format
 msgid "Key is revoked."
-msgstr ""
+msgstr "鍵は失効しています。"
 
 #: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
 #, kde-format
 msgid "Uses wrong signature."
-msgstr ""
+msgstr "署名が違います。"
 
 #: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
 #, kde-format
 msgid "This app is built without verification support."
-msgstr ""
+msgstr "このアプリは検証サポートなしでビルドされています。"
 
 #: isoimagewriter/isoverifier.cpp:181
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
+"SHA256SUMS ファイルが開けませんでした。同じディレクトリにダウンロードしてくだ"
+"さい"
 
 #: isoimagewriter/isoverifier.cpp:195
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr ""
+msgstr "SHA256SUMS ファイルにチェックサムが見つかりませんでした"
 
 #: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
 #, kde-format
 msgid "Could not read ISO image"
-msgstr ""
+msgstr "ISO イメージを読み取れませんでした"
 
 #: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not perform checksum"
-msgstr ""
+msgstr "チェックサムを実行できませんでした"
 
 #: isoimagewriter/isoverifier.cpp:212
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
-msgstr ""
+msgstr ".iso ファイルのチェックサムが SHA256SUMS ファイルの値と一致しません"
 
 #: isoimagewriter/isoverifier.cpp:220
 #, kde-format
@@ -182,26 +198,28 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
+"SHA256SUMS.gpg が見つかりませんでした。PGP 署名ファイルを同じディレクトリにダ"
+"ウンロードしてください。"
 
 #: isoimagewriter/isoverifier.cpp:269
 #, kde-format
 msgid "Checksum did not match"
-msgstr ""
+msgstr "チェックサムが一致しませんでした"
 
 #: isoimagewriter/isoverifier.cpp:275
 #, kde-format
 msgid "Requires an SHA256 checksum"
-msgstr ""
+msgstr "SHA256 チェックサムが必要です"
 
 #: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
-msgstr ""
+msgstr "ISO イメージライター"
 
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
-msgstr ""
+msgstr "ISO イメージを USB ディスクに書き込む"
 
 #: isoimagewriter/mainapplication.cpp:31
 #, kde-format
@@ -209,56 +227,58 @@ msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:33
 #, kde-format
 msgid "Konstantin Vlasov"
-msgstr ""
+msgstr "Konstantin Vlasov"
 
 #: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: isoimagewriter/mainapplication.cpp:34
 #, kde-format
 msgid "Jonathan Riddell"
-msgstr ""
+msgstr "Jonathan Riddell"
 
 #: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
-msgstr ""
+msgstr "開く ISO ファイル"
 
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "KDE ISO Image Writer"
-msgstr ""
+msgstr "KDE ISO イメージライター"
 
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "起動可能 USB ドライブを素早く簡単に作成する方法です。"
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr ""
+msgstr "ISO イメージへのパス..."
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
-msgstr ""
+msgstr "作成"
 
 #: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
-msgstr ""
+msgstr "この ISO イメージを書き込む:"
 
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
-msgstr ""
+msgstr "この USB ドライブに:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
@@ -267,27 +287,30 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"USB ドライブ上のすべてが上書きされます。\n"
+"\n"
+"続行しますか？"
 
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
-msgstr ""
+msgstr "%1 をダウンロード中..."
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
 msgid "Abort"
-msgstr ""
+msgstr "中止"
 
 #: isoimagewriter/mainwindow.cpp:193
 #, kde-format
 msgid "Continue"
-msgstr ""
+msgstr "続行"
 
 #: isoimagewriter/mainwindow.cpp:215
 #, kde-format
@@ -297,76 +320,79 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
+"USB ドライブが作成されています。\n"
+"\n"
+"ISO イメージファイルのサイズや転送速度によっては時間がかかる場合があります。"
 
 #: isoimagewriter/mainwindow.cpp:223
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr ""
+msgstr "ライブ USB フラッシュドライブが完成し、使用する準備ができました!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
 #: isoimagewriter/mainwindow.cpp:249
 #, kde-format
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr ""
+msgstr "イメージファイルを開けませんでした:"
 
 #: isoimagewriter/mainwindow.cpp:289
 #, kde-format
 msgid "Verifying ISO image"
-msgstr ""
+msgstr "ISO イメージを検証中"
 
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr ""
+msgstr "USB ドライブを接続してください"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
 msgid "Cancel?"
-msgstr ""
+msgstr "キャンセル？"
 
 #: isoimagewriter/mainwindow.cpp:462
 #, kde-format
 msgid "Writing is in progress, abort it?"
-msgstr ""
+msgstr "書き込みが進行中ですが、中止しますか？"
 
 #: isoimagewriter/mainwindow.cpp:478
 #, kde-format
 msgid "Disk Images (%1)"
-msgstr ""
+msgstr "ディスクイメージ (%1)"
 
 #: isoimagewriter/mainwindow.cpp:479
 #, kde-format
 msgid "All Files (%1)"
-msgstr ""
+msgstr "すべてのファイル (%1)"
 
 #: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
-msgstr ""
+msgstr "フラッシュするイメージを選択"
 
 #: isoimagewriter/mainwindow.cpp:510
 #, kde-format
 msgid "Downloading ISO image"
-msgstr ""
+msgstr "ISO イメージをダウンロード中"
 
 #: isoimagewriter/mainwindow.cpp:529
 #, kde-format
 msgid "Unknown Disk Size"
-msgstr ""
+msgstr "不明なディスクサイズ"
 
 #: isoimagewriter/mainwindow.cpp:530
 #, kde-format
@@ -376,11 +402,15 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
+"選択されたディスクのサイズが不明です。書き込む前にイメージが収まるか確認して"
+"ください。\n"
+"\n"
+"イメージのサイズ: %1 (%2 b)"
 
 #: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 #: isoimagewriter/mainwindow.cpp:542
 #, kde-format
@@ -390,63 +420,67 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
+"イメージが選択したデバイスより大きいです!\n"
+"\n"
+"イメージのサイズ: %1 (%2 b)\n"
+"ディスクのサイズ: %3 (%4 b)"
 
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
 msgid "The ISO image is valid"
-msgstr ""
+msgstr "ISO イメージは有効です"
 
 #: isoimagewriter/mainwindow.cpp:636
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr ""
+msgstr "ISO イメージを検証するための鍵が見つかりませんでした"
 
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
 msgid "Could not verify ISO image"
-msgstr ""
+msgstr "ISO イメージを検証できませんでした"
 
 #: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "ISO Verification failed"
-msgstr ""
+msgstr "ISO 検証が失敗しました"
 
 #: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
-msgstr ""
+msgstr "ロックを取得できませんでした:"
 
 #: isoimagewriter/platform_win.cpp:94
 #, kde-format
 msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
-msgstr ""
+msgstr "CoCreateInstance(WbemAdministrativeLocator) が失敗しました。"
 
 #: isoimagewriter/platform_win.cpp:95
 #, kde-format
 msgid "ConnectServer failed."
-msgstr ""
+msgstr "ConnectServer が失敗しました。"
 
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr ""
+msgstr "USB フラッシュデバイスを照会できませんでした。"
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr ""
+msgstr "パーティションの一覧を照会できませんでした。"
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr ""
+msgstr "論理ディスクの一覧を照会できませんでした。"
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
 msgid "Unknown Device"
-msgstr ""
+msgstr "不明なデバイス"
 
 #: isoimagewriter/usbdevice.h:32
 #, kde-format
 msgid "<unmounted>"
-msgstr ""
+msgstr "<アンマウントされた>"
