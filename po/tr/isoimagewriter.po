@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2023-12-05 16:14+0300\n"
+"PO-Revision-Date: 2024-03-15 00:21+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -115,8 +115,8 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
-"Bu aygıtta yeniden veri depolayabilmek için lütfen, \"USB Diski Sil\" "
-"düğmesini kullanın."
+"Bu aygıtta yeniden veri depolayabilmek için lütfen ‘USB Diski Sil’ düğmesini "
+"kullanın."
 
 #: isoimagewriter/isoverifier.cpp:58
 #, kde-format
@@ -222,7 +222,7 @@ msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
 msgstr ""
-"Telif hakkı (c) 2016 ROSA, Telif hakkı (c) 2022 Jonathan Esk-Riddell "
+"Telif hakkı (c) 2016 ROSA, Telif hakkı (c) 2022 Jonathan Esk–Riddell "
 "<jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:33
@@ -258,7 +258,7 @@ msgstr "Önyüklenebilir bir USB sürücüsü oluşturmanın tez ve kolay bir yo
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr "ISO kalıbının yolu..."
+msgstr "ISO kalıbının yolu…"
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
@@ -289,7 +289,7 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
-msgstr "%1 indiriliyor..."
+msgstr "%1 indiriliyor…"
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
