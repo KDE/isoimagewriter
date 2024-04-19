@@ -6,6 +6,7 @@
   <project_license>GPL-3.0</project_license>
   <name>ISO Image Writer</name>
   <name xml:lang="ar">كاتب صور ISO</name>
+  <name xml:lang="bg">Запис на ISO изображения</name>
   <name xml:lang="ca">Escriu imatges ISO</name>
   <name xml:lang="ca-valencia">Escriu imatges ISO</name>
   <name xml:lang="cs">Nástroj pro zapisování obrazů ISO</name>
@@ -48,6 +49,7 @@
   <name xml:lang="zh-TW">ISO 映像寫入工具</name>
   <summary>Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</summary>
+  <summary xml:lang="bg">Запис на ISO изображения върху USB диск</summary>
   <summary xml:lang="ca">Escriu una imatge ISO a un disc USB</summary>
   <summary xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</summary>
   <summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
@@ -91,6 +93,7 @@
   <description>
     <p>Write an ISO Image to a USB Disk</p>
     <p xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</p>
+    <p xml:lang="bg">Запис на ISO изображения върху USB диск</p>
     <p xml:lang="ca">Escriu una imatge ISO a un disc USB</p>
     <p xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</p>
     <p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
