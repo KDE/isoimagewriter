@@ -1,6 +1,7 @@
 [Domain]
 Name=ISO Image Writer
 Name[ar]=كاتب صور ISO
+Name[bg]=Запис на ISO изображения
 Name[ca]=Escriu imatges ISO
 Name[ca@valencia]=Escriu imatges ISO
 Name[cs]=Nástroj pro zapisování obrazů ISO
@@ -46,6 +47,7 @@ Icon=org.kde.isoimagewriter
 [org.kde.isoimagewriter.write]
 Name=Write an ISO image to a USB disk
 Name[ar]=اكتب صورة ISO على قرص يو اس بي
+Name[bg]=Запис на ISO изображение върху USB disk
 Name[ca]=Escriu una imatge ISO a un disc USB
 Name[ca@valencia]=Escriu una imatge ISO a un disc USB
 Name[cs]=Zapsat obraz na ISO na disk USB
@@ -88,6 +90,7 @@ Name[zh_CN]=将 ISO 镜像写入 USB 盘
 Name[zh_TW]=將 ISO 映像檔寫入 USB 裝置
 Description=Write an ISO image to a USB disk
 Description[ar]=اكتب صورة ISO على قرص يو اس بي
+Description[bg]=Запис на ISO изображение върху USB disk
 Description[ca]=Escriu una imatge ISO a un disc USB
 Description[ca@valencia]=Escriu una imatge ISO a un disc USB
 Description[cs]=Zapsat obraz na ISO na disk USB
