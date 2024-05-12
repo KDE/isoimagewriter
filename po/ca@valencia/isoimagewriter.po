@@ -270,7 +270,7 @@ msgstr "Una manera ràpida i senzilla de crear una unitat USB d'arrancada."
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr "Camí cap a la imatge ISO..."
+msgstr "Camí cap a la imatge ISO…"
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
@@ -301,7 +301,7 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
-msgstr "S'està descarregant %1..."
+msgstr "S'està descarregant %1…"
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
