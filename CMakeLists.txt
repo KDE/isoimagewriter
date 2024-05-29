@@ -26,7 +26,7 @@ include(ECMDeprecationSettings)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus Test)
 
-find_package(KF6 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     CoreAddons
     WidgetsAddons
