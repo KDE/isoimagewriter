@@ -36,8 +36,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Solid
 )
 
-ecm_set_disabled_deprecation_versions(QT 6.4
-     KF 5.101.0
+ecm_set_disabled_deprecation_versions(QT 6.7
+     KF 6.3.0
     )
 
 KDE_ENABLE_EXCEPTIONS()
