@@ -18,7 +18,7 @@
   <name xml:lang="es">ISO Image Writer</name>
   <name xml:lang="et">ISO-tõmmise kirjutaja</name>
   <name xml:lang="eu">ISO irudi idazlea</name>
-  <name xml:lang="fi">ISO-levykirjoitin</name>
+  <name xml:lang="fi">ISO-kuvan kirjoittaja</name>
   <name xml:lang="fr">ISO Image Writer</name>
   <name xml:lang="gl">Gravadora de imaxes ISO</name>
   <name xml:lang="he">צורב דמויות ISO</name>
@@ -61,7 +61,7 @@
   <summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
   <summary xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</summary>
   <summary xml:lang="eu">Idatzi ISO irudia USB disko batean</summary>
-  <summary xml:lang="fi">Kirjoittaa ISO-levykuvan USB-levylle</summary>
+  <summary xml:lang="fi">Kirjoittaa ISO-kuvan USB-medialle</summary>
   <summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
   <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
   <summary xml:lang="he">צריבת דמות ISO לכונן USB</summary>
@@ -105,7 +105,7 @@
     <p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
     <p xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</p>
     <p xml:lang="eu">Idatzi ISO irudia USB disko batean</p>
-    <p xml:lang="fi">Kirjoittaa ISO-levykuvan USB-levylle</p>
+    <p xml:lang="fi">Kirjoittaa ISO-kuvan USB-medialle</p>
     <p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
     <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
     <p xml:lang="he">צריבת דמות ISO לכונן USB</p>
