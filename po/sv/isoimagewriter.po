@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2017, 2019, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2017, 2019, 2021, 2022, 2023, 2024 Stefan Asserhäll <stefan.asserhall@bredband.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:43+0000\n"
-"PO-Revision-Date: 2023-07-30 17:25+0200\n"
+"PO-Revision-Date: 2024-06-08 14:58+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -293,12 +293,10 @@ msgid "Downloading %1..."
 msgstr "Laddar ner %1..."
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
-#, fuzzy, kde-format
-#| msgctxt "Progress percent value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr "%1 %"
+msgstr "%p %"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
