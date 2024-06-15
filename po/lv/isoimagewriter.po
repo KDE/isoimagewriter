@@ -1,0 +1,489 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the isoimagewriter package.
+#
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: isoimagewriter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-12-05 00:43+0000\n"
+"PO-Revision-Date: 2024-05-28 17:25+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 24.02.2\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Toms Trasūns"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "toms.trasuns@posteo.net"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr "Kļūdas kods: %1"
+
+#: isoimagewriter/imagewriter.cpp:57
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr "Neizdevās piešķirt atmiņu buferim:"
+
+#: isoimagewriter/imagewriter.cpp:61
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr "Neizdevās piešķirt atmiņu buferim."
+
+#: isoimagewriter/imagewriter.cpp:75
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr "Neizdevās rakstīšanai atvērt attēla datni: %1"
+
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr "Neizdevās atvērt saspiešanas ierīci: %1"
+
+#: isoimagewriter/imagewriter.cpp:118
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr "Neizdevās atvērt ierīci %1"
+
+#: isoimagewriter/imagewriter.cpp:125
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr "Neizdevās atmontēt ierīci %1"
+
+#: isoimagewriter/imagewriter.cpp:142
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr ""
+"Neizdevās atmontēt sējumu %1\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"Neizdevās atvērt mērķa ierīci:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:187
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+"Pēdējais bloks nav pilnībā ierakstīts (%1 no %2 baitiem)!\n"
+"Atceļ."
+
+#: isoimagewriter/imagewriter.cpp:219
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+"Neizdevās nolasīt attēla datni:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:241
+#, kde-format
+msgid "The operation completed successfully."
+msgstr "Darbība ir veiksmīgi pabeigta."
+
+#: isoimagewriter/imagewriter.cpp:243
+#, kde-format
+msgid "Now you need to format your device."
+msgstr "Tagad jums ir jāformatē sava ierīce."
+
+#: isoimagewriter/imagewriter.cpp:243
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+"Lai varētu atkal saglabāt datus šajā ierīce, izmantojiet pogu „Notīrīt USB "
+"disku“."
+
+#: isoimagewriter/isoverifier.cpp:58
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr "Neizdevās pārbaudīt zināmu distributīva attēlu."
+
+#: isoimagewriter/isoverifier.cpp:70
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr "SHA256 kontrolsumma"
+
+#: isoimagewriter/isoverifier.cpp:71
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr "Ielīmēt šī ISO SHA 256 kontrolsummu:"
+
+#: isoimagewriter/isoverifier.cpp:129
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr ""
+"Neizdevās atrast %1. Lejupielādējiet PGP paraksta datni un saglabājiet tajā "
+"pašā mapē."
+
+#: isoimagewriter/isoverifier.cpp:136
+#, kde-format
+msgid "Could not open signature file"
+msgstr "Neizdevās atvērt paraksta datni"
+
+#: isoimagewriter/isoverifier.cpp:142
+#, kde-format
+msgid "Could not open ISO image"
+msgstr "Neizdevās atvērt ISO attēlu"
+
+#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
+#, kde-format
+msgid "Key is revoked."
+msgstr "Atslēga ir atsaukta."
+
+#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
+#, kde-format
+msgid "Uses wrong signature."
+msgstr "Izmanto nepareizu parakstu."
+
+#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
+#, kde-format
+msgid "This app is built without verification support."
+msgstr "Šī programma ir būvēta bez verifikācijas atbalsta."
+
+#: isoimagewriter/isoverifier.cpp:181
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr ""
+"Neizdevās atvērt SHA256SUMS datni. Lejupielādējiet un saglabājiet to tajā "
+"pašā mapē."
+
+#: isoimagewriter/isoverifier.cpp:195
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr "Neizdevās atrast kontrolsummu SHA256SUMS datnē"
+
+#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
+#, kde-format
+msgid "Could not read ISO image"
+msgstr "Neizdevās nolasīt ISO attēlu"
+
+#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
+#, kde-format
+msgid "Could not perform checksum"
+msgstr "Neizdevās veikt kontrolsummas pārbaudi"
+
+#: isoimagewriter/isoverifier.cpp:212
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr "„.iso“ datnes kontrolsumma neatbilst vērtībai SHA256SUMS datnē"
+
+#: isoimagewriter/isoverifier.cpp:220
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+"Neizdevās atrast SHA256SUMS.gpg, lejupielādējiet PGP paraksta datni tajā "
+"pašā mapē."
+
+#: isoimagewriter/isoverifier.cpp:269
+#, kde-format
+msgid "Checksum did not match"
+msgstr "Kontrolsumma neatbilst"
+
+#: isoimagewriter/isoverifier.cpp:275
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr "Nepieciešama SHA256 kontrolsumma"
+
+#: isoimagewriter/mainapplication.cpp:27
+#, kde-format
+msgid "ISO Image Writer"
+msgstr "ISO attēlu rakstītājs"
+
+#: isoimagewriter/mainapplication.cpp:29
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr "Rakstīt ISO attēlu USB diskā"
+
+#: isoimagewriter/mainapplication.cpp:31
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+"Autortiesības (c) 2016 ROSA, Autortiesības (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr "Konstantin Vlasov"
+
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
+#, kde-format
+msgid "Author"
+msgstr "Autors"
+
+#: isoimagewriter/mainapplication.cpp:34
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr "Jonathan Riddell"
+
+#: isoimagewriter/mainapplication.cpp:38
+#, kde-format
+msgid "ISO file to open"
+msgstr "Atveramā ISO datne"
+
+#: isoimagewriter/mainwindow.cpp:85
+#, kde-format
+msgid "KDE ISO Image Writer"
+msgstr "KDE ISO attēlu rakstītājs"
+
+#: isoimagewriter/mainwindow.cpp:85
+#, kde-format
+msgid "A quick and simple way to create a bootable USB drive."
+msgstr "Ātrs un vienkāršs veids sāknējamu USB zibatmiņu izveidošanai."
+
+#: isoimagewriter/mainwindow.cpp:113
+#, kde-format
+msgid "Path to ISO image..."
+msgstr "Ceļš uz ISO attēlu..."
+
+#: isoimagewriter/mainwindow.cpp:124
+#, kde-format
+msgid "Create"
+msgstr "Izveidot"
+
+#: isoimagewriter/mainwindow.cpp:144
+#, kde-format
+msgid "Write this ISO image:"
+msgstr "Rakstīt šo ISO attēlu:"
+
+#: isoimagewriter/mainwindow.cpp:147
+#, kde-format
+msgid "To this USB drive:"
+msgstr "Šajā USB zibatmiņā:"
+
+#: isoimagewriter/mainwindow.cpp:165
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"Programma pārrakstīs visu šajā USB zibatmiņā esošo informāciju.\n"
+"\n"
+"Vai vēlaties turpināt?"
+
+#: isoimagewriter/mainwindow.cpp:171
+#, kde-format
+msgid "Downloading %1..."
+msgstr "Lejupielādē „%1“..."
+
+#: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
+#, kde-format
+msgctxt "Progress percent value"
+msgid "%p%"
+msgstr "%p %"
+
+#: isoimagewriter/mainwindow.cpp:190
+#, kde-format
+msgid "Abort"
+msgstr "Pārtraukt"
+
+#: isoimagewriter/mainwindow.cpp:193
+#, kde-format
+msgid "Continue"
+msgstr "Turpināt"
+
+#: isoimagewriter/mainwindow.cpp:215
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+"Veido jūsu USB zibatmiņu.\n"
+"\n"
+"Tas var aizņemt kādu laiku atkarībā no ISO attēla datnes izmēra un datu "
+"pārraides ātruma."
+
+#: isoimagewriter/mainwindow.cpp:223
+#, kde-format
+msgid "Cancel"
+msgstr "Atcelt"
+
+#: isoimagewriter/mainwindow.cpp:239
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr "Jūsu sāknējamā USB zibatmiņa ir pabeigta un gatava lietošanai!"
+
+#: isoimagewriter/mainwindow.cpp:246
+#, kde-format
+msgid "Back"
+msgstr "Atpakaļ"
+
+#: isoimagewriter/mainwindow.cpp:249
+#, kde-format
+msgid "Close"
+msgstr "Aizvērt"
+
+#: isoimagewriter/mainwindow.cpp:274
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr "Neizdevās atvērt attēla datni:"
+
+#: isoimagewriter/mainwindow.cpp:289
+#, kde-format
+msgid "Verifying ISO image"
+msgstr "Pārbauda ISO attēlu"
+
+#: isoimagewriter/mainwindow.cpp:369
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr "Pievienojiet USB zibatmiņu"
+
+#: isoimagewriter/mainwindow.cpp:461
+#, kde-format
+msgid "Cancel?"
+msgstr "Vai atcelt?"
+
+#: isoimagewriter/mainwindow.cpp:462
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr "Notiek rakstīšana, vai to pārtraukt?"
+
+#: isoimagewriter/mainwindow.cpp:478
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr "Disku attēli (%1)"
+
+#: isoimagewriter/mainwindow.cpp:479
+#, kde-format
+msgid "All Files (%1)"
+msgstr "Visas datnes (%1)"
+
+#: isoimagewriter/mainwindow.cpp:480
+#, kde-format
+msgid "Select image to flash"
+msgstr "Atlasiet ierakstāmo attēlu"
+
+#: isoimagewriter/mainwindow.cpp:510
+#, kde-format
+msgid "Downloading ISO image"
+msgstr "Lejupielādē ISO attēlu"
+
+#: isoimagewriter/mainwindow.cpp:529
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr "Nezināms diska izmērs"
+
+#: isoimagewriter/mainwindow.cpp:530
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+"Nav zināms atlasītā diska attēla izmērs. Pārbaudiet, vai tam pietiks vietas "
+"pirms turpināt.\n"
+"\n"
+"Attēla izmērs: %1 (%2 b)"
+
+#: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
+#, kde-format
+msgid "Error"
+msgstr "Kļūda"
+
+#: isoimagewriter/mainwindow.cpp:542
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+"Attēls ir lielāks par atlasīto ierīci!\n"
+"\n"
+"Attēla izmērs: %1 (%2 b)\n"
+"Zibatmiņas izmērs: %3 (%4 b)"
+
+#: isoimagewriter/mainwindow.cpp:629
+#, kde-format
+msgid "The ISO image is valid"
+msgstr "ISO attēls ir derīgs"
+
+#: isoimagewriter/mainwindow.cpp:636
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr "Neizdevās atrast atslēgu ISO attēl pārbaudei"
+
+#: isoimagewriter/mainwindow.cpp:638
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr "Neizdevās pārbaudīt ISO attēlu"
+
+#: isoimagewriter/mainwindow.cpp:639
+#, kde-format
+msgid "ISO Verification failed"
+msgstr "ISO pārbaude neizdevās"
+
+#: isoimagewriter/physicaldevice.cpp:56
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr "Neizdodas slēgt datni:"
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr "„CoCreateInstance(WbemAdministrativeLocator)“ neizdevās."
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr "Neizdevās savienoties ar serveri."
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr "Neizdevās iegūt informāciju par USB zibatmiņām."
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr "Neizdevās iegūt informāciju par nodalījumu sarakstu"
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr "Neizdevās iegūt informāciju par loģisko disku sarakstu."
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr "Nezināma ierīce"
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr "<atmontēta>"
