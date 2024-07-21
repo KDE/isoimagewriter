@@ -8,108 +8,106 @@ grade: stable
 base: core22
 adopt-info: isoimagewriter
 apps:
-    isoimagewriter:
-        extensions:
-        - kde-neon-6
-        common-id: org.kde.isoimagewriter.desktop
-        desktop: usr/share/applications/org.kde.isoimagewriter.desktop
-        command: usr/bin/isoimagewriter
-        plugs:
-        - home
-        - raw-usb
-        - udisks2
-        - optical-drive
-        - gpg-keys
+  isoimagewriter:
+    extensions:
+      - kde-neon-6
+    common-id: org.kde.isoimagewriter.desktop
+    desktop: usr/share/applications/org.kde.isoimagewriter.desktop
+    command: usr/bin/isoimagewriter
+    plugs:
+      - home
+      - raw-usb
+      - udisks2
+      - optical-drive
+      - gpg-keys
 slots:
-    session-dbus-interface:
-        interface: dbus
-        name: org.kde.isoimagewriter
-        bus: session
+  session-dbus-interface:
+    interface: dbus
+    name: org.kde.isoimagewriter
+    bus: session
 package-repositories:
--   type: apt
+  - type: apt
     components:
-    - main
+      - main
     suites:
-    - jammy
+      - jammy
     key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
     url: http://origin.archive.neon.kde.org/user
     key-server: keyserver.ubuntu.com
 parts:
-    libgpgmepp-qt6:
-        build-packages:
-        - libassuan-dev
-        - libgpg-error-dev
-        - rsync
-        stage-packages:
-        - libassuan0
-        - libgpg-error0
-        source: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2
-        source-checksum: sha256/9499e8b1f33cccb6815527a1bc16049d35a6198a6c5fae0185f2bd561bce5224
-        plugin: autotools
-        autotools-configure-parameters:
-        - --disable-gpgsm-test
-        - --enable-languages=cpp,qt6
-        - --prefix=/usr
-        - --enable-fixed-path=/snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
-        build-environment:
-        - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kf6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
-        - PKG_CONFIG_PATH: /snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
-        override-build: |
-                craftctl default
-                rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
-    isoimagewriter:
-        after:
-        - libgpgmepp-qt6
-        parse-info:
-        - usr/share/metainfo/org.kde.isoimagewriter.appdata.xml
-        plugin: cmake
-        source: .
-        source-type: local
-        build-packages:
-        - libpulse0
-        - libxkbcommon-dev
-        stage-packages:
-        - libpulse0
-        - libxkbcommon0
-        - gpg
-        cmake-parameters:
-        - -DCMAKE_INSTALL_PREFIX=/usr
-        - -DCMAKE_BUILD_TYPE=Release
-        - -DQT_MAJOR_VERSION=6
-        - -DBUILD_WITH_QT6=ON
-        - -DBUILD_TESTING=OFF
-        - -DCMAKE_INSTALL_SYSCONFDIR=/etc
-        - -DCMAKE_INSTALL_LOCALSTATEDIR=/var
-        - -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON
-        - -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF
-        - -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON
-        - -DCMAKE_INSTALL_RUNSTATEDIR=/run
-        - -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON
-        - -DCMAKE_VERBOSE_MAKEFILE=ON
-        - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
-        - --log-level=STATUS
-        - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
-        prime:
-        - -usr/lib/*/cmake/*
-        - -usr/include/*
-        - -usr/share/ECM/*
-        - -usr/share/man/*
-        - -usr/bin/X11
-        - -usr/lib/gcc/$CRAFT_ARCH_TRIPLET_BUILD_FOR/6.0.0
-        - -usr/lib/aspell/*
-        - -usr/share/lintian
-    cleanup:
-        after:
-        - isoimagewriter
-        plugin: nil
-        build-snaps:
-        - core22
-        - kf6-core22
-        - qt-common-themes
-        override-prime: |
-            set -eux
-            for snap in "core22" "kf6-core22" "qt-common-themes"; do
-                cd "/snap/$snap/current" && find . -type f,l -exec rm -rf "${CRAFT_PRIME}/{}" \;
-            done
-
-
+  libgpgmepp-qt6:
+    build-packages:
+      - libassuan-dev
+      - libgpg-error-dev
+      - rsync
+    stage-packages:
+      - libassuan0
+      - libgpg-error0
+    source: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2
+    source-checksum: sha256/9499e8b1f33cccb6815527a1bc16049d35a6198a6c5fae0185f2bd561bce5224
+    plugin: autotools
+    autotools-configure-parameters:
+      - --disable-gpgsm-test
+      - --enable-languages=cpp,qt6
+      - --prefix=/usr
+      - --enable-fixed-path=/snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+    build-environment:
+      - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kf6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
+      - PKG_CONFIG_PATH: /snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
+    override-build: |
+      craftctl default
+      rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
+  isoimagewriter:
+    after:
+      - libgpgmepp-qt6
+    parse-info:
+      - usr/share/metainfo/org.kde.isoimagewriter.appdata.xml
+    plugin: cmake
+    source: .
+    source-type: local
+    build-packages:
+      - libpulse0
+      - libxkbcommon-dev
+    stage-packages:
+      - libpulse0
+      - libxkbcommon0
+      - gpg
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DQT_MAJOR_VERSION=6
+      - -DBUILD_WITH_QT6=ON
+      - -DBUILD_TESTING=OFF
+      - -DCMAKE_INSTALL_SYSCONFDIR=/etc
+      - -DCMAKE_INSTALL_LOCALSTATEDIR=/var
+      - -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON
+      - -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF
+      - -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON
+      - -DCMAKE_INSTALL_RUNSTATEDIR=/run
+      - -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON
+      - -DCMAKE_VERBOSE_MAKEFILE=ON
+      - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+      - --log-level=STATUS
+      - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+    prime:
+      - -usr/lib/*/cmake/*
+      - -usr/include/*
+      - -usr/share/ECM/*
+      - -usr/share/man/*
+      - -usr/bin/X11
+      - -usr/lib/gcc/$CRAFT_ARCH_TRIPLET_BUILD_FOR/6.0.0
+      - -usr/lib/aspell/*
+      - -usr/share/lintian
+  cleanup:
+    after:
+      - isoimagewriter
+    plugin: nil
+    build-snaps:
+      - core22
+      - kf6-core22
+      - qt-common-themes
+    override-prime: |
+      set -eux
+      for snap in "core22" "kf6-core22" "qt-common-themes"; do
+          cd "/snap/$snap/current" && find . -type f,l -exec rm -rf "${CRAFT_PRIME}/{}" \;
+      done
