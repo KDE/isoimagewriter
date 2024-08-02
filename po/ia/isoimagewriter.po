@@ -173,7 +173,7 @@ msgstr ""
 #: isoimagewriter/isoverifier.cpp:195
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr "Nonpoite trovar checksum in file SHA256SUMS "
+msgstr "Non pote trovar checksum in file SHA256SUMS "
 
 #: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
 #, kde-format
