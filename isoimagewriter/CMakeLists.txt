@@ -66,6 +66,9 @@ endif()
 
 add_executable(isoimagewriter ${isoimagewriter_SRCS})
 
+file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../res/*isoimagewriter.png")
+ecm_add_app_icon(isoimagewriter ICONS ${ICONS_SRCS})
+
 target_compile_definitions(isoimagewriter PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(isoimagewriter
