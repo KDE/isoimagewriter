@@ -54,6 +54,8 @@ void IsoVerifier::verifyIso()
         m_verificationMean = VerificationMean::Sha256SumsFile;
     } else if (fileName.startsWith("netrunner-")) {
         m_verificationMean = VerificationMean::Sha256SumInput;
+    } else if (fileName.startsWith("debian-")) {
+        m_verificationMean = VerificationMean::Sha256SumInput;
     } else {
         m_error = i18n("Could not verify as a known distro image.");
         m_isIsoValid = VerifyResult::KeyNotFound;
