@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-08-16 00:41+0000\n"
 "PO-Revision-Date: 2023-12-05 06:40+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -119,79 +119,79 @@ msgstr ""
 "Če želite ponovno shraniti podatke v to napravo, uporabite gumb \"Obriši USB "
 "disk \"."
 
-#: isoimagewriter/isoverifier.cpp:58
+#: isoimagewriter/isoverifier.cpp:60
 #, kde-format
 msgid "Could not verify as a known distro image."
 msgstr "Ni mogoče preveriti kot znano sliko distribucije."
 
-#: isoimagewriter/isoverifier.cpp:70
+#: isoimagewriter/isoverifier.cpp:72
 #, kde-format
 msgid "SHA256 Checksum"
 msgstr "Kontrolna vsota SHA256"
 
-#: isoimagewriter/isoverifier.cpp:71
+#: isoimagewriter/isoverifier.cpp:73
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
 msgstr "Prilepite kontrolno vsoto SHA256 za to ISO sliko:"
 
-#: isoimagewriter/isoverifier.cpp:129
+#: isoimagewriter/isoverifier.cpp:131
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr "%1 ni mogoče najti. Prenesite datoteko s podpisom PGP v isto mapo."
 
-#: isoimagewriter/isoverifier.cpp:136
+#: isoimagewriter/isoverifier.cpp:138
 #, kde-format
 msgid "Could not open signature file"
 msgstr "Ni bilo mogoče odpreti podpisne datoteke"
 
-#: isoimagewriter/isoverifier.cpp:142
+#: isoimagewriter/isoverifier.cpp:144
 #, kde-format
 msgid "Could not open ISO image"
 msgstr "Ni bilo mogoče odpreti ISO slike"
 
-#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
 #, kde-format
 msgid "Key is revoked."
 msgstr "Ključ je preklican."
 
-#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
+#: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
 #, kde-format
 msgid "Uses wrong signature."
 msgstr "Uporablja napačen podpis."
 
-#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
+#: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
 #, kde-format
 msgid "This app is built without verification support."
 msgstr "Ta aplikacija je izdelana brez podpore za verifikacijo."
 
-#: isoimagewriter/isoverifier.cpp:181
+#: isoimagewriter/isoverifier.cpp:183
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr "Datoteke SHA256SUMS ni bilo mogoče odpreti, prenesite jo v isto mapo"
 
-#: isoimagewriter/isoverifier.cpp:195
+#: isoimagewriter/isoverifier.cpp:197
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
 msgstr "V datoteki SHA256SUMS ni bilo mogoče najti kontrolne vsote"
 
-#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
+#: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
 #, kde-format
 msgid "Could not read ISO image"
 msgstr "Ni bilo mogoče brati ISO slike"
 
-#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
+#: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
 #, kde-format
 msgid "Could not perform checksum"
 msgstr "Ni bilo mogoče izračunati kontrolne vsote"
 
-#: isoimagewriter/isoverifier.cpp:212
+#: isoimagewriter/isoverifier.cpp:214
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
 "Kontrolna vsota v datoteki .iso ne ustreza vrednosti v datoteki SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:220
+#: isoimagewriter/isoverifier.cpp:222
 #, kde-format
 msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
@@ -200,12 +200,12 @@ msgstr ""
 "Ni bilo mogoče najti SHA256SUMS.gpg. Prenesite podpisno datoteko PGP v isto "
 "mapo."
 
-#: isoimagewriter/isoverifier.cpp:269
+#: isoimagewriter/isoverifier.cpp:271
 #, kde-format
 msgid "Checksum did not match"
 msgstr "Kontrolna vsota ni ustrezna"
 
-#: isoimagewriter/isoverifier.cpp:275
+#: isoimagewriter/isoverifier.cpp:277
 #, kde-format
 msgid "Requires an SHA256 checksum"
 msgstr "Zahteva kontrolno vsoto SHA256"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-08-16 00:41+0000\n"
 "PO-Revision-Date: 2024-04-12 12:43+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -119,78 +119,78 @@ msgstr ""
 "כדי שאפשר יהיה לאחסן שוב נתונים על ההתקן הזה, נא להשתמש בכפתור „מחיקת כונן "
 "USB”"
 
-#: isoimagewriter/isoverifier.cpp:58
+#: isoimagewriter/isoverifier.cpp:60
 #, kde-format
 msgid "Could not verify as a known distro image."
 msgstr "לא ניתן לאמת כדמות הפצה מוכרת."
 
-#: isoimagewriter/isoverifier.cpp:70
+#: isoimagewriter/isoverifier.cpp:72
 #, kde-format
 msgid "SHA256 Checksum"
 msgstr "סיכום ביקורת SHA256"
 
-#: isoimagewriter/isoverifier.cpp:71
+#: isoimagewriter/isoverifier.cpp:73
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
 msgstr "הדבקת סיכום הביקורת מסוג SHA256 ל־ISO הזה:"
 
-#: isoimagewriter/isoverifier.cpp:129
+#: isoimagewriter/isoverifier.cpp:131
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr "לא ניתן למצוא את %1, נא להוריד קובץ חתימת PGP לאותה התיקייה."
 
-#: isoimagewriter/isoverifier.cpp:136
+#: isoimagewriter/isoverifier.cpp:138
 #, kde-format
 msgid "Could not open signature file"
 msgstr "לא ניתן לפתוח את קובץ החתימה"
 
-#: isoimagewriter/isoverifier.cpp:142
+#: isoimagewriter/isoverifier.cpp:144
 #, kde-format
 msgid "Could not open ISO image"
 msgstr "לא ניתן לפתוח את דמות ה־ISO"
 
-#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
 #, kde-format
 msgid "Key is revoked."
 msgstr "המפתח נשלל."
 
-#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
+#: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
 #, kde-format
 msgid "Uses wrong signature."
 msgstr "משתמש בחתימה שגויה."
 
-#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
+#: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
 #, kde-format
 msgid "This app is built without verification support."
 msgstr "היישום הזה נבנה בלי תמיכה באימות."
 
-#: isoimagewriter/isoverifier.cpp:181
+#: isoimagewriter/isoverifier.cpp:183
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr "לא ניתן לפתוח את קובץ ה־SHA256SUMS, נא להוריד לאותה התיקייה"
 
-#: isoimagewriter/isoverifier.cpp:195
+#: isoimagewriter/isoverifier.cpp:197
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
 msgstr "לא ניתן למצוא סיכום ביקורת בקובץ ה־SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
+#: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
 #, kde-format
 msgid "Could not read ISO image"
 msgstr "לא ניתן לקרוא את קובץ דמות ה־ISO"
 
-#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
+#: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
 #, kde-format
 msgid "Could not perform checksum"
 msgstr "לא ניתן לבצע את סיכום הביקורת"
 
-#: isoimagewriter/isoverifier.cpp:212
+#: isoimagewriter/isoverifier.cpp:214
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr "סיכום הביקורת של קובץ ה־‎.iso לא תואם לערך שבקובץ ה־SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:220
+#: isoimagewriter/isoverifier.cpp:222
 #, kde-format
 msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
@@ -198,12 +198,12 @@ msgid ""
 msgstr ""
 "לא ניתן למצוא SHA256SUMS.gpg, נא להוריד את קובץ חתימת ה־PGP לאותה התיקייה."
 
-#: isoimagewriter/isoverifier.cpp:269
+#: isoimagewriter/isoverifier.cpp:271
 #, kde-format
 msgid "Checksum did not match"
 msgstr "סיכום הביקורת לא תואם"
 
-#: isoimagewriter/isoverifier.cpp:275
+#: isoimagewriter/isoverifier.cpp:277
 #, kde-format
 msgid "Requires an SHA256 checksum"
 msgstr "דורש סיכום ביקורת מסוג SHA256"

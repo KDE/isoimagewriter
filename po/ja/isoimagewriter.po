@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-08-16 00:41+0000\n"
 "PO-Revision-Date: 2024-02-25 00:08+0900\n"
 "Last-Translator: Tarot Osuji <tarot@sdf.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -117,22 +117,22 @@ msgstr ""
 "再度このデバイスにデータを保存できるようにするには、\"USB ディスクをワイプ\" "
 "ボタンを使用してください。"
 
-#: isoimagewriter/isoverifier.cpp:58
+#: isoimagewriter/isoverifier.cpp:60
 #, kde-format
 msgid "Could not verify as a known distro image."
 msgstr "既知のディストリビューションのイメージとして検証できませんでした。"
 
-#: isoimagewriter/isoverifier.cpp:70
+#: isoimagewriter/isoverifier.cpp:72
 #, kde-format
 msgid "SHA256 Checksum"
 msgstr "SHA256 チェックサム"
 
-#: isoimagewriter/isoverifier.cpp:71
+#: isoimagewriter/isoverifier.cpp:73
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
 msgstr "この ISO の SHA256 チェックサムを貼り付けます:"
 
-#: isoimagewriter/isoverifier.cpp:129
+#: isoimagewriter/isoverifier.cpp:131
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
@@ -140,59 +140,59 @@ msgstr ""
 "%1 が見つかりませんでした。PGP 署名ファイルを同じディレクトリにダウンロードし"
 "てください。"
 
-#: isoimagewriter/isoverifier.cpp:136
+#: isoimagewriter/isoverifier.cpp:138
 #, kde-format
 msgid "Could not open signature file"
 msgstr "署名ファイルを開けませんでした"
 
-#: isoimagewriter/isoverifier.cpp:142
+#: isoimagewriter/isoverifier.cpp:144
 #, kde-format
 msgid "Could not open ISO image"
 msgstr "ISO イメージを開けませんでした"
 
-#: isoimagewriter/isoverifier.cpp:162 isoimagewriter/isoverifier.cpp:237
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
 #, kde-format
 msgid "Key is revoked."
 msgstr "鍵は失効しています。"
 
-#: isoimagewriter/isoverifier.cpp:165 isoimagewriter/isoverifier.cpp:240
+#: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
 #, kde-format
 msgid "Uses wrong signature."
 msgstr "署名が違います。"
 
-#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
+#: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
 #, kde-format
 msgid "This app is built without verification support."
 msgstr "このアプリは検証サポートなしでビルドされています。"
 
-#: isoimagewriter/isoverifier.cpp:181
+#: isoimagewriter/isoverifier.cpp:183
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
 "SHA256SUMS ファイルが開けませんでした。同じディレクトリにダウンロードしてくだ"
 "さい"
 
-#: isoimagewriter/isoverifier.cpp:195
+#: isoimagewriter/isoverifier.cpp:197
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
 msgstr "SHA256SUMS ファイルにチェックサムが見つかりませんでした"
 
-#: isoimagewriter/isoverifier.cpp:203 isoimagewriter/isoverifier.cpp:256
+#: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
 #, kde-format
 msgid "Could not read ISO image"
 msgstr "ISO イメージを読み取れませんでした"
 
-#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
+#: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
 #, kde-format
 msgid "Could not perform checksum"
 msgstr "チェックサムを実行できませんでした"
 
-#: isoimagewriter/isoverifier.cpp:212
+#: isoimagewriter/isoverifier.cpp:214
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ".iso ファイルのチェックサムが SHA256SUMS ファイルの値と一致しません"
 
-#: isoimagewriter/isoverifier.cpp:220
+#: isoimagewriter/isoverifier.cpp:222
 #, kde-format
 msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
@@ -201,12 +201,12 @@ msgstr ""
 "SHA256SUMS.gpg が見つかりませんでした。PGP 署名ファイルを同じディレクトリにダ"
 "ウンロードしてください。"
 
-#: isoimagewriter/isoverifier.cpp:269
+#: isoimagewriter/isoverifier.cpp:271
 #, kde-format
 msgid "Checksum did not match"
 msgstr "チェックサムが一致しませんでした"
 
-#: isoimagewriter/isoverifier.cpp:275
+#: isoimagewriter/isoverifier.cpp:277
 #, kde-format
 msgid "Requires an SHA256 checksum"
 msgstr "SHA256 チェックサムが必要です"
