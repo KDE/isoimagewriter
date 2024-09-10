@@ -475,7 +475,7 @@ void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
 
 void MainWindow::openIsoImage()
 {
-    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img *.iso.gz *.iso.xz *.img.zstd *.img.gz *.img.zx *.img.zstd"))
+    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img *.iso.gz *.iso.xz *.img.zstd *.img.gz *.img.zx *.img.zstd *.raw"))
         + ";;" + i18n("All Files (%1)", QString("*"));
     QUrl isoImageUrl = QFileDialog::getOpenFileUrl(this, i18n("Select image to flash"), QUrl::fromLocalFile(m_lastOpenedDir),
                                                         filter, nullptr,
