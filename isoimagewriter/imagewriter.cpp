@@ -183,8 +183,13 @@ void ImageWriter::writeImage()
                 qDebug() << "write writtenBytes: " << writtenBytes;
                 //throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
             }
-            if (writtenBytes != readBytes)
-                throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
+            if (writtenBytes != readBytes) {
+                throw i18nc("@info %1 and %2 are byte counts, %3 is an error message",
+                            "The last block was not fully written (%1 of %2 bytes)!\nError message: %3\nAborting.",
+                            writtenBytes,
+                            readBytes,
+                            deviceFile.errorString());
+            }
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC) || defined(Q_OS_FREEBSD)
             // In Linux/MacOS the USB device is opened with buffering. Using forced sync to validate progress bar.
             // For unknown reason, deviceFile.flush() does not work as intended here.
