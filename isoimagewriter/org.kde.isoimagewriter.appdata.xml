@@ -185,9 +185,8 @@
       </artifacts>
     </release>
   </releases>
-  <content_rating type="oars-1.1"/>
   <custom>
     <value key="KDE::supporters">Cameron Radmore</value>
   </custom>
-
+  <content_rating type="oars-1.1"/>
 </component>
