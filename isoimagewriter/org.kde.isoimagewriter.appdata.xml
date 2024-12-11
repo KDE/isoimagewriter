@@ -186,7 +186,7 @@
     </release>
   </releases>
   <custom>
-    <value key="KDE::supporters">Cameron Radmore</value>
+    <value key="KDE::supporters">Cameron Radmore;githubixx</value>
   </custom>
   <content_rating type="oars-1.1"/>
 </component>
