@@ -1,0 +1,482 @@
+# Sanskrit translations for isoimagewriter package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the isoimagewriter package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: isoimagewriter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "भवतः नामानि"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "भवतः ईमेलपत्राणि"
+
+#: isoimagewriter/common.cpp:41
+#, kde-format
+msgid "Error code: %1"
+msgstr "त्रुटिसङ्केतः: %1"
+
+#: isoimagewriter/imagewriter.cpp:57
+#, kde-format
+msgid "Failed to allocate memory for buffer:"
+msgstr "बफरस्य कृते स्मृतिः आवंटयितुं असफलम्:"
+
+#: isoimagewriter/imagewriter.cpp:61
+#, kde-format
+msgid "Failed to allocate memory for buffer."
+msgstr "बफरस्य कृते स्मृतिः आवंटयितुं असफलम् ।"
+
+#: isoimagewriter/imagewriter.cpp:75
+#, kde-format
+msgid "Failed to open the image file: %1"
+msgstr "चित्रसञ्चिकां उद्घाटयितुं असफलम्: %1"
+
+#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
+#: isoimagewriter/imagewriter.cpp:92
+#, kde-format
+msgid "Failed to open compression device: %1"
+msgstr "संपीडनयन्त्रं उद्घाटयितुं असफलम्: %1"
+
+#: isoimagewriter/imagewriter.cpp:118
+#, kde-format
+msgid "Failed to open the drive %1"
+msgstr "%1 ड्राइव् उद्घाटयितुं असफलम्"
+
+#: isoimagewriter/imagewriter.cpp:125
+#, kde-format
+msgid "Failed to unmount the drive %1"
+msgstr "%1 ड्राइव् अनमाउण्ट् कर्तुं असफलम्"
+
+#: isoimagewriter/imagewriter.cpp:142
+#, kde-format
+msgid ""
+"Failed to unmount the volume %1\n"
+"%2"
+msgstr ""
+"%1 आयतनं अनमाउण्ट् कर्तुं असफलम्\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:154
+#, kde-format
+msgid ""
+"Failed to open the target device:\n"
+"%1"
+msgstr ""
+"लक्ष्ययन्त्रं उद्घाटयितुं असफलम्:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:187
+#, kde-format
+msgid ""
+"The last block was not fully written (%1 of %2 bytes)!\n"
+"Aborting."
+msgstr ""
+"अन्तिमः खण्डः पूर्णतया न लिखितः (%2 बाइट् इत्यस्य %1)!\n"
+"गर्भपातं कुर्वन् ।"
+
+#: isoimagewriter/imagewriter.cpp:219
+#, kde-format
+msgid ""
+"Failed to read the image file:\n"
+"%1"
+msgstr ""
+"चित्रसञ्चिकां पठितुं असफलम्:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:241
+#, kde-format
+msgid "The operation completed successfully."
+msgstr "शल्यक्रिया सफलतया सम्पन्नम्।"
+
+#: isoimagewriter/imagewriter.cpp:243
+#, kde-format
+msgid "Now you need to format your device."
+msgstr "इदानीं भवद्भिः स्वस्य यन्त्रस्य स्वरूपं कर्तव्यम् ।"
+
+#: isoimagewriter/imagewriter.cpp:243
+#, kde-format
+msgid ""
+"To be able to store data on this device again, please, use the button \"Wipe "
+"USB Disk\"."
+msgstr ""
+"अस्मिन् उपकरणे पुनः आँकडानां संग्रहणं कर्तुं शक्नुवन्तु, कृपया, \"Wipe USB Disk\" इति बटनस्य "
+"उपयोगं कुर्वन्तु ।"
+
+#: isoimagewriter/isoverifier.cpp:60
+#, kde-format
+msgid "Could not verify as a known distro image."
+msgstr "ज्ञातं डिस्ट्रो इमेज इति सत्यापयितुं न शक्तवान्।"
+
+#: isoimagewriter/isoverifier.cpp:72
+#, kde-format
+msgid "SHA256 Checksum"
+msgstr "SHA256 चेकसम"
+
+#: isoimagewriter/isoverifier.cpp:73
+#, kde-format
+msgid "Paste the SHA256 checksum for this ISO:"
+msgstr "अस्य ISO कृते SHA256 चेकसमं चिनोतु:"
+
+#: isoimagewriter/isoverifier.cpp:131
+#, kde-format
+msgid ""
+"Could not find %1, please download PGP signature file to same directory."
+msgstr "%1 न प्राप्तम्, कृपया PGP हस्ताक्षरसञ्चिकां समाननिर्देशिकायां अवतरणं कुर्वन्तु ।"
+
+#: isoimagewriter/isoverifier.cpp:138
+#, kde-format
+msgid "Could not open signature file"
+msgstr "हस्ताक्षरसञ्चिकां उद्घाटयितुं न शक्तवान्"
+
+#: isoimagewriter/isoverifier.cpp:144
+#, kde-format
+msgid "Could not open ISO image"
+msgstr "ISO चित्रं उद्घाटयितुं न शक्तवान्"
+
+#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#, kde-format
+msgid "Key is revoked."
+msgstr "कीलः निरस्तः भवति।"
+
+#: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
+#, kde-format
+msgid "Uses wrong signature."
+msgstr "गलतहस्ताक्षरस्य उपयोगं करोति।"
+
+#: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
+#, kde-format
+msgid "This app is built without verification support."
+msgstr "एतत् एप् सत्यापनसमर्थनं विना निर्मितम् अस्ति।"
+
+#: isoimagewriter/isoverifier.cpp:183
+#, kde-format
+msgid "Could not open SHA256SUMS file, please download to same directory"
+msgstr "SHA256SUMS सञ्चिकां उद्घाटयितुं न शक्तवती, कृपया समाननिर्देशिकायां डाउनलोड् कुर्वन्तु"
+
+#: isoimagewriter/isoverifier.cpp:197
+#, kde-format
+msgid "Could not find checksum in SHA256SUMS file"
+msgstr "SHA256SUMS सञ्चिकायां चेकसमं न प्राप्नोत्"
+
+#: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
+#, kde-format
+msgid "Could not read ISO image"
+msgstr "ISO चित्रं पठितुं न शक्तवान्"
+
+#: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
+#, kde-format
+msgid "Could not perform checksum"
+msgstr "चेकसमं कर्तुं न शक्तवान्"
+
+#: isoimagewriter/isoverifier.cpp:214
+#, kde-format
+msgid "Checksum of .iso file does not match value in SHA256SUMS file"
+msgstr ".iso सञ्चिकायाः चेकसमः SHA256SUMS सञ्चिकायां मूल्येन न मेलति"
+
+#: isoimagewriter/isoverifier.cpp:222
+#, kde-format
+msgid ""
+"Could not find SHA256SUMS.gpg, please download PGP signature file to same "
+"directory."
+msgstr ""
+"SHA256SUMS.gpg न प्राप्तम्, कृपया PGP हस्ताक्षरसञ्चिकां समाननिर्देशिकायां डाउनलोड् कुर्वन्तु "
+"।"
+
+#: isoimagewriter/isoverifier.cpp:271
+#, kde-format
+msgid "Checksum did not match"
+msgstr "चेकसमः न मेलितः"
+
+#: isoimagewriter/isoverifier.cpp:277
+#, kde-format
+msgid "Requires an SHA256 checksum"
+msgstr "SHA256 चेकसमस्य आवश्यकता वर्तते"
+
+#: isoimagewriter/mainapplication.cpp:27
+#, kde-format
+msgid "ISO Image Writer"
+msgstr "ISO इमेज राइटर"
+
+#: isoimagewriter/mainapplication.cpp:29
+#, kde-format
+msgid "Write an ISO Image to a USB Disk"
+msgstr "USB Disk मध्ये ISO Image लिखन्तु"
+
+#: isoimagewriter/mainapplication.cpp:31
+#, kde-format
+msgid ""
+"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
+"<jr@jriddell.org>"
+msgstr ""
+"प्रतिलिपि अधिकार (ग) २०१६ रोसा, प्रतिलिपि अधिकार (ग) २०२२ जोनाथन एस्क-रिडेल "
+"<jr@jriddell.org>"
+
+#: isoimagewriter/mainapplication.cpp:33
+#, kde-format
+msgid "Konstantin Vlasov"
+msgstr "कोन्स्टन्टिन व्लासोव"
+
+#: isoimagewriter/mainapplication.cpp:33 isoimagewriter/mainapplication.cpp:34
+#, kde-format
+msgid "Author"
+msgstr "लेखकः"
+
+#: isoimagewriter/mainapplication.cpp:34
+#, kde-format
+msgid "Jonathan Riddell"
+msgstr "जोनाथन् रिडेल्"
+
+#: isoimagewriter/mainapplication.cpp:38
+#, kde-format
+msgid "ISO file to open"
+msgstr "ISO सञ्चिकां उद्घाटयितुं"
+
+#: isoimagewriter/mainwindow.cpp:85
+#, kde-format
+msgid "KDE ISO Image Writer"
+msgstr "KDE ISO इमेज राइटर"
+
+#: isoimagewriter/mainwindow.cpp:85
+#, kde-format
+msgid "A quick and simple way to create a bootable USB drive."
+msgstr "बूट-करणीयं USB ड्राइव् निर्मातुं द्रुततरः सरलः च उपायः ।"
+
+#: isoimagewriter/mainwindow.cpp:113
+#, kde-format
+msgid "Path to ISO image..."
+msgstr "ISO इमेजस्य मार्गः..."
+
+#: isoimagewriter/mainwindow.cpp:124
+#, kde-format
+msgid "Create"
+msgstr "निर्मियताम्"
+
+#: isoimagewriter/mainwindow.cpp:144
+#, kde-format
+msgid "Write this ISO image:"
+msgstr "एतत् ISO चित्रं लिखत:"
+
+#: isoimagewriter/mainwindow.cpp:147
+#, kde-format
+msgid "To this USB drive:"
+msgstr "अस्य USB ड्राइव् प्रति :"
+
+#: isoimagewriter/mainwindow.cpp:165
+#, kde-format
+msgid ""
+"Everything on the USB drive will be overwritten.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"USB ड्राइव् मध्ये सर्वं अधिलेखितं भविष्यति ।\n"
+"\n"
+"किं त्वं निरन्तरं कर्तुम् इच्छसि ?"
+
+#: isoimagewriter/mainwindow.cpp:171
+#, kde-format
+msgid "Downloading %1..."
+msgstr "%1 डाउनलोड् करणम्..."
+
+#: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
+#, kde-format
+msgctxt "Progress percent value"
+msgid "%p%"
+msgstr "%प% ९."
+
+#: isoimagewriter/mainwindow.cpp:190
+#, kde-format
+msgid "Abort"
+msgstr "गर्भपातं कुरुत"
+
+#: isoimagewriter/mainwindow.cpp:193
+#, kde-format
+msgid "Continue"
+msgstr "अनुवर्तते"
+
+#: isoimagewriter/mainwindow.cpp:215
+#, kde-format
+msgid ""
+"Your USB drive is being created.\n"
+"\n"
+"This may take some time depending on the size of the ISO image file and the "
+"transfer speed."
+msgstr ""
+"भवतः USB ड्राइव् निर्मितं भवति।\n"
+"\n"
+"ISO इमेज सञ्चिकायाः आकारस्य स्थानान्तरणवेगस्य च आधारेण एतत् किञ्चित् समयं गृह्णीयात् ।"
+
+#: isoimagewriter/mainwindow.cpp:223
+#, kde-format
+msgid "Cancel"
+msgstr "निरसयतु"
+
+#: isoimagewriter/mainwindow.cpp:239
+#, kde-format
+msgid "Your live USB flash drive is now complete and ready to use!"
+msgstr "इदानीं भवतः लाइव USB फ्लैशड्राइवः सम्पूर्णः अस्ति तथा च उपयोगाय सज्जः अस्ति!"
+
+#: isoimagewriter/mainwindow.cpp:246
+#, kde-format
+msgid "Back"
+msgstr "पृष्ठभागः"
+
+#: isoimagewriter/mainwindow.cpp:249
+#, kde-format
+msgid "Close"
+msgstr "पिधानं करोतु"
+
+#: isoimagewriter/mainwindow.cpp:274
+#, kde-format
+msgid "Failed to open the image file:"
+msgstr "चित्रसञ्चिकां उद्घाटयितुं असफलम्:"
+
+#: isoimagewriter/mainwindow.cpp:289
+#, kde-format
+msgid "Verifying ISO image"
+msgstr "ISO चित्रस्य सत्यापनम्"
+
+#: isoimagewriter/mainwindow.cpp:369
+#, kde-format
+msgid "Please plug in a USB drive"
+msgstr "कृपया USB ड्राइव् प्लग् कुर्वन्तु"
+
+#: isoimagewriter/mainwindow.cpp:461
+#, kde-format
+msgid "Cancel?"
+msgstr "निरसयतु?"
+
+#: isoimagewriter/mainwindow.cpp:462
+#, kde-format
+msgid "Writing is in progress, abort it?"
+msgstr "लेखनं प्रचलति, गर्भपातं कुरुत?"
+
+#: isoimagewriter/mainwindow.cpp:478
+#, kde-format
+msgid "Disk Images (%1)"
+msgstr "डिस्क चित्राणि (%1) ."
+
+#: isoimagewriter/mainwindow.cpp:479
+#, kde-format
+msgid "All Files (%1)"
+msgstr "सर्वाणि सञ्चिकाः (%1) ."
+
+#: isoimagewriter/mainwindow.cpp:480
+#, kde-format
+msgid "Select image to flash"
+msgstr "फ़्लैश कर्तुं चित्रं चिनोतु"
+
+#: isoimagewriter/mainwindow.cpp:510
+#, kde-format
+msgid "Downloading ISO image"
+msgstr "ISO चित्रं डाउनलोड् करणम्"
+
+#: isoimagewriter/mainwindow.cpp:529
+#, kde-format
+msgid "Unknown Disk Size"
+msgstr "अज्ञात डिस्क आकार"
+
+#: isoimagewriter/mainwindow.cpp:530
+#, kde-format
+msgid ""
+"The selected disk is of unknown size, please check the image will fit before "
+"writing.\n"
+"\n"
+"Image size: %1 (%2 b)"
+msgstr ""
+"चयनितस्य डिस्कस्य आकारः अज्ञातः अस्ति, कृपया लेखनात् पूर्वं चित्रं युक्तं भविष्यति इति पश्यन्तु "
+"।\n"
+"\n"
+"चित्रस्य आकारः %1 (%2 ख) ."
+
+#: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
+#, kde-format
+msgid "Error"
+msgstr "त्रुटि"
+
+#: isoimagewriter/mainwindow.cpp:542
+#, kde-format
+msgid ""
+"The image is larger than your selected device!\n"
+"\n"
+"Image size: %1 (%2 b)\n"
+"Disk size: %3 (%4 b)"
+msgstr ""
+"भवतः चयनितयन्त्रात् चित्रं बृहत्तरम् अस्ति!\n"
+"\n"
+"चित्रस्य आकारः %1 (%2 ख) .\n"
+"डिस्क आकारः %3 (%4 ख) ."
+
+#: isoimagewriter/mainwindow.cpp:629
+#, kde-format
+msgid "The ISO image is valid"
+msgstr "ISO प्रतिबिम्बं वैधम् अस्ति"
+
+#: isoimagewriter/mainwindow.cpp:636
+#, kde-format
+msgid "Could not find the key to verify the ISO image"
+msgstr "ISO प्रतिबिम्बस्य सत्यापनार्थं कुञ्जी न प्राप्नोत्"
+
+#: isoimagewriter/mainwindow.cpp:638
+#, kde-format
+msgid "Could not verify ISO image"
+msgstr "ISO चित्रं सत्यापयितुं न शक्तवान्"
+
+#: isoimagewriter/mainwindow.cpp:639
+#, kde-format
+msgid "ISO Verification failed"
+msgstr "ISO सत्यापनम् असफलम् अभवत्"
+
+#: isoimagewriter/physicaldevice.cpp:56
+#, kde-format
+msgid "Could not acquire lock:"
+msgstr "तालं प्राप्तुं न शक्तवान्:"
+
+#: isoimagewriter/platform_win.cpp:94
+#, kde-format
+msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
+msgstr "CoCreateInstance (WbemAdministrativeLocator) विफलम्।"
+
+#: isoimagewriter/platform_win.cpp:95
+#, kde-format
+msgid "ConnectServer failed."
+msgstr "ConnectServer विफलम् अभवत् ।"
+
+#: isoimagewriter/platform_win.cpp:96
+#, kde-format
+msgid "Failed to query USB flash devices."
+msgstr "USB-फ्लैश-यन्त्राणां प्रश्नं कर्तुं असफलम् ।"
+
+#: isoimagewriter/platform_win.cpp:160
+#, kde-format
+msgid "Failed to query list of partitions."
+msgstr "विभाजनसूचीं पृच्छितुं असफलम् ।"
+
+#: isoimagewriter/platform_win.cpp:192
+#, kde-format
+msgid "Failed to query list of logical disks."
+msgstr "तार्किकडिस्कसूचीं पृच्छितुं असफलम् ।"
+
+#: isoimagewriter/usbdevice.h:23
+#, kde-format
+msgid "Unknown Device"
+msgstr "अज्ञात यन्त्र"
+
+#: isoimagewriter/usbdevice.h:32
+#, kde-format
+msgid "<unmounted>"
+msgstr "<अनमाउण्टे>"
