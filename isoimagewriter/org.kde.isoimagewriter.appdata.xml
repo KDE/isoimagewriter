@@ -26,6 +26,7 @@
   <name xml:lang="fr">ISO Image Writer</name>
   <name xml:lang="gl">Gravadora de imaxes ISO</name>
   <name xml:lang="he">צורב דמויות ISO</name>
+  <name xml:lang="hi">आईएसओ इमेज राइटर</name>
   <name xml:lang="hu">ISO-lemezképíró</name>
   <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
   <name xml:lang="id">Penulis Citra ISO</name>
@@ -44,6 +45,7 @@
   <name xml:lang="pt-BR">Gravador de imagem ISO</name>
   <name xml:lang="ro">Inscriptor de imagini ISO</name>
   <name xml:lang="ru">Запись образов ISO</name>
+  <name xml:lang="sa">ISO इमेज राइटर</name>
   <name xml:lang="sk">Zapisovač ISO obrazov</name>
   <name xml:lang="sl">ISO Image Writer</name>
   <name xml:lang="sv">ISO-avbildsskrivning</name>
@@ -70,6 +72,7 @@
   <summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
   <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
   <summary xml:lang="he">צריבת דמות ISO לכונן USB</summary>
+  <summary xml:lang="hi">ISO इमेज को USB डिस्क पर लिखें</summary>
   <summary xml:lang="hu">ISO-lemezkép írása USB-lemezre</summary>
   <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
   <summary xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</summary>
@@ -88,6 +91,7 @@
   <summary xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</summary>
   <summary xml:lang="ro">Scrie o imagine ISO pe disc USB</summary>
   <summary xml:lang="ru">Запись образов дисков на USB-накопитель</summary>
+  <summary xml:lang="sa">USB Disk मध्ये ISO Image लिखन्तु</summary>
   <summary xml:lang="sk">Zapísať ISO obraz na USB disk</summary>
   <summary xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</summary>
   <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
@@ -115,6 +119,7 @@
     <p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
     <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
     <p xml:lang="he">צריבת דמות ISO לכונן USB</p>
+    <p xml:lang="hi">ISO इमेज को USB डिस्क पर लिखें</p>
     <p xml:lang="hu">ISO-lemezkép írása USB-lemezre</p>
     <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
     <p xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</p>
@@ -133,6 +138,7 @@
     <p xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</p>
     <p xml:lang="ro">Scrie o imagine ISO pe disc USB</p>
     <p xml:lang="ru">Запись образов дисков на USB-накопитель</p>
+    <p xml:lang="sa">USB Disk मध्ये ISO Image लिखन्तु</p>
     <p xml:lang="sk">Zapísať ISO obraz na USB disk</p>
     <p xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</p>
     <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
@@ -147,7 +153,7 @@
   <url type="donation">https://www.kde.org/community/donations</url>
   <screenshots>
     <screenshot type="default">
-      <image width="659" height="311">
+      <image width="551" height="430">
 	https://cdn.kde.org/screenshots/isoimagewriter/isoimagewriter2.png
       </image>
     </screenshot>
@@ -157,6 +163,12 @@
   </provides>
   <project_group>KDE</project_group>
   <releases>
+    <release version="24.12.1" date="2025-01-09"/>
+    <release version="24.12.0" date="2024-12-12"/>
+    <release version="24.08.3" date="2024-11-07"/>
+    <release version="24.08.2" date="2024-10-10"/>
+    <release version="24.08.1" date="2024-09-12"/>
+    <release version="24.08.0" date="2024-08-22"/>
     <release version="24.05.2" date="2024-07-04"/>
     <release version="24.05.1" date="2024-06-13"/>
     <release version="24.05.0" date="2024-05-23"/>
@@ -180,5 +192,8 @@
       </artifacts>
     </release>
   </releases>
+  <custom>
+    <value key="KDE::supporters">Cameron Radmore;githubixx</value>
+  </custom>
   <content_rating type="oars-1.1"/>
 </component>
