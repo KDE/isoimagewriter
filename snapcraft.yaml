@@ -1,150 +1,113 @@
-# Trigger build 1
+# SPDX-FileCopyrightText: 2024 Scarlett Moore <sgmoore@kde.org>
+#
+# SPDX-License-Identifier: CC0-1.0
 ---
 name: isoimagewriter
+confinement: strict
+grade: stable
 base: core22
 adopt-info: isoimagewriter
-grade: stable
-confinement: strict
 apps:
-    isoimagewriter:
-        # extensions:
-        # - kde-neon
-        command: usr/bin/isoimagewriter
-        desktop: usr/share/applications/org.kde.isoimagewriter.desktop
-        common-id: org.kde.isoimagewriter
-        plugs:
-        - home
-        - raw-usb
-        - desktop
-        - desktop-legacy
-        - opengl
-        - wayland
-        - x11
-        - audio-playback
-        - unity7
-        - network
-        - network-bind
-        - udisks2
-        - optical-drive
-        - gpg-keys
-        command-chain:
-        - snap/command-chain/desktop-launch
-assumes:
-- snapd2.58.3
-compression: lzo
-plugs:
-    desktop:
-        mount-host-font-cache: false
-    icon-themes:
-        interface: content
-        target: $SNAP/data-dir/icons
-        default-provider: gtk-common-themes
-    sound-themes:
-        interface: content
-        target: $SNAP/data-dir/sounds
-        default-provider: gtk-common-themes
-    kf5-5-110-qt-5-15-11-core22:
-        content: kf5-5-110-qt-5-15-11-core22-all
-        interface: content
-        default-provider: kf5-5-110-qt-5-15-11-core22
-        target: $SNAP/kf5
-environment:
-    SNAP_DESKTOP_RUNTIME: $SNAP/kf5
-    SNAP_SAVE_DATA: $SNAP_USER_DATA
-hooks:
-    configure:
-        plugs:
-        - desktop
-        command-chain:
-        - snap/command-chain/hooks-configure-desktop
-layout:
-    /usr/share/X11:
-        symlink: $SNAP/kf5/usr/share/X11
+  isoimagewriter:
+    extensions:
+      - kde-neon-6
+    common-id: org.kde.isoimagewriter.desktop
+    desktop: usr/share/applications/org.kde.isoimagewriter.desktop
+    command: usr/bin/isoimagewriter
+    plugs:
+      - home
+      - raw-usb
+      - udisks2
+      - optical-drive
+      - gpg-keys
 slots:
-    session-dbus-interface:
-        interface: dbus
-        name: org.kde.isoimagewriter
-        bus: session
+  session-dbus-interface:
+    interface: dbus
+    name: org.kde.isoimagewriter
+    bus: session
 package-repositories:
--   type: apt
+  - type: apt
     components:
-    - main
+      - main
     suites:
-    - jammy
+      - jammy
     key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
     url: http://origin.archive.neon.kde.org/user
     key-server: keyserver.ubuntu.com
 parts:
-    kde-neon:
-        source: /snap/snapcraft/current/share/snapcraft/extensions/desktop/kde-neon
-        source-type: local
-        plugin: make
-        make-parameters:
-        - PLATFORM_PLUG=kf5-5-110-qt-5-15-11-core22
-        build-snaps:
-        - kf5-5-110-qt-5-15-11-core22-sdk
-        build-environment:
-        - &id001
-            PATH: /snap/kf5-5-110-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - &id002
-            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-110-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - &id003
-            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-110-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - &id004
-            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-110-qt-5-15-11-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
-    isoimagewriter:
-        after:
-        - kde-neon
-        source: .
-        source-type: local
-        plugin: cmake
-        build-packages:
-        - cmake
-        - libgpgme-dev
-        - libgpgmepp-dev
-        - libgpg-error-dev
-        stage-packages:
-        - libgpgme11
-        - libgpgmepp6
-        - libqgpgme7
-        - gpg
-        cmake-parameters:
-        - -DKDE_INSTALL_USE_QT_SYS_PATHS=FALSE
-        - "-DCMAKE_INSTALL_PREFIX=/usr"
-        - "-DCMAKE_BUILD_TYPE=Release"
-        - "-DENABLE_TESTING=OFF"
-        - "-DBUILD_TESTING=OFF"
-        - "-DCMAKE_FIND_ROOT_PATH=/usr\\;$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
-        - "-DKDE_INSTALL_PLUGINDIR=/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins/"
-        - "-DUSE_KAUTH=off"
-        parse-info:
-        - usr/share/metainfo/org.kde.isoimagewriter.appdata.xml
-        prime:
-        - "-usr/lib/*/cmake/*"
-        - "-usr/include/*"
-        - "-usr/share/ECM/*"
-        - "-usr/share/doc/*"
-        - "-usr/share/man/*"
-        - "-usr/share/icons/breeze-dark*"
-        - "-usr/bin/X11"
-        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
-        - "-usr/lib/aspell/*"
-        - "-usr/share/lintian"
-        build-environment: &id005
-        - *id001
-        - *id002
-        - *id003
-        - *id004
-    # cleanup:
-    #     after:
-    #     - isoimagewriter
-    #     plugin: nil
-    #     build-snaps:
-    #     - kde-frameworks-5-99-qt-5-15-7-core20
-    #     override-prime: |
-    #         set -eux
-    #         for snap in "kde-frameworks-5-99-qt-5-15-7-core20"; do  # List all content-snaps you're using here
-    #             cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" "$SNAPCRAFT_PRIME/usr/{}" \;
-    #         done
-    #         find $SNAPCRAFT_PRIME/usr/share/doc/ -type f -not -name 'copyright' -delete
-    #         find $SNAPCRAFT_PRIME/usr/share -type d -empty -delete
+  libgpgmepp-qt6:
+    build-packages:
+      - libassuan-dev
+      - libgpg-error-dev
+      - rsync
+    stage-packages:
+      - libassuan0
+      - libgpg-error0
+    source: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2
+    source-checksum: sha256/9499e8b1f33cccb6815527a1bc16049d35a6198a6c5fae0185f2bd561bce5224
+    plugin: autotools
+    autotools-configure-parameters:
+      - --disable-gpgsm-test
+      - --enable-languages=cpp,qt6
+      - --prefix=/usr
+      - --enable-fixed-path=/snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+    build-environment:
+      - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kf6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
+      - PKG_CONFIG_PATH: /snap/kde-qt6-core22-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
+    override-build: |
+      craftctl default
+      rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
+  isoimagewriter:
+    after:
+      - libgpgmepp-qt6
+    parse-info:
+      - usr/share/metainfo/org.kde.isoimagewriter.appdata.xml
+    plugin: cmake
+    source: .
+    source-type: local
+    build-packages:
+      - libpulse0
+      - libxkbcommon-dev
+    stage-packages:
+      - libpulse0
+      - libxkbcommon0
+      - gpg
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DQT_MAJOR_VERSION=6
+      - -DBUILD_WITH_QT6=ON
+      - -DBUILD_TESTING=OFF
+      - -DCMAKE_INSTALL_SYSCONFDIR=/etc
+      - -DCMAKE_INSTALL_LOCALSTATEDIR=/var
+      - -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON
+      - -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF
+      - -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON
+      - -DCMAKE_INSTALL_RUNSTATEDIR=/run
+      - -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON
+      - -DCMAKE_VERBOSE_MAKEFILE=ON
+      - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+      - --log-level=STATUS
+      - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+    prime:
+      - -usr/lib/*/cmake/*
+      - -usr/include/*
+      - -usr/share/ECM/*
+      - -usr/share/man/*
+      - -usr/bin/X11
+      - -usr/lib/gcc/$CRAFT_ARCH_TRIPLET_BUILD_FOR/6.0.0
+      - -usr/lib/aspell/*
+      - -usr/share/lintian
+  cleanup:
+    after:
+      - isoimagewriter
+    plugin: nil
+    build-snaps:
+      - core22
+      - kf6-core22
+      - qt-common-themes
+    override-prime: |
+      set -eux
+      for snap in "core22" "kf6-core22" "qt-common-themes"; do
+          cd "/snap/$snap/current" && find . -type f,l -exec rm -rf "${CRAFT_PRIME}/{}" \;
+      done
