@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2023, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-16 00:41+0000\n"
-"PO-Revision-Date: 2023-12-05 17:26+0100\n"
+"PO-Revision-Date: 2025-01-26 19:44+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -278,7 +278,7 @@ msgstr "Escribir esta imaxe ISO:"
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
-msgstr "Neste dispositivo USB:"
+msgstr "Nesta unidade USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
@@ -287,7 +287,7 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Sobrescribirase todo o contido do dispositivo USB.\n"
+"Sobrescribirase todo o contido da unidade USB.\n"
 "\n"
 "Quere continuar?"
 
@@ -320,7 +320,7 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
-"Estase creando o seu dispositivo USB.\n"
+"Estase creando a súa unidade USB.\n"
 "\n"
 "Isto pode levar un tempo segundo o tamaño do ficheiro da imaxe ISO de da "
 "velocidade de transferencia."
@@ -333,7 +333,7 @@ msgstr "Cancelar"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "O seu dispositivo USB está completo e listo para usar!"
+msgstr "A súa unidade USB está completa e lista para usar!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -358,7 +358,7 @@ msgstr "Verificando a imaxe ISO"
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr "Conecte un dispositivo USB"
+msgstr "Conecte unha unidade USB"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
