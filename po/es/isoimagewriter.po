@@ -1,15 +1,13 @@
-# Spanish translations for imagewriter.po package.
+# Spanish translations for isoimagewriter.po package.
 # Copyright (C) 2017 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the isoimagewriter package.
 #
-# Sofía Priego <spriego@darksylvania.net>, %Y.
 # Automatically generated, 2017.
-# SPDX-FileCopyrightText: 2017, 2023 Eloy <ecuadra@eloihr.net>
-# Eloy Cuadra <ecuadra@eloihr.net>, 2017, 2019, 2021, 2022, 2023.
-# Sofia Priego <spriego@darksylvania.net>, 2017, %Y.
+# SPDX-FileCopyrightText: 2017, 2019, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2017, 2023, 2025 Sofia Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: imagewriter\n"
+"Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-16 00:41+0000\n"
 "PO-Revision-Date: 2023-12-06 00:38+0100\n"
@@ -272,7 +270,7 @@ msgstr "Un modo rápido y sencillo de crear una unidad USB de arranque."
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr "Ruta a la imagen ISO..."
+msgstr "Ruta a la imagen ISO…"
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
@@ -303,7 +301,7 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
-msgstr "Descargando %1..."
+msgstr "Descargando %1…"
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
@@ -496,114 +494,3 @@ msgstr "Dispositivo desconocido"
 #, kde-format
 msgid "<unmounted>"
 msgstr "<sin montar>"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Ha fallado la escritura en el dispositivo:\n"
-#~ "%1"
-
-#~ msgid "Copyright (c) 2016 ROSA"
-#~ msgstr "Copyright © 2016 ROSA"
-
-#~ msgid "Memory allocation for %1 failed."
-#~ msgstr "La asignación de memoria para %1 ha fallado."
-
-#~ msgid "Select an ISO image file to write to a USB disk"
-#~ msgstr "Seleccione un archivo de imagen ISO para escribir en un disco USB"
-
-#~ msgid "Clear USB Disk"
-#~ msgstr "Borrar disco USB"
-
-#~ msgid "Write"
-#~ msgstr "Escribir"
-
-#~ msgid "Wipe USB Disk"
-#~ msgstr "Borrar disco USB"
-
-#~ msgid "(%1 MiB)"
-#~ msgstr "(%1 MiB)"
-
-#~ msgid "Invalid ISO"
-#~ msgstr "ISO no válida"
-
-#~ msgid "ISO is invalid:<p>%1"
-#~ msgstr "La ISO no es válida:<p>%1"
-
-#~ msgid "%1<p>Do you want to continue"
-#~ msgstr "%1<p>¿Desea continuar?"
-
-#~ msgid "Running ISO verification, please wait..."
-#~ msgstr "Ejecutando la verificación de la ISO. Espere, por favor..."
-
-#~ msgid "Verified as valid KDE neon ISO"
-#~ msgstr "Verificada como ISO válida de KDE Neon"
-
-#~ msgid "Invalid KDE neon image"
-#~ msgstr "Imagen de KDE Neon no válida"
-
-#~ msgid "Verified as valid Arch ISO"
-#~ msgstr "Verificada como ISO válida de Arch"
-
-#~ msgid "Invalid Arch image"
-#~ msgstr "Imagen de Arch no válida"
-
-#~ msgid "Verified as valid Netrunner ISO"
-#~ msgstr "Verificada como ISO válida de Netrunner"
-
-#~ msgid "Invalid Netrunner image"
-#~ msgstr "Imagen de Netrunner no válida"
-
-#~ msgid "Verified as valid Kubuntu ISO"
-#~ msgstr "Verificada como ISO válida de Kubuntu"
-
-#~ msgid "Invalid Kubuntu image"
-#~ msgstr "Imagen de Kubuntu no válida"
-
-#~ msgid "Image size: %1MiB (%2b)"
-#~ msgstr "Tamaño de la imagen: %1MiB (%2b)"
-
-#~ msgid "Disk size: %1MiB (%2b)"
-#~ msgstr "Tamaño del disco: %1MiB (%2b)"
-
-#~ msgid "All existing data on the selected device will be lost."
-#~ msgstr ""
-#~ "Se perderán todos los datos existentes en el dispositivo seleccionado."
-
-#~ msgid "Are you sure you wish to proceed?"
-#~ msgstr "¿Seguro que desea continuar?"
-
-#~ msgid "Clear Disk and Write Image"
-#~ msgstr "Borrar el disco y escribir la imagen"
-
-#~ msgid "Image:"
-#~ msgstr "Imagen:"
-
-#~ msgid "Open image file"
-#~ msgstr "Abrir archivo de imagen"
-
-#~ msgid "&USB Device:"
-#~ msgstr "Dispositivo &USB:"
-
-#~ msgid "Refresh the list"
-#~ msgstr "Actualizar la lista"
-
-#~ msgid "%v / %m MiB"
-#~ msgstr "%v / %m MiB"
-
-#~ msgid "MiB"
-#~ msgstr "MiB"
-
-#~ msgid "ISO File %1 does not exist"
-#~ msgstr "El archivo ISO %1 no existe"
-
-#~ msgctxt "%1 is the name of the distribution"
-#~ msgid "Filename does not match %1 ISO files"
-#~ msgstr "El nombre de archivo no coincide con los archivos ISO de %1"
-
-#~ msgid "Filename does not match Netrunner ISO files"
-#~ msgstr "El nombre de archivo no coincide con los archivos ISO de Netrunner"
-
-#~ msgid "Clear Disk"
-#~ msgstr "Borrar disco"
