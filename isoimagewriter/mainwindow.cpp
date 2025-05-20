@@ -141,10 +141,10 @@ QWidget* MainWindow::createFormWidget()
     isoImageLayout->addWidget(m_isoImageSizeLabel);
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
-    mainVBoxLayout->addWidget(new QLabel(i18n("Write this ISO image:")));
+    mainVBoxLayout->addWidget(new QLabel(i18n("ISO image:")));
     mainVBoxLayout->addLayout(isoImageLayout);
     mainVBoxLayout->addSpacing(5);
-    mainVBoxLayout->addWidget(new QLabel(i18n("To this USB drive:")));
+    mainVBoxLayout->addWidget(new QLabel(i18n("USB drive:")));
     mainVBoxLayout->addWidget(m_usbDriveComboBox);
     mainVBoxLayout->addSpacing(15);
     mainVBoxLayout->addStretch();
