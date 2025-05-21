@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-10-29 10:25+0100\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -269,13 +269,15 @@ msgid "Create"
 msgstr "Opret"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Skriv dette ISO-aftryk:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Aftryk:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Til dette USB-drev:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -483,6 +485,9 @@ msgstr "Ukendt enhed"
 msgid "<unmounted>"
 msgstr "<afmonteret>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Skriv dette ISO-aftryk:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -561,9 +566,6 @@ msgstr "<afmonteret>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Ryd disk og skriv aftryk"
-
-#~ msgid "Image:"
-#~ msgstr "Aftryk:"
 
 #~ msgid "Open image file"
 #~ msgstr "Åbn aftryksfil"

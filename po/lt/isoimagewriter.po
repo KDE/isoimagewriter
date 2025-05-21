@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-01-16 23:46+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -271,13 +271,15 @@ msgid "Create"
 msgstr "Sukurti"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Įrašyti šį ISO atvaizdį:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Atvaizdis:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Į šį USB atmintuką:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -486,6 +488,9 @@ msgstr "Nežinomas įrenginys"
 msgid "<unmounted>"
 msgstr "<neprijungtas>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Įrašyti šį ISO atvaizdį:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -564,9 +569,6 @@ msgstr "<neprijungtas>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Išvalyti diską ir rašyti atvaizdį"
-
-#~ msgid "Image:"
-#~ msgstr "Atvaizdis:"
 
 #~ msgid "Open image file"
 #~ msgstr "Atverti atvaizdžio failą"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-02-11 12:03-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -260,13 +260,15 @@ msgid "Create"
 msgstr "ਬਣਾਓ"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
+#, fuzzy, kde-format
+#| msgid "Write this ISO image:"
+msgid "ISO image:"
 msgstr "ਇਹ ISO ਈਮੇਜ਼ ਲਿਖੋ:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "ਇਸ USB ਡਰਾਇਵ ਉੱਤੇ:"
 
 #: isoimagewriter/mainwindow.cpp:165

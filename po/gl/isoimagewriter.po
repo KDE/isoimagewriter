@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2025-01-26 19:44+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -271,13 +271,15 @@ msgid "Create"
 msgstr "Crear"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Escribir esta imaxe ISO:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Imaxe:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Nesta unidade USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -486,6 +488,9 @@ msgstr "Dispositivo descoñecido"
 msgid "<unmounted>"
 msgstr "<sen montar>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Escribir esta imaxe ISO:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -564,9 +569,6 @@ msgstr "<sen montar>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Baleirar o disco e escribir a imaxe"
-
-#~ msgid "Image:"
-#~ msgstr "Imaxe:"
 
 #~ msgid "Open image file"
 #~ msgstr "Abrir un ficheiro de imaxe"

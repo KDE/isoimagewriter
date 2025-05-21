@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-04-21 11:24+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -267,13 +267,15 @@ msgid "Create"
 msgstr "Luo"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Kirjoita tämä ISO-kuva:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Levykuva:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Tälle USB-medialle:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -482,6 +484,9 @@ msgstr "Tuntematon laite"
 msgid "<unmounted>"
 msgstr "<irrotettu>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Kirjoita tämä ISO-kuva:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -560,9 +565,6 @@ msgstr "<irrotettu>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Tyhjennä levy ja kirjoita levykuva"
-
-#~ msgid "Image:"
-#~ msgstr "Levykuva:"
 
 #~ msgid "Open image file"
 #~ msgstr "Avaa levykuvatiedosto"

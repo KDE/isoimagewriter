@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2022-08-26 23:44+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: https://t.me/Localizations_KDE_Indonesia\n"
@@ -276,13 +276,15 @@ msgid "Create"
 msgstr "Ciptakan"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Tulis citra ISO ini:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Citra:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Ke drive USB ini:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -494,6 +496,9 @@ msgstr "Peranti Tak Diketahui"
 msgid "<unmounted>"
 msgstr "<terlepaskait>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Tulis citra ISO ini:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -572,9 +577,6 @@ msgstr "<terlepaskait>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Bersihkan Diska dan Tuliskan Citra"
-
-#~ msgid "Image:"
-#~ msgstr "Citra:"
 
 #~ msgid "Open image file"
 #~ msgstr "Buka file citra"

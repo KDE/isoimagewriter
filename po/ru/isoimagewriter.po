@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-02-04 19:49+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -273,13 +273,15 @@ msgid "Create"
 msgstr "Создать"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Записать этот образ ISO:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Файл образа:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "На этот накопитель USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -488,6 +490,9 @@ msgstr "Неизвестное устройство"
 msgid "<unmounted>"
 msgstr "<отключено>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Записать этот образ ISO:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -568,9 +573,6 @@ msgstr "<отключено>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Очистить устройство и записать файл образа"
-
-#~ msgid "Image:"
-#~ msgstr "Файл образа:"
 
 #~ msgid "Open image file"
 #~ msgstr "Выбрать файл образа"

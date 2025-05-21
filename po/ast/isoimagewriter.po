@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-03-16 15:25+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Asturian <alministradores@softastur.org>\n"
@@ -255,12 +255,12 @@ msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:144
 #, kde-format
-msgid "Write this ISO image:"
+msgid "ISO image:"
 msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
-msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:165

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-06-17 17:43+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -267,13 +267,15 @@ msgid "Create"
 msgstr "Skapa"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Skriv ISO-avbilden:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Avbild:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Till den här USB-minnesstickan:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -482,6 +484,9 @@ msgstr "Okänd enhet"
 msgid "<unmounted>"
 msgstr "<avmonterad>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Skriv ISO-avbilden:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -560,9 +565,6 @@ msgstr "<avmonterad>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Rensa disk och skriv avbild"
-
-#~ msgid "Image:"
-#~ msgstr "Avbild:"
 
 #~ msgid "Open image file"
 #~ msgstr "Öppna avbildsfil"

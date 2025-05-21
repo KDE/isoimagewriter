@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2024-09-19 15:06+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -275,13 +275,15 @@ msgid "Create"
 msgstr "Δημιουργία"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Εγγραφή αυτής της εικόνας ISO:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Εικόνα:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Σε αυτήν τη συσκευή USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -492,6 +494,9 @@ msgstr "Άγνωστη συσκευή"
 msgid "<unmounted>"
 msgstr "<unmounted>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Εγγραφή αυτής της εικόνας ISO:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -571,9 +576,6 @@ msgstr "<unmounted>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Καθαρισμός δίσκου και εγγραφή εικόνας"
-
-#~ msgid "Image:"
-#~ msgstr "Εικόνα:"
 
 #~ msgid "Open image file"
 #~ msgstr "Άνοιγμα αρχείου εικόνας"

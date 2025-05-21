@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2022-04-15 19:13+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -276,13 +276,15 @@ msgid "Create"
 msgstr "Vytvoriť"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Zapísať tento obraz ISO"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Obraz:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "Na túto jednotku USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -490,6 +492,9 @@ msgstr "Neznáme zariadenie"
 msgid "<unmounted>"
 msgstr "<unmounted>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Zapísať tento obraz ISO"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -568,9 +573,6 @@ msgstr "<unmounted>"
 
 #~ msgid "Clear Disk and Write Image"
 #~ msgstr "Vyčistiť disk a zapísať obraz"
-
-#~ msgid "Image:"
-#~ msgstr "Obraz:"
 
 #~ msgid "Open image file"
 #~ msgstr "Otvoriť súbor obrázka"

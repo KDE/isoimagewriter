@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-16 00:41+0000\n"
+"POT-Creation-Date: 2025-05-21 00:45+0000\n"
 "PO-Revision-Date: 2023-12-15 08:47+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -269,13 +269,15 @@ msgid "Create"
 msgstr "Crea"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, kde-format
-msgid "Write this ISO image:"
-msgstr "Scribe iste imagine ISO:"
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgid "ISO image:"
+msgstr "Imagine:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, kde-format
-msgid "To this USB drive:"
+#, fuzzy, kde-format
+#| msgid "To this USB drive:"
+msgid "USB drive:"
 msgstr "A iste drive USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
@@ -484,6 +486,9 @@ msgstr "Dispositivo incognite"
 msgid "<unmounted>"
 msgstr "<unmounted>"
 
+#~ msgid "Write this ISO image:"
+#~ msgstr "Scribe iste imagine ISO:"
+
 #~ msgid ""
 #~ "Failed to write to the device:\n"
 #~ "%1"
@@ -524,9 +529,6 @@ msgstr "<unmounted>"
 
 #~ msgid "Are you sure you wish to proceed?"
 #~ msgstr "Tu es secur que tu vole proceder?"
-
-#~ msgid "Image:"
-#~ msgstr "Imagine:"
 
 #~ msgid "Open image file"
 #~ msgstr "Aperi file de imagine"
