@@ -1,16 +1,16 @@
 # Translation of isoimagewriter.po to Catalan
-# Copyright (C) 2017-2023 This_file_is_part_of_KDE
+# Copyright (C) 2017-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2017, 2021, 2022, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2017, 2021, 2022, 2023, 2025.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2017, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:45+0000\n"
-"PO-Revision-Date: 2023-12-05 12:52+0100\n"
+"PO-Revision-Date: 2025-05-21 11:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -278,16 +278,14 @@ msgid "Create"
 msgstr "Crea"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Write this ISO image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "Escriu aquesta imatge ISO:"
+msgstr "Imatge ISO:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "A aquesta unitat USB:"
+msgstr "Unitat USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
