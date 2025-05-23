@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:45+0000\n"
-"PO-Revision-Date: 2025-01-02 18:44+0900\n"
+"PO-Revision-Date: 2025-05-22 13:55+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -266,16 +266,14 @@ msgid "Create"
 msgstr "建立"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Write this ISO image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "寫入此 ISO 映像檔："
+msgstr "ISO 映像檔："
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "到此 USB 磁碟機："
+msgstr "USB 磁碟機："
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format

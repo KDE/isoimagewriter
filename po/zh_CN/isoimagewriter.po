@@ -264,16 +264,14 @@ msgid "Create"
 msgstr "创建"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Write this ISO image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "写入此 ISO 镜像："
+msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "至此 USB 驱动器："
+msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
