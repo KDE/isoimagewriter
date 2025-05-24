@@ -266,12 +266,12 @@ msgstr "创建"
 #: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "ISO image:"
-msgstr ""
+msgstr "ISO 镜像："
 
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "USB drive:"
-msgstr ""
+msgstr "USB 驱动器："
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
