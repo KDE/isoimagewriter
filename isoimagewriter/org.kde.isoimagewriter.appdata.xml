@@ -61,7 +61,7 @@
   <summary xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</summary>
   <summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
   <summary xml:lang="da">Skriv et ISO-aftryk til en USB-disk</summary>
-  <summary xml:lang="de">ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
+  <summary xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
   <summary xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</summary>
   <summary xml:lang="en-GB">Write an ISO Image to a USB Disk</summary>
   <summary xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</summary>
@@ -108,7 +108,7 @@
     <p xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</p>
     <p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
     <p xml:lang="da">Skriv et ISO-aftryk til en USB-disk</p>
-    <p xml:lang="de">ISO-Abbild auf ein USB-Speichermedium schreiben</p>
+    <p xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</p>
     <p xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</p>
     <p xml:lang="en-GB">Write an ISO Image to a USB Disk</p>
     <p xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</p>
