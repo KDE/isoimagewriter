@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2021, 2022, 2023, 2024.
+# SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 # SPDX-FileCopyrightText: 2024 Kimmo Kujansuu <mrkujansuu@gmail.com>
 #
 msgid ""
@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-16 00:41+0000\n"
-"PO-Revision-Date: 2024-04-21 11:24+0300\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"PO-Revision-Date: 2025-05-28 11:00+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Tommi Nieminen; Kimmo Kujansuu"
+msgstr "Tommi Nieminen, Kimmo Kujansuu"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "translator@legisign.org; mrkujansuu@gmail.com"
+msgstr "translator@legisign.org, mrkujansuu@gmail.com"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
@@ -107,14 +108,16 @@ msgstr "Toiminto suoritettiin loppuun virheittä."
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid "Now you need to format your device."
-msgstr "Sinun on alustettava media ensin."
+msgstr "Tietoväline on ensin alustettava."
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
-msgstr "Voit tallentaa medialle myöhemmin, painamalla ”Pyyhi USB-media”."
+msgstr ""
+"Jotta tietovälineelle voi taas tallentaa tietoa, painama ”Pyyhi USB-"
+"tietoväline."
 
 #: isoimagewriter/isoverifier.cpp:60
 #, kde-format
@@ -215,7 +218,7 @@ msgstr "ISO-kuvan kirjoittaja"
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
-msgstr "Kirjoita ISO-kuva USB-medialle"
+msgstr "Kirjoita ISO-kuva USB-tietovälineelle"
 
 #: isoimagewriter/mainapplication.cpp:31
 #, kde-format
@@ -254,7 +257,7 @@ msgstr "KDE ISO-kuvan kirjoittaja"
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr "Helppo tapa luoda käynnistettävä USB-media."
+msgstr "Helppo tapa luoda käynnistettävä USB-tietoväline."
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
@@ -274,7 +277,7 @@ msgstr "Kirjoita tämä ISO-kuva:"
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
-msgstr "Tälle USB-medialle:"
+msgstr "Tälle USB-tietovälineelle:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
@@ -283,7 +286,7 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Kaikki USB-medialla oleva tieto korvataan.\n"
+"Kaikki USB-tietovälineellä oleva tieto korvataan.\n"
 "\n"
 "Haluatko jatkaa?"
 
@@ -317,9 +320,9 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
-"Kirjoitetaan USB-mediaa.\n"
+"Kirjoitetaan USB-tietovälinettä.\n"
 "\n"
-"Tämä voi kestää jonkin aikaa ISO-kuvasta ja nopeudesta riippuen."
+"Tämän kesto vaihtelee ISO-kuvan ja siirtonopeuden mukaan."
 
 #: isoimagewriter/mainwindow.cpp:223
 #, kde-format
@@ -329,7 +332,7 @@ msgstr "Peru"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "Media valmiina käyttöön!"
+msgstr "Tietoväline on valmis käyttöön!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -354,7 +357,7 @@ msgstr "Tarkistetaan ISO-kuvaa"
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr "Kytke USB-media koneeseen"
+msgstr "Liitä USB-tietoväline"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
@@ -417,10 +420,10 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
-"Levykuva on valittua mediaa suurempi!\n"
+"Levykuva on valittua tietovälinettä suurempi!\n"
 "\n"
 "Levykuvan koko: %1 (%2 t)\n"
-"Median koko: %3 (%4 t)"
+"Tietovälineen koko: %3 (%4 t)"
 
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
