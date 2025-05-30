@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the isoimagewriter package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:45+0000\n"
-"PO-Revision-Date: 2024-05-28 17:25+0300\n"
+"PO-Revision-Date: 2025-05-26 17:50+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -273,16 +273,14 @@ msgid "Create"
 msgstr "Izveidot"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Write this ISO image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "Rakstīt šo ISO attēlu:"
+msgstr "ISO attēls:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "Šajā USB zibatmiņā:"
+msgstr "USB disks:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
