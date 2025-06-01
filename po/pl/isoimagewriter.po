@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
+# SPDX-FileCopyrightText: 2017, 2019, 2020, 2021, 2022, 2023, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
-# SPDX-FileCopyrightText: 2017, 2019, 2020, 2021, 2022, 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:45+0000\n"
-"PO-Revision-Date: 2023-12-16 10:46+0100\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
+"PO-Revision-Date: 2025-05-31 09:14+0200\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -271,16 +272,14 @@ msgid "Create"
 msgstr "Utwórz"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "Obraz:"
+msgstr "Obraz ISO:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "Na tę pamięć USB:"
+msgstr "Napęd USB:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
