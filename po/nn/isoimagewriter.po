@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:45+0000\n"
-"PO-Revision-Date: 2024-07-21 14:21+0200\n"
+"PO-Revision-Date: 2025-06-01 14:47+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 25.07.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -269,16 +269,14 @@ msgid "Create"
 msgstr "Opprett"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Write this ISO image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "Skriv denne ISO-diskbiletfila:"
+msgstr "ISO-diskbiletfil:"
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "Til denne USB-minnepinnen:"
+msgstr "USB-minnepinne:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
