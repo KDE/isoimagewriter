@@ -4,21 +4,22 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2017, 2022, 2023.
 # SPDX-FileCopyrightText: 2024 Flori G <Renner03@protonmail.com>
 # SPDX-FileCopyrightText: 2025 Frank Steinmetzger <dev+kde@felsenfleischer.de>
+# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n@prly.mozmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-16 00:41+0000\n"
-"PO-Revision-Date: 2025-05-13 00:07+0200\n"
-"Last-Translator: Frank Steinmetzger <dev+kde@felsenfleischer.de>\n"
+"PO-Revision-Date: 2025-05-25 17:30+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -33,7 +34,7 @@ msgstr "kde-i18n-de@kde.org"
 #: isoimagewriter/common.cpp:41
 #, kde-format
 msgid "Error code: %1"
-msgstr "Fehlernummer: %1"
+msgstr "Fehlercode: %1"
 
 #: isoimagewriter/imagewriter.cpp:57
 #, kde-format
@@ -64,7 +65,7 @@ msgstr "Fehler beim Öffnen des Laufwerks %1"
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr "Aushängen des Laufwerks %1 fehlgeschlagen"
+msgstr "Fehler beim Aushängen des Laufwerks %1"
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -72,7 +73,7 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
-"Aushängen des Datenträgers %1 fehlgeschlagen\n"
+"Fehler beim Aushängen des Datenträgers %1\n"
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:154
@@ -90,8 +91,7 @@ msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
 "Aborting."
 msgstr ""
-"Der letzte Block ist nicht vollständig geschrieben worden (%1 von %2 "
-"Bytes).\n"
+"Der letzte Block wurde nicht vollständig geschrieben (%1 von %2 Bytes)!\n"
 "Abbruch."
 
 #: isoimagewriter/imagewriter.cpp:219
@@ -100,13 +100,13 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"Das Lesen der Abbilddatei ist fehlgeschlagen:\n"
+"Fehler beim Lesen der Abbilddatei:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid "The operation completed successfully."
-msgstr "Der Vorgang wurde erfolgreich beendet."
+msgstr "Der Vorgang wurde erfolgreich abgeschlossen."
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
@@ -176,13 +176,13 @@ msgstr ""
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
-"Die Datei SHA256SUMS kann nicht geöffnet werden. Bitte laden Sie sie in "
-"denselben Ordner herunter."
+"Die Datei SHA256SUMS kann nicht geöffnet werden. Bitte laden Sie sie in den "
+"gleichen Ordner herunter."
 
 #: isoimagewriter/isoverifier.cpp:197
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr "Die Prüfsumme wurde in der Datei SHA256SUMS nicht gefunden"
+msgstr "Die Prüfsumme kann in der SHA256SUMS-Datei nicht gefunden werden"
 
 #: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
 #, kde-format
@@ -198,7 +198,7 @@ msgstr "Die Prüfsumme kann nicht ermittelt werden"
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
-"Die Prüfsumme der ISO-Datei passt nicht zum Wert in der Datei SHA256SUMS"
+"Die Prüfsumme der ISO-Datei passt nicht zum Wert in der SHA256SUMS-Datei"
 
 #: isoimagewriter/isoverifier.cpp:222
 #, kde-format
@@ -206,8 +206,8 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
-"Die Datei SHA256SUMS.gpg wurde nicht gefunden. Bitte laden Sie die PGP-"
-"Signaturdatei herunter und speichern Sie sie im selben Ordner."
+"Die Datei „SHA256SUMS.gpg“ wurde nicht gefunden. Bitte laden Sie die PGP-"
+"Signaturdatei herunter und speichern Sie sie im gleichen Ordner."
 
 #: isoimagewriter/isoverifier.cpp:271
 #, kde-format
@@ -234,9 +234,7 @@ msgstr "Ein ISO-Abbild auf ein USB-Speichermedium schreiben"
 msgid ""
 "Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
 "<jr@jriddell.org>"
-msgstr ""
-"Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell "
-"<jr@jriddell.org>"
+msgstr "© 2016 ROSA, © 2022 Jonathan Esk-Riddell <jr@jriddell.org>"
 
 #: isoimagewriter/mainapplication.cpp:33
 #, kde-format
@@ -271,7 +269,7 @@ msgstr "Schnell und einfach einen bootfähigen USB-Stick erstellen."
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr "Pfad zum ISO-Abbild …"
+msgstr "Pfad zum ISO-Abbild …"
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
@@ -281,12 +279,12 @@ msgstr "Erstellen"
 #: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "Write this ISO image:"
-msgstr "Dieses ISO-Abbild:"
+msgstr "Dieses ISO-Abbild schreiben:"
 
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "To this USB drive:"
-msgstr "Auf dieses USB-Gerät schreiben:"
+msgstr "Auf dieses USB-Gerät:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
@@ -295,14 +293,14 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Der Inhalt des USB-Geräts wird überschrieben.\n"
+"Der gesamte Inhalt des USB-Geräts wird überschrieben.\n"
 "\n"
 "Möchten Sie fortfahren?"
 
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
 msgid "Downloading %1..."
-msgstr "%1 wird heruntergeladen …"
+msgstr "„%1“ wird heruntergeladen …"
 
 #: isoimagewriter/mainwindow.cpp:184 isoimagewriter/mainwindow.cpp:222
 #, kde-format
@@ -341,7 +339,7 @@ msgstr "Abbrechen"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "Ihr Live-USB-Stick ist nun fertig und einsatzbereit."
+msgstr "Ihr Live-USB-Stick ist nun fertig und einsatzbereit!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -356,7 +354,7 @@ msgstr "Schließen"
 #: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr "Das Öffnen der Abbilddatei ist fehlgeschlagen:"
+msgstr "Fehler beim Öffnen der Abbilddatei:"
 
 #: isoimagewriter/mainwindow.cpp:289
 #, kde-format
@@ -411,10 +409,10 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
-"Der ausgewählte Datenträger hat eine unbekannte Größe, prüfen Sie also vor "
-"dem Schreiben, dass das Abbild auf den Datenträger passt.\n"
+"Der ausgewählte Datenträger hat eine unbekannte Größe, bitte prüfen Sie also "
+"vor dem Schreiben, ob das Abbild auf den Datenträger passt.\n"
 "\n"
-"Abbildgröße: %1 (%2 B)"
+"Abbildgröße: %1 (%2 B)"
 
 #: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
@@ -429,10 +427,10 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
-"Das Abbild ist größer als Ihr ausgewähltes Laufwerk.\n"
+"Das Abbild ist größer als Ihr ausgewähltes Laufwerk!\n"
 "\n"
-"Abbildgröße: %1 (%2 b)\n"
-"Laufwerksgröße: %3 (%4 b)"
+"Abbildgröße: %1 (%2 B)\n"
+"Laufwerksgröße: %3 (%4 B)"
 
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
@@ -468,7 +466,7 @@ msgstr "CoCreateInstance(WbemAdministrativeLocator) ist fehlgeschlagen."
 #: isoimagewriter/platform_win.cpp:95
 #, kde-format
 msgid "ConnectServer failed."
-msgstr "Die Verbindung zum Server ist fehlgeschlagen."
+msgstr "ConnectServer ist fehlgeschlagen."
 
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
