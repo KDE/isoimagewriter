@@ -414,7 +414,7 @@ msgstr ""
 "El disc seleccionat és de mida desconeguda. Comproveu que la imatge s'hi "
 "ajuste abans d'escriure.\n"
 "\n"
-"Mida de la imatge: %1 (%2 b)"
+"Mida de la imatge: %1 (%2b)"
 
 #: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
@@ -431,7 +431,7 @@ msgid ""
 msgstr ""
 "La imatge és més gran que el dispositiu seleccionat!\n"
 "\n"
-"Mida de la imatge: %1 (%2 b)\n"
+"Mida de la imatge: %1 (%2b)\n"
 "Mida del disc: %3 (%4 b)"
 
 #: isoimagewriter/mainwindow.cpp:629
