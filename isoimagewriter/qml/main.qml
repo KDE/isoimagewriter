@@ -4,7 +4,7 @@ import org.kde.kirigami 2.19 as Kirigami
 import QtQuick.Dialogs
 import QtQuick.Layouts 1.15
 
-import org.kde.example 1.0
+import org.kde.isoimagewriter.about 1.0
 
 Kirigami.ApplicationWindow {
     id: root
