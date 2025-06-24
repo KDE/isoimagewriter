@@ -1,4 +1,4 @@
-/*
+        /*
     SPDX-FileCopyrightText: 2016 ROSA
     SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -8,10 +8,18 @@
 #include <QLibraryInfo>
 #include <QIcon>
 #include <QLoggingCategory>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQuickStyle>
+#include <QtQml>
+#include <QUrl>
+
 
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KCrash>
+#include <KLocalizedContext>
+#include <KLocalizedString>
 
 #include "common.h"
 #include "mainapplication.h"
@@ -31,8 +39,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setSetuidAllowed(true);
 #endif
 
-    MainApplication a(argc, argv);
+    // MainApplication a(argc, argv);
+    QGuiApplication app(argc, argv);
     KCrash::initialize();
+    // KCrash::initialize();
 
     if (!ensureElevated())
         return 1;
@@ -47,16 +57,82 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    MainWindow w;
-    w.show();
+    // MainWindow w;
+    // w.show();
 
-    UsbDeviceMonitor deviceMonitor;
-    deviceMonitor.startMonitoring();
+    // UsbDeviceMonitor deviceMonitor;
+    // deviceMonitor.startMonitoring();
 
-    // When device changing event comes, refresh the list of USB flash disks
-    // Using QueuedConnection to avoid delays in processing the message
-    QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w,
-                     &MainWindow::scheduleEnumFlashDevices, Qt::QueuedConnection);
+    // // When device changing event comes, refresh the list of USB flash disks
+    // // Using QueuedConnection to avoid delays in processing the message
+    // QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w,
+    //                  &MainWindow::scheduleEnumFlashDevices, Qt::QueuedConnection);
 
-    return a.exec();
+    // return a.exec();
+
+    KLocalizedString::setApplicationDomain("helloworld");
+    QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
+    QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
+    QCoreApplication::setApplicationName(QStringLiteral("Hello World"));
+
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+    }
+
+
+    KAboutData aboutData(
+        QStringLiteral("IsoImage Writer"),
+        i18nc("@title", "IsoImage Writer"),
+        QStringLiteral("1.0"),
+        i18n("Write an ISO Image to a USB Disk"),
+        KAboutLicense::GPL,
+        i18n("(c) 2021"));
+
+    aboutData.addAuthor(
+        i18nc("@info:credit", "@Holychicken"),
+        i18nc("@info:credit", "Author Role"),
+
+        //TODO : update the school address
+        QStringLiteral("assa297@sfu.ca"),
+        QStringLiteral("https://tcombinator.dev"));
+
+    KAboutData::setApplicationData(aboutData);
+
+    qmlRegisterSingletonType(
+        "org.kde.isoimagewriter.about", // How the import statement should look like
+        1, 0, // Major and minor versions of the import
+        "About", // The name of the QML object
+        [](QQmlEngine* engine, QJSEngine *) -> QJSValue {
+            return engine->toScriptValue(KAboutData::applicationData());
+        }
+    );
+
+    QQmlApplicationEngine engine;
+
+    engine.addImportPath("qrc:/");
+    engine.addImportPath("qrc:/qml");
+
+    engine.rootContext()->setContextProperty("mainApp", &app);
+
+    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl) {
+            qWarning() << "Failed to create QML object for" << objUrl;
+            QCoreApplication::exit(-1);
+        }
+    }, Qt::QueuedConnection);
+
+    engine.load(url);
+
+    // if (engine.rootObjects().isEmpty()) {
+    //     qWarning() << "Failed to load QML file:" << url;
+    //     // const auto errors = engine.errors();
+    //     // for (const auto &error : errors) {
+    //     //     qWarning() << "QML Error:" << error.toString();
+    //     // }
+    //     return -1;
+    // }
+    return app.exec();  // Start the Qt event loop
 }

@@ -13,7 +13,8 @@ set(KF6_MIN_VERSION "6.0.0")
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(KDE_COMPILERSETTINGS_LEVEL "5.82.0")
 
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+# set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "/home/churchschicken/kde/usr/share/ECM/modules")
+# set(ECM_DIR "/home/churchschicken/kde/usr/share/ECM/cmake")
 
 include(KDEInstallDirs)
 include(KDEClangFormat)
@@ -23,8 +24,10 @@ include(ECMOptionalAddSubdirectory)
 include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 include(ECMDeprecationSettings)
+include(ECMFindQmlModule)
+include(ECMQmlModule)
 
-find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus Test)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Network Widgets DBus Test Quick Qml Gui Core QuickControls2)
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
@@ -34,7 +37,11 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Crash
     Solid
+    Kirigami
+    QQC2DesktopStyle
 )
+
+ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
 
 ecm_set_disabled_deprecation_versions(QT 6.7
      KF 6.3.0
