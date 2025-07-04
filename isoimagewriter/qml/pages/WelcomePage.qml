@@ -112,7 +112,7 @@ Kirigami.Page {
                 // Download button
                 Button {
                     height: 70
-                    text: "Download from official mirrors"
+                    text: "Download automatically"
                     icon.name: "download"
                     
                     onClicked: pageStack.push("qrc:/qml/pages/DownloadPage.qml")
