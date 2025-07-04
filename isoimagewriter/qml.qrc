@@ -9,13 +9,10 @@
         <file>qml/pages/AboutPage.qml</file>
 
         <!-- Components -->
-        <file>qml/components/WelcomeHeader.qml</file>
         <file>qml/components/WelcomeActions.qml</file>
-        <file>qml/components/ActionCard.qml</file>
-        <file>qml/components/FileSelectionCard.qml</file>
-        <file>qml/components/UsbDriveCard.qml</file>
-        <file>qml/components/WarningCard.qml</file>
         <file>qml/components/SearchField.qml</file>
-        <file>qml/components/DistributionItem.qml</file>
+        
+        <!-- Images -->
+        <file>qml/images/org.kde.isoimagewriter.svg</file>
     </qresource>
 </RCC>

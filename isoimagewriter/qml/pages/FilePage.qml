@@ -1,15 +1,26 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import org.kde.kirigami 2.19 as Kirigami
+import QtQuick
+import QtQuick.Controls
+import org.kde.kirigami as Kirigami
 import QtQuick.Dialogs
-import QtQuick.Layouts 1.15
-import "../components"
+import QtQuick.Layouts
 
 Kirigami.Page {
     id: filePage
-    title: "Select Files"
-
+    title: "Write ISO Image"
     property string preselectedFile: ""
+
+    header: ToolBar {
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: Kirigami.Units.smallSpacing
+            
+            Button {
+                text: "Back"
+                icon.name: "go-previous"
+                onClicked: pageStack.pop()
+            }
+        }
+    }
 
     FileDialog {
         id: fileDialog
@@ -26,57 +37,63 @@ Kirigami.Page {
         }
     }
 
-    ColumnLayout {
-        anchors.centerIn: parent
-        spacing: Kirigami.Units.gridUnit * 2
-        width: Math.min(600, parent.width - Kirigami.Units.gridUnit * 4)
-
-        // File selection card
-        FileSelectionCard {
-            id: fileSelectionCard
-            Layout.fillWidth: true
-            title: "ISO Image"
-            fieldText: isoField.text
-            onBrowseClicked: fileDialog.open()
-
+    Kirigami.FormLayout {
+        anchors {
+            fill: parent
+            margins: Kirigami.Units.largeSpacing
+        }
+        
+        // ISO Image Selection
+        RowLayout {
+            Kirigami.FormData.label: "Write this ISO image:"
+            spacing: Kirigami.Units.smallSpacing
+            
             TextField {
                 id: isoField
-                placeholderText: "No file selected"
-                readOnly: true
-                background: Rectangle {
-                    color: "transparent"
-                    border.width: 0
-                }
+                Layout.fillWidth: true
+                placeholderText: "Path to ISO image..."
+                readOnly: false
+            }
+            
+            Button {
+                icon.name: "folder-open"
+                text: "Browse"
+                onClicked: fileDialog.open()
             }
         }
 
-        // USB drive card
-        UsbDriveCard {
+        // USB Drive Selection
+        ComboBox {
+            id: usbDriveCombo
+            Kirigami.FormData.label: "To this USB drive:"
             Layout.fillWidth: true
+            model: ["Please plug in a USB drive"]
+            currentIndex: 0
+            enabled: false
         }
 
-        // Warning message
-        WarningCard {
+        // Buttons row
+        Item {
+            Kirigami.FormData.isSection: true
             Layout.fillWidth: true
-            message: "All data on the USB drive will be permanently erased"
-        }
-    }
-
-    RowLayout {
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: Kirigami.Units.gridUnit * 2
-        spacing: Kirigami.Units.gridUnit
-
-        Button {
-            text: "Back"
-            onClicked: pageStack.pop()
-        }
-
-        Button {
-            text: "Write to USB"
-            highlighted: true
-            enabled: isoField.text.length > 0
+            height: 50  // Fixed height for the button row
+            
+            
+            Button {
+                id: createButton
+                anchors {
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+                text: "Create"
+                highlighted: true
+                enabled: isoField.text.length > 0 && usbDriveCombo.currentIndex > 0
+                
+                onClicked: {
+                    // Handle creation logic here
+                    console.log("Creating ISO on USB drive...")
+                }
+            }
         }
     }
 }

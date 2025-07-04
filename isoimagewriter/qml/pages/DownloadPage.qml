@@ -1,104 +1,131 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import org.kde.kirigami 2.19 as Kirigami
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import org.kde.kirigami as Kirigami
+import QtQuick.Layouts
 import "../components"
 
 Kirigami.Page {
     id: downloadPage
     title: "Download OS"
-
+    
     property var distributions: [
-        {
-            name: "Ubuntu",
-            desc: "Popular, user-friendly Linux distribution"
-        },
-        {
-            name: "Kubuntu",
-            desc: "Ubuntu with KDE Plasma desktop"
-        },
-        {
-            name: "Fedora",
-            desc: "Cutting-edge features and technologies"
-        },
-        {
-            name: "openSUSE",
-            desc: "Stable and reliable Linux distribution"
-        },
-        {
-            name: "Debian",
-            desc: "Universal operating system"
-        },
-        {
-            name: "Linux Mint",
-            desc: "Elegant and easy to use"
-        },
-        {
-            name: "Elementary OS",
-            desc: "Fast, open, and privacy-respecting"
-        },
-        {
-            name: "Pop!_OS",
-            desc: "Optimized for developers and creators"
-        },
-        {
-            name: "Manjaro",
-            desc: "User-friendly Arch Linux derivative"
-        }
+        { name: "Ubuntu" },
+        { name: "Kubuntu" },
+        { name: "Fedora" },
+        { name: "openSUSE" },
+        { name: "Debian" },
+        { name: "Linux Mint" },
+        { name: "Elementary OS" },
+        { name: "Pop!_OS" },
+        { name: "Manjaro" }
     ]
-
-    ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: Kirigami.Units.gridUnit * 2
-        spacing: Kirigami.Units.gridUnit * 2
-
-        // Search field
-        SearchField {
-            id: searchField
-            Layout.fillWidth: true
-        }
-
-        // OS list
-        ScrollView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            ListView {
-                model: {
-                    if (searchField.searchText.length === 0)
-                        return distributions;
-                    return distributions.filter(item => item.name.toLowerCase().includes(searchField.searchText.toLowerCase()));
-                }
-
-                spacing: Kirigami.Units.gridUnit
-
-                delegate: DistributionItem {
-                    width: ListView.view.width
-                    distributionData: modelData
-
-                    onClicked: {
-                        searchField.searchText = modelData.name;
-                    }
+    
+    property var filteredDistributions: distributions.filter(function(dist) {
+        return searchField.text.length === 0 || 
+               dist.name.toLowerCase().includes(searchField.text.toLowerCase())
+    })
+    
+    property string selectedDistribution: ""
+    
+    header: ToolBar {
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: Kirigami.Units.smallSpacing
+            
+            Button {
+                text: "Back"
+                icon.name: "go-previous"
+                onClicked: pageStack.pop()
+            }
+            
+            Kirigami.SearchField {
+                id: searchField
+                Layout.fillWidth: true
+                placeholderText: "Search for an operating system..."
+                onTextChanged: {
+                    console.log("Search query:", text)
+                    // Trigger property binding update
+                    downloadPage.filteredDistributions = distributions.filter(function(dist) {
+                        return text.length === 0 || 
+                               dist.name.toLowerCase().includes(text.toLowerCase())
+                    })
                 }
             }
         }
     }
-
-    RowLayout {
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: Kirigami.Units.gridUnit * 2
+    
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: Kirigami.Units.gridUnit
         spacing: Kirigami.Units.gridUnit
-
-        Button {
-            text: "Back"
-            onClicked: pageStack.pop()
+        
+        // Selected distribution info
+        Kirigami.InlineMessage {
+            id: selectionMessage
+            Layout.fillWidth: true
+            visible: selectedDistribution.length > 0
+            type: Kirigami.MessageType.Information
+            text: "Selected: " + selectedDistribution
         }
-
-        Button {
-            text: "Download"
-            highlighted: true
-            enabled: searchField.searchText.length > 0
+        
+        // OS list
+        ScrollView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            
+            ListView {
+                model: filteredDistributions
+                spacing: Kirigami.Units.smallSpacing
+                
+                delegate: Kirigami.SwipeListItem {
+                    id: listItem
+                    
+                    highlighted: selectedDistribution === modelData.name
+                    
+                    contentItem: RowLayout {
+                        spacing: Kirigami.Units.gridUnit
+                        
+                        Kirigami.Icon {
+                            source: "application-x-cd-image"
+                            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                        }
+                        
+                        Label {
+                            text: modelData.name
+                            font.bold: true
+                            Layout.fillWidth: true
+                        }
+                        
+                        Button {
+                            text: selectedDistribution === modelData.name ? "Selected" : "Select"
+                            icon.name: selectedDistribution === modelData.name ? "checkbox" : "list-add"
+                            enabled: selectedDistribution !== modelData.name
+                            onClicked: {
+                                selectedDistribution = modelData.name
+                                searchField.text = modelData.name
+                            }
+                        }
+                    }
+                    
+                    onClicked: {
+                        selectedDistribution = modelData.name
+                        searchField.text = modelData.name
+                    }
+                    
+                }
+                
+                // Empty state
+                Kirigami.PlaceholderMessage {
+                    anchors.centerIn: parent
+                    visible: filteredDistributions.length === 0
+                    text: "No distributions found"
+                    explanation: "Try adjusting your search terms"
+                    icon.name: "search"
+                }
+            }
         }
     }
+    
+    // Footer with download button
 }
