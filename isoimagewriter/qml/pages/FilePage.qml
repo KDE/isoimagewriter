@@ -6,25 +6,12 @@ import QtQuick.Layouts
 
 Kirigami.Page {
     id: filePage
-    title: "Write ISO Image"
+    title: i18n("Write ISO Image")
     property string preselectedFile: ""
-
-    header: ToolBar {
-        RowLayout {
-            anchors.fill: parent
-            anchors.margins: Kirigami.Units.smallSpacing
-            
-            Button {
-                text: "Back"
-                icon.name: "go-previous"
-                onClicked: pageStack.pop()
-            }
-        }
-    }
 
     FileDialog {
         id: fileDialog
-        title: "Select ISO image"
+        title: i18n("Select ISO image")
         nameFilters: ["ISO files (*.iso)", "All files (*)"]
         onAccepted: {
             isoField.text = fileDialog.fileUrl.toString().replace("file://", "");
@@ -45,19 +32,19 @@ Kirigami.Page {
         
         // ISO Image Selection
         RowLayout {
-            Kirigami.FormData.label: "Write this ISO image:"
+            Kirigami.FormData.label: i18n("Write this ISO image:")
             spacing: Kirigami.Units.smallSpacing
             
             TextField {
                 id: isoField
                 Layout.fillWidth: true
-                placeholderText: "Path to ISO image..."
+                placeholderText: i18n("Path to ISO image...")
                 readOnly: false
             }
             
             Button {
                 icon.name: "folder-open"
-                text: "Browse"
+                text: i18n("Browse")
                 onClicked: fileDialog.open()
             }
         }
@@ -65,9 +52,9 @@ Kirigami.Page {
         // USB Drive Selection
         ComboBox {
             id: usbDriveCombo
-            Kirigami.FormData.label: "To this USB drive:"
+            Kirigami.FormData.label: i18n("To this USB drive:")
             Layout.fillWidth: true
-            model: ["Please plug in a USB drive"]
+            model: [i18n("Please plug in a USB drive")]
             currentIndex: 0
             enabled: false
         }
@@ -85,7 +72,7 @@ Kirigami.Page {
                     right: parent.right
                     bottom: parent.bottom
                 }
-                text: "Create"
+                text: i18n("Create")
                 highlighted: true
                 enabled: isoField.text.length > 0 && usbDriveCombo.currentIndex > 0
                 

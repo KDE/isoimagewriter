@@ -2,11 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import QtQuick.Layouts
-import "../components"
 
 Kirigami.Page {
     id: downloadPage
-    title: "Download OS"
+    title: i18n("Download OS")
     
     property var distributions: [
         { name: "Ubuntu" },
@@ -31,17 +30,11 @@ Kirigami.Page {
         RowLayout {
             anchors.fill: parent
             anchors.margins: Kirigami.Units.smallSpacing
-            
-            Button {
-                text: "Back"
-                icon.name: "go-previous"
-                onClicked: pageStack.pop()
-            }
-            
+
             Kirigami.SearchField {
                 id: searchField
                 Layout.fillWidth: true
-                placeholderText: "Search for an operating system..."
+                placeholderText: i18n("Search for an operating system…")
                 onTextChanged: {
                     console.log("Search query:", text)
                     // Trigger property binding update
@@ -65,7 +58,7 @@ Kirigami.Page {
             Layout.fillWidth: true
             visible: selectedDistribution.length > 0
             type: Kirigami.MessageType.Information
-            text: "Selected: " + selectedDistribution
+            text: i18n("Selected: %1", selectedDistribution)
         }
         
         // OS list
@@ -98,7 +91,7 @@ Kirigami.Page {
                         }
                         
                         Button {
-                            text: selectedDistribution === modelData.name ? "Selected" : "Select"
+                            text: selectedDistribution === modelData.name ? i18n("Selected") : i18n("Select")
                             icon.name: selectedDistribution === modelData.name ? "checkbox" : "list-add"
                             enabled: selectedDistribution !== modelData.name
                             onClicked: {
@@ -119,8 +112,8 @@ Kirigami.Page {
                 Kirigami.PlaceholderMessage {
                     anchors.centerIn: parent
                     visible: filteredDistributions.length === 0
-                    text: "No distributions found"
-                    explanation: "Try adjusting your search terms"
+                    text: i18n("No distributions found")
+                    explanation: i18n("Try adjusting your search terms")
                     icon.name: "search"
                 }
             }

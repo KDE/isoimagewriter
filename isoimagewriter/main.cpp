@@ -88,6 +88,7 @@ int main(int argc, char *argv[])
         KAboutLicense::GPL,
         i18n("(c) 2021"));
 
+
     aboutData.addAuthor(
         i18nc("@info:credit", "@Holychicken"),
         i18nc("@info:credit", "Author Role"),
@@ -113,6 +114,7 @@ int main(int argc, char *argv[])
     engine.addImportPath("qrc:/qml");
 
     engine.rootContext()->setContextProperty("mainApp", &app);
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
 

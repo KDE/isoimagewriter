@@ -2,7 +2,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import org.kde.kirigami 2.20 as Kirigami
 import QtQuick.Layouts
-import "../components"
 
 Kirigami.Page {
     id: welcomePage
@@ -12,6 +11,7 @@ Kirigami.Page {
     property bool hasValidFile: false
     property string selectedFile: ""
     readonly property bool networkConnected:false
+
 
     DropArea {
         id: dropArea
@@ -70,7 +70,7 @@ Kirigami.Page {
 
                 Text {
                     width: parent.width
-                    text: welcomePage.isDragActive ? "Drop your ISO here" : "KDE ISO Image Writer"
+                    text: welcomePage.isDragActive ? i18n("Drop your ISO here") : i18n("KDE ISO Image Writer")
                     color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
                     wrapMode: Text.WordWrap
                     font.pixelSize: 24
@@ -81,7 +81,7 @@ Kirigami.Page {
                     width: parent.width
                     text: welcomePage.hasValidFile
                           ? welcomePage.selectedFile.split('/').pop()
-                          : "A quick and simple way to create bootable USB drives"
+                          : i18n("A quick and simple way to create bootable USB drives")
                     color: welcomePage.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
                     wrapMode: Text.WordWrap
                     opacity: welcomePage.isDragActive ? 0.7 : 1.0
@@ -96,7 +96,7 @@ Kirigami.Page {
                 
                 Button {
                     height: 70
-                    text: welcomePage.hasValidFile ? "Use selected file" : "Select ISO from computer"
+                    text: welcomePage.hasValidFile ? i18n("Use selected file") : i18n("Select ISO from computer")
                     icon.name: "document-open"
                     
                     onClicked: {
@@ -112,7 +112,7 @@ Kirigami.Page {
                 // Download button
                 Button {
                     height: 70
-                    text: "Download automatically"
+                    text: i18n("Download automatically")
                     icon.name: "download"
                     
                     onClicked: pageStack.push("qrc:/qml/pages/DownloadPage.qml")
@@ -124,8 +124,8 @@ Kirigami.Page {
     Button {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        text: "About"
-        flat: true
+        text: i18n("About")
+        icon.name: "help-about"
         onClicked: pageStack.push("qrc:/qml/pages/AboutPage.qml")
     }
 }

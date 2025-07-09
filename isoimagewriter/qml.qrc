@@ -7,10 +7,6 @@
         <file>qml/pages/FilePage.qml</file>
         <file>qml/pages/DownloadPage.qml</file>
         <file>qml/pages/AboutPage.qml</file>
-
-        <!-- Components -->
-        <file>qml/components/WelcomeActions.qml</file>
-        <file>qml/components/SearchField.qml</file>
         
         <!-- Images -->
         <file>qml/images/org.kde.isoimagewriter.svg</file>
