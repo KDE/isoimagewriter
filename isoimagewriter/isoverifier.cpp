@@ -26,10 +26,22 @@
 
 #include <KLocalizedString>
 
-IsoVerifier::IsoVerifier(const QString &filePath)
-    : m_filePath(filePath),
+IsoVerifier::IsoVerifier(QObject *parent) 
+    : QObject(parent), 
+      m_filePath(""),
       m_error(),
-      m_verificationMean(VerificationMean::None)
+      m_verificationMean(VerificationMean::None),
+      m_isIsoValid(VerifyResult::Failed)
+{
+    qRegisterMetaType<VerifyResult>();
+}
+
+IsoVerifier::IsoVerifier(const QString &filePath, QObject *parent) 
+    : QObject(parent),
+      m_filePath(filePath),
+      m_error(),
+      m_verificationMean(VerificationMean::None),
+      m_isIsoValid(VerifyResult::Failed)
 {
     qRegisterMetaType<VerifyResult>();
 }
@@ -92,11 +104,13 @@ void IsoVerifier::verifyWithInputText(bool ok, const QString &text)
 
 bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerprint)
 {
-    QString signingKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
-    if (signingKeyFile.isEmpty()) {
-        qDebug() << "error can't find signing key" << signingKeyFile;
-        return false;
-    }
+
+QString signingKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
+
+if (signingKeyFile.isEmpty()) {
+    qDebug() << "Error: Could not find signing key" << fileName << "in any standard location";
+    return false;
+}
 
     QFile signingKey(signingKeyFile);
     if (!signingKey.open(QIODevice::ReadOnly)) {
@@ -278,6 +292,15 @@ void IsoVerifier::verifyWithSha256Sum(bool ok, const QString &checksum)
 
 finish:
     emit finished(m_isIsoValid, m_error);
+}
+
+void IsoVerifier::setFilePath(const QString &path) 
+{
+    if (m_filePath != path) {
+        m_filePath = path;
+        m_isIsoValid = VerifyResult::Failed; // Reset verification state
+        emit filePathChanged();
+    }
 }
 
 #include "moc_isoverifier.cpp"

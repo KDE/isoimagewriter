@@ -1,3 +1,4 @@
+
         /*
     SPDX-FileCopyrightText: 2016 ROSA
     SPDX-License-Identifier: GPL-3.0-or-later
@@ -70,10 +71,10 @@ int main(int argc, char *argv[])
 
     // return a.exec();
 
-    KLocalizedString::setApplicationDomain("helloworld");
+    KLocalizedString::setApplicationDomain("isoimagewriter");
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
-    QCoreApplication::setApplicationName(QStringLiteral("Hello World"));
+    QCoreApplication::setApplicationName(QStringLiteral("IsoImage Writer"));
 
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
         QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
@@ -108,6 +109,9 @@ int main(int argc, char *argv[])
         }
     );
 
+
+    qmlRegisterType<IsoVerifier>("org.kde.isoimagewriter", 1, 0, "IsoVerifier");
+
     QQmlApplicationEngine engine;
 
     engine.addImportPath("qrc:/");
@@ -128,13 +132,5 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
-    // if (engine.rootObjects().isEmpty()) {
-    //     qWarning() << "Failed to load QML file:" << url;
-    //     // const auto errors = engine.errors();
-    //     // for (const auto &error : errors) {
-    //     //     qWarning() << "QML Error:" << error.toString();
-    //     // }
-    //     return -1;
-    // }
     return app.exec();  // Start the Qt event loop
 }

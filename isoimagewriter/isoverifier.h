@@ -8,14 +8,22 @@
 #define ISOVERIFIER_H
 
 #include <QObject>
+#include <QString>
+
 
 class IsoVerifier : public QObject
 {
     Q_OBJECT
-
+    Q_PROPERTY(QString filePath READ filePath WRITE setFilePath NOTIFY filePathChanged)
+    
 public:
-    explicit IsoVerifier(const QString &filePath);
-
+    explicit IsoVerifier(QObject *parent = nullptr);
+    explicit IsoVerifier(const QString &filePath, QObject *parent = nullptr);
+    
+    // Property methods
+    QString filePath() const { return m_filePath; }
+    void setFilePath(const QString &path);
+    
     enum class VerifyResult {
         Successful,
         Failed,
@@ -32,8 +40,10 @@ signals:
     void finished(IsoVerifier::VerifyResult result, const QString &error);
     void inputRequested(const QString &title, const QString &body);
     void asyncDone();
+    void filePathChanged();
 
 private:
+
     int summaryResult;
     QString m_filePath;
     QString m_error;
@@ -50,5 +60,4 @@ private:
     void verifyWithSha256SumsFile(const QString &keyFingerPrint);
     void verifyWithSha256Sum(bool ok, const QString &checksum);
 };
-
 #endif // ISOVERIFIER_H

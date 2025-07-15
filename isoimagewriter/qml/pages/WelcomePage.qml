@@ -19,13 +19,13 @@ Kirigami.Page {
 
         onEntered: function(drag) {
             if (drag.hasUrls) {
-                var hasIso = drag.urls.some(url => url.toString().toLowerCase().endsWith('.iso'));
+                let hasIso = drag.urls.some(url => url.toString().toLowerCase().endsWith('.iso'));
                 hasIso ? drag.accept(Qt.CopyAction) : drag.reject();
             }
         }
 
         onDropped: function(drop) {
-            var isoFile = drop.urls.find(url => url.toString().toLowerCase().endsWith('.iso'));
+            let isoFile = drop.urls.find(url => url.toString().toLowerCase().endsWith('.iso'));
             if (isoFile) {
                 welcomePage.selectedFile = isoFile.toString().replace("file://", "");
                 welcomePage.hasValidFile = true;
@@ -48,8 +48,8 @@ Kirigami.Page {
 
             Rectangle {
                 id: iconContainer
-                width: 64
-                height: 64
+                width: Kirigami.Units.iconSizes.large
+                height: Kirigami.Units.iconSizes.large
                 radius: width / 2
                 color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
                 border.width: welcomePage.isDragActive ? 0 : 2
@@ -101,7 +101,7 @@ Kirigami.Page {
                     
                     onClicked: {
                         if (welcomePage.hasValidFile) {
-                            var page = pageStack.push("qrc:/qml/pages/FilePage.qml");
+                            let page = pageStack.push("qrc:/qml/pages/FilePage.qml");
                             page.preselectedFile = welcomePage.selectedFile;
                         } else {
                             pageStack.push("qrc:/qml/pages/FilePage.qml");

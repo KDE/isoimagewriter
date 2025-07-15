@@ -18,6 +18,8 @@ set(isoimagewriter_SRCS
     isoverifier.cpp
     fetchisojob.cpp
     isolineedit.cpp
+    # usbdevicemodel.cpp
+    # usbdevice.cpp
 
     common.h
     mainapplication.h
@@ -27,6 +29,8 @@ set(isoimagewriter_SRCS
     isoverifier.h
     fetchisojob.h
     isolineedit.h
+    # usbdevicemodel.h
+    usbdevice.h
     main.cpp
 )
 
@@ -70,14 +74,6 @@ qt6_add_resources(ISO_IMAGE_WRITER_QRC ${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc)
 
 set(isoimagewriter_SRCS ${isoimagewriter_SRCS} ${ISO_IMAGE_WRITER_QRC})
 
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/qmldir
-    "module org.kde.isoimagewriter\n"
-    "typeinfo isoimagewriter.qmltypes\n"
-    "plugin isoimagewriter\n"
-    "classname IsoImageWriterPlugin\n"
-    "depends org.kde.kirigami 2.19\n"
-)
-
 add_executable(isoimagewriter ${isoimagewriter_SRCS})
 
 set_target_properties(isoimagewriter PROPERTIES
@@ -118,7 +114,6 @@ target_link_libraries(isoimagewriter
         KF6::Kirigami
         KF6::IconWidgets
 )
-
 
 if(KF6I18nLocaleData_FOUND)
     target_link_libraries(isoimagewriter PRIVATE KF6::I18nLocaleData)

@@ -1,9 +1,9 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls 
 import org.kde.kirigami as Kirigami
-import QtQuick.Layouts
+import QtQuick.Layouts 
 
-Kirigami.Page {
+Kirigami.ScrollablePage {
     id: downloadPage
     title: i18n("Download OS")
     
@@ -47,10 +47,9 @@ Kirigami.Page {
         }
     }
     
-    ColumnLayout {
+        ColumnLayout {
         anchors.fill: parent
-        anchors.margins: Kirigami.Units.gridUnit
-        spacing: Kirigami.Units.gridUnit
+        spacing: Kirigami.Units.largeSpacing
         
         // Selected distribution info
         Kirigami.InlineMessage {
@@ -61,56 +60,66 @@ Kirigami.Page {
             text: i18n("Selected: %1", selectedDistribution)
         }
         
-        // OS list
-        ScrollView {
+        // OS list in a scrollable area
+        Flickable {
+            id: flickable
             Layout.fillWidth: true
             Layout.fillHeight: true
+            contentWidth: width
+            contentHeight: contentColumn.height
+            clip: true
             
-            ListView {
-                model: filteredDistributions
+            Column {
+                id: contentColumn
+                width: parent.width
                 spacing: Kirigami.Units.smallSpacing
                 
-                delegate: Kirigami.SwipeListItem {
-                    id: listItem
+                Repeater {
+                    model: filteredDistributions
                     
-                    highlighted: selectedDistribution === modelData.name
-                    
-                    contentItem: RowLayout {
-                        spacing: Kirigami.Units.gridUnit
+                    Kirigami.SwipeListItem {
+                        id: listItem
+                        width: contentColumn.width
                         
-                        Kirigami.Icon {
-                            source: "application-x-cd-image"
-                            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
-                        }
+                        highlighted: selectedDistribution === modelData.name
                         
-                        Label {
-                            text: modelData.name
-                            font.bold: true
-                            Layout.fillWidth: true
-                        }
-                        
-                        Button {
-                            text: selectedDistribution === modelData.name ? i18n("Selected") : i18n("Select")
-                            icon.name: selectedDistribution === modelData.name ? "checkbox" : "list-add"
-                            enabled: selectedDistribution !== modelData.name
-                            onClicked: {
-                                selectedDistribution = modelData.name
-                                searchField.text = modelData.name
+                        contentItem: RowLayout {
+                            spacing: Kirigami.Units.gridUnit
+                            
+                            Kirigami.Icon {
+                                source: "application-x-cd-image"
+                                Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+                                Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                            }
+                            
+                            Label {
+                                text: modelData.name
+                                font.bold: true
+                                Layout.fillWidth: true
+                            }
+                            
+                            Button {
+                                text: selectedDistribution === modelData.name ? i18n("Selected") : i18n("Select")
+                                icon.name: selectedDistribution === modelData.name ? "checkbox" : "list-add"
+                                enabled: selectedDistribution !== modelData.name
+                                onClicked: {
+                                    selectedDistribution = modelData.name
+                                    searchField.text = modelData.name
+                                }
                             }
                         }
+                        
+                        onClicked: {
+                            selectedDistribution = modelData.name
+                            searchField.text = modelData.name
+                        }
                     }
-                    
-                    onClicked: {
-                        selectedDistribution = modelData.name
-                        searchField.text = modelData.name
-                    }
-                    
                 }
                 
                 // Empty state
                 Kirigami.PlaceholderMessage {
-                    anchors.centerIn: parent
+                    width: contentColumn.width
+                    anchors.horizontalCenter: parent.horizontalCenter
                     visible: filteredDistributions.length === 0
                     text: i18n("No distributions found")
                     explanation: i18n("Try adjusting your search terms")
@@ -120,5 +129,6 @@ Kirigami.Page {
         }
     }
     
+    //TODO: to implement the download function
     // Footer with download button
 }

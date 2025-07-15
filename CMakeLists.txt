@@ -13,8 +13,8 @@ set(KF6_MIN_VERSION "6.0.0")
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(KDE_COMPILERSETTINGS_LEVEL "5.82.0")
 
-# set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "/home/churchschicken/kde/usr/share/ECM/modules")
-# set(ECM_DIR "/home/churchschicken/kde/usr/share/ECM/cmake")
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+set(ECM_DIR "/home/churchschicken/kde/usr/share/ECM/cmake")
 
 include(KDEInstallDirs)
 include(KDEClangFormat)
