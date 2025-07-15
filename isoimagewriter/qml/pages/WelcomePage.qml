@@ -84,7 +84,6 @@ Kirigami.Page {
                           : i18n("A quick and simple way to create bootable USB drives")
                     color: welcomePage.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
                     wrapMode: Text.WordWrap
-                    opacity: welcomePage.isDragActive ? 0.7 : 1.0
                 }
             }
         }

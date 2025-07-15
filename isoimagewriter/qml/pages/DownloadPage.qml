@@ -94,7 +94,6 @@ Kirigami.ScrollablePage {
                             
                             Label {
                                 text: modelData.name
-                                font.bold: true
                                 Layout.fillWidth: true
                             }
                             

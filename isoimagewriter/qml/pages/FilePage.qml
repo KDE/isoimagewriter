@@ -59,6 +59,7 @@ Kirigami.ScrollablePage {
             if (fileDialog.selectedFile) {
                 let filePath = fileDialog.selectedFile.toString()
                 if (filePath.startsWith("file://")) {
+                    //removes the file:// prefix for display
                     filePath = filePath.substring(7)
                 }
                 
@@ -411,9 +412,6 @@ Kirigami.ScrollablePage {
             }
         }
         
-        Item {
-            Layout.fillHeight: true
-        }
     }
     
     footer: ToolBar { 
