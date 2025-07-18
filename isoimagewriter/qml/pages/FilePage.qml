@@ -73,6 +73,8 @@ Kirigami.ScrollablePage {
                 verificationCard.state = "ready"
                 
                 createButton.enabled = false
+
+                skipVerification.enabled = true
             }
         }
     }
@@ -421,9 +423,10 @@ Kirigami.ScrollablePage {
             }
             
             Button {
+                id: skipVerification
                 text: i18n("Skip Verification")
                 icon.name: "go-next"
-                visible: selectedFileCard.visible && verificationCard.state === "ready"
+                enabled: false
                 
                 onClicked: {
                     pageStack.push("qrc:/qml/pages/FlashPage.qml", {

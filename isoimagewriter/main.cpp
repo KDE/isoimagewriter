@@ -1,4 +1,3 @@
-
         /*
     SPDX-FileCopyrightText: 2016 ROSA
     SPDX-License-Identifier: GPL-3.0-or-later
@@ -14,6 +13,7 @@
 #include <QQuickStyle>
 #include <QtQml>
 #include <QUrl>
+#include <QQmlContext>
 
 
 #include <KAboutData>
@@ -23,9 +23,10 @@
 #include <KLocalizedString>
 
 #include "common.h"
-#include "mainapplication.h"
-#include "mainwindow.h"
 #include "usbdevicemonitor.h"
+#include "usbdevicemodel.h"
+#include "isoverifier.h"
+#include "flashcontroller.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC) && !defined(Q_OS_FREEBSD)
 #error Unsupported platform!
@@ -40,10 +41,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setSetuidAllowed(true);
 #endif
 
-    // MainApplication a(argc, argv);
     QGuiApplication app(argc, argv);
     KCrash::initialize();
-    // KCrash::initialize();
 
     if (!ensureElevated())
         return 1;
@@ -57,19 +56,6 @@ int main(int argc, char *argv[])
         return res;
     }
 #endif
-
-    // MainWindow w;
-    // w.show();
-
-    // UsbDeviceMonitor deviceMonitor;
-    // deviceMonitor.startMonitoring();
-
-    // // When device changing event comes, refresh the list of USB flash disks
-    // // Using QueuedConnection to avoid delays in processing the message
-    // QObject::connect(&deviceMonitor, &UsbDeviceMonitor::deviceChanged, &w,
-    //                  &MainWindow::scheduleEnumFlashDevices, Qt::QueuedConnection);
-
-    // return a.exec();
 
     KLocalizedString::setApplicationDomain("isoimagewriter");
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
@@ -111,11 +97,15 @@ int main(int argc, char *argv[])
 
 
     qmlRegisterType<IsoVerifier>("org.kde.isoimagewriter", 1, 0, "IsoVerifier");
+    qmlRegisterType<FlashController>("org.kde.isoimagewriter", 1, 0, "FlashController");
 
     QQmlApplicationEngine engine;
 
     engine.addImportPath("qrc:/");
     engine.addImportPath("qrc:/qml");
+
+    UsbDeviceModel deviceModel;
+    engine.rootContext()->setContextProperty("usbDeviceModel", &deviceModel);
 
     engine.rootContext()->setContextProperty("mainApp", &app);
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));

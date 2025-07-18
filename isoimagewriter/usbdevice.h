@@ -6,46 +6,72 @@
 #ifndef USBDEVICE_H
 #define USBDEVICE_H
 
-////////////////////////////////////////////////////////////////////////////////
-// Class for storing information about USB flash disk
-
-#include "common.h"
-
+#include <QObject>
 #include <QStringList>
-
 #include <KLocalizedString>
 #include <KFormat>
 
-class UsbDevice
+class UsbDevice : public QObject
 {
-public:
-    UsbDevice() :
-        m_VisibleName(i18n("Unknown Device")),
-        m_Volumes(),
-        m_Size(0),
-        m_SectorSize(512),
-        m_PhysicalDevice("") {}
+    Q_OBJECT
+    Q_PROPERTY(QString visibleName READ visibleName WRITE setVisibleName NOTIFY visibleNameChanged)
+    Q_PROPERTY(QStringList volumes READ volumes WRITE setVolumes NOTIFY volumesChanged)
+    Q_PROPERTY(quint64 size READ size WRITE setSize NOTIFY sizeChanged)
+    Q_PROPERTY(QString physicalDevice READ physicalDevice WRITE setPhysicalDevice NOTIFY physicalDeviceChanged)
+    Q_PROPERTY(QString displayName READ displayName NOTIFY displayNameChanged)
 
-    // Formats the device description for GUI
-    // The format is: "<volume(s)> - <user-friendly name> (<size in megabytes>)"
-    QString formatDisplayName() const {
+public:
+    explicit UsbDevice(QObject *parent = nullptr) : QObject(parent), m_Size(0) {}
+
+    QString visibleName() const { return m_VisibleName; }
+    void setVisibleName(const QString &visibleName) {
+        if (m_VisibleName == visibleName) return;
+        m_VisibleName = visibleName;
+        emit visibleNameChanged();
+        emit displayNameChanged();
+    }
+
+    QStringList volumes() const { return m_Volumes; }
+    void setVolumes(const QStringList &volumes) {
+        if (m_Volumes == volumes) return;
+        m_Volumes = volumes;
+        emit volumesChanged();
+        emit displayNameChanged();
+    }
+
+    quint64 size() const { return m_Size; }
+    void setSize(quint64 size) {
+        if (m_Size == size) return;
+        m_Size = size;
+        emit sizeChanged();
+        emit displayNameChanged();
+    }
+
+    QString physicalDevice() const { return m_PhysicalDevice; }
+    void setPhysicalDevice(const QString &physicalDevice) {
+        if (m_PhysicalDevice == physicalDevice) return;
+        m_PhysicalDevice = physicalDevice;
+        emit physicalDeviceChanged();
+    }
+
+    QString displayName() const {
         return ((m_Volumes.isEmpty()) ? i18n("<unmounted>")
                 : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + KFormat().formatByteSize(m_Size) + QLatin1Char(')');
     }
 
-    // User-friendly name of the device
-    QString     m_VisibleName;
-    // List of mounted volumes from this device
+    QString     m_VisibleName = i18n("Unknown Device");
     QStringList m_Volumes;
-    // Size of the device
-    quint64     m_Size;
-    // Sector size
-    quint32     m_SectorSize;
-    // System name of the physical disk
+    quint64     m_Size = 0;
     QString     m_PhysicalDevice;
+    quint32     m_SectorSize;
+
+signals:
+    void visibleNameChanged();
+    void volumesChanged();
+    void sizeChanged();
+    void physicalDeviceChanged();
+    void displayNameChanged();
+
 };
-
-Q_DECLARE_METATYPE(UsbDevice*)
-
 
 #endif // USBDEVICE_H

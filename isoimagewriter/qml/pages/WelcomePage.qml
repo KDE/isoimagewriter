@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import org.kde.kirigami 2.20 as Kirigami
@@ -10,21 +12,20 @@ Kirigami.Page {
     property bool isDragActive: dropArea.containsDrag
     property bool hasValidFile: false
     property string selectedFile: ""
-    readonly property bool networkConnected:false
-
+    readonly property bool networkConnected: false
 
     DropArea {
         id: dropArea
         anchors.fill: parent
 
-        onEntered: function(drag) {
+        onEntered: function (drag) {
             if (drag.hasUrls) {
                 let hasIso = drag.urls.some(url => url.toString().toLowerCase().endsWith('.iso'));
                 hasIso ? drag.accept(Qt.CopyAction) : drag.reject();
             }
         }
 
-        onDropped: function(drop) {
+        onDropped: function (drop) {
             let isoFile = drop.urls.find(url => url.toString().toLowerCase().endsWith('.iso'));
             if (isoFile) {
                 welcomePage.selectedFile = isoFile.toString().replace("file://", "");
@@ -68,7 +69,7 @@ Kirigami.Page {
                 width: parent.width - iconContainer.width - Kirigami.Units.gridUnit * 2
                 spacing: Kirigami.Units.smallSpacing
 
-                Text {
+                Label {
                     width: parent.width
                     text: welcomePage.isDragActive ? i18n("Drop your ISO here") : i18n("KDE ISO Image Writer")
                     color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
@@ -77,48 +78,44 @@ Kirigami.Page {
                     font.weight: Font.Bold
                 }
 
-                Text {
+                Label {
                     width: parent.width
-                    text: welcomePage.hasValidFile
-                          ? welcomePage.selectedFile.split('/').pop()
-                          : i18n("A quick and simple way to create bootable USB drives")
+                    text: welcomePage.hasValidFile ? welcomePage.selectedFile.split('/').pop() : i18n("A quick and simple way to create bootable USB drives")
                     color: welcomePage.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
                     wrapMode: Text.WordWrap
                 }
             }
         }
 
+        Row {
+            width: parent.width
+            spacing: Kirigami.Units.gridUnit
 
-            Row {
-                width: parent.width
-                spacing: Kirigami.Units.gridUnit
-                
-                Button {
-                    height: 70
-                    text: welcomePage.hasValidFile ? i18n("Use selected file") : i18n("Select ISO from computer")
-                    icon.name: "document-open"
-                    
-                    onClicked: {
-                        if (welcomePage.hasValidFile) {
-                            let page = pageStack.push("qrc:/qml/pages/FilePage.qml");
-                            page.preselectedFile = welcomePage.selectedFile;
-                        } else {
-                            pageStack.push("qrc:/qml/pages/FilePage.qml");
-                        }
+            Button {
+                height: Kirigami.Units.gridUnit * 3
+                text: welcomePage.hasValidFile ? i18n("Use selected file") : i18n("Select ISO from computer")
+                icon.name: "document-open"
+
+                onClicked: {
+                    if (welcomePage.hasValidFile) {
+                        let page = pageStack.push("qrc:/qml/pages/FilePage.qml");
+                        page.preselectedFile = welcomePage.selectedFile;
+                    } else {
+                        pageStack.push("qrc:/qml/pages/FilePage.qml");
                     }
                 }
+            }
 
-                // Download button
-                Button {
-                    height: 70
-                    text: i18n("Download automatically")
-                    icon.name: "download"
-                    
-                    onClicked: pageStack.push("qrc:/qml/pages/DownloadPage.qml")
-                }
+            // Download button
+            Button {
+                height: Kirigami.Units.gridUnit * 3
+                text: i18n("Download automatically")
+                icon.name: "download"
+
+                onClicked: pageStack.push("qrc:/qml/pages/DownloadPage.qml")
             }
         }
-    
+    }
 
     Button {
         anchors.right: parent.right
@@ -128,4 +125,3 @@ Kirigami.Page {
         onClicked: pageStack.push("qrc:/qml/pages/AboutPage.qml")
     }
 }
-

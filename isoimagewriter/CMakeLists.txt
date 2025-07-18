@@ -11,26 +11,27 @@ ecm_setup_version(${PROJECT_VERSION}
 set(isoimagewriter_SRCS
     usbdevicemonitor.h
     common.cpp
-    mainapplication.cpp
-    mainwindow.cpp
     imagewriter.cpp
     physicaldevice.cpp
     isoverifier.cpp
     fetchisojob.cpp
     isolineedit.cpp
-    # usbdevicemodel.cpp
-    # usbdevice.cpp
+    usbdevicemodel.cpp
+    flashcontroller.cpp
+
 
     common.h
     mainapplication.h
-    mainwindow.h
     imagewriter.h
     physicaldevice.h
     isoverifier.h
     fetchisojob.h
     isolineedit.h
-    # usbdevicemodel.h
+    usbdevicemodel.h
     usbdevice.h
+    flashcontroller.h
+
+
     main.cpp
 )
 

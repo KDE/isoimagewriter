@@ -6,6 +6,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains Linux implementation of platform-dependent functions
 
+#include "common.h"
+
 #include <KLocalizedString>
 #include <QDBusInterface>
 #include <QDBusReply>
