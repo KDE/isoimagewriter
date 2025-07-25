@@ -2,7 +2,7 @@
 Name=ISO Image Writer
 Name[ar]=كاتب صور ISO
 Name[bg]=Запис на ISO изображения
-Name[ca]=Escriu imatges ISO
+Name[ca]=Gravador d'imatges ISO
 Name[ca@valencia]=Escriu imatges ISO
 Name[cs]=Nástroj pro zapisování obrazů ISO
 Name[da]=ISO-aftryksskriver
@@ -51,7 +51,7 @@ Type=Application
 GenericName=Write an ISO Image to a USB Disk
 GenericName[ar]=اكتب صورة ISO على قرص يو اس بي
 GenericName[bg]=Запис на ISO изображение върху USB disk
-GenericName[ca]=Escriu una imatge ISO a un disc USB
+GenericName[ca]=Grava una imatge ISO a un disc USB
 GenericName[ca@valencia]=Escriu una imatge ISO a un disc USB
 GenericName[cs]=Zapsat obraz na ISO na disk USB
 GenericName[da]=Skriv et ISO-aftryk til en USB-disk
