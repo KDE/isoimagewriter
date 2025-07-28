@@ -12,7 +12,7 @@
   <name xml:lang="ar">كاتب صور ISO</name>
   <name xml:lang="bg">Запис на ISO изображения</name>
   <name xml:lang="ca">Gravador d'imatges ISO</name>
-  <name xml:lang="ca-valencia">Escriu imatges ISO</name>
+  <name xml:lang="ca-valencia">Gravador d'imatges ISO</name>
   <name xml:lang="cs">Nástroj pro zapisování obrazů ISO</name>
   <name xml:lang="da">ISO-aftryksskriver</name>
   <name xml:lang="de">ISO Image Writer</name>
@@ -58,7 +58,7 @@
   <summary xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</summary>
   <summary xml:lang="bg">Запис на ISO изображения върху USB диск</summary>
   <summary xml:lang="ca">Grava una imatge ISO a un disc USB</summary>
-  <summary xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</summary>
+  <summary xml:lang="ca-valencia">Grava una imatge ISO a un disc USB</summary>
   <summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
   <summary xml:lang="da">Skriv et ISO-aftryk til en USB-disk</summary>
   <summary xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
@@ -105,7 +105,7 @@
     <p xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</p>
     <p xml:lang="bg">Запис на ISO изображения върху USB диск</p>
     <p xml:lang="ca">Grava una imatge ISO a un disc USB</p>
-    <p xml:lang="ca-valencia">Escriu una imatge ISO a un disc USB</p>
+    <p xml:lang="ca-valencia">Grava una imatge ISO a un disc USB</p>
     <p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
     <p xml:lang="da">Skriv et ISO-aftryk til en USB-disk</p>
     <p xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</p>
