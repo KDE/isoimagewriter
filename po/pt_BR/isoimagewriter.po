@@ -3,13 +3,14 @@
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2018, 2019, 2021, 2022, 2023, 2024.
 # SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
+# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:45+0000\n"
-"PO-Revision-Date: 2025-07-23 10:17-0300\n"
-"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"PO-Revision-Date: 2025-08-03 01:41-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +118,7 @@ msgid ""
 "USB Disk\"."
 msgstr ""
 "Para poder armazenar dados neste dispositivo novamente, use o botão "
-"\"Formatar pendrive USB\""
+"\"Formatar dispositivo USB\""
 
 #: isoimagewriter/isoverifier.cpp:60
 #, kde-format
@@ -221,7 +222,7 @@ msgstr "Gravador de imagem ISO"
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
-msgstr "Grave uma imagem ISO em um pendrive USB"
+msgstr "Grave uma imagem ISO em um dispositivo USB"
 
 #: isoimagewriter/mainapplication.cpp:31
 #, kde-format
@@ -260,7 +261,7 @@ msgstr "Gravador de imagem ISO do KDE"
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr "Uma forma rápida e simples para criar pendrives USB inicializáveis."
+msgstr "Uma forma rápida e simples para criar dispositivos USB inicializáveis."
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
@@ -289,7 +290,7 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Tudo que está no pendrive USB será sobrescrito.\n"
+"Tudo que está no dispositivo USB será sobrescrito.\n"
 "\n"
 "Deseja continuar?"
 
@@ -322,7 +323,7 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
-"Seu pendrive USB está sendo criado.\n"
+"Seu dispositivo USB está sendo criado.\n"
 "\n"
 "Isto pode levar algum tempo dependendo do tamanho do arquivo da imagem ISO e "
 "da velocidade de transferência."
@@ -335,7 +336,7 @@ msgstr "Cancelar"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "Seu pendrive USB está completo e pronto para usar!"
+msgstr "Seu dispositivo USB está completo e pronto para usar!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -360,7 +361,7 @@ msgstr "Verificando a imagem ISO"
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr "Conecte um pendrive USB"
+msgstr "Conecte um dispositivo USB"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
@@ -426,7 +427,7 @@ msgstr ""
 "A imagem é maior que o dispositivo selecionado!\n"
 "\n"
 "Tamanho da imagem: %1 (%2 b)\n"
-"Tamanho do pendrive: %3 (%4 b)"
+"Tamanho do dispositivo: %3 (%4 b)"
 
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
