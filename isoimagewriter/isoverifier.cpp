@@ -158,9 +158,13 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
     QSignalSpy spy(this, SIGNAL(asyncDone()));
     spy.wait(20000); // Set a long timeout as it can take time to read the whole ISO file
 
-    if (summaryResult & GpgME::Signature::Valid) {
+    // async api returns enums
+    if (summaryResult == 0) {        // GpgME::Signature::None
         m_isIsoValid = VerifyResult::Successful;
-    } else if (summaryResult & GpgME::Signature::KeyRevoked) {
+    } else if (summaryResult == 1) { // GpgME::Signature::Valid
+        m_isIsoValid = VerifyResult::Successful;
+    }
+    else if (summaryResult == 8) {   // GpgME::Signature::KeyRevoked
         m_error = i18n("Key is revoked.");
         m_isIsoValid = VerifyResult::Failed;
     } else {
