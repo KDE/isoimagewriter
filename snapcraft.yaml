@@ -99,7 +99,7 @@ parts:
       - -usr/lib/aspell/*
       - -usr/share/lintian
   gpu-2404:
-    after: [ark]
+    after: [isoimagewriter]
     source: https://github.com/canonical/gpu-snap.git
     plugin: dump
     override-prime: |
