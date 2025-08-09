@@ -114,9 +114,8 @@ parts:
     build-snaps:
       - core24
       - kf6-core24
-      #- qt-common-themes
     override-prime: |
       set -eux
-      for snap in "core24" "kf6-core24" "qt-common-themes"; do
+      for snap in "core24" "kf6-core24"; do
           cd "/snap/$snap/current" && find . -type f,l -exec rm -rf "${CRAFT_PRIME}/{}" \;
       done
