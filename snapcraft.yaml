@@ -114,7 +114,7 @@ parts:
     build-snaps:
       - core24
       - kf6-core24
-      - qt-common-themes
+      #- qt-common-themes
     override-prime: |
       set -eux
       for snap in "core24" "kf6-core24" "qt-common-themes"; do
