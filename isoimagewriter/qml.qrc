@@ -8,6 +8,8 @@
         <file>qml/pages/DownloadPage.qml</file>
         <file>qml/pages/AboutPage.qml</file>
         <file>qml/pages/FlashPage.qml</file>
+        <file>qml/pages/SelectionPage.qml</file>
+        <file>qml/pages/ProgressPage.qml</file>
         
         <!-- Images -->
         <file>qml/images/org.kde.isoimagewriter.svg</file>

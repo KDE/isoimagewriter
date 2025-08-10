@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
         i18nc("@info:credit", "Author Role"),
 
         //TODO : update the school address
-        QStringLiteral("assa297@sfu.ca"),
+        QStringLiteral("asa297@sfu.ca"),
         QStringLiteral("https://tcombinator.dev"));
 
     KAboutData::setApplicationData(aboutData);

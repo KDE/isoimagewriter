@@ -17,15 +17,28 @@ FlashController::~FlashController()
 {
     if (m_writer) {
         m_writer->cancelWriting();
+        // Wait a bit for the writer to finish cleanly
+        QThread::msleep(100);
         m_writer->deleteLater();
+        m_writer = nullptr;
     }
 }
 
 void FlashController::startFlashing(const QString& isoPath, UsbDevice* device)
 {
     if (m_isWriting || !device) {
+        qDebug() << "FlashController::startFlashing: Invalid state - isWriting:" << m_isWriting << "device:" << device;
         return;
     }
+
+    // Validate device has a physical device path
+    if (device->physicalDevice().isEmpty()) {
+        qDebug() << "FlashController::startFlashing: Device has no physical device path";
+        setErrorMessage(i18n("Invalid device selected"));
+        return;
+    }
+
+    qDebug() << "FlashController::startFlashing: Starting flash of" << isoPath << "to" << device->physicalDevice();
 
     // Clean up any previous writer
     if (m_writer) {

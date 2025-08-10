@@ -1,3 +1,8 @@
+# /*
+#  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+#  * SPDX-License-Identifier: GPL-3.0-or-later
+#  */
+
 set(GPGME_REQUIRED_VERSION "1.8.0")
 find_package(Gpgmepp ${GPGME_REQUIRED_VERSION} CONFIG)
 find_package(QGpgmeQt6 ${GPGME_REQUIRED_VERSION} CONFIG)

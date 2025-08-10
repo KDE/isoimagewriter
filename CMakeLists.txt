@@ -1,3 +1,7 @@
+# /*
+#  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+#  * SPDX-License-Identifier: GPL-3.0-or-later
+#  */
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 # KDE Application Version, managed by release script

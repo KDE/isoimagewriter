@@ -1,8 +1,11 @@
-pragma ComponentBehavior: Bound
+/*
+ * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+import QtQuick.Controls 
+import org.kde.kirigami as Kirigami
 import QtQuick.Layouts
 
 Kirigami.Page {
@@ -69,12 +72,12 @@ Kirigami.Page {
                 width: parent.width - iconContainer.width - Kirigami.Units.gridUnit * 2
                 spacing: Kirigami.Units.smallSpacing
 
-                Label {
+                Kirigami.Heading {
                     width: parent.width
                     text: welcomePage.isDragActive ? i18n("Drop your ISO here") : i18n("KDE ISO Image Writer")
                     color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-                    wrapMode: Text.WordWrap
-                    font.pixelSize: 24
+                    wrapMode: Label.WordWrap
+                    level: 1
                     font.weight: Font.Bold
                 }
 
@@ -82,7 +85,7 @@ Kirigami.Page {
                     width: parent.width
                     text: welcomePage.hasValidFile ? welcomePage.selectedFile.split('/').pop() : i18n("A quick and simple way to create bootable USB drives")
                     color: welcomePage.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
-                    wrapMode: Text.WordWrap
+                    wrapMode: Label.WordWrap
                 }
             }
         }
@@ -98,10 +101,10 @@ Kirigami.Page {
 
                 onClicked: {
                     if (welcomePage.hasValidFile) {
-                        let page = pageStack.push("qrc:/qml/pages/FilePage.qml");
+                        let page = pageStack.push("qrc:/qml/pages/SelectionPage.qml");
                         page.preselectedFile = welcomePage.selectedFile;
                     } else {
-                        pageStack.push("qrc:/qml/pages/FilePage.qml");
+                        pageStack.push("qrc:/qml/pages/SelectionPage.qml");
                     }
                 }
             }
@@ -120,7 +123,7 @@ Kirigami.Page {
     Button {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        text: i18n("About")
+        text: i18nc("@action:button", "About")
         icon.name: "help-about"
         onClicked: pageStack.push("qrc:/qml/pages/AboutPage.qml")
     }

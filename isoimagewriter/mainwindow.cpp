@@ -110,7 +110,7 @@ QWidget* MainWindow::createFormWidget()
     // Form
     m_isoImageLineEdit = new IsoLineEdit;
     m_isoImageLineEdit->setReadOnly(true);
-    m_isoImageLineEdit->setPlaceholderText(i18n("Path to ISO image..."));
+    m_isoImageLineEdit->setPlaceholderText(i18n("Path to ISO image…"));
     connect(m_isoImageLineEdit, &IsoLineEdit::clicked, this, &MainWindow::openIsoImage);
 
     m_isoImageSizeLabel = new QLabel;
@@ -121,7 +121,7 @@ QWidget* MainWindow::createFormWidget()
 
     m_usbDriveComboBox = new QComboBox;
 
-    m_createButton = new QPushButton(i18n("Create"));
+    m_createButton = new QPushButton(i18nc("@action:button", "Create"));
     connect(m_createButton, &QPushButton::clicked, this, &MainWindow::showConfirmMessage);
 
     m_busyLabel = new QLabel;
@@ -168,7 +168,7 @@ QWidget* MainWindow::createConfirmWidget()
     QLabel *messageLabel = new QLabel(overwriteMessage);
     connect(this, &MainWindow::downloadProgressChanged, messageLabel, [messageLabel, iconLabel, this] {
         iconLabel->setPixmap(QIcon::fromTheme("download").pixmap(QSize(64, 64)));
-        messageLabel->setText(i18n("Downloading %1...", m_fetchIso->fetchUrl().toDisplayString()));
+        messageLabel->setText(i18n("Downloading %1…", m_fetchIso->fetchUrl().toDisplayString()));
     });
     connect(this, &MainWindow::verificationResult, messageLabel, [messageLabel, iconLabel] {
         messageLabel->setText(overwriteMessage);
@@ -187,10 +187,10 @@ QWidget* MainWindow::createConfirmWidget()
     connect(this, &MainWindow::downloadProgressChanged, downloadProgressBar, &QProgressBar::show);
     connect(this, &MainWindow::downloadProgressChanged, downloadProgressBar, &QProgressBar::setValue);
 
-    QPushButton *abortButton = new QPushButton(i18n("Abort"));
+    QPushButton *abortButton = new QPushButton(i18nc("@action:button", "Abort"));
     connect(abortButton, &QPushButton::clicked, this, &MainWindow::hideWritingProgress);
 
-    QPushButton *continueButton = new QPushButton(i18n("Continue"));
+    QPushButton *continueButton = new QPushButton(i18nc("@action:button", "Continue"));
     connect(continueButton, &QPushButton::clicked, this, &MainWindow::writeIsoImage);
     connect(this, &MainWindow::downloadProgressChanged, continueButton, [continueButton] { continueButton->setEnabled(false); });
     connect(this, &MainWindow::verificationResult, continueButton, [continueButton] { continueButton->setEnabled(true); });
@@ -220,7 +220,7 @@ QWidget* MainWindow::createProgressWidget()
 
     m_progressBar = new QProgressBar;
     m_progressBar->setFormat(i18nc("Progress percent value", "%p%"));
-    m_cancelButton = new QPushButton(i18n("Cancel"));
+    m_cancelButton = new QPushButton(i18nc("@action:button", "Cancel"));
 
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout;
     mainVBoxLayout->addWidget(messageLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
@@ -243,10 +243,10 @@ QWidget* MainWindow::createSuccessWidget()
     QLabel *successIconLabel = new QLabel();
     successIconLabel->setPixmap(QIcon::fromTheme("emblem-success").pixmap(QSize(64, 64)));
 
-    QPushButton *backButton = new QPushButton(i18n("Back"));
+    QPushButton *backButton = new QPushButton(i18nc("@action:button", "Back"));
     connect(backButton, &QPushButton::clicked, this, &MainWindow::hideWritingProgress);
 
-    QPushButton *closeButton = new QPushButton(i18n("Close"));
+    QPushButton *closeButton = new QPushButton(i18nc("@action:button", "Close"));
     connect(closeButton, &QPushButton::clicked, this, &MainWindow::close);
 
     QHBoxLayout *buttonsHBoxLayout = new QHBoxLayout;
@@ -538,7 +538,7 @@ void MainWindow::writeIsoImage()
     } else if (m_isoImageSize > selectedDevice->m_Size) {
         QMessageBox::critical(
             this,
-            i18n("Error"),
+            i18nc("@title:window", "Error"),
             i18n("The image is larger than your selected device!\n\n"
                  "Image size: %1 (%2 b)\n"
                  "Disk size: %3 (%4 b)",
@@ -598,7 +598,7 @@ void MainWindow::showErrorMessage(const QString &message)
 {
     m_externalProgressBar.ProgressSetError();
 
-    QMessageBox::critical(this, i18n("Error"), message);
+    QMessageBox::critical(this, i18nc("@title:window", "Error"), message);
 
     hideWritingProgress();
 }
