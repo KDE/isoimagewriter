@@ -9,7 +9,7 @@ import org.kde.kirigami as Kirigami
 import QtQuick.Layouts
 
 Kirigami.ScrollablePage {
-    title: i18n("Download OS")
+    title: i18nc("@title:page", "Download Operating System")
 
     property string searchText: ""
     property string selectedOS: ""
