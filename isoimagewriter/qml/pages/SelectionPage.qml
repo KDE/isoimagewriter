@@ -16,11 +16,36 @@ Kirigami.Page {
 
     property string selectedIsoPath: ""
     property string preselectedFile: ""
+    property bool showVerifySection: false
+    property bool isVerifying: false
+    property string verificationResult: ""
 
     Component.onCompleted: {
         if (preselectedFile) {
             selectedIsoPath = preselectedFile;
         }
+    }
+
+    IsoVerifier {
+        id: isoVerifier
+
+        onFinished: function (result, error) {
+            isVerifying = false;
+
+            if (result === IsoVerifier.Successful) {
+                selectionPage.verificationResult = "✓ " + i18n("Verification successful! ISO integrity confirmed.");
+            } else {
+                selectionPage.verificationResult = "✗ " + i18n("Verification failed: %1", error);
+            }
+        }
+    }
+
+    function verifyIsoIntegrity(filePath, expectedSha256) {
+        isVerifying = true;
+        verificationResult = i18n("Computing SHA256 checksum...");
+
+        isoVerifier.filePath = filePath;
+        isoVerifier.verifyWithSha256Sum(expectedSha256);
     }
 
     FileDialog {
@@ -55,28 +80,94 @@ Kirigami.Page {
                 font.bold: true
             }
 
+            TextField {
+                id: isoField
+                Layout.fillWidth: true
+                placeholderText: i18n("Click to select ISO file…")
+                text: selectedIsoPath
+                readOnly: true
+                rightPadding: folderButton.width + Kirigami.Units.smallSpacing
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: fileDialog.open()
+                    cursorShape: Qt.PointingHandCursor
+                }
+
+                Button {
+                    id: folderButton
+                    anchors.right: parent.right
+                    anchors.rightMargin: Kirigami.Units.smallSpacing
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon.name: "folder-open"
+                    flat: true
+                    onClicked: fileDialog.open()
+
+                    // Make button smaller to fit nicely inside text field
+                    implicitWidth: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing
+                    implicitHeight: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing
+                }
+            }
+        }
+
+        // Verification Section
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+            visible: showVerifySection
+
+            Label {
+                text: i18n("Verify ISO integrity:")
+                font.bold: true
+            }
+
+            TextField {
+                id: sha256Field
+                Layout.fillWidth: true
+                placeholderText: i18n("Enter SHA256 checksum...")
+                enabled: !isVerifying
+            }
+
             RowLayout {
                 Layout.fillWidth: true
 
-                TextField {
-                    id: isoField
-                    Layout.fillWidth: true
-                    placeholderText: i18n("Click to select ISO file…")
-                    text: selectedIsoPath
-                    readOnly: true
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: fileDialog.open()
-                        cursorShape: Qt.PointingHandCursor
+                Button {
+                    text: i18nc("@action:button", "Verify")
+                    icon.name: "security-high"
+                    enabled: sha256Field.text.length > 0 && selectedIsoPath !== "" && !isVerifying
+                    onClicked: {
+                    console.log("Length of SHA256 field:", sha256Field.text.length)
+                        verifyIsoIntegrity(selectedIsoPath, sha256Field.text.trim());
                     }
                 }
 
                 Button {
-                    text: i18nc("@action:button", "Browse")
-                    icon.name: "folder-open"
-                    onClicked: fileDialog.open()
+                    text: i18nc("@action:button", "Cancel")
+                    icon.name: "dialog-cancel"
+                    enabled: !isVerifying
+                    onClicked: {
+                        showVerifySection = false;
+                        sha256Field.text = "";
+                        verificationResult = "";
+                    }
                 }
+
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                BusyIndicator {
+                    visible: isVerifying
+                    running: isVerifying
+                }
+            }
+
+            Label {
+                Layout.fillWidth: true
+                text: verificationResult
+                color: verificationResult.includes("✓") ? Kirigami.Theme.positiveTextColor : verificationResult.includes("✗") ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+                wrapMode: Label.WordWrap
+                visible: verificationResult !== ""
             }
         }
 
@@ -141,9 +232,9 @@ Kirigami.Page {
             Button {
                 text: i18nc("@action:button", "Verify")
                 icon.name: "security-medium"
-                enabled: selectedIsoPath !== ""
+                enabled: selectedIsoPath !== "" && !isVerifying
                 onClicked: {
-                    console.log("Verify clicked - not implemented yet");
+                    showVerifySection = true;
                 }
             }
 

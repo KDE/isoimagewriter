@@ -49,7 +49,8 @@ void FlashController::startFlashing(const QString& isoPath, UsbDevice* device)
     }
 
     // Create new ImageWriter
-    m_writer = new ImageWriter(isoPath, device, this);
+    m_writer = new ImageWriter(isoPath, device);
+    QThread* thread = new QThread(this);
     
     // Connect signals
     connect(m_writer, &ImageWriter::progressChanged, this, &FlashController::onWriterProgress);
@@ -65,7 +66,6 @@ void FlashController::startFlashing(const QString& isoPath, UsbDevice* device)
     setIsWriting(true);
 
     // Start writing in a separate thread
-    QThread* thread = new QThread(this);
     m_writer->moveToThread(thread);
     
     connect(thread, &QThread::started, m_writer, &ImageWriter::writeImage);

@@ -294,6 +294,11 @@ finish:
     emit finished(m_isIsoValid, m_error);
 }
 
+void IsoVerifier::verifyWithSha256Sum(const QString &checksum)
+{
+    verifyWithSha256Sum(true, checksum);
+}
+
 void IsoVerifier::setFilePath(const QString &path) 
 {
     if (m_filePath != path) {

@@ -9,6 +9,7 @@ import org.kde.kirigami as Kirigami
 import QtQuick.Layouts
 
 import org.kde.isoimagewriter 1.0
+//TODO: disable going back when flashing, causes a segfault
 
 Kirigami.ScrollablePage {
     id: progressPage
@@ -75,6 +76,54 @@ Kirigami.ScrollablePage {
             wrapMode: Label.WordWrap
         }
 
+        // Progress section - only visible when flashing
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+            visible: flashController.isWriting
+
+            Label {
+                Layout.fillWidth: true
+                text: flashController.statusMessage || i18n("Preparing...")
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
+                wrapMode: Label.WordWrap
+            }
+
+            ProgressBar {
+                Layout.fillWidth: true
+                value: flashController.progress
+                from: 0.0
+                to: 1.0
+            }
+
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Progress: %1%", Math.round(flashController.progress * 100))
+                color: Kirigami.Theme.disabledTextColor
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        // Error message section
+        Label {
+            Layout.fillWidth: true
+            text: flashController.errorMessage
+            color: Kirigami.Theme.negativeTextColor
+            font.weight: Font.Bold
+            wrapMode: Label.WordWrap
+            visible: flashController.errorMessage.length > 0
+        }
+
+        // Success message section
+        Label {
+            Layout.fillWidth: true
+            text: i18n("Flash completed successfully!")
+            color: Kirigami.Theme.positiveTextColor
+            font.weight: Font.Bold
+            wrapMode: Label.WordWrap
+            visible: !flashController.isWriting && flashController.progress >= 1.0 && flashController.errorMessage.length === 0
+        }
+
         // Spacer to push everything to top
         Item {
             Layout.fillHeight: true
@@ -93,10 +142,11 @@ Kirigami.ScrollablePage {
                 onClicked: {
                     if (flashController.isWriting) {
                         flashController.cancelFlashing();
+                    } else {
+                        pageStack.pop();
                     }
-                    pageStack.pop();
                 }
-                visible: flashController.isWriting
+                visible: flashController.isWriting || flashController.errorMessage.length > 0
             }
 
             // Big Start Flashing Button
@@ -110,7 +160,7 @@ Kirigami.ScrollablePage {
 
                 onClicked: {
                     console.log("ProgressPage: Starting flash operation");
-                    
+
                     // Use the exact same approach as FlashPage.qml
                     if (selectedDeviceIndex < 0 || !usbDeviceModel) {
                         console.error("ProgressPage: Invalid device selection");
@@ -139,7 +189,7 @@ Kirigami.ScrollablePage {
                     // Go back to the first page (WelcomePage)
                     pageStack.pop(null);
                 }
-                visible: false // Only show after successful completion
+                visible: !flashController.isWriting && flashController.progress >= 1.0 && flashController.errorMessage.length === 0
             }
         }
     }

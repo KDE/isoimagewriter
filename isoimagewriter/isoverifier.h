@@ -35,6 +35,7 @@ public:
 public slots:
     void verifyIso();
     void verifyWithInputText(bool ok, const QString &text);
+    void verifyWithSha256Sum(const QString &checksum);
 
 signals:
     void finished(IsoVerifier::VerifyResult result, const QString &error);

@@ -3,6 +3,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+//TODO: if usb is removed while on this page then it should go back to the home page 
+//TODO: FIX SEG fault error, go back from flashpage to FilePage
+
+
 import QtQuick
 import QtQuick.Controls
 import org.kde.kirigami as Kirigami
@@ -55,6 +59,11 @@ Kirigami.ScrollablePage {
 
         onFlashFailed: function (error) {
             console.error("Flash failed:", error);
+        }
+
+        Component.onDestruction: {
+            console.log("FlashController is being destroyed")
+            // Add any cleanup if needed
         }
     }
 

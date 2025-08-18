@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+ // legacy
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -232,6 +234,7 @@ Kirigami.ScrollablePage {
         Kirigami.Card {
             id: verificationCard
             Layout.fillWidth: true
+            Layout.maximumHeight: root.height * 0.6  // Limit height to prevent overflow
             visible: false
 
             property string instructions: ""

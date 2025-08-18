@@ -14,9 +14,12 @@ import "pages"
 Kirigami.ApplicationWindow {
     id: root
     title: i18n("ISO Image Writer")
+    minimumWidth: Kirigami.Units.gridUnit * 24
+    minimumHeight: Kirigami.Units.gridUnit * 12
     width: Kirigami.Units.gridUnit * 28
-    height: Kirigami.Units.gridUnit * 14
+    height: Kirigami.Units.gridUnit * 18
 
+    pageStack.globalToolBar.showNavigationButtons: 1
     pageStack.defaultColumnWidth: root.width
     pageStack.initialPage: WelcomePage {}
 }

@@ -33,7 +33,14 @@ QNetworkReply *FetchIsoJob::downloadFile(const QUrl& url)
         qDebug() << "redirecting to" << url << "from" << reply->url();
         reply->redirectAllowed();
     });
-    connect(reply, &QNetworkReply::readyRead, this, [file, reply] {
+    connect(reply, &QNetworkReply::readyRead, this, [this, file, reply] {
+        if (this->m_canceled) {
+                reply->abort();
+                file->close();
+                file->remove();
+                qWarning() << "Stopped downloading"; 
+                return;
+            }
         file->write(reply->readAll());
     });
     connect(reply, &QNetworkReply::finished, this, [file, reply] {
@@ -59,6 +66,7 @@ void FetchIsoJob::fetch(const QUrl& url)
         if (bytesTotal == 0)
              return;
         Q_EMIT downloadProgressChanged(100 * bytesReceived / bytesTotal);
+        qDebug() << "ISO download Progress " << 100*bytesReceived/ bytesTotal << "\n"; 
     });
     connect(reply, &QNetworkReply::finished, this, [reply, this, url] {
         if (reply->error()) {

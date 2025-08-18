@@ -4,7 +4,7 @@
  */
 
 import QtQuick
-import QtQuick.Controls 
+import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import QtQuick.Layouts
 
@@ -39,17 +39,17 @@ Kirigami.Page {
 
     ColumnLayout {
         anchors.centerIn: parent
-        width: Math.min(parent.width - Kirigami.Units.gridUnit * 4, Kirigami.Units.gridUnit * 40)
-        spacing: Kirigami.Units.gridUnit
+        width: Math.min(welcomePage.width - Kirigami.Units.gridUnit * 4, Kirigami.Units.gridUnit * 40)
+        spacing: Kirigami.Units.largeSpacing
 
-        Row {
-            spacing: Kirigami.Units.gridUnit * 2
-            width: parent.width
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.largeSpacing
 
             Rectangle {
                 id: iconContainer
-                width: Kirigami.Units.iconSizes.large
-                height: Kirigami.Units.iconSizes.large
+                Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                Layout.preferredHeight: Kirigami.Units.iconSizes.large
                 radius: width / 2
                 color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
                 border.width: welcomePage.isDragActive ? 0 : 2
@@ -63,13 +63,12 @@ Kirigami.Page {
                 }
             }
 
-            // Text content on the right
-            Column {
-                width: parent.width - iconContainer.width - Kirigami.Units.gridUnit * 2
+            ColumnLayout {
+                Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
 
                 Kirigami.Heading {
-                    width: parent.width
+                    Layout.fillWidth: true
                     text: welcomePage.isDragActive ? i18n("Drop your ISO here") : i18n("KDE ISO Image Writer")
                     color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
                     wrapMode: Label.WordWrap
@@ -78,7 +77,7 @@ Kirigami.Page {
                 }
 
                 Label {
-                    width: parent.width
+                    Layout.fillWidth: true
                     text: welcomePage.hasValidFile ? welcomePage.selectedFile.split('/').pop() : i18n("A quick and simple way to create bootable USB drives")
                     color: welcomePage.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.disabledTextColor
                     wrapMode: Label.WordWrap
@@ -86,12 +85,14 @@ Kirigami.Page {
             }
         }
 
-        Row {
-            width: parent.width
-            spacing: Kirigami.Units.gridUnit
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            spacing: Kirigami.Units.largeSpacing
 
             Button {
-                height: Kirigami.Units.gridUnit * 3
+                Layout.fillWidth: true
+                Layout.preferredHeight: Kirigami.Units.gridUnit * 3
                 text: welcomePage.hasValidFile ? i18n("Use selected file") : i18n("Select ISO from computer")
                 icon.name: "document-open"
 
@@ -105,13 +106,13 @@ Kirigami.Page {
                 }
             }
 
-            // Download button
             Button {
-                height: Kirigami.Units.gridUnit * 3
+                Layout.fillWidth: true
+                Layout.preferredHeight: Kirigami.Units.gridUnit * 3
                 text: i18n("Download automatically")
                 icon.name: "download"
 
-                onClicked: pageStack.push("qrc:/qml/pages/DownloadPage.qml")
+                onClicked: pageStack.push("qrc:/qml/pages/IsoListingPage.qml")
             }
         }
     }

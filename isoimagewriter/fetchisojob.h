@@ -16,6 +16,7 @@ public:
     explicit FetchIsoJob(QObject *parent = nullptr);
 
     Q_INVOKABLE void fetch(const QUrl &url);
+    Q_INVOKABLE void cancel() { m_canceled = true; }
     QUrl fetchUrl() const {
         return m_fetchUrl;
     }
@@ -31,6 +32,7 @@ private:
     QNetworkAccessManager m_network;
     QUrl m_fetchUrl;
     QString cache;
+    bool m_canceled = false;
 };
 
 #endif // FETCHISOJOB_H

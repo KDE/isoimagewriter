@@ -11,7 +11,7 @@ import org.kde.isoimagewriter 1.0
 
 Kirigami.Page {
     id: downloadingPage
-    title: i18n("Downloading ISO")
+    title: i18n("Download & Flash ISO")
 
     property string isoName: ""
     property string isoUrl: ""
@@ -19,129 +19,313 @@ Kirigami.Page {
     property string isoHashAlgo: ""
     property bool downloadComplete: false
     property string downloadedFilePath: ""
+    property bool flashingStarted: false
+    property bool showProgress: false
+    property bool verificationComplete: false
 
     FetchIsoJob {
         id: fetchJob
-        
-        onDownloadProgressChanged: function(percentage) {
-            progressBar.value = percentage
-            progressLabel.text = i18n("Downloading: %1%", percentage)
+
+        onDownloadProgressChanged: function (percentage) {
+            downloadProgressBar.value = percentage;
+            statusLabel.text = i18n("Downloading: %1%", percentage);
         }
-        
-        onFinished: function(filePath) {
-            downloadComplete = true
-            downloadedFilePath = filePath
-            progressLabel.text = i18n("Download completed!")
-            statusLabel.text = i18n("ISO downloaded to: %1", filePath)
-            continueButton.enabled = true
+
+        onFinished: function (filePath) {
+            downloadComplete = true;
+            downloadedFilePath = filePath;
+            statusLabel.text = i18n("Download completed!");
+
+            // Start SHA256 verification if hash is available
+            if (isoHash && isoHashAlgo === "sha256") {
+                statusLabel.text = i18n("Verifying SHA256 checksum...");
+                isoVerifier.filePath = filePath;
+                isoVerifier.verifyWithInputText(true, isoHash);
+            }
         }
-        
+
         onFailed: {
-            progressLabel.text = i18n("Download failed!")
-            statusLabel.text = i18n("Failed to download the ISO file. Please try again.")
-            retryButton.visible = true
+            statusLabel.text = i18n("Download failed!");
+            errorLabel.text = i18n("Failed to download the ISO file. Please try again.");
+            errorLabel.visible = true;
+            retryButton.visible = true;
         }
     }
 
-    Component.onCompleted: {
+    IsoVerifier {
+        id: isoVerifier
+
+        onFinished: function (result, error) {
+            if (result === IsoVerifier.Successful) {
+                verificationComplete = true;
+                statusLabel.text = i18n("SHA256 verification successful!");
+
+                // Auto-start flashing if USB device is selected
+                if (usbDeviceCombo.currentIndex >= 0 && !flashingStarted) {
+                    startFlashing();
+                }
+            } else {
+                statusLabel.text = i18n("SHA256 verification failed!");
+                errorLabel.text = error || i18n("The downloaded file's checksum does not match the expected value.");
+                errorLabel.visible = true;
+                retryButton.visible = true;
+            }
+        }
+    }
+
+    FlashController {
+        id: flashController
+
+        onProgressChanged: {
+            flashProgressBar.value = progress;
+            statusLabel.text = i18n("Flashing: %1%", Math.round(progress));
+        }
+
+        onFlashCompleted: {
+            statusLabel.text = i18n("Flash completed successfully!");
+            successLabel.visible = true;
+        }
+
+        onFlashFailed: function (error) {
+            statusLabel.text = i18n("Flash failed!");
+            errorLabel.text = error;
+            errorLabel.visible = true;
+            retryButton.visible = true;
+        }
+    }
+
+    function startDownload() {
         if (isoUrl) {
-            fetchJob.fetch(isoUrl)
+            showProgress = true;
+            statusLabel.text = i18n("Starting download...");
+            errorLabel.visible = false;
+            successLabel.visible = false;
+            retryButton.visible = false;
+            fetchJob.fetch(isoUrl);
+        }
+    }
+
+    function startFlashing() {
+        if (downloadComplete && (verificationComplete || !isoHash) && usbDeviceCombo.currentIndex >= 0 && !flashingStarted) {
+            flashingStarted = true;
+            let device = usbDeviceModel.getDevice(usbDeviceCombo.currentIndex);
+            if (device) {
+                statusLabel.text = i18n("Starting flash...");
+                flashController.startFlashing(downloadedFilePath, device);
+            }
         }
     }
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: Kirigami.Units.largeSpacing
-        spacing: Kirigami.Units.largeSpacing
-
-        Kirigami.Heading {
-            level: 2
-            text: i18n("Downloading %1", isoName)
-            Layout.alignment: Qt.AlignHCenter
-        }
-
-        Item {
-            Layout.fillHeight: true
-        }
 
         ColumnLayout {
-            Layout.alignment: Qt.AlignCenter
-            spacing: Kirigami.Units.largeSpacing
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
 
-            Kirigami.Icon {
-                source: "download"
-                Layout.preferredWidth: Kirigami.Units.iconSizes.huge
-                Layout.preferredHeight: Kirigami.Units.iconSizes.huge
-                Layout.alignment: Qt.AlignHCenter
+            Label {
+                text: i18n("ISO to download:")
+                font.bold: true
             }
 
             Label {
-                id: progressLabel
-                text: i18n("Starting download...")
-                Layout.alignment: Qt.AlignHCenter
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
+                text: isoName || i18n("Unknown ISO")
+                Layout.fillWidth: true
+                elide: Label.ElideMiddle
+            }
+        }
+
+        // Row 2: USB Drive Selection
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+
+            Label {
+                text: i18n("Select USB drive:")
+                font.bold: true
             }
 
-            ProgressBar {
-                id: progressBar
-                Layout.preferredWidth: 400
-                Layout.alignment: Qt.AlignHCenter
-                from: 0
-                to: 100
-                value: 0
+            ComboBox {
+                id: usbDeviceCombo
+                Layout.fillWidth: true
+                model: usbDeviceModel || null
+                textRole: "displayName"
+                enabled: usbDeviceModel && usbDeviceModel.hasDevices && !flashController.isWriting
+
+                // Auto-select first device if available
+                currentIndex: (usbDeviceModel && usbDeviceModel.hasDevices && count > 0) ? 0 : -1
+
+                delegate: ItemDelegate {
+                    width: usbDeviceCombo.width
+                    text: model.displayName
+                    highlighted: usbDeviceCombo.highlightedIndex === index
+                }
+
+                // Show placeholder text when no devices
+                Label {
+                    anchors.left: parent.left
+                    anchors.leftMargin: usbDeviceCombo.leftPadding
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: i18n("Please plug in a USB drive")
+                    color: Kirigami.Theme.disabledTextColor
+                    visible: !usbDeviceModel || !usbDeviceModel.hasDevices || usbDeviceCombo.count === 0
+                }
             }
+
+            Label {
+                Layout.fillWidth: true
+                text: i18n("All data on the selected device will be permanently erased!")
+                color: Kirigami.Theme.negativeTextColor
+                wrapMode: Label.WordWrap
+                visible: usbDeviceCombo.currentIndex >= 0
+            }
+        }
+
+        // Row 3: Progress Section
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+            visible: showProgress
 
             Label {
                 id: statusLabel
-                text: i18n("Preparing to download ISO file...")
-                Layout.alignment: Qt.AlignHCenter
-                color: Kirigami.Theme.disabledTextColor
-                wrapMode: Text.WordWrap
-                Layout.maximumWidth: 400
+                text: i18n("Ready to start...")
+                Layout.fillWidth: true
             }
-        }
 
-        Item {
-            Layout.fillHeight: true
-        }
+            ProgressBar {
+                id: downloadProgressBar
+                Layout.fillWidth: true
+                from: 0
+                to: 100
+                value: 0
+                visible: !downloadComplete
+            }
 
-        RowLayout {
-            Layout.alignment: Qt.AlignHCenter
-            spacing: Kirigami.Units.smallSpacing
+            ProgressBar {
+                id: flashProgressBar
+                Layout.fillWidth: true
+                from: 0
+                to: 100
+                value: 0
+                visible: downloadComplete && flashingStarted
+            }
+
+            Label {
+                id: errorLabel
+                Layout.fillWidth: true
+                color: Kirigami.Theme.negativeTextColor
+                wrapMode: Label.WordWrap
+                visible: false
+            }
+
+            Label {
+                id: successLabel
+                text: i18n("Operation completed successfully!")
+                Layout.fillWidth: true
+                color: Kirigami.Theme.positiveTextColor
+                visible: false
+            }
 
             Button {
                 id: retryButton
-                text: i18n("Retry Download")
+                text: i18n("Retry")
                 icon.name: "view-refresh"
                 visible: false
                 onClicked: {
-                    visible = false
-                    progressBar.value = 0
-                    progressLabel.text = i18n("Starting download...")
-                    statusLabel.text = i18n("Preparing to download ISO file...")
-                    fetchJob.fetch(isoUrl)
+                    showProgress = false;
+                    downloadComplete = false;
+                    verificationComplete = false;
+                    flashingStarted = false;
+                    downloadProgressBar.value = 0;
+                    flashProgressBar.value = 0;
+                    errorLabel.visible = false;
+                    successLabel.visible = false;
+                    retryButton.visible = false;
+                    startDownload();
                 }
+            }
+        }
+
+        // Spacer
+        Item {
+            Layout.fillHeight: true
+        }
+    }
+
+    footer: ToolBar {
+        contentItem: RowLayout {
+            Item {
+                Layout.fillWidth: true
             }
 
             Button {
                 text: i18n("Cancel")
                 icon.name: "dialog-cancel"
                 onClicked: {
-                    applicationWindow().pageStack.pop()
+                    applicationWindow().pageStack.pop();
                 }
+                visible: !showProgress || errorLabel.visible
             }
 
             Button {
-                id: continueButton
-                text: i18n("Continue to Flash")
-                icon.name: "arrow-right"
-                enabled: false
+                id: cancelDownloadButton
+                text: i18n("Cancel Download")
+                icon.name: "process-stop"
                 onClicked: {
-                    // Navigate to flash page with the downloaded file
-                    applicationWindow().pageStack.push("qrc:/qml/pages/FlashPage.qml", {
-                        "isoPath": downloadedFilePath
-                    })
+                    // Cancel the actual download
+                    fetchJob.cancel();
+                    applicationWindow().pageStack.pop(null); // Go back to welcome page
+
+                    // Reset the download state
+                    // showProgress = false
+                    // downloadComplete = false
+                    // flashingStarted = false
+                    // downloadProgressBar.value = 0
+                    // flashProgressBar.value = 0
+                    // statusLabel.text = i18n("Download cancelled")
+                    // errorLabel.visible = false
+                    // successLabel.visible = false
+                    // retryButton.visible = false
                 }
+                visible: showProgress && !downloadComplete && !flashingStarted && !errorLabel.visible && !successLabel.visible
+            }
+
+            Button {
+                id: cancelFlashButton
+                text: i18n("Cancel Flash")
+                icon.name: "process-stop"
+                onClicked: {
+                    flashController.cancelFlashing();
+                    statusLabel.text = i18n("Flash cancelled");
+                    showProgress = false;
+                    errorLabel.visible = false;
+                    successLabel.visible = false;
+                    retryButton.visible = false;
+                }
+                visible: showProgress && flashingStarted && !errorLabel.visible && !successLabel.visible
+            }
+
+            Button {
+                id: startButton
+                text: i18n("Start Download & Flash")
+                icon.name: "media-flash"
+                highlighted: true
+                enabled: isoUrl && usbDeviceCombo.currentIndex >= 0 && !showProgress
+                onClicked: {
+                    startDownload();
+                }
+                visible: !showProgress || errorLabel.visible
+            }
+
+            Button {
+                text: i18n("Done")
+                icon.name: "dialog-ok"
+                highlighted: true
+                onClicked: {
+                    applicationWindow().pageStack.pop(null); // Go back to welcome page
+                }
+                visible: successLabel.visible
             }
         }
     }
