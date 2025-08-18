@@ -27,6 +27,8 @@
 #include "usbdevicemodel.h"
 #include "isoverifier.h"
 #include "flashcontroller.h"
+#include "releasesmodel.h"
+#include "fetchisojob.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC) && !defined(Q_OS_FREEBSD)
 #error Unsupported platform!
@@ -63,7 +65,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QStringLiteral("IsoImage Writer"));
 
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
-        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+        QQuickStyle::setStyle(QStringLiteral("Fusion"));
     }
 
 
@@ -98,6 +100,8 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<IsoVerifier>("org.kde.isoimagewriter", 1, 0, "IsoVerifier");
     qmlRegisterType<FlashController>("org.kde.isoimagewriter", 1, 0, "FlashController");
+    qmlRegisterType<ReleasesModel>("org.kde.isoimagewriter", 1, 0, "ReleasesModel");
+    qmlRegisterType<FetchIsoJob>("org.kde.isoimagewriter", 1, 0, "FetchIsoJob");
 
     QQmlApplicationEngine engine;
 

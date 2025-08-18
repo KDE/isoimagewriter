@@ -20,8 +20,7 @@ FlashController::~FlashController()
 {
     if (m_writer) {
         m_writer->cancelWriting();
-        // Wait a bit for the writer to finish cleanly
-        QThread::msleep(100);
+
         m_writer->deleteLater();
         m_writer = nullptr;
     }

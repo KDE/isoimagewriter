@@ -5,7 +5,8 @@
         <!-- Pages -->
         <file>qml/pages/WelcomePage.qml</file>
         <file>qml/pages/FilePage.qml</file>
-        <file>qml/pages/DownloadPage.qml</file>
+        <file>qml/pages/IsoListingPage.qml</file>
+        <file>qml/pages/DownloadingPage.qml</file>
         <file>qml/pages/AboutPage.qml</file>
         <file>qml/pages/FlashPage.qml</file>
         <file>qml/pages/SelectionPage.qml</file>
@@ -13,5 +14,8 @@
         
         <!-- Images -->
         <file>qml/images/org.kde.isoimagewriter.svg</file>
+        
+        <!-- Data -->
+        <file>releases.json</file>
     </qresource>
 </RCC>

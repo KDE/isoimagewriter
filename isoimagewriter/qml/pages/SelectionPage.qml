@@ -27,6 +27,8 @@ Kirigami.Page {
         id: fileDialog
         title: i18n("Select ISO image")
         nameFilters: ["ISO files (*.iso)", "All files (*)"]
+        modality: Qt.WindowModal
+        options: FileDialog.DontUseNativeDialog
         onAccepted: {
             if (fileDialog.selectedFile) {
                 let filePath = fileDialog.selectedFile.toString();

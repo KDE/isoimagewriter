@@ -38,12 +38,8 @@ Kirigami.Page {
     }
 
     ColumnLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            margins: Kirigami.Units.gridUnit
-        }
+        anchors.centerIn: parent
+        width: Math.min(parent.width - Kirigami.Units.gridUnit * 4, Kirigami.Units.gridUnit * 40)
         spacing: Kirigami.Units.gridUnit
 
         Row {

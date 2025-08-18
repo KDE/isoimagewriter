@@ -13,9 +13,9 @@ class FetchIsoJob : public QObject
 {
     Q_OBJECT
 public:
-    FetchIsoJob(QObject *parent);
+    explicit FetchIsoJob(QObject *parent = nullptr);
 
-    void fetch(const QUrl &url);
+    Q_INVOKABLE void fetch(const QUrl &url);
     QUrl fetchUrl() const {
         return m_fetchUrl;
     }

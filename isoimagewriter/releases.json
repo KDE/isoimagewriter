@@ -1,0 +1,56 @@
+{
+    "ubuntu": {
+        "name": "Ubuntu",
+        "version": "25.04",
+        "edition": "Desktop",
+        "description": "Popular Linux distribution based on Debian, known for ease of use and strong community support",
+        "url": "https://releases.ubuntu.com/25.04/ubuntu-25.04-desktop-amd64.iso",
+        "hash": "f33e0828511732e73f32fb0a69a0305f6d729cf653b6a22f30691238d9755866",
+        "hash_algo": "sha256"
+    },
+    "kubuntu": {
+        "name": "Kubuntu",
+        "version": "25.04",
+        "edition": "Desktop",
+        "description": "Ubuntu variant featuring the KDE Plasma desktop environment with modern and intuitive interface",
+        "url": "https://cdimage.ubuntu.com/kubuntu/releases/25.04/release/kubuntu-25.04-desktop-amd64.iso",
+        "hash": "c7e0f2f01f038f831969e6b4d30e01239851722e1762e533c3a41c195f24f5a3",
+        "hash_algo": "sha256"
+    },
+    "debian": {
+        "name": "Debian",
+        "version": "13.0.0",
+        "edition": "KDE Plasma",
+        "description": "Stable and reliable Linux distribution, the foundation for many other distributions",
+        "url": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.0.0-amd64-kde.iso",
+        "hash": "82705f41050e88b8599423c4a961d56350355447a0753d0e2c8421b8b8f2d577b960b77a7f654b42b93df24d9c49129532432831b14a938640105315354972e3",
+        "hash_algo": "sha512"
+    },
+    "fedora": {
+        "name": "Fedora",
+        "version": "40",
+        "edition": "Workstation",
+        "description": "Cutting-edge Linux distribution sponsored by Red Hat, featuring latest technologies and innovations",
+        "url": "https://download.fedoraproject.org/pub/fedora/linux/releases/40/Workstation/x86_64/images/Fedora-Workstation-Live-x86_64-40-1.14.iso",
+        "hash": "d185ef35b80a40f1a547781b0f19c0175d4b553644f568603417726b2169c0d1",
+        "hash_algo": "sha256"
+    },
+    "manjaro": {
+        "name": "Manjaro",
+        "version": "25.0.7",
+        "edition": "KDE Plasma",
+        "description": "User-friendly Arch Linux derivative with rolling release model and excellent hardware support",
+        "url": "https://download.manjaro.org/kde/25.0.7/manjaro-kde-25.0.7-250812-linux66.iso",
+        "hash": "4e9b6a6c429712128e4e9f7331575c3f81e649033328e937d5786c5c0d517b6ef8c1a603672b12a806c9a341e3a9c786a3d906e5793098f98e858739988a8d05",
+        "hash_algo": "sha512"
+    },
+    "garuda": {
+        "name": "Garuda Linux",
+        "version": "Latest",
+        "edition": "Dr460nized",
+        "description": "Arch-based distribution with gaming optimizations, beautiful aesthetics, and performance tweaks",
+        "url": "https://iso.builds.garudalinux.org/iso/latest/garuda/dr460nized/latest.iso",
+        "hash": "754f91040523e32e8f172551a1d9b32c3f8e6a5b7c8a9d0e1f2a3c4b5d6e7f80",
+        "hash_algo": "sha256"
+    }
+}
