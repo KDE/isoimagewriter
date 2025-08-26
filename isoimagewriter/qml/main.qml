@@ -8,6 +8,7 @@ import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 import QtQuick.Dialogs
 import QtQuick.Layouts
+import org.kde.isoimagewriter 1.0
 
 import "pages"
 
@@ -15,11 +16,10 @@ Kirigami.ApplicationWindow {
     id: root
     title: i18n("ISO Image Writer")
     minimumWidth: Kirigami.Units.gridUnit * 24
-    minimumHeight: Kirigami.Units.gridUnit * 12
-    width: Kirigami.Units.gridUnit * 28
-    height: Kirigami.Units.gridUnit * 18
+    minimumHeight: Kirigami.Units.gridUnit * 18
+    width: Kirigami.Units.gridUnit * 33
+    height: Kirigami.Units.gridUnit * 14
 
-    pageStack.globalToolBar.showNavigationButtons: 1
     pageStack.defaultColumnWidth: root.width
     pageStack.initialPage: WelcomePage {}
 }

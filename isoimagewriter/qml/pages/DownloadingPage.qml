@@ -17,10 +17,10 @@ Kirigami.Page {
     property string isoUrl: ""
     property string isoHash: ""
     property string isoHashAlgo: ""
+    property var selectedDevice: null
     property bool downloadComplete: false
     property string downloadedFilePath: ""
     property bool flashingStarted: false
-    property bool showProgress: false
     property bool verificationComplete: false
 
     FetchIsoJob {
@@ -61,7 +61,7 @@ Kirigami.Page {
                 statusLabel.text = i18n("SHA256 verification successful!");
 
                 // Auto-start flashing if USB device is selected
-                if (usbDeviceCombo.currentIndex >= 0 && !flashingStarted) {
+                if (selectedDevice && !flashingStarted) {
                     startFlashing();
                 }
             } else {
@@ -96,7 +96,6 @@ Kirigami.Page {
 
     function startDownload() {
         if (isoUrl) {
-            showProgress = true;
             statusLabel.text = i18n("Starting download...");
             errorLabel.visible = false;
             successLabel.visible = false;
@@ -106,91 +105,71 @@ Kirigami.Page {
     }
 
     function startFlashing() {
-        if (downloadComplete && (verificationComplete || !isoHash) && usbDeviceCombo.currentIndex >= 0 && !flashingStarted) {
+        if (downloadComplete && (verificationComplete || !isoHash) && selectedDevice && !flashingStarted) {
             flashingStarted = true;
-            let device = usbDeviceModel.getDevice(usbDeviceCombo.currentIndex);
-            if (device) {
-                statusLabel.text = i18n("Starting flash...");
-                flashController.startFlashing(downloadedFilePath, device);
-            }
+            statusLabel.text = i18n("Starting flash...");
+            flashController.startFlashing(downloadedFilePath, selectedDevice);
         }
+    }
+
+    Component.onCompleted: {
+        // Auto-start download when page loads
+        startDownload();
     }
 
     ColumnLayout {
         anchors.fill: parent
+        anchors.margins: Kirigami.Units.largeSpacing
+        spacing: Kirigami.Units.largeSpacing
 
-        ColumnLayout {
+        Image {
+            Layout.alignment: Qt.AlignHCenter
+            width: Kirigami.Units.gridUnit * 4 // About 96px
+            height: Kirigami.Units.gridUnit * 4
+            source: "qrc:/qml/images/downloading.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        // ISO Information
+        Kirigami.FormLayout {
             Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
 
             Label {
-                text: i18n("ISO to download:")
-                font.bold: true
-            }
-
-            Label {
+                Kirigami.FormData.label: i18n("ISO:")
                 text: isoName || i18n("Unknown ISO")
-                Layout.fillWidth: true
                 elide: Label.ElideMiddle
+                font.weight: Font.Medium
+            }
+
+            Label {
+                Kirigami.FormData.label: i18n("USB Device:")
+                text: selectedDevice ? selectedDevice.displayName : i18n("Unknown Device")
+                elide: Label.ElideMiddle
+                font.weight: Font.Medium
             }
         }
 
-        // Row 2: USB Drive Selection
+        // Progress Section
         ColumnLayout {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
+            Kirigami.Separator {
+                Layout.fillWidth: true
+                Layout.topMargin: Kirigami.Units.smallSpacing
+            }
+
             Label {
-                text: i18n("Select USB drive:")
+                text: i18n("Progress")
                 font.bold: true
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
             }
-
-            ComboBox {
-                id: usbDeviceCombo
-                Layout.fillWidth: true
-                model: usbDeviceModel || null
-                textRole: "displayName"
-                enabled: usbDeviceModel && usbDeviceModel.hasDevices && !flashController.isWriting
-
-                // Auto-select first device if available
-                currentIndex: (usbDeviceModel && usbDeviceModel.hasDevices && count > 0) ? 0 : -1
-
-                delegate: ItemDelegate {
-                    width: usbDeviceCombo.width
-                    text: model.displayName
-                    highlighted: usbDeviceCombo.highlightedIndex === index
-                }
-
-                // Show placeholder text when no devices
-                Label {
-                    anchors.left: parent.left
-                    anchors.leftMargin: usbDeviceCombo.leftPadding
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: i18n("Please plug in a USB drive")
-                    color: Kirigami.Theme.disabledTextColor
-                    visible: !usbDeviceModel || !usbDeviceModel.hasDevices || usbDeviceCombo.count === 0
-                }
-            }
-
-            Label {
-                Layout.fillWidth: true
-                text: i18n("All data on the selected device will be permanently erased!")
-                color: Kirigami.Theme.negativeTextColor
-                wrapMode: Label.WordWrap
-                visible: usbDeviceCombo.currentIndex >= 0
-            }
-        }
-
-        // Row 3: Progress Section
-        ColumnLayout {
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-            visible: showProgress
 
             Label {
                 id: statusLabel
                 text: i18n("Ready to start...")
                 Layout.fillWidth: true
+                color: Kirigami.Theme.textColor
             }
 
             ProgressBar {
@@ -217,14 +196,16 @@ Kirigami.Page {
                 color: Kirigami.Theme.negativeTextColor
                 wrapMode: Label.WordWrap
                 visible: false
+                font.weight: Font.Medium
             }
 
             Label {
                 id: successLabel
-                text: i18n("Operation completed successfully!")
+                text: i18n("✅ Operation completed successfully!")
                 Layout.fillWidth: true
                 color: Kirigami.Theme.positiveTextColor
                 visible: false
+                font.weight: Font.Medium
             }
 
             Button {
@@ -232,8 +213,8 @@ Kirigami.Page {
                 text: i18n("Retry")
                 icon.name: "view-refresh"
                 visible: false
+                Layout.alignment: Qt.AlignLeft
                 onClicked: {
-                    showProgress = false;
                     downloadComplete = false;
                     verificationComplete = false;
                     flashingStarted = false;
@@ -247,7 +228,7 @@ Kirigami.Page {
             }
         }
 
-        // Spacer
+        // Spacer to push everything up
         Item {
             Layout.fillHeight: true
         }
@@ -260,62 +241,21 @@ Kirigami.Page {
             }
 
             Button {
+                id: cancelButton
                 text: i18n("Cancel")
-                icon.name: "dialog-cancel"
-                onClicked: {
-                    applicationWindow().pageStack.pop();
-                }
-                visible: !showProgress || errorLabel.visible
-            }
-
-            Button {
-                id: cancelDownloadButton
-                text: i18n("Cancel Download")
                 icon.name: "process-stop"
                 onClicked: {
-                    // Cancel the actual download
-                    fetchJob.cancel();
+                    if (!downloadComplete && !flashingStarted) {
+                        // Cancel download
+                        fetchJob.cancel();
+                    } else if (flashingStarted && !successLabel.visible && !errorLabel.visible) {
+                        // Cancel flash
+                        flashController.cancelFlashing();
+                        statusLabel.text = i18n("Flash cancelled");
+                    }
                     applicationWindow().pageStack.pop(null); // Go back to welcome page
-
-                    // Reset the download state
-                    // showProgress = false
-                    // downloadComplete = false
-                    // flashingStarted = false
-                    // downloadProgressBar.value = 0
-                    // flashProgressBar.value = 0
-                    // statusLabel.text = i18n("Download cancelled")
-                    // errorLabel.visible = false
-                    // successLabel.visible = false
-                    // retryButton.visible = false
                 }
-                visible: showProgress && !downloadComplete && !flashingStarted && !errorLabel.visible && !successLabel.visible
-            }
-
-            Button {
-                id: cancelFlashButton
-                text: i18n("Cancel Flash")
-                icon.name: "process-stop"
-                onClicked: {
-                    flashController.cancelFlashing();
-                    statusLabel.text = i18n("Flash cancelled");
-                    showProgress = false;
-                    errorLabel.visible = false;
-                    successLabel.visible = false;
-                    retryButton.visible = false;
-                }
-                visible: showProgress && flashingStarted && !errorLabel.visible && !successLabel.visible
-            }
-
-            Button {
-                id: startButton
-                text: i18n("Start Download & Flash")
-                icon.name: "media-flash"
-                highlighted: true
-                enabled: isoUrl && usbDeviceCombo.currentIndex >= 0 && !showProgress
-                onClicked: {
-                    startDownload();
-                }
-                visible: !showProgress || errorLabel.visible
+                visible: !successLabel.visible
             }
 
             Button {

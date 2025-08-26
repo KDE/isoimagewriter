@@ -29,6 +29,7 @@
 #include "flashcontroller.h"
 #include "releasesmodel.h"
 #include "fetchisojob.h"
+#include "releasefetch.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC) && !defined(Q_OS_FREEBSD)
 #error Unsupported platform!
@@ -64,11 +65,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
     QCoreApplication::setApplicationName(QStringLiteral("IsoImage Writer"));
 
-    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
-        QQuickStyle::setStyle(QStringLiteral("Fusion"));
-    }
-
-
     KAboutData aboutData(
         QStringLiteral("IsoImage Writer"),
         i18nc("@title", "IsoImage Writer"),
@@ -101,7 +97,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<IsoVerifier>("org.kde.isoimagewriter", 1, 0, "IsoVerifier");
     qmlRegisterType<FlashController>("org.kde.isoimagewriter", 1, 0, "FlashController");
     qmlRegisterType<ReleasesModel>("org.kde.isoimagewriter", 1, 0, "ReleasesModel");
+    qmlRegisterType<ReleasesFilterModel>("org.kde.isoimagewriter", 1, 0, "ReleasesFilterModel");
     qmlRegisterType<FetchIsoJob>("org.kde.isoimagewriter", 1, 0, "FetchIsoJob");
+    qmlRegisterType<ReleaseFetch>("org.kde.isoimagewriter", 1, 0, "ReleaseFetch");
 
     QQmlApplicationEngine engine;
 

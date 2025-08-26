@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QFile>
 #include <QObject>
+#include <QSortFilterProxyModel>
 
 struct Release {
     Q_GADGET
@@ -54,6 +55,29 @@ public:
 private:
     QList<Release> m_releases;
     void parseJsonData(const QJsonObject &json);
+};
+
+class ReleasesFilterModel : public QSortFilterProxyModel
+{
+    Q_OBJECT
+    Q_PROPERTY(QString filterText READ filterText WRITE setFilterText NOTIFY filterTextChanged)
+
+public:
+    explicit ReleasesFilterModel(QObject *parent = nullptr);
+    
+    QString filterText() const;
+    void setFilterText(const QString &text);
+    
+    Q_INVOKABLE Release getReleaseAt(int index) const;
+
+protected:
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
+
+signals:
+    void filterTextChanged();
+
+private:
+    QString m_filterText;
 };
 
 #endif // RELEASESMODEL_H

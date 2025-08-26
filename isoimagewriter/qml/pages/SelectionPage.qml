@@ -9,6 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Dialogs
 import org.kde.kirigami as Kirigami
 import org.kde.isoimagewriter
+import QtQuick.Window
 
 Kirigami.Page {
     id: selectionPage
@@ -16,9 +17,9 @@ Kirigami.Page {
 
     property string selectedIsoPath: ""
     property string preselectedFile: ""
-    property bool showVerifySection: false
     property bool isVerifying: false
     property string verificationResult: ""
+    property bool isFlashing: false
 
     Component.onCompleted: {
         if (preselectedFile) {
@@ -40,12 +41,87 @@ Kirigami.Page {
         }
     }
 
+    FlashController {
+        id: flashController
+
+        onFlashCompleted: {
+            console.log("Flash completed successfully!");
+            isFlashing = false;
+        }
+
+        onFlashFailed: function (error) {
+            console.error("Flash failed:", error);
+            isFlashing = false;
+        }
+    }
+
     function verifyIsoIntegrity(filePath, expectedSha256) {
         isVerifying = true;
         verificationResult = i18n("Computing SHA256 checksum...");
 
         isoVerifier.filePath = filePath;
         isoVerifier.verifyWithSha256Sum(expectedSha256);
+    }
+
+    function startFlashing() {
+        if (deviceCombo.currentIndex < 0 || !usbDeviceModel) {
+            console.error("SelectionPage: Invalid device selection");
+            return;
+        }
+
+        let device = usbDeviceModel.getDevice(deviceCombo.currentIndex);
+        if (device && device.physicalDevice) {
+            console.log("SelectionPage: Starting flash with device:", device.physicalDevice);
+            isFlashing = true;
+            flashController.startFlashing(selectedIsoPath, device);
+        } else {
+            console.error("SelectionPage: No valid device selected");
+        }
+    }
+
+    // SHA256 Input Dialog
+    Kirigami.Dialog {
+        id: sha256Dialog
+        title: i18n("Verify ISO Integrity")
+        standardButtons: Kirigami.Dialog.NoButton
+
+        ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Enter the expected SHA256 checksum to verify the integrity of your ISO file:")
+                wrapMode: Label.WordWrap
+            }
+
+            TextField {
+                id: sha256Input
+                Layout.fillWidth: true
+                placeholderText: i18n("SHA256 checksum...")
+                selectByMouse: true
+            }
+        }
+
+        customFooterActions: [
+            Kirigami.Action {
+                text: i18nc("@action:button", "Cancel")
+                icon.name: "dialog-cancel"
+                onTriggered: {
+                    sha256Dialog.close();
+                    sha256Input.text = "";
+                }
+            },
+            Kirigami.Action {
+                text: i18nc("@action:button", "Verify")
+                icon.name: "security-medium"
+                enabled: sha256Input.text.trim().length > 0
+                onTriggered: {
+                    verifyIsoIntegrity(selectedIsoPath, sha256Input.text.trim());
+                    sha256Dialog.close();
+                    sha256Input.text = "";
+                }
+            }
+        ]
     }
 
     FileDialog {
@@ -110,64 +186,26 @@ Kirigami.Page {
             }
         }
 
-        // Verification Section
+        // Verification Result Section
         ColumnLayout {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
-            visible: showVerifySection
-
-            Label {
-                text: i18n("Verify ISO integrity:")
-                font.bold: true
-            }
-
-            TextField {
-                id: sha256Field
-                Layout.fillWidth: true
-                placeholderText: i18n("Enter SHA256 checksum...")
-                enabled: !isVerifying
-            }
+            visible: verificationResult !== "" || isVerifying
 
             RowLayout {
                 Layout.fillWidth: true
 
-                Button {
-                    text: i18nc("@action:button", "Verify")
-                    icon.name: "security-high"
-                    enabled: sha256Field.text.length > 0 && selectedIsoPath !== "" && !isVerifying
-                    onClicked: {
-                    console.log("Length of SHA256 field:", sha256Field.text.length)
-                        verifyIsoIntegrity(selectedIsoPath, sha256Field.text.trim());
-                    }
-                }
-
-                Button {
-                    text: i18nc("@action:button", "Cancel")
-                    icon.name: "dialog-cancel"
-                    enabled: !isVerifying
-                    onClicked: {
-                        showVerifySection = false;
-                        sha256Field.text = "";
-                        verificationResult = "";
-                    }
-                }
-
-                Item {
+                Label {
                     Layout.fillWidth: true
+                    text: isVerifying ? i18n("Computing SHA256 checksum...") : verificationResult
+                    color: verificationResult.includes("✓") ? Kirigami.Theme.positiveTextColor : verificationResult.includes("✗") ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+                    wrapMode: Label.WordWrap
                 }
 
                 BusyIndicator {
                     visible: isVerifying
                     running: isVerifying
                 }
-            }
-
-            Label {
-                Layout.fillWidth: true
-                text: verificationResult
-                color: verificationResult.includes("✓") ? Kirigami.Theme.positiveTextColor : verificationResult.includes("✗") ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
-                wrapMode: Label.WordWrap
-                visible: verificationResult !== ""
             }
         }
 
@@ -186,7 +224,7 @@ Kirigami.Page {
                 Layout.fillWidth: true
                 model: usbDeviceModel || null
                 textRole: "displayName"
-                enabled: usbDeviceModel && usbDeviceModel.hasDevices
+                enabled: usbDeviceModel && usbDeviceModel.hasDevices && !isFlashing
 
                 // Auto-select first device if available
                 currentIndex: (usbDeviceModel && usbDeviceModel.hasDevices && count > 0) ? 0 : -1
@@ -217,6 +255,81 @@ Kirigami.Page {
             }
         }
 
+        // Flash Progress Section
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+            visible: isFlashing
+
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Flashing: %1", selectedIsoPath.split('/').pop() || i18n("No file selected"))
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
+                font.weight: Font.Bold
+                wrapMode: Label.WordWrap
+            }
+
+            Label {
+                Layout.fillWidth: true
+                text: {
+                    if (deviceCombo.currentIndex >= 0 && usbDeviceModel && deviceCombo.currentIndex < usbDeviceModel.count) {
+                        let device = usbDeviceModel.getDevice(deviceCombo.currentIndex);
+                        if (device && device.displayName) {
+                            return i18n("Into: %1", device.displayName);
+                        } else {
+                            return i18n("Into: %1", i18n("Unknown device"));
+                        }
+                    } else {
+                        return i18n("Into: %1", i18n("No device selected"));
+                    }
+                }
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
+                color: Kirigami.Theme.disabledTextColor
+                wrapMode: Label.WordWrap
+            }
+
+            Label {
+                Layout.fillWidth: true
+                text: flashController.statusMessage || i18n("Preparing...")
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
+                wrapMode: Label.WordWrap
+            }
+
+            ProgressBar {
+                Layout.fillWidth: true
+                value: flashController.progress
+                from: 0.0
+                to: 1.0
+            }
+
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Progress: %1%", Math.round(flashController.progress * 100))
+                color: Kirigami.Theme.disabledTextColor
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            // Error message section
+            Label {
+                Layout.fillWidth: true
+                text: flashController.errorMessage
+                color: Kirigami.Theme.negativeTextColor
+                font.weight: Font.Bold
+                wrapMode: Label.WordWrap
+                visible: flashController.errorMessage.length > 0
+            }
+
+            // Success message section
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Flash completed successfully!")
+                color: Kirigami.Theme.positiveTextColor
+                font.weight: Font.Bold
+                wrapMode: Label.WordWrap
+                visible: !flashController.isWriting && flashController.progress >= 1.0 && flashController.errorMessage.length === 0
+            }
+        }
+
         // Spacer
         Item {
             Layout.fillHeight: true
@@ -230,28 +343,51 @@ Kirigami.Page {
             }
 
             Button {
-                text: i18nc("@action:button", "Verify")
-                icon.name: "security-medium"
-                enabled: selectedIsoPath !== "" && !isVerifying
+                text: i18nc("@action:button", "Cancel")
+                icon.name: "dialog-cancel"
+                visible: isFlashing
                 onClicked: {
-                    showVerifySection = true;
+                    if (flashController.isWriting) {
+                        flashController.cancelFlashing();
+                    }
+                    isFlashing = false;
                 }
             }
 
             Button {
-                text: i18nc("@action:button", "Next")
-                icon.name: "go-next"
-                highlighted: true
-                enabled: selectedIsoPath !== "" && deviceCombo.currentIndex >= 0
+                text: i18nc("@action:button", "Verify")
+                icon.name: "security-medium"
+                enabled: selectedIsoPath !== "" && !isVerifying && !isFlashing
+                visible: !isFlashing
                 onClicked: {
-                    console.log("SelectionPage: Navigating to ProgressPage");
-                    console.log("SelectionPage: Selected device index:", deviceCombo.currentIndex);
-
-                    pageStack.push("qrc:/qml/pages/ProgressPage.qml", {
-                        isoPath: selectedIsoPath,
-                        selectedDeviceIndex: deviceCombo.currentIndex
-                    });
+                    sha256Dialog.open();
                 }
+            }
+
+            Button {
+                text: i18nc("@action:button", "Home")
+                icon.name: "go-home"
+                visible: !flashController.isWriting && flashController.progress >= 1.0 && flashController.errorMessage.length === 0
+                onClicked: {
+                    // Go back to the first page (WelcomePage)
+                    pageStack.pop(null);
+                    // Reset state
+                    isFlashing = false;
+                    verificationResult = "";
+                }
+            }
+
+            Button {
+                text: i18nc("@action:button", "START FLASHING")
+                icon.name: "media-flash"
+                highlighted: true
+                enabled: selectedIsoPath !== "" && deviceCombo.currentIndex >= 0 && !isFlashing && !isVerifying
+                visible: !isFlashing || (flashController.errorMessage.length > 0)
+                onClicked: {
+                    startFlashing();
+                }
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
+                font.weight: Font.Bold
             }
         }
     }

@@ -3,93 +3,143 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
 import QtQuick.Layouts
 import org.kde.isoimagewriter 1.0
 
-Kirigami.ScrollablePage {
-    title: i18n("Download Directly")
+FormCard.FormCardPage {
+    id: root
+    title: i18n("Browse Linux Distributions")
 
-    property string searchText: ""
-    property string selectedOS: ""
+    property var releases: []
+    property bool isLoading: true
 
-    ReleasesModel {
-        id: releasesModel
+    ReleaseFetch {
+        id: releaseFetcher
+
+        onReleasesReady: function (fetchedReleases) {
+            console.log("Releases fetched:", fetchedReleases.length);
+            root.releases = fetchedReleases;
+            root.isLoading = false;
+        }
+
+        onFetchFailed: function (error) {
+            console.log("Failed to fetch releases:", error);
+            root.isLoading = false;
+            showPassiveNotification(i18n("Failed to fetch releases: %1", error));
+        }
+
+        onFetchProgress: function (status) {
+            console.log("Fetch progress:", status);
+        }
     }
 
-    actions: [
-        Kirigami.Action {
-            displayComponent: Kirigami.SearchField {
-                onTextChanged: searchText = text
-            }
+    function selectRelease(release) {
+        applicationWindow().pageStack.push("qrc:/qml/pages/DownloadWriteOptionsPage.qml", {
+            "isoName": release.name,
+            "isoUrl": release.url,
+            "isoHash": release.sha256,
+            "isoHashAlgo": "sha256"
+        });
+    }
+
+    function groupReleasesByDistro() {
+        let distroGroups = {};
+        if (!releases || !releases.length) {
+            return distroGroups;
         }
-    ]
-
-    ListView {
-        model: releasesModel
-
-        delegate: Item {
-            width: ListView.view.width
-            height: radioDelegate.height
-
-            // Only show items that match the search filter
-            visible: searchText === "" || model.name.toLowerCase().includes(searchText.toLowerCase())
-
-            RadioDelegate {
-                id: radioDelegate
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: model.name
-                checked: selectedOS === model.name
-                onClicked: selectedOS = model.name
-                icon.name: "media-optical"
-
-                ToolTip {
-                    visible: parent.hovered
-                    text: model.description + "\n\nVersion: " + model.version + (model.edition ? " " + model.edition : "") + "\nURL: " + model.url
-                    // change to standard duration
-                    delay: 500
-                    timeout: 5000
-                }
+        for (let i = 0; i < releases.length; i++) {
+            let release = releases[i];
+            if (!distroGroups[release.distro]) {
+                distroGroups[release.distro] = [];
             }
+            distroGroups[release.distro].push(release);
+        }
+        return distroGroups;
+    }
+
+    Item {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        visible: isLoading || (!releases || releases.length === 0)
+
+        Kirigami.LoadingPlaceholder {
+            anchors.centerIn: parent
+            visible: isLoading
+            text: i18n("Fetching latest releases...")
         }
 
+        // check for internet
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent
-            visible: parent.count === 0
-            text: i18n("No operating systems found")
-            icon.name: "search"
+            visible: !isLoading && (releases ? releases.length === 0 : true)
+            text: i18n("No releases available")
+            icon.name: "download"
         }
     }
 
-    footer: ToolBar {
-        RowLayout {
-            anchors.fill: parent
-            anchors.margins: Kirigami.Units.smallSpacing
-            
+    // Main content - only visible when not loading and has releases
 
-            Button {
-                text: i18n("Download")
-                icon.name: "download"
-                enabled: selectedOS !== ""
-                onClicked: {
-                    // Find the selected release
-                    for (let i = 0; i < releasesModel.rowCount(); i++) {
-                        let release = releasesModel.getReleaseAt(i);
-                        if (release.name === selectedOS) {
-                            applicationWindow().pageStack.push("qrc:/qml/pages/DownloadingPage.qml", {
-                                "isoName": release.name,
-                                "isoUrl": release.url,
-                                "isoHash": release.hash,
-                                "isoHashAlgo": release.hashAlgo
-                            });
-                            break;
+    ColumnLayout {
+        visible: !isLoading && releases && releases.length > 0
+        spacing: 0
+
+        FormCard.FormHeader {
+            visible: !isLoading && releases && releases.length > 0
+            title: "Select ISO"
+            Layout.topMargin: Kirigami.Units.gridUnit
+        }
+
+        Repeater {
+            model: {
+                if (!isLoading && releases && releases.length > 0) {
+                    let distroGroups = groupReleasesByDistro();
+                    return Object.keys(distroGroups).map(distroName => ({
+                                distroName: distroName,
+                                releases: distroGroups[distroName]
+                            }));
+                }
+                return [];
+            }
+
+            delegate: ColumnLayout {
+                required property var modelData
+                spacing: 0
+
+                FormCard.FormCard {
+                    Repeater {
+                        model: modelData.releases
+
+                        delegate: ColumnLayout {
+                            required property var modelData
+                            required property int index
+                            spacing: 0
+
+                            FormCard.FormButtonDelegate {
+                                text: modelData.name + (modelData.version ? " (" + modelData.version + ")" : "")
+                                onClicked: root.selectRelease(modelData)
+                            }
+
+                            FormCard.FormDelegateSeparator {
+                                visible: index < parent.parent.model.length - 1
+                            }
                         }
                     }
                 }
             }
         }
+        FormCard.FormSectionText {
+            text: i18n("For more distributions, visit the <a href=\"https://kde.org/distributions\"><span style=\" text-decoration: underline;\">KDE Distributions</span></a>")
+        }
+    }
+
+    Component.onCompleted: {
+        console.log("Starting release fetch …");
+        releaseFetcher.fetchReleases();
     }
 }

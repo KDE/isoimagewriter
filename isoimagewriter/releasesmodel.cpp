@@ -103,3 +103,49 @@ Release ReleasesModel::getReleaseAt(int index) const
     }
     return Release();
 }
+
+// ReleasesFilterModel implementation
+ReleasesFilterModel::ReleasesFilterModel(QObject *parent)
+    : QSortFilterProxyModel(parent)
+{
+    setSourceModel(new ReleasesModel(this));
+    setFilterCaseSensitivity(Qt::CaseInsensitive);
+}
+
+QString ReleasesFilterModel::filterText() const
+{
+    return m_filterText;
+}
+
+void ReleasesFilterModel::setFilterText(const QString &text)
+{
+    if (m_filterText != text) {
+        m_filterText = text;
+        setFilterFixedString(text);
+        emit filterTextChanged();
+    }
+}
+
+bool ReleasesFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+    if (m_filterText.isEmpty()) {
+        return true;
+    }
+    
+    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
+    QString name = sourceModel()->data(index, ReleasesModel::NameRole).toString();
+    QString description = sourceModel()->data(index, ReleasesModel::DescriptionRole).toString();
+    
+    return name.contains(m_filterText, Qt::CaseInsensitive) || 
+           description.contains(m_filterText, Qt::CaseInsensitive);
+}
+
+Release ReleasesFilterModel::getReleaseAt(int index) const
+{
+    QModelIndex sourceIndex = mapToSource(this->index(index, 0));
+    ReleasesModel *sourceModel = qobject_cast<ReleasesModel*>(this->sourceModel());
+    if (sourceModel) {
+        return sourceModel->getReleaseAt(sourceIndex.row());
+    }
+    return Release();
+}

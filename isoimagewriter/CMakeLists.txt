@@ -24,6 +24,7 @@ set(isoimagewriter_SRCS
     usbdevicemodel.cpp
     flashcontroller.cpp
     releasesmodel.cpp
+    releasefetch.cpp
 
 
     common.h
@@ -37,6 +38,7 @@ set(isoimagewriter_SRCS
     usbdevice.h
     flashcontroller.h
     releasesmodel.h
+    releasefetch.h
 
 
     main.cpp

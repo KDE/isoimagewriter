@@ -6,16 +6,21 @@
         <file>qml/pages/WelcomePage.qml</file>
         <file>qml/pages/FilePage.qml</file>
         <file>qml/pages/IsoListingPage.qml</file>
+        <file>qml/pages/DownloadWriteOptionsPage.qml</file>
         <file>qml/pages/DownloadingPage.qml</file>
         <file>qml/pages/AboutPage.qml</file>
         <file>qml/pages/FlashPage.qml</file>
         <file>qml/pages/SelectionPage.qml</file>
-        <file>qml/pages/ProgressPage.qml</file>
+        
+        <!-- Components -->
+        <file>qml/components/ListDelegate.qml</file>
         
         <!-- Images -->
         <file>qml/images/org.kde.isoimagewriter.svg</file>
+        <file>qml/images/kubuntu.svg</file>
+        <file>qml/images/fedora.svg</file>
+        <file>qml/images/KDE-neon.jpg</file>
+        <file>qml/images/downloading.png</file>
         
-        <!-- Data -->
-        <file>releases.json</file>
     </qresource>
 </RCC>
