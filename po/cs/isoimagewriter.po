@@ -271,16 +271,14 @@ msgid "Create"
 msgstr "Vytvořit"
 
 #: isoimagewriter/mainwindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Write this ISO image:"
+#, kde-format
 msgid "ISO image:"
-msgstr "Zapsat tento obraz ISO:"
+msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:147
-#, fuzzy, kde-format
-#| msgid "To this USB drive:"
+#, kde-format
 msgid "USB drive:"
-msgstr "Na tento disk USB:"
+msgstr ""
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
