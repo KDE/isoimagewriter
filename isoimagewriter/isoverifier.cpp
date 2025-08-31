@@ -30,8 +30,8 @@ IsoVerifier::IsoVerifier(QObject *parent)
     : QObject(parent)
     , m_filePath("")
     , m_error()
-    , m_verificationMean(VerificationMean::None)
     , m_isIsoValid(VerifyResult::Failed)
+    , m_verificationMean(VerificationMean::None)
 {
     qRegisterMetaType<VerifyResult>();
 }
@@ -40,8 +40,8 @@ IsoVerifier::IsoVerifier(const QString &filePath, QObject *parent)
     : QObject(parent)
     , m_filePath(filePath)
     , m_error()
-    , m_verificationMean(VerificationMean::None)
     , m_isIsoValid(VerifyResult::Failed)
+    , m_verificationMean(VerificationMean::None)
 {
     qRegisterMetaType<VerifyResult>();
 }
@@ -130,6 +130,7 @@ bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerpr
 
 void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
 {
+    Q_UNUSED(keyFingerprint)
     QString sigFilePath = m_filePath + ".sig";
     QFileInfo fileInfo(sigFilePath);
     QString sigFileName = fileInfo.fileName();

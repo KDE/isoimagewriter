@@ -24,6 +24,7 @@ Kirigami.Page {
     property bool flashCompleted: false
     property bool flashFailed: false
     property string errorMessage: ""
+    property real currentProgress: 0.0
 
     Component.onCompleted: {
         console.log("FlashPage: Ready to flash ISO");
@@ -45,6 +46,7 @@ Kirigami.Page {
 
         onProgressChanged: {
             console.log("FlashPage: Progress changed to", progress);
+            flashPage.currentProgress = progress;
         }
 
         onFlashCompleted: {
@@ -124,7 +126,7 @@ Kirigami.Page {
                     anchors.fill: parent
                     from: 0
                     to: 1
-                    value: flashController.progress
+                    value: currentProgress
                     
                     onValueChanged: {
                         console.log("FlashPage: ProgressBar value changed to:", value);
@@ -134,7 +136,7 @@ Kirigami.Page {
                 // Progress percentage text overlay
                 Controls.Label {
                     anchors.centerIn: parent
-                    text: Math.round(flashController.progress * 100) + "%"
+                    text: Math.round(currentProgress * 100) + "%"
                     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
                     font.bold: true
                     color: Kirigami.Theme.textColor
@@ -165,7 +167,7 @@ Kirigami.Page {
                     flashCompleted = false;
                     flashFailed = false;
                     errorMessage = "";
-                    flashProgressBar.value = 0;
+                    currentProgress = 0.0;
                     Qt.callLater(startFlashing);
                 }
             }

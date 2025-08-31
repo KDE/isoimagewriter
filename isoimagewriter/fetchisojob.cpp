@@ -66,7 +66,6 @@ void FetchIsoJob::fetch(const QUrl &url)
         if (bytesTotal == 0)
             return;
         Q_EMIT downloadProgressChanged(100 * bytesReceived / bytesTotal);
-        qDebug() << "ISO download Progress " << 100 * bytesReceived / bytesTotal << "\n";
     });
     connect(reply, &QNetworkReply::finished, this, [reply, this, url] {
         if (reply->error()) {

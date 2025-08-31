@@ -21,10 +21,6 @@
         
         <!-- Images -->
         <file>qml/images/org.kde.isoimagewriter.svg</file>
-        <file>qml/images/kubuntu.svg</file>
-        <file>qml/images/fedora.svg</file>
-        <file>qml/images/KDE-neon.jpg</file>
-        <file>qml/images/downloading.png</file>
         
     </qresource>
 </RCC>

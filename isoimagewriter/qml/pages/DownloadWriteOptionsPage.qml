@@ -12,7 +12,7 @@ import org.kde.isoimagewriter 1.0
 
 FormCard.FormCardPage {
     id: downloadWriteOptionsPage
-    title: i18n("Download & Write")
+    title: i18nc("@title:window", "Download & Write")
 
     property string isoName: ""
     property string isoUrl: ""
@@ -39,7 +39,7 @@ FormCard.FormCardPage {
     // USB Device Selection Dialog
     Kirigami.Dialog {
         id: usbSelectionDialog
-        title: i18n("Select USB Device")
+        title: i18nc("@title:window", "Select USB Device")
         standardButtons: Kirigami.Dialog.NoButton
 
         property var selectedDevice: null
@@ -55,7 +55,7 @@ FormCard.FormCardPage {
             implicitWidth: Kirigami.Units.gridUnit * 25
 
             FormCard.FormHeader {
-                title: i18n("Available USB Devices")
+                title: i18nc("@title:group", "Available USB Devices")
             }
 
             FormCard.FormCard {
@@ -81,7 +81,7 @@ FormCard.FormCardPage {
             // Show message when no devices available
             Controls.Label {
                 Layout.fillWidth: true
-                text: i18n("No USB devices detected. Please connect a USB drive and try again.")
+                text: i18nc("@info", "No USB devices detected. Please connect a USB drive and try again.")
                 color: Kirigami.Theme.disabledTextColor
                 horizontalAlignment: Text.AlignHCenter
                 visible: !usbDeviceModel || !usbDeviceModel.hasDevices
@@ -103,7 +103,7 @@ FormCard.FormCardPage {
 
         // ISO Information Section
         FormCard.FormHeader {
-            title: i18n("ISO to Download")
+            title: i18nc("@title:group", "ISO to Download")
         }
 
         FormCard.FormCard {
@@ -124,7 +124,7 @@ FormCard.FormCardPage {
 
                     Controls.Label {
                         Layout.fillWidth: true
-                        text: isoName || i18n("Unknown ISO")
+                        text: isoName || i18nc("@info", "Unknown ISO")
                         font.bold: true
                         elide: Text.ElideMiddle
                         wrapMode: Text.WordWrap
@@ -132,7 +132,7 @@ FormCard.FormCardPage {
 
                     Controls.Label {
                         Layout.fillWidth: true
-                        text: isoUrl || i18n("No URL provided")
+                        text: isoUrl || i18nc("@info", "No URL provided")
                         color: Kirigami.Theme.disabledTextColor
                         elide: Text.ElideMiddle
                         wrapMode: Text.WordWrap
@@ -144,14 +144,14 @@ FormCard.FormCardPage {
 
         // USB Device Selection Section
         FormCard.FormHeader {
-            title: i18n("USB Device")
+            title: i18nc("@title:group", "USB Device")
         }
 
         FormCard.FormCard {
             FormCard.FormButtonDelegate {
                 id: usbSelectionDelegate
-                text: selectedDevice ? selectedDevice.displayName : i18n("Select USB device...")
-                description: selectedDevice ? (selectedDevice.size ? i18n("Size: %1", selectedDevice.size) : i18n("USB device selected")) : i18n("Choose a USB device to write to")
+                text: selectedDevice ? selectedDevice.displayName : i18nc("@action:button", "Select USB device...")
+                description: selectedDevice ? (selectedDevice.size ? i18nc("@info", "Size: %1", selectedDevice.size) : i18nc("@info", "USB device selected")) : i18nc("@info", "Choose a USB device to write to")
                 icon.name: selectedDevice ? "drive-removable-media" : "drive-removable-media-usb"
                 enabled: usbDeviceModel && usbDeviceModel.hasDevices
                 onClicked: usbSelectionDialog.open()
@@ -179,13 +179,13 @@ FormCard.FormCardPage {
 
                     Controls.Label {
                         Layout.fillWidth: true
-                        text: i18n("No USB devices detected")
+                        text: i18nc("@info", "No USB devices detected")
                         font.bold: true
                     }
 
                     Controls.Label {
                         Layout.fillWidth: true
-                        text: i18n("Please connect a USB drive to continue")
+                        text: i18nc("@info", "Please connect a USB drive to continue")
                         color: Kirigami.Theme.disabledTextColor
                         wrapMode: Text.WordWrap
                     }
@@ -197,7 +197,7 @@ FormCard.FormCardPage {
     // Confirmation Dialog
     Kirigami.Dialog {
         id: confirmationDialog
-        title: i18n("Warning: Data Will Be Erased")
+        title: i18nc("@title:window", "Warning: Data Will Be Erased")
         standardButtons: Kirigami.Dialog.NoButton
 
         ColumnLayout {
@@ -215,7 +215,7 @@ FormCard.FormCardPage {
 
                 Controls.Label {
                     Layout.fillWidth: true
-                    text: i18n("All data on the selected USB device will be permanently erased!\n\nThis action cannot be undone. Please make sure you have backed up any important data before proceeding.")
+                    text: i18nc("@info", "All data on the selected USB device will be permanently erased!\n\nThis action cannot be undone. Please make sure you have backed up any important data before proceeding.")
                     wrapMode: Text.WordWrap
                     font.bold: true
                 }
@@ -248,7 +248,7 @@ FormCard.FormCardPage {
             }
 
             Controls.Button {
-                text: i18n("Cancel")
+                text: i18nc("@action:button", "Cancel")
                 icon.name: "dialog-cancel"
                 onClicked: {
                     applicationWindow().pageStack.pop();

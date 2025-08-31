@@ -41,7 +41,7 @@ FormCard.FormCardPage {
         return distroGroups;
     }
 
-    title: i18n("Browse Linux Distributions")
+    title: i18nc("@title:window", "Browse Linux Distributions")
     Component.onCompleted: {
         console.log("Starting release fetch…");
         releaseFetcher.fetchReleases();
@@ -58,7 +58,7 @@ FormCard.FormCardPage {
         onFetchFailed: function(error) {
             console.log("Failed to fetch releases:", error);
             root.isLoading = false;
-            showPassiveNotification(i18n("Failed to fetch releases: %1", error));
+            showPassiveNotification(i18nc("@info:status", "Failed to fetch releases: %1", error));
         }
         onFetchProgress: function(status) {
             console.log("Fetch progress:", status);
@@ -67,7 +67,8 @@ FormCard.FormCardPage {
 
     // Main content layout, visible only when not loading
     ColumnLayout {
-        anchors.fill: parent
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         spacing: 0
         visible: !isLoading
 
@@ -149,18 +150,19 @@ FormCard.FormCardPage {
 
         FormCard.FormSectionText {
             Layout.fillWidth: true
-            text: i18n("For more distributions, visit the <a href=\"https://kde.org/distributions\"><span style=\" text-decoration: underline;\">KDE Distributions</span></a>")
+            text: i18nc("@info", "For more distributions, visit the <a href=\"https://kde.org/distributions\"><span style=\" text-decoration: underline;\">KDE Distributions</span></a>")
         }
 
     }
 
     // Loading state - centered on the page
-    // This is now outside the main content's ColumnLayout, allowing it to be centered.
     Controls.BusyIndicator {
         id: indicator
 
-        anchors.centerIn: parent // This is the key change to center the indicator
-        running: isLoading // Controls the animation
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        running: isLoading
         visible: isLoading
     }
 
@@ -168,7 +170,7 @@ FormCard.FormCardPage {
     Kirigami.Dialog {
         id: urlDialog
 
-        title: i18n("Add URL")
+        title: i18nc("@title:window", "Add URL")
         standardButtons: Kirigami.Dialog.NoButton
         preferredHeight: Kirigami.Units.gridUnit * 10
         preferredWidth: Kirigami.Units.gridUnit * 15
@@ -198,13 +200,13 @@ FormCard.FormCardPage {
             Kirigami.InlineMessage {
                 Layout.fillWidth: true
                 type: Kirigami.MessageType.Information
-                text: i18n("Enter the direct download URL of the Image File")
+                text: i18nc("@info", "Enter the direct download URL of the Image File")
                 visible: true
             }
 
             Controls.Label {
                 Layout.fillWidth: true
-                text: i18n("ISO URL:")
+                text: i18nc("@label", "ISO URL:")
                 font.bold: true
             }
 
@@ -218,7 +220,7 @@ FormCard.FormCardPage {
                 }
 
                 Layout.fillWidth: true
-                placeholderText: i18n("https://example.com/path/to/file.iso")
+                placeholderText: i18nc("@info:placeholder", "https://example.com/path/to/file.iso")
                 selectByMouse: true
             }
 
