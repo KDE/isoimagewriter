@@ -6,42 +6,42 @@
 
 #include "isoverifier.h"
 
-#include <QFile>
-#include <QDebug>
-#include <QFileInfo>
 #include <QByteArray>
-#include <QStandardPaths>
 #include <QCryptographicHash>
+#include <QDebug>
+#include <QFile>
+#include <QFileInfo>
 #include <QRegularExpression>
 #include <QSignalSpy>
+#include <QStandardPaths>
 
 #ifdef _USE_GPG
+#include <QGpgME/ImportJob>
 #include <QGpgME/Protocol>
 #include <QGpgME/VerifyDetachedJob>
-#include <QGpgME/ImportJob>
 
-#include <gpgme++/verificationresult.h>
 #include <gpgme++/importresult.h>
+#include <gpgme++/verificationresult.h>
 #endif
 
 #include <KLocalizedString>
 
-IsoVerifier::IsoVerifier(QObject *parent) 
-    : QObject(parent), 
-      m_filePath(""),
-      m_error(),
-      m_verificationMean(VerificationMean::None),
-      m_isIsoValid(VerifyResult::Failed)
+IsoVerifier::IsoVerifier(QObject *parent)
+    : QObject(parent)
+    , m_filePath("")
+    , m_error()
+    , m_verificationMean(VerificationMean::None)
+    , m_isIsoValid(VerifyResult::Failed)
 {
     qRegisterMetaType<VerifyResult>();
 }
 
-IsoVerifier::IsoVerifier(const QString &filePath, QObject *parent) 
-    : QObject(parent),
-      m_filePath(filePath),
-      m_error(),
-      m_verificationMean(VerificationMean::None),
-      m_isIsoValid(VerifyResult::Failed)
+IsoVerifier::IsoVerifier(const QString &filePath, QObject *parent)
+    : QObject(parent)
+    , m_filePath(filePath)
+    , m_error()
+    , m_verificationMean(VerificationMean::None)
+    , m_isIsoValid(VerifyResult::Failed)
 {
     qRegisterMetaType<VerifyResult>();
 }
@@ -52,17 +52,13 @@ void IsoVerifier::verifyIso()
     QString fileName = fileInfo.fileName();
     QString keyFingerprint;
 
-    if (fileName.startsWith("neon-")
-        && importSigningKey("neon-signing-key.gpg", keyFingerprint)) {
+    if (fileName.startsWith("neon-") && importSigningKey("neon-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::DotSigFile;
-    } else if (fileName.startsWith("archlinux-")
-               && importSigningKey("arch-signing-key.gpg", keyFingerprint)) {
+    } else if (fileName.startsWith("archlinux-") && importSigningKey("arch-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::DotSigFile;
-    } else if (fileName.startsWith("kubuntu-")
-               && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
+    } else if (fileName.startsWith("kubuntu-") && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
-    } else if (fileName.startsWith("ubuntu-")
-               && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
+    } else if (fileName.startsWith("ubuntu-") && importSigningKey("ubuntu-signing-key.gpg", keyFingerprint)) {
         m_verificationMean = VerificationMean::Sha256SumsFile;
     } else if (fileName.startsWith("netrunner-")) {
         m_verificationMean = VerificationMean::Sha256SumInput;
@@ -81,8 +77,7 @@ void IsoVerifier::verifyIso()
         verifyWithSha256SumsFile(keyFingerprint);
         break;
     case VerificationMean::Sha256SumInput:
-        emit inputRequested(i18n("SHA256 Checksum"),
-                            i18n("Paste the SHA256 checksum for this ISO:"));
+        emit inputRequested(i18n("SHA256 Checksum"), i18n("Paste the SHA256 checksum for this ISO:"));
         break;
     default:
         emit finished(m_isIsoValid, m_error);
@@ -104,13 +99,12 @@ void IsoVerifier::verifyWithInputText(bool ok, const QString &text)
 
 bool IsoVerifier::importSigningKey(const QString &fileName, QString &keyFingerprint)
 {
+    QString signingKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
 
-QString signingKeyFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
-
-if (signingKeyFile.isEmpty()) {
-    qDebug() << "Error: Could not find signing key" << fileName << "in any standard location";
-    return false;
-}
+    if (signingKeyFile.isEmpty()) {
+        qDebug() << "Error: Could not find signing key" << fileName << "in any standard location";
+        return false;
+    }
 
     QFile signingKey(signingKeyFile);
     if (!signingKey.open(QIODevice::ReadOnly)) {
@@ -122,9 +116,7 @@ if (signingKeyFile.isEmpty()) {
     QGpgME::ImportJob *importJob = QGpgME::openpgp()->importJob();
     GpgME::ImportResult importResult = importJob->exec(signingKeyData);
 
-    if (!(importResult.numConsidered() == 1
-          && (importResult.numImported() == 1
-              || importResult.numUnchanged() == 1))) {
+    if (!(importResult.numConsidered() == 1 && (importResult.numImported() == 1 || importResult.numUnchanged() == 1))) {
         qDebug() << "Could not import gpg signature";
         return false;
     }
@@ -142,28 +134,31 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
     QFileInfo fileInfo(sigFilePath);
     QString sigFileName = fileInfo.fileName();
     if (!QFile::exists(sigFilePath)) {
-        m_error = i18n("Could not find %1, please download PGP signature file "
-                       "to same directory.", sigFileName);
-        emit finished(m_isIsoValid, m_error); return;
+        m_error = i18n(
+            "Could not find %1, please download PGP signature file "
+            "to same directory.",
+            sigFileName);
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
 
     auto signatureFile = std::shared_ptr<QIODevice>(new QFile(sigFilePath));
     if (!signatureFile->open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open signature file");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
 
     auto isoFile = std::shared_ptr<QIODevice>(new QFile(m_filePath));
     if (!isoFile->open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not open ISO image");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
-
 
 #ifdef _USE_GPG
     QGpgME::VerifyDetachedJob *job = QGpgME::openpgp()->verifyDetachedJob();
-    connect(job, &QGpgME::VerifyDetachedJob::result, this, [this](GpgME::VerificationResult result)
-    {
+    connect(job, &QGpgME::VerifyDetachedJob::result, this, [this](GpgME::VerificationResult result) {
         GpgME::Signature signature = result.signature(0);
         this->summaryResult = signature.summary();
         Q_EMIT asyncDone();
@@ -182,8 +177,8 @@ void IsoVerifier::verifyWithDotSigFile(const QString &keyFingerprint)
         m_isIsoValid = VerifyResult::Failed;
     }
 #else
-        m_error = i18n("This app is built without verification support.");
-        m_isIsoValid = VerifyResult::KeyNotFound;
+    m_error = i18n("This app is built without verification support.");
+    m_isIsoValid = VerifyResult::KeyNotFound;
 #endif
 
     emit finished(m_isIsoValid, m_error);
@@ -195,7 +190,8 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     QFile checksumsFile(fileInfo.absolutePath() + "/SHA256SUMS");
     if (!checksumsFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         m_error = i18n("Could not open SHA256SUMS file, please download to same directory");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
 
     // Extract checksum from the SHA256SUMS file
@@ -209,7 +205,8 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         checksum = match.captured(1);
     } else {
         m_error = i18n("Could not find checksum in SHA256SUMS file");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
 
     // Calculate SHA256 checksum of the ISO image
@@ -217,16 +214,19 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     QFile isoFile(m_filePath);
     if (!isoFile.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not read ISO image");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
     if (!hash.addData(&isoFile)) {
         m_error = i18n("Could not perform checksum");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
     QByteArray hashResult = hash.result();
     if (checksum != hashResult.toHex()) {
         m_error = i18n("Checksum of .iso file does not match value in SHA256SUMS file");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
 
     // Check GPG signature
@@ -234,9 +234,9 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     QFile signatureFile(fileInfo.absolutePath() + "/SHA256SUMS.gpg");
     if (!signatureFile.open(QIODevice::ReadOnly)) {
         m_error = i18n("Could not find SHA256SUMS.gpg, please download PGP signature file to same directory.");
-        emit finished(m_isIsoValid, m_error); return;
+        emit finished(m_isIsoValid, m_error);
+        return;
     }
-
 
 #ifdef _USE_GPG
     QByteArray signatureData = signatureFile.readAll();
@@ -244,8 +244,7 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
     GpgME::VerificationResult result = job->exec(signatureData, checksumsData);
     GpgME::Signature signature = result.signature(0);
 
-    if (signature.summary() == GpgME::Signature::None
-        && signature.fingerprint() == keyFingerprint) {
+    if (signature.summary() == GpgME::Signature::None && signature.fingerprint() == keyFingerprint) {
         m_isIsoValid = VerifyResult::Successful;
     } else if (signature.summary() & GpgME::Signature::Valid) {
         m_isIsoValid = VerifyResult::Successful;
@@ -257,8 +256,8 @@ void IsoVerifier::verifyWithSha256SumsFile(const QString &keyFingerprint)
         m_isIsoValid = VerifyResult::Failed;
     }
 #else
-        m_error = i18n("This app is built without verification support.");
-        m_isIsoValid = VerifyResult::KeyNotFound;
+    m_error = i18n("This app is built without verification support.");
+    m_isIsoValid = VerifyResult::KeyNotFound;
 #endif
     emit finished(m_isIsoValid, m_error);
 }
@@ -299,7 +298,7 @@ void IsoVerifier::verifyWithSha256Sum(const QString &checksum)
     verifyWithSha256Sum(true, checksum);
 }
 
-void IsoVerifier::setFilePath(const QString &path) 
+void IsoVerifier::setFilePath(const QString &path)
 {
     if (m_filePath != path) {
         m_filePath = path;

@@ -4,39 +4,39 @@
 */
 
 #include "mainwindow.h"
-#include "mainapplication.h"
 #include "common.h"
 #include "fetchisojob.h"
 #include "imagewriter.h"
-#include "isoverifier.h"
 #include "isoimagewriter_debug.h"
+#include "isoverifier.h"
+#include "mainapplication.h"
 
-#include <QLabel>
-#include <QTimer>
-#include <QAction>
-#include <QThread>
-#include <QMimeData>
-#include <QDropEvent>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QInputDialog>
-#include <QStandardPaths>
+#include "isolineedit.h"
 #include <KFormat>
 #include <KIconLoader>
-#include <KPixmapSequence>
 #include <KLocalizedString>
-#include "isolineedit.h"
+#include <KPixmapSequence>
+#include <QAction>
+#include <QDropEvent>
+#include <QFileDialog>
+#include <QHBoxLayout>
+#include <QInputDialog>
+#include <QLabel>
+#include <QMessageBox>
+#include <QMimeData>
+#include <QStandardPaths>
+#include <QThread>
+#include <QTimer>
+#include <QVBoxLayout>
 
 #include <KPixmapSequenceLoader>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-      m_lastOpenedDir(),
-      m_isWriting(false),
-      m_enumFlashDevicesWaiting(false),
-      m_externalProgressBar(this)
+    : QMainWindow(parent)
+    , m_lastOpenedDir()
+    , m_isWriting(false)
+    , m_enumFlashDevicesWaiting(false)
+    , m_externalProgressBar(this)
 {
     setupUi();
     setAcceptDrops(true);
@@ -82,7 +82,9 @@ void MainWindow::setupUi()
 
     QLabel *titleLabel = new QLabel;
     titleLabel->setTextFormat(Qt::RichText);
-    titleLabel->setText(QStringLiteral("<h2 style='margin-bottom: 0;'>%1</h2>%2").arg(i18n("KDE ISO Image Writer")).arg(i18n("A quick and simple way to create a bootable USB drive.")));
+    titleLabel->setText(QStringLiteral("<h2 style='margin-bottom: 0;'>%1</h2>%2")
+                            .arg(i18n("KDE ISO Image Writer"))
+                            .arg(i18n("A quick and simple way to create a bootable USB drive.")));
 
     QHBoxLayout *headerHBoxLayout = new QHBoxLayout;
     headerHBoxLayout->addWidget(logoLabel);
@@ -105,7 +107,7 @@ void MainWindow::setupUi()
     setCentralWidget(centralWidget);
 }
 
-QWidget* MainWindow::createFormWidget()
+QWidget *MainWindow::createFormWidget()
 {
     // Form
     m_isoImageLineEdit = new IsoLineEdit;
@@ -115,8 +117,7 @@ QWidget* MainWindow::createFormWidget()
 
     m_isoImageSizeLabel = new QLabel;
 
-    QAction *openIsoImageAction = m_isoImageLineEdit->addAction(
-        QIcon::fromTheme("folder-open"), QLineEdit::TrailingPosition);
+    QAction *openIsoImageAction = m_isoImageLineEdit->addAction(QIcon::fromTheme("folder-open"), QLineEdit::TrailingPosition);
     connect(openIsoImageAction, &QAction::triggered, this, &MainWindow::openIsoImage);
 
     m_usbDriveComboBox = new QComboBox;
@@ -156,15 +157,16 @@ QWidget* MainWindow::createFormWidget()
     return formWidget;
 }
 
-QWidget* MainWindow::createConfirmWidget()
+QWidget *MainWindow::createConfirmWidget()
 {
     QLabel *iconLabel = new QLabel;
     iconLabel->setPixmap(QIcon::fromTheme("dialog-warning").pixmap(QSize(64, 64)));
     iconLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    static const QString overwriteMessage = i18n("Everything on the USB drive will "
-                                           "be overwritten."
-                                           "\n\nDo you want to continue?");
+    static const QString overwriteMessage = i18n(
+        "Everything on the USB drive will "
+        "be overwritten."
+        "\n\nDo you want to continue?");
     QLabel *messageLabel = new QLabel(overwriteMessage);
     connect(this, &MainWindow::downloadProgressChanged, messageLabel, [messageLabel, iconLabel, this] {
         iconLabel->setPixmap(QIcon::fromTheme("download").pixmap(QSize(64, 64)));
@@ -192,8 +194,12 @@ QWidget* MainWindow::createConfirmWidget()
 
     QPushButton *continueButton = new QPushButton(i18nc("@action:button", "Continue"));
     connect(continueButton, &QPushButton::clicked, this, &MainWindow::writeIsoImage);
-    connect(this, &MainWindow::downloadProgressChanged, continueButton, [continueButton] { continueButton->setEnabled(false); });
-    connect(this, &MainWindow::verificationResult, continueButton, [continueButton] { continueButton->setEnabled(true); });
+    connect(this, &MainWindow::downloadProgressChanged, continueButton, [continueButton] {
+        continueButton->setEnabled(false);
+    });
+    connect(this, &MainWindow::verificationResult, continueButton, [continueButton] {
+        continueButton->setEnabled(true);
+    });
 
     QHBoxLayout *buttonsHBoxLayout = new QHBoxLayout;
     buttonsHBoxLayout->addWidget(abortButton, 0, Qt::AlignLeft);
@@ -210,12 +216,13 @@ QWidget* MainWindow::createConfirmWidget()
     return confirmWidget;
 }
 
-QWidget* MainWindow::createProgressWidget()
+QWidget *MainWindow::createProgressWidget()
 {
-    QLabel *messageLabel = new QLabel(i18n("Your USB drive is being created.\n\n"
-                                           "This may take some time depending "
-                                           "on the size of the ISO image file "
-                                           "and the transfer speed."));
+    QLabel *messageLabel =
+        new QLabel(i18n("Your USB drive is being created.\n\n"
+                        "This may take some time depending "
+                        "on the size of the ISO image file "
+                        "and the transfer speed."));
     messageLabel->setWordWrap(true);
 
     m_progressBar = new QProgressBar;
@@ -234,10 +241,11 @@ QWidget* MainWindow::createProgressWidget()
     return progressWidget;
 }
 
-QWidget* MainWindow::createSuccessWidget()
+QWidget *MainWindow::createSuccessWidget()
 {
-    QLabel *messageLabel = new QLabel(i18n("Your live USB flash drive is now "
-                                           "complete and ready to use!"));
+    QLabel *messageLabel =
+        new QLabel(i18n("Your live USB flash drive is now "
+                        "complete and ready to use!"));
     messageLabel->setWordWrap(true);
 
     QLabel *successIconLabel = new QLabel();
@@ -265,15 +273,13 @@ QWidget* MainWindow::createSuccessWidget()
     return successWidget;
 }
 
-void MainWindow::preprocessIsoImage(const QString& isoImagePath)
+void MainWindow::preprocessIsoImage(const QString &isoImagePath)
 {
     QFile file(isoImagePath);
-    if (!file.open(QIODevice::ReadOnly))
-    {
-        QMessageBox::critical(this, "Error",
-                              i18n("Failed to open the image file:")
-                              + "\n" + QDir::toNativeSeparators(isoImagePath)
-                              + "\n" + file.errorString());
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::critical(this,
+                              "Error",
+                              i18n("Failed to open the image file:") + "\n" + QDir::toNativeSeparators(isoImagePath) + "\n" + file.errorString());
         return;
     }
 
@@ -288,8 +294,7 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
     // Verify ISO image
     m_busyLabel->setText(i18n("Verifying ISO image"));
     m_busyWidget->show();
-    m_busySpinner->setSequence(KPixmapSequenceLoader::load(
-        "process-working", KIconLoader::SizeSmallMedium));
+    m_busySpinner->setSequence(KPixmapSequenceLoader::load("process-working", KIconLoader::SizeSmallMedium));
     m_busySpinner->start();
 
     IsoVerifier *isoVerifier = new IsoVerifier(m_isoImagePath);
@@ -316,9 +321,8 @@ void MainWindow::preprocessIsoImage(const QString& isoImagePath)
 void MainWindow::cleanUp()
 {
     // Delete all the allocated UsbDevice objects attached to the combobox
-    for (int i = 0; i < m_usbDriveComboBox->count(); ++i)
-    {
-        delete m_usbDriveComboBox->itemData(i).value<UsbDevice*>();
+    for (int i = 0; i < m_usbDriveComboBox->count(); ++i) {
+        delete m_usbDriveComboBox->itemData(i).value<UsbDevice *>();
     }
 }
 
@@ -329,9 +333,8 @@ void MainWindow::enumFlashDevices()
     // Remember the currently selected device
     QString selectedDevice = "";
     int idx = m_usbDriveComboBox->currentIndex();
-    if (idx >= 0)
-    {
-        UsbDevice* dev = m_usbDriveComboBox->itemData(idx).value<UsbDevice*>();
+    if (idx >= 0) {
+        UsbDevice *dev = m_usbDriveComboBox->itemData(idx).value<UsbDevice *>();
         selectedDevice = dev->m_PhysicalDevice;
     }
 
@@ -347,26 +350,22 @@ void MainWindow::enumFlashDevices()
 
     // Restore the previously selected device (if present)
     if (!selectedDevice.isEmpty())
-        for (int i = 0; i < m_usbDriveComboBox->count(); ++i)
-        {
-            UsbDevice* dev = m_usbDriveComboBox->itemData(i).value<UsbDevice*>();
-            if (dev->m_PhysicalDevice == selectedDevice)
-            {
+        for (int i = 0; i < m_usbDriveComboBox->count(); ++i) {
+            UsbDevice *dev = m_usbDriveComboBox->itemData(i).value<UsbDevice *>();
+            if (dev->m_PhysicalDevice == selectedDevice) {
                 m_usbDriveComboBox->setCurrentIndex(i);
                 break;
             }
         }
 
     // Update the Write button enabled/disabled state
-    m_createButton->setEnabled(m_usbDriveComboBox->count() > 0
-                               && m_isoImagePath != "");
+    m_createButton->setEnabled(m_usbDriveComboBox->count() > 0 && m_isoImagePath != "");
 
     // Enable/disable the usb drive combobox
     if (m_usbDriveComboBox->count() < 1) {
         m_usbDriveComboBox->setEnabled(false);
         m_usbDriveComboBox->setEditable(true);
-        m_usbDriveComboBox->lineEdit()
-            ->setPlaceholderText(i18n("Please plug in a USB drive"));
+        m_usbDriveComboBox->lineEdit()->setPlaceholderText(i18n("Please plug in a USB drive"));
     } else {
         m_usbDriveComboBox->setEnabled(true);
         m_usbDriveComboBox->setEditable(false);
@@ -375,10 +374,9 @@ void MainWindow::enumFlashDevices()
 
 void MainWindow::writeToDevice(bool zeroing)
 {
-    UsbDevice* selectedDevice = m_usbDriveComboBox->itemData(
-        m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
+    UsbDevice *selectedDevice = m_usbDriveComboBox->itemData(m_usbDriveComboBox->currentIndex()).value<UsbDevice *>();
 
-    ImageWriter* writer = new ImageWriter(zeroing ? "" : m_isoImagePath, selectedDevice);
+    ImageWriter *writer = new ImageWriter(zeroing ? "" : m_isoImagePath, selectedDevice);
     QThread *writerThread = new QThread(this);
 
     // Connect start and end signals
@@ -407,16 +405,15 @@ void MainWindow::writeToDevice(bool zeroing)
     showWritingProgress();
 }
 
-void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only files with ANSI or Unicode paths (Windows) and URIs (Linux)
-    if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"") ||
-        event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\"") ||
-        event->mimeData()->hasFormat("text/uri-list"))
+    if (event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileName\"")
+        || event->mimeData()->hasFormat("application/x-qt-windows-mime;value=\"FileNameW\"") || event->mimeData()->hasFormat("text/uri-list"))
         event->accept();
 }
 
-void MainWindow::dropEvent(QDropEvent* event)
+void MainWindow::dropEvent(QDropEvent *event)
 {
     QString newImageFile = "";
     QByteArray droppedFileName;
@@ -424,7 +421,7 @@ void MainWindow::dropEvent(QDropEvent* event)
     // First, try to use the Unicode file name
     droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileNameW\"");
     if (!droppedFileName.isEmpty()) {
-        newImageFile = QString::fromWCharArray(reinterpret_cast<const wchar_t*>(droppedFileName.constData()));
+        newImageFile = QString::fromWCharArray(reinterpret_cast<const wchar_t *>(droppedFileName.constData()));
     } else {
         // If failed, use the ANSI name with the local codepage
         droppedFileName = event->mimeData()->data("application/x-qt-windows-mime;value=\"FileName\"");
@@ -452,38 +449,32 @@ void MainWindow::dropEvent(QDropEvent* event)
     }
 }
 
-void MainWindow::closeEvent(QCloseEvent* event)
+void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (m_isWriting)
-    {
-        const int answer = QMessageBox::question(
-            this,
-            i18n("Cancel?"),
-            i18n("Writing is in progress, abort it?"));
+    if (m_isWriting) {
+        const int answer = QMessageBox::question(this, i18n("Cancel?"), i18n("Writing is in progress, abort it?"));
 
         if (answer == QMessageBox::No)
             event->ignore();
     }
 }
 
-void MainWindow::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
+void MainWindow::addFlashDeviceCallback(void *cbParam, UsbDevice *device)
 {
-    auto usbDriveComboBox = (QComboBox*)cbParam;
-    usbDriveComboBox->addItem(device->formatDisplayName(),
-                              QVariant::fromValue(device));
+    auto usbDriveComboBox = (QComboBox *)cbParam;
+    usbDriveComboBox->addItem(device->formatDisplayName(), QVariant::fromValue(device));
 }
 
 void MainWindow::openIsoImage()
 {
-    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img *.iso.gz *.iso.xz *.img.zstd *.img.gz *.img.zx *.img.zstd *.raw"))
-        + ";;" + i18n("All Files (%1)", QString("*"));
-    QUrl isoImageUrl = QFileDialog::getOpenFileUrl(this, i18n("Select image to flash"), QUrl::fromLocalFile(m_lastOpenedDir),
-                                                        filter, nullptr,
-                                                        QFileDialog::ReadOnly);
+    const QString filter = i18n("Disk Images (%1)", QString("*.iso *.bin *.img *.iso.gz *.iso.xz *.img.zstd *.img.gz *.img.zx *.img.zstd *.raw")) + ";;"
+        + i18n("All Files (%1)", QString("*"));
+    QUrl isoImageUrl =
+        QFileDialog::getOpenFileUrl(this, i18n("Select image to flash"), QUrl::fromLocalFile(m_lastOpenedDir), filter, nullptr, QFileDialog::ReadOnly);
     openUrl(isoImageUrl);
 }
 
-void MainWindow::openUrl(const QUrl& url)
+void MainWindow::openUrl(const QUrl &url)
 {
     if (url.isEmpty()) {
         return;
@@ -502,15 +493,14 @@ void MainWindow::openUrl(const QUrl& url)
     m_fetchIso = new FetchIsoJob(this);
     connect(m_fetchIso, &FetchIsoJob::downloadProgressChanged, this, &MainWindow::downloadProgressChanged);
     connect(m_fetchIso, &FetchIsoJob::failed, this, &MainWindow::hideWritingProgress);
-    connect(m_fetchIso, &FetchIsoJob::finished, this, [this] (const QString &file) {
+    connect(m_fetchIso, &FetchIsoJob::finished, this, [this](const QString &file) {
         m_isoImagePath = file;
         m_busySpinner->stop();
         preprocessIsoImage(file);
     });
     m_busyLabel->setText(i18n("Downloading ISO image"));
     m_busyWidget->show();
-    m_busySpinner->setSequence(KPixmapSequenceLoader::load(
-        "process-working", KIconLoader::SizeSmallMedium));
+    m_busySpinner->setSequence(KPixmapSequenceLoader::load("process-working", KIconLoader::SizeSmallMedium));
     m_busySpinner->start();
     m_fetchIso->fetch(url);
 }
@@ -520,33 +510,30 @@ void MainWindow::writeIsoImage()
     if (m_usbDriveComboBox->count() == 0 || m_isoImagePath == "")
         return;
 
-    UsbDevice* selectedDevice = m_usbDriveComboBox->itemData(
-        m_usbDriveComboBox->currentIndex()).value<UsbDevice*>();
+    UsbDevice *selectedDevice = m_usbDriveComboBox->itemData(m_usbDriveComboBox->currentIndex()).value<UsbDevice *>();
 
     if (selectedDevice->m_Size == 0) {
-        int warningReturn = QMessageBox::warning(
-            this,
-            i18n("Unknown Disk Size"),
-            i18n("The selected disk is of unknown size, please check the image will fit before writing.\n\n"
-                 "Image size: %1 (%2 b)",
-                 KFormat().formatByteSize(m_isoImageSize),
-                 m_isoImageSize),
-            QMessageBox::Ok | QMessageBox::Cancel);
+        int warningReturn = QMessageBox::warning(this,
+                                                 i18n("Unknown Disk Size"),
+                                                 i18n("The selected disk is of unknown size, please check the image will fit before writing.\n\n"
+                                                      "Image size: %1 (%2 b)",
+                                                      KFormat().formatByteSize(m_isoImageSize),
+                                                      m_isoImageSize),
+                                                 QMessageBox::Ok | QMessageBox::Cancel);
         if (warningReturn != QMessageBox::Ok) {
             return;
         }
     } else if (m_isoImageSize > selectedDevice->m_Size) {
-        QMessageBox::critical(
-            this,
-            i18nc("@title:window", "Error"),
-            i18n("The image is larger than your selected device!\n\n"
-                 "Image size: %1 (%2 b)\n"
-                 "Disk size: %3 (%4 b)",
-                 KFormat().formatByteSize(m_isoImageSize),
-                 m_isoImageSize,
-                 KFormat().formatByteSize(selectedDevice->m_Size),
-                 selectedDevice->m_Size),
-            QMessageBox::Ok);
+        QMessageBox::critical(this,
+                              i18nc("@title:window", "Error"),
+                              i18n("The image is larger than your selected device!\n\n"
+                                   "Image size: %1 (%2 b)\n"
+                                   "Disk size: %3 (%4 b)",
+                                   KFormat().formatByteSize(m_isoImageSize),
+                                   m_isoImageSize,
+                                   KFormat().formatByteSize(selectedDevice->m_Size),
+                                   selectedDevice->m_Size),
+                              QMessageBox::Ok);
         return;
     }
 
@@ -627,11 +614,9 @@ void MainWindow::showIsoVerificationResult(IsoVerifier::VerifyResult verify, con
 {
     if (verify == IsoVerifier::VerifyResult::Successful) {
         m_busyLabel->setText(i18n("The ISO image is valid"));
-        m_busySpinner->setSequence(KPixmapSequenceLoader::load(
-            "checkmark", KIconLoader::SizeSmallMedium));
+        m_busySpinner->setSequence(KPixmapSequenceLoader::load("checkmark", KIconLoader::SizeSmallMedium));
     } else {
-        m_busySpinner->setSequence(
-            KPixmapSequenceLoader::load("error", KIconLoader::SizeSmallMedium));
+        m_busySpinner->setSequence(KPixmapSequenceLoader::load("error", KIconLoader::SizeSmallMedium));
         if (verify == IsoVerifier::VerifyResult::KeyNotFound) {
             m_busyLabel->setText(i18n("Could not find the key to verify the ISO image"));
         } else if (verify == IsoVerifier::VerifyResult::Failed) {

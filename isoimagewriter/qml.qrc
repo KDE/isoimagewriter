@@ -1,10 +1,14 @@
+<!-- /*
+ * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */ -->
+
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
 
         <!-- Pages -->
         <file>qml/pages/WelcomePage.qml</file>
-        <file>qml/pages/FilePage.qml</file>
         <file>qml/pages/IsoListingPage.qml</file>
         <file>qml/pages/DownloadWriteOptionsPage.qml</file>
         <file>qml/pages/DownloadingPage.qml</file>

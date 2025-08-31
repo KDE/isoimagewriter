@@ -16,8 +16,12 @@ public:
     explicit FetchIsoJob(QObject *parent = nullptr);
 
     Q_INVOKABLE void fetch(const QUrl &url);
-    Q_INVOKABLE void cancel() { m_canceled = true; }
-    QUrl fetchUrl() const {
+    Q_INVOKABLE void cancel()
+    {
+        m_canceled = true;
+    }
+    QUrl fetchUrl() const
+    {
         return m_fetchUrl;
     }
 

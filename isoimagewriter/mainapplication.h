@@ -12,7 +12,7 @@
 class MainApplication : public QApplication
 {
 public:
-    MainApplication(int& argc, char** argv);
+    MainApplication(int &argc, char **argv);
     // Returns the language id to be used by the application (specified by --lang, or system locale otherwise)
     QString getLocale();
     // Returns the start-up directory that will be shown by default in the Open File dialog

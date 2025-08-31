@@ -1,19 +1,22 @@
-// UsbDeviceModel.h - Add this to your existing headers
-#ifndef USBDEVICEMODEL_H
-#define USBDEVICEMODEL_H
+#/*
+#  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+#  * SPDX-License-Identifier: GPL-3.0-or-later
+#  */
 
+#pragma once
+
+#include "usbdevice.h"
+#include "usbdevicemonitor.h"
 #include <QAbstractListModel>
 #include <QObject>
 #include <QQmlEngine>
 #include <qqmlregistration.h>
-#include "usbdevice.h"
-#include "usbdevicemonitor.h"
 
 class UsbDeviceModel : public QAbstractListModel
 {
     Q_OBJECT
     QML_ELEMENT
-    
+
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(bool hasDevices READ hasDevices NOTIFY hasDevicesChanged)
 
@@ -32,11 +35,17 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     // Properties
-    int count() const { return m_devices.size(); }
-    bool hasDevices() const { return !m_devices.isEmpty(); }
+    int count() const
+    {
+        return m_devices.size();
+    }
+    bool hasDevices() const
+    {
+        return !m_devices.isEmpty();
+    }
 
     // Invokable methods for QML
-    Q_INVOKABLE UsbDevice* getDevice(int index) const;
+    Q_INVOKABLE UsbDevice *getDevice(int index) const;
 
 public slots:
     void onDeviceChanged();
@@ -48,11 +57,8 @@ signals:
 private:
     void enumFlashDevices();
     void cleanUp();
-    static void addFlashDeviceCallback(void* cbParam, UsbDevice* device);
+    static void addFlashDeviceCallback(void *cbParam, UsbDevice *device);
 
-    QList<UsbDevice*> m_devices;
-    UsbDeviceMonitor* m_monitor;
+    QList<UsbDevice *> m_devices;
+    UsbDeviceMonitor *m_monitor;
 };
-
-
-#endif // USBDEVICEMODEL_H

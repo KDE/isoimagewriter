@@ -14,5 +14,4 @@ public:
     ~UsbDeviceMonitorPrivate();
 };
 
-
 #endif // USBDEVICEMONITOR_MAC_P_H

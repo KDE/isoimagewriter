@@ -10,9 +10,9 @@
 // This file contains some commonly-used constants and function declarations
 
 #include <QDebug>
+#include <QLoggingCategory>
 #include <QObject>
 #include <QString>
-#include <QLoggingCategory>
 
 #include <type_traits>
 
@@ -27,7 +27,7 @@ const quint64 DEFAULT_UNIT = 1048576;
 const QString ApplicationTitle = "ISO Image Writer";
 
 // Pointer to correctly typed application instance
-#define mApp (static_cast<MainApplication*>qApp)
+#define mApp (static_cast<MainApplication *> qApp)
 
 // Returns the number of blocks required to contain some number of bytes
 // Input:
@@ -36,7 +36,8 @@ const QString ApplicationTitle = "ISO Image Writer";
 //  factor - size of the block
 // Returns:
 //  the number of blocks of size <factor> required for <val> to fit in
-template <typename T> T alignNumberDiv(T val, T factor)
+template<typename T>
+T alignNumberDiv(T val, T factor)
 {
     static_assert(std::is_integral<T>::value, "Only integer types are supported!");
     return ((val + factor - 1) / factor);
@@ -49,7 +50,8 @@ template <typename T> T alignNumberDiv(T val, T factor)
 //  factor - size of the block
 // Returns:
 //  the total size of blocks of size <factor> required for <val> to fit in
-template <typename T> T alignNumber(T val, T factor)
+template<typename T>
+T alignNumber(T val, T factor)
 {
     static_assert(std::is_integral<T>::value, "Only integer types are supported!");
     return alignNumberDiv(val, factor) * factor;
@@ -77,7 +79,7 @@ QString formatErrorMessageFromCode(QString prefixMessage, DWORD errorCode = GetL
 //  fileName - path to the file to read
 // Returns:
 //  the file contents or empty string if an error occurred
-QString readFileContents(const QString& fileName);
+QString readFileContents(const QString &fileName);
 
 // Callback function type for platformEnumFlashDevices (see below)
 // Input:
@@ -91,7 +93,7 @@ QString readFileContents(const QString& fileName);
 //  SectorSize     - sector size of the device
 // Returns:
 //  nothing
-typedef void (*AddFlashDeviceCallbackProc)(void* cbParam, UsbDevice* device);
+typedef void (*AddFlashDeviceCallbackProc)(void *cbParam, UsbDevice *device);
 
 // Performs platform-specific enumeration of USB flash disks and calls the callback
 // function for adding these devices into the application GUI structure
@@ -100,7 +102,7 @@ typedef void (*AddFlashDeviceCallbackProc)(void* cbParam, UsbDevice* device);
 //  cbParam  - parameter to be passed to this callback function
 // Returns:
 //  true if enumeration completed successfully, false otherwise
-bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam);
+bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void *cbParam);
 
 // Checks the application privileges and if they are not sufficient, restarts
 // itself requesting higher privileges

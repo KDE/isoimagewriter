@@ -14,5 +14,4 @@ public:
     ~UsbDeviceMonitorPrivate();
 };
 
-
 #endif // USBDEVICEMONITOR_WIN_P_H

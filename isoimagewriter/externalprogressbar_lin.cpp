@@ -7,7 +7,6 @@
 // Linux implementation of ExternalProgressBar
 // Not implemented yet, contains only stubs
 
-
 #include <QWidget>
 
 #include "externalprogressbar.h"
@@ -28,10 +27,9 @@ ExternalProgressBarPrivate::~ExternalProgressBarPrivate()
 {
 }
 
-
-ExternalProgressBar::ExternalProgressBar(QWidget* mainWindow) :
-    d_ptr(new ExternalProgressBarPrivate()),
-    m_MaxValue(0)
+ExternalProgressBar::ExternalProgressBar(QWidget *mainWindow)
+    : d_ptr(new ExternalProgressBarPrivate())
+    , m_MaxValue(0)
 {
     Q_UNUSED(mainWindow);
 }
@@ -74,4 +72,3 @@ bool ExternalProgressBar::ProgressSetError()
 {
     return false;
 }
-

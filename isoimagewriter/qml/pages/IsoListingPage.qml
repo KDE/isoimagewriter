@@ -1,43 +1,20 @@
 /*
- * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
+* SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+* SPDX-License-Identifier: GPL-3.0-or-later
+*/
 
-pragma ComponentBehavior: Bound
-
-import QtQuick
+import QtQuick 
 import QtQuick.Controls as Controls
+import QtQuick.Layouts 
+import org.kde.isoimagewriter 1.0
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
-import QtQuick.Layouts
-import org.kde.isoimagewriter 1.0
 
 FormCard.FormCardPage {
     id: root
-    title: i18n("Browse Linux Distributions")
 
     property var releases: []
     property bool isLoading: true
-
-    ReleaseFetch {
-        id: releaseFetcher
-
-        onReleasesReady: function (fetchedReleases) {
-            console.log("Releases fetched:", fetchedReleases.length);
-            root.releases = fetchedReleases;
-            root.isLoading = false;
-        }
-
-        onFetchFailed: function (error) {
-            console.log("Failed to fetch releases:", error);
-            root.isLoading = false;
-            showPassiveNotification(i18n("Failed to fetch releases: %1", error));
-        }
-
-        onFetchProgress: function (status) {
-            console.log("Fetch progress:", status);
-        }
-    }
 
     function selectRelease(release) {
         applicationWindow().pageStack.push("qrc:/qml/pages/DownloadWriteOptionsPage.qml", {
@@ -49,97 +26,204 @@ FormCard.FormCardPage {
     }
 
     function groupReleasesByDistro() {
-        let distroGroups = {};
-        if (!releases || !releases.length) {
+        let distroGroups = {
+        };
+        if (!releases || !releases.length)
             return distroGroups;
-        }
+
         for (let i = 0; i < releases.length; i++) {
             let release = releases[i];
-            if (!distroGroups[release.distro]) {
+            if (!distroGroups[release.distro])
                 distroGroups[release.distro] = [];
-            }
+
             distroGroups[release.distro].push(release);
         }
         return distroGroups;
     }
 
-    Item {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        visible: isLoading || (!releases || releases.length === 0)
-
-        Kirigami.LoadingPlaceholder {
-            anchors.centerIn: parent
-            visible: isLoading
-            text: i18n("Fetching latest releases...")
-        }
-
-        // check for internet
-        Kirigami.PlaceholderMessage {
-            anchors.centerIn: parent
-            visible: !isLoading && (releases ? releases.length === 0 : true)
-            text: i18n("No releases available")
-            icon.name: "download"
-        }
-    }
-
-    // Main content - only visible when not loading and has releases
-
-    ColumnLayout {
-        visible: !isLoading && releases && releases.length > 0
-        spacing: 0
-
-        FormCard.FormHeader {
-            visible: !isLoading && releases && releases.length > 0
-            title: "Select ISO"
-            Layout.topMargin: Kirigami.Units.gridUnit
-        }
-
-        Repeater {
-            model: {
-                if (!isLoading && releases && releases.length > 0) {
-                    let distroGroups = groupReleasesByDistro();
-                    return Object.keys(distroGroups).map(distroName => ({
-                                distroName: distroName,
-                                releases: distroGroups[distroName]
-                            }));
-                }
-                return [];
-            }
-
-            delegate: ColumnLayout {
-                required property var modelData
-                spacing: 0
-
-                FormCard.FormCard {
-                    Repeater {
-                        model: modelData.releases
-
-                        delegate: ColumnLayout {
-                            required property var modelData
-                            required property int index
-                            spacing: 0
-
-                            FormCard.FormButtonDelegate {
-                                text: modelData.name + (modelData.version ? " (" + modelData.version + ")" : "")
-                                onClicked: root.selectRelease(modelData)
-                            }
-
-                            FormCard.FormDelegateSeparator {
-                                visible: index < parent.parent.model.length - 1
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        FormCard.FormSectionText {
-            text: i18n("For more distributions, visit the <a href=\"https://kde.org/distributions\"><span style=\" text-decoration: underline;\">KDE Distributions</span></a>")
-        }
-    }
-
+    title: i18n("Browse Linux Distributions")
     Component.onCompleted: {
-        console.log("Starting release fetch …");
+        console.log("Starting release fetch…");
         releaseFetcher.fetchReleases();
     }
+
+    ReleaseFetch {
+        id: releaseFetcher
+
+        onReleasesReady: function(fetchedReleases) {
+            console.log("Releases fetched:", fetchedReleases.length);
+            root.releases = fetchedReleases;
+            root.isLoading = false;
+        }
+        onFetchFailed: function(error) {
+            console.log("Failed to fetch releases:", error);
+            root.isLoading = false;
+            showPassiveNotification(i18n("Failed to fetch releases: %1", error));
+        }
+        onFetchProgress: function(status) {
+            console.log("Fetch progress:", status);
+        }
+    }
+
+    // Main content layout, visible only when not loading
+    ColumnLayout {
+        anchors.fill: parent
+        spacing: 0
+        visible: !isLoading
+
+        // Show releases if available
+        ColumnLayout {
+            visible: releases && releases.length > 0
+            spacing: 0
+            Layout.fillWidth: true
+
+            FormCard.FormHeader {
+                title: "Select ISO"
+                Layout.topMargin: Kirigami.Units.gridUnit
+            }
+
+            Repeater {
+                model: {
+                    if (releases && releases.length > 0) {
+                        let distroGroups = groupReleasesByDistro();
+                        return Object.keys(distroGroups).map((distroName) => {
+                            return ({
+                                "distroName": distroName,
+                                "releases": distroGroups[distroName]
+                            });
+                        });
+                    }
+                    return [];
+                }
+
+                delegate: ColumnLayout {
+                    required property var modelData
+
+                    spacing: 0
+
+                    FormCard.FormCard {
+                        Repeater {
+                            model: modelData.releases
+
+                            delegate: ColumnLayout {
+                                required property var modelData
+                                required property int index
+
+                                spacing: 0
+
+                                FormCard.FormButtonDelegate {
+                                    text: modelData.name + (modelData.version ? " (" + modelData.version + ")" : "")
+                                    onClicked: root.selectRelease(modelData)
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // Spacer before download button
+        Item {
+            height: Kirigami.Units.largeSpacing
+            visible: releases && releases.length > 0
+        }
+
+        // Always show download from URL option when not loading
+        FormCard.FormCard {
+            Layout.fillWidth: true
+
+            FormCard.FormButtonDelegate {
+                text: "Download from URL"
+                icon.name: "globe"
+                highlighted: true
+                onClicked: urlDialog.open()
+            }
+
+        }
+
+        FormCard.FormSectionText {
+            Layout.fillWidth: true
+            text: i18n("For more distributions, visit the <a href=\"https://kde.org/distributions\"><span style=\" text-decoration: underline;\">KDE Distributions</span></a>")
+        }
+
+    }
+
+    // Loading state - centered on the page
+    // This is now outside the main content's ColumnLayout, allowing it to be centered.
+    Controls.BusyIndicator {
+        id: indicator
+
+        anchors.centerIn: parent // This is the key change to center the indicator
+        running: isLoading // Controls the animation
+        visible: isLoading
+    }
+
+    // URL Input Dialog
+    Kirigami.Dialog {
+        id: urlDialog
+
+        title: i18n("Add URL")
+        standardButtons: Kirigami.Dialog.NoButton
+        preferredHeight: Kirigami.Units.gridUnit * 10
+        preferredWidth: Kirigami.Units.gridUnit * 15
+        customFooterActions: [
+            Kirigami.Action {
+                // nameInput is not defined in the provided code, so it has been removed.
+
+                text: i18nc("@action:button", "Next")
+                icon.name: "go-next"
+                enabled: urlInput.isValidUrl
+                onTriggered: {
+                    applicationWindow().pageStack.push("qrc:/qml/pages/DownloadWriteOptionsPage.qml", {
+                        "isoName": urlInput.text,
+                        "isoUrl": urlInput.text.trim(),
+                        "isoHash": "",
+                        "isoHashAlgo": ""
+                    });
+                    urlDialog.close();
+                    urlInput.text = "";
+                }
+            }
+        ]
+
+        ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                type: Kirigami.MessageType.Information
+                text: i18n("Enter the direct download URL of the Image File")
+                visible: true
+            }
+
+            Controls.Label {
+                Layout.fillWidth: true
+                text: i18n("ISO URL:")
+                font.bold: true
+            }
+
+            Controls.TextField {
+                id: urlInput
+
+                // Validate URL format
+                property bool isValidUrl: {
+                    let urlText = text.trim();
+                    return urlText.length > 0 && (urlText.startsWith("http://") || urlText.startsWith("https://")) && urlText.toLowerCase().endsWith(".iso");
+                }
+
+                Layout.fillWidth: true
+                placeholderText: i18n("https://example.com/path/to/file.iso")
+                selectByMouse: true
+            }
+
+        }
+
+    }
+
 }

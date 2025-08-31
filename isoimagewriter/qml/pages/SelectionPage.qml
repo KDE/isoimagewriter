@@ -4,26 +4,40 @@
  */
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.isoimagewriter
 import QtQuick.Window
 
-Kirigami.Page {
+FormCard.FormCardPage {
     id: selectionPage
-    title: i18n("ISO Image Writer")
+    title: i18nc("@title:window", "ISO Image Writer")
 
     property string selectedIsoPath: ""
     property string preselectedFile: ""
     property bool isVerifying: false
     property string verificationResult: ""
-    property bool isFlashing: false
+    property var selectedDevice: null
+
+    onSelectedIsoPathChanged: {
+        console.log("SelectionPage: selectedIsoPath changed to:", selectedIsoPath);
+    }
 
     Component.onCompleted: {
+        console.log("SelectionPage: Component.onCompleted, preselectedFile:", preselectedFile);
         if (preselectedFile) {
             selectedIsoPath = preselectedFile;
+            console.log("SelectionPage: Set selectedIsoPath to:", selectedIsoPath);
+        }
+    }
+
+    onPreselectedFileChanged: {
+        console.log("SelectionPage: preselectedFile changed to:", preselectedFile);
+        if (preselectedFile) {
+            selectedIsoPath = preselectedFile;
+            console.log("SelectionPage: Updated selectedIsoPath to:", selectedIsoPath);
         }
     }
 
@@ -34,70 +48,53 @@ Kirigami.Page {
             isVerifying = false;
 
             if (result === IsoVerifier.Successful) {
-                selectionPage.verificationResult = "✓ " + i18n("Verification successful! ISO integrity confirmed.");
+                selectionPage.verificationResult = "✓ " + i18nc("@info:status", "Verification successful! ISO integrity confirmed.");
             } else {
-                selectionPage.verificationResult = "✗ " + i18n("Verification failed: %1", error);
+                selectionPage.verificationResult = "✗ " + i18nc("@info:status", "Verification failed: %1", error);
             }
-        }
-    }
-
-    FlashController {
-        id: flashController
-
-        onFlashCompleted: {
-            console.log("Flash completed successfully!");
-            isFlashing = false;
-        }
-
-        onFlashFailed: function (error) {
-            console.error("Flash failed:", error);
-            isFlashing = false;
         }
     }
 
     function verifyIsoIntegrity(filePath, expectedSha256) {
         isVerifying = true;
-        verificationResult = i18n("Computing SHA256 checksum...");
+        verificationResult = i18nc("@info:progress", "Computing SHA256 checksum…");
 
         isoVerifier.filePath = filePath;
         isoVerifier.verifyWithSha256Sum(expectedSha256);
     }
 
-    function startFlashing() {
-        if (deviceCombo.currentIndex < 0 || !usbDeviceModel) {
+    function navigateToFlashPage() {
+        if (!selectedDevice || !selectedDevice.physicalDevice) {
             console.error("SelectionPage: Invalid device selection");
             return;
         }
 
-        let device = usbDeviceModel.getDevice(deviceCombo.currentIndex);
-        if (device && device.physicalDevice) {
-            console.log("SelectionPage: Starting flash with device:", device.physicalDevice);
-            isFlashing = true;
-            flashController.startFlashing(selectedIsoPath, device);
-        } else {
-            console.error("SelectionPage: No valid device selected");
-        }
+        console.log("SelectionPage: Navigating to flash page with device:", selectedDevice.physicalDevice);
+        applicationWindow().pageStack.push("qrc:/qml/pages/FlashPage.qml", {
+            "isoPath": selectedIsoPath,
+            "selectedDevice": selectedDevice
+        });
     }
 
     // SHA256 Input Dialog
     Kirigami.Dialog {
         id: sha256Dialog
-        title: i18n("Verify ISO Integrity")
+        title: i18nc("@title:window", "Verify ISO Integrity")
         standardButtons: Kirigami.Dialog.NoButton
 
         ColumnLayout {
             spacing: Kirigami.Units.largeSpacing
 
-            Label {
+            Controls.Label {
                 Layout.fillWidth: true
-                text: i18n("Enter the expected SHA256 checksum to verify the integrity of your ISO file:")
-                wrapMode: Label.WordWrap
+                text: i18nc("@info", "Enter the expected SHA256 checksum to verify the integrity of your ISO file:")
+                wrapMode: Text.WordWrap
             }
 
-            TextField {
+            Controls.TextField {
                 id: sha256Input
                 Layout.fillWidth: true
-                placeholderText: i18n("SHA256 checksum...")
+                placeholderText: i18nc("@info:placeholder", "SHA256 checksum…")
                 selectByMouse: true
             }
         }
@@ -124,270 +121,251 @@ Kirigami.Page {
         ]
     }
 
-    FileDialog {
-        id: fileDialog
-        title: i18n("Select ISO image")
-        nameFilters: ["ISO files (*.iso)", "All files (*)"]
-        modality: Qt.WindowModal
-        options: FileDialog.DontUseNativeDialog
-        onAccepted: {
-            if (fileDialog.selectedFile) {
-                let filePath = fileDialog.selectedFile.toString();
-                if (filePath.startsWith("file://")) {
-                    filePath = filePath.substring(7);
+    // Confirmation Dialog
+    Kirigami.Dialog {
+        id: confirmationDialog
+        title: i18nc("@title:window", "Warning: Data Will Be Erased")
+        standardButtons: Kirigami.Dialog.NoButton
+
+        ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+
+            RowLayout {
+                spacing: Kirigami.Units.largeSpacing
+
+                Kirigami.Icon {
+                    source: "dialog-warning"
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
+                    color: Kirigami.Theme.negativeTextColor
                 }
-                selectedIsoPath = filePath;
+
+                Controls.Label {
+                    Layout.fillWidth: true
+                    text: i18nc("@info", "All data on the selected USB device will be permanently erased!\n\nThis action cannot be undone. Please make sure you have backed up any important data before proceeding.")
+                    wrapMode: Text.WordWrap
+                    font.bold: true
+                }
             }
         }
+
+        customFooterActions: [
+            Kirigami.Action {
+                text: i18nc("@action:button", "Abort")
+                icon.name: "dialog-cancel"
+                onTriggered: {
+                    confirmationDialog.close();
+                }
+            },
+            Kirigami.Action {
+                text: i18nc("@action:button", "Continue")
+                icon.name: "go-next"
+                onTriggered: {
+                    confirmationDialog.close();
+                    navigateToFlashPage();
+                }
+            }
+        ]
+    }
+
+    FileDialogBridge {
+        id: fileDialog
+    }
+
+    // USB Device Selection Dialog
+    Kirigami.Dialog {
+        id: usbSelectionDialog
+        title: i18nc("@title:window", "Select USB Device")
+        standardButtons: Kirigami.Dialog.NoButton
+
+        property var selectedDevice: null
+
+        signal deviceSelected(var device)
+
+        onDeviceSelected: function (device) {
+            selectionPage.selectedDevice = device;
+        }
+
+        ColumnLayout {
+            spacing: Kirigami.Units.largeSpacing
+            implicitWidth: Kirigami.Units.gridUnit * 25
+
+            FormCard.FormHeader {
+                title: i18nc("@title:group", "Available USB Devices")
+            }
+
+            FormCard.FormCard {
+                Repeater {
+                    model: usbDeviceModel || null
+
+                    FormCard.FormButtonDelegate {
+                        required property string displayName
+                        required property int index
+
+                        text: displayName || ""
+                        icon.name: "drive-removable-media"
+
+                        onClicked: {
+                            let selectedDevice = usbDeviceModel.getDevice(index);
+                            usbSelectionDialog.deviceSelected(selectedDevice);
+                            usbSelectionDialog.close();
+                        }
+                    }
+                }
+            }
+
+            // Show message when no devices available
+            Controls.Label {
+                Layout.fillWidth: true
+                text: i18nc("@info", "No USB devices detected. Please connect a USB drive and try again.")
+                color: Kirigami.Theme.disabledTextColor
+                horizontalAlignment: Text.AlignHCenter
+                visible: !usbDeviceModel || !usbDeviceModel.hasDevices
+                wrapMode: Text.WordWrap
+            }
+        }
+
+        customFooterActions: [
+            Kirigami.Action {
+                text: i18nc("@action:button", "Cancel")
+                icon.name: "dialog-cancel"
+                onTriggered: usbSelectionDialog.close()
+            }
+        ]
     }
 
     ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: Kirigami.Units.largeSpacing
-        spacing: Kirigami.Units.largeSpacing
+        spacing: 0
 
-        // Row 1: ISO Selection
-        ColumnLayout {
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
+        // ISO Selection Section
+        FormCard.FormHeader {
+            title: i18nc("@title:group", "ISO Image")
+        }
 
-            Label {
-                text: i18n("Select ISO image:")
-                font.bold: true
-            }
-
-            TextField {
-                id: isoField
-                Layout.fillWidth: true
-                placeholderText: i18n("Click to select ISO file…")
-                text: selectedIsoPath
-                readOnly: true
-                rightPadding: folderButton.width + Kirigami.Units.smallSpacing
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: fileDialog.open()
-                    cursorShape: Qt.PointingHandCursor
+        FormCard.FormCard {
+            FormCard.FormButtonDelegate {
+                id: isoSelectionDelegate
+                text: selectedIsoPath ? selectedIsoPath.split('/').pop() : i18nc("@action:button", "Select ISO file…")
+                description: selectedIsoPath ? selectedIsoPath : i18nc("@info", "Choose an ISO image to write")
+                icon.name: selectedIsoPath ? "application-x-cd-image" : "folder-open"
+                onClicked: {
+                    var fileUrl = fileDialog.selectImageFile();
+                    if (fileUrl.toString() !== "") {
+                        let filePath = fileUrl.toString();
+                        if (filePath.startsWith("file://")) {
+                            filePath = filePath.substring(7);
+                        }
+                        selectedIsoPath = filePath;
+                    }
                 }
 
-                Button {
-                    id: folderButton
-                    anchors.right: parent.right
-                    anchors.rightMargin: Kirigami.Units.smallSpacing
-                    anchors.verticalCenter: parent.verticalCenter
-                    icon.name: "folder-open"
-                    flat: true
-                    onClicked: fileDialog.open()
-
-                    // Make button smaller to fit nicely inside text field
-                    implicitWidth: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing
-                    implicitHeight: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing
+                Component.onCompleted: {
+                    console.log("FormButtonDelegate: selectedIsoPath is:", selectedIsoPath);
                 }
             }
         }
 
-        // Verification Result Section
-        ColumnLayout {
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-            visible: verificationResult !== "" || isVerifying
+        // USB Device Selection Section
+        FormCard.FormHeader {
+            title: i18nc("@title:group", "USB Device")
+        }
+
+        // Show USB selector when devices are available
+        FormCard.FormCard {
+            visible: usbDeviceModel && usbDeviceModel.hasDevices
+
+            FormCard.FormButtonDelegate {
+                id: usbSelectionDelegate
+                text: selectedDevice ? selectedDevice.displayName : i18nc("@action:button", "Select USB device…")
+                description: selectedDevice ? (selectedDevice.size ? i18nc("@info", "Size: %1", selectedDevice.size) : i18nc("@info", "USB device selected")) : i18nc("@info", "Choose a USB device to write to")
+                icon.name: selectedDevice ? "drive-removable-media" : "drive-removable-media-usb"
+                onClicked: usbSelectionDialog.open()
+            }
+        }
+
+        // Warning message when no USB devices - replaces the FormCard
+        FormCard.FormCard {
+            visible: !usbDeviceModel || !usbDeviceModel.hasDevices
 
             RowLayout {
                 Layout.fillWidth: true
+                Layout.margins: Kirigami.Units.largeSpacing
+                spacing: Kirigami.Units.largeSpacing
 
-                Label {
+                Kirigami.Icon {
+                    source: "dialog-information"
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                }
+
+                ColumnLayout {
                     Layout.fillWidth: true
-                    text: isVerifying ? i18n("Computing SHA256 checksum...") : verificationResult
-                    color: verificationResult.includes("✓") ? Kirigami.Theme.positiveTextColor : verificationResult.includes("✗") ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
-                    wrapMode: Label.WordWrap
-                }
+                    spacing: Kirigami.Units.smallSpacing
 
-                BusyIndicator {
-                    visible: isVerifying
-                    running: isVerifying
-                }
-            }
-        }
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        text: i18nc("@info", "No USB devices detected")
+                        font.bold: true
+                    }
 
-        // Row 2: USB Drive Selection
-        ColumnLayout {
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-
-            Label {
-                text: i18n("Select USB drive:")
-                font.bold: true
-            }
-
-            ComboBox {
-                id: deviceCombo
-                Layout.fillWidth: true
-                model: usbDeviceModel || null
-                textRole: "displayName"
-                enabled: usbDeviceModel && usbDeviceModel.hasDevices && !isFlashing
-
-                // Auto-select first device if available
-                currentIndex: (usbDeviceModel && usbDeviceModel.hasDevices && count > 0) ? 0 : -1
-
-                delegate: ItemDelegate {
-                    width: deviceCombo.width
-                    text: model.displayName
-                    highlighted: deviceCombo.highlightedIndex === index
-                }
-
-                // Show placeholder text when no devices
-                Label {
-                    anchors.left: parent.left
-                    anchors.leftMargin: deviceCombo.leftPadding
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: i18n("Please plug in a USB drive")
-                    color: Kirigami.Theme.disabledTextColor
-                    visible: !usbDeviceModel || !usbDeviceModel.hasDevices || deviceCombo.count === 0
-                }
-            }
-
-            Label {
-                Layout.fillWidth: true
-                text: i18n("All data on the selected device will be permanently erased!")
-                color: Kirigami.Theme.negativeTextColor
-                wrapMode: Label.WordWrap
-                visible: deviceCombo.currentIndex >= 0
-            }
-        }
-
-        // Flash Progress Section
-        ColumnLayout {
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-            visible: isFlashing
-
-            Label {
-                Layout.fillWidth: true
-                text: i18n("Flashing: %1", selectedIsoPath.split('/').pop() || i18n("No file selected"))
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
-                font.weight: Font.Bold
-                wrapMode: Label.WordWrap
-            }
-
-            Label {
-                Layout.fillWidth: true
-                text: {
-                    if (deviceCombo.currentIndex >= 0 && usbDeviceModel && deviceCombo.currentIndex < usbDeviceModel.count) {
-                        let device = usbDeviceModel.getDevice(deviceCombo.currentIndex);
-                        if (device && device.displayName) {
-                            return i18n("Into: %1", device.displayName);
-                        } else {
-                            return i18n("Into: %1", i18n("Unknown device"));
-                        }
-                    } else {
-                        return i18n("Into: %1", i18n("No device selected"));
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        text: i18nc("@info", "Please connect a USB drive to continue")
+                        color: Kirigami.Theme.disabledTextColor
+                        wrapMode: Text.WordWrap
                     }
                 }
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
-                color: Kirigami.Theme.disabledTextColor
-                wrapMode: Label.WordWrap
             }
-
-            Label {
-                Layout.fillWidth: true
-                text: flashController.statusMessage || i18n("Preparing...")
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
-                wrapMode: Label.WordWrap
-            }
-
-            ProgressBar {
-                Layout.fillWidth: true
-                value: flashController.progress
-                from: 0.0
-                to: 1.0
-            }
-
-            Label {
-                Layout.fillWidth: true
-                text: i18n("Progress: %1%", Math.round(flashController.progress * 100))
-                color: Kirigami.Theme.disabledTextColor
-                horizontalAlignment: Text.AlignHCenter
-            }
-
-            // Error message section
-            Label {
-                Layout.fillWidth: true
-                text: flashController.errorMessage
-                color: Kirigami.Theme.negativeTextColor
-                font.weight: Font.Bold
-                wrapMode: Label.WordWrap
-                visible: flashController.errorMessage.length > 0
-            }
-
-            // Success message section
-            Label {
-                Layout.fillWidth: true
-                text: i18n("Flash completed successfully!")
-                color: Kirigami.Theme.positiveTextColor
-                font.weight: Font.Bold
-                wrapMode: Label.WordWrap
-                visible: !flashController.isWriting && flashController.progress >= 1.0 && flashController.errorMessage.length === 0
-            }
-        }
-
-        // Spacer
-        Item {
-            Layout.fillHeight: true
         }
     }
 
-    footer: ToolBar {
+    footer: Controls.ToolBar {
         contentItem: RowLayout {
+            Controls.Label {
+                text: {
+                    if (!selectedIsoPath) {
+                        return "";
+                    } else if (verificationResult.includes("✓")) {
+                        return i18nc("@info:status", "Verified ISO Image");
+                    } else if (verificationResult.includes("✗")) {
+                        return i18nc("@info:status", "Verification Failed");
+                    } else {
+                        return i18nc("@info:status", " 🚫 Unverified ISO Image");
+                    }
+                }
+                color: {
+                    if (verificationResult.includes("✓")) {
+                        return Kirigami.Theme.positiveTextColor;
+                    } else if (verificationResult.includes("✗")) {
+                        return Kirigami.Theme.negativeTextColor;
+                    } else {
+                        return Kirigami.Theme.disabledTextColor;
+                    }
+                }
+                visible: selectedIsoPath !== ""
+            }
+
             Item {
                 Layout.fillWidth: true
             }
 
-            Button {
-                text: i18nc("@action:button", "Cancel")
-                icon.name: "dialog-cancel"
-                visible: isFlashing
-                onClicked: {
-                    if (flashController.isWriting) {
-                        flashController.cancelFlashing();
-                    }
-                    isFlashing = false;
-                }
-            }
-
-            Button {
+            Controls.Button {
                 text: i18nc("@action:button", "Verify")
                 icon.name: "security-medium"
-                enabled: selectedIsoPath !== "" && !isVerifying && !isFlashing
-                visible: !isFlashing
+                enabled: selectedIsoPath !== "" && !isVerifying
                 onClicked: {
                     sha256Dialog.open();
                 }
             }
 
-            Button {
-                text: i18nc("@action:button", "Home")
-                icon.name: "go-home"
-                visible: !flashController.isWriting && flashController.progress >= 1.0 && flashController.errorMessage.length === 0
-                onClicked: {
-                    // Go back to the first page (WelcomePage)
-                    pageStack.pop(null);
-                    // Reset state
-                    isFlashing = false;
-                    verificationResult = "";
-                }
-            }
-
-            Button {
-                text: i18nc("@action:button", "START FLASHING")
-                icon.name: "media-flash"
+            Controls.Button {
+                text: i18nc("@action:button", "Next")
+                icon.name: "go-next"
                 highlighted: true
-                enabled: selectedIsoPath !== "" && deviceCombo.currentIndex >= 0 && !isFlashing && !isVerifying
-                visible: !isFlashing || (flashController.errorMessage.length > 0)
+                enabled: selectedIsoPath !== "" && selectedDevice && !isVerifying
                 onClicked: {
-                    startFlashing();
+                    confirmationDialog.open();
                 }
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
-                font.weight: Font.Bold
             }
         }
     }

@@ -2,15 +2,16 @@
  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-#include "flashcontroller.h"
-#include <QThread>
-#include <KLocalizedString>
-#include <iostream>
+
 #include <QDebug>
+#include <QThread>
+
+#include "flashcontroller.h"
 
 FlashController::FlashController(QObject *parent)
     : QObject(parent)
     , m_writer(nullptr)
+    , m_thread(nullptr)
     , m_isWriting(false)
     , m_progress(0.0)
 {
@@ -18,15 +19,32 @@ FlashController::FlashController(QObject *parent)
 
 FlashController::~FlashController()
 {
-    if (m_writer) {
+    // Properly cleanup thread and writer
+    if (m_writer && m_thread && m_thread->isRunning()) {
+        qDebug() << "FlashController::~FlashController: Cleaning up running thread";
         m_writer->cancelWriting();
 
+        // Wait for thread to finish properly
+        m_thread->quit();
+        if (!m_thread->wait(5000)) { // Wait up to 5 seconds
+            qWarning() << "FlashController::~FlashController: Thread did not finish gracefully, terminating";
+            m_thread->terminate();
+            m_thread->wait(1000);
+        }
+    }
+
+    if (m_writer) {
         m_writer->deleteLater();
         m_writer = nullptr;
     }
+
+    if (m_thread) {
+        m_thread->deleteLater();
+        m_thread = nullptr;
+    }
 }
 
-void FlashController::startFlashing(const QString& isoPath, UsbDevice* device)
+void FlashController::startFlashing(const QString &isoPath, UsbDevice *device)
 {
     if (m_isWriting || !device) {
         qDebug() << "FlashController::startFlashing: Invalid state - isWriting:" << m_isWriting << "device:" << device;
@@ -42,16 +60,30 @@ void FlashController::startFlashing(const QString& isoPath, UsbDevice* device)
 
     qDebug() << "FlashController::startFlashing: Starting flash of" << isoPath << "to" << device->physicalDevice();
 
-    // Clean up any previous writer
+    // Clean up any previous writer and thread
     if (m_writer) {
         m_writer->deleteLater();
         m_writer = nullptr;
     }
 
-    // Create new ImageWriter
+    if (m_thread) {
+        if (m_thread->isRunning()) {
+            qDebug() << "FlashController::startFlashing: Waiting for previous thread to finish";
+            m_thread->quit();
+            if (!m_thread->wait(3000)) {
+                qWarning() << "FlashController::startFlashing: Previous thread did not finish, terminating";
+                m_thread->terminate();
+                m_thread->wait(1000);
+            }
+        }
+        m_thread->deleteLater();
+        m_thread = nullptr;
+    }
+
+    // Create new ImageWriter and thread
     m_writer = new ImageWriter(isoPath, device);
-    QThread* thread = new QThread(this);
-    
+    m_thread = new QThread(this);
+
     // Connect signals
     connect(m_writer, &ImageWriter::progressChanged, this, &FlashController::onWriterProgress);
     connect(m_writer, &ImageWriter::success, this, &FlashController::onWriterSuccess);
@@ -62,24 +94,35 @@ void FlashController::startFlashing(const QString& isoPath, UsbDevice* device)
     // Reset state
     setErrorMessage("");
     setProgress(0.0);
-    setStatusMessage(i18n("Starting flash operation..."));
+    setStatusMessage(i18n("Starting flash operation…"));
     setIsWriting(true);
 
     // Start writing in a separate thread
-    m_writer->moveToThread(thread);
-    
-    connect(thread, &QThread::started, m_writer, &ImageWriter::writeImage);
-    connect(m_writer, &ImageWriter::finished, thread, &QThread::quit);
-    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
-    
-    thread->start();
+    m_writer->moveToThread(m_thread);
+
+    connect(m_thread, &QThread::started, m_writer, &ImageWriter::writeImage);
+    connect(m_writer, &ImageWriter::finished, m_thread, &QThread::quit);
+
+    // Use a safer cleanup approach - don't auto-delete the thread
+    connect(m_thread, &QThread::finished, this, [this]() {
+        if (m_thread) {
+            m_thread->deleteLater();
+            m_thread = nullptr;
+        }
+    });
+
+    m_thread->start();
 }
 
 void FlashController::cancelFlashing()
 {
     if (m_writer && m_isWriting) {
+        qDebug() << "FlashController::cancelFlashing: Cancelling flash operation";
         m_writer->cancelWriting();
-        setStatusMessage(i18n("Cancelling..."));
+        setStatusMessage(i18n("Cancelling…"));
+
+        // The thread will be cleaned up when the writer finishes
+        // Don't force quit here as it can cause the "thread destroyed while running" error
     }
 }
 
@@ -88,18 +131,16 @@ void FlashController::onWriterProgress(int percent)
     setProgress(percent / 100.0);
     setStatusMessage(i18n("Writing: %1%", percent));
     qDebug() << "Progress " << percent;
-
-
 }
 
-void FlashController::onWriterSuccess(const QString& msg)
+void FlashController::onWriterSuccess(const QString &msg)
 {
     setStatusMessage(msg.isEmpty() ? i18n("Flash completed successfully!") : msg);
     setProgress(1.0);
     emit flashCompleted();
 }
 
-void FlashController::onWriterError(const QString& msg)
+void FlashController::onWriterError(const QString &msg)
 {
     setErrorMessage(msg);
     setStatusMessage(i18n("Flash failed"));
@@ -133,7 +174,7 @@ void FlashController::setProgress(double progress)
     }
 }
 
-void FlashController::setStatusMessage(const QString& message)
+void FlashController::setStatusMessage(const QString &message)
 {
     if (m_statusMessage != message) {
         m_statusMessage = message;
@@ -141,7 +182,7 @@ void FlashController::setStatusMessage(const QString& message)
     }
 }
 
-void FlashController::setErrorMessage(const QString& message)
+void FlashController::setErrorMessage(const QString &message)
 {
     if (m_errorMessage != message) {
         m_errorMessage = message;

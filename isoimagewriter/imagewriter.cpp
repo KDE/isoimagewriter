@@ -10,9 +10,9 @@
 
 #include <KLocalizedString>
 
-#include <QtDBus/QtDBus>
-#include <QFile>
 #include <KCompressionDevice>
+#include <QFile>
+#include <QtDBus/QtDBus>
 
 #include <fcntl.h>
 
@@ -26,11 +26,11 @@ Q_DECLARE_METATYPE(DBusIntrospection)
 #include "common.h"
 #include "physicaldevice.h"
 
-ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *parent) :
-    QObject(parent),
-    m_Device(Device),
-    m_ImageFile(ImageFile),
-    m_CancelWriting(false)
+ImageWriter::ImageWriter(const QString &ImageFile, UsbDevice *Device, QObject *parent)
+    : QObject(parent)
+    , m_Device(Device)
+    , m_ImageFile(ImageFile)
+    , m_CancelWriting(false)
 {
 }
 
@@ -38,7 +38,7 @@ ImageWriter::ImageWriter(const QString& ImageFile, UsbDevice* Device, QObject *p
 void ImageWriter::writeImage()
 {
     const qint64 TRANSFER_BLOCK_SIZE = 1024 * 1024;
-    void* buffer = NULL;
+    void *buffer = NULL;
 
     bool isError = false;
     bool cancelRequested = false;
@@ -47,8 +47,7 @@ void ImageWriter::writeImage()
     // Using try-catch for processing errors
     // Invalid values are used for indication non-initialized objects;
     // after the try-catch block all the initialized objects are freed
-    try
-    {
+    try {
 #if defined(Q_OS_WIN32)
         // Using VirtualAlloc so that the buffer was properly aligned (required for
         // direct access to devices and for unbuffered reading/writing)
@@ -62,35 +61,36 @@ void ImageWriter::writeImage()
 #endif
 
         QFile imageFile;
-        if (zeroing)
-        {
+        if (zeroing) {
             // Prepare zero-filled buffer
             memset(buffer, 0, TRANSFER_BLOCK_SIZE);
-        }
-        else
-        {
+        } else {
             // Open the source image file for reading
             imageFile.setFileName(m_ImageFile);
             if (!imageFile.open(QIODevice::ReadOnly))
                 throw i18n("Failed to open the image file: %1", imageFile.errorString());
         }
 
-        QIODevice* device;
+        QIODevice *device;
+        bool isCompressed = false;
         if (imageFile.fileName().endsWith(".gz")) {
             device = new KCompressionDevice(&imageFile, true, KCompressionDevice::GZip);
             if (!device->open(QIODevice::ReadOnly)) {
                 throw i18n("Failed to open compression device: %1", device->errorString());
             }
+            isCompressed = true;
         } else if (imageFile.fileName().endsWith(".xz")) {
             device = new KCompressionDevice(&imageFile, true, KCompressionDevice::Xz);
             if (!device->open(QIODevice::ReadOnly)) {
                 throw i18n("Failed to open compression device: %1", device->errorString());
             }
+            isCompressed = true;
         } else if (imageFile.fileName().endsWith(".zstd")) {
             device = new KCompressionDevice(&imageFile, true, KCompressionDevice::Zstd);
             if (!device->open(QIODevice::ReadOnly)) {
                 throw i18n("Failed to open compression device: %1", device->errorString());
             }
+            isCompressed = true;
         } else {
             device = &imageFile;
         }
@@ -101,20 +101,16 @@ void ImageWriter::writeImage()
         QStringList errMessages;
 
 #if defined(Q_OS_WIN32)
-        for (int i = 0; i < m_Device->m_Volumes.size(); ++i)
-        {
+        for (int i = 0; i < m_Device->m_Volumes.size(); ++i) {
             DWORD bret;
-            HANDLE volume = CreateFile(
-                reinterpret_cast<const wchar_t*>(("\\\\.\\" + m_Device->m_Volumes[i]).utf16()),
-                GENERIC_READ | GENERIC_WRITE,
-                FILE_SHARE_READ | FILE_SHARE_WRITE,
-                NULL,
-                OPEN_EXISTING,
-                0,
-                NULL
-            );
-            if (volume == INVALID_HANDLE_VALUE)
-            {
+            HANDLE volume = CreateFile(reinterpret_cast<const wchar_t *>(("\\\\.\\" + m_Device->m_Volumes[i]).utf16()),
+                                       GENERIC_READ | GENERIC_WRITE,
+                                       FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                       NULL,
+                                       OPEN_EXISTING,
+                                       0,
+                                       NULL);
+            if (volume == INVALID_HANDLE_VALUE) {
                 errMessages << formatErrorMessageFromCode(i18n("Failed to open the drive %1", m_Device->m_Volumes[i]));
                 continue;
             }
@@ -127,16 +123,12 @@ void ImageWriter::writeImage()
             volume = INVALID_HANDLE_VALUE;
         }
 #elif defined(Q_OS_MAC)
-        struct statfs* mntEntries = NULL;
+        struct statfs *mntEntries = NULL;
         int mntEntriesNum = getmntinfo(&mntEntries, MNT_WAIT);
-        for (int i = 0; i < mntEntriesNum; ++i)
-        {
-            for (int j = 0; j < m_Device->m_Volumes.size(); ++j)
-            {
+        for (int i = 0; i < mntEntriesNum; ++i) {
+            for (int j = 0; j < m_Device->m_Volumes.size(); ++j) {
                 // Check that the mount point is either our target device itself or a partition on it
-                if ((mntEntries[i].f_mntfromname == m_Device->m_Volumes[j]) ||
-                    QString(mntEntries[i].f_mntfromname).startsWith(m_Device->m_Volumes[j] + 's'))
-                {
+                if ((mntEntries[i].f_mntfromname == m_Device->m_Volumes[j]) || QString(mntEntries[i].f_mntfromname).startsWith(m_Device->m_Volumes[j] + 's')) {
                     // Mount point is the selected device or one of its partitions - try to unmount it
                     if (unmount(mntEntries[i].f_mntonname, MNT_FORCE) != 0)
                         errMessages << i18n("Failed to unmount the volume %1\n%2", m_Device->m_Volumes[i], strerror(errno));
@@ -155,7 +147,7 @@ void ImageWriter::writeImage()
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
-        QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}} );
+        QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}});
         QDBusUnixFileDescriptor fd = reply.value();
         QFile deviceFile;
         deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly);
@@ -163,25 +155,23 @@ void ImageWriter::writeImage()
 
         qint64 readBytes;
         qint64 writtenBytes;
+        qint64 totalBytesWritten = 0;
+        
         // Start reading/writing cycle
-        for (;;)
-        {
-            if (zeroing)
-            {
+        for (;;) {
+            if (zeroing) {
                 readBytes = TRANSFER_BLOCK_SIZE;
-            }
-            else
-            {
-                if ((readBytes = device->read(static_cast<char*>(buffer), TRANSFER_BLOCK_SIZE)) <= 0) {
+            } else {
+                if ((readBytes = device->read(static_cast<char *>(buffer), TRANSFER_BLOCK_SIZE)) <= 0) {
                     break;
                 }
             }
             // Align the number of bytes to the sector size
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
-            writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
+            writtenBytes = deviceFile.write(static_cast<char *>(buffer), readBytes);
             if (writtenBytes < 0) {
                 qDebug() << "write writtenBytes: " << writtenBytes;
-                //throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
+                // throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
             }
             if (writtenBytes != readBytes)
                 throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
@@ -190,10 +180,20 @@ void ImageWriter::writeImage()
             // For unknown reason, deviceFile.flush() does not work as intended here.
             fsync(deviceFile.handle());
 #endif
-            const int percent = (100 * imageFile.pos()) / imageFile.size();
-            // Inform the GUI thread that next block was written
-            // TODO: Make sure that when TRANSFER_BLOCK_SIZE is not a multiple of DEFAULT_UNIT
-            // this still works or at least fails compilation
+            
+            totalBytesWritten += writtenBytes;
+            
+            int percent = 0;
+            if (!zeroing && !isCompressed && imageFile.size() > 0) {
+                percent = (100 * imageFile.pos()) / imageFile.size();
+            } else if (!zeroing && isCompressed) {
+                // For compressed files, show incremental progress based on data written
+                // This is an approximation since we don't know the final uncompressed size
+                percent = qMin(95, (int)(totalBytesWritten / (1024 * 1024))); // 1% per MB, max 95%
+            }
+            
+            // Always emit progress for feedback, even if it's 0
+            qDebug() << "ImageWriter: Progress" << percent << "% (pos:" << imageFile.pos() << "size:" << imageFile.size() << "written:" << totalBytesWritten << ")";
             emit progressChanged(percent);
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)
@@ -201,29 +201,24 @@ void ImageWriter::writeImage()
             cancelRequested = m_CancelWriting;
             m_Mutex.unlock();
 
-            if (cancelRequested)
-            {
+            if (cancelRequested) {
                 // The cancel request was issued
                 emit cancelled();
                 break;
             }
-            if (zeroing)
-            {
+            if (zeroing) {
                 // In zeroing mode only write 1 block - 1 MB is enough to clear both MBR and GPT
                 break;
             }
         }
-        if (!zeroing)
-        {
+        if (!zeroing) {
             if (readBytes < 0) {
                 throw i18n("Failed to read the image file:\n%1", device->errorString());
             }
             imageFile.close();
         }
         deviceFile.close();
-    }
-    catch (QString msg)
-    {
+    } catch (QString msg) {
         // Something went wrong :-(
         emit error(msg);
         isError = true;
@@ -238,9 +233,9 @@ void ImageWriter::writeImage()
 
     // If no errors occurred and user did not stop the operation, it means everything went fine
     if (!isError && !cancelRequested) {
-        QString message = i18n("The operation completed successfully.") +
-            "<br><br>" +
-            (zeroing ? i18n("Now you need to format your device.") : i18n("To be able to store data on this device again, please, use the button \"Wipe USB Disk\"."));
+        QString message = i18n("The operation completed successfully.") + "<br><br>"
+            + (zeroing ? i18n("Now you need to format your device.")
+                       : i18n("To be able to store data on this device again, please, use the button \"Wipe USB Disk\"."));
         emit success(message);
     }
 

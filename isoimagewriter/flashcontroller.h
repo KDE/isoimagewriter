@@ -7,6 +7,8 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QThread>
+
 #include "imagewriter.h"
 #include "usbdevice.h"
 
@@ -24,13 +26,25 @@ public:
     explicit FlashController(QObject *parent = nullptr);
     ~FlashController();
 
-    bool isWriting() const { return m_isWriting; }
-    double progress() const { return m_progress; }
-    QString statusMessage() const { return m_statusMessage; }
-    QString errorMessage() const { return m_errorMessage; }
+    bool isWriting() const
+    {
+        return m_isWriting;
+    }
+    double progress() const
+    {
+        return m_progress;
+    }
+    QString statusMessage() const
+    {
+        return m_statusMessage;
+    }
+    QString errorMessage() const
+    {
+        return m_errorMessage;
+    }
 
 public slots:
-    void startFlashing(const QString& isoPath, UsbDevice* device);
+    void startFlashing(const QString &isoPath, UsbDevice *device);
     void cancelFlashing();
 
 signals:
@@ -39,17 +53,18 @@ signals:
     void statusMessageChanged();
     void errorMessageChanged();
     void flashCompleted();
-    void flashFailed(const QString& error);
+    void flashFailed(const QString &error);
 
 private slots:
     void onWriterProgress(int percent);
-    void onWriterSuccess(const QString& msg);
-    void onWriterError(const QString& msg);
+    void onWriterSuccess(const QString &msg);
+    void onWriterError(const QString &msg);
     void onWriterCancelled();
     void onWriterFinished();
 
 private:
-    ImageWriter* m_writer;
+    ImageWriter *m_writer;
+    QThread *m_thread;
     bool m_isWriting;
     double m_progress;
     QString m_statusMessage;
@@ -57,8 +72,8 @@ private:
 
     void setIsWriting(bool writing);
     void setProgress(double progress);
-    void setStatusMessage(const QString& message);
-    void setErrorMessage(const QString& message);
+    void setStatusMessage(const QString &message);
+    void setErrorMessage(const QString &message);
 };
 
 #endif // FLASHCONTROLLER_H

@@ -2,17 +2,16 @@
     SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
     SPDX-License-Identifier: GPL-3.0-or-later
 */
+#pragma once
 
-#ifndef RELEASEFETCH_H
-#define RELEASEFETCH_H
-
-#include <QObject>
+#include <QCache>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QJsonObject>
-#include <QJsonArray>
+#include <QObject>
+#include <QTimer>
 #include <QUrl>
-#include <QCache>
 
 struct IsoRelease {
     QString name;
@@ -30,8 +29,6 @@ class ReleaseFetch : public QObject
 public:
     explicit ReleaseFetch(QObject *parent = nullptr);
 
-
-
     Q_INVOKABLE void fetchReleases();
     Q_INVOKABLE void cancel();
     Q_INVOKABLE void clearCache();
@@ -46,6 +43,7 @@ private slots:
     void onKubuntuReleasePageFinished();
     void onKubuntuSha256Finished();
     void onFedoraReleasesFinished();
+    void onTimeout();
 
 private:
     QNetworkReply *fetchUrl(const QUrl &url);
@@ -71,9 +69,8 @@ private:
     bool m_fedoraComplete;
     bool m_kdeNeonComplete;
     QString m_kubuntuBaseUrl;
-    
+    QTimer m_timeoutTimer;
+
     // Cache management
     static QCache<QString, QJsonArray> s_releaseCache;
 };
-
-#endif // RELEASEFETCH_H

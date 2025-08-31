@@ -9,11 +9,12 @@
 #include <Solid/Device>
 #include <Solid/DeviceNotifier>
 #include <Solid/StorageDrive>
+
 #include "usbdevicemonitor.h"
 
-UsbDeviceMonitor::UsbDeviceMonitor(QObject *parent) :
-    QObject(parent),
-    d_ptr(nullptr)
+UsbDeviceMonitor::UsbDeviceMonitor(QObject *parent)
+    : QObject(parent)
+    , d_ptr(nullptr)
 {
 }
 
@@ -34,7 +35,7 @@ bool UsbDeviceMonitor::nativeEventFilter(const QByteArray &eventType, void *mess
 bool UsbDeviceMonitor::startMonitoring()
 {
     auto notifier = Solid::DeviceNotifier::instance();
-    auto refresh = [this] (const QString &udi) {
+    auto refresh = [this](const QString &udi) {
         Solid::Device device(udi);
         if (!device.is<Solid::StorageDrive>()) {
             Q_EMIT deviceChanged();

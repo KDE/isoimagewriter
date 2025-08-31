@@ -19,7 +19,7 @@ FetchIsoJob::FetchIsoJob(QObject *parent)
     QDir().mkpath(cache);
 }
 
-QNetworkReply *FetchIsoJob::downloadFile(const QUrl& url)
+QNetworkReply *FetchIsoJob::downloadFile(const QUrl &url)
 {
     auto file = QSharedPointer<QFile>::create(cache + '/' + url.fileName());
     if (!file->open(QIODevice::WriteOnly)) {
@@ -29,18 +29,18 @@ QNetworkReply *FetchIsoJob::downloadFile(const QUrl& url)
     auto reply = m_network.get(QNetworkRequest(url));
 
     // Allow every redirect for now
-    connect(reply, &QNetworkReply::redirected, reply, [reply] (const QUrl &url) {
+    connect(reply, &QNetworkReply::redirected, reply, [reply](const QUrl &url) {
         qDebug() << "redirecting to" << url << "from" << reply->url();
         reply->redirectAllowed();
     });
     connect(reply, &QNetworkReply::readyRead, this, [this, file, reply] {
         if (this->m_canceled) {
-                reply->abort();
-                file->close();
-                file->remove();
-                qWarning() << "Stopped downloading"; 
-                return;
-            }
+            reply->abort();
+            file->close();
+            file->remove();
+            qWarning() << "Stopped downloading";
+            return;
+        }
         file->write(reply->readAll());
     });
     connect(reply, &QNetworkReply::finished, this, [file, reply] {
@@ -55,18 +55,18 @@ QNetworkReply *FetchIsoJob::downloadFile(const QUrl& url)
     return reply;
 }
 
-void FetchIsoJob::fetch(const QUrl& url)
+void FetchIsoJob::fetch(const QUrl &url)
 {
     auto reply = downloadFile(url);
     if (!reply) {
         Q_EMIT failed();
         return;
     }
-    connect(reply, &QNetworkReply::downloadProgress, this, [this] (qint64 bytesReceived, qint64 bytesTotal) {
+    connect(reply, &QNetworkReply::downloadProgress, this, [this](qint64 bytesReceived, qint64 bytesTotal) {
         if (bytesTotal == 0)
-             return;
+            return;
         Q_EMIT downloadProgressChanged(100 * bytesReceived / bytesTotal);
-        qDebug() << "ISO download Progress " << 100*bytesReceived/ bytesTotal << "\n"; 
+        qDebug() << "ISO download Progress " << 100 * bytesReceived / bytesTotal << "\n";
     });
     connect(reply, &QNetworkReply::finished, this, [reply, this, url] {
         if (reply->error()) {
@@ -75,7 +75,7 @@ void FetchIsoJob::fetch(const QUrl& url)
             Q_EMIT finished(cache + '/' + url.fileName());
         }
     });
-    connect(reply, &QNetworkReply::redirected, reply, [this] (const QUrl &url) {
+    connect(reply, &QNetworkReply::redirected, reply, [this](const QUrl &url) {
         m_fetchUrl = url;
     });
 

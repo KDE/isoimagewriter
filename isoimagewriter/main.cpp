@@ -1,40 +1,36 @@
-        /*
-    SPDX-FileCopyrightText: 2016 ROSA
-    SPDX-License-Identifier: GPL-3.0-or-later
+/*
+SPDX-FileCopyrightText: 2016 ROSA
+SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 #include <QApplication>
-#include <QTranslator>
-#include <QLibraryInfo>
 #include <QIcon>
+#include <QLibraryInfo>
 #include <QLoggingCategory>
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQuickStyle>
-#include <QtQml>
-#include <QUrl>
 #include <QQmlContext>
-
+#include <QQuickStyle>
+#include <QTranslator>
+#include <QUrl>
+#include <QtQml>
 
 #include <KAboutData>
-#include <KLocalizedString>
 #include <KCrash>
 #include <KLocalizedContext>
 #include <KLocalizedString>
 
 #include "common.h"
-#include "usbdevicemonitor.h"
-#include "usbdevicemodel.h"
-#include "isoverifier.h"
-#include "flashcontroller.h"
-#include "releasesmodel.h"
 #include "fetchisojob.h"
+#include "filedialogbridge.h"
+#include "flashcontroller.h"
+#include "isoverifier.h"
 #include "releasefetch.h"
+#include "usbdevicemodel.h"
+#include "usbdevicemonitor.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC) && !defined(Q_OS_FREEBSD)
 #error Unsupported platform!
 #endif
-
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +40,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setSetuidAllowed(true);
 #endif
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
+
     KCrash::initialize();
 
     if (!ensureElevated())
@@ -53,8 +50,7 @@ int main(int argc, char *argv[])
 #if defined(Q_OS_WIN32)
     // CoInitialize() seems to be called by Qt automatically, so only set security attributes
     HRESULT res = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, 0);
-    if (res != S_OK)
-    {
+    if (res != S_OK) {
         printf("CoInitializeSecurity failed! (Code: 0x%08lx)\n", res);
         return res;
     }
@@ -65,41 +61,39 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
     QCoreApplication::setApplicationName(QStringLiteral("IsoImage Writer"));
 
-    KAboutData aboutData(
-        QStringLiteral("IsoImage Writer"),
-        i18nc("@title", "IsoImage Writer"),
-        QStringLiteral("1.0"),
-        i18n("Write an ISO Image to a USB Disk"),
-        KAboutLicense::GPL,
-        i18n("(c) 2021"));
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+    }
 
+    KAboutData aboutData(QStringLiteral("IsoImage Writer"),
+                         i18nc("@title", "IsoImage Writer"),
+                         QStringLiteral("1.0"),
+                         i18n("Write an ISO Image to a USB Disk"),
+                         KAboutLicense::GPL,
+                         i18n("(c) 2021"));
 
-    aboutData.addAuthor(
-        i18nc("@info:credit", "@Holychicken"),
-        i18nc("@info:credit", "Author Role"),
+    aboutData.addAuthor(i18nc("@info:credit", "@Holychicken"),
+                        i18nc("@info:credit", "Author Role"),
 
-        //TODO : update the school address
-        QStringLiteral("asa297@sfu.ca"),
-        QStringLiteral("https://tcombinator.dev"));
+                        // TODO : update the school address
+                        QStringLiteral("asa297@sfu.ca"),
+                        QStringLiteral("https://tcombinator.dev"));
 
     KAboutData::setApplicationData(aboutData);
 
-    qmlRegisterSingletonType(
-        "org.kde.isoimagewriter.about", // How the import statement should look like
-        1, 0, // Major and minor versions of the import
-        "About", // The name of the QML object
-        [](QQmlEngine* engine, QJSEngine *) -> QJSValue {
-            return engine->toScriptValue(KAboutData::applicationData());
-        }
-    );
-
+    qmlRegisterSingletonType("org.kde.isoimagewriter.about", // How the import statement should look like
+                             1,
+                             0, // Major and minor versions of the import
+                             "About", // The name of the QML object
+                             [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
+                                 return engine->toScriptValue(KAboutData::applicationData());
+                             });
 
     qmlRegisterType<IsoVerifier>("org.kde.isoimagewriter", 1, 0, "IsoVerifier");
     qmlRegisterType<FlashController>("org.kde.isoimagewriter", 1, 0, "FlashController");
-    qmlRegisterType<ReleasesModel>("org.kde.isoimagewriter", 1, 0, "ReleasesModel");
-    qmlRegisterType<ReleasesFilterModel>("org.kde.isoimagewriter", 1, 0, "ReleasesFilterModel");
     qmlRegisterType<FetchIsoJob>("org.kde.isoimagewriter", 1, 0, "FetchIsoJob");
     qmlRegisterType<ReleaseFetch>("org.kde.isoimagewriter", 1, 0, "ReleaseFetch");
+    qmlRegisterType<FileDialogBridge>("org.kde.isoimagewriter", 1, 0, "FileDialogBridge");
 
     QQmlApplicationEngine engine;
 
@@ -114,15 +108,19 @@ int main(int argc, char *argv[])
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
 
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl) {
-            qWarning() << "Failed to create QML object for" << objUrl;
-            QCoreApplication::exit(-1);
-        }
-    }, Qt::QueuedConnection);
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl) {
+                qWarning() << "Failed to create QML object for" << objUrl;
+                QCoreApplication::exit(-1);
+            }
+        },
+        Qt::QueuedConnection);
 
     engine.load(url);
 
-    return app.exec();  // Start the Qt event loop
+    return app.exec(); // Start the Qt event loop
 }

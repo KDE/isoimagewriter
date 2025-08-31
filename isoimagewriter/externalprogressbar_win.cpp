@@ -6,7 +6,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Windows implementation of ExternalProgressBar
 
-
 #include <QWidget>
 
 #include "externalprogressbar.h"
@@ -19,15 +18,15 @@ public:
     ~ExternalProgressBarPrivate();
 
     // Windows7 Taskbar interface for mirroring the progress bar
-    ITaskbarList3* m_Win7TaskbarList;
+    ITaskbarList3 *m_Win7TaskbarList;
 
     // Main window handle for selecting the correct taskbar button
     HWND m_hWnd;
 };
 
-ExternalProgressBarPrivate::ExternalProgressBarPrivate() :
-    m_Win7TaskbarList(NULL),
-    m_hWnd(NULL)
+ExternalProgressBarPrivate::ExternalProgressBarPrivate()
+    : m_Win7TaskbarList(NULL)
+    , m_hWnd(NULL)
 {
 }
 
@@ -35,13 +34,12 @@ ExternalProgressBarPrivate::~ExternalProgressBarPrivate()
 {
 }
 
-
-ExternalProgressBar::ExternalProgressBar(QWidget* mainWindow) :
-    d_ptr(new ExternalProgressBarPrivate()),
-    m_MaxValue(0)
+ExternalProgressBar::ExternalProgressBar(QWidget *mainWindow)
+    : d_ptr(new ExternalProgressBarPrivate())
+    , m_MaxValue(0)
 {
     // Get the taskbar object (if NULL is returned it won't be used - e.g. on pre-7 Windows versions)
-    CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void**>(&d_ptr->m_Win7TaskbarList));
+    CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, reinterpret_cast<void **>(&d_ptr->m_Win7TaskbarList));
     // Store the window handle. In Windows winId() returns HWND.
     d_ptr->m_hWnd = reinterpret_cast<HWND>(mainWindow->winId());
 }
@@ -110,4 +108,3 @@ bool ExternalProgressBar::ProgressSetError()
 
     return res;
 }
-

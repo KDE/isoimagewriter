@@ -6,11 +6,11 @@
 
 #include "mainapplication.h"
 
-#include <QStandardPaths>
-#include <QIcon>
-#include <QUrl>
 #include <KAboutData>
 #include <KLocalizedString>
+#include <QIcon>
+#include <QStandardPaths>
+#include <QUrl>
 
 #include "common.h"
 #include "isoimagewriter_version.h"
@@ -18,17 +18,17 @@
 // in one source file
 Q_LOGGING_CATEGORY(IMAGEWRITER, "org.kde.isoimagewriter");
 
-MainApplication::MainApplication(int& argc, char** argv) :
-    QApplication(argc, argv)
+MainApplication::MainApplication(int &argc, char **argv)
+    : QApplication(argc, argv)
 {
     setWindowIcon(QIcon::fromTheme("org.kde.isoimagewriter"));
     KLocalizedString::setApplicationDomain("isoimagewriter");
-    KAboutData aboutData( QStringLiteral("isoimagewriter"),
-                          i18n("ISO Image Writer"),
-                          QStringLiteral(ISOIMAGEWRITER_VERSION_STRING),
-                          i18n("Write an ISO Image to a USB Disk"),
-                          KAboutLicense::GPL,
-                          i18n("Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell <jr@jriddell.org>"));
+    KAboutData aboutData(QStringLiteral("isoimagewriter"),
+                         i18n("ISO Image Writer"),
+                         QStringLiteral(ISOIMAGEWRITER_VERSION_STRING),
+                         i18n("Write an ISO Image to a USB Disk"),
+                         KAboutLicense::GPL,
+                         i18n("Copyright (c) 2016 ROSA, Copyright (c) 2022 Jonathan Esk-Riddell <jr@jriddell.org>"));
 
     aboutData.addAuthor(i18n("Konstantin Vlasov"), i18n("Author"), QStringLiteral("konstantin.vlasov@rosalab.ru"));
     aboutData.addAuthor(i18n("Jonathan Riddell"), i18n("Author"), QStringLiteral("jr@jriddell.org"));

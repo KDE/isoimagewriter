@@ -1,165 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
-<id>org.kde.isoimagewriter.desktop</id>
-<launchable type="desktop-id">org.kde.isoimagewriter.desktop</launchable>
-<developer id="org.kde">
-<name translate="no">KDE</name>
-<url>https://kde.org</url>
-</developer>
-<metadata_license>CC0-1.0</metadata_license>
-<project_license>GPL-3.0</project_license>
-<name>ISO Image Writer</name>
-<name xml:lang="ar">كاتب صور ISO</name>
-<name xml:lang="bg">Запис на ISO изображения</name>
-<name xml:lang="ca">Gravador d'imatges ISO</name>
-<name xml:lang="ca-valencia">Gravador d'imatges ISO</name>
-<name xml:lang="cs">Nástroj pro zapisování obrazů ISO</name>
-<name xml:lang="da">ISO-aftryksskriver</name>
-<name xml:lang="de">ISO Image Writer</name>
-<name xml:lang="el">ISO Image Writer</name>
-<name xml:lang="en-GB">ISO Image Writer</name>
-<name xml:lang="eo">ISO-Bitkopia Skribilo</name>
-<name xml:lang="es">ISO Image Writer</name>
-<name xml:lang="et">ISO-tõmmise kirjutaja</name>
-<name xml:lang="eu">ISO irudi idazlea</name>
-<name xml:lang="fi">ISO-kuvan kirjoittaja</name>
-<name xml:lang="fr">ISO Image Writer</name>
-<name xml:lang="gl">Gravadora de imaxes ISO</name>
-<name xml:lang="he">צורב דמויות ISO</name>
-<name xml:lang="hi">आईएसओ इमेज राइटर</name>
-<name xml:lang="hu">ISO-lemezképíró</name>
-<name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
-<name xml:lang="id">Penulis Citra ISO</name>
-<name xml:lang="ie">Scritor de images ISO</name>
-<name xml:lang="it">Scrittore di immagini ISO</name>
-<name xml:lang="ja">ISO イメージライター</name>
-<name xml:lang="ka">ISO ასლის ჩამწერი</name>
-<name xml:lang="ko">ISO 이미지 기록 도구</name>
-<name xml:lang="lt">ISO atvaizdžių rašymo programa</name>
-<name xml:lang="lv">ISO Image Writer</name>
-<name xml:lang="nl">ISO-image-schrijver</name>
-<name xml:lang="nn">ISO-diskbiletskrivar</name>
-<name xml:lang="pa">ISO ਈਮੇਜ਼ ਰਾਇਟਰ</name>
-<name xml:lang="pl">Wgrywanie obrazów ISO</name>
-<name xml:lang="pt">Gravador de Imagens ISO</name>
-<name xml:lang="pt-BR">Gravador de imagem ISO</name>
-<name xml:lang="ro">Inscriptor de imagini ISO</name>
-<name xml:lang="ru">Запись образов ISO</name>
-<name xml:lang="sa">ISO इमेज राइटर</name>
-<name xml:lang="sk">Zapisovač ISO obrazov</name>
-<name xml:lang="sl">ISO Image Writer</name>
-<name xml:lang="sv">ISO-avbildsskrivning</name>
-<name xml:lang="tr">ISO Kalıbı Yazıcısı</name>
-<name xml:lang="uk">Записувач образів ISO</name>
-<name xml:lang="zh-CN">ISO 镜像文件写入器</name>
-<name xml:lang="zh-TW">ISO 映像寫入工具</name>
-<summary>Write an ISO Image to a USB Disk</summary>
-<summary xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</summary>
-<summary xml:lang="bg">Запис на ISO изображения върху USB диск</summary>
-<summary xml:lang="ca">Grava una imatge ISO a un disc USB</summary>
-<summary xml:lang="ca-valencia">Grava una imatge ISO a un disc USB</summary>
-<summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
-<summary xml:lang="da">Skriv et ISO-aftryk til en USB-disk</summary>
-<summary xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
-<summary xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</summary>
-<summary xml:lang="en-GB">Write an ISO Image to a USB Disk</summary>
-<summary xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</summary>
-<summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
-<summary xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</summary>
-<summary xml:lang="eu">Idatzi ISO irudia USB disko batean</summary>
-<summary xml:lang="fi">Kirjoittaa ISO-kuvan USB-tietovälineelle</summary>
-<summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
-<summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
-<summary xml:lang="he">צריבת דמות ISO לכונן USB</summary>
-<summary xml:lang="hi">ISO इमेज को USB डिस्क पर लिखें</summary>
-<summary xml:lang="hu">ISO-lemezkép írása USB-lemezre</summary>
-<summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
-<summary xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</summary>
-<summary xml:lang="ie">Scrir un image ISO a un unité USB</summary>
-<summary xml:lang="it">Scrive un'immagine ISO in un disco USB</summary>
-<summary xml:lang="ja">ISO イメージを USB ディスクに書き込む</summary>
-<summary xml:lang="ka">ISO ასლის USB-ზე ჩაწერა</summary>
-<summary xml:lang="ko">ISO 이미지를 USB 메모리에 기록합니다</summary>
-<summary xml:lang="lt">Rašyti ISO atvaizdį į USB diską</summary>
-<summary xml:lang="lv">Rakstiet ISO attēlu USB diskā</summary>
-<summary xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</summary>
-<summary xml:lang="nn">Skriv ISO-diskbilete til USB-diskar</summary>
-<summary xml:lang="pa">ISO ਈਮੇਜ਼ ਨੂੰ USB ਡਿਸਕ ਉੱਤੇ ਲਿਖੋ</summary>
-<summary xml:lang="pl">Wgrywa obraz ISO na nośnik USB</summary>
-<summary xml:lang="pt">Gravar uma Imagem ISO num Disco USB</summary>
-<summary xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</summary>
-<summary xml:lang="ro">Scrie o imagine ISO pe disc USB</summary>
-<summary xml:lang="ru">Запись образов дисков на USB-накопитель</summary>
-<summary xml:lang="sa">USB Disk मध्ये ISO Image लिखन्तु</summary>
-<summary xml:lang="sk">Zapísať ISO obraz na USB disk</summary>
-<summary xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</summary>
-<summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
-<summary xml:lang="tr">ISO Kalıbını bir USB Diske Yaz</summary>
-<summary xml:lang="uk">Програма для запису образів ISO на флешки USB</summary>
-<summary xml:lang="zh-CN">将 ISO 镜像写入 U 盘</summary>
-<summary xml:lang="zh-TW">將 ISO 映像寫入 USB 裝置</summary>
-<description>
-<p>Write an ISO Image to a USB Disk</p>
-<p xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</p>
-<p xml:lang="bg">Запис на ISO изображения върху USB диск</p>
-<p xml:lang="ca">Grava una imatge ISO a un disc USB</p>
-<p xml:lang="ca-valencia">Grava una imatge ISO a un disc USB</p>
-<p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
-<p xml:lang="da">Skriv et ISO-aftryk til en USB-disk</p>
-<p xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</p>
-<p xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</p>
-<p xml:lang="en-GB">Write an ISO Image to a USB Disk</p>
-<p xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</p>
-<p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
-<p xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</p>
-<p xml:lang="eu">Idatzi ISO irudia USB disko batean</p>
-<p xml:lang="fi">Kirjoittaa ISO-kuvan USB-tietovälineelle</p>
-<p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
-<p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
-<p xml:lang="he">צריבת דמות ISO לכונן USB</p>
-<p xml:lang="hi">ISO इमेज को USB डिस्क पर लिखें</p>
-<p xml:lang="hu">ISO-lemezkép írása USB-lemezre</p>
-<p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
-<p xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</p>
-<p xml:lang="ie">Scrir un image ISO a un unité USB</p>
-<p xml:lang="it">Scrive un'immagine ISO in un disco USB</p>
-<p xml:lang="ja">ISO イメージを USB ディスクに書き込む</p>
-<p xml:lang="ka">ISO ასლის USB-ზე ჩაწერა</p>
-<p xml:lang="ko">ISO 이미지를 USB 메모리에 기록합니다</p>
-<p xml:lang="lt">Rašyti ISO atvaizdį į USB diską</p>
-<p xml:lang="lv">Rakstiet ISO attēlu USB diskā</p>
-<p xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</p>
-<p xml:lang="nn">Skriv ISO-diskbilete til USB-diskar</p>
-<p xml:lang="pa">ISO ਈਮੇਜ਼ ਨੂੰ USB ਡਿਸਕ ਉੱਤੇ ਲਿਖੋ</p>
-<p xml:lang="pl">Wgrywa obraz ISO na nośnik USB</p>
-<p xml:lang="pt">Gravar uma Imagem ISO num Disco USB</p>
-<p xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</p>
-<p xml:lang="ro">Scrie o imagine ISO pe disc USB</p>
-<p xml:lang="ru">Запись образов дисков на USB-накопитель</p>
-<p xml:lang="sa">USB Disk मध्ये ISO Image लिखन्तु</p>
-<p xml:lang="sk">Zapísať ISO obraz na USB disk</p>
-<p xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</p>
-<p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
-<p xml:lang="tr">ISO Kalıbını bir USB Diske Yaz</p>
-<p xml:lang="uk">Програма для запису образів ISO на флешки USB</p>
-<p xml:lang="zh-CN">将 ISO 镜像写入 U 盘</p>
-<p xml:lang="zh-TW">將 ISO 映像寫入 USB 裝置</p>
-</description>
-<url type="homepage">https://www.kde.org</url>
-<url type="bugtracker">https://bugs.kde.org</url>
-<url type="donation">https://www.kde.org/community/donations</url>
-<screenshots>
-<screenshot type="default">
-  <image width="551" height="430">
-https://cdn.kde.org/screenshots/isoimagewriter/isoimagewriter2.png
-  </image>
-</screenshot>
-</screenshots>
-<provides>
-<binary>isoimagewriter</binary>
-</provides>
-<project_group>KDE</project_group>
-<releases>
+  <id>org.kde.isoimagewriter.desktop</id>
+  <launchable type="desktop-id">org.kde.isoimagewriter.desktop</launchable>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+    <url>https://kde.org</url>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>ISO Image Writer</name>
+  <name xml:lang="ar">كاتب صور ISO</name>
+  <name xml:lang="bg">Запис на ISO изображения</name>
+  <name xml:lang="ca">Gravador d'imatges ISO</name>
+  <name xml:lang="ca-valencia">Gravador d'imatges ISO</name>
+  <name xml:lang="cs">Nástroj pro zapisování obrazů ISO</name>
+  <name xml:lang="da">ISO-aftryksskriver</name>
+  <name xml:lang="de">ISO Image Writer</name>
+  <name xml:lang="el">ISO Image Writer</name>
+  <name xml:lang="en-GB">ISO Image Writer</name>
+  <name xml:lang="eo">ISO-Bitkopia Skribilo</name>
+  <name xml:lang="es">ISO Image Writer</name>
+  <name xml:lang="et">ISO-tõmmise kirjutaja</name>
+  <name xml:lang="eu">ISO irudi idazlea</name>
+  <name xml:lang="fi">ISO-kuvan kirjoittaja</name>
+  <name xml:lang="fr">ISO Image Writer</name>
+  <name xml:lang="gl">Gravadora de imaxes ISO</name>
+  <name xml:lang="he">צורב דמויות ISO</name>
+  <name xml:lang="hi">आईएसओ इमेज राइटर</name>
+  <name xml:lang="hu">ISO-lemezképíró</name>
+  <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
+  <name xml:lang="id">Penulis Citra ISO</name>
+  <name xml:lang="ie">Scritor de images ISO</name>
+  <name xml:lang="it">Scrittore di immagini ISO</name>
+  <name xml:lang="ja">ISO イメージライター</name>
+  <name xml:lang="ka">ISO ასლის ჩამწერი</name>
+  <name xml:lang="ko">ISO 이미지 기록 도구</name>
+  <name xml:lang="lt">ISO atvaizdžių rašymo programa</name>
+  <name xml:lang="lv">ISO Image Writer</name>
+  <name xml:lang="nl">ISO-image-schrijver</name>
+  <name xml:lang="nn">ISO-diskbiletskrivar</name>
+  <name xml:lang="pa">ISO ਈਮੇਜ਼ ਰਾਇਟਰ</name>
+  <name xml:lang="pl">Wgrywanie obrazów ISO</name>
+  <name xml:lang="pt">Gravador de Imagens ISO</name>
+  <name xml:lang="pt-BR">Gravador de imagem ISO</name>
+  <name xml:lang="ro">Inscriptor de imagini ISO</name>
+  <name xml:lang="ru">Запись образов ISO</name>
+  <name xml:lang="sa">ISO इमेज राइटर</name>
+  <name xml:lang="sk">Zapisovač ISO obrazov</name>
+  <name xml:lang="sl">ISO Image Writer</name>
+  <name xml:lang="sv">ISO-avbildsskrivning</name>
+  <name xml:lang="tr">ISO Kalıbı Yazıcısı</name>
+  <name xml:lang="uk">Записувач образів ISO</name>
+  <name xml:lang="zh-CN">ISO 镜像文件写入器</name>
+  <name xml:lang="zh-TW">ISO 映像寫入工具</name>
+  <summary>Write an ISO Image to a USB Disk</summary>
+  <summary xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</summary>
+  <summary xml:lang="bg">Запис на ISO изображения върху USB диск</summary>
+  <summary xml:lang="ca">Grava una imatge ISO a un disc USB</summary>
+  <summary xml:lang="ca-valencia">Grava una imatge ISO a un disc USB</summary>
+  <summary xml:lang="cs">Zapsat obraz na ISO na disk USB</summary>
+  <summary xml:lang="da">Skriv et ISO-aftryk til en USB-disk</summary>
+  <summary xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</summary>
+  <summary xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</summary>
+  <summary xml:lang="en-GB">Write an ISO Image to a USB Disk</summary>
+  <summary xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</summary>
+  <summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
+  <summary xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</summary>
+  <summary xml:lang="eu">Idatzi ISO irudia USB disko batean</summary>
+  <summary xml:lang="fi">Kirjoittaa ISO-kuvan USB-tietovälineelle</summary>
+  <summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
+  <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
+  <summary xml:lang="he">צריבת דמות ISO לכונן USB</summary>
+  <summary xml:lang="hi">ISO इमेज को USB डिस्क पर लिखें</summary>
+  <summary xml:lang="hu">ISO-lemezkép írása USB-lemezre</summary>
+  <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
+  <summary xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</summary>
+  <summary xml:lang="ie">Scrir un image ISO a un unité USB</summary>
+  <summary xml:lang="it">Scrive un'immagine ISO in un disco USB</summary>
+  <summary xml:lang="ja">ISO イメージを USB ディスクに書き込む</summary>
+  <summary xml:lang="ka">ISO ასლის USB-ზე ჩაწერა</summary>
+  <summary xml:lang="ko">ISO 이미지를 USB 메모리에 기록합니다</summary>
+  <summary xml:lang="lt">Rašyti ISO atvaizdį į USB diską</summary>
+  <summary xml:lang="lv">Rakstiet ISO attēlu USB diskā</summary>
+  <summary xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</summary>
+  <summary xml:lang="nn">Skriv ISO-diskbilete til USB-diskar</summary>
+  <summary xml:lang="pa">ISO ਈਮੇਜ਼ ਨੂੰ USB ਡਿਸਕ ਉੱਤੇ ਲਿਖੋ</summary>
+  <summary xml:lang="pl">Wgrywa obraz ISO na nośnik USB</summary>
+  <summary xml:lang="pt">Gravar uma Imagem ISO num Disco USB</summary>
+  <summary xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</summary>
+  <summary xml:lang="ro">Scrie o imagine ISO pe disc USB</summary>
+  <summary xml:lang="ru">Запись образов дисков на USB-накопитель</summary>
+  <summary xml:lang="sa">USB Disk मध्ये ISO Image लिखन्तु</summary>
+  <summary xml:lang="sk">Zapísať ISO obraz na USB disk</summary>
+  <summary xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</summary>
+  <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
+  <summary xml:lang="tr">ISO Kalıbını bir USB Diske Yaz</summary>
+  <summary xml:lang="uk">Програма для запису образів ISO на флешки USB</summary>
+  <summary xml:lang="zh-CN">将 ISO 镜像写入 U 盘</summary>
+  <summary xml:lang="zh-TW">將 ISO 映像寫入 USB 裝置</summary>
+  <description>
+    <p>Write an ISO Image to a USB Disk</p>
+    <p xml:lang="ar">اكتب صورة ISO على قرص يو اس بي</p>
+    <p xml:lang="bg">Запис на ISO изображения върху USB диск</p>
+    <p xml:lang="ca">Grava una imatge ISO a un disc USB</p>
+    <p xml:lang="ca-valencia">Grava una imatge ISO a un disc USB</p>
+    <p xml:lang="cs">Zapsat obraz na ISO na disk USB</p>
+    <p xml:lang="da">Skriv et ISO-aftryk til en USB-disk</p>
+    <p xml:lang="de">Ein ISO-Abbild auf ein USB-Speichermedium schreiben</p>
+    <p xml:lang="el">Εγγραφή ISO εικόνας δίσκου σε USB δίσκο</p>
+    <p xml:lang="en-GB">Write an ISO Image to a USB Disk</p>
+    <p xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</p>
+    <p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
+    <p xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</p>
+    <p xml:lang="eu">Idatzi ISO irudia USB disko batean</p>
+    <p xml:lang="fi">Kirjoittaa ISO-kuvan USB-tietovälineelle</p>
+    <p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
+    <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
+    <p xml:lang="he">צריבת דמות ISO לכונן USB</p>
+    <p xml:lang="hi">ISO इमेज को USB डिस्क पर लिखें</p>
+    <p xml:lang="hu">ISO-lemezkép írása USB-lemezre</p>
+    <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
+    <p xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</p>
+    <p xml:lang="ie">Scrir un image ISO a un unité USB</p>
+    <p xml:lang="it">Scrive un'immagine ISO in un disco USB</p>
+    <p xml:lang="ja">ISO イメージを USB ディスクに書き込む</p>
+    <p xml:lang="ka">ISO ასლის USB-ზე ჩაწერა</p>
+    <p xml:lang="ko">ISO 이미지를 USB 메모리에 기록합니다</p>
+    <p xml:lang="lt">Rašyti ISO atvaizdį į USB diską</p>
+    <p xml:lang="lv">Rakstiet ISO attēlu USB diskā</p>
+    <p xml:lang="nl">Een ISO-image naar een USB-schijf schrijven</p>
+    <p xml:lang="nn">Skriv ISO-diskbilete til USB-diskar</p>
+    <p xml:lang="pa">ISO ਈਮੇਜ਼ ਨੂੰ USB ਡਿਸਕ ਉੱਤੇ ਲਿਖੋ</p>
+    <p xml:lang="pl">Wgrywa obraz ISO na nośnik USB</p>
+    <p xml:lang="pt">Gravar uma Imagem ISO num Disco USB</p>
+    <p xml:lang="pt-BR">Grave uma imagem ISO em um pendrive USB</p>
+    <p xml:lang="ro">Scrie o imagine ISO pe disc USB</p>
+    <p xml:lang="ru">Запись образов дисков на USB-накопитель</p>
+    <p xml:lang="sa">USB Disk मध्ये ISO Image लिखन्तु</p>
+    <p xml:lang="sk">Zapísať ISO obraz na USB disk</p>
+    <p xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</p>
+    <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
+    <p xml:lang="tr">ISO Kalıbını bir USB Diske Yaz</p>
+    <p xml:lang="uk">Програма для запису образів ISO на флешки USB</p>
+    <p xml:lang="zh-CN">将 ISO 镜像写入 U 盘</p>
+    <p xml:lang="zh-TW">將 ISO 映像寫入 USB 裝置</p>
+  </description>
+  <url type="homepage">https://www.kde.org</url>
+  <url type="bugtracker">https://bugs.kde.org</url>
+  <url type="donation">https://www.kde.org/community/donations</url>
+  <screenshots>
+    <screenshot type="default">
+      <image width="551" height="430">
+	https://cdn.kde.org/screenshots/isoimagewriter/isoimagewriter2.png
+      </image>
+    </screenshot>
+  </screenshots>
+  <provides>
+    <binary>isoimagewriter</binary>
+  </provides>
+  <project_group>KDE</project_group>
+  <releases>
     <release version="25.08.1" date="2025-09-11"/>
     <release version="25.08.0" date="2025-08-14"/>
     <release version="25.04.3" date="2025-07-03"/>

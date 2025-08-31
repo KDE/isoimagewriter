@@ -1,5 +1,10 @@
+#/*
+#  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+#  * SPDX-License-Identifier: GPL-3.0-or-later
+#  */
+
 #include "usbdevicemodel.h"
-#include "platform.h" 
+#include "platform.h"
 #include <QDebug>
 
 UsbDeviceModel::UsbDeviceModel(QObject *parent)
@@ -18,7 +23,6 @@ UsbDeviceModel::~UsbDeviceModel()
 {
     cleanUp();
 }
-
 
 int UsbDeviceModel::rowCount(const QModelIndex &parent) const
 {
@@ -53,15 +57,13 @@ QHash<int, QByteArray> UsbDeviceModel::roleNames() const
     return roles;
 }
 
-
-UsbDevice* UsbDeviceModel::getDevice(int index) const
+UsbDevice *UsbDeviceModel::getDevice(int index) const
 {
     if (index < 0 || index >= m_devices.count()) {
         return nullptr;
     }
     return m_devices.at(index);
 }
-
 
 void UsbDeviceModel::onDeviceChanged()
 {
@@ -90,8 +92,8 @@ void UsbDeviceModel::cleanUp()
     m_devices.clear();
 }
 
-void UsbDeviceModel::addFlashDeviceCallback(void* cbParam, UsbDevice* device)
+void UsbDeviceModel::addFlashDeviceCallback(void *cbParam, UsbDevice *device)
 {
-    UsbDeviceModel* model = static_cast<UsbDeviceModel*>(cbParam);
+    UsbDeviceModel *model = static_cast<UsbDeviceModel *>(cbParam);
     model->m_devices.append(device);
 }

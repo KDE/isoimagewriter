@@ -12,7 +12,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of the non-template cross-platform functions from common.h
 
-
 #if defined(Q_OS_WIN32)
 // Converts the WinAPI and COM error code into text message
 // Input:
@@ -22,22 +21,18 @@
 QString errorMessageFromCode(DWORD errorCode)
 {
     LPTSTR msgBuffer;
-    DWORD res = FormatMessage(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-        NULL,
-        errorCode,
-        0,
-        reinterpret_cast<LPTSTR>(&msgBuffer),
-        0,
-        NULL
-    );
-    if (res)
-    {
+    DWORD res = FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                              NULL,
+                              errorCode,
+                              0,
+                              reinterpret_cast<LPTSTR>(&msgBuffer),
+                              0,
+                              NULL);
+    if (res) {
         QString ret = QString::fromWCharArray(msgBuffer);
         LocalFree(msgBuffer);
         return ret;
-    }
-    else
+    } else
         return i18n("Error code: %1", QString::number(errorCode));
 }
 
@@ -62,7 +57,7 @@ const CLSID CLSID_WbemAdministrativeLocator = {0xCB8555CC, 0x9128, 0x11D1, {0xAD
 //  fileName - path to the file to read
 // Returns:
 //  the file contents or empty string if an error occurred
-QString readFileContents(const QString& fileName)
+QString readFileContents(const QString &fileName)
 {
     QFile f(fileName);
     if (!f.open(QFile::ReadOnly))

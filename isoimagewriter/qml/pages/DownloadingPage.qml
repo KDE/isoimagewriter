@@ -4,14 +4,14 @@
  */
 
 import QtQuick
-import QtQuick.Controls
-import org.kde.kirigami as Kirigami
+import QtQuick.Controls as Controls
 import QtQuick.Layouts
 import org.kde.isoimagewriter 1.0
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
 
 Kirigami.Page {
     id: downloadingPage
-    title: i18n("Download & Flash ISO")
 
     property string isoName: ""
     property string isoUrl: ""
@@ -21,55 +21,52 @@ Kirigami.Page {
     property bool downloadComplete: false
     property string downloadedFilePath: ""
     property bool flashingStarted: false
-    property bool verificationComplete: false
+    property string currentStatus: ""
+
+    function startDownload() {
+        if (isoUrl) {
+            currentStatus = i18n("Starting download…");
+            errorLabel.visible = false;
+            successLabel.visible = false;
+            fetchJob.fetch(isoUrl);
+        }
+    }
+
+    function startFlashing() {
+        if (downloadComplete && selectedDevice && !flashingStarted) {
+            flashingStarted = true;
+            currentStatus = i18n("Starting flash…");
+            flashController.startFlashing(downloadedFilePath, selectedDevice);
+        }
+    }
+
+    title: successLabel.visible ? i18n("USB Drive Ready") : errorLabel.visible ? i18n("Operation Failed") : downloadComplete && flashingStarted ? i18n("Creating USB Drive") : i18n("Downloading ISO")
+    Component.onCompleted: {
+        // Auto-start the download process
+        currentStatus = i18n("Preparing to download…");
+        Qt.callLater(startDownload);
+    }
 
     FetchIsoJob {
         id: fetchJob
 
-        onDownloadProgressChanged: function (percentage) {
+        onDownloadProgressChanged: function(percentage) {
             downloadProgressBar.value = percentage;
-            statusLabel.text = i18n("Downloading: %1%", percentage);
+            currentStatus = i18n("Downloading: %1%", percentage);
         }
-
-        onFinished: function (filePath) {
+        onFinished: function(filePath) {
             downloadComplete = true;
             downloadedFilePath = filePath;
-            statusLabel.text = i18n("Download completed!");
+            currentStatus = i18n("Download completed! Starting flash…");
+            // Skip SHA verification - directly start flashing
+            if (selectedDevice && !flashingStarted)
+                startFlashing();
 
-            // Start SHA256 verification if hash is available
-            if (isoHash && isoHashAlgo === "sha256") {
-                statusLabel.text = i18n("Verifying SHA256 checksum...");
-                isoVerifier.filePath = filePath;
-                isoVerifier.verifyWithInputText(true, isoHash);
-            }
         }
-
         onFailed: {
-            statusLabel.text = i18n("Download failed!");
+            currentStatus = i18n("Download failed!");
             errorLabel.text = i18n("Failed to download the ISO file. Please try again.");
             errorLabel.visible = true;
-            retryButton.visible = true;
-        }
-    }
-
-    IsoVerifier {
-        id: isoVerifier
-
-        onFinished: function (result, error) {
-            if (result === IsoVerifier.Successful) {
-                verificationComplete = true;
-                statusLabel.text = i18n("SHA256 verification successful!");
-
-                // Auto-start flashing if USB device is selected
-                if (selectedDevice && !flashingStarted) {
-                    startFlashing();
-                }
-            } else {
-                statusLabel.text = i18n("SHA256 verification failed!");
-                errorLabel.text = error || i18n("The downloaded file's checksum does not match the expected value.");
-                errorLabel.visible = true;
-                retryButton.visible = true;
-            }
         }
     }
 
@@ -77,173 +74,158 @@ Kirigami.Page {
         id: flashController
 
         onProgressChanged: {
-            flashProgressBar.value = progress;
-            statusLabel.text = i18n("Flashing: %1%", Math.round(progress));
+            flashProgressBar.value = flashController.progress * 100;
+            currentStatus = i18n("Flashing: %1%", Math.round(flashController.progress * 100));
         }
-
         onFlashCompleted: {
-            statusLabel.text = i18n("Flash completed successfully!");
+            currentStatus = i18n("Flash completed successfully!");
             successLabel.visible = true;
         }
-
-        onFlashFailed: function (error) {
-            statusLabel.text = i18n("Flash failed!");
+        onFlashFailed: function(error) {
+            currentStatus = i18n("Flash failed!");
             errorLabel.text = error;
             errorLabel.visible = true;
-            retryButton.visible = true;
         }
-    }
-
-    function startDownload() {
-        if (isoUrl) {
-            statusLabel.text = i18n("Starting download...");
-            errorLabel.visible = false;
-            successLabel.visible = false;
-            retryButton.visible = false;
-            fetchJob.fetch(isoUrl);
-        }
-    }
-
-    function startFlashing() {
-        if (downloadComplete && (verificationComplete || !isoHash) && selectedDevice && !flashingStarted) {
-            flashingStarted = true;
-            statusLabel.text = i18n("Starting flash...");
-            flashController.startFlashing(downloadedFilePath, selectedDevice);
-        }
-    }
-
-    Component.onCompleted: {
-        // Auto-start download when page loads
-        startDownload();
     }
 
     ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: Kirigami.Units.largeSpacing
-        spacing: Kirigami.Units.largeSpacing
+        anchors.centerIn: parent
+        width: Math.min(parent.width - Kirigami.Units.gridUnit * 4, Kirigami.Units.gridUnit * 40)
+        spacing: Kirigami.Units.largeSpacing * 2
 
-        Image {
+        // Success/Error/Status Icon
+        Kirigami.Icon {
             Layout.alignment: Qt.AlignHCenter
-            width: Kirigami.Units.gridUnit * 4 // About 96px
-            height: Kirigami.Units.gridUnit * 4
-            source: "qrc:/qml/images/downloading.png"
-            fillMode: Image.PreserveAspectFit
+            Layout.preferredWidth: Kirigami.Units.iconSizes.huge
+            Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+            source: successLabel.visible ? "checkmark" : errorLabel.visible ? "error" : downloadComplete && flashingStarted ? "media-optical" : "cloud-download"
+            color: successLabel.visible ? Kirigami.Theme.positiveTextColor : errorLabel.visible ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
         }
 
-        // ISO Information
-        Kirigami.FormLayout {
+        // Subtitle message
+        Controls.Label {
             Layout.fillWidth: true
-
-            Label {
-                Kirigami.FormData.label: i18n("ISO:")
-                text: isoName || i18n("Unknown ISO")
-                elide: Label.ElideMiddle
-                font.weight: Font.Medium
-            }
-
-            Label {
-                Kirigami.FormData.label: i18n("USB Device:")
-                text: selectedDevice ? selectedDevice.displayName : i18n("Unknown Device")
-                elide: Label.ElideMiddle
-                font.weight: Font.Medium
-            }
+            text: successLabel.visible ? i18n("Your bootable USB drive has been created successfully!\nYou can now safely remove it and use it to boot your computer.") : errorLabel.visible ? (errorLabel.text || i18n("Please try again or check your connection.")) : currentStatus || (downloadComplete && flashingStarted ? i18n("Writing data to your USB drive. This may take some time.") : i18n("Downloading the ISO file. This may take some time depending on your internet connection."))
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
+            color: successLabel.visible ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
         }
 
-        // Progress Section
+        // Progress bar with percentage
         ColumnLayout {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
+            visible: !successLabel.visible && !errorLabel.visible
 
-            Kirigami.Separator {
-                Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-            }
-
-            Label {
-                text: i18n("Progress")
-                font.bold: true
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
-            }
-
-            Label {
-                id: statusLabel
-                text: i18n("Ready to start...")
-                Layout.fillWidth: true
-                color: Kirigami.Theme.textColor
-            }
-
-            ProgressBar {
+            Controls.ProgressBar {
                 id: downloadProgressBar
+
                 Layout.fillWidth: true
+                height: Kirigami.Units.gridUnit * 2
                 from: 0
                 to: 100
                 value: 0
                 visible: !downloadComplete
+
+                // Progress percentage text overlay
+                Controls.Label {
+                    anchors.centerIn: parent
+                    text: Math.round(downloadProgressBar.value) + "%"
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
+                    font.bold: true
+                    color: Kirigami.Theme.textColor
+                }
+
             }
 
-            ProgressBar {
+            Controls.ProgressBar {
                 id: flashProgressBar
+
                 Layout.fillWidth: true
+                height: Kirigami.Units.gridUnit * 2
                 from: 0
                 to: 100
                 value: 0
                 visible: downloadComplete && flashingStarted
+
+                // Progress percentage text overlay
+                Controls.Label {
+                    anchors.centerIn: parent
+                    text: Math.round(flashProgressBar.value) + "%"
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
+                    font.bold: true
+                    color: Kirigami.Theme.textColor
+                }
+
             }
 
-            Label {
-                id: errorLabel
+            Controls.Label {
                 Layout.fillWidth: true
-                color: Kirigami.Theme.negativeTextColor
-                wrapMode: Label.WordWrap
-                visible: false
-                font.weight: Font.Medium
+                text: downloadComplete && flashingStarted ? i18n("Writing data to USB drive…") : i18n("Downloading ISO file…")
+                horizontalAlignment: Text.AlignHCenter
+                color: Kirigami.Theme.disabledTextColor
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
             }
 
-            Label {
-                id: successLabel
-                text: i18n("✅ Operation completed successfully!")
-                Layout.fillWidth: true
-                color: Kirigami.Theme.positiveTextColor
-                visible: false
-                font.weight: Font.Medium
-            }
+        }
 
-            Button {
-                id: retryButton
+        // Error/Success labels (hidden, used for state checking)
+        Controls.Label {
+            id: errorLabel
+
+            Layout.fillWidth: true
+            color: Kirigami.Theme.negativeTextColor
+            wrapMode: Text.WordWrap
+            visible: false
+            font.weight: Font.Medium
+        }
+
+        Controls.Label {
+            id: successLabel
+
+            text: i18n("✅ Operation completed successfully!")
+            Layout.fillWidth: true
+            color: Kirigami.Theme.positiveTextColor
+            visible: false
+            font.weight: Font.Medium
+        }
+
+        // Error actions (only show Retry button in main content when failed)
+        RowLayout {
+            Layout.alignment: Qt.AlignHCenter
+            spacing: Kirigami.Units.mediumSpacing
+            visible: errorLabel.visible
+
+            Controls.Button {
                 text: i18n("Retry")
                 icon.name: "view-refresh"
-                visible: false
-                Layout.alignment: Qt.AlignLeft
+                highlighted: true
                 onClicked: {
                     downloadComplete = false;
-                    verificationComplete = false;
                     flashingStarted = false;
                     downloadProgressBar.value = 0;
                     flashProgressBar.value = 0;
                     errorLabel.visible = false;
                     successLabel.visible = false;
-                    retryButton.visible = false;
                     startDownload();
                 }
             }
+
         }
 
-        // Spacer to push everything up
-        Item {
-            Layout.fillHeight: true
-        }
     }
 
-    footer: ToolBar {
+    footer: Controls.ToolBar {
+
         contentItem: RowLayout {
             Item {
                 Layout.fillWidth: true
             }
 
-            Button {
-                id: cancelButton
+            Controls.Button {
                 text: i18n("Cancel")
-                icon.name: "process-stop"
+                icon.name: "dialog-cancel"
                 onClicked: {
                     if (!downloadComplete && !flashingStarted) {
                         // Cancel download
@@ -251,14 +233,14 @@ Kirigami.Page {
                     } else if (flashingStarted && !successLabel.visible && !errorLabel.visible) {
                         // Cancel flash
                         flashController.cancelFlashing();
-                        statusLabel.text = i18n("Flash cancelled");
+                        currentStatus = i18n("Flash cancelled");
                     }
-                    applicationWindow().pageStack.pop(null); // Go back to welcome page
+                    applicationWindow().pageStack.pop();
                 }
                 visible: !successLabel.visible
             }
 
-            Button {
+            Controls.Button {
                 text: i18n("Done")
                 icon.name: "dialog-ok"
                 highlighted: true
@@ -267,6 +249,25 @@ Kirigami.Page {
                 }
                 visible: successLabel.visible
             }
+
+            Controls.Button {
+                text: i18n("Retry")
+                icon.name: "view-refresh"
+                highlighted: true
+                onClicked: {
+                    downloadComplete = false;
+                    flashingStarted = false;
+                    downloadProgressBar.value = 0;
+                    flashProgressBar.value = 0;
+                    errorLabel.visible = false;
+                    successLabel.visible = false;
+                    startDownload();
+                }
+                visible: errorLabel.visible
+            }
+
         }
+
     }
+
 }

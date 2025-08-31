@@ -5,8 +5,8 @@
 */
 
 #include "imagewriter_helper.h"
-#include "isoimagewriter_debug.h"
 #include "imagewriter.h"
+#include "isoimagewriter_debug.h"
 #include "usbdevice.h"
 
 #include <KLocalizedString>
@@ -17,14 +17,14 @@
 #include <KAuthActionReply>
 #endif
 
-#include <QProcess>
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
+#include <QProcess>
 #include <QThread>
 
-#include <stdio.h>
 #include <iostream>
+#include <stdio.h>
 #include <time.h>
 
 ImageWriterHelper::ImageWriterHelper()
@@ -44,7 +44,7 @@ ActionReply ImageWriterHelper::write(const QVariantMap &args)
     quint32 sectorSize = args[QStringLiteral("usbdevice_sectorsize")].toUInt();
     QString physicalDevice = args[QStringLiteral("usbdevice_physicaldevice")].toString();
 
-    UsbDevice* selectedDevice = new UsbDevice();
+    UsbDevice *selectedDevice = new UsbDevice();
     selectedDevice->m_VisibleName = visibleName;
     selectedDevice->m_Volumes = volumes;
     selectedDevice->m_Size = size;
@@ -58,7 +58,7 @@ ActionReply ImageWriterHelper::write(const QVariantMap &args)
     qDebug() << "ImageWriterHelper::writefile() size:" << size;
     qDebug() << "ImageWriterHelper::writefile() sectorSize:" << sectorSize;
 
-    ImageWriter* writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
+    ImageWriter *writer = new ImageWriter(zeroing ? "" : imageFile, selectedDevice);
     writer->writeImage();
 
     return ActionReply::SuccessReply();

@@ -3,12 +3,13 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#include "releasefetch.h"
 #include <QDebug>
-#include <QRegularExpression>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QRegularExpression>
 #include <algorithm>
+
+#include "releasefetch.h"
 
 #define FEDORA_URL "https://fedoraproject.org//releases.json"
 #define KUBUNTU_URL "https://cdimage.ubuntu.com/kubuntu/releases/"
@@ -27,21 +28,25 @@ ReleaseFetch::ReleaseFetch(QObject *parent)
     , m_kubuntuBaseUrl(KUBUNTU_URL)
 {
     m_network.setRedirectPolicy(QNetworkRequest::UserVerifiedRedirectPolicy);
-}
 
+    // Setup timeout timer
+    m_timeoutTimer.setSingleShot(true);
+    m_timeoutTimer.setInterval(10000); // 10 seconds
+    connect(&m_timeoutTimer, &QTimer::timeout, this, &ReleaseFetch::onTimeout);
+}
 
 void ReleaseFetch::fetchReleases()
 {
     // Check cache first
     const QString cacheKey = "latest_releases";
     QJsonArray *cachedReleases = s_releaseCache.object(cacheKey);
-    
+
     if (cachedReleases) {
         emit fetchProgress("Using cached releases...");
         emit releasesReady(*cachedReleases);
         return;
     }
-    
+
     // Not in cache, fetch fresh data
     m_canceled = false;
     m_kubuntuReleases.clear();
@@ -52,9 +57,12 @@ void ReleaseFetch::fetchReleases()
     m_kubuntuComplete = false;
     m_fedoraComplete = false;
     m_kdeNeonComplete = false;
-    
+
     emit fetchProgress("Starting release fetch...");
-    
+
+    // Start the 10-second timeout timer
+    m_timeoutTimer.start();
+
     // Start both fetches in parallel
     fetchKubuntuReleases();
     fetchFedoraReleases();
@@ -64,7 +72,7 @@ void ReleaseFetch::fetchReleases()
 void ReleaseFetch::fetchKubuntuReleases()
 {
     emit fetchProgress("Fetching Kubuntu releases...");
-    
+
     // Fetch main directory listing
     QUrl url(m_kubuntuBaseUrl);
     QNetworkReply *reply = fetchUrl(url);
@@ -78,7 +86,7 @@ void ReleaseFetch::fetchKubuntuReleases()
 void ReleaseFetch::fetchFedoraReleases()
 {
     emit fetchProgress("Fetching Fedora releases...");
-    
+
     QUrl url("https://fedoraproject.org/releases.json");
     QNetworkReply *reply = fetchUrl(url);
     if (reply) {
@@ -91,6 +99,7 @@ void ReleaseFetch::fetchFedoraReleases()
 void ReleaseFetch::cancel()
 {
     m_canceled = true;
+    m_timeoutTimer.stop();
 }
 
 void ReleaseFetch::clearCache()
@@ -104,7 +113,7 @@ QNetworkReply *ReleaseFetch::fetchUrl(const QUrl &url)
     if (m_canceled) {
         return nullptr;
     }
-    
+
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, "KubuntuFetcher/1.0");
     QNetworkReply *reply = m_network.get(request);
@@ -114,33 +123,34 @@ QNetworkReply *ReleaseFetch::fetchUrl(const QUrl &url)
 
 void ReleaseFetch::onKubuntuMainPageFinished()
 {
-    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-    if (!reply) return;
-    
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    if (!reply)
+        return;
+
     reply->deleteLater();
-    
+
     if (m_canceled) {
         return;
     }
-    
+
     if (reply->error() != QNetworkReply::NoError) {
         emit fetchFailed("Failed to fetch Kubuntu releases page: " + reply->errorString());
         return;
     }
-    
+
     QString html = QString::fromUtf8(reply->readAll());
     m_versions = parseVersions(html);
-    
+
     if (m_versions.isEmpty()) {
         emit fetchFailed("No Kubuntu versions found");
         return;
     }
-    
+
     // Start fetching individual release pages
     m_currentVersionIndex = 0;
     QString version = m_versions[m_currentVersionIndex];
     emit fetchProgress(QString("Checking Kubuntu version %1...").arg(version));
-    
+
     QUrl releaseUrl(m_kubuntuBaseUrl + version + "/release/");
     QNetworkReply *releaseReply = fetchUrl(releaseUrl);
     if (releaseReply) {
@@ -152,20 +162,21 @@ void ReleaseFetch::onKubuntuMainPageFinished()
 
 void ReleaseFetch::onKubuntuReleasePageFinished()
 {
-    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-    if (!reply) return;
-    
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    if (!reply)
+        return;
+
     reply->deleteLater();
-    
+
     if (m_canceled) {
         return;
     }
-    
+
     if (reply->error() == QNetworkReply::NoError) {
         QString html = QString::fromUtf8(reply->readAll());
         QString version = m_versions[m_currentVersionIndex];
         QString filename = QString("kubuntu-%1-desktop-amd64.iso").arg(version);
-        
+
         // Check if ISO exists
         if (html.contains(filename)) {
             IsoRelease release;
@@ -174,7 +185,7 @@ void ReleaseFetch::onKubuntuReleasePageFinished()
             release.filename = filename;
             release.url = m_kubuntuBaseUrl + version + "/release/" + filename;
             release.distro = "Kubuntu";
-            
+
             // Fetch SHA256SUMS
             QUrl sha256Url(m_kubuntuBaseUrl + version + "/release/SHA256SUMS");
             QNetworkReply *sha256Reply = fetchUrl(sha256Url);
@@ -189,13 +200,13 @@ void ReleaseFetch::onKubuntuReleasePageFinished()
             }
         }
     }
-    
+
     // Move to next version
     m_currentVersionIndex++;
     if (m_currentVersionIndex < m_versions.size()) {
         QString version = m_versions[m_currentVersionIndex];
         emit fetchProgress(QString("Checking Kubuntu version %1...").arg(version));
-        
+
         QUrl releaseUrl(m_kubuntuBaseUrl + version + "/release/");
         QNetworkReply *releaseReply = fetchUrl(releaseUrl);
         if (releaseReply) {
@@ -211,27 +222,28 @@ void ReleaseFetch::onKubuntuReleasePageFinished()
 
 void ReleaseFetch::onKubuntuSha256Finished()
 {
-    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-    if (!reply) return;
-    
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    if (!reply)
+        return;
+
     reply->deleteLater();
-    
+
     if (m_canceled) {
         return;
     }
-    
+
     if (reply->error() == QNetworkReply::NoError && !m_kubuntuReleases.isEmpty()) {
         QString sha256Content = QString::fromUtf8(reply->readAll());
         IsoRelease &release = m_kubuntuReleases.last();
         release.sha256 = extractSHA256(sha256Content, release.filename);
     }
-    
+
     // Continue with next version
     m_currentVersionIndex++;
     if (m_currentVersionIndex < m_versions.size()) {
         QString version = m_versions[m_currentVersionIndex];
         emit fetchProgress(QString("Checking Kubuntu version %1...").arg(version));
-        
+
         QUrl releaseUrl(m_kubuntuBaseUrl + version + "/release/");
         QNetworkReply *releaseReply = fetchUrl(releaseUrl);
         if (releaseReply) {
@@ -247,64 +259,62 @@ void ReleaseFetch::onKubuntuSha256Finished()
 
 void ReleaseFetch::onFedoraReleasesFinished()
 {
-    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-    if (!reply) return;
-    
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    if (!reply)
+        return;
+
     reply->deleteLater();
-    
+
     if (m_canceled) {
         return;
     }
-    
+
     if (reply->error() != QNetworkReply::NoError) {
         emit fetchFailed("Failed to fetch Fedora releases: " + reply->errorString());
         return;
     }
-    
+
     QByteArray data = reply->readAll();
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson(data, &error);
-    
+
     if (error.error != QJsonParseError::NoError) {
         emit fetchFailed("Failed to parse Fedora JSON: " + error.errorString());
         return;
     }
-    
+
     if (!doc.isArray()) {
         emit fetchFailed("Invalid Fedora JSON format");
         return;
     }
-    
+
     QJsonArray releases = doc.array();
     emit fetchProgress("Processing Fedora releases...");
-    
+
     // Filter for KDE/Plasma variants
     for (const QJsonValue &value : releases) {
         QJsonObject releaseObj = value.toObject();
         QString variant = releaseObj["variant"].toString();
         QString subvariant = releaseObj["subvariant"].toString();
-        
+
         // Look for KDE/Plasma variants
-        if (variant.contains("KDE", Qt::CaseInsensitive) || 
-            subvariant.contains("KDE", Qt::CaseInsensitive) ||
-            variant.contains("Plasma", Qt::CaseInsensitive) ||
-            subvariant.contains("Plasma", Qt::CaseInsensitive)) {
-            
+        if (variant.contains("KDE", Qt::CaseInsensitive) || subvariant.contains("KDE", Qt::CaseInsensitive) || variant.contains("Plasma", Qt::CaseInsensitive)
+            || subvariant.contains("Plasma", Qt::CaseInsensitive)) {
             IsoRelease release;
             release.name = QString("Fedora %1 %2").arg(releaseObj["version"].toString(), variant);
             release.version = releaseObj["version"].toString();
             release.url = releaseObj["link"].toString();
             release.sha256 = releaseObj["sha256"].toString();
             release.distro = "Fedora";
-            
+
             // Extract filename from URL
             QUrl url(release.url);
             release.filename = url.fileName();
-            
+
             m_fedoraReleases.append(release);
         }
     }
-    
+
     m_fedoraComplete = true;
     emit fetchProgress("Fedora fetch complete");
     checkIfComplete();
@@ -313,7 +323,7 @@ void ReleaseFetch::onFedoraReleasesFinished()
 void ReleaseFetch::fetchKdeNeonReleases()
 {
     emit fetchProgress("Adding KDE neon release...");
-    
+
     // Create KDE neon release directly since we know the structure
     IsoRelease release;
     release.name = "KDE neon User Edition";
@@ -323,26 +333,25 @@ void ReleaseFetch::fetchKdeNeonReleases()
     release.distro = "KDE neon";
     // SHA256 URL is known but we'll let the download process handle verification
     release.sha256 = QString(KDENEON_URL) + "neon-user-current.sha256sum";
-    
+
     m_kdeNeonReleases.append(release);
     m_kdeNeonComplete = true;
     emit fetchProgress("KDE neon release added");
     checkIfComplete();
 }
 
-
 QStringList ReleaseFetch::parseVersions(const QString &html)
 {
     QStringList versions;
     QRegularExpression versionRegex(R"(<a href="([0-9]+\.[0-9]+(?:\.[0-9]+)?)/")");
     QRegularExpressionMatchIterator iter = versionRegex.globalMatch(html);
-    
+
     while (iter.hasNext()) {
         QRegularExpressionMatch match = iter.next();
         QString version = match.captured(1);
         versions.append(version);
     }
-    
+
     return versions;
 }
 
@@ -350,7 +359,7 @@ QString ReleaseFetch::extractSHA256(const QString &sha256Content, const QString 
 {
     QRegularExpression sha256Regex(QString("([a-f0-9]{64})\\s+\\*?%1").arg(QRegularExpression::escape(filename)));
     QRegularExpressionMatch match = sha256Regex.match(sha256Content);
-    
+
     if (match.hasMatch()) {
         return match.captured(1);
     }
@@ -360,34 +369,37 @@ QString ReleaseFetch::extractSHA256(const QString &sha256Content, const QString 
 void ReleaseFetch::checkIfComplete()
 {
     if (m_kubuntuComplete && m_fedoraComplete && m_kdeNeonComplete) {
+        // Stop the timeout timer since we completed successfully
+        m_timeoutTimer.stop();
+
         emit fetchProgress("All fetches complete, selecting latest releases...");
-        
+
         QList<IsoRelease> finalReleases;
-        
+
         // Get latest Kubuntu
         IsoRelease latestKubuntu = getLatestKubuntu();
         if (!latestKubuntu.version.isEmpty()) {
             finalReleases.append(latestKubuntu);
         }
-        
+
         // Get latest Fedora KDE
         IsoRelease latestFedora = getLatestFedoraKDE();
         if (!latestFedora.version.isEmpty()) {
             finalReleases.append(latestFedora);
         }
-        
+
         // Get latest KDE neon
         IsoRelease latestKdeNeon = getLatestKdeNeon();
         if (!latestKdeNeon.version.isEmpty()) {
             finalReleases.append(latestKdeNeon);
         }
-        
+
         QJsonArray result = releasesToJson(finalReleases);
-        
+
         // Cache the result
         const QString cacheKey = "latest_releases";
         s_releaseCache.insert(cacheKey, new QJsonArray(result));
-        
+
         emit releasesReady(result);
     }
 }
@@ -397,13 +409,12 @@ IsoRelease ReleaseFetch::getLatestKubuntu()
     if (m_kubuntuReleases.isEmpty()) {
         return IsoRelease();
     }
-    
+
     // Sort by version and return the latest
-    std::sort(m_kubuntuReleases.begin(), m_kubuntuReleases.end(), 
-              [](const IsoRelease &a, const IsoRelease &b) {
-                  return a.version > b.version;
-              });
-    
+    std::sort(m_kubuntuReleases.begin(), m_kubuntuReleases.end(), [](const IsoRelease &a, const IsoRelease &b) {
+        return a.version > b.version;
+    });
+
     return m_kubuntuReleases.first();
 }
 
@@ -412,13 +423,12 @@ IsoRelease ReleaseFetch::getLatestFedoraKDE()
     if (m_fedoraReleases.isEmpty()) {
         return IsoRelease();
     }
-    
+
     // Sort by version and return the latest
-    std::sort(m_fedoraReleases.begin(), m_fedoraReleases.end(), 
-              [](const IsoRelease &a, const IsoRelease &b) {
-                  return a.version.toInt() > b.version.toInt();
-              });
-    
+    std::sort(m_fedoraReleases.begin(), m_fedoraReleases.end(), [](const IsoRelease &a, const IsoRelease &b) {
+        return a.version.toInt() > b.version.toInt();
+    });
+
     return m_fedoraReleases.first();
 }
 
@@ -427,7 +437,7 @@ IsoRelease ReleaseFetch::getLatestKdeNeon()
     if (m_kdeNeonReleases.isEmpty()) {
         return IsoRelease();
     }
-    
+
     // KDE neon only has one "current" release, so return the first (and only) one
     return m_kdeNeonReleases.first();
 }
@@ -435,7 +445,7 @@ IsoRelease ReleaseFetch::getLatestKdeNeon()
 QJsonArray ReleaseFetch::releasesToJson(const QList<IsoRelease> &releases)
 {
     QJsonArray jsonArray;
-    
+
     for (const auto &release : releases) {
         QJsonObject releaseObj;
         releaseObj["name"] = release.name;
@@ -446,8 +456,24 @@ QJsonArray ReleaseFetch::releasesToJson(const QList<IsoRelease> &releases)
         releaseObj["distro"] = release.distro;
         jsonArray.append(releaseObj);
     }
-    
+
     return jsonArray;
+}
+
+void ReleaseFetch::onTimeout()
+{
+    if (m_canceled) {
+        return;
+    }
+
+    emit fetchProgress("Network request timed out after 10 seconds");
+
+    // Cancel all ongoing operations
+    m_canceled = true;
+
+    // Return empty list as requested
+    QJsonArray emptyResult;
+    emit releasesReady(emptyResult);
 }
 
 #include "moc_releasefetch.cpp"

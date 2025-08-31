@@ -9,14 +9,14 @@
 #include "common.h"
 
 #include <KLocalizedString>
-#include <QDBusInterface>
-#include <QDBusReply>
 #include <QDBusConnection>
+#include <QDBusInterface>
 #include <QDBusObjectPath>
-#include <QtDBus/QtDBus>
-#include <QMessageBox>
+#include <QDBusReply>
 #include <QDir>
+#include <QMessageBox>
 #include <QRegularExpression>
+#include <QtDBus/QtDBus>
 
 #include "mainapplication.h"
 #include "usbdevice.h"
@@ -26,7 +26,8 @@ typedef QHash<QDBusObjectPath, InterfacesAndProperties> DBusIntrospection;
 Q_DECLARE_METATYPE(InterfacesAndProperties)
 Q_DECLARE_METATYPE(DBusIntrospection)
 
-UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndProperties &interfaces_and_properties) {
+UsbDevice *handleObject(const QDBusObjectPath &object_path, const InterfacesAndProperties &interfaces_and_properties)
+{
     QRegularExpression numberRE("[0-9]$");
     QRegularExpressionMatch numberREMatch = numberRE.match(object_path.path());
     QRegularExpression mmcRE("[0-9]p[0-9]$");
@@ -34,10 +35,9 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
     QDBusObjectPath driveId = qvariant_cast<QDBusObjectPath>(interfaces_and_properties["org.freedesktop.UDisks2.Block"]["Drive"]);
 
     QDBusInterface driveInterface("org.freedesktop.UDisks2", driveId.path(), "org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus());
-    UsbDevice* deviceData = new UsbDevice;
+    UsbDevice *deviceData = new UsbDevice;
 
-    if ((numberREMatch.hasMatch() && !object_path.path().startsWith("/org/freedesktop/UDisks2/block_devices/mmcblk")) ||
-            mmcREMatch.hasMatch())
+    if ((numberREMatch.hasMatch() && !object_path.path().startsWith("/org/freedesktop/UDisks2/block_devices/mmcblk")) || mmcREMatch.hasMatch())
         return nullptr;
 
     if (!driveId.path().isEmpty() && driveId.path() != "/") {
@@ -50,7 +50,7 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
         QString vendor = driveInterface.property("Vendor").toString();
         QString model = driveInterface.property("Model").toString();
         uint64_t size = driveInterface.property("Size").toULongLong();
-        //bool isoLayout = interfaces_and_properties["org.freedesktop.UDisks2.Block"]["IdType"].toString() == "iso9660";
+        // bool isoLayout = interfaces_and_properties["org.freedesktop.UDisks2.Block"]["IdType"].toString() == "iso9660";
 
         QString name;
         if (vendor.isEmpty())
@@ -58,16 +58,16 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
                 name = interfaces_and_properties["org.freedesktop.UDisks2.Block"]["Device"].toByteArray();
             else
                 name = model;
+        else if (model.isEmpty())
+            name = vendor;
         else
-            if (model.isEmpty())
-                name = vendor;
-            else
-                name = QString("%1 %2").arg(vendor).arg(model);
+            name = QString("%1 %2").arg(vendor).arg(model);
 
-        //qDebug() << "New drive" << driveId.path() << "-" << name << "(" << size << "bytes;" << (isValid ? "removable;" : "nonremovable;") << connectionBus << ")";
+        // qDebug() << "New drive" << driveId.path() << "-" << name << "(" << size << "bytes;" << (isValid ? "removable;" : "nonremovable;") << connectionBus <<
+        // ")";
 
         deviceData->m_PhysicalDevice = object_path.path();
-        deviceData->m_Volumes = QStringList{ deviceData->m_PhysicalDevice };
+        deviceData->m_Volumes = QStringList{deviceData->m_PhysicalDevice};
         deviceData->m_SectorSize = 512;
         deviceData->m_Size = size;
         deviceData->m_VisibleName = name;
@@ -79,12 +79,12 @@ UsbDevice* handleObject(const QDBusObjectPath &object_path, const InterfacesAndP
     return nullptr;
 }
 
-bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam)
+bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void *cbParam)
 {
-
     qDBusRegisterMetaType<InterfacesAndProperties>();
     qDBusRegisterMetaType<DBusIntrospection>();
-    QDBusInterface* m_objManager = new QDBusInterface("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", "org.freedesktop.DBus.ObjectManager", QDBusConnection::systemBus());
+    QDBusInterface *m_objManager =
+        new QDBusInterface("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2", "org.freedesktop.DBus.ObjectManager", QDBusConnection::systemBus());
     QDBusPendingReply<DBusIntrospection> reply = m_objManager->asyncCall("GetManagedObjects");
     reply.waitForFinished();
     if (reply.isError()) {
@@ -97,7 +97,7 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void* cbParam
         if (!i.path().startsWith("/org/freedesktop/UDisks2/block_devices")) {
             continue;
         }
-        UsbDevice* deviceData = nullptr;
+        UsbDevice *deviceData = nullptr;
         deviceData = handleObject(i, introspection[i]);
         if (deviceData) {
             callback(cbParam, deviceData);

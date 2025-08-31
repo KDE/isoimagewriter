@@ -23,8 +23,8 @@ set(isoimagewriter_SRCS
     isolineedit.cpp
     usbdevicemodel.cpp
     flashcontroller.cpp
-    releasesmodel.cpp
     releasefetch.cpp
+    filedialogbridge.cpp
 
 
     common.h
@@ -37,8 +37,8 @@ set(isoimagewriter_SRCS
     usbdevicemodel.h
     usbdevice.h
     flashcontroller.h
-    releasesmodel.h
     releasefetch.h
+    filedialogbridge.h
 
 
     main.cpp

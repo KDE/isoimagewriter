@@ -6,10 +6,10 @@
 #ifndef USBDEVICE_H
 #define USBDEVICE_H
 
+#include <KFormat>
+#include <KLocalizedString>
 #include <QObject>
 #include <QStringList>
-#include <KLocalizedString>
-#include <KFormat>
 
 class UsbDevice : public QObject
 {
@@ -21,49 +21,74 @@ class UsbDevice : public QObject
     Q_PROPERTY(QString displayName READ displayName NOTIFY displayNameChanged)
 
 public:
-    explicit UsbDevice(QObject *parent = nullptr) : QObject(parent), m_Size(0) {}
+    explicit UsbDevice(QObject *parent = nullptr)
+        : QObject(parent)
+        , m_Size(0)
+    {
+    }
 
-    QString visibleName() const { return m_VisibleName; }
-    void setVisibleName(const QString &visibleName) {
-        if (m_VisibleName == visibleName) return;
+    QString visibleName() const
+    {
+        return m_VisibleName;
+    }
+    void setVisibleName(const QString &visibleName)
+    {
+        if (m_VisibleName == visibleName)
+            return;
         m_VisibleName = visibleName;
         emit visibleNameChanged();
         emit displayNameChanged();
     }
 
-    QStringList volumes() const { return m_Volumes; }
-    void setVolumes(const QStringList &volumes) {
-        if (m_Volumes == volumes) return;
+    QStringList volumes() const
+    {
+        return m_Volumes;
+    }
+    void setVolumes(const QStringList &volumes)
+    {
+        if (m_Volumes == volumes)
+            return;
         m_Volumes = volumes;
         emit volumesChanged();
         emit displayNameChanged();
     }
 
-    quint64 size() const { return m_Size; }
-    void setSize(quint64 size) {
-        if (m_Size == size) return;
+    quint64 size() const
+    {
+        return m_Size;
+    }
+    void setSize(quint64 size)
+    {
+        if (m_Size == size)
+            return;
         m_Size = size;
         emit sizeChanged();
         emit displayNameChanged();
     }
 
-    QString physicalDevice() const { return m_PhysicalDevice; }
-    void setPhysicalDevice(const QString &physicalDevice) {
-        if (m_PhysicalDevice == physicalDevice) return;
+    QString physicalDevice() const
+    {
+        return m_PhysicalDevice;
+    }
+    void setPhysicalDevice(const QString &physicalDevice)
+    {
+        if (m_PhysicalDevice == physicalDevice)
+            return;
         m_PhysicalDevice = physicalDevice;
         emit physicalDeviceChanged();
     }
 
-    QString displayName() const {
-        return ((m_Volumes.isEmpty()) ? i18n("<unmounted>")
-                : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + KFormat().formatByteSize(m_Size) + QLatin1Char(')');
+    QString displayName() const
+    {
+        return ((m_Volumes.isEmpty()) ? i18n("<unmounted>") : m_Volumes.join(", ")) + " - " + m_VisibleName + " (" + KFormat().formatByteSize(m_Size)
+            + QLatin1Char(')');
     }
 
-    QString     m_VisibleName = i18n("Unknown Device");
+    QString m_VisibleName = i18n("Unknown Device");
     QStringList m_Volumes;
-    quint64     m_Size = 0;
-    QString     m_PhysicalDevice;
-    quint32     m_SectorSize;
+    quint64 m_Size = 0;
+    QString m_PhysicalDevice;
+    quint32 m_SectorSize;
 
 signals:
     void visibleNameChanged();
@@ -71,7 +96,6 @@ signals:
     void sizeChanged();
     void physicalDeviceChanged();
     void displayNameChanged();
-
 };
 
 #endif // USBDEVICE_H

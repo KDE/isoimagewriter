@@ -10,17 +10,16 @@
 // Class for exporting progressbar state to some external component
 // At the moment implemented only for the Windows taskbar
 
-
 #include "common.h"
 
 class ExternalProgressBarPrivate;
 class ExternalProgressBar
 {
 protected:
-    ExternalProgressBarPrivate* const d_ptr;
+    ExternalProgressBarPrivate *const d_ptr;
 
 public:
-    explicit ExternalProgressBar(QWidget* mainWindow);
+    explicit ExternalProgressBar(QWidget *mainWindow);
     ~ExternalProgressBar();
 
     // Initializes the external progress bar and sets its limits
