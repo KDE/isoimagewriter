@@ -16,9 +16,6 @@
         <file>qml/pages/FlashPage.qml</file>
         <file>qml/pages/SelectionPage.qml</file>
         
-        <!-- Components -->
-        <file>qml/components/ListDelegate.qml</file>
-        
         <!-- Images -->
         <file>qml/images/org.kde.isoimagewriter.svg</file>
         
