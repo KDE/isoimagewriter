@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef COMMON_H
-#define COMMON_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // This file contains some commonly-used constants and function declarations
@@ -114,4 +113,4 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void *cbParam
 //  does not return if elevation request succeeded (the current instance terminates)
 bool ensureElevated();
 
-#endif // COMMON_H
+

@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef IMAGEWRITER_H
-#define IMAGEWRITER_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // ImageWriter is a class for writing image file to the USB flash disk
@@ -50,4 +49,4 @@ public slots:
     void cancelWriting();
 };
 
-#endif // IMAGEWRITER_H
+

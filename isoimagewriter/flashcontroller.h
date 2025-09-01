@@ -2,8 +2,7 @@
  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-#ifndef FLASHCONTROLLER_H
-#define FLASHCONTROLLER_H
+#pragma once
 
 #include <QObject>
 #include <QQmlEngine>
@@ -76,4 +75,4 @@ private:
     void setErrorMessage(const QString &message);
 };
 
-#endif // FLASHCONTROLLER_H
+

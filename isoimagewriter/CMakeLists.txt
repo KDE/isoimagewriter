@@ -1,6 +1,6 @@
 # /*
 #  * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
-#  * SPDX-License-Identifier: GPL-3.0-or-later
+#  * SPDX-License-Identifier: BSD-3-Clause
 #  */
 
 set(GPGME_REQUIRED_VERSION "1.8.0")

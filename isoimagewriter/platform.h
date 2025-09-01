@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#pragma once
 
 #include <QtGlobal>
 
@@ -30,4 +29,4 @@
 #include <unistd.h>
 #endif
 
-#endif // PLATFORM_H
+

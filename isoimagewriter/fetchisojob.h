@@ -4,8 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef FETCHISOJOB_H
-#define FETCHISOJOB_H
+#pragma once
 
 #include <QNetworkAccessManager>
 
@@ -39,4 +38,4 @@ private:
     bool m_canceled = false;
 };
 
-#endif // FETCHISOJOB_H
+

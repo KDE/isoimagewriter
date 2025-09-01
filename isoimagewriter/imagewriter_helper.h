@@ -4,8 +4,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef IMAGEWRITER_HELPER_H
-#define IMAGEWRITER_HELPER_H
+#pragma once
 
 #include <QtGlobal>
 
@@ -30,4 +29,4 @@ public Q_SLOTS:
     ActionReply write(const QVariantMap &args);
 };
 
-#endif // IMAGEWRITER_HELPER_H
+

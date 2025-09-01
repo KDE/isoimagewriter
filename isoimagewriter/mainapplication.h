@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef MAINAPPLICATION_H
-#define MAINAPPLICATION_H
+#pragma once
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -24,4 +23,4 @@ protected:
     QCommandLineParser m_Options;
 };
 
-#endif // MAINAPPLICATION_H
+

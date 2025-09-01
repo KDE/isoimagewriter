@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef USBDEVICE_H
-#define USBDEVICE_H
+#pragma once
 
 #include <KFormat>
 #include <KLocalizedString>
@@ -98,4 +97,4 @@ signals:
     void displayNameChanged();
 };
 
-#endif // USBDEVICE_H
+

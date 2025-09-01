@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef ISOLINEEDIT_H
-#define ISOLINEEDIT_H
+#pragma once
 
 #include <QEvent>
 #include <QLineEdit>

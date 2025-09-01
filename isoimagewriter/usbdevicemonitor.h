@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef USBDEVICEMONITOR_H
-#define USBDEVICEMONITOR_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class implementing monitoring for inserting/removing USB devices
@@ -44,4 +43,4 @@ public slots:
     bool startMonitoring();
 };
 
-#endif // USBDEVICEMONITOR_H
+

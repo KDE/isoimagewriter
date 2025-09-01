@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef PHYSICALDEVICE_H
-#define PHYSICALDEVICE_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class implementing write-only physical device
@@ -31,4 +30,4 @@ protected:
 #endif
 };
 
-#endif // PHYSICALDEVICE_H
+

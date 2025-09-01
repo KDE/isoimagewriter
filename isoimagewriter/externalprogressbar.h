@@ -3,8 +3,7 @@
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#ifndef EXTERNALPROGRESSBAR_H
-#define EXTERNALPROGRESSBAR_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class for exporting progressbar state to some external component
@@ -42,4 +41,4 @@ protected:
     quint64 m_MaxValue;
 };
 
-#endif // EXTERNALPROGRESSBAR_H
+
