@@ -14,6 +14,7 @@ Dependencies:
     'frameworks/kcrash': '@latest-kf6'
     'frameworks/solid': '@latest-kf6'
     'frameworks/kirigami': '@latest-kf6'
+    'frameworks/qqc2-desktop-style': '@latest-kf6'
 
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
   'require':
