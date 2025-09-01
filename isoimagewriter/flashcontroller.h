@@ -74,5 +74,3 @@ private:
     void setStatusMessage(const QString &message);
     void setErrorMessage(const QString &message);
 };
-
-

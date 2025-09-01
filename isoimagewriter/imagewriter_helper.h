@@ -28,5 +28,3 @@ public:
 public Q_SLOTS:
     ActionReply write(const QVariantMap &args);
 };
-
-

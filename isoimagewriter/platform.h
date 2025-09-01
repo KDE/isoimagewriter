@@ -28,5 +28,3 @@
 #include <sys/ucred.h>
 #include <unistd.h>
 #endif
-
-

@@ -156,7 +156,7 @@ void ImageWriter::writeImage()
         qint64 readBytes;
         qint64 writtenBytes;
         qint64 totalBytesWritten = 0;
-        
+
         // Start reading/writing cycle
         for (;;) {
             if (zeroing) {
@@ -180,9 +180,9 @@ void ImageWriter::writeImage()
             // For unknown reason, deviceFile.flush() does not work as intended here.
             fsync(deviceFile.handle());
 #endif
-            
+
             totalBytesWritten += writtenBytes;
-            
+
             int percent = 0;
             if (!zeroing && !isCompressed && imageFile.size() > 0) {
                 percent = (100 * imageFile.pos()) / imageFile.size();
@@ -191,9 +191,10 @@ void ImageWriter::writeImage()
                 // This is an approximation since we don't know the final uncompressed size
                 percent = qMin(95, (int)(totalBytesWritten / (1024 * 1024))); // 1% per MB, max 95%
             }
-            
+
             // Always emit progress for feedback, even if it's 0
-            qDebug() << "ImageWriter: Progress" << percent << "% (pos:" << imageFile.pos() << "size:" << imageFile.size() << "written:" << totalBytesWritten << ")";
+            qDebug() << "ImageWriter: Progress" << percent << "% (pos:" << imageFile.pos() << "size:" << imageFile.size() << "written:" << totalBytesWritten
+                     << ")";
             emit progressChanged(percent);
 
             // Check for the cancel request (using temporary variable to avoid multiple unlock calls in the code)

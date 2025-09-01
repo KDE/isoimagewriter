@@ -96,5 +96,3 @@ signals:
     void physicalDeviceChanged();
     void displayNameChanged();
 };
-
-

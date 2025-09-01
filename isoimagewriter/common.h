@@ -112,5 +112,3 @@ bool platformEnumFlashDevices(AddFlashDeviceCallbackProc callback, void *cbParam
 //  false if error occurs
 //  does not return if elevation request succeeded (the current instance terminates)
 bool ensureElevated();
-
-

@@ -37,5 +37,3 @@ private:
     QString cache;
     bool m_canceled = false;
 };
-
-

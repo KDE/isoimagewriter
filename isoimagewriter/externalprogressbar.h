@@ -40,5 +40,3 @@ protected:
     // Maximum counter value for the progress bar
     quint64 m_MaxValue;
 };
-
-

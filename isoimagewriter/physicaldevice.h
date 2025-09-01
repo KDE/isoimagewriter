@@ -29,5 +29,3 @@ protected:
     HANDLE m_fileHandle;
 #endif
 };
-
-

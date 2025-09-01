@@ -48,5 +48,3 @@ public slots:
     // Implements reaction to the cancel request from user
     void cancelWriting();
 };
-
-

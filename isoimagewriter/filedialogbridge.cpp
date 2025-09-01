@@ -14,13 +14,9 @@ FileDialogBridge::FileDialogBridge(QObject *parent)
 
 QUrl FileDialogBridge::selectImageFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(
-        nullptr,
-        tr("Select Image File"),
-        QStandardPaths::writableLocation(QStandardPaths::HomeLocation),
-        getImageFileFilter()
-    );
-    
+    QString fileName =
+        QFileDialog::getOpenFileName(nullptr, tr("Select Image File"), QStandardPaths::writableLocation(QStandardPaths::HomeLocation), getImageFileFilter());
+
     return fileName.isEmpty() ? QUrl() : QUrl::fromLocalFile(fileName);
 }
 

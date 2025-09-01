@@ -28,5 +28,3 @@ public:
 signals:
     void clicked();
 };
-
-#endif

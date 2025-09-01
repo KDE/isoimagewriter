@@ -22,5 +22,3 @@ public:
 protected:
     QCommandLineParser m_Options;
 };
-
-

@@ -42,5 +42,3 @@ public slots:
     // Initializes monitoring for USB devices
     bool startMonitoring();
 };
-
-
