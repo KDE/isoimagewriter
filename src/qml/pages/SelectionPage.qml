@@ -13,6 +13,7 @@ import QtQuick.Window
 
 FormCard.FormCardPage {
     id: selectionPage
+
     title: i18nc("@title:window", "ISO Image Writer")
 
     property string selectedIsoPath: ""
@@ -39,6 +40,11 @@ FormCard.FormCardPage {
             selectedIsoPath = preselectedFile;
             console.log("SelectionPage: Updated selectedIsoPath to:", selectedIsoPath);
         }
+    }
+
+
+    UsbDeviceModel {
+        id: usbDeviceModel
     }
 
     IsoVerifier {
@@ -196,7 +202,7 @@ FormCard.FormCardPage {
 
             FormCard.FormCard {
                 Repeater {
-                    model: usbDeviceModel || null
+                    model: usbDeviceModel
 
                     FormCard.FormButtonDelegate {
                         required property string displayName
@@ -287,34 +293,10 @@ FormCard.FormCardPage {
         FormCard.FormCard {
             visible: !usbDeviceModel || !usbDeviceModel.hasDevices
 
-            RowLayout {
-                Layout.fillWidth: true
-                Layout.margins: Kirigami.Units.largeSpacing
-                spacing: Kirigami.Units.largeSpacing
-
-                Kirigami.Icon {
-                    source: "dialog-information"
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                }
-
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: Kirigami.Units.smallSpacing
-
-                    Controls.Label {
-                        Layout.fillWidth: true
-                        text: i18nc("@info", "No USB devices detected")
-                        font.bold: true
-                    }
-
-                    Controls.Label {
-                        Layout.fillWidth: true
-                        text: i18nc("@info", "Please connect a USB drive to continue")
-                        color: Kirigami.Theme.disabledTextColor
-                        wrapMode: Text.WordWrap
-                    }
-                }
+            FormCard.FormTextDelegate {
+                icon.name: "dialog-information"
+                text: i18nc("@info", "No USB devices detected")
+                description: i18nc("@info", "Please connect a USB drive to continue")
             }
         }
     }

@@ -6,7 +6,7 @@
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
-import org.kde.isoimagewriter 1.0
+import org.kde.isoimagewriter
 import org.kde.kirigami as Kirigami
 
 Kirigami.Page {

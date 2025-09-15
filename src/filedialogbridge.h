@@ -6,10 +6,12 @@
 
 #include <QObject>
 #include <QUrl>
+#include <qqmlintegration.h>
 
 class FileDialogBridge : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     explicit FileDialogBridge(QObject *parent = nullptr);

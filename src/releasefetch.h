@@ -12,6 +12,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QUrl>
+#include <qqmlintegration.h>
 
 struct IsoRelease {
     QString name;
@@ -25,6 +26,7 @@ struct IsoRelease {
 class ReleaseFetch : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     explicit ReleaseFetch(QObject *parent = nullptr);

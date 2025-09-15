@@ -7,10 +7,12 @@
 #pragma once
 
 #include <QNetworkAccessManager>
+#include <qqmlintegration.h>
 
 class FetchIsoJob : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 public:
     explicit FetchIsoJob(QObject *parent = nullptr);
 

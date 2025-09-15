@@ -44,6 +44,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     QQC2DesktopStyle
 )
 
+qt_policy(SET QTP0004 NEW)
+
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
 
 ecm_set_disabled_deprecation_versions(QT 6.7
@@ -52,7 +54,7 @@ ecm_set_disabled_deprecation_versions(QT 6.7
 
 KDE_ENABLE_EXCEPTIONS()
 
-add_subdirectory(isoimagewriter)
+add_subdirectory(src)
 add_subdirectory(signing-keys)
 
 ki18n_install(po)
@@ -63,3 +65,7 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+
+install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES org.kde.isoimagewriter.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)

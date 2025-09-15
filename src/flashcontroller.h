@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QThread>
+#include <qqmlintegration.h>
 
 #include "imagewriter.h"
 #include "usbdevice.h"

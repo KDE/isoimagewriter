@@ -13,7 +13,7 @@ ecm_setup_version(${PROJECT_VERSION}
     VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/isoimagewriter_version.h
 )
 
-set(isoimagewriter_SRCS
+add_executable(isoimagewriter
     usbdevicemonitor.h
     common.cpp
     imagewriter.cpp
@@ -25,7 +25,6 @@ set(isoimagewriter_SRCS
     flashcontroller.cpp
     releasefetch.cpp
     filedialogbridge.cpp
-
 
     common.h
     mainapplication.h
@@ -40,38 +39,35 @@ set(isoimagewriter_SRCS
     releasefetch.h
     filedialogbridge.h
 
-
     main.cpp
 )
 
-ecm_qt_declare_logging_category(isoimagewriter_SRCS
-                                HEADER isoimagewriter_debug.h
-                                IDENTIFIER ISOIMAGEWRITER_LOG
-                                CATEGORY_NAME org.kde.isoimagewriter
-                                DEFAULT_SEVERITY Debug)
+ecm_qt_declare_logging_category(isoimagewriter
+    HEADER isoimagewriter_debug.h
+    IDENTIFIER ISOIMAGEWRITER_LOG
+    CATEGORY_NAME org.kde.isoimagewriter
+    DEFAULT_SEVERITY Debug
+)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)
     message("Compiling isoimagewriter for Windows")
     set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
-    set(isoimagewriter_SRCS
-        ${isoimagewriter_SRCS}
+    target_sources(isoimagewriter PRIVATE
         platform_win.cpp
         usbdevicemonitor_win.cpp
         externalprogressbar_win.cpp
- ../res/isoimagewriter.manifest
+        ../res/isoimagewriter.manifest
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
     message("Compiling isoimagewriter for Linux")
-    set(isoimagewriter_SRCS
-        ${isoimagewriter_SRCS}
+    target_sources(isoimagewriter PRIVATE
         platform_lin.cpp
         usbdevicemonitor_lin.cpp
         externalprogressbar_lin.cpp
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL FreeBSD)
     message("Compiling isoimagewriter for FreeBSD")
-    set(isoimagewriter_SRCS
-        ${isoimagewriter_SRCS}
+    target_sources(isoimagewriter PRIVATE
         platform_lin.cpp
         usbdevicemonitor_lin.cpp
         externalprogressbar_lin.cpp
@@ -80,11 +76,23 @@ else()
     message("Unsupported Platform " . ${CMAKE_SYSTEM_NAME})
 endif()
 
-qt6_add_resources(ISO_IMAGE_WRITER_QRC ${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc)
+ecm_add_qml_module(isoimagewriter
+    GENERATE_PLUGIN_SOURCE
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/src/org/kde/isoimagewriter
+    URI org.kde.isoimagewriter
+)
 
-set(isoimagewriter_SRCS ${isoimagewriter_SRCS} ${ISO_IMAGE_WRITER_QRC})
+qt_target_qml_sources(isoimagewriter
+    QML_FILES
+        qml/Main.qml
+        qml/pages/WelcomePage.qml
+        qml/pages/IsoListingPage.qml
+        qml/pages/DownloadWriteOptionsPage.qml
+        qml/pages/DownloadingPage.qml
+        qml/pages/FlashPage.qml
+        qml/pages/SelectionPage.qml
+)
 
-add_executable(isoimagewriter ${isoimagewriter_SRCS})
 
 set_target_properties(isoimagewriter PROPERTIES
     OUTPUT_NAME "isoimagewriter"
@@ -115,6 +123,7 @@ target_link_libraries(isoimagewriter
         Qt6::QuickControls2
         Qt6::QuickTemplates2
         KF6::I18n
+        KF6::I18nQml
         KF6::CoreAddons
         KF6::WidgetsAddons
         KF6::IconThemes
@@ -152,7 +161,3 @@ if(CMAKE_SYSTEM_NAME STREQUAL Linux)
 endif()
 
 install(TARGETS isoimagewriter ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-    install(PROGRAMS org.kde.isoimagewriter.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
-    install(FILES org.kde.isoimagewriter.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
-endif()

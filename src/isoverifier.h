@@ -7,10 +7,12 @@
 
 #include <QObject>
 #include <QString>
+#include <qqmlintegration.h>
 
 class IsoVerifier : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(QString filePath READ filePath WRITE setFilePath NOTIFY filePathChanged)
 
 public:

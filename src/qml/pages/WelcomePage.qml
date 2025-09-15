@@ -51,8 +51,8 @@ Kirigami.Page {
                 console.log("root: Dropping ISO file:", filePath);
                 Qt.callLater(function() {
                     console.log("root: Pushing SelectionPage with preselectedFile:", filePath);
-                    let page = pageStack.push("qrc:/qml/pages/SelectionPage.qml", {
-                        "preselectedFile": filePath
+                    let page = root.Kirigami.PageStack.push(Qt.createComponent("org.kde.isoimagewriter", "SelectionPage"), {
+                        "preselectedFile": filePath,
                     });
                     console.log("root: Page created with preselectedFile:", page.preselectedFile);
                 });
@@ -76,7 +76,7 @@ Kirigami.Page {
             Layout.maximumWidth: distributionsCard.maximumWidth - Kirigami.Units.largeSpacing * 2
 
             Kirigami.Icon {
-                source: root.isDragActive ? "document-import" : "qrc:/qml/images/org.kde.isoimagewriter.svg"
+                source: root.isDragActive ? "document-import" : "org.kde.isoimagewriter"
 
                 Layout.preferredWidth: Kirigami.Units.iconSizes.huge
                 Layout.preferredHeight: Kirigami.Units.iconSizes.huge
@@ -127,7 +127,7 @@ Kirigami.Page {
                 text: i18nc("@action:button", "Browse Linux Distributions")
                 icon.name: "download"
                 description: i18nc("@info", "Download popular Linux distributions like Kubuntu, Fedora, and more")
-                onClicked: pageStack.push("qrc:/qml/pages/IsoListingPage.qml")
+                onClicked: root.Kirigami.PageStack.push(Qt.createComponent("org.kde.isoimagewriter", "IsoListingPage"))
             }
         }
 
@@ -137,12 +137,13 @@ Kirigami.Page {
                 icon.name: root.hasValidFile ? "media-optical" : "document-open"
                 description: i18nc("@info:tooltip", "Select an ISO file from your computer")
                 onClicked: {
-                    if (root.hasValidFile)
-                        pageStack.push("qrc:/qml/pages/SelectionPage.qml", {
+                    if (root.hasValidFile) {
+                        root.Kirigami.PageStack.push(Qt.createComponent("org.kde.isoimagewriter", "SelectionPage"), {
                             "preselectedFile": root.selectedFile
                         });
-                    else
-                        pageStack.push("qrc:/qml/pages/SelectionPage.qml");
+                    } else {
+                        root.Kirigami.PageStack.push(Qt.createComponent("org.kde.isoimagewriter", "SelectionPage"))
+                    }
                 }
             }
         }

@@ -16,17 +16,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <KAboutData>
 #include <KCrash>
-#include <KLocalizedContext>
+#include <KLocalizedQmlContext>
 #include <KLocalizedString>
 
 #include "common.h"
-#include "fetchisojob.h"
-#include "filedialogbridge.h"
-#include "flashcontroller.h"
-#include "isoverifier.h"
-#include "releasefetch.h"
-#include "usbdevicemodel.h"
-#include "usbdevicemonitor.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_LINUX) && !defined(Q_OS_MAC) && !defined(Q_OS_FREEBSD)
 #error Unsupported platform!
@@ -65,7 +58,7 @@ int main(int argc, char *argv[])
         QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
     }
 
-    KAboutData aboutData(QStringLiteral("IsoImage Writer"),
+    KAboutData aboutData(QStringLiteral("isoimagewriter"),
                          i18nc("@title", "IsoImage Writer"),
                          QStringLiteral("1.0"),
                          i18n("Write an ISO Image to a USB Disk"),
@@ -80,31 +73,17 @@ int main(int argc, char *argv[])
                         QStringLiteral("https://tcombinator.dev"));
 
     KAboutData::setApplicationData(aboutData);
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.isoimagewriter")));
 
-    qmlRegisterSingletonType("org.kde.isoimagewriter.about", // How the import statement should look like
-                             1,
-                             0, // Major and minor versions of the import
-                             "About", // The name of the QML object
-                             [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
-                                 return engine->toScriptValue(KAboutData::applicationData());
-                             });
-
-    qmlRegisterType<IsoVerifier>("org.kde.isoimagewriter", 1, 0, "IsoVerifier");
-    qmlRegisterType<FlashController>("org.kde.isoimagewriter", 1, 0, "FlashController");
-    qmlRegisterType<FetchIsoJob>("org.kde.isoimagewriter", 1, 0, "FetchIsoJob");
-    qmlRegisterType<ReleaseFetch>("org.kde.isoimagewriter", 1, 0, "ReleaseFetch");
-    qmlRegisterType<FileDialogBridge>("org.kde.isoimagewriter", 1, 0, "FileDialogBridge");
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     QQmlApplicationEngine engine;
 
-    engine.addImportPath("qrc:/");
-    engine.addImportPath("qrc:/qml");
-
-    UsbDeviceModel deviceModel;
-    engine.rootContext()->setContextProperty("usbDeviceModel", &deviceModel);
-
     engine.rootContext()->setContextProperty("mainApp", &app);
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    KLocalization::setupLocalizedContext(&engine);
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
 
@@ -120,7 +99,7 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
 
-    engine.load(url);
+    engine.loadFromModule("org.kde.isoimagewriter", "Main");
 
     return app.exec(); // Start the Qt event loop
 }
