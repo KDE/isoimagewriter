@@ -16,10 +16,10 @@ Kirigami.ApplicationWindow {
   property bool showBackButton: false
 
   title: i18nc("@title:window", "ISO Image Writer")
-  minimumWidth: Kirigami.Units.gridUnit * 24
+  minimumWidth: Kirigami.Units.gridUnit * 20
   minimumHeight: Kirigami.Units.gridUnit * 18
   width: Kirigami.Units.gridUnit * 33
-  height: Kirigami.Units.gridUnit * 14
+  height: Kirigami.Units.gridUnit * 20
   pageStack.defaultColumnWidth: root.width
   pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
 //   pageStack.globalToolBar.showNavigationButtons: 0 // Disable auto buttons

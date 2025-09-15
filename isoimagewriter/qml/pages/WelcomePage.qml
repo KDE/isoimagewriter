@@ -1,27 +1,28 @@
-// Automatic redirection to SelectionPage when ISO is dropped - implemented
+// SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
+// SPDX-License-Identifier: GPL-3.0-or-later
 
-/*
- * SPDX-FileCopyrightText: 2025 Akki <asa297@sfu.ca>
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
 
 Kirigami.Page {
-    id: welcomePage
+    id: root
 
     property bool isDragActive: dropArea.containsDrag
     property bool hasValidFile: false
     property string selectedFile: ""
     readonly property bool networkConnected: false
-    
+
+    leftPadding: 0
+    rightPadding: 0
+
     actions: [
         Kirigami.Action {
             text: i18nc("@action:button", "About")
             icon.name: "help-about"
-            onTriggered: pageStack.push("qrc:/qml/pages/AboutPage.qml")
+            onTriggered: root.Kirigami.PageStack.push(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
         }
     ]
 
@@ -29,134 +30,125 @@ Kirigami.Page {
         id: dropArea
 
         anchors.fill: parent
-        onEntered: function(drag) {
+
+        onEntered: (drag) => {
             if (drag.hasUrls) {
-                let hasIso = drag.urls.some((url) => {
+                const hasIso = drag.urls.some((url) => {
                     return url.toString().toLowerCase().endsWith('.iso');
                 });
                 hasIso ? drag.accept(Qt.CopyAction) : drag.reject();
             }
         }
-        onDropped: function(drop) {
+        onDropped: (drop) => {
             let isoFile = drop.urls.find((url) => {
                 return url.toString().toLowerCase().endsWith('.iso');
             });
             if (isoFile) {
                 let filePath = isoFile.toString().replace("file://", "");
-                welcomePage.selectedFile = filePath;
-                welcomePage.hasValidFile = true;
+                root.selectedFile = filePath;
+                root.hasValidFile = true;
                 // Auto-navigate to SelectionPage with the dropped ISO
-                console.log("WelcomePage: Dropping ISO file:", filePath);
+                console.log("root: Dropping ISO file:", filePath);
                 Qt.callLater(function() {
-                    console.log("WelcomePage: Pushing SelectionPage with preselectedFile:", filePath);
+                    console.log("root: Pushing SelectionPage with preselectedFile:", filePath);
                     let page = pageStack.push("qrc:/qml/pages/SelectionPage.qml", {
                         "preselectedFile": filePath
                     });
-                    console.log("WelcomePage: Page created with preselectedFile:", page.preselectedFile);
+                    console.log("root: Page created with preselectedFile:", page.preselectedFile);
                 });
             }
         }
     }
 
-    // Main content area
     ColumnLayout {
-        anchors.centerIn: parent
-        width: Math.min(welcomePage.width - Kirigami.Units.gridUnit * 4, Kirigami.Units.gridUnit * 35)
-        spacing: Kirigami.Units.largeSpacing * 1.5
+        anchors.fill: parent
+        spacing: Kirigami.Units.largeSpacing
 
-        // Header section with icon and title
+        Item {
+            Layout.fillHeight: true
+        }
+
         RowLayout {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
             spacing: Kirigami.Units.largeSpacing
 
-            Item {
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            Layout.maximumWidth: distributionsCard.maximumWidth - Kirigami.Units.largeSpacing * 2
+
+            Kirigami.Icon {
+                source: root.isDragActive ? "document-import" : "qrc:/qml/images/org.kde.isoimagewriter.svg"
+
                 Layout.preferredWidth: Kirigami.Units.iconSizes.huge
                 Layout.preferredHeight: Kirigami.Units.iconSizes.huge
-
-                Kirigami.Icon {
-                    anchors.fill: parent
-                    source: welcomePage.isDragActive ? "document-import" : "qrc:/qml/images/org.kde.isoimagewriter.svg"
-                }
-
             }
 
             ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
                 spacing: Kirigami.Units.smallSpacing
 
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+
                 Kirigami.Heading {
-                    Layout.fillWidth: true
-                    text: welcomePage.isDragActive ? i18nc("@info", "Drop to select ISO file") : i18nc("@title", "KDE ISO Image Writer")
-                    color: welcomePage.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                    text: root.isDragActive ? i18nc("@info", "Drop to select ISO file") : i18nc("@title", "KDE ISO Image Writer")
+                    color: root.isDragActive ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
                     wrapMode: Text.WordWrap
-                    level: 1
                     font.weight: Font.Bold
+
+                    Layout.fillWidth: true
 
                     Behavior on color {
                         ColorAnimation {
                             duration: Kirigami.Units.shortDuration
                         }
-
                     }
-
                 }
 
                 Label {
-                    Layout.fillWidth: true
-                    text: welcomePage.isDragActive ? i18nc("@info", "Release to continue with this ISO file") : welcomePage.hasValidFile ? i18nc("@info:status", "Ready to write: %1", welcomePage.selectedFile.split('/').pop()) : i18nc("@info", "A quick and simple way to create bootable USB drives. Drag and drop an ISO file to get started.")
-                    color: welcomePage.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.textColor
+                    text: if (root.isDragActive) {
+                        return i18nc("@info", "Release to continue with this ISO file");
+                    } else if (root.hasValidFile) {
+                        return i18nc("@info:status", "Ready to write: %1", root.selectedFile.split('/').pop());
+                    } else {
+                        return i18nc("@info", "A quick and simple way to create bootable USB drives. Drag and drop an ISO file to get started.");
+                    }
+                    color: root.hasValidFile ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.textColor
                     wrapMode: Text.WordWrap
                     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.95
+
+                    Layout.fillWidth: true
                 }
-
             }
-
         }
 
-        // Action buttons section
-        ColumnLayout {
-            Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
-            spacing: Kirigami.Units.largeSpacing
+        FormCard.FormCard {
+            id: distributionsCard
 
-            // Primary action - Download ISOs
-            Button {
-                Layout.fillWidth: true
-                Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+            FormCard.FormButtonDelegate {
                 text: i18nc("@action:button", "Browse Linux Distributions")
                 icon.name: "download"
-                font.bold: true
-                highlighted: true
-                ToolTip.text: i18nc("@info:tooltip", "Download popular Linux distributions like Kubuntu, Fedora, and more")
-                ToolTip.visible: hovered
-                ToolTip.delay: Kirigami.Units.toolTipDelay
+                description: i18nc("@info", "Download popular Linux distributions like Kubuntu, Fedora, and more")
                 onClicked: pageStack.push("qrc:/qml/pages/IsoListingPage.qml")
             }
+        }
 
-            Button {
-                Layout.fillWidth: true
-                Layout.preferredHeight: Kirigami.Units.gridUnit * 3
-                text: welcomePage.hasValidFile ? i18nc("@action:button", "Use Selected ISO File") : i18nc("@action:button", "Choose Local ISO File")
-                icon.name: welcomePage.hasValidFile ? "media-optical" : "document-open"
-                ToolTip.text: i18nc("@info:tooltip", "Select an ISO file from your computer")
-                ToolTip.visible: hovered
-                ToolTip.delay: Kirigami.Units.toolTipDelay
+        FormCard.FormCard {
+            FormCard.FormButtonDelegate {
+                text: root.hasValidFile ? i18nc("@action:button", "Use Selected ISO File") : i18nc("@action:button", "Choose Local ISO File")
+                icon.name: root.hasValidFile ? "media-optical" : "document-open"
+                description: i18nc("@info:tooltip", "Select an ISO file from your computer")
                 onClicked: {
-                    if (welcomePage.hasValidFile)
+                    if (root.hasValidFile)
                         pageStack.push("qrc:/qml/pages/SelectionPage.qml", {
-                            "preselectedFile": welcomePage.selectedFile
+                            "preselectedFile": root.selectedFile
                         });
                     else
                         pageStack.push("qrc:/qml/pages/SelectionPage.qml");
                 }
             }
-
         }
 
+        Item {
+            Layout.fillHeight: true
+        }
     }
-
-
-
 }
