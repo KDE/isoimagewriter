@@ -307,7 +307,7 @@ msgstr "Descargando %1…"
 #, kde-format
 msgctxt "Progress percent value"
 msgid "%p%"
-msgstr "%p%"
+msgstr "%p %"
 
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
