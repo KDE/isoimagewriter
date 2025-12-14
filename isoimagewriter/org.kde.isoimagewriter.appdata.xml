@@ -200,8 +200,5 @@
       </artifacts>
     </release>
   </releases>
-  <custom>
-    <value key="KDE::supporters">Richard Langis, Ulf Bartholomäus</value>
-  </custom>
   <content_rating type="oars-1.1"/>
 </component>
