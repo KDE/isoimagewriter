@@ -50,23 +50,23 @@ msgstr "No s'ha pogut assignar memòria a la memòria intermèdia."
 #: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr "No s'ha pogut obrir el fitxer d'imatge: %1"
+msgstr "Ha fallat mentre s'obria el fitxer d'imatge: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
-msgstr "No s'ha pogut obrir el dispositiu de compressió: %1"
+msgstr "Ha fallat mentre s'obria el dispositiu de compressió: %1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr "No s'ha pogut obrir la unitat %1"
+msgstr "Ha fallat mentre s'obria la unitat %1"
 
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr "No s'ha pogut desmuntar la unitat %1"
+msgstr "Ha fallat mentre es desmuntava la unitat %1"
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -74,7 +74,7 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
-"No s'ha pogut desmuntar el volum %1\n"
+"Ha fallat mentre es desmuntava el volum %1\n"
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:154
@@ -83,7 +83,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"No s'ha pogut obrir el dispositiu de destinació:\n"
+"Ha fallat mentre s'obria el dispositiu de destinació:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:187
@@ -101,7 +101,7 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"No s'ha pogut llegir el fitxer d'imatge:\n"
+"Ha fallat mentre es llegia el fitxer d'imatge:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
@@ -356,7 +356,7 @@ msgstr "Tanca"
 #: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr "No s'ha pogut obrir el fitxer d'imatge:"
+msgstr "Ha fallat mentre s'obria el fitxer d'imatge:"
 
 #: isoimagewriter/mainwindow.cpp:289
 #, kde-format
@@ -472,17 +472,17 @@ msgstr "Ha fallat ConnectServer."
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr "No s'han pogut consultar els dispositius flaix USB."
+msgstr "Ha fallat mentre es consultaven els dispositius flaix USB."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr "No s'ha pogut consultar la llista de les particions."
+msgstr "Ha fallat mentre es consultava la llista de les particions."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr "No s'ha pogut consultar la llista dels discs lògics."
+msgstr "Ha fallat mentre es consultava la llista dels discs lògics."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
