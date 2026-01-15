@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2026-01-09 17:41+0000\n"
+"PO-Revision-Date: 2026-01-14 16:32+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -35,33 +35,33 @@ msgstr "Villukóði: %1"
 #: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr ""
+msgstr "Gat ekki úthlutað minni undir biðminni:"
 
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr ""
+msgstr "Gat ekki úthlutað minni undir biðminni."
 
 #: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr ""
+msgstr "Mistókst að opna diskmyndarskrána: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
-msgstr ""
+msgstr "Mistókst að opna þjöppunartækið: %1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr ""
+msgstr "Mistókst að opna drifið %1"
 
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr ""
+msgstr "Mistókst að aftengja drifið %1"
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -69,6 +69,8 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
+"Tókst ekki að aftengja sýndardiskinn %1\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:154
 #, kde-format
@@ -76,6 +78,8 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
+"Tókst ekki að opna marktækið:\n"
+"%1"
 
 #: isoimagewriter/imagewriter.cpp:187
 #, kde-format
@@ -83,6 +87,8 @@ msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
 "Aborting."
 msgstr ""
+"Síðasta blokkin var ekki skrifuð til fulls (%1 af %2 bætum)!\n"
+"Hætti."
 
 #: isoimagewriter/imagewriter.cpp:219
 #, kde-format
@@ -90,16 +96,18 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
+"Mistókst að lesa diskmyndarskrána:\n"
+"%1"
 
 #: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid "The operation completed successfully."
-msgstr ""
+msgstr "Tókst að ljúka aðgerðinni."
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid "Now you need to format your device."
-msgstr ""
+msgstr "Núna þarftu að forsníða tækið þitt."
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
@@ -121,7 +129,7 @@ msgstr "SHA256-gátsumma"
 #: isoimagewriter/isoverifier.cpp:73
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
-msgstr ""
+msgstr "Límdu SHA256-gátsummuna fyrir þessa ISO-diskmynd:"
 
 #: isoimagewriter/isoverifier.cpp:131
 #, kde-format
@@ -132,7 +140,7 @@ msgstr ""
 #: isoimagewriter/isoverifier.cpp:138
 #, kde-format
 msgid "Could not open signature file"
-msgstr ""
+msgstr "Tókst ekki að opna undirritunarskrá"
 
 #: isoimagewriter/isoverifier.cpp:144
 #, kde-format
@@ -147,7 +155,7 @@ msgstr "Lykill er afturkallaður."
 #: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
 #, kde-format
 msgid "Uses wrong signature."
-msgstr ""
+msgstr "Notar ranga undirritun."
 
 #: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
 #, kde-format
@@ -326,17 +334,17 @@ msgstr "Loka"
 #: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr ""
+msgstr "Mistókst að opna diskmyndarskrána:"
 
 #: isoimagewriter/mainwindow.cpp:289
 #, kde-format
 msgid "Verifying ISO image"
-msgstr ""
+msgstr "Sannprófa ISO-diskmynd"
 
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr ""
+msgstr "Tengdu inn USB-drif"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
@@ -346,7 +354,7 @@ msgstr "Hætta við?"
 #: isoimagewriter/mainwindow.cpp:462
 #, kde-format
 msgid "Writing is in progress, abort it?"
-msgstr ""
+msgstr "Skrifun er í gangi, hætta við hana?"
 
 #: isoimagewriter/mainwindow.cpp:478
 #, kde-format
@@ -361,12 +369,12 @@ msgstr "Allar skrár (%1)"
 #: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
-msgstr ""
+msgstr "Veldu diskmynd til að skrifa"
 
 #: isoimagewriter/mainwindow.cpp:510
 #, kde-format
 msgid "Downloading ISO image"
-msgstr ""
+msgstr "Sæki ISO-diskmynd"
 
 #: isoimagewriter/mainwindow.cpp:529
 #, kde-format
@@ -395,11 +403,15 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
+"Diskmyndin er stærri en tækið sem þú valdir!\n"
+"\n"
+"Stærð diskmyndar: %1 (%2 b)\n"
+"Stærð disks: %3 (%4 b)"
 
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
 msgid "The ISO image is valid"
-msgstr ""
+msgstr "ISO-diskmyndin er gild"
 
 #: isoimagewriter/mainwindow.cpp:636
 #, kde-format
@@ -409,12 +421,12 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
 msgid "Could not verify ISO image"
-msgstr ""
+msgstr "Tókst ekki að sannprófa ISO-diskmynd"
 
 #: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "ISO Verification failed"
-msgstr ""
+msgstr "Sannvottun ISO-diskmyndar mistókst"
 
 #: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
