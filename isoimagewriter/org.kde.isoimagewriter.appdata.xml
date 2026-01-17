@@ -31,6 +31,7 @@
   <name xml:lang="ia">Scriptor de imagine ISO (ISO Image Writer)</name>
   <name xml:lang="id">Penulis Citra ISO</name>
   <name xml:lang="ie">Scritor de images ISO</name>
+  <name xml:lang="is">ISO-diskmyndaskrifari</name>
   <name xml:lang="it">Scrittore di immagini ISO</name>
   <name xml:lang="ja">ISO イメージライター</name>
   <name xml:lang="ka">ISO ასლის ჩამწერი</name>
@@ -76,6 +77,7 @@
   <summary xml:lang="ia">Scribe un imagine ISO a un disco USB</summary>
   <summary xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</summary>
   <summary xml:lang="ie">Scrir un image ISO a un unité USB</summary>
+  <summary xml:lang="is">Skrifaðu ISO-diskmynd á USB-disk</summary>
   <summary xml:lang="it">Scrive un'immagine ISO in un disco USB</summary>
   <summary xml:lang="ja">ISO イメージを USB ディスクに書き込む</summary>
   <summary xml:lang="ka">ISO ასლის USB-ზე ჩაწერა</summary>
@@ -122,6 +124,7 @@
     <p xml:lang="ia">Scribe un imagine ISO a un disco USB</p>
     <p xml:lang="id">Tulis sebuah ISO Citra ke sebuah Disk USB</p>
     <p xml:lang="ie">Scrir un image ISO a un unité USB</p>
+    <p xml:lang="is">Skrifaðu ISO-diskmynd á USB-disk</p>
     <p xml:lang="it">Scrive un'immagine ISO in un disco USB</p>
     <p xml:lang="ja">ISO イメージを USB ディスクに書き込む</p>
     <p xml:lang="ka">ISO ასლის USB-ზე ჩაწერა</p>
