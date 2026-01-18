@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2026-01-14 16:32+0000\n"
+"PO-Revision-Date: 2026-01-17 09:07+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -416,7 +416,7 @@ msgstr "ISO-diskmyndin er gild"
 #: isoimagewriter/mainwindow.cpp:636
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr ""
+msgstr "Tókst ekki að finna lykilinn til að sannprófa ISO-diskmyndina"
 
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
@@ -431,7 +431,7 @@ msgstr "Sannvottun ISO-diskmyndar mistókst"
 #: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
-msgstr ""
+msgstr "Tókst ekki að fá læsingu:"
 
 #: isoimagewriter/platform_win.cpp:94
 #, kde-format
@@ -446,17 +446,17 @@ msgstr ""
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr ""
+msgstr "Mistókst að fá lista yfir USB-tæki."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr ""
+msgstr "Mistókst að fá lista yfir disksneiðar."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr ""
+msgstr "Mistókst að fá lista yfir sýndardiska."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
