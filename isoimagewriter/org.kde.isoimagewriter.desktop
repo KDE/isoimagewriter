@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=ISO Image Writer
 Name[ar]=كاتب صور ISO
+Name[az]=ISO surətnin yazılması
 Name[bg]=Запис на ISO изображения
 Name[ca]=Gravador d'imatges ISO
 Name[ca@valencia]=Gravador d'imatges ISO
@@ -50,6 +51,7 @@ Icon=org.kde.isoimagewriter
 Type=Application
 GenericName=Write an ISO Image to a USB Disk
 GenericName[ar]=اكتب صورة ISO على قرص يو اس بي
+GenericName[az]=ISO surətini USB diskə yazmaq
 GenericName[bg]=Запис на ISO изображение върху USB disk
 GenericName[ca]=Grava una imatge ISO a un disc USB
 GenericName[ca@valencia]=Grava una imatge ISO a un disc USB
