@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2026-01-17 09:07+0000\n"
+"PO-Revision-Date: 2026-01-20 11:32+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -115,11 +115,13 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
+"Til að geta aftur geymt gögn á þessu tæki, þá skaltu nota hnappinn \"Hreinsa "
+"USB-disk\"."
 
 #: isoimagewriter/isoverifier.cpp:60
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr ""
+msgstr "Tókst ekki að staðfesta þetta sem diskmynd þekktar dreifingar."
 
 #: isoimagewriter/isoverifier.cpp:72
 #, kde-format
@@ -136,6 +138,8 @@ msgstr "Límdu SHA256-gátsummuna fyrir þessa ISO-diskmynd:"
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr ""
+"Tókst ekki að finna %1, sæktu PGP-undirritunarskrá og vistaðu inni í sömu "
+"möppu."
 
 #: isoimagewriter/isoverifier.cpp:138
 #, kde-format
@@ -160,17 +164,18 @@ msgstr "Notar ranga undirritun."
 #: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
 #, kde-format
 msgid "This app is built without verification support."
-msgstr ""
+msgstr "Þetta forrit er byggt án stuðnings við sannvottun."
 
 #: isoimagewriter/isoverifier.cpp:183
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
+"Tókst ekki að opna SHA256SUMS-skrá, sæktu hana og vistaðu inni í sömu möppu"
 
 #: isoimagewriter/isoverifier.cpp:197
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr ""
+msgstr "Tókst ekki að finna gátsummu í SHA256SUMS-skrá"
 
 #: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
 #, kde-format
@@ -180,12 +185,12 @@ msgstr "Tókst ekki að lesa ISO-diskmynd"
 #: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
 #, kde-format
 msgid "Could not perform checksum"
-msgstr ""
+msgstr "Tókst ekki að framkvæma gátsummu"
 
 #: isoimagewriter/isoverifier.cpp:214
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
-msgstr ""
+msgstr "Gátsumman á .iso skránni samsvarar ekki gildinu í SHA256SUMS-skrá"
 
 #: isoimagewriter/isoverifier.cpp:222
 #, kde-format
@@ -193,6 +198,8 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
+"Tókst ekki að finna SHA256SUMS.gpg, sæktu PGP-undirritunarskrá og vistaðu "
+"inni í sömu möppu."
 
 #: isoimagewriter/isoverifier.cpp:271
 #, kde-format
@@ -251,7 +258,7 @@ msgstr "ISO-diskmyndaskrifari frá KDE"
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr ""
+msgstr "Fljótleg og einföld leið til að útbúa keyranleg USB-drif."
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
@@ -280,6 +287,9 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"Skrifað verður yfir allt sem er á USB-drifinu.\n"
+"\n"
+"Viltu halda áfram?"
 
 #: isoimagewriter/mainwindow.cpp:171
 #, kde-format
@@ -310,6 +320,10 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
+"Verið er að útbúa USB-drifið þitt.\n"
+"\n"
+"Þetta getur tekið nokkurn tíma og fer það eftir stærð ISO-"
+"diskmyndarskrárinnar og flutningshraða."
 
 #: isoimagewriter/mainwindow.cpp:223
 #, kde-format
@@ -319,7 +333,7 @@ msgstr "Hætta við"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr ""
+msgstr "Keyranlega USB-drifið þitt er núna tilbúið til notkunar!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -389,6 +403,10 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
+"Stærð valins disks er óþekkt, athugaðu hvort diskmyndin muni passa áður en "
+"skrifun fer fram.\n"
+"\n"
+"Stærð diskmyndar: %1 (%2 b)"
 
 #: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
@@ -436,12 +454,12 @@ msgstr "Tókst ekki að fá læsingu:"
 #: isoimagewriter/platform_win.cpp:94
 #, kde-format
 msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
-msgstr ""
+msgstr "CoCreateInstance(WbemAdministrativeLocator) brást."
 
 #: isoimagewriter/platform_win.cpp:95
 #, kde-format
 msgid "ConnectServer failed."
-msgstr ""
+msgstr "ConnectServer brást."
 
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
