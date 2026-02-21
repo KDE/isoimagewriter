@@ -105,7 +105,7 @@ msgstr "Le operation completate con successo."
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
 msgid "Now you need to format your device."
-msgstr "Nunc tu necessita formattar tu dispositivo."
+msgstr "Nunc tu necessita fnormatar tu dispositivo."
 
 #: isoimagewriter/imagewriter.cpp:243
 #, kde-format
