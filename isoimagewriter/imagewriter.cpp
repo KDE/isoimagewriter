@@ -1,5 +1,7 @@
 /*
-    SPDX-FileCopyrightText: 2016 ROSA, 2023 Jonathan Esk-Riddell <jr@jriddell.org>
+    SPDX-FileCopyrightText: 2016 ROSA
+    SPDX-FileCopyrightText: 2023 Jonathan Esk-Riddell <jr@jriddell.org>
+    SPDX-FileCopyrightText: 2026 Hadi Chokr <hadichokr@icloud.com>
     SPDX-License-Identifier: GPL-3.0-or-later
 */
 
@@ -16,8 +18,10 @@
 
 #include <fcntl.h>
 
+using namespace Qt::StringLiterals;
+
 typedef QHash<QString, QVariant> Properties;
-typedef QHash<QString, Properties> InterfacesAndProperties;
+typedef QHash<QString, QVariantMap> InterfacesAndProperties;
 typedef QHash<QDBusObjectPath, InterfacesAndProperties> DBusIntrospection;
 Q_DECLARE_METATYPE(Properties)
 Q_DECLARE_METATYPE(InterfacesAndProperties)
@@ -140,6 +144,47 @@ void ImageWriter::writeImage()
                     // Mount point is the selected device or one of its partitions - try to unmount it
                     if (unmount(mntEntries[i].f_mntonname, MNT_FORCE) != 0)
                         errMessages << i18n("Failed to unmount the volume %1\n%2", m_Device->m_Volumes[i], strerror(errno));
+                }
+            }
+        }
+#elif defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+        {
+            qDBusRegisterMetaType<InterfacesAndProperties>();
+            qDBusRegisterMetaType<DBusIntrospection>();
+            QDBusMessage getManagedObjects = QDBusMessage::createMethodCall(
+                u"org.freedesktop.UDisks2"_s,
+                u"/org/freedesktop/UDisks2"_s,
+                u"org.freedesktop.DBus.ObjectManager"_s,
+                u"GetManagedObjects"_s
+            );
+            QDBusPendingReply<DBusIntrospection> objectsReply =
+                QDBusConnection::systemBus().asyncCall(getManagedObjects);
+            objectsReply.waitForFinished();
+
+            if (objectsReply.isValid()) {
+                const DBusIntrospection objects = objectsReply.value();
+                for (auto it = objects.constBegin(); it != objects.constEnd(); ++it) {
+                    const QString path = it.key().path();
+                    if (!path.startsWith(m_Device->m_PhysicalDevice) || path == m_Device->m_PhysicalDevice)
+                        continue;
+                    if (!it.value().contains("org.freedesktop.UDisks2.Filesystem"_L1))
+                        continue;
+
+                    QDBusMessage unmount = QDBusMessage::createMethodCall(
+                        u"org.freedesktop.UDisks2"_s,
+                        path,
+                        u"org.freedesktop.UDisks2.Filesystem"_s,
+                        u"Unmount"_s
+                    );
+                    unmount << QVariantMap{{u"force"_s, true}};
+                    QDBusPendingReply<> umountReply =
+                        QDBusConnection::systemBus().asyncCall(unmount);
+                    umountReply.waitForFinished();
+
+                    if (umountReply.isError()
+                            && umountReply.error().name() != "org.freedesktop.UDisks2.Error.NotMounted"_L1)
+                        errMessages << i18nc("@info", "Failed to unmount %1: %2",
+                                             path, umountReply.error().message());
                 }
             }
         }
