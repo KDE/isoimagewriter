@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
+"POT-Creation-Date: 2026-05-21 00:48+0000\n"
 "PO-Revision-Date: 2025-05-21 12:42+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -35,38 +35,38 @@ msgstr "spriego@darksylvania.net,ecuadra@eloihr.net"
 msgid "Error code: %1"
 msgstr "Código de error: %1"
 
-#: isoimagewriter/imagewriter.cpp:57
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "La asignación de memoria para el «buffer» ha fallado:"
 
-#: isoimagewriter/imagewriter.cpp:61
+#: isoimagewriter/imagewriter.cpp:65
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "La asignación de memoria para el «buffer» ha fallado."
 
-#: isoimagewriter/imagewriter.cpp:75
+#: isoimagewriter/imagewriter.cpp:79
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Ha fallado la apertura del archivo de imagen: %1"
 
-#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
-#: isoimagewriter/imagewriter.cpp:92
+#: isoimagewriter/imagewriter.cpp:86 isoimagewriter/imagewriter.cpp:91
+#: isoimagewriter/imagewriter.cpp:96
 #, kde-format
 msgid "Failed to open compression device: %1"
 msgstr "Ha fallado la apertura del dispositivo de compresión: %1"
 
-#: isoimagewriter/imagewriter.cpp:118
+#: isoimagewriter/imagewriter.cpp:122
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Ha fallado la apertura de la memoria USB %1"
 
-#: isoimagewriter/imagewriter.cpp:125
+#: isoimagewriter/imagewriter.cpp:129
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Ha fallado el desmontaje de la memoria USB %1"
 
-#: isoimagewriter/imagewriter.cpp:142
+#: isoimagewriter/imagewriter.cpp:146
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -75,7 +75,18 @@ msgstr ""
 "Ha fallado el desmontaje del volumen %1\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
+#: isoimagewriter/imagewriter.cpp:186
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to unmount the volume %1\n"
+#| "%2"
+msgctxt "@info"
+msgid "Failed to unmount %1: %2"
+msgstr ""
+"Ha fallado el desmontaje del volumen %1\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:199
 #, kde-format
 msgid ""
 "Failed to open the target device:\n"
@@ -84,7 +95,7 @@ msgstr ""
 "Ha fallado la apertura del dispositivo de destino:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:187
+#: isoimagewriter/imagewriter.cpp:232
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -93,7 +104,7 @@ msgstr ""
 "El último bloque no se ha escrito completamente (%1 de %2 bytes).\n"
 "Interrumpiendo."
 
-#: isoimagewriter/imagewriter.cpp:219
+#: isoimagewriter/imagewriter.cpp:264
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -102,17 +113,17 @@ msgstr ""
 "Ha fallado la lectura del archivo de imagen:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:241
+#: isoimagewriter/imagewriter.cpp:286
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "La operación se ha completado con éxito."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Ahora debe formatear el dispositivo."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "

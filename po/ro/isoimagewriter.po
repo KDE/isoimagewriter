@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
+"POT-Creation-Date: 2026-05-21 00:48+0000\n"
 "PO-Revision-Date: 2025-10-19 02:25+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -33,38 +33,38 @@ msgstr "sergiu@cip.md"
 msgid "Error code: %1"
 msgstr "Cod de eroare: %1"
 
-#: isoimagewriter/imagewriter.cpp:57
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "Nu s-a putut aloca memorie pentru tampon:"
 
-#: isoimagewriter/imagewriter.cpp:61
+#: isoimagewriter/imagewriter.cpp:65
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "Nu s-a putut aloca memorie pentru tampon."
 
-#: isoimagewriter/imagewriter.cpp:75
+#: isoimagewriter/imagewriter.cpp:79
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Deschiderea fișierului cu imagine a eșuat: %1"
 
-#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
-#: isoimagewriter/imagewriter.cpp:92
+#: isoimagewriter/imagewriter.cpp:86 isoimagewriter/imagewriter.cpp:91
+#: isoimagewriter/imagewriter.cpp:96
 #, kde-format
 msgid "Failed to open compression device: %1"
 msgstr "Deschiderea dispozitivului de compresie a eșuat: %1"
 
-#: isoimagewriter/imagewriter.cpp:118
+#: isoimagewriter/imagewriter.cpp:122
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Deschiderea unității %1 a eșuat"
 
-#: isoimagewriter/imagewriter.cpp:125
+#: isoimagewriter/imagewriter.cpp:129
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Demontarea unității %1 a eșuat"
 
-#: isoimagewriter/imagewriter.cpp:142
+#: isoimagewriter/imagewriter.cpp:146
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -73,7 +73,18 @@ msgstr ""
 "Demontarea volumului %1 a eșuat\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
+#: isoimagewriter/imagewriter.cpp:186
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to unmount the volume %1\n"
+#| "%2"
+msgctxt "@info"
+msgid "Failed to unmount %1: %2"
+msgstr ""
+"Demontarea volumului %1 a eșuat\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:199
 #, kde-format
 msgid ""
 "Failed to open the target device:\n"
@@ -82,7 +93,7 @@ msgstr ""
 "Deschiderea dispozitivului destinație a eșuat:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:187
+#: isoimagewriter/imagewriter.cpp:232
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -91,7 +102,7 @@ msgstr ""
 "Ultimul bloc nu a fost scris complet (%1 din %2 octeți)!\n"
 "Se abandonează."
 
-#: isoimagewriter/imagewriter.cpp:219
+#: isoimagewriter/imagewriter.cpp:264
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -100,17 +111,17 @@ msgstr ""
 "Citirea fișierului cu imagine a eșuat:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:241
+#: isoimagewriter/imagewriter.cpp:286
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Operația s-a încheiat cu succes."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Acum trebuie să formatați dispozitivul."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "

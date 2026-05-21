@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
+"POT-Creation-Date: 2026-05-21 00:48+0000\n"
 "PO-Revision-Date: 2025-05-21 07:16+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -33,38 +33,38 @@ msgstr "matjaz.jeran@amis.net"
 msgid "Error code: %1"
 msgstr "Koda napake: %1"
 
-#: isoimagewriter/imagewriter.cpp:57
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "Ni bilo mogoče dodeliti pomnilnika za medpomnilnik:"
 
-#: isoimagewriter/imagewriter.cpp:61
+#: isoimagewriter/imagewriter.cpp:65
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "Ni bilo mogoče dodeliti pomnilnika za medpomnilnik."
 
-#: isoimagewriter/imagewriter.cpp:75
+#: isoimagewriter/imagewriter.cpp:79
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "Ni bilo mogoče odpreti vhodne datoteke: %1"
 
-#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
-#: isoimagewriter/imagewriter.cpp:92
+#: isoimagewriter/imagewriter.cpp:86 isoimagewriter/imagewriter.cpp:91
+#: isoimagewriter/imagewriter.cpp:96
 #, kde-format
 msgid "Failed to open compression device: %1"
 msgstr "Ni bilo mogoče odpreti naprave za stiskanje: %1"
 
-#: isoimagewriter/imagewriter.cpp:118
+#: isoimagewriter/imagewriter.cpp:122
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "Ni bilo mogoče odpreti enote: %1"
 
-#: isoimagewriter/imagewriter.cpp:125
+#: isoimagewriter/imagewriter.cpp:129
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "Pogona %1 ni bilo mogoče odklopiti"
 
-#: isoimagewriter/imagewriter.cpp:142
+#: isoimagewriter/imagewriter.cpp:146
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -73,7 +73,18 @@ msgstr ""
 "Ni bilo mogoče odklopiti %1\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
+#: isoimagewriter/imagewriter.cpp:186
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to unmount the volume %1\n"
+#| "%2"
+msgctxt "@info"
+msgid "Failed to unmount %1: %2"
+msgstr ""
+"Ni bilo mogoče odklopiti %1\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:199
 #, kde-format
 msgid ""
 "Failed to open the target device:\n"
@@ -82,7 +93,7 @@ msgstr ""
 "Ni bilo mogoče odpreti ciljne naprave:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:187
+#: isoimagewriter/imagewriter.cpp:232
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -91,7 +102,7 @@ msgstr ""
 "Zadnji blok ni bil v celoti napisan (%1 od %2 byte)!\n"
 "Prekinjam."
 
-#: isoimagewriter/imagewriter.cpp:219
+#: isoimagewriter/imagewriter.cpp:264
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -100,17 +111,17 @@ msgstr ""
 "Ni bilo mogoče prebrati datoteke s sliko sistema:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:241
+#: isoimagewriter/imagewriter.cpp:286
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Operacija se je uspešno zaključila."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Sedaj morate formatirati vašo enoto."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "

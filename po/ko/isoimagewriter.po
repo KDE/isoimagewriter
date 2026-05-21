@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
+"POT-Creation-Date: 2026-05-21 00:48+0000\n"
 "PO-Revision-Date: 2025-06-10 23:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -32,38 +32,38 @@ msgstr "kde@peremen.name"
 msgid "Error code: %1"
 msgstr "오류 코드: %1"
 
-#: isoimagewriter/imagewriter.cpp:57
+#: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
 msgstr "버퍼 메모리를 할당할 수 없음:"
 
-#: isoimagewriter/imagewriter.cpp:61
+#: isoimagewriter/imagewriter.cpp:65
 #, kde-format
 msgid "Failed to allocate memory for buffer."
 msgstr "버퍼 메모리를 할당할 수 없습니다."
 
-#: isoimagewriter/imagewriter.cpp:75
+#: isoimagewriter/imagewriter.cpp:79
 #, kde-format
 msgid "Failed to open the image file: %1"
 msgstr "이미지 파일을 열 수 없음: %1"
 
-#: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
-#: isoimagewriter/imagewriter.cpp:92
+#: isoimagewriter/imagewriter.cpp:86 isoimagewriter/imagewriter.cpp:91
+#: isoimagewriter/imagewriter.cpp:96
 #, kde-format
 msgid "Failed to open compression device: %1"
 msgstr "압축 장치를 열 수 없음: %1"
 
-#: isoimagewriter/imagewriter.cpp:118
+#: isoimagewriter/imagewriter.cpp:122
 #, kde-format
 msgid "Failed to open the drive %1"
 msgstr "%1 드라이브를 열 수 없음"
 
-#: isoimagewriter/imagewriter.cpp:125
+#: isoimagewriter/imagewriter.cpp:129
 #, kde-format
 msgid "Failed to unmount the drive %1"
 msgstr "%1 드라이브를 마운트 해제할 수 없음"
 
-#: isoimagewriter/imagewriter.cpp:142
+#: isoimagewriter/imagewriter.cpp:146
 #, kde-format
 msgid ""
 "Failed to unmount the volume %1\n"
@@ -72,7 +72,18 @@ msgstr ""
 "%1 볼륨을 마운트 해제할 수 없음\n"
 "%2"
 
-#: isoimagewriter/imagewriter.cpp:154
+#: isoimagewriter/imagewriter.cpp:186
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to unmount the volume %1\n"
+#| "%2"
+msgctxt "@info"
+msgid "Failed to unmount %1: %2"
+msgstr ""
+"%1 볼륨을 마운트 해제할 수 없음\n"
+"%2"
+
+#: isoimagewriter/imagewriter.cpp:199
 #, kde-format
 msgid ""
 "Failed to open the target device:\n"
@@ -81,7 +92,7 @@ msgstr ""
 "대상 장치를 열 수 없음:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:187
+#: isoimagewriter/imagewriter.cpp:232
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -90,7 +101,7 @@ msgstr ""
 "마지막 블록을 완전히 기록할 수 없었습니다(%2바이트 중 %1바이트)!\n"
 "종료합니다."
 
-#: isoimagewriter/imagewriter.cpp:219
+#: isoimagewriter/imagewriter.cpp:264
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -99,17 +110,17 @@ msgstr ""
 "이미지 파일을 읽을 수 없음:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:241
+#: isoimagewriter/imagewriter.cpp:286
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "작업이 완료되었습니다."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "이제 장치를 포맷해야 합니다."
 
-#: isoimagewriter/imagewriter.cpp:243
+#: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
