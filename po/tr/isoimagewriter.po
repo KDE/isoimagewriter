@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022-2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-21 00:48+0000\n"
-"PO-Revision-Date: 2026-05-02 19:53+0300\n"
+"PO-Revision-Date: 2026-05-21 12:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -73,15 +73,10 @@ msgstr ""
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:186
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to unmount the volume %1\n"
-#| "%2"
+#, kde-format
 msgctxt "@info"
 msgid "Failed to unmount %1: %2"
-msgstr ""
-"%1 disk bölümünün bağlantısı kesilemedi\n"
-"%2"
+msgstr "%1 bağlantısı kesilemedi: %2"
 
 #: isoimagewriter/imagewriter.cpp:199
 #, kde-format
