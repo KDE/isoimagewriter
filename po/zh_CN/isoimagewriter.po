@@ -73,15 +73,10 @@ msgstr ""
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:186
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to unmount the volume %1\n"
-#| "%2"
+#, kde-format
 msgctxt "@info"
 msgid "Failed to unmount %1: %2"
 msgstr ""
-"无法卸载卷 %1\n"
-"%2"
 
 #: isoimagewriter/imagewriter.cpp:199
 #, kde-format
