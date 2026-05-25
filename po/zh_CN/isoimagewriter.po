@@ -76,7 +76,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "Failed to unmount %1: %2"
-msgstr ""
+msgstr "卸载 %1 失败：%2"
 
 #: isoimagewriter/imagewriter.cpp:199
 #, kde-format
