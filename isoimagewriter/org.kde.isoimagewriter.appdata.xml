@@ -52,6 +52,7 @@
   <name xml:lang="sl">ISO Image Writer</name>
   <name xml:lang="sv">ISO-avbildsskrivning</name>
   <name xml:lang="tr">ISO Kalıbı Yazıcısı</name>
+  <name xml:lang="ug">ISO تەسۋىر يازغۇچ</name>
   <name xml:lang="uk">Записувач образів ISO</name>
   <name xml:lang="zh-CN">ISO 镜像文件写入器</name>
   <name xml:lang="zh-TW">ISO 映像寫入工具</name>
@@ -99,6 +100,7 @@
   <summary xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</summary>
   <summary xml:lang="sv">Skriv en ISO-avbild till en USB-disk</summary>
   <summary xml:lang="tr">ISO kalıplarını USB belleklere yazın</summary>
+  <summary xml:lang="ug">ISO تەسۋىرنى USB دىسكىغا ياز</summary>
   <summary xml:lang="uk">Програма для запису образів ISO на флешки USB</summary>
   <summary xml:lang="zh-CN">将 ISO 镜像写入 U 盘</summary>
   <summary xml:lang="zh-TW">將 ISO 映像寫入 USB 裝置</summary>
@@ -147,6 +149,7 @@
     <p xml:lang="sl">Piše an ISO sliko operacijskega sistema na USB Disk</p>
     <p xml:lang="sv">Skriv en ISO-avbild till en USB-disk</p>
     <p xml:lang="tr">ISO kalıplarını USB belleklere yazın</p>
+    <p xml:lang="ug">ISO تەسۋىرنى USB دىسكىغا ياز</p>
     <p xml:lang="uk">Програма для запису образів ISO на флешки USB</p>
     <p xml:lang="zh-CN">将 ISO 镜像写入 U 盘</p>
     <p xml:lang="zh-TW">將 ISO 映像寫入 USB 裝置</p>
