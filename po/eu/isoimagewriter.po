@@ -1,7 +1,7 @@
 # Translation for isoimagewriter.po to Euskara/Basque (eu).
 # Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the isoimagewriter package.
-# SPDX-FileCopyrightText: 2023, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2025-2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Ander Elortondo <ander.elor@gmail.com>, 2020.
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: 2025-05-25 22:38+0200\n"
+"PO-Revision-Date: 2026-07-01 18:38+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,53 +19,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Ander Elortondo"
+msgstr "Iñigo Salvador Azurmendi,Ander Elortondo"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "ander.elor@gmail.com"
+msgstr "xalba@ni.eus,ander.elor@gmail.com"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
 msgid "Error code: %1"
-msgstr "Errore kodea: %1"
+msgstr "Errore-kodea: %1"
 
 #: isoimagewriter/imagewriter.cpp:57
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr "Huts egin du buffer memoria alokatzean:"
+msgstr "Bufferrerako memoria esleitzeak huts egin du:"
 
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr "Huts egin du buffer memoria alokatzean."
+msgstr "Bufferrerako memoria esleitzeak huts egin du."
 
 #: isoimagewriter/imagewriter.cpp:75
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr "Huts egin du irudi-fitxategia irekitzean: %1"
+msgstr "Irudi-fitxategia irekitzeak huts egin du: %1"
 
 #: isoimagewriter/imagewriter.cpp:82 isoimagewriter/imagewriter.cpp:87
 #: isoimagewriter/imagewriter.cpp:92
 #, kde-format
 msgid "Failed to open compression device: %1"
-msgstr "konpresio gailua irekitzea huts egin du: %1"
+msgstr "Konpresio-gailua irekitzeak huts egin du: %1"
 
 #: isoimagewriter/imagewriter.cpp:118
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr "Huts egin du unitatea irekitzean %1"
+msgstr "%1 unitatea irekitzeak huts egin du"
 
 #: isoimagewriter/imagewriter.cpp:125
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr "Huts egin du %1 unitatea desmuntatzean"
+msgstr "%1 unitatea desmuntatzeak huts egin du"
 
 #: isoimagewriter/imagewriter.cpp:142
 #, kde-format
@@ -73,7 +73,7 @@ msgid ""
 "Failed to unmount the volume %1\n"
 "%2"
 msgstr ""
-"Huts egin du %1 bolumena desmuntatzean\n"
+"%1 bolumena desmuntatzeak huts egin du\n"
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:154
@@ -82,7 +82,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"Huts egin du jomugako gailua irekitzean:\n"
+"Jomugako gailua irekitzeak huts egin du:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:187
@@ -100,7 +100,7 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"Huts egin du irudi-fitxategia irakurtzean:\n"
+"Irudi-fitxategia irakurtzeak huts egin du:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
@@ -354,7 +354,7 @@ msgstr "Itxi"
 #: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr "Huts egin du irudi-fitxategia irekitzean:"
+msgstr "Irudi-fitxategia irekitzeak huts egin du:"
 
 #: isoimagewriter/mainwindow.cpp:289
 #, kde-format
@@ -465,22 +465,22 @@ msgstr "Huts egin du CoCreateInstance(WbemAdministrativeLocator)"
 #: isoimagewriter/platform_win.cpp:95
 #, kde-format
 msgid "ConnectServer failed."
-msgstr "ConnectServer huts egin du."
+msgstr "ConnectServer(r)ek huts egin du."
 
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr "USB flash gailuen kontsultak huts egin du."
+msgstr "USB flash gailuak itauntzeak huts egin du."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr "Partizioen zerrenda kontsultak huts egin du."
+msgstr "Partizioen zerrenda itauntzeak huts egin du."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr "Disko logikoen kontsultak huts egin du."
+msgstr "Disko logikoen zerrenda itauntzeak huts egin du."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
