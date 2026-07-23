@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-21 00:48+0000\n"
+"POT-Creation-Date: 2026-07-23 00:47+0000\n"
 "PO-Revision-Date: 2026-06-15 13:15+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -125,82 +125,82 @@ msgstr ""
 "Pentru a putea păstra date pe acest dispozitiv iarăși, folosiți butonul "
 "„Curăță discul USB”."
 
-#: isoimagewriter/isoverifier.cpp:60
+#: isoimagewriter/isoverifier.cpp:62
 #, kde-format
 msgid "Could not verify as a known distro image."
 msgstr "Nu s-a putut verifica ca imagine de distribuție cunoscută."
 
-#: isoimagewriter/isoverifier.cpp:72
+#: isoimagewriter/isoverifier.cpp:74
 #, kde-format
 msgid "SHA256 Checksum"
 msgstr "Sumă de control SHA256"
 
-#: isoimagewriter/isoverifier.cpp:73
+#: isoimagewriter/isoverifier.cpp:75
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
 msgstr "Lipiți suma de control SHA256 pentru acest ISO:"
 
-#: isoimagewriter/isoverifier.cpp:131
+#: isoimagewriter/isoverifier.cpp:133
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr ""
 "Nu s-a putut găsi %1, descărcați fișierul cu semnătura PGP în același dosar."
 
-#: isoimagewriter/isoverifier.cpp:138
+#: isoimagewriter/isoverifier.cpp:140
 #, kde-format
 msgid "Could not open signature file"
 msgstr "Nu s-a putut deschide fișierul cu semnături"
 
-#: isoimagewriter/isoverifier.cpp:144
+#: isoimagewriter/isoverifier.cpp:146
 #, kde-format
 msgid "Could not open ISO image"
 msgstr "Nu s-a putut deschide imaginea ISO"
 
-#: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
+#: isoimagewriter/isoverifier.cpp:166 isoimagewriter/isoverifier.cpp:241
 #, kde-format
 msgid "Key is revoked."
 msgstr "Cheia e revocată."
 
-#: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
+#: isoimagewriter/isoverifier.cpp:169 isoimagewriter/isoverifier.cpp:244
 #, kde-format
 msgid "Uses wrong signature."
 msgstr "Folosește semnătura greșită."
 
-#: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
+#: isoimagewriter/isoverifier.cpp:173 isoimagewriter/isoverifier.cpp:248
 #, kde-format
 msgid "This app is built without verification support."
 msgstr "Această aplicație e construită fără suport pentru verificare."
 
-#: isoimagewriter/isoverifier.cpp:183
+#: isoimagewriter/isoverifier.cpp:185
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
 "Nu s-a putut deschide fișierul SHA256SUMS, descărcați-l în același dosar"
 
-#: isoimagewriter/isoverifier.cpp:197
+#: isoimagewriter/isoverifier.cpp:199
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
 msgstr "Nu s-a găsit nicio sumă de control în fișierul SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
+#: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not read ISO image"
 msgstr "Nu s-a putut citi imaginea ISO"
 
-#: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
+#: isoimagewriter/isoverifier.cpp:211 isoimagewriter/isoverifier.cpp:264
 #, kde-format
 msgid "Could not perform checksum"
 msgstr "Suma de control nu a putut fi calculată"
 
-#: isoimagewriter/isoverifier.cpp:214
+#: isoimagewriter/isoverifier.cpp:216
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
 "Suma de control a fișierului .iso nu se potrivește cu valoarea din fișierul "
 "SHA256SUMS"
 
-#: isoimagewriter/isoverifier.cpp:222
+#: isoimagewriter/isoverifier.cpp:224
 #, kde-format
 msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
@@ -209,12 +209,12 @@ msgstr ""
 "Nu s-a putut găsi SHA256SUMS.gpg, descărcați fișierul cu semnătura PGP în "
 "același dosar."
 
-#: isoimagewriter/isoverifier.cpp:271
+#: isoimagewriter/isoverifier.cpp:273
 #, kde-format
 msgid "Checksum did not match"
 msgstr "Suma de control nu corespunde"
 
-#: isoimagewriter/isoverifier.cpp:277
+#: isoimagewriter/isoverifier.cpp:279
 #, kde-format
 msgid "Requires an SHA256 checksum"
 msgstr "Necesită o sumă de control SHA256"
