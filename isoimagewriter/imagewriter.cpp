@@ -201,9 +201,19 @@ void ImageWriter::writeImage()
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         QDBusInterface deviceDBus("org.freedesktop.UDisks2", m_Device->m_PhysicalDevice, "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
         QDBusReply<QDBusUnixFileDescriptor> reply = deviceDBus.call(QDBus::Block, "OpenDevice", "rw", Properties{{"flags", O_EXCL | O_SYNC | O_CLOEXEC}} );
-        QDBusUnixFileDescriptor fd = reply.value();
+        if (!reply.isValid()) {
+            // O_EXCL turns the open down while anything else still holds the device.
+            throw i18nc("@info",
+                        "Failed to open the target device %1:\n%2\n\n"
+                        "The device is in use. Close the programs using it and unmount it, or write to it from a system that was not booted from it.",
+                        m_Device->m_VisibleName,
+                        reply.error().message());
+        }
+        const QDBusUnixFileDescriptor fd = reply.value();
         QFile deviceFile;
-        deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly);
+        if (!deviceFile.open(fd.fileDescriptor(), QIODevice::WriteOnly)) {
+            throw i18nc("@info", "Failed to open the target device %1:\n%2", m_Device->m_VisibleName, deviceFile.errorString());
+        }
 #endif
 
         qint64 readBytes;
@@ -225,8 +235,7 @@ void ImageWriter::writeImage()
             readBytes = alignNumber(readBytes, (qint64)m_Device->m_SectorSize);
             writtenBytes = deviceFile.write(static_cast<char*>(buffer), readBytes);
             if (writtenBytes < 0) {
-                qDebug() << "write writtenBytes: " << writtenBytes;
-                //throw i18n("Failed to write to the device:\n%1"); //, "ook"); //deviceFile.errorString());
+                throw i18nc("@info", "Failed to write to the device:\n%1", deviceFile.errorString());
             }
             if (writtenBytes != readBytes)
                 throw i18n("The last block was not fully written (%1 of %2 bytes)!\nAborting.", writtenBytes, readBytes);
