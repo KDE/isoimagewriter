@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-23 00:47+0000\n"
+"POT-Creation-Date: 2026-07-28 00:48+0000\n"
 "PO-Revision-Date: 2026-07-05 17:30+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -88,8 +88,45 @@ msgstr ""
 "Klarte ikkje opna måleininga:\n"
 "%1"
 
+#: isoimagewriter/imagewriter.cpp:207
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2\n"
+"\n"
+"The device is in use. Close the programs using it and unmount it, or write "
+"to it from a system that was not booted from it."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:215
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to open the target device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2"
+msgstr ""
+"Klarte ikkje opna måleininga:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:238
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to open the target device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"Klarte ikkje opna måleininga:\n"
+"%1"
+
 # skip-rule: passiv
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -98,7 +135,7 @@ msgstr ""
 "Den siste blokka vart ikkje fullstendig skriven (%1 av %2 byte).\n"
 "Avbryt."
 
-#: isoimagewriter/imagewriter.cpp:264
+#: isoimagewriter/imagewriter.cpp:273
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -107,17 +144,17 @@ msgstr ""
 "Klarte ikkje lesa diskbiletfila:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:286
+#: isoimagewriter/imagewriter.cpp:295
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Handlinga er fullført."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "No må du formatera eininga."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-23 00:47+0000\n"
+"POT-Creation-Date: 2026-07-28 00:48+0000\n"
 "PO-Revision-Date: 2026-05-25 19:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -87,7 +87,44 @@ msgstr ""
 "대상 장치를 열 수 없음:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:207
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2\n"
+"\n"
+"The device is in use. Close the programs using it and unmount it, or write "
+"to it from a system that was not booted from it."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:215
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to open the target device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2"
+msgstr ""
+"대상 장치를 열 수 없음:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:238
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to write to the device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"장치에 기록할 수 없음:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -96,7 +133,7 @@ msgstr ""
 "마지막 블록을 완전히 기록할 수 없었습니다(%2바이트 중 %1바이트)!\n"
 "종료합니다."
 
-#: isoimagewriter/imagewriter.cpp:264
+#: isoimagewriter/imagewriter.cpp:273
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -105,17 +142,17 @@ msgstr ""
 "이미지 파일을 읽을 수 없음:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:286
+#: isoimagewriter/imagewriter.cpp:295
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "작업이 완료되었습니다."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "이제 장치를 포맷해야 합니다."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -490,13 +527,6 @@ msgstr "<마운트되지 않음>"
 
 #~ msgid "Write this ISO image:"
 #~ msgstr "이 ISO 이미지 기록:"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "장치에 기록할 수 없음:\n"
-#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "Copyright (c) 2016 ROSA"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-23 00:47+0000\n"
+"POT-Creation-Date: 2026-07-28 00:48+0000\n"
 "PO-Revision-Date: 2026-05-23 09:51+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -90,7 +90,44 @@ msgstr ""
 "Impossible d'ouvrir le périphérique cible :\n"
 "%1."
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:207
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2\n"
+"\n"
+"The device is in use. Close the programs using it and unmount it, or write "
+"to it from a system that was not booted from it."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:215
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to open the target device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2"
+msgstr ""
+"Impossible d'ouvrir le périphérique cible :\n"
+"%1."
+
+#: isoimagewriter/imagewriter.cpp:238
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to write to the device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"Impossible d'écrire sur le périphérique :\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -99,7 +136,7 @@ msgstr ""
 "Le dernier bloc n'a pas été entièrement écrit (%1 octet sur %2) !\n"
 "Annulation."
 
-#: isoimagewriter/imagewriter.cpp:264
+#: isoimagewriter/imagewriter.cpp:273
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -108,17 +145,17 @@ msgstr ""
 "Impossible de lire le fichier image :\n"
 "%1."
 
-#: isoimagewriter/imagewriter.cpp:286
+#: isoimagewriter/imagewriter.cpp:295
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "L'opération s'est terminée avec succès."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Vous devez désormais formater votre appareil."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -500,13 +537,6 @@ msgstr "<non monté>"
 
 #~ msgid "Write this ISO image:"
 #~ msgstr "Écrire cette image ISO :"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Impossible d'écrire sur le périphérique :\n"
-#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "Copyright (c) 2016 ROSA"

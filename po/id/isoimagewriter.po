@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-23 00:47+0000\n"
+"POT-Creation-Date: 2026-07-28 00:48+0000\n"
 "PO-Revision-Date: 2022-08-26 23:44+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: https://t.me/Localizations_KDE_Indonesia\n"
@@ -98,7 +98,44 @@ msgstr ""
 "Gagal membuka sasaran peranti:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:232
+#: isoimagewriter/imagewriter.cpp:207
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2\n"
+"\n"
+"The device is in use. Close the programs using it and unmount it, or write "
+"to it from a system that was not booted from it."
+msgstr ""
+
+#: isoimagewriter/imagewriter.cpp:215
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to open the target device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to open the target device %1:\n"
+"%2"
+msgstr ""
+"Gagal membuka sasaran peranti:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:238
+#, fuzzy, kde-format
+#| msgid ""
+#| "Failed to write to the device:\n"
+#| "%1"
+msgctxt "@info"
+msgid ""
+"Failed to write to the device:\n"
+"%1"
+msgstr ""
+"Gagal menulis ke peranti:\n"
+"%1"
+
+#: isoimagewriter/imagewriter.cpp:241
 #, kde-format
 msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
@@ -107,7 +144,7 @@ msgstr ""
 "Blok terakhir tidak tertulis secara penuh (%1 dari %2 bita)!\n"
 "Gugur."
 
-#: isoimagewriter/imagewriter.cpp:264
+#: isoimagewriter/imagewriter.cpp:273
 #, kde-format
 msgid ""
 "Failed to read the image file:\n"
@@ -116,17 +153,17 @@ msgstr ""
 "Gagal membaca file citra:\n"
 "%1"
 
-#: isoimagewriter/imagewriter.cpp:286
+#: isoimagewriter/imagewriter.cpp:295
 #, kde-format
 msgid "The operation completed successfully."
 msgstr "Operasi lengkap dengan sukses."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid "Now you need to format your device."
 msgstr "Sekarang Anda harus memformat peranti Anda."
 
-#: isoimagewriter/imagewriter.cpp:288
+#: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
@@ -509,13 +546,6 @@ msgstr "<terlepaskait>"
 
 #~ msgid "Write this ISO image:"
 #~ msgstr "Tulis citra ISO ini:"
-
-#~ msgid ""
-#~ "Failed to write to the device:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Gagal menulis ke peranti:\n"
-#~ "%1"
 
 #~ msgid "Copyright (c) 2016 ROSA"
 #~ msgstr "Hak Cipta (c) 2016 ROSA"
