@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the isoimagewriter package.
 # Automatically generated, 2017.
 #
-# SPDX-FileCopyrightText: 2017, 2026 Eloy Cuadra <ecuadra@eloihr.net>
-# SPDX-FileCopyrightText: 2017, 2023, 2025, 2026 Sofía Priego <spriego@darksylvania.net>
+# SPDX-FileCopyrightText: 2017 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2017, 2023, 2025-2026 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-28 00:48+0000\n"
-"PO-Revision-Date: 2026-05-22 01:11+0100\n"
+"PO-Revision-Date: 2026-07-28 15:39+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -100,31 +100,31 @@ msgid ""
 "The device is in use. Close the programs using it and unmount it, or write "
 "to it from a system that was not booted from it."
 msgstr ""
+"Ha fallado la apertura del dispositivo de destino %1:\n"
+"%2\n"
+"\n"
+"El dispositivo está en uso. Cierre los programas que lo estén usando y "
+"desmóntelo. También puede escribir en él usando un sistema que no haya "
+"arrancado desde dicho dispositivo."
 
 #: isoimagewriter/imagewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"Ha fallado la apertura del dispositivo de destino:\n"
-"%1"
+"Ha fallado la apertura del dispositivo de destino %1:\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
-"Ha fallado la apertura del dispositivo de destino:\n"
+"No se ha podido escribir en el dispositivo:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
