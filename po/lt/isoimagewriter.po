@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-28 00:48+0000\n"
-"PO-Revision-Date: 2026-05-22 22:52+0300\n"
+"PO-Revision-Date: 2026-08-01 16:43+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -99,25 +99,24 @@ msgid ""
 "The device is in use. Close the programs using it and unmount it, or write "
 "to it from a system that was not booted from it."
 msgstr ""
+"Nepavyko atverti paskirties įrenginio %1:\n"
+"%2\n"
+"\n"
+"Įrenginys yra naudojamas. Užverkite jį naudojančias programas ir atjunkite "
+"jį arba rašykite į jį naudodami sistemą, kuri nėra iš jo paleista."
 
 #: isoimagewriter/imagewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"Nepavyko atverti paskirties įrenginio:\n"
-"%1"
+"Nepavyko atverti paskirties įrenginio %1:\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to write to the device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
