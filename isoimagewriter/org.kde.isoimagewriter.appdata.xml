@@ -22,7 +22,7 @@
   <name xml:lang="eo">ISO-Bitkopia Skribilo</name>
   <name xml:lang="es">ISO Image Writer</name>
   <name xml:lang="et">ISO-tõmmise kirjutaja</name>
-  <name xml:lang="eu">ISO irudi idazlea</name>
+  <name xml:lang="eu">ISO irudi-idazlea</name>
   <name xml:lang="fi">ISO-kuvan kirjoittaja</name>
   <name xml:lang="fr">ISO Image Writer</name>
   <name xml:lang="gl">Gravadora de imaxes ISO</name>
@@ -70,7 +70,7 @@
   <summary xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</summary>
   <summary xml:lang="es">Escribir una imagen ISO en un disco USB</summary>
   <summary xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</summary>
-  <summary xml:lang="eu">Idatzi ISO irudia USB disko batean</summary>
+  <summary xml:lang="eu">ISO irudia USB disko batean idatzi</summary>
   <summary xml:lang="fi">Kirjoittaa ISO-kuvan USB-tietovälineelle</summary>
   <summary xml:lang="fr">Écrire une image ISO sur une clé USB</summary>
   <summary xml:lang="gl">Gravar unha imaxe ISO nun disco USB</summary>
@@ -119,7 +119,7 @@
     <p xml:lang="eo">Skribu ISO-Bitkopion al USB-Disko</p>
     <p xml:lang="es">Escribir una imagen ISO en un disco USB</p>
     <p xml:lang="et">ISO-tõmmise kirjutamine USB-pulgale</p>
-    <p xml:lang="eu">Idatzi ISO irudia USB disko batean</p>
+    <p xml:lang="eu">ISO irudia USB disko batean idatzi</p>
     <p xml:lang="fi">Kirjoittaa ISO-kuvan USB-tietovälineelle</p>
     <p xml:lang="fr">Écrire une image ISO sur une clé USB</p>
     <p xml:lang="gl">Gravar unha imaxe ISO nun disco USB</p>
