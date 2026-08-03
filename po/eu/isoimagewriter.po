@@ -10,7 +10,8 @@
 # Egoera:
 # Proiektu osoaren berrikuspen integrala: 2026-08-01.
 # Terminologia, estiloa, ortotipografia, kohesioa eta koherentzia berrikusi dira.
-# Itzulpen-irizpideak: kde-iso-image-writer_eu-itzulpen-gida.md
+# Erreferentzia-gida: kde-iso-image-writer_eu-itzulpen-gida.md
+# Ikus, halaber: KDE-eu-berrikuspen-integralen-erregistroa.md
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"

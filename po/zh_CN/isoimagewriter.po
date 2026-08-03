@@ -99,30 +99,20 @@ msgid ""
 msgstr ""
 
 #: isoimagewriter/imagewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"无法打开目标设备：\n"
-"%1"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
-"无法打开目标设备：\n"
-"%1"
 
 #: isoimagewriter/imagewriter.cpp:241
 #, kde-format
