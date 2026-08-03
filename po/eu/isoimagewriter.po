@@ -6,12 +6,18 @@
 # Translators:
 # Ander Elortondo <ander.elor@gmail.com>, 2020.
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2022, 2023, 2025, 2026.
+#
+# Egoera:
+# Proiektu osoaren berrikuspen integrala: 2026-08-01.
+# Terminologia, estiloa, ortotipografia, kohesioa eta koherentzia berrikusi dira.
+# Erreferentzia-gida: kde-iso-image-writer_eu-itzulpen-gida.md
+# Ikus, halaber: KDE-eu-berrikuspen-integralen-erregistroa.md
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-21 00:48+0000\n"
-"PO-Revision-Date: 2026-07-01 18:38+0200\n"
+"PO-Revision-Date: 2026-08-01 16:21+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.04.2\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -88,7 +94,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"Jomugako gailua irekitzeak huts egin du:\n"
+"Helburuko gailua irekitzeak huts egin du:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:232
@@ -97,8 +103,8 @@ msgid ""
 "The last block was not fully written (%1 of %2 bytes)!\n"
 "Aborting."
 msgstr ""
-"Azken blokea ez da osotasunean idatzi (%2tik %1 byte))!\n"
-"Abortatzen."
+"Azken blokea ez da osorik idatzi (%2 byteetatik %1 bakarrik)!\n"
+"Prozesua bertan behera utziko da."
 
 #: isoimagewriter/imagewriter.cpp:264
 #, kde-format
@@ -117,7 +123,7 @@ msgstr "Eragiketa ongi burutu da."
 #: isoimagewriter/imagewriter.cpp:288
 #, kde-format
 msgid "Now you need to format your device."
-msgstr "Orain zure gailua formateatu beharra daukazu."
+msgstr "Orain gailua formateatu behar duzu."
 
 #: isoimagewriter/imagewriter.cpp:288
 #, kde-format
@@ -125,46 +131,46 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
-"Gailu honetan datuak gorde ahal izateko berriz, mesedez, erabili \"Garbitu "
-"USB diskoa\"."
+"Gailu honetan datuak berriz gorde ahal izateko, erabili «Garbitu USB diskoa» "
+"botoia."
 
 #: isoimagewriter/isoverifier.cpp:60
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr "Ezin da egiaztatu Distro irudi ezagun bezala."
+msgstr "Ezin izan da egiaztatu banaketa-irudi ezagun bat dela."
 
 #: isoimagewriter/isoverifier.cpp:72
 #, kde-format
 msgid "SHA256 Checksum"
-msgstr "SHA256 Egiaztapen-batura"
+msgstr "SHA256 egiaztapen-batura"
 
 #: isoimagewriter/isoverifier.cpp:73
 #, kde-format
 msgid "Paste the SHA256 checksum for this ISO:"
-msgstr "Itsatsi ISO honentzako SHA256 egiaztapen-batura:"
+msgstr "Itsatsi ISO honen SHA256 egiaztapen-batura:"
 
 #: isoimagewriter/isoverifier.cpp:131
 #, kde-format
 msgid ""
 "Could not find %1, please download PGP signature file to same directory."
 msgstr ""
-"Ezin da %1 aurkitu, mesedez jaitsi PGP sinadura fitxategia direktorio "
-"berdinera."
+"%1 ezin izan da aurkitu; PGP sinadura-fitxategia direktorio berera zama-"
+"jaitsi."
 
 #: isoimagewriter/isoverifier.cpp:138
 #, kde-format
 msgid "Could not open signature file"
-msgstr "Ezin da sinadura fitxategia ireki"
+msgstr "Sinadura-fitxategia ezin izan da ireki"
 
 #: isoimagewriter/isoverifier.cpp:144
 #, kde-format
 msgid "Could not open ISO image"
-msgstr "Ezin da ISO irudia ireki"
+msgstr "ISO irudia ezin izan da ireki"
 
 #: isoimagewriter/isoverifier.cpp:164 isoimagewriter/isoverifier.cpp:239
 #, kde-format
 msgid "Key is revoked."
-msgstr "Gakoa indargabetu da"
+msgstr "Gakoa indargabetuta dago."
 
 #: isoimagewriter/isoverifier.cpp:167 isoimagewriter/isoverifier.cpp:242
 #, kde-format
@@ -174,35 +180,35 @@ msgstr "Sinadura okerra darabil."
 #: isoimagewriter/isoverifier.cpp:171 isoimagewriter/isoverifier.cpp:246
 #, kde-format
 msgid "This app is built without verification support."
-msgstr "Aplikazio hau egiaztatze euskarririk gabe eraikita dago."
+msgstr "Aplikazio hau egiaztatzeko euskarririk gabe eraiki da."
 
 #: isoimagewriter/isoverifier.cpp:183
 #, kde-format
 msgid "Could not open SHA256SUMS file, please download to same directory"
 msgstr ""
-"Ezin da ireki SHA256SUMS fitxategia, mesedez jaitsi direktorio berdinera"
+"SHA256SUMS fitxategia ezin izan da ireki; direktorio berera zama-jaitsi"
 
 #: isoimagewriter/isoverifier.cpp:197
 #, kde-format
 msgid "Could not find checksum in SHA256SUMS file"
-msgstr "Ezin da SHA256SUMS egiaztapen-batura fitxategia aurkitu"
+msgstr "SHA256SUMS fitxategian ezin izan da egiaztapen-batura aurkitu"
 
 #: isoimagewriter/isoverifier.cpp:205 isoimagewriter/isoverifier.cpp:258
 #, kde-format
 msgid "Could not read ISO image"
-msgstr "Ezin da ISO irudia irakurri"
+msgstr "ISO irudia ezin izan da irakurri"
 
 #: isoimagewriter/isoverifier.cpp:209 isoimagewriter/isoverifier.cpp:262
 #, kde-format
 msgid "Could not perform checksum"
-msgstr "Ezin da egiaztapen-batura burutu"
+msgstr "Egiaztapen-batura ezin izan da kalkulatu"
 
 #: isoimagewriter/isoverifier.cpp:214
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
-".iso fitxategiaren Egiaztapen-batura ez dator bat SHA256SUMS fitxategiaren "
-"balioaz"
+".iso fitxategiaren egiaztapen-batura ez dator bat SHA256SUMS fitxategiko "
+"balioarekin"
 
 #: isoimagewriter/isoverifier.cpp:222
 #, kde-format
@@ -210,8 +216,8 @@ msgid ""
 "Could not find SHA256SUMS.gpg, please download PGP signature file to same "
 "directory."
 msgstr ""
-"Ezin da SHA256SUMS.gpg aurkitu, mesedez jaitsi PGP sinadura fitxategia "
-"direktorio berdinera."
+"SHA256SUMS.gpg ezin izan da aurkitu; PGP sinadura-fitxategia direktorio "
+"berera zama-jaitsi."
 
 #: isoimagewriter/isoverifier.cpp:271
 #, kde-format
@@ -226,12 +232,12 @@ msgstr "SHA256 egiaztapen-batura behar da"
 #: isoimagewriter/mainapplication.cpp:27
 #, kde-format
 msgid "ISO Image Writer"
-msgstr "ISO irudi idazlea"
+msgstr "ISO irudi-idazlea"
 
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
-msgstr "Idatzi ISO irudia USB disko batean"
+msgstr "ISO irudia USB disko batean idatzi"
 
 #: isoimagewriter/mainapplication.cpp:31
 #, kde-format
@@ -265,17 +271,17 @@ msgstr "Ireki beharreko ISO fitxategia"
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "KDE ISO Image Writer"
-msgstr "KDE ISO irudi idazlea"
+msgstr "KDE ISO irudi-idazlea"
 
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
-msgstr "Abioko USB unitate bat sortzeko era azkar eta erraz bat."
+msgstr "USB unitate abiagarri bat sortzeko modu azkar eta erraza."
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr "ISO irudiaren Bide-izena..."
+msgstr "ISO irudiaren bide-izena…"
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
@@ -299,7 +305,7 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"USB gailuan dagoen guztia gain-idatziko da.\n"
+"USB unitatean dagoen guztia gainidatziko da.\n"
 "\n"
 "Jarraitu nahi duzu?"
 
@@ -317,7 +323,7 @@ msgstr "%%p"
 #: isoimagewriter/mainwindow.cpp:190
 #, kde-format
 msgid "Abort"
-msgstr "Abortatu"
+msgstr "Bertan behera utzi"
 
 #: isoimagewriter/mainwindow.cpp:193
 #, kde-format
@@ -332,10 +338,10 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
-"Zure USB gailua sortu behar da.\n"
+"Zure USB unitatea sortzen ari da.\n"
 "\n"
-"Honek bere denbora hartuko du, ISO irudiaren tamainaren arabera eta "
-"transferentzia abiaduraren arabera."
+"Prozesu honek denbora behar izan dezake, ISO irudi-fitxategiaren tamainaren "
+"eta transferentzia-abiaduraren arabera."
 
 #: isoimagewriter/mainwindow.cpp:223
 #, kde-format
@@ -345,7 +351,7 @@ msgstr "Utzi"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "Zure USB flash gailua osotua dago eta erabiltzeko prest!"
+msgstr "Zure USB flash unitate bizia erabiltzeko prest dago!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -370,22 +376,22 @@ msgstr "ISO irudia egiaztatzen"
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr "Mesedez entxufatu USB unitate baten"
+msgstr "USB unitate bat konektatu"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
 msgid "Cancel?"
-msgstr "Ezeztatu?"
+msgstr "Utzi?"
 
 #: isoimagewriter/mainwindow.cpp:462
 #, kde-format
 msgid "Writing is in progress, abort it?"
-msgstr "Idazketa abian da, abortatu?"
+msgstr "USB unitatean idazten ari da. Bertan behera utzi nahi duzu?"
 
 #: isoimagewriter/mainwindow.cpp:478
 #, kde-format
 msgid "Disk Images (%1)"
-msgstr "Disko irudiak (%1)"
+msgstr "Disko-irudiak (%1)"
 
 #: isoimagewriter/mainwindow.cpp:479
 #, kde-format
@@ -395,7 +401,7 @@ msgstr "Fitxategi guztiak (%1)"
 #: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
-msgstr "Aukeratu grabatu beharreko irudia"
+msgstr "Idatzi beharreko irudia hautatu"
 
 #: isoimagewriter/mainwindow.cpp:510
 #, kde-format
@@ -405,7 +411,7 @@ msgstr "ISO irudia zama-jaisten"
 #: isoimagewriter/mainwindow.cpp:529
 #, kde-format
 msgid "Unknown Disk Size"
-msgstr "Disko tamaina ezezaguna"
+msgstr "Diskoaren tamaina ezezaguna"
 
 #: isoimagewriter/mainwindow.cpp:530
 #, kde-format
@@ -415,8 +421,8 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
-"Hautatutako diskoaren tamaina ezezaguna da, mesedez, idatzi aurretik, "
-"egiaztatu irudia sartuko dela.\n"
+"Hautatutako diskoaren tamaina ezezaguna da; idatzi aurretik, egiaztatu "
+"irudia sartuko dela.\n"
 "\n"
 "Irudiaren tamaina: %1 (%2 b)"
 
@@ -433,10 +439,10 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
-"Irudia zuk aukeratu duzun gailua baino handiagoa da!\n"
+"Irudia hautatutako gailua baino handiagoa da!\n"
 "\n"
-"Irudi tamaina: %1 (%2 b)\n"
-"Disko tamaina: %3 (%4 b)"
+"Irudiaren tamaina: %1 (%2 b)\n"
+"Diskoaren tamaina: %3 (%4 b)"
 
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
@@ -451,27 +457,27 @@ msgstr "Ezin izan da ISO irudia egiaztatzeko gakoa aurkitu"
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
 msgid "Could not verify ISO image"
-msgstr "Ezin da ISO irudia egiaztatu"
+msgstr "Ezin izan da ISO irudia egiaztatu"
 
 #: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "ISO Verification failed"
-msgstr "ISO egiaztatzeak huts egin du"
+msgstr "ISO irudia egiaztatzeak huts egin du"
 
 #: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
 msgid "Could not acquire lock:"
-msgstr "Ezin da blokeoa lortu:"
+msgstr "Blokeoa ezin izan da eskuratu:"
 
 #: isoimagewriter/platform_win.cpp:94
 #, kde-format
 msgid "CoCreateInstance(WbemAdministrativeLocator) failed."
-msgstr "Huts egin du CoCreateInstance(WbemAdministrativeLocator)"
+msgstr "CoCreateInstance(WbemAdministrativeLocator) deiak huts egin du."
 
 #: isoimagewriter/platform_win.cpp:95
 #, kde-format
 msgid "ConnectServer failed."
-msgstr "ConnectServer(r)ek huts egin du."
+msgstr "ConnectServer deiak huts egin du."
 
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
