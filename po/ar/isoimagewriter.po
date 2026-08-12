@@ -371,7 +371,7 @@ msgstr "ألغِ"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "قرص فلاش يو اس بي أصبح الآن كاملاً وجاهزًا للاستخدام!"
+msgstr "قرص فلاش يو اس بي أصبح الآن كاملًا وجاهزًا للاستخدام!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
