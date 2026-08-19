@@ -97,6 +97,11 @@ msgid ""
 "The device is in use. Close the programs using it and unmount it, or write "
 "to it from a system that was not booted from it."
 msgstr ""
+"无法打开目标设备 %1：\n"
+"%2\n"
+"\n"
+"设备正在使用中。请关闭正在使用它的程序并卸载设备，或在并非从此设备启动的系统"
+"中对其进行写入操作。"
 
 #: isoimagewriter/imagewriter.cpp:215
 #, kde-format
@@ -105,6 +110,8 @@ msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
+"无法打开目标设备 %1：\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:238
 #, kde-format
@@ -113,6 +120,8 @@ msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
+"写入设备失败：\n"
+"%1"
 
 #: isoimagewriter/imagewriter.cpp:241
 #, kde-format
