@@ -20,15 +20,15 @@
     ],
     "separate-locales": false,
     "modules": [
-       {
-          "buildsystem": "cmake-ninja",
-          "name": "isoimagewriter",
-          "sources": [
-               {
-                  "type": "dir",
-                  "path": "."
-               }
+        {
+            "buildsystem": "cmake-ninja",
+            "name": "isoimagewriter",
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
             ]
-       }
+        }
     ]
 }
