@@ -98,5 +98,5 @@ GenericName[ug]=ISO تەسۋىرنى USB دىسكىغا ياز
 GenericName[uk]=Програма для запису образів ISO на диски USB
 GenericName[zh_CN]=将 ISO 镜像写入 U 盘
 GenericName[zh_TW]=將 ISO 映像檔寫入 USB 裝置
-MimeType=application/x-cd-image;application/vnd.efi.iso;application/x-raw-disk-image;application/vnd.efi.img;
+MimeType=application/x-cd-image;application/vnd.efi.iso;application/x-raw-disk-image;application/vnd.efi.img;application/x-raw-disk-image-xz-compressed;
 Categories=Qt;KDE;System;
