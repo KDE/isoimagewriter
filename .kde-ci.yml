@@ -4,19 +4,19 @@
 Dependencies:
 - 'on': ['Linux', 'FreeBSD', 'Windows']
   'require':
-    'frameworks/extra-cmake-modules': '@latest-kf6'
-    'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/kconfig': '@latest-kf6'
-    'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kwidgetsaddons': '@latest-kf6'
-    'frameworks/kiconthemes': '@latest-kf6'
-    'frameworks/karchive': '@latest-kf6'
-    'frameworks/kcrash': '@latest-kf6'
-    'frameworks/solid': '@latest-kf6'
+    'frameworks/extra-cmake-modules': 'Frameworks/6.24'
+    'frameworks/kcoreaddons': 'Frameworks/6.24'
+    'frameworks/kconfig': 'Frameworks/6.24'
+    'frameworks/ki18n': 'Frameworks/6.24'
+    'frameworks/kwidgetsaddons': 'Frameworks/6.24'
+    'frameworks/kiconthemes': 'Frameworks/6.24'
+    'frameworks/karchive': 'Frameworks/6.24'
+    'frameworks/kcrash': 'Frameworks/6.24'
+    'frameworks/solid': 'Frameworks/6.24'
 
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
   'require':
-    'frameworks/kauth': '@latest-kf6'
+    'frameworks/kauth': 'Frameworks/6.24'
 
 Options:
   require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
