@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-28 00:48+0000\n"
-"PO-Revision-Date: 2026-07-18 17:01+0200\n"
+"PO-Revision-Date: 2026-09-06 10:38+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 26.04.2\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,17 +36,17 @@ msgstr "Kod błędu: %1"
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr "Nie udało się przydzielenie pamięci dla bufora:"
+msgstr "Nie udało się przydzielić pamięci dla bufora:"
 
 #: isoimagewriter/imagewriter.cpp:65
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr "Nie udało się przydzielenie pamięci dla bufora."
+msgstr "Nie udało się przydzielić pamięci dla bufora."
 
 #: isoimagewriter/imagewriter.cpp:79
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr "Nie udało się otwarcie pliku obrazu: %1"
+msgstr "Nie udało się otworzyć pliku obrazu: %1"
 
 #: isoimagewriter/imagewriter.cpp:86 isoimagewriter/imagewriter.cpp:91
 #: isoimagewriter/imagewriter.cpp:96
@@ -85,7 +85,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"Nie udało się otwarcie urządzenia docelowego:\n"
+"Nie udało się otworzyć urządzenia docelowego:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:207
@@ -98,31 +98,31 @@ msgid ""
 "The device is in use. Close the programs using it and unmount it, or write "
 "to it from a system that was not booted from it."
 msgstr ""
+"Nie udało się otworzyć urządzenia docelowego %1:\n"
+"%2\n"
+"\n"
+"Urządzenie jest w użyciu. Zamknij programy używające go, a następnie odepnij "
+"jego partycje lub zapisz na nie z systemu, który nie został z niego "
+"uruchomiony."
 
 #: isoimagewriter/imagewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"Nie udało się otwarcie urządzenia docelowego:\n"
-"%1"
+"Nie udało się otworzyć urządzenia docelowego %1:\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to write to the device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
-"Nie udało się zapisać niczego na urządzeniu:\n"
+"Nie udało się zapisać na urządzenie:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
@@ -140,7 +140,7 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"Nie udało się wczytanie pliku obrazu:\n"
+"Nie udało się wczytać pliku obrazu:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:295
@@ -170,7 +170,7 @@ msgstr "Nie można sprawdzić, że to znany obraz distra."
 #: isoimagewriter/isoverifier.cpp:74
 #, kde-format
 msgid "SHA256 Checksum"
-msgstr "Suma sprawdzenia SHA256"
+msgstr "Suma kontrolna SHA256"
 
 #: isoimagewriter/isoverifier.cpp:75
 #, kde-format
@@ -233,7 +233,7 @@ msgstr "Nie można obliczyć sumy sprawdzającej"
 #: isoimagewriter/isoverifier.cpp:216
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
-msgstr "Suma sprawdzenia pliku .iso nie jest równa wartości w pliku SHA256SUMS"
+msgstr "Suma kontrolna pliku .iso nie jest równa wartości w pliku SHA256SUMS"
 
 #: isoimagewriter/isoverifier.cpp:224
 #, kde-format
@@ -247,7 +247,7 @@ msgstr ""
 #: isoimagewriter/isoverifier.cpp:273
 #, kde-format
 msgid "Checksum did not match"
-msgstr "Suma sprawdzenia nie pasuje"
+msgstr "Suma kontrolna nie pasuje"
 
 #: isoimagewriter/isoverifier.cpp:279
 #, kde-format
@@ -507,17 +507,17 @@ msgstr "Nie udało się połączenie z serwerem."
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr "Nie udało się odpytanie urządzeń pamięci masowej USB."
+msgstr "Nie udało się odpytać urządzeń pamięci masowej USB."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr "Nie udało się pobranie listy partycji."
+msgstr "Nie udało się pobrać listy partycji."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr "Nie udało się pobranie napędów logicznych."
+msgstr "Nie udało się pobrać napędów logicznych."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
