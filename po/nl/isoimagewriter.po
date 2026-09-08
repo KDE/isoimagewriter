@@ -1,19 +1,21 @@
 # SPDX-FileCopyrightText: 2017, 2019, 2021-2023, 2025-2026 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2026 pieter <pieterkristensen@gmail.com>
+# SPDX-FileCopyrightText: 2026 Luc Castermans <luc.castermans@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-28 00:48+0000\n"
-"PO-Revision-Date: 2026-07-28 10:50+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2026-09-05 19:22+0200\n"
+"Last-Translator: Luc Castermans <luc.castermans@gmail.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -23,7 +25,8 @@ msgstr "Freek de Kruijf - t/m 2019;2021 t/m 2026"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "freekdekruijf@kde.nl"
+msgstr ""
+"freekdekruijf@kde.nl; pieter.kristensen@gmail/com; luc.castermans@gmail.com"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
@@ -33,33 +36,33 @@ msgstr "Foutcode: %1"
 #: isoimagewriter/imagewriter.cpp:61
 #, kde-format
 msgid "Failed to allocate memory for buffer:"
-msgstr "Toewijzen van geheugen voor buffer is mislukt:"
+msgstr "Geheugen toekennen voor buffer is mislukt."
 
 #: isoimagewriter/imagewriter.cpp:65
 #, kde-format
 msgid "Failed to allocate memory for buffer."
-msgstr "Toewijzen van geheugen voor buffer is mislukt."
+msgstr "Geheugen toekennen voor buffer is mislukt."
 
 #: isoimagewriter/imagewriter.cpp:79
 #, kde-format
 msgid "Failed to open the image file: %1"
-msgstr "Imagebestand openen is mislukt: %1"
+msgstr "Image bestand openen is mislukt: %1"
 
 #: isoimagewriter/imagewriter.cpp:86 isoimagewriter/imagewriter.cpp:91
 #: isoimagewriter/imagewriter.cpp:96
 #, kde-format
 msgid "Failed to open compression device: %1"
-msgstr "Compressieapparaat openen is mislukt: %1"
+msgstr "Compressie apparaat openen is mislukt: %1"
 
 #: isoimagewriter/imagewriter.cpp:122
 #, kde-format
 msgid "Failed to open the drive %1"
-msgstr "Het station openen is mislukt %1"
+msgstr "Het apparaat openen is mislukt %1"
 
 #: isoimagewriter/imagewriter.cpp:129
 #, kde-format
 msgid "Failed to unmount the drive %1"
-msgstr "Het station %1 afkoppelen is mislukt"
+msgstr "Het apparaat %1 afkoppelen is mislukt"
 
 #: isoimagewriter/imagewriter.cpp:146
 #, kde-format
@@ -82,7 +85,7 @@ msgid ""
 "Failed to open the target device:\n"
 "%1"
 msgstr ""
-"Het doelapparaat openen is mislukt:\n"
+"Openen doelapparaat is mislukt:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:207
@@ -109,7 +112,7 @@ msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"Kan het doelapparaat %1 niet openen:\n"
+"Kan doelapparaat %1 niet openen:\n"
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:238
@@ -137,18 +140,18 @@ msgid ""
 "Failed to read the image file:\n"
 "%1"
 msgstr ""
-"Het imagebestand lezen is mislukt:\n"
+"Lezen image bestand mislukt:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:295
 #, kde-format
 msgid "The operation completed successfully."
-msgstr "De bewerking is met succes voltooid."
+msgstr "Bewerking met succes voltooid."
 
 #: isoimagewriter/imagewriter.cpp:297
 #, kde-format
 msgid "Now you need to format your device."
-msgstr "U moet nu het apparaat formatteren."
+msgstr "Formatteer het apparaat."
 
 #: isoimagewriter/imagewriter.cpp:297
 #, kde-format
@@ -156,13 +159,13 @@ msgid ""
 "To be able to store data on this device again, please, use the button \"Wipe "
 "USB Disk\"."
 msgstr ""
-"Om opnieuw gegevens op dit apparaat op te slaan dient u de knop \"USB-schijf "
-"wissen\" te gebruiken."
+"Gebruik de knop \"USB-apparaatwissen\" om opnieuw gegevens op dit apparaat "
+"op te slaan."
 
 #: isoimagewriter/isoverifier.cpp:62
 #, kde-format
 msgid "Could not verify as a known distro image."
-msgstr "Kon niet verifiëren als een bekend distro-image."
+msgstr "Kon ISO-bestand niet verifiëren als een van een distributie  bestand."
 
 #: isoimagewriter/isoverifier.cpp:74
 #, kde-format
@@ -184,12 +187,12 @@ msgstr ""
 #: isoimagewriter/isoverifier.cpp:140
 #, kde-format
 msgid "Could not open signature file"
-msgstr "Kon bestand met handtekening niet openen"
+msgstr "Kon het handtekeningbestand niet openen"
 
 #: isoimagewriter/isoverifier.cpp:146
 #, kde-format
 msgid "Could not open ISO image"
-msgstr "Kon ISO-image niet openen"
+msgstr "Kon ISO-bestand niet openen"
 
 #: isoimagewriter/isoverifier.cpp:166 isoimagewriter/isoverifier.cpp:241
 #, kde-format
@@ -204,7 +207,7 @@ msgstr "Gebruikt verkeerde ondertekening."
 #: isoimagewriter/isoverifier.cpp:173 isoimagewriter/isoverifier.cpp:248
 #, kde-format
 msgid "This app is built without verification support."
-msgstr "Deze toepassing is gebouwd zinder ondersteuning voor verificatie."
+msgstr "Deze toepassing is gebouwd zonder ondersteuning voor verificatie."
 
 #: isoimagewriter/isoverifier.cpp:185
 #, kde-format
@@ -219,19 +222,19 @@ msgstr "Kon controlesom in SHA256SUMS bestand niet vinden"
 #: isoimagewriter/isoverifier.cpp:207 isoimagewriter/isoverifier.cpp:260
 #, kde-format
 msgid "Could not read ISO image"
-msgstr "Kon ISO-image niet lezen"
+msgstr "Kon ISO-bestand niet lezen"
 
 #: isoimagewriter/isoverifier.cpp:211 isoimagewriter/isoverifier.cpp:264
 #, kde-format
 msgid "Could not perform checksum"
-msgstr "Kon geen controlesom uitvoeren"
+msgstr "Kon controlesom niet berekenen"
 
 #: isoimagewriter/isoverifier.cpp:216
 #, kde-format
 msgid "Checksum of .iso file does not match value in SHA256SUMS file"
 msgstr ""
-"Controlesom van .iso bestand komt niet overeen met waarde in SHA256SUMS "
-"bestand"
+"Controlesom van het .iso bestand komt niet overeen met de waarde in het "
+"SHA256SUMS bestand"
 
 #: isoimagewriter/isoverifier.cpp:224
 #, kde-format
@@ -260,7 +263,7 @@ msgstr "ISO-image-schrijver"
 #: isoimagewriter/mainapplication.cpp:29
 #, kde-format
 msgid "Write an ISO Image to a USB Disk"
-msgstr "Een ISO-image naar een USB-schijf schrijven"
+msgstr "Schrijf ISO-bestand naar USB-apparaat"
 
 #: isoimagewriter/mainapplication.cpp:31
 #, kde-format
@@ -289,7 +292,7 @@ msgstr "Jonathan Riddell"
 #: isoimagewriter/mainapplication.cpp:38
 #, kde-format
 msgid "ISO file to open"
-msgstr "Te openen ISO-bestand"
+msgstr "Kies ISO-bestand"
 
 #: isoimagewriter/mainwindow.cpp:85
 #, kde-format
@@ -300,27 +303,27 @@ msgstr "KDE ISO-image-schrijver"
 #, kde-format
 msgid "A quick and simple way to create a bootable USB drive."
 msgstr ""
-"Een snelle en eenvoudige manier om een op te starten USB-stick te maken."
+"Een snelle en eenvoudige manier om een opstartbaar USB-apparaat te maken."
 
 #: isoimagewriter/mainwindow.cpp:113
 #, kde-format
 msgid "Path to ISO image..."
-msgstr "Pad naar ISO-image..."
+msgstr "Pad naar ISO-bestand..."
 
 #: isoimagewriter/mainwindow.cpp:124
 #, kde-format
 msgid "Create"
-msgstr "Aanmaken"
+msgstr "Starten"
 
 #: isoimagewriter/mainwindow.cpp:144
 #, kde-format
 msgid "ISO image:"
-msgstr "ISO-image:"
+msgstr "ISO-bestand:"
 
 #: isoimagewriter/mainwindow.cpp:147
 #, kde-format
 msgid "USB drive:"
-msgstr "USB-station:"
+msgstr "USB-apparaat:"
 
 #: isoimagewriter/mainwindow.cpp:165
 #, kde-format
@@ -329,7 +332,7 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Alles op het USB-station zal overschreven worden.\n"
+"Alles op het USB-apparaat zal overschreven worden.\n"
 "\n"
 "Wilt u doorgaan?"
 
@@ -362,10 +365,10 @@ msgid ""
 "This may take some time depending on the size of the ISO image file and the "
 "transfer speed."
 msgstr ""
-"Uw USB-station wordt aangemaakt.\n"
+"Uw USB-apparaat wordt aangemaakt.\n"
 "\n"
-"Dit ka enige tijd kosten afhankelijk van de grootte van het ISO-image file "
-"en de overdrachtssnelheid."
+"Dit kan enige tijd kosten afhankelijk van de grootte van het ISO-bestand en "
+"de overdrachtssnelheid."
 
 #: isoimagewriter/mainwindow.cpp:223
 #, kde-format
@@ -375,7 +378,7 @@ msgstr "Annuleren"
 #: isoimagewriter/mainwindow.cpp:239
 #, kde-format
 msgid "Your live USB flash drive is now complete and ready to use!"
-msgstr "Uw live USB-flashdrive is nu gereed en klaar voor gebruik!"
+msgstr "Uw live USB-apparaat is nu gereed en klaar voor gebruik!"
 
 #: isoimagewriter/mainwindow.cpp:246
 #, kde-format
@@ -390,17 +393,17 @@ msgstr "Sluiten"
 #: isoimagewriter/mainwindow.cpp:274
 #, kde-format
 msgid "Failed to open the image file:"
-msgstr "Imagebestand openen is mislukt:"
+msgstr "ISO-bestand openen is mislukt:"
 
 #: isoimagewriter/mainwindow.cpp:289
 #, kde-format
 msgid "Verifying ISO image"
-msgstr "ISO-image verifiëren"
+msgstr "ISO-bestand verifiëren"
 
 #: isoimagewriter/mainwindow.cpp:369
 #, kde-format
 msgid "Please plug in a USB drive"
-msgstr "Steek een USB-station in"
+msgstr "Plug een USB-apparaat in"
 
 #: isoimagewriter/mainwindow.cpp:461
 #, kde-format
@@ -410,12 +413,12 @@ msgstr "Annuleren?"
 #: isoimagewriter/mainwindow.cpp:462
 #, kde-format
 msgid "Writing is in progress, abort it?"
-msgstr "Er wordt geschreven, afbreken?"
+msgstr "Schrijven afbreken?"
 
 #: isoimagewriter/mainwindow.cpp:478
 #, kde-format
 msgid "Disk Images (%1)"
-msgstr "Schijfimages (%1)"
+msgstr "Schijfbestand (%1)"
 
 #: isoimagewriter/mainwindow.cpp:479
 #, kde-format
@@ -425,17 +428,17 @@ msgstr "Alle bestanden (%1)"
 #: isoimagewriter/mainwindow.cpp:480
 #, kde-format
 msgid "Select image to flash"
-msgstr "In flash te schrijven image selecteren"
+msgstr "Selecteer ISO-bestand"
 
 #: isoimagewriter/mainwindow.cpp:510
 #, kde-format
 msgid "Downloading ISO image"
-msgstr "ISO-image wordt gedownload"
+msgstr "ISO-bestand wordt gedownload"
 
 #: isoimagewriter/mainwindow.cpp:529
 #, kde-format
 msgid "Unknown Disk Size"
-msgstr "Onbekend schijfgrootte"
+msgstr "Onbekende schijfgrootte"
 
 #: isoimagewriter/mainwindow.cpp:530
 #, kde-format
@@ -445,10 +448,10 @@ msgid ""
 "\n"
 "Image size: %1 (%2 b)"
 msgstr ""
-"De geselecteerde schijf heeft een onbekende grootte, controleer of de image "
-"zal passen alvorens te schrijven.\n"
+"De geselecteerde schijf heeft een onbekende grootte, controleer of  hij "
+"groot genoeg is.\n"
 "\n"
-"Imagegrootte: %1 (%2 b)"
+"Image grootte: %1 (%2 b)"
 
 #: isoimagewriter/mainwindow.cpp:541 isoimagewriter/mainwindow.cpp:601
 #, kde-format
@@ -463,7 +466,7 @@ msgid ""
 "Image size: %1 (%2 b)\n"
 "Disk size: %3 (%4 b)"
 msgstr ""
-"De image is groter dan uw geselecteerde apparaat!\n"
+"ISO-bestand is groter dan het geselecteerde apparaat!\n"
 "\n"
 "Image-grootte: %1 (%2 b)\n"
 "Schijfgrootte: %3 (%4 b)"
@@ -471,22 +474,22 @@ msgstr ""
 #: isoimagewriter/mainwindow.cpp:629
 #, kde-format
 msgid "The ISO image is valid"
-msgstr "De ISO-image is geldig"
+msgstr "Het ISO-bestand is authentiek"
 
 #: isoimagewriter/mainwindow.cpp:636
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr "Kon de sleutel niet vinden om de ISO-image te verifiëren"
+msgstr "Kon sleutel niet vinden om het ISO-bestand te verifiëren"
 
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
 msgid "Could not verify ISO image"
-msgstr "Kon ISO-image niet verifiëren"
+msgstr "Kon ISO-bestand niet verifiëren"
 
 #: isoimagewriter/mainwindow.cpp:639
 #, kde-format
 msgid "ISO Verification failed"
-msgstr "Verificatie van ISO is mislukt"
+msgstr "Verificatie van ISO-bestand is mislukt"
 
 #: isoimagewriter/physicaldevice.cpp:56
 #, kde-format
@@ -506,17 +509,17 @@ msgstr "ConnectServer is mislukt."
 #: isoimagewriter/platform_win.cpp:96
 #, kde-format
 msgid "Failed to query USB flash devices."
-msgstr "USB-flashapparaten afvragen is mislukt."
+msgstr "Kan geen geschikt USB-apparaat vinden."
 
 #: isoimagewriter/platform_win.cpp:160
 #, kde-format
 msgid "Failed to query list of partitions."
-msgstr "Een lijst met partities afvragen is mislukt."
+msgstr "Kon lijst met partities niet opvragen."
 
 #: isoimagewriter/platform_win.cpp:192
 #, kde-format
 msgid "Failed to query list of logical disks."
-msgstr "Een lijst met logische schijven afvragen is mislukt."
+msgstr "Kon Lijst met logische schijven niet opvragen."
 
 #: isoimagewriter/usbdevice.h:23
 #, kde-format
