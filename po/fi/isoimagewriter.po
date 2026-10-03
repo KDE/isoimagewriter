@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2023, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # SPDX-FileCopyrightText: 2024 Kimmo Kujansuu <mrkujansuu@gmail.com>
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-28 00:48+0000\n"
-"PO-Revision-Date: 2025-05-28 11:00+0300\n"
+"PO-Revision-Date: 2026-09-05 10:42+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -74,15 +74,10 @@ msgstr ""
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:186
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to unmount the volume %1\n"
-#| "%2"
+#, kde-format
 msgctxt "@info"
 msgid "Failed to unmount %1: %2"
-msgstr ""
-"Ei voitu irrottaa taltiota %1\n"
-"%2"
+msgstr "Laitetta %1 ei voitu irrottaa: %2"
 
 #: isoimagewriter/imagewriter.cpp:199
 #, kde-format
@@ -103,31 +98,30 @@ msgid ""
 "The device is in use. Close the programs using it and unmount it, or write "
 "to it from a system that was not booted from it."
 msgstr ""
+"Kohdelaitetta %1 ei voitu avata:\n"
+"%2\n"
+"\n"
+"Laite on käytössä. Sulje sitä käyttävät ohjelmat ja irrota se tai kirjoita "
+"sille järjestelmästä, jota ei ole käynnistetty siltä."
 
 #: isoimagewriter/imagewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"Ei voitu avata kohdetta:\n"
-"%1"
+"Kohdelaitetta %1 ei voitu avata:\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to write to the device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
-"Ei voitu kirjoittaa laitteelle:\n"
+"Laitteelle ei voitu kirjoittaa:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
