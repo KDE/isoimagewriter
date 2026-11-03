@@ -117,16 +117,13 @@ msgstr ""
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to write to the device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
-"Non se puido escribir no dispositivo:\n"
+"Non foi posíbel escribir no dispositivo:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
