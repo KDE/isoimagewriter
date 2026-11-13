@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the isoimagewriter package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024-2026 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: isoimagewriter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-28 00:48+0000\n"
-"PO-Revision-Date: 2025-05-26 17:50+0300\n"
+"PO-Revision-Date: 2026-11-11 12:48+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -74,15 +74,10 @@ msgstr ""
 "%2"
 
 #: isoimagewriter/imagewriter.cpp:186
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to unmount the volume %1\n"
-#| "%2"
+#, kde-format
 msgctxt "@info"
 msgid "Failed to unmount %1: %2"
-msgstr ""
-"Neizdevās atmontēt sējumu %1\n"
-"%2"
+msgstr "Neizdevās atmontēt %1: %2"
 
 #: isoimagewriter/imagewriter.cpp:199
 #, kde-format
@@ -103,31 +98,30 @@ msgid ""
 "The device is in use. Close the programs using it and unmount it, or write "
 "to it from a system that was not booted from it."
 msgstr ""
+"Neizdevās atvērt mērķa ierīci „%1“:\n"
+"%2\n"
+"\n"
+"Ierīce tiek lietota. Aizveriet programmas, kas to izmanto, un atmontējiet, "
+"vai arī rakstiet tajā no sistēmas, kas nav sāknēta no šīs ierīces."
 
 #: isoimagewriter/imagewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to open the target device %1:\n"
 "%2"
 msgstr ""
-"Neizdevās atvērt mērķa ierīci:\n"
-"%1"
+"Neizdevās atvērt mērķa ierīci „%1“:\n"
+"%2"
 
 #: isoimagewriter/imagewriter.cpp:238
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to open the target device:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Failed to write to the device:\n"
 "%1"
 msgstr ""
-"Neizdevās atvērt mērķa ierīci:\n"
+"Neizdevās rakstīt ierīcē:\n"
 "%1"
 
 #: isoimagewriter/imagewriter.cpp:241
@@ -137,7 +131,7 @@ msgid ""
 "Aborting."
 msgstr ""
 "Pēdējais bloks nav pilnībā ierakstīts (%1 no %2 baitiem)!\n"
-"Atceļ."
+"Atceļ darbību."
 
 #: isoimagewriter/imagewriter.cpp:273
 #, kde-format
