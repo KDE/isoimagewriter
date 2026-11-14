@@ -20,13 +20,15 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Freek de Kruijf - t/m 2019;2021 t/m 2026"
+msgstr ""
+"Freek de Kruijf - t/m 2019;2021 t/m 2026,Pieter Kristensen -2026,Luc "
+"Castermans -2026"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"freekdekruijf@kde.nl; pieter.kristensen@gmail/com; luc.castermans@gmail.com"
+"freekdekruijf@kde.nl, pieter.kristensen@gmail.com, luc.castermans@gmail.com"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
@@ -479,7 +481,7 @@ msgstr "Het ISO-bestand is authentiek"
 #: isoimagewriter/mainwindow.cpp:636
 #, kde-format
 msgid "Could not find the key to verify the ISO image"
-msgstr "Kon sleutel niet vinden om het ISO-bestand te verifiëren"
+msgstr "Kon sleutel niet vinden om de ISO-bestand te verifiëren"
 
 #: isoimagewriter/mainwindow.cpp:638
 #, kde-format
