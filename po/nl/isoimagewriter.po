@@ -26,7 +26,7 @@ msgstr "Freek de Kruijf - t/m 2019;2021 t/m 2026"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"freekdekruijf@kde.nl; pieter.kristensen@gmail/com; luc.castermans@gmail.com"
+"freekdekruijf@kde.nl;pieter.kristensen@gmail/com;luc.castermans@gmail.com"
 
 #: isoimagewriter/common.cpp:41
 #, kde-format
